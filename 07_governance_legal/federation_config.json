@@ -1,0 +1,152 @@
+{
+  "blueprint_version": "v4.4",
+  "config_version": "1.0.0",
+  "description": "Federation Configuration - Settings for federated governance synchronization",
+  "last_updated": "2025-10-11T20:00:00Z",
+  "federation": {
+    "enabled": false,
+    "mode": "participant",
+    "description": "Set mode to 'coordinator' for central orchestration node, 'participant' for standard nodes",
+    "auto_sync": false,
+    "auto_consensus": true
+  },
+  "local_node": {
+    "node_name": "SSID-Main",
+    "organization": "EduBrainBoost",
+    "git_remote": "https://github.com/EduBrainBoost/SSID.git",
+    "api_endpoint": "",
+    "description": "Configure your local node identity here"
+  },
+  "sync_settings": {
+    "interval_minutes": 60,
+    "max_retry_attempts": 3,
+    "retry_delay_seconds": 30,
+    "timeout_seconds": 120,
+    "max_clone_depth": 100,
+    "description": "Synchronization timing and retry settings"
+  },
+  "consensus_settings": {
+    "threshold": 0.66,
+    "min_participating_nodes": 2,
+    "tie_breaking_strategy": "timestamp_priority",
+    "auto_resolve_conflicts": false,
+    "trust_score_weight": 0.3,
+    "description": "Consensus validation configuration. Threshold of 0.66 = 66% agreement required."
+  },
+  "trust_settings": {
+    "initial_trust_score": 50,
+    "max_trust_score": 100,
+    "min_trust_score": 0,
+    "agreement_bonus": 2,
+    "disagreement_penalty": 5,
+    "inactive_penalty_days": 30,
+    "inactive_penalty_amount": 1,
+    "description": "Trust score calculation parameters"
+  },
+  "security": {
+    "require_ssh_key_verification": false,
+    "require_gpg_signature": false,
+    "allowed_git_protocols": ["https", "ssh"],
+    "max_event_age_days": 365,
+    "description": "Security and verification settings"
+  },
+  "notifications": {
+    "enabled": false,
+    "channels": [],
+    "events": {
+      "sync_completed": false,
+      "sync_failed": false,
+      "consensus_achieved": false,
+      "consensus_failed": true,
+      "node_added": true,
+      "node_removed": true,
+      "trust_score_low": true
+    },
+    "low_trust_threshold": 25,
+    "description": "Notification settings for federation events. Configure channels in telemetry_config.json"
+  },
+  "event_filters": {
+    "sync_event_types": [
+      "blueprint_tagged",
+      "quarterly_release",
+      "compliance_audit",
+      "governance_update"
+    ],
+    "exclude_event_types": [
+      "telemetry_notification"
+    ],
+    "description": "Filter which event types are synchronized across federation"
+  },
+  "conflict_resolution": {
+    "strategy": "hash_majority_voting",
+    "fallback_strategy": "manual_review",
+    "auto_apply_consensus": false,
+    "create_conflict_report": true,
+    "conflict_report_path": "24_meta_orchestration/registry/conflicts/",
+    "description": "How to handle conflicting events between nodes"
+  },
+  "performance": {
+    "parallel_sync": false,
+    "max_parallel_syncs": 3,
+    "cache_remote_events": true,
+    "cache_ttl_minutes": 30,
+    "description": "Performance optimization settings"
+  },
+  "compliance": {
+    "gdpr_compliant": true,
+    "log_retention_days": 365,
+    "anonymize_node_data": false,
+    "data_location_restrictions": [],
+    "description": "Compliance and data governance settings"
+  },
+  "advanced": {
+    "custom_consensus_algorithm": null,
+    "webhook_on_consensus": null,
+    "external_validator_api": null,
+    "blockchain_anchoring": {
+      "enabled": false,
+      "network": "polygon",
+      "contract_address": "",
+      "description": "Anchor consensus decisions to blockchain for immutable audit trail"
+    },
+    "ipfs_federation": {
+      "enabled": false,
+      "pin_consensus_records": false,
+      "description": "Store consensus records on IPFS for distributed access"
+    }
+  },
+  "example_nodes": [
+    {
+      "node_name": "SSID-Partner-1",
+      "organization": "Partner Organization",
+      "git_remote": "https://github.com/partner-org/ssid-fork.git",
+      "description": "Example federated node configuration"
+    },
+    {
+      "node_name": "SSID-Partner-2",
+      "organization": "Another Partner",
+      "git_remote": "git@github.com:another-partner/ssid.git",
+      "description": "Example SSH-based node configuration"
+    }
+  ],
+  "usage_instructions": {
+    "enable_federation": "Set federation.enabled to true",
+    "configure_local_node": "Update local_node section with your node details",
+    "add_federated_node": "python3 12_tooling/scripts/federation_sync_manager.py --add-node <git_url> --node-name <name> --organization <org>",
+    "sync_manually": "python3 12_tooling/scripts/federation_sync_manager.py --sync",
+    "check_status": "python3 12_tooling/scripts/federation_sync_manager.py --check-status",
+    "validate_consensus": "python3 12_tooling/scripts/consensus_validator.py --verify",
+    "view_trust_scores": "python3 12_tooling/scripts/consensus_validator.py --analyze-trust"
+  },
+  "documentation_links": {
+    "federation_guide": "05_documentation/FEDERATION_GUIDE.md",
+    "operations_guide": "05_documentation/OPERATIONS_GUIDE.md",
+    "blueprint_proposal": "05_documentation/blueprints/Blueprint_v4.4_Proposal.md",
+    "api_reference": "05_documentation/API_REFERENCE.md"
+  },
+  "version_compatibility": {
+    "min_blueprint_version": "v4.2.0",
+    "recommended_blueprint_version": "v4.4.0",
+    "description": "Federation works best when all nodes run similar Blueprint versions"
+  }
+}
