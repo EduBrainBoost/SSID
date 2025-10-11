@@ -1,0 +1,129 @@
+{
+  "artifact": "05_documentation/reports/dashboard/SSID_Governance_Dashboard.md",
+  "type": "governance_dashboard",
+  "version": "v4.2.0",
+  "status": "ACTIVE",
+  "timestamp": "2026-03-31T00:00:00Z",
+  "metadata": {
+    "dashboard_title": "SSID Governance Dashboard",
+    "blueprint_version": "v4.2.0",
+    "model": "6-Layer Depth Model",
+    "root_24_lock": "active",
+    "compliance_score": "100/100",
+    "repository": "https://github.com/EduBrainBoost/SSID",
+    "data_source": "05_documentation/reports/dashboard/dashboard_data.csv",
+    "update_script": "12_tooling/scripts/update_governance_dashboard.py",
+    "automation": "run_quarterly_audit.sh"
+  },
+  "data_sources": {
+    "csv_backend": "05_documentation/reports/dashboard/dashboard_data.csv",
+    "compliance_reports": "05_documentation/reports/YYYY-QX/COMPLIANCE_REPORT.md",
+    "registry_events": "24_meta_orchestration/registry/logs/registry_events.log",
+    "git_history": "git log",
+    "structure_validation": "12_tooling/scripts/structure_guard.sh"
+  },
+  "cryptographic_anchoring": {
+    "method": "SHA256",
+    "proof_anchor": "dc9bb56b17bbb7f5c4ba2ae0eea6befbf301b22a042f639f38866059aa92bee3",
+    "anchor_location": "24_meta_orchestration/registry/logs/registry_events.log",
+    "verified_at": "2026-03-31T00:00:00Z",
+    "hash_valid": true
+  },
+  "automation": {
+    "trigger": "quarterly_audit",
+    "frequency": "quarterly",
+    "script": "12_tooling/scripts/update_governance_dashboard.py",
+    "integration_point": "run_quarterly_audit.sh",
+    "outputs": [
+      "SSID_Governance_Dashboard.md",
+      "dashboard_data.csv (updated)"
+    ]
+  },
+  "dashboard_sections": {
+    "executive_summary": {
+      "includes": [
+        "Current compliance status",
+        "Root-24-LOCK status",
+        "Latest proof-anchor",
+        "Total violations",
+        "Quarterly reports count"
+      ]
+    },
+    "quarterly_compliance_trend": {
+      "includes": [
+        "Compliance score chart (Markdown)",
+        "Violations trend chart",
+        "4-quarter historical view"
+      ]
+    },
+    "registry_proof_anchors": {
+      "includes": [
+        "Quarter and date",
+        "SHA256 proof-anchor prefix",
+        "Hash validation status",
+        "Root-24-LOCK status"
+      ]
+    },
+    "compliance_reports_overview": {
+      "includes": [
+        "Report paths with links",
+        "Commit counts per quarter",
+        "Compliance scores",
+        "Total commits tracked"
+      ]
+    },
+    "commit_activity": {
+      "includes": [
+        "Commit volume chart",
+        "Commit rate calculation",
+        "Most active period identification"
+      ]
+    },
+    "evidence_chain_status": {
+      "includes": [
+        "Root-24-LOCK enforcement status",
+        "Pre-commit hook status",
+        "CI/CD pipeline status",
+        "Registry hash integrity",
+        "Branch protection status",
+        "Quarterly audit trail status"
+      ]
+    },
+    "next_scheduled_audit": {
+      "includes": [
+        "Next quarter identification",
+        "Target date",
+        "Command to execute",
+        "Automated tasks list"
+      ]
+    }
+  },
+  "validation": {
+    "pre_commit_hook": "12_tooling/hooks/pre_commit/root24_enforcer.sh",
+    "ci_cd_workflow": ".github/workflows/structure_guard.yml",
+    "quarterly_audit": "12_tooling/scripts/run_quarterly_audit.sh",
+    "structure_guard": "12_tooling/scripts/structure_guard.sh"
+  },
+  "governance": {
+    "blueprint": "v4.2.0",
+    "model": "6-Layer Depth Model",
+    "source_of_truth": "16_codex/structure/blueprint_v4.2/",
+    "registry_log": "24_meta_orchestration/registry/logs/registry_events.log",
+    "branch_protection": "07_governance_legal/branch_protection_rules.yaml",
+    "operations_guide": "05_documentation/OPERATIONS_GUIDE.md"
+  },
+  "transparency": {
+    "public_access": true,
+    "audit_trail": "tamper_proof",
+    "cryptographic_verification": true,
+    "automated_updates": true,
+    "ci_cd_validated": true
+  },
+  "compliance": {
+    "root_directories": 24,
+    "verified_roots": 24,
+    "compliance_percentage": 100,
+    "last_validation": "2026-03-31T00:00:00Z",
+    "validator": "structure_guard.sh + root24_enforcer.sh"
+  }
+}
