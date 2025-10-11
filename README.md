@@ -27,6 +27,8 @@ Deterministisches, CI-fertiges Bundle basierend auf **Blueprint v4.2** (6-Layer 
 - ✅ Quarterly compliance audits generate tamper-proof reports
 - ✅ Registry event logging with cryptographic proof-anchors
 
+**Latest Compliance Report:** [2026-Q1 COMPLIANCE_REPORT.md](05_documentation/reports/2026-Q1/COMPLIANCE_REPORT.md)
+
 ### Key Features
 
 - **Blueprint v4.2 Architecture**: 6-Layer Model with full Root-24-LOCK enforcement
@@ -96,6 +98,17 @@ This repository follows the **Root-24-LOCK** standard with 24 immutable root dir
 - **GitHub Actions**: Continuous structure validation on push/PR
 - **Quarterly audits**: Scheduled compliance reports in `05_documentation/reports/`
 - **Registry events**: Tamper-proof event logging in `24_meta_orchestration/registry/logs/`
+- **Operations guide**: Detailed maintenance procedures in [OPERATIONS_GUIDE.md](05_documentation/OPERATIONS_GUIDE.md)
+
+### Maintenance Schedule
+
+**Monthly:** Run `bash 12_tooling/scripts/structure_guard.sh` to verify Root-24-LOCK compliance
+
+**Quarterly:** Run `bash 12_tooling/scripts/run_quarterly_audit.sh` to generate compliance report
+
+**Per Release:** Emit registry event with `bash 12_tooling/scripts/registry_event_trigger.sh`
+
+See [OPERATIONS_GUIDE.md](05_documentation/OPERATIONS_GUIDE.md) for complete operational procedures.
 
 ### Contributing
 
@@ -105,7 +118,7 @@ This repository enforces strict structure compliance. All contributions must:
 - Follow Blueprint v4.2 specifications
 - Pass all CI/CD checks before merge
 
-See `07_governance_legal/` for contribution guidelines.
+See `07_governance_legal/` for contribution guidelines and `07_governance_legal/branch_protection_rules.yaml` for branch protection configuration.
 
 ### License
 
@@ -117,4 +130,5 @@ EduBrainBoost <EduBrainBoost@fakemail.com>
 
 ---
 
-_Generated under Blueprint v4.2 • Governance Registry Hash: dc9bb56b17bbb7f5c4ba2ae0eea6befbf301b22a042f639f38866059aa92bee3_
+_Generated under Blueprint v4.2 • Governance Registry Hash: dc9bb56b17bbb7f5c4ba2ae0eea6befbf301b22a042f639f38866059aa92bee3_  
+_Latest compliance report:_ [2026-Q1 COMPLIANCE_REPORT.md](05_documentation/reports/2026-Q1/COMPLIANCE_REPORT.md) • [Operations Guide](05_documentation/OPERATIONS_GUIDE.md)
