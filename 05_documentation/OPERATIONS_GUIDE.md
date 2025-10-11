@@ -354,6 +354,75 @@ arweave deploy 05_documentation/reports/2026-Q1/COMPLIANCE_REPORT.md
 python3 12_tooling/scripts/update_governance_dashboard.py
 ```
 
+## Blueprint v4.4 Functional Expansion Commands (NEW)
+
+### Policy Compiler
+
+**Purpose:** Generate OPA/Rego policies from compliance mappings
+
+```bash
+# Compile all policies from mappings
+python3 12_tooling/scripts/policy_compiler.py --compile-all
+
+# Validate existing policies only
+python3 12_tooling/scripts/policy_compiler.py --validate-only
+```
+
+**Output:**
+- `23_compliance/policy/*.rego` - Generated policies
+- `23_compliance/policy/tests/*_test.rego` - Unit tests
+- `02_audit_logging/reports/policy_activation_log.json` - Audit log
+
+### Evidence Proof Emitter
+
+**Purpose:** Generate cryptographic proofs for forensic reports
+
+```bash
+# Generate proofs for all forensic files
+python3 12_tooling/scripts/evidence_proof_emitter.py --emit
+
+# Generate proofs with IPFS anchoring
+python3 12_tooling/scripts/evidence_proof_emitter.py --emit --auto-anchor
+
+# Verify specific file
+python3 12_tooling/scripts/evidence_proof_emitter.py \
+  --verify-file "05_documentation/reports/2026-Q1/COMPLIANCE_REPORT.md"
+
+# Calculate Merkle root for quarter
+python3 12_tooling/scripts/evidence_proof_emitter.py \
+  --calculate-merkle-root --quarter "2026-Q1"
+```
+
+**Output:**
+- `23_compliance/evidence/proof_hashes.json` - All file proofs
+- `24_meta_orchestration/registry/events/evidence_emission_event.json` - Registry event
+- `02_audit_logging/reports/evidence_emission_log.json` - Audit log
+
+### Review Flow Manager
+
+**Purpose:** Automate governance review and approval workflows
+
+```bash
+# Create review item
+python3 07_governance_legal/automation/review_flow_manager.py \
+  --create-item "blueprint" "Blueprint v4.5 Proposal" "AI-powered governance"
+
+# Submit review (approve/reject)
+python3 07_governance_legal/automation/review_flow_manager.py \
+  --submit-review "blueprint_abc123" "technical-lead" "approve" "LGTM"
+
+# Quarterly status check
+python3 07_governance_legal/automation/review_flow_manager.py --quarterly-check
+
+# Finalize quarter
+python3 07_governance_legal/automation/review_flow_manager.py --finalize-quarter
+```
+
+**Output:**
+- `24_meta_orchestration/registry/review_items/*.json` - Review items
+- `24_meta_orchestration/registry/logs/governance_review.log` - Review log
+- `24_meta_orchestration/registry/events/governance_review_event.json` - Registry events
+
 ## Quick Reference Commands
 
 ```bash
@@ -392,6 +461,20 @@ gh workflow run quarterly_audit.yml
 
 # Anchor proof to IPFS
 ipfs add 05_documentation/reports/2026-Q1/COMPLIANCE_REPORT.md
+
+# === NEW: Blueprint v4.4 Functional Expansion === #
+
+# Compile OPA/Rego policies
+python3 12_tooling/scripts/policy_compiler.py --compile-all
+
+# Generate evidence proofs
+python3 12_tooling/scripts/evidence_proof_emitter.py --emit --auto-anchor
+
+# Quarterly review check
+python3 07_governance_legal/automation/review_flow_manager.py --quarterly-check
+
+# Finalize quarterly governance cycle
+python3 07_governance_legal/automation/review_flow_manager.py --finalize-quarter
 ```
 
 ## Support & Contact

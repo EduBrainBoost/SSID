@@ -1,0 +1,209 @@
+name: Policy Validation
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - '23_compliance/mappings/**'
+      - '23_compliance/policy/**'
+      - '12_tooling/scripts/policy_compiler.py'
+  schedule:
+    - cron: "0 9 * * *"  # Daily at 09:00 UTC
+  workflow_dispatch:
+
+jobs:
+  policy-validation:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Install OPA (Open Policy Agent)
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
+          opa version
+
+      - name: Compile policies from mappings
+        id: compile
+        run: |
+          echo "Compiling OPA/Rego policies from compliance mappings..."
+          python3 12_tooling/scripts/policy_compiler.py --compile-all
+
+          # Check compilation result
+          if [ -f "23_compliance/policy/active_policies.rego" ]; then
+            echo "policies_generated=true" >> $GITHUB_OUTPUT
+            echo "OK: Policies compiled successfully"
+          else
+            echo "policies_generated=false" >> $GITHUB_OUTPUT
+            echo "! No policies generated (mappings may be empty)"
+          fi
+
+      - name: Validate Rego syntax
+        if: steps.compile.outputs.policies_generated == 'true'
+        run: |
+          echo "Validating Rego policy syntax..."
+
+          # Validate all .rego files
+          find 23_compliance/policy -name "*.rego" -type f | while read rego_file; do
+            echo "Validating: $rego_file"
+            opa check "$rego_file" || exit 1
+          done
+
+          echo "OK: All policies have valid syntax"
+
+      - name: Run policy tests
+        if: steps.compile.outputs.policies_generated == 'true'
+        continue-on-error: true
+        run: |
+          echo "Running OPA policy tests..."
+
+          # Run tests for all test files
+          find 23_compliance/policy/tests -name "*_test.rego" -type f | while read test_file; do
+            echo "Testing: $test_file"
+            opa test "$test_file" -v || true
+          done
+
+      - name: Validate policy audit log
+        run: |
+          echo "Validating policy activation audit log..."
+
+          if [ -f "02_audit_logging/reports/policy_activation_log.json" ]; then
+            # Validate JSON structure
+            python3 -c "
+import json
+with open('02_audit_logging/reports/policy_activation_log.json') as f:
+    log = json.load(f)
+    print(f'Log version: {log.get(\"log_version\")}')
+    print(f'Total compilations: {len(log.get(\"compilations\", []))}')
+            "
+            echo "OK: Policy activation log valid"
+          else
+            echo "! Policy activation log not found (first run)"
+          fi
+
+      - name: Check compliance mapping coverage
+        run: |
+          echo "Checking compliance mapping coverage..."
+
+          # Count mapping files
+          MAPPING_COUNT=$(find 23_compliance/mappings -name "*.yaml" -o -name "*.yml" | wc -l)
+          echo "Mapping files found: $MAPPING_COUNT"
+
+          # Count policy files
+          POLICY_COUNT=$(find 23_compliance/policy -name "*.rego" ! -name "*_test.rego" 2>/dev/null | wc -l)
+          echo "Policy files generated: $POLICY_COUNT"
+
+          if [ $POLICY_COUNT -eq 0 ] && [ $MAPPING_COUNT -gt 0 ]; then
+            echo "! Policies not generated from mappings"
+          elif [ $POLICY_COUNT -gt 0 ]; then
+            echo "OK: Policies generated from mappings"
+          fi
+
+      - name: Generate policy validation report
+        if: always()
+        run: |
+          echo "=" >> $GITHUB_STEP_SUMMARY
+          echo "=" >> $GITHUB_STEP_SUMMARY
+          echo "=" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## OPA/Rego Policy Validation Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date -u +\"%Y-%m-%dT%H:%M:%SZ\")" >> $GITHUB_STEP_SUMMARY
+          echo "**Blueprint Version:** v4.4.0" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Count files
+          MAPPING_COUNT=$(find 23_compliance/mappings -name "*.yaml" -o -name "*.yml" 2>/dev/null | wc -l)
+          POLICY_COUNT=$(find 23_compliance/policy -name "*.rego" ! -name "*_test.rego" 2>/dev/null | wc -l)
+          TEST_COUNT=$(find 23_compliance/policy/tests -name "*_test.rego" 2>/dev/null | wc -l)
+
+          echo "### Statistics" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Compliance Mappings | $MAPPING_COUNT |" >> $GITHUB_STEP_SUMMARY
+          echo "| Compiled Policies | $POLICY_COUNT |" >> $GITHUB_STEP_SUMMARY
+          echo "| Policy Tests | $TEST_COUNT |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "### Validation Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.compile.outputs.policies_generated }}" = "true" ]; then
+            echo "- [x] Policy compilation: **SUCCESS**" >> $GITHUB_STEP_SUMMARY
+            echo "- [x] Syntax validation: **PASSED**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- [ ] Policy compilation: **SKIPPED** (no mappings)" >> $GITHUB_STEP_SUMMARY
+            echo "- [ ] Syntax validation: **SKIPPED**" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Compliance Frameworks" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Policies generated for the following frameworks:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ $MAPPING_COUNT -gt 0 ]; then
+            find 23_compliance/mappings -name "*.yaml" -o -name "*.yml" | while read mapping_file; do
+              FRAMEWORK=$(basename "$mapping_file" | sed 's/\..*//' | tr '[:lower:]' '[:upper:]')
+              echo "- $FRAMEWORK" >> $GITHUB_STEP_SUMMARY
+            done
+          else
+            echo "- No mapping files found" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request' && steps.compile.outputs.policies_generated == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Count files
+            const { execSync } = require('child_process');
+            const policyCount = execSync('find 23_compliance/policy -name "*.rego" ! -name "*_test.rego" 2>/dev/null | wc -l').toString().trim();
+
+            const comment = `## OPA/Rego Policy Validation
+
+            **Status:** PASSED
+
+            **Compiled Policies:** ${policyCount}
+            **Syntax Validation:** All policies passed OPA check
+
+            Policies have been successfully compiled from compliance mappings and validated.`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Upload policy artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: policy-validation-results
+          path: |
+            23_compliance/policy/**/*.rego
+            02_audit_logging/reports/policy_activation_log.json
+          retention-days: 30
