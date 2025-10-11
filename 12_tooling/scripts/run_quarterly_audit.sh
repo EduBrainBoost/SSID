@@ -222,7 +222,7 @@ echo ""
 
 # Update governance dashboard (skip in simulation mode)
 if [ "$SIMULATE_MODE" = false ]; then
-    echo -e "${YELLOW}[BONUS] Updating Governance Dashboard...${NC}"
+    echo -e "${YELLOW}[BONUS 1/2] Updating Governance Dashboard...${NC}"
     if command -v python3 &> /dev/null; then
         if python3 "${PROJECT_ROOT}/12_tooling/scripts/update_governance_dashboard.py"; then
             echo -e "${GREEN}✅ Dashboard updated successfully${NC}"
@@ -233,9 +233,23 @@ if [ "$SIMULATE_MODE" = false ]; then
     else
         echo -e "${YELLOW}⚠️  Python3 not available - skipping dashboard update${NC}"
     fi
+
+    # Create quarterly release bundle
+    echo ""
+    echo -e "${YELLOW}[BONUS 2/2] Creating Quarterly Release Bundle...${NC}"
+    if command -v python3 &> /dev/null; then
+        if python3 "${PROJECT_ROOT}/12_tooling/scripts/create_quarterly_release_bundle.py"; then
+            echo -e "${GREEN}✅ Release bundle created successfully${NC}"
+        else
+            echo -e "${RED}❌ Release bundle creation failed${NC}"
+        fi
+    else
+        echo -e "${YELLOW}⚠️  Python3 not available - skipping release bundle${NC}"
+    fi
 else
     echo -e "${YELLOW}[SIMULATION MODE] Dashboard update skipped${NC}"
-    echo -e "   Run without --simulate flag to update dashboard"
+    echo -e "${YELLOW}[SIMULATION MODE] Release bundle skipped${NC}"
+    echo -e "   Run without --simulate flag to generate real artifacts"
 fi
 echo ""
 
