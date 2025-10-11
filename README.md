@@ -1,15 +1,31 @@
 # SSID Root-24 Package
 
-![Blueprint v4.2](https://img.shields.io/badge/Blueprint-v4.2-brightgreen)
-![Compliance](https://img.shields.io/badge/Compliance-100%25-success)
-![Root-24-LOCK](https://img.shields.io/badge/Root--24--LOCK-Active-blue)
-![License](https://img.shields.io/badge/License-Apache%202.0-orange)
+![Blueprint v4.2](https://img.shields.io/badge/Blueprint-v4.2-brightgreen?style=for-the-badge)
+![Compliance](https://img.shields.io/badge/Compliance-100%25-success?style=for-the-badge)
+![Root-24-LOCK](https://img.shields.io/badge/Root--24--LOCK-Active-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Apache%202.0-orange?style=for-the-badge)
+[![Structure Guard](https://github.com/EduBrainBoost/SSID/actions/workflows/structure_guard.yml/badge.svg)](https://github.com/EduBrainBoost/SSID/actions/workflows/structure_guard.yml)
 
 ## Overview
 
 Deterministisches, CI-fertiges Bundle basierend auf **Blueprint v4.2** (6-Layer Model).
 
 **Status:** 100% Structure Compliance | 24 Roots Verified | SAFE-FIX Active
+
+## 🧭 Compliance & Governance Status
+
+**Blueprint Version:** v4.2.0 (6-Layer Depth Model)  
+**Compliance Score:** 100 / 100 ✅  
+**Structure Guard:** PASS (automated Root-24-LOCK validation)  
+**Registry Hash:** dc9bb56b17bbb7f5c4ba2ae0eea6befbf301b22a042f639f38866059aa92bee3
+
+[![Root-24-LOCK PASS](https://github.com/EduBrainBoost/SSID/actions/workflows/structure_guard.yml/badge.svg)](https://github.com/EduBrainBoost/SSID/actions/workflows/structure_guard.yml)
+
+**Automated Validation:**
+- ✅ Pre-commit hooks enforce Root-24-LOCK on every commit
+- ✅ GitHub Actions CI/CD validates structure on push/PR
+- ✅ Quarterly compliance audits generate tamper-proof reports
+- ✅ Registry event logging with cryptographic proof-anchors
 
 ### Key Features
 
@@ -69,11 +85,17 @@ This repository follows the **Root-24-LOCK** standard with 24 immutable root dir
    pytest 11_test_simulation/
    ```
 
+4. **Run quarterly audit**
+   ```bash
+   bash 12_tooling/scripts/run_quarterly_audit.sh
+   ```
+
 ### Compliance & Auditing
 
 - **Pre-commit hooks**: Automatic Root-24-LOCK validation on every commit
 - **GitHub Actions**: Continuous structure validation on push/PR
 - **Quarterly audits**: Scheduled compliance reports in `05_documentation/reports/`
+- **Registry events**: Tamper-proof event logging in `24_meta_orchestration/registry/logs/`
 
 ### Contributing
 
@@ -81,6 +103,7 @@ This repository enforces strict structure compliance. All contributions must:
 - Pass Root-24-LOCK validation
 - Maintain 100% compliance score
 - Follow Blueprint v4.2 specifications
+- Pass all CI/CD checks before merge
 
 See `07_governance_legal/` for contribution guidelines.
 
@@ -91,3 +114,7 @@ Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for detai
 ### Author
 
 EduBrainBoost <EduBrainBoost@fakemail.com>
+
+---
+
+_Generated under Blueprint v4.2 • Governance Registry Hash: dc9bb56b17bbb7f5c4ba2ae0eea6befbf301b22a042f639f38866059aa92bee3_
