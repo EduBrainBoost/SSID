@@ -15,6 +15,12 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+# Parse command line arguments
+SIMULATE_MODE=false
+if [ "${1:-}" == "--simulate" ] || [ "${1:-}" == "-s" ]; then
+    SIMULATE_MODE=true
+fi
+
 # Get current quarter
 YEAR=$(date +%Y)
 MONTH=$(date +%m)
@@ -31,8 +37,19 @@ fi
 QUARTER_DIR="${REPORT_DIR}/${YEAR}-${QUARTER}"
 REPORT_FILE="${QUARTER_DIR}/COMPLIANCE_REPORT.md"
 
+# Add simulation prefix if in simulate mode
+if [ "$SIMULATE_MODE" = true ]; then
+    QUARTER_DIR="${REPORT_DIR}/${YEAR}-${QUARTER}-PREVIEW"
+    REPORT_FILE="${QUARTER_DIR}/COMPLIANCE_REPORT_PREVIEW.md"
+fi
+
 echo -e "${BLUE}═══════════════════════════════════════════════════════${NC}"
-echo -e "${BLUE}  SSID Quarterly Compliance Audit - ${YEAR} ${QUARTER}${NC}"
+if [ "$SIMULATE_MODE" = true ]; then
+    echo -e "${YELLOW}  SSID Quarterly Compliance Audit - ${YEAR} ${QUARTER} [SIMULATION]${NC}"
+    echo -e "${YELLOW}  This is a test run - no files will be committed${NC}"
+else
+    echo -e "${BLUE}  SSID Quarterly Compliance Audit - ${YEAR} ${QUARTER}${NC}"
+fi
 echo -e "${BLUE}  Blueprint v4.2 (6-Layer Model)${NC}"
 echo -e "${BLUE}═══════════════════════════════════════════════════════${NC}"
 echo ""
@@ -203,16 +220,34 @@ echo -e "${BLUE}Review the full report at:${NC}"
 echo -e "${BLUE}${REPORT_FILE}${NC}"
 echo ""
 
-# Update governance dashboard
-echo -e "${YELLOW}[BONUS] Updating Governance Dashboard...${NC}"
-if command -v python3 &> /dev/null; then
-    if python3 "${PROJECT_ROOT}/12_tooling/scripts/update_governance_dashboard.py"; then
-        echo -e "${GREEN}✅ Dashboard updated successfully${NC}"
-        echo -e "   Dashboard: ${PROJECT_ROOT}/05_documentation/reports/dashboard/SSID_Governance_Dashboard.md"
+# Update governance dashboard (skip in simulation mode)
+if [ "$SIMULATE_MODE" = false ]; then
+    echo -e "${YELLOW}[BONUS] Updating Governance Dashboard...${NC}"
+    if command -v python3 &> /dev/null; then
+        if python3 "${PROJECT_ROOT}/12_tooling/scripts/update_governance_dashboard.py"; then
+            echo -e "${GREEN}✅ Dashboard updated successfully${NC}"
+            echo -e "   Dashboard: ${PROJECT_ROOT}/05_documentation/reports/dashboard/SSID_Governance_Dashboard.md"
+        else
+            echo -e "${RED}❌ Dashboard update failed${NC}"
+        fi
     else
-        echo -e "${RED}❌ Dashboard update failed${NC}"
+        echo -e "${YELLOW}⚠️  Python3 not available - skipping dashboard update${NC}"
     fi
 else
-    echo -e "${YELLOW}⚠️  Python3 not available - skipping dashboard update${NC}"
+    echo -e "${YELLOW}[SIMULATION MODE] Dashboard update skipped${NC}"
+    echo -e "   Run without --simulate flag to update dashboard"
 fi
 echo ""
+
+if [ "$SIMULATE_MODE" = true ]; then
+    echo -e "${YELLOW}═══════════════════════════════════════════════════════${NC}"
+    echo -e "${YELLOW}  SIMULATION COMPLETE${NC}"
+    echo -e "${YELLOW}═══════════════════════════════════════════════════════${NC}"
+    echo ""
+    echo -e "${YELLOW}This was a preview run. To execute the real audit:${NC}"
+    echo -e "  bash 12_tooling/scripts/run_quarterly_audit.sh"
+    echo ""
+    echo -e "${YELLOW}Preview report location:${NC}"
+    echo -e "  ${QUARTER_DIR}"
+    echo ""
+fi
