@@ -32,9 +32,9 @@ import urllib.request
 import urllib.error
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Configuration
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 CONFIG_FILE = PROJECT_ROOT / "07_governance_legal/telemetry_config.json"
@@ -53,9 +53,9 @@ class Colors:
     NC = '\033[0m'  # No Color
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Configuration Management
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 def load_config() -> Dict:
     """Load telemetry configuration or return defaults."""
@@ -138,9 +138,9 @@ def save_telemetry_state(state: Dict):
         json.dump(state, f, indent=2, ensure_ascii=False)
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Metrics Collection
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 def load_dashboard_metrics() -> Optional[Dict]:
     """Load latest metrics from governance dashboard CSV."""
@@ -171,7 +171,7 @@ def load_dashboard_metrics() -> Optional[Dict]:
             }
 
     except Exception as e:
-        print(f"{Colors.RED}✗ Error loading dashboard metrics: {e}{Colors.NC}")
+        print(f"{Colors.RED}X Error loading dashboard metrics: {e}{Colors.NC}")
         return None
 
 
@@ -247,9 +247,9 @@ def analyze_score_trend(metrics: Dict, state: Dict) -> Dict[str, Any]:
     return analysis
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Notification Senders
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 def send_slack_notification(webhook_url: str, message: Dict, config: Dict) -> bool:
     """Send notification to Slack via webhook."""
@@ -273,7 +273,7 @@ def send_slack_notification(webhook_url: str, message: Dict, config: Dict) -> bo
             return response.status == 200
 
     except Exception as e:
-        print(f"{Colors.RED}✗ Slack notification failed: {e}{Colors.NC}")
+        print(f"{Colors.RED}X Slack notification failed: {e}{Colors.NC}")
         return False
 
 
@@ -298,7 +298,7 @@ def send_discord_notification(webhook_url: str, message: Dict, config: Dict) -> 
             return response.status in (200, 204)
 
     except Exception as e:
-        print(f"{Colors.RED}✗ Discord notification failed: {e}{Colors.NC}")
+        print(f"{Colors.RED}X Discord notification failed: {e}{Colors.NC}")
         return False
 
 
@@ -320,7 +320,7 @@ def send_webhook_notification(url: str, message: Dict, config: Dict) -> bool:
             return response.status in (200, 201, 202, 204)
 
     except Exception as e:
-        print(f"{Colors.RED}✗ Webhook notification failed: {e}{Colors.NC}")
+        print(f"{Colors.RED}X Webhook notification failed: {e}{Colors.NC}")
         return False
 
 
@@ -341,10 +341,10 @@ def format_notification_message(event_type: str, metrics: Dict, analysis: Dict) 
 
     # Determine emoji and color based on alert level
     emoji_map = {
-        "critical": "🚨",
-        "warning": "⚠️",
-        "success": "✅",
-        "info": "ℹ️"
+        "critical": "!!",
+        "warning": "!",
+        "success": "[OK]",
+        "info": "[i]"
     }
 
     color_map = {
@@ -354,7 +354,7 @@ def format_notification_message(event_type: str, metrics: Dict, analysis: Dict) 
         "info": "#0099ff"
     }
 
-    emoji = emoji_map.get(alert_level, "ℹ️")
+    emoji = emoji_map.get(alert_level, "[i]")
     color = color_map.get(alert_level, "#0099ff")
 
     # Build message text
@@ -368,15 +368,15 @@ def format_notification_message(event_type: str, metrics: Dict, analysis: Dict) 
             description += f"\nChange: {sign}{change}"
 
     elif event_type == "violation":
-        title = f"🚨 SSID Governance Violation Detected"
+        title = f"!! SSID Governance Violation Detected"
         description = f"Violations: **{metrics.get('violations', 0)}**\nCompliance score: {current_score}/100"
 
     elif event_type == "release":
-        title = f"📦 SSID Quarterly Release"
+        title = f"[RELEASE] SSID Quarterly Release"
         description = f"Quarter: **{metrics.get('quarter')}**\nCompliance score: {current_score}/100"
 
     elif event_type == "test":
-        title = f"🧪 SSID Telemetry Test"
+        title = f"[TEST] SSID Telemetry Test"
         description = f"Test notification from governance telemetry system\nCompliance score: {current_score}/100"
 
     else:
@@ -439,29 +439,29 @@ def send_notifications(event_type: str, metrics: Dict, analysis: Dict, config: D
     if notifications_config.get("slack", {}).get("enabled"):
         webhook_url = notifications_config["slack"].get("webhook_url")
         if webhook_url and send_slack_notification(webhook_url, message, notifications_config["slack"]):
-            print(f"{Colors.GREEN}✓ Slack notification sent{Colors.NC}")
+            print(f"{Colors.GREEN}OK Slack notification sent{Colors.NC}")
             sent_count += 1
 
     # Discord
     if notifications_config.get("discord", {}).get("enabled"):
         webhook_url = notifications_config["discord"].get("webhook_url")
         if webhook_url and send_discord_notification(webhook_url, message, notifications_config["discord"]):
-            print(f"{Colors.GREEN}✓ Discord notification sent{Colors.NC}")
+            print(f"{Colors.GREEN}OK Discord notification sent{Colors.NC}")
             sent_count += 1
 
     # Custom Webhook
     if notifications_config.get("webhook", {}).get("enabled"):
         webhook_url = notifications_config["webhook"].get("url")
         if webhook_url and send_webhook_notification(webhook_url, message, notifications_config["webhook"]):
-            print(f"{Colors.GREEN}✓ Webhook notification sent{Colors.NC}")
+            print(f"{Colors.GREEN}OK Webhook notification sent{Colors.NC}")
             sent_count += 1
 
     return sent_count
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Main Monitoring Logic
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 def check_metrics(config: Dict, test_mode: bool = False):
     """
@@ -471,14 +471,14 @@ def check_metrics(config: Dict, test_mode: bool = False):
         config: Telemetry configuration
         test_mode: If True, always send test notification
     """
-    print(f"{Colors.CYAN}🔍 Checking governance metrics...{Colors.NC}")
+    print(f"{Colors.CYAN}[CHECK] Checking governance metrics...{Colors.NC}")
 
     # Load current state
     state = load_telemetry_state()
     metrics = load_dashboard_metrics()
 
     if not metrics:
-        print(f"{Colors.YELLOW}⚠ No metrics available{Colors.NC}")
+        print(f"{Colors.YELLOW}! No metrics available{Colors.NC}")
         return
 
     # Analyze trends
@@ -504,26 +504,26 @@ def check_metrics(config: Dict, test_mode: bool = False):
     if test_mode:
         should_notify = True
         event_type = "test"
-        print(f"{Colors.YELLOW}📢 Test mode: Sending test notification{Colors.NC}")
+        print(f"{Colors.YELLOW}[NOTIFY] Test mode: Sending test notification{Colors.NC}")
 
     elif metrics["violations"] > thresholds.get("max_violations", 0):
         should_notify = filters.get("notify_on_violation", True)
         event_type = "violation"
-        print(f"{Colors.RED}🚨 Violations detected!{Colors.NC}")
+        print(f"{Colors.RED}!! Violations detected!{Colors.NC}")
 
     elif analysis.get("alert_level") in ("warning", "critical"):
         should_notify = filters.get("notify_on_score_change", True)
         event_type = "score_change"
-        print(f"{Colors.YELLOW}⚠️ Score change alert!{Colors.NC}")
+        print(f"{Colors.YELLOW}! Score change alert!{Colors.NC}")
 
     # Send notifications if needed
     if should_notify:
         sent_count = send_notifications(event_type, metrics, analysis, config)
 
         if sent_count > 0:
-            print(f"{Colors.GREEN}✓ Sent {sent_count} notification(s){Colors.NC}")
+            print(f"{Colors.GREEN}OK Sent {sent_count} notification(s){Colors.NC}")
         else:
-            print(f"{Colors.YELLOW}⚠ No notifications configured or all failed{Colors.NC}")
+            print(f"{Colors.YELLOW}! No notifications configured or all failed{Colors.NC}")
 
     # Update state
     state["last_compliance_score"] = metrics["compliance_score"]
@@ -544,26 +544,26 @@ def watch_mode(config: Dict):
     """
     interval = config.get("check_interval_seconds", 300)
 
-    print(f"{Colors.BLUE}{'═' * 70}{Colors.NC}")
+    print(f"{Colors.BLUE}{'=' * 70}{Colors.NC}")
     print(f"{Colors.BLUE}  SSID Governance Telemetry - Watch Mode{Colors.NC}")
     print(f"{Colors.BLUE}  Check interval: {interval}s{Colors.NC}")
-    print(f"{Colors.BLUE}{'═' * 70}{Colors.NC}")
+    print(f"{Colors.BLUE}{'=' * 70}{Colors.NC}")
     print()
 
     try:
         while True:
             check_metrics(config)
-            print(f"{Colors.CYAN}⏳ Next check in {interval}s... (Ctrl+C to stop){Colors.NC}")
+            print(f"{Colors.CYAN}[WAIT] Next check in {interval}s... (Ctrl+C to stop){Colors.NC}")
             print()
             time.sleep(interval)
 
     except KeyboardInterrupt:
-        print(f"\n{Colors.YELLOW}⚠ Monitoring stopped{Colors.NC}")
+        print(f"\n{Colors.YELLOW}! Monitoring stopped{Colors.NC}")
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # CLI Interface
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 def main():
     """Main entry point for telemetry script."""
@@ -596,7 +596,7 @@ Examples:
         config = load_config()
 
         if not config.get("enabled", True):
-            print(f"{Colors.YELLOW}⚠ Telemetry is disabled in configuration{Colors.NC}")
+            print(f"{Colors.YELLOW}! Telemetry is disabled in configuration{Colors.NC}")
             sys.exit(0)
 
         if args.watch:
@@ -607,10 +607,10 @@ Examples:
         sys.exit(0)
 
     except KeyboardInterrupt:
-        print(f"\n{Colors.YELLOW}⚠ Interrupted by user{Colors.NC}")
+        print(f"\n{Colors.YELLOW}! Interrupted by user{Colors.NC}")
         sys.exit(130)
     except Exception as e:
-        print(f"{Colors.RED}✗ Error: {e}{Colors.NC}")
+        print(f"{Colors.RED}X Error: {e}{Colors.NC}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

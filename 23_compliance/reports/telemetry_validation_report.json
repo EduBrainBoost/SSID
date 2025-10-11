@@ -1,0 +1,45 @@
+{
+  "manifest_version": "1.0.0",
+  "blueprint_version": "v4.4.0",
+  "timestamp": "2025-10-11T19:55:20.137176+00:00",
+  "validation_type": "telemetry_system_check",
+  "script_status": "OPERATIONAL",
+  "telemetry_config": {
+    "file": "07_governance_legal\\telemetry_config.json",
+    "exists": true,
+    "enabled": true
+  },
+  "notification_channels": {
+    "slack": {
+      "configured": true,
+      "enabled": false,
+      "status": "DISABLED"
+    },
+    "discord": {
+      "configured": true,
+      "enabled": false,
+      "status": "DISABLED"
+    },
+    "webhook": {
+      "configured": true,
+      "enabled": false,
+      "status": "DISABLED"
+    },
+    "email": {
+      "configured": true,
+      "enabled": false,
+      "status": "DISABLED"
+    }
+  },
+  "thresholds": {
+    "compliance_score_min": 95,
+    "compliance_score_critical": 90,
+    "score_drop_warning": 5,
+    "score_drop_critical": 10,
+    "max_violations": 0,
+    "description": "Alert thresholds for governance metrics"
+  },
+  "exit_code": 0,
+  "overall_status": "PASS",
+  "notes": "Telemetry script operational. Dashboard CSV path mismatch (non-blocking)."
+}

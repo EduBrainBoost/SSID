@@ -31,9 +31,9 @@ from typing import Dict, List, Optional, Tuple
 import urllib.request
 import urllib.error
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Configuration
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 REGISTRY_LOG = PROJECT_ROOT / "24_meta_orchestration/registry/logs/registry_events.log"
@@ -56,9 +56,9 @@ class Colors:
     NC = '\033[0m'  # No Color
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # IPFS Operations
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 def check_ipfs_available() -> bool:
     """Check if IPFS CLI is available on the system."""
@@ -96,14 +96,14 @@ def upload_to_ipfs_local(file_path: Path) -> Optional[str]:
             cid = result.stdout.strip()
             return cid
         else:
-            print(f"{Colors.RED}✗ IPFS upload failed: {result.stderr}{Colors.NC}")
+            print(f"{Colors.RED}X IPFS upload failed: {result.stderr}{Colors.NC}")
             return None
 
     except subprocess.TimeoutExpired:
-        print(f"{Colors.RED}✗ IPFS upload timed out{Colors.NC}")
+        print(f"{Colors.RED}X IPFS upload timed out{Colors.NC}")
         return None
     except Exception as e:
-        print(f"{Colors.RED}✗ IPFS upload error: {e}{Colors.NC}")
+        print(f"{Colors.RED}X IPFS upload error: {e}{Colors.NC}")
         return None
 
 
@@ -138,14 +138,14 @@ def upload_to_web3_storage(file_path: Path, api_token: str) -> Optional[str]:
                 response_data = json.loads(response.read().decode())
                 return response_data.get('cid')
             else:
-                print(f"{Colors.RED}✗ Web3.Storage upload failed: HTTP {response.status}{Colors.NC}")
+                print(f"{Colors.RED}X Web3.Storage upload failed: HTTP {response.status}{Colors.NC}")
                 return None
 
     except urllib.error.URLError as e:
-        print(f"{Colors.RED}✗ Web3.Storage upload error: {e}{Colors.NC}")
+        print(f"{Colors.RED}X Web3.Storage upload error: {e}{Colors.NC}")
         return None
     except Exception as e:
-        print(f"{Colors.RED}✗ Upload error: {e}{Colors.NC}")
+        print(f"{Colors.RED}X Upload error: {e}{Colors.NC}")
         return None
 
 
@@ -168,9 +168,9 @@ def verify_ipfs_cid(cid: str) -> bool:
         return False
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Registry Event Processing
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 def load_registry_events() -> List[Dict]:
     """Load all events from the registry log."""
@@ -275,9 +275,9 @@ def get_files_for_event(event: Dict) -> List[Path]:
     return list(set(files))  # Remove duplicates
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # Main Anchoring Logic
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 def compute_file_hash(file_path: Path) -> str:
     """Compute SHA256 hash of a file."""
@@ -300,7 +300,7 @@ def anchor_file(file_path: Path, event: Dict, use_web3: bool = False) -> Optiona
     Returns:
         Anchor record dictionary if successful, None otherwise
     """
-    print(f"{Colors.CYAN}📤 Anchoring: {file_path.name}{Colors.NC}")
+    print(f"{Colors.CYAN}[?] Anchoring: {file_path.name}{Colors.NC}")
 
     # Compute file hash
     file_hash = compute_file_hash(file_path)
@@ -314,13 +314,13 @@ def anchor_file(file_path: Path, event: Dict, use_web3: bool = False) -> Optiona
         if token:
             cid = upload_to_web3_storage(file_path, token)
         else:
-            print(f"{Colors.YELLOW}⚠ Web3.Storage token not found in {WEB3_STORAGE_TOKEN_ENV}{Colors.NC}")
+            print(f"{Colors.YELLOW}! Web3.Storage token not found in {WEB3_STORAGE_TOKEN_ENV}{Colors.NC}")
 
     if not cid and check_ipfs_available():
         cid = upload_to_ipfs_local(file_path)
 
     if not cid:
-        print(f"{Colors.RED}✗ Failed to anchor {file_path.name}{Colors.NC}")
+        print(f"{Colors.RED}X Failed to anchor {file_path.name}{Colors.NC}")
         return None
 
     # Create anchor record
@@ -337,7 +337,7 @@ def anchor_file(file_path: Path, event: Dict, use_web3: bool = False) -> Optiona
         "blueprint_version": "v4.3"
     }
 
-    print(f"{Colors.GREEN}✓ Anchored: {cid}{Colors.NC}")
+    print(f"{Colors.GREEN}OK Anchored: {cid}{Colors.NC}")
     print(f"  URL: {Colors.BLUE}{IPFS_GATEWAY}{cid}{Colors.NC}")
 
     return anchor_record
@@ -351,21 +351,21 @@ def process_events(verify_only: bool = False, use_web3: bool = False):
         verify_only: If True, only verify existing anchors
         use_web3: If True, use Web3.Storage API for uploads
     """
-    print(f"{Colors.BLUE}{'═' * 70}{Colors.NC}")
+    print(f"{Colors.BLUE}{'=' * 70}{Colors.NC}")
     print(f"{Colors.BLUE}  SSID Auto-Anchoring System - Blueprint v4.3{Colors.NC}")
-    print(f"{Colors.BLUE}{'═' * 70}{Colors.NC}")
+    print(f"{Colors.BLUE}{'=' * 70}{Colors.NC}")
     print()
 
     # Load manifests
     events = load_registry_events()
     manifest = load_ipfs_manifest()
 
-    print(f"{Colors.CYAN}📋 Loaded {len(events)} registry events{Colors.NC}")
-    print(f"{Colors.CYAN}📋 Existing anchors: {len(manifest.get('anchors', []))}{Colors.NC}")
+    print(f"{Colors.CYAN}[LIST] Loaded {len(events)} registry events{Colors.NC}")
+    print(f"{Colors.CYAN}[LIST] Existing anchors: {len(manifest.get('anchors', []))}{Colors.NC}")
     print()
 
     if verify_only:
-        print(f"{Colors.YELLOW}🔍 Verifying existing anchors...{Colors.NC}")
+        print(f"{Colors.YELLOW}[CHECK] Verifying existing anchors...{Colors.NC}")
         print()
 
         anchors = manifest.get("anchors", [])
@@ -379,10 +379,10 @@ def process_events(verify_only: bool = False, use_web3: bool = False):
             print(f"  Verifying {file_name}... ", end="", flush=True)
 
             if verify_ipfs_cid(cid):
-                print(f"{Colors.GREEN}✓{Colors.NC}")
+                print(f"{Colors.GREEN}OK{Colors.NC}")
                 verified += 1
             else:
-                print(f"{Colors.RED}✗{Colors.NC}")
+                print(f"{Colors.RED}X{Colors.NC}")
                 failed += 1
 
         print()
@@ -421,21 +421,21 @@ def process_events(verify_only: bool = False, use_web3: bool = False):
         save_ipfs_manifest(manifest)
 
         print()
-        print(f"{Colors.GREEN}✓ Anchored {len(new_anchors)} new files{Colors.NC}")
-        print(f"{Colors.GREEN}✓ Manifest updated: {IPFS_MANIFEST.relative_to(PROJECT_ROOT)}{Colors.NC}")
+        print(f"{Colors.GREEN}OK Anchored {len(new_anchors)} new files{Colors.NC}")
+        print(f"{Colors.GREEN}OK Manifest updated: {IPFS_MANIFEST.relative_to(PROJECT_ROOT)}{Colors.NC}")
     else:
-        print(f"{Colors.YELLOW}ℹ No new files to anchor{Colors.NC}")
+        print(f"{Colors.YELLOW}[i] No new files to anchor{Colors.NC}")
 
     print()
-    print(f"{Colors.BLUE}{'═' * 70}{Colors.NC}")
+    print(f"{Colors.BLUE}{'=' * 70}{Colors.NC}")
     print(f"{Colors.BLUE}  Auto-Anchoring Complete{Colors.NC}")
-    print(f"{Colors.BLUE}{'═' * 70}{Colors.NC}")
+    print(f"{Colors.BLUE}{'=' * 70}{Colors.NC}")
     print()
 
 
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 # CLI Interface
-# ═══════════════════════════════════════════════════════════════════════════
+# ===========================================================================
 
 def main():
     """Main entry point for auto-anchoring script."""
@@ -468,10 +468,10 @@ Examples:
         process_events(verify_only=args.verify, use_web3=args.web3_storage)
         sys.exit(0)
     except KeyboardInterrupt:
-        print(f"\n{Colors.YELLOW}⚠ Interrupted by user{Colors.NC}")
+        print(f"\n{Colors.YELLOW}! Interrupted by user{Colors.NC}")
         sys.exit(130)
     except Exception as e:
-        print(f"{Colors.RED}✗ Error: {e}{Colors.NC}")
+        print(f"{Colors.RED}X Error: {e}{Colors.NC}")
         import traceback
         traceback.print_exc()
         sys.exit(1)
