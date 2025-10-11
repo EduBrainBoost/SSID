@@ -43,6 +43,8 @@ bash 12_tooling/scripts/run_quarterly_audit.sh
 
 **What it generates:**
 - Comprehensive compliance report in `05_documentation/reports/YYYY-QX/COMPLIANCE_REPORT.md`
+- Updated governance dashboard in `05_documentation/reports/dashboard/SSID_Governance_Dashboard.md`
+- Updated dashboard metrics in `05_documentation/reports/dashboard/dashboard_data.csv`
 - Commit history analysis
 - Test coverage metrics
 - Structure validation results
@@ -50,14 +52,30 @@ bash 12_tooling/scripts/run_quarterly_audit.sh
 
 **Post-Audit Actions:**
 1. Review the generated report
-2. Address any identified issues
-3. Update README with link to latest report
-4. Commit the audit report:
+2. Check the updated governance dashboard
+3. Address any identified issues
+4. Update README with link to latest report
+5. Commit the audit report:
    ```bash
    git add 05_documentation/reports/
    git commit -m "Add quarterly compliance report for YYYY-QX"
    git push origin main
    ```
+
+**Automated Quarterly Audits:**
+
+The quarterly audit can now run automatically via GitHub Actions:
+
+- **Trigger:** Scheduled cron job on 1st of Jan/Apr/Jul/Oct at 08:00 UTC
+- **Workflow:** `.github/workflows/quarterly_audit.yml`
+- **Manual Trigger:** Available via GitHub Actions UI (workflow_dispatch)
+
+The automated workflow will:
+- Run the complete quarterly audit
+- Update the governance dashboard
+- Generate a pull request with results
+- Include proof-anchor for external verification
+- Provide options for on-chain/IPFS anchoring
 
 ### Release Tag Events
 
@@ -101,6 +119,17 @@ git push origin v4.2.1
 - **Trigger:** On every push and pull request
 - **Validation:** Runs `structure_guard.sh` to verify Root-24-LOCK
 - **Badge:** ![Structure Guard](https://github.com/EduBrainBoost/SSID/actions/workflows/structure_guard.yml/badge.svg)
+
+**Quarterly Audit Workflow (NEW):**
+- **File:** `.github/workflows/quarterly_audit.yml`
+- **Trigger:** Scheduled cron on 1st of Jan/Apr/Jul/Oct at 08:00 UTC
+- **Manual Trigger:** Available via workflow_dispatch
+- **Actions:**
+  - Runs complete quarterly compliance audit
+  - Updates governance dashboard with latest metrics
+  - Generates proof-anchor for external verification
+  - Creates pull request with audit results
+  - Provides instructions for on-chain/IPFS anchoring
 
 ### Pre-commit Hook
 
@@ -250,6 +279,81 @@ tail -n 20 24_meta_orchestration/registry/logs/registry_events.log
 - Document all structural changes
 - Maintain audit trail integrity
 
+## Advanced Features (v4.2.1+)
+
+### Audit Report Comparison
+
+**Purpose:** Analyze score drift between quarters
+
+**Command:**
+```bash
+python3 12_tooling/scripts/diff_audit_reports.py <quarter1> <quarter2>
+
+# Example
+python3 12_tooling/scripts/diff_audit_reports.py 2025-Q4 2026-Q1
+```
+
+**Output:**
+- Detailed comparison report in `05_documentation/reports/comparisons/`
+- Score drift analysis
+- Violation trends
+- Commit activity comparison
+- Recommendations for improvement
+
+**Use Cases:**
+- Quarterly performance tracking
+- Compliance trend analysis
+- Identifying degradation patterns
+- Root cause analysis for score changes
+
+### External Proof-Anchoring
+
+**Purpose:** Anchor proof-hashes to external systems for independent verification
+
+**Guide:** `05_documentation/PROOF_ANCHORING_GUIDE.md`
+
+**Quick Commands:**
+
+```bash
+# Anchor to IPFS (free)
+ipfs add 05_documentation/reports/2026-Q1/COMPLIANCE_REPORT.md
+
+# Anchor to Ethereum/Polygon (requires wallet)
+cast send $CONTRACT "anchorProof(bytes32,string,string)" \
+  0x<PROOF_ANCHOR> "2026-Q1" "github.com/EduBrainBoost/SSID" \
+  --rpc-url $RPC_URL --private-key $PRIVATE_KEY
+
+# Anchor to Arweave (permanent storage)
+arweave deploy 05_documentation/reports/2026-Q1/COMPLIANCE_REPORT.md
+```
+
+**Supported Methods:**
+- IPFS (decentralized, free)
+- Ethereum/Polygon (blockchain, $1-5 per anchor)
+- Arweave (permanent, ~$0.01/MB one-time)
+- Certificate Transparency (timestamping, free)
+- Bitcoin OP_RETURN (ultra-permanent, ~$1-10)
+
+### Governance Dashboard
+
+**Location:** `05_documentation/reports/dashboard/SSID_Governance_Dashboard.md`
+
+**Features:**
+- Real-time compliance metrics
+- Quarterly trend charts (Markdown format)
+- Registry proof-anchors table
+- Compliance reports overview
+- Commit activity visualization
+- Evidence-chain status
+- Next scheduled audit
+
+**Auto-updates:** Dashboard regenerates automatically during quarterly audits
+
+**Manual Update:**
+```bash
+python3 12_tooling/scripts/update_governance_dashboard.py
+```
+
 ## Quick Reference Commands
 
 ```bash
@@ -258,6 +362,12 @@ bash 12_tooling/scripts/structure_guard.sh
 
 # Quarterly audit
 bash 12_tooling/scripts/run_quarterly_audit.sh
+
+# Compare audit reports
+python3 12_tooling/scripts/diff_audit_reports.py 2025-Q4 2026-Q1
+
+# Update dashboard
+python3 12_tooling/scripts/update_governance_dashboard.py
 
 # Release event
 bash 12_tooling/scripts/registry_event_trigger.sh \
@@ -271,8 +381,17 @@ bash .git/hooks/pre-commit
 # View recent registry events
 tail -n 20 24_meta_orchestration/registry/logs/registry_events.log
 
+# View governance dashboard
+cat 05_documentation/reports/dashboard/SSID_Governance_Dashboard.md
+
 # Check CI/CD status
 gh run list --limit 5
+
+# Trigger automated quarterly audit manually
+gh workflow run quarterly_audit.yml
+
+# Anchor proof to IPFS
+ipfs add 05_documentation/reports/2026-Q1/COMPLIANCE_REPORT.md
 ```
 
 ## Support & Contact
