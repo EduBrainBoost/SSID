@@ -1,0 +1,48 @@
+{
+  "manifest_version": "1.0.0",
+  "blueprint_version": "v4.5.0-prelaunch",
+  "timestamp": "2025-10-11T21:02:43.217903+00:00",
+  "report_type": "telemetry_sync_preview",
+  "telemetry_config": {
+    "enabled": true,
+    "channels_configured": 0
+  },
+  "test_messages": [
+    {
+      "title": "Governance Warm-Up",
+      "message": "Governance Warm-Up [OK]",
+      "status": "success",
+      "icon": "[CHECK]"
+    },
+    {
+      "title": "Proof-Chain Integrity Verified",
+      "message": "Proof-Chain Integrity Verified [LOCK]",
+      "status": "info",
+      "icon": "[LOCK]"
+    },
+    {
+      "title": "Telemetry Ready for Q1 2026",
+      "message": "Telemetry Ready for Q1 2026 [ROCKET]",
+      "status": "success",
+      "icon": "[ROCKET]"
+    }
+  ],
+  "notification_results": {
+    "slack": [],
+    "discord": [],
+    "webhook": [],
+    "email": []
+  },
+  "delivery_summary": {
+    "total_sent": 0,
+    "total_failed": 0,
+    "total_simulated": 0,
+    "total_channels": 0,
+    "success_rate": 0
+  },
+  "overall_status": {
+    "status": "NO_CHANNELS_CONFIGURED",
+    "exit_code": 0,
+    "exit_message": "No notification channels configured (preview mode)"
+  }
+}
