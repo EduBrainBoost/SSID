@@ -1,0 +1,100 @@
+{
+  "blueprint_version": "v4.3",
+  "config_version": "1.0.0",
+  "enabled": true,
+  "description": "SSID Governance Telemetry Configuration - Blueprint v4.3",
+  "check_interval_seconds": 300,
+  "thresholds": {
+    "compliance_score_min": 95,
+    "compliance_score_critical": 90,
+    "score_drop_warning": 5,
+    "score_drop_critical": 10,
+    "max_violations": 0,
+    "description": "Alert thresholds for governance metrics"
+  },
+  "notifications": {
+    "slack": {
+      "enabled": false,
+      "webhook_url": "",
+      "channel": "#ssid-governance",
+      "username": "SSID Governance Bot",
+      "icon_emoji": ":shield:",
+      "description": "Slack notifications via incoming webhook"
+    },
+    "discord": {
+      "enabled": false,
+      "webhook_url": "",
+      "username": "SSID Governance",
+      "avatar_url": "",
+      "description": "Discord notifications via webhook"
+    },
+    "webhook": {
+      "enabled": false,
+      "url": "",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+        "User-Agent": "SSID-Governance-Telemetry/v4.3"
+      },
+      "description": "Custom webhook for generic integrations"
+    },
+    "email": {
+      "enabled": false,
+      "smtp_server": "",
+      "smtp_port": 587,
+      "from_address": "governance@ssid.local",
+      "to_addresses": [],
+      "use_tls": true,
+      "description": "Email notifications (requires SMTP configuration)"
+    }
+  },
+  "event_filters": {
+    "notify_on_release": true,
+    "notify_on_score_change": true,
+    "notify_on_violation": true,
+    "notify_on_quarterly_report": true,
+    "notify_on_blueprint_update": true,
+    "description": "Control which events trigger notifications"
+  },
+  "compliance": {
+    "no_pii": true,
+    "metadata_only": true,
+    "gdpr_compliant": true,
+    "eidas_compliant": true,
+    "mica_compliant": true,
+    "description": "All notifications contain only hashes and metadata, no personal data"
+  },
+  "documentation": {
+    "setup_guide": "05_documentation/OPERATIONS_GUIDE.md",
+    "webhook_examples": {
+      "slack": "https://api.slack.com/messaging/webhooks",
+      "discord": "https://discord.com/developers/docs/resources/webhook",
+      "custom": "Any HTTP endpoint accepting JSON POST requests"
+    },
+    "environment_variables": {
+      "WEB3_STORAGE_TOKEN": "Optional: Web3.Storage API token for IPFS pinning",
+      "SLACK_WEBHOOK_URL": "Optional: Override Slack webhook URL",
+      "DISCORD_WEBHOOK_URL": "Optional: Override Discord webhook URL"
+    }
+  },
+  "examples": {
+    "enable_slack": {
+      "step_1": "Create Slack incoming webhook at https://api.slack.com/messaging/webhooks",
+      "step_2": "Set 'enabled': true in notifications.slack section",
+      "step_3": "Add webhook_url to notifications.slack.webhook_url",
+      "step_4": "Run: python3 12_tooling/scripts/governance_telemetry.py --test"
+    },
+    "enable_discord": {
+      "step_1": "Create Discord webhook in Server Settings > Integrations",
+      "step_2": "Set 'enabled': true in notifications.discord section",
+      "step_3": "Add webhook_url to notifications.discord.webhook_url",
+      "step_4": "Run: python3 12_tooling/scripts/governance_telemetry.py --test"
+    },
+    "custom_webhook": {
+      "step_1": "Set 'enabled': true in notifications.webhook section",
+      "step_2": "Add your endpoint URL to notifications.webhook.url",
+      "step_3": "Adjust method and headers as needed",
+      "step_4": "Run: python3 12_tooling/scripts/governance_telemetry.py --test"
+    }
+  }
+}
