@@ -109,6 +109,52 @@ jobs:
             exit 1
           fi
 
+      - name: Anchor to IPFS (Blueprint v4.3)
+        id: ipfs_anchor
+        continue-on-error: true
+        run: |
+          echo "🔗 Running IPFS auto-anchoring..."
+
+          # Run auto-anchoring script
+          python3 12_tooling/scripts/auto_ipfs_anchor.py
+
+          # Check if IPFS manifest was updated
+          if [ -f "24_meta_orchestration/registry/manifests/ipfs_anchor_manifest.json" ]; then
+            # Extract latest CID if available
+            LATEST_CID=$(python3 -c "
+          import json
+          try:
+              with open('24_meta_orchestration/registry/manifests/ipfs_anchor_manifest.json', 'r') as f:
+                  data = json.load(f)
+                  anchors = data.get('anchors', [])
+                  if anchors:
+                      print(anchors[-1].get('ipfs_cid', ''))
+          except:
+              pass
+          " 2>/dev/null || echo "")
+
+            if [ -n "$LATEST_CID" ]; then
+              echo "ipfs_cid=${LATEST_CID}" >> $GITHUB_OUTPUT
+              echo "✅ IPFS anchoring complete: ${LATEST_CID}"
+            else
+              echo "ipfs_cid=none" >> $GITHUB_OUTPUT
+              echo "ℹ️ No new IPFS anchors created"
+            fi
+          else
+            echo "ipfs_cid=none" >> $GITHUB_OUTPUT
+            echo "⚠️ IPFS manifest not found"
+          fi
+
+      - name: Send governance telemetry (Blueprint v4.3)
+        continue-on-error: true
+        run: |
+          echo "📊 Sending governance telemetry..."
+
+          # Run telemetry notification
+          python3 12_tooling/scripts/governance_telemetry.py
+
+          echo "✅ Telemetry notification sent"
+
       - name: Commit release artifacts
         id: commit
         run: |
@@ -299,6 +345,12 @@ Co-Authored-By: SSID Release Bot <release-bot@ssid.local>"
             **Bundle Hash (SHA256):**
             ```
             ${{ steps.hash.outputs.hash }}
+            ```
+
+            **IPFS Anchor (Blueprint v4.3):**
+            ```
+            CID: ${{ steps.ipfs_anchor.outputs.ipfs_cid }}
+            Gateway: https://ipfs.io/ipfs/${{ steps.ipfs_anchor.outputs.ipfs_cid }}
             ```
 
             ### 🔗 External Anchoring (Recommended)

@@ -98,3 +98,30 @@ echo -e "${GREEN}═════════════════════
 echo -e "${GREEN}  Proof-Anchor Emission Complete${NC}"
 echo -e "${GREEN}═══════════════════════════════════════════════════════${NC}"
 echo ""
+
+# Blueprint v4.3: Optional auto-anchoring to IPFS
+if [ "${AUTO_ANCHOR_IPFS:-false}" = "true" ]; then
+    echo -e "${BLUE}═══════════════════════════════════════════════════════${NC}"
+    echo -e "${BLUE}  Blueprint v4.3: Auto-Anchoring to IPFS${NC}"
+    echo -e "${BLUE}═══════════════════════════════════════════════════════${NC}"
+    echo ""
+
+    # Check if auto-anchoring script exists
+    AUTO_ANCHOR_SCRIPT="${SCRIPT_DIR}/auto_ipfs_anchor.py"
+
+    if [ -f "$AUTO_ANCHOR_SCRIPT" ]; then
+        echo -e "${CYAN}Running IPFS auto-anchoring...${NC}"
+
+        # Run auto-anchoring
+        if python3 "$AUTO_ANCHOR_SCRIPT"; then
+            echo -e "${GREEN}✅ IPFS anchoring complete${NC}"
+        else
+            echo -e "${YELLOW}⚠ IPFS anchoring failed (non-critical)${NC}"
+        fi
+    else
+        echo -e "${YELLOW}⚠ Auto-anchoring script not found: ${AUTO_ANCHOR_SCRIPT}${NC}"
+        echo -e "${YELLOW}  Install Blueprint v4.3 to enable IPFS anchoring${NC}"
+    fi
+
+    echo ""
+fi
