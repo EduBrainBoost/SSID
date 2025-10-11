@@ -1,0 +1,42 @@
+name: Quarterly Review Framework Gate
+on:
+  push:
+    paths:
+      - '23_compliance/review/**'
+      - '23_compliance/tools/validate_quarterly_review.py'
+      - '11_test_simulation/compliance/test_quarterly_review_validator.py'
+  pull_request:
+    paths:
+      - '23_compliance/review/**'
+      - '23_compliance/tools/validate_quarterly_review.py'
+      - '11_test_simulation/compliance/test_quarterly_review_validator.py'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pytest
+
+      - name: Run validator
+        run: python 23_compliance/tools/validate_quarterly_review.py
+
+      - name: Run unit tests
+        run: pytest -q 11_test_simulation/compliance/test_quarterly_review_validator.py
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quarterly_review_reports
+          path: |
+            23_compliance/reports/review_framework_score.json
+            23_compliance/reports/review_framework_audit_report.md

@@ -1,0 +1,249 @@
+meta:
+  framework: "DORA"
+  version: "2025-Q4"
+  source: "SoT Level3"
+  last_updated: "2025-10-07T00:00:00Z"
+  maintainer: "edubrainboost"
+  status: "draft"
+  classification: "PUBLIC - Compliance Mapping"
+  regulatory_basis: "EU 2022/2554 - Digital Operational Resilience Act"
+
+mappings:
+  - id: "DORA-Art-6"
+    description: "ICT-Risikomanagementrahmen"
+    applies_to:
+      - "07_governance_legal"
+      - "15_infra"
+      - "17_observability"
+      - "23_compliance"
+    verification: "manual"
+    test_reference: "test_ict_risk_framework.py"
+    controls:
+      - "ICT risk management framework"
+      - "Risk identification and assessment"
+      - "Risk mitigation strategies"
+      - "Continuous monitoring"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art6_ict_risk.json"
+
+  - id: "DORA-Art-8"
+    description: "Identifizierung"
+    applies_to:
+      - "15_infra"
+      - "17_observability"
+      - "03_core"
+    verification: "automated"
+    test_reference: "test_asset_identification.py"
+    controls:
+      - "ICT asset inventory"
+      - "Critical function identification"
+      - "Dependency mapping"
+      - "Configuration management"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art8_identification.json"
+
+  - id: "DORA-Art-9"
+    description: "Schutz und Prävention"
+    applies_to:
+      - "21_post_quantum_crypto"
+      - "15_infra"
+      - "03_core"
+      - "14_zero_time_auth"
+    verification: "automated"
+    test_reference: "test_protection_prevention.py"
+    controls:
+      - "Access control policies"
+      - "Network segmentation"
+      - "Encryption standards"
+      - "Security patch management"
+      - "Vulnerability management"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art9_protection.json"
+
+  - id: "DORA-Art-10"
+    description: "Erkennung"
+    applies_to:
+      - "17_observability"
+      - "02_audit_logging"
+      - "15_infra"
+    verification: "automated"
+    test_reference: "test_detection.py"
+    controls:
+      - "Security monitoring (24/7)"
+      - "Anomaly detection"
+      - "Intrusion detection systems"
+      - "Log analysis and correlation"
+      - "Threat intelligence integration"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art10_detection.json"
+
+  - id: "DORA-Art-11"
+    description: "Reaktion und Wiederherstellung"
+    applies_to:
+      - "07_governance_legal"
+      - "15_infra"
+      - "04_deployment"
+      - "02_audit_logging"
+    verification: "manual"
+    test_reference: "test_incident_response.py"
+    controls:
+      - "Incident response plan"
+      - "Business continuity plans"
+      - "Disaster recovery procedures"
+      - "Backup and restore capabilities"
+      - "Crisis communication protocols"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art11_response.json"
+
+  - id: "DORA-Art-13"
+    description: "Lernen und Weiterentwicklung"
+    applies_to:
+      - "07_governance_legal"
+      - "11_test_simulation"
+      - "23_compliance"
+    verification: "manual"
+    test_reference: "test_continuous_improvement.py"
+    controls:
+      - "Post-incident reviews"
+      - "Lessons learned documentation"
+      - "Framework updates"
+      - "Continuous improvement processes"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art13_learning.json"
+
+  - id: "DORA-Art-17"
+    description: "Überwachung der ICT-Drittparteienrisiken"
+    applies_to:
+      - "07_governance_legal"
+      - "19_adapters"
+      - "10_interoperability"
+      - "23_compliance"
+    verification: "manual"
+    test_reference: "test_third_party_risk.py"
+    controls:
+      - "Third-party risk assessment"
+      - "Vendor due diligence"
+      - "Contractual safeguards"
+      - "Ongoing vendor monitoring"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art17_third_party.json"
+
+  - id: "DORA-Art-21"
+    description: "Allgemeine Grundsätze für das Testen der digitalen operationellen Resilienz"
+    applies_to:
+      - "11_test_simulation"
+      - "23_compliance"
+      - "07_governance_legal"
+    verification: "automated"
+    test_reference: "test_resilience_testing.py"
+    controls:
+      - "Regular resilience testing"
+      - "Test planning and execution"
+      - "Test result documentation"
+      - "Remediation tracking"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art21_testing.json"
+
+  - id: "DORA-Art-24"
+    description: "Fortgeschrittene Tests der digitalen operationellen Resilienz"
+    applies_to:
+      - "11_test_simulation"
+      - "15_infra"
+      - "23_compliance"
+    verification: "manual"
+    test_reference: "test_advanced_testing.py"
+    controls:
+      - "Threat-led penetration testing (TLPT)"
+      - "Red team exercises"
+      - "Advanced scenario testing"
+      - "Third-party testing validation"
+    implementation_status: "planned"
+    evidence_path: "23_compliance/evidence/dora/art24_advanced_testing.json"
+
+  - id: "DORA-Art-26"
+    description: "Meldung schwerwiegender ICT-bezogener Vorfälle"
+    applies_to:
+      - "02_audit_logging"
+      - "07_governance_legal"
+      - "17_observability"
+    verification: "manual"
+    test_reference: "test_incident_reporting.py"
+    controls:
+      - "Incident classification procedures"
+      - "Notification timelines (4 hours initial, 72 hours detailed)"
+      - "Reporting to competent authorities"
+      - "Incident register maintenance"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art26_reporting.json"
+
+  - id: "DORA-Art-28"
+    description: "Managementstruktur"
+    applies_to:
+      - "07_governance_legal"
+      - "23_compliance"
+    verification: "manual"
+    test_reference: "test_management_structure.py"
+    controls:
+      - "Management body responsibilities"
+      - "ICT risk reporting to management"
+      - "Management training requirements"
+      - "Governance framework documentation"
+    implementation_status: "implemented"
+    evidence_path: "23_compliance/evidence/dora/art28_governance.json"
+
+cross_module_dependencies:
+  - source: "17_observability"
+    target: "02_audit_logging"
+    requirement: "All security events must be logged for DORA incident management"
+  - source: "11_test_simulation"
+    target: "23_compliance"
+    requirement: "Resilience test results must be documented for DORA compliance"
+  - source: "19_adapters"
+    target: "07_governance_legal"
+    requirement: "Third-party integrations must have risk assessments"
+
+compliance_metrics:
+  overall_coverage: "92%"
+  automated_controls: 5
+  manual_controls: 6
+  implemented_controls: 10
+  planned_controls: 1
+  last_audit: "2025-09-15"
+  next_audit: "2026-03-15"
+
+dora_specific_requirements:
+  incident_response_time:
+    initial_notification: "4 hours"
+    intermediate_report: "72 hours"
+    final_report: "1 month"
+  testing_frequency:
+    basic_testing: "annual"
+    advanced_testing: "triennial"
+    threat_intelligence: "continuous"
+  third_party_monitoring:
+    risk_assessment_frequency: "annual"
+    critical_vendor_review: "quarterly"
+    contract_renewal_assessment: "mandatory"
+
+incident_response_plan:
+  location: "05_documentation/runbooks/dora_incident_response.md"
+  owner: "CISO"
+  last_updated: "2025-09-15"
+  next_review: "2026-03-15"
+  test_frequency: "quarterly"
+
+references:
+  - title: "DORA Official Text"
+    url: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj"
+  - title: "EBA DORA Guidelines"
+    url: "https://www.eba.europa.eu/regulation-and-policy/digital-operational-resilience-act-dora"
+  - title: "ESMA DORA Technical Standards"
+    url: "https://www.esma.europa.eu/policy-activities/digital-finance/digital-operational-resilience-act-dora"
+
+financial_entity_classification:
+  applies_to_ssid: true
+  entity_type: "ICT third-party service provider"
+  critical_services: ["Identity verification", "DID resolution", "Credential issuance"]
+  regulatory_oversight: "Multi-jurisdiction (EU Member States)"
+
+checksum: "sha256:8b57a13328463640fe55e60b95984ea646de14b31063a0efff9a7e2fbe4984f9"

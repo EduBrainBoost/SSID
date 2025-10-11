@@ -1,0 +1,10 @@
+registry_version: 1.0.0
+entries:
+  - name: detect_duplicate_identity_hashes
+    version: 1.0.0
+    entrypoint: 12_tooling/duplicate_checks/detect_duplicate_identity_hashes.py
+    outputs:
+      - 23_compliance/reports/detect_duplicate_identity_hashes_report.md
+      - 24_meta_orchestration/registry/logs/detect_duplicate_identity_hashes_last.json
+    ci_policy:
+      fail_on_findings: true

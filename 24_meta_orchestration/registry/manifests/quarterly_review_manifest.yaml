@@ -1,0 +1,36 @@
+component: quarterly_review_framework
+version: 2025-Q4
+owner: edubrainboost
+roots:
+  - 23_compliance
+  - 02_audit_logging
+  - 24_meta_orchestration
+  - 17_observability
+  - 11_test_simulation
+artifacts:
+  inputs:
+    template: 23_compliance/review/review_template.yaml
+    checklist: 23_compliance/review/reviewer_checklist.yaml
+    assignments: 23_compliance/review/reviewer_assignments.yaml
+    findings: 23_compliance/review/review_findings.yaml
+    readme: 23_compliance/review/README.md
+    tests: 23_compliance/tests/test_review_templates.py
+  validator: 23_compliance/tools/validate_quarterly_review.py
+  reports:
+    score: 23_compliance/reports/review_framework_score.json
+    audit_md: 23_compliance/reports/review_framework_audit_report.md
+  logs:
+    jsonl: 02_audit_logging/logs/review_framework.jsonl
+ci_cd:
+  workflow: .github/workflows/quarterly_review_check.yml
+  blocking: true
+status:
+  last_audit: 2025-10-07
+  promotion_ready: true
+compliance:
+  pii: false
+  retention_years: 10
+signatures:
+  - type: author
+    by: edubrainboost
+    when: 2025-10-07T00:00:00Z

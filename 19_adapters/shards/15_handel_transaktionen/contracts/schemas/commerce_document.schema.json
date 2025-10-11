@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.example/schemas/commerce_document.json",
+  "title": "Käufe, Verkäufe Document",
+  "description": "Schema for commerce documents in SSID system",
+  "type": "object",
+  "required": ["id", "data_hash"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique document identifier"
+    },
+    "data_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of document content"
+    },
+    "metadata_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of metadata"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Document creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Document version number"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "minLength": 64,
+      "maxLength": 64,
+      "description": "SHA3-256 hash (64 hex characters)"
+    }
+  },
+  "examples": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "data_hash": "cd25363366b4e72f3296c037f3af12d7128f890b1569e33127d18e80e3d24c0f",
+      "metadata_hash": "3c55e6c818d395e447e3a813691eabb48e97c06eda0b0df6b420ed3df1846b45",
+      "created_at": "2025-10-05T15:29:16.202995Z",
+      "updated_at": "2025-10-05T15:29:16.202995Z",
+      "version": 1
+    }
+  ]
+}

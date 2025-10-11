@@ -1,0 +1,56 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "registryHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "proofType",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "metadataURI",
+        "type": "string"
+      }
+    ],
+    "name": "submitProof",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "proofId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "proofId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "registryHash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "proofType",
+        "type": "string"
+      }
+    ],
+    "name": "ProofSubmitted",
+    "type": "event"
+  }
+]

@@ -1,0 +1,494 @@
+meta:
+  framework: "UNIFIED"
+  index_type: "cross_framework_normalization"
+  version: "2025-Q4"
+  source: "Multi-Framework Integration"
+  last_updated: "2025-10-07T00:00:00Z"
+  maintainer: "edubrainboost"
+  status: "active"
+  classification: "OPERATIONAL - Compliance Ontology"
+  purpose: "Common ontology mapping across GDPR, DORA, MiCA, AMLD6 for multi-jurisdictional audits"
+
+description: |
+  Unified compliance index providing normalized ontology across all regulatory frameworks.
+  Enables cross-framework queries, multi-jurisdictional audit trails, and common risk assessment.
+
+  Key Features:
+  - Normalized control IDs across frameworks
+  - Common risk classification taxonomy
+  - Unified verification methodology
+  - Cross-reference mapping for overlapping requirements
+
+ontology:
+  control_categories:
+    - id: "CC-01"
+      name: "Data Protection & Privacy"
+      description: "Controls related to personal data processing, privacy rights, and data minimization"
+      frameworks: ["GDPR", "MiCA", "AMLD6"]
+      risk_domain: "privacy"
+
+    - id: "CC-02"
+      name: "ICT Security & Resilience"
+      description: "Controls for IT security, business continuity, and incident response"
+      frameworks: ["DORA", "GDPR", "MiCA"]
+      risk_domain: "operational"
+
+    - id: "CC-03"
+      name: "Financial Crime Prevention"
+      description: "AML/CFT controls, transaction monitoring, and sanctions compliance"
+      frameworks: ["AMLD6", "MiCA"]
+      risk_domain: "financial_crime"
+
+    - id: "CC-04"
+      name: "Governance & Accountability"
+      description: "Management oversight, documentation, and regulatory reporting"
+      frameworks: ["GDPR", "DORA", "MiCA", "AMLD6"]
+      risk_domain: "governance"
+
+    - id: "CC-05"
+      name: "Third-Party Risk Management"
+      description: "Vendor due diligence, service provider oversight, and supply chain security"
+      frameworks: ["DORA", "GDPR", "AMLD6"]
+      risk_domain: "third_party"
+
+    - id: "CC-06"
+      name: "Cryptographic Controls"
+      description: "Encryption, key management, and post-quantum cryptography"
+      frameworks: ["DORA", "GDPR", "MiCA"]
+      risk_domain: "cryptography"
+
+    - id: "CC-07"
+      name: "Audit & Monitoring"
+      description: "Logging, audit trails, and continuous monitoring"
+      frameworks: ["GDPR", "DORA", "MiCA", "AMLD6"]
+      risk_domain: "audit"
+
+  risk_classifications:
+    - level: "CRITICAL"
+      severity_score: 5
+      description: "Immediate regulatory action required, potential fines or sanctions"
+      remediation_sla: "24 hours"
+      escalation: "C-level + Legal"
+
+    - level: "HIGH"
+      severity_score: 4
+      description: "Significant compliance gap, regulatory notification may be required"
+      remediation_sla: "7 days"
+      escalation: "Compliance Officer + DPO"
+
+    - level: "MEDIUM"
+      severity_score: 3
+      description: "Material compliance issue requiring timely remediation"
+      remediation_sla: "30 days"
+      escalation: "Department Head"
+
+    - level: "LOW"
+      severity_score: 2
+      description: "Minor compliance gap, continuous improvement opportunity"
+      remediation_sla: "90 days"
+      escalation: "Team Lead"
+
+    - level: "INFORMATIONAL"
+      severity_score: 1
+      description: "Observation or best practice recommendation"
+      remediation_sla: "Next review cycle"
+      escalation: "N/A"
+
+  verification_methods:
+    - method: "automated"
+      description: "Continuous automated testing via CI/CD pipeline"
+      frequency: "real-time"
+      tools: ["pytest", "structure_guard.sh", "compliance_check.yml"]
+      confidence_level: "high"
+
+    - method: "semi_automated"
+      description: "Automated data collection with manual review"
+      frequency: "daily/weekly"
+      tools: ["compliance_dashboard.py", "dora_operational_metrics.yaml"]
+      confidence_level: "medium-high"
+
+    - method: "manual"
+      description: "Manual documentation review and attestation"
+      frequency: "quarterly"
+      tools: ["review_template.yaml", "audit_findings.yaml"]
+      confidence_level: "medium"
+
+    - method: "external_audit"
+      description: "Independent third-party assessment"
+      frequency: "annual"
+      tools: ["registry_anchor.json", "evidence trails"]
+      confidence_level: "very-high"
+
+cross_framework_mappings:
+  data_protection:
+    - unified_id: "UNI-DP-001"
+      category: "CC-01"
+      description: "Personal data processing lawfulness and transparency"
+      risk_level: "HIGH"
+      mappings:
+        - framework: "GDPR"
+          article: "Art. 5"
+          control_id: "GDPR-Art-5"
+          requirement: "Principles of data processing"
+        - framework: "MiCA"
+          article: "Art. 74"
+          control_id: "MiCA-Art-74"
+          requirement: "Records and data retention"
+      ssid_modules:
+        - "09_meta_identity"
+        - "03_core"
+      verification: "automated"
+      implementation_status: "implemented"
+
+    - unified_id: "UNI-DP-002"
+      category: "CC-01"
+      description: "Data subject rights (access, erasure, portability)"
+      risk_level: "MEDIUM"
+      mappings:
+        - framework: "GDPR"
+          article: "Art. 15-22"
+          control_id: "GDPR-Art-15"
+          requirement: "Data subject rights"
+      ssid_modules:
+        - "09_meta_identity"
+        - "07_governance_legal"
+      verification: "semi_automated"
+      implementation_status: "implemented"
+
+  security_resilience:
+    - unified_id: "UNI-SR-001"
+      category: "CC-02"
+      description: "ICT risk management framework"
+      risk_level: "CRITICAL"
+      mappings:
+        - framework: "DORA"
+          article: "Art. 6"
+          control_id: "DORA-Art-6"
+          requirement: "ICT risk management framework"
+        - framework: "GDPR"
+          article: "Art. 32"
+          control_id: "GDPR-Art-32"
+          requirement: "Security of processing"
+        - framework: "MiCA"
+          article: "Art. 60"
+          control_id: "MiCA-Art-60"
+          requirement: "Custody of crypto-assets"
+      ssid_modules:
+        - "15_infra"
+        - "21_post_quantum_crypto"
+        - "03_core"
+      verification: "automated"
+      implementation_status: "implemented"
+
+    - unified_id: "UNI-SR-002"
+      category: "CC-02"
+      description: "Incident detection and response"
+      risk_level: "HIGH"
+      mappings:
+        - framework: "DORA"
+          article: "Art. 11"
+          control_id: "DORA-Art-11"
+          requirement: "Response and recovery"
+        - framework: "GDPR"
+          article: "Art. 33"
+          control_id: "GDPR-Art-33"
+          requirement: "Notification of personal data breach"
+        - framework: "MiCA"
+          article: "Art. 76"
+          control_id: "MiCA-Art-76"
+          requirement: "Incident reporting"
+      ssid_modules:
+        - "02_audit_logging"
+        - "17_observability"
+        - "07_governance_legal"
+      verification: "semi_automated"
+      implementation_status: "implemented"
+
+    - unified_id: "UNI-SR-003"
+      category: "CC-02"
+      description: "Business continuity and disaster recovery"
+      risk_level: "HIGH"
+      mappings:
+        - framework: "DORA"
+          article: "Art. 11(4)"
+          control_id: "DORA-Art-11"
+          requirement: "Recovery time and point objectives"
+      ssid_modules:
+        - "15_infra"
+        - "02_audit_logging"
+      verification: "manual"
+      implementation_status: "implemented"
+
+  financial_crime:
+    - unified_id: "UNI-FC-001"
+      category: "CC-03"
+      description: "Customer due diligence (CDD) and KYC"
+      risk_level: "HIGH"
+      mappings:
+        - framework: "AMLD6"
+          article: "Art. 8"
+          control_id: "AMLD6-Art-8"
+          requirement: "Customer due diligence"
+        - framework: "MiCA"
+          article: "Art. 63"
+          control_id: "MiCA-Art-63"
+          requirement: "Authorization of crypto-asset service providers"
+      ssid_modules:
+        - "09_meta_identity"
+        - "14_zero_time_auth"
+      verification: "manual"
+      implementation_status: "implemented"
+
+    - unified_id: "UNI-FC-002"
+      category: "CC-03"
+      description: "Transaction monitoring and suspicious activity reporting"
+      risk_level: "HIGH"
+      mappings:
+        - framework: "AMLD6"
+          article: "Art. 20"
+          control_id: "AMLD6-Art-20"
+          requirement: "Suspicious transaction reports"
+        - framework: "AMLD6"
+          article: "AMLR Art. 22"
+          control_id: "AMLD6-AMLR-22"
+          requirement: "Travel rule compliance"
+      ssid_modules:
+        - "02_audit_logging"
+        - "17_observability"
+      verification: "semi_automated"
+      implementation_status: "implemented"
+
+  governance:
+    - unified_id: "UNI-GV-001"
+      category: "CC-04"
+      description: "Governance framework and management accountability"
+      risk_level: "MEDIUM"
+      mappings:
+        - framework: "GDPR"
+          article: "Art. 24"
+          control_id: "GDPR-Art-24"
+          requirement: "Responsibility of the controller"
+        - framework: "DORA"
+          article: "Art. 5"
+          control_id: "DORA-Art-5"
+          requirement: "Governance and organization"
+        - framework: "MiCA"
+          article: "Art. 65"
+          control_id: "MiCA-Art-65"
+          requirement: "Governance arrangements"
+      ssid_modules:
+        - "07_governance_legal"
+        - "23_compliance"
+      verification: "manual"
+      implementation_status: "implemented"
+
+    - unified_id: "UNI-GV-002"
+      category: "CC-04"
+      description: "Records management and documentation"
+      risk_level: "MEDIUM"
+      mappings:
+        - framework: "GDPR"
+          article: "Art. 30"
+          control_id: "GDPR-Art-30"
+          requirement: "Records of processing activities"
+        - framework: "MiCA"
+          article: "Art. 74"
+          control_id: "MiCA-Art-74"
+          requirement: "Records and data retention"
+        - framework: "AMLD6"
+          article: "Art. 28"
+          control_id: "AMLD6-Art-28"
+          requirement: "Record keeping"
+      ssid_modules:
+        - "07_governance_legal"
+        - "02_audit_logging"
+        - "05_documentation"
+      verification: "automated"
+      implementation_status: "implemented"
+
+  third_party:
+    - unified_id: "UNI-TP-001"
+      category: "CC-05"
+      description: "Third-party service provider oversight"
+      risk_level: "HIGH"
+      mappings:
+        - framework: "DORA"
+          article: "Art. 17"
+          control_id: "DORA-Art-17"
+          requirement: "Third-party risk management"
+        - framework: "GDPR"
+          article: "Art. 28"
+          control_id: "GDPR-Art-28"
+          requirement: "Processor obligations"
+        - framework: "AMLD6"
+          article: "Art. 8(3)"
+          control_id: "AMLD6-Art-8"
+          requirement: "Third-party identification"
+      ssid_modules:
+        - "07_governance_legal"
+        - "15_infra"
+      verification: "manual"
+      implementation_status: "planned"
+
+  cryptography:
+    - unified_id: "UNI-CR-001"
+      category: "CC-06"
+      description: "Encryption and cryptographic key management"
+      risk_level: "CRITICAL"
+      mappings:
+        - framework: "GDPR"
+          article: "Art. 32"
+          control_id: "GDPR-Art-32"
+          requirement: "Encryption of personal data"
+        - framework: "DORA"
+          article: "Art. 9(4)"
+          control_id: "DORA-Art-9"
+          requirement: "Encryption and cryptographic controls"
+        - framework: "MiCA"
+          article: "Art. 60"
+          control_id: "MiCA-Art-60"
+          requirement: "Safeguarding of crypto-asset keys"
+      ssid_modules:
+        - "21_post_quantum_crypto"
+        - "14_zero_time_auth"
+        - "03_core"
+      verification: "automated"
+      implementation_status: "implemented"
+
+  audit_logging:
+    - unified_id: "UNI-AL-001"
+      category: "CC-07"
+      description: "Comprehensive audit logging and WORM storage"
+      risk_level: "HIGH"
+      mappings:
+        - framework: "GDPR"
+          article: "Art. 32"
+          control_id: "GDPR-Art-32"
+          requirement: "Logging and monitoring"
+        - framework: "DORA"
+          article: "Art. 10(1)"
+          control_id: "DORA-Art-10"
+          requirement: "Detection mechanisms"
+        - framework: "AMLD6"
+          article: "Art. 28"
+          control_id: "AMLD6-Art-28"
+          requirement: "Record retention"
+      ssid_modules:
+        - "02_audit_logging"
+        - "17_observability"
+      verification: "automated"
+      implementation_status: "implemented"
+
+compliance_metrics_unified:
+  overall_coverage:
+    gdpr: "95%"
+    dora: "92%"
+    mica: "88%"
+    amld6: "94%"
+    unified_average: "92%"
+
+  by_category:
+    data_protection: "95%"
+    security_resilience: "94%"
+    financial_crime: "94%"
+    governance: "90%"
+    third_party: "80%"
+    cryptography: "100%"
+    audit_logging: "98%"
+
+  by_risk_level:
+    critical: "100%"
+    high: "95%"
+    medium: "88%"
+    low: "75%"
+    informational: "60%"
+
+  verification_status:
+    automated: 18
+    semi_automated: 4
+    manual: 6
+    external_audit: 0
+    total_controls: 28
+
+multi_jurisdictional_audit_support:
+  features:
+    - "Single source of truth for all frameworks"
+    - "Automated cross-reference resolution"
+    - "Unified risk scoring across frameworks"
+    - "Common evidence repository"
+    - "Multi-framework reporting templates"
+
+  audit_trails:
+    - source: "02_audit_logging/evidence/registry/registry_anchor.json"
+      purpose: "Immutable compliance state history"
+    - source: "02_audit_logging/evidence/blockchain/compliance_events.jsonl"
+      purpose: "On-chain proof anchoring"
+    - source: "23_compliance/reviews/*/audit_findings.yaml"
+      purpose: "Historical audit findings"
+
+  reporting_capabilities:
+    - format: "consolidated"
+      output: "All frameworks in single report"
+      audience: "Board of Directors"
+    - format: "framework_specific"
+      output: "Individual framework compliance"
+      audience: "Regulatory authorities"
+    - format: "risk_based"
+      output: "By risk level and category"
+      audience: "Risk management committee"
+    - format: "technical"
+      output: "Module-level implementation details"
+      audience: "Technical auditors"
+
+integration_points:
+  compliance_dashboard: "13_ui_layer/compliance_dashboard.py"
+  blockchain_trigger: "24_meta_orchestration/compliance_chain_trigger.py"
+  registry_lock: "24_meta_orchestration/registry/locks/registry_lock.yaml"
+  operational_metrics: "23_compliance/mappings/dora_operational_metrics.yaml"
+  test_suite: "23_compliance/tests/test_compliance_integrity.py"
+
+query_examples:
+  - query: "Find all CRITICAL controls across all frameworks"
+    filter: "risk_level == 'CRITICAL'"
+    expected_results: ["UNI-SR-001", "UNI-CR-001"]
+
+  - query: "List all controls requiring manual verification"
+    filter: "verification == 'manual'"
+    expected_results: ["UNI-DP-002", "UNI-SR-003", "UNI-FC-001", "UNI-GV-001", "UNI-TP-001"]
+
+  - query: "Show all controls affecting 09_meta_identity"
+    filter: "'09_meta_identity' in ssid_modules"
+    expected_results: ["UNI-DP-001", "UNI-DP-002", "UNI-FC-001"]
+
+  - query: "Find overlapping requirements between GDPR and DORA"
+    filter: "frameworks contains ['GDPR', 'DORA']"
+    expected_results: ["UNI-SR-001", "UNI-SR-002", "UNI-GV-001", "UNI-TP-001", "UNI-CR-001", "UNI-AL-001"]
+
+change_history:
+  - version: "2025-Q4"
+    date: "2025-10-07"
+    changes: "Initial unified index creation"
+    author: "edubrainboost"
+
+  - version: "2026-Q1"
+    date: "TBD"
+    changes: "Planned: AI-driven risk predictions integration"
+    author: "TBD"
+
+references:
+  - title: "GDPR Compliance Mapping"
+    location: "23_compliance/mappings/gdpr_mapping.yaml"
+  - title: "DORA Compliance Mapping"
+    location: "23_compliance/mappings/dora_mapping.yaml"
+  - title: "MiCA Compliance Mapping"
+    location: "23_compliance/mappings/mica_mapping.yaml"
+  - title: "AMLD6 Compliance Mapping"
+    location: "23_compliance/mappings/amld6_mapping.yaml"
+  - title: "DORA Operational Metrics"
+    location: "23_compliance/mappings/dora_operational_metrics.yaml"
+  - title: "Registry Lock"
+    location: "24_meta_orchestration/registry/locks/registry_lock.yaml"
+  - title: "Compliance Dashboard"
+    location: "13_ui_layer/compliance_dashboard.py"
+
+checksum: "sha256:placeholder_will_be_calculated"

@@ -1,0 +1,310 @@
+openapi: 3.1.0
+info:
+  title: "Ämter, Anträge - Risk Scoring API"
+  description: "Risk Scoring API für Sofort-Authentifizierung im Kontext Meldewesen, Gerichtsurteile, Ordnungswidrigkeiten"
+  version: "2.0.0"
+  contact:
+    name: "SSID zero_time_auth Team"
+    email: "team-14@example.local"
+  license:
+    name: "Proprietary"
+
+servers:
+  - url: "https://zero_time_auth-government.ssid.example"
+    description: "Production"
+  - url: "https://staging-zero_time_auth-government.ssid.example"
+    description: "Staging"
+
+security:
+  - mTLS: []
+
+paths:
+  /v1/risk-score:
+    post:
+      operationId: computeRiskScore
+      summary: "Compute risk score for government data"
+      description: |
+        Computes a risk score based on hash of input data.
+        **CRITICAL**: Only hashes are accepted, no raw PII.
+      tags:
+        - "risk-scoring"
+      parameters:
+        - $ref: '#/components/parameters/RequestID'
+        - $ref: '#/components/parameters/TraceID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskScoreRequest'
+            examples:
+              valid_request:
+                summary: "Valid hash-based request"
+                value:
+                  data_hash: "acf3ed6fd1cb3a09bcc93f876b36d2614084365faed6d7c72d82095edad87e6a"
+                  context:
+                    timestamp: "2025-10-05T15:29:16.202995Z"
+                    source: "api"
+              invalid_request:
+                summary: "Invalid request (wrong hash length)"
+                value:
+                  data_hash: "invalid"
+      responses:
+        '200':
+          description: "Risk score computed successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskScoreResponse'
+              examples:
+                low_risk:
+                  value:
+                    risk_score: 0.15
+                    confidence: 0.95
+                    evidence_anchor:
+                      hash: "b5cb4c21a7009433ede2572980ad16de39aa2b0b90296d8b9c0592c3bdaefdf1"
+                      timestamp: "2025-10-05T15:29:16.202995Z"
+                high_risk:
+                  value:
+                    risk_score: 0.85
+                    confidence: 0.92
+                    evidence_anchor:
+                      hash: "f990f971766e9af43a01cc1b1bffd85fa3559e59bf7ce7c4f8353baf26643bb4"
+                      timestamp: "2025-10-05T15:29:16.202995Z"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          description: "PII detected or validation failed"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: "pii_detected"
+                message: "Raw PII detected in request. Only hashes allowed."
+                timestamp: "2025-10-05T15:29:16.202995Z"
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-ratelimit:
+        limit: 1000
+        window: "1m"
+      x-cache:
+        enabled: false
+        reason: "Dynamic computation required"
+
+  /health/live:
+    get:
+      operationId: healthLive
+      summary: "Liveness probe"
+      tags:
+        - "health"
+      responses:
+        '200':
+          description: "Service is alive"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: ["alive"]
+
+  /health/ready:
+    get:
+      operationId: healthReady
+      summary: "Readiness probe"
+      tags:
+        - "health"
+      responses:
+        '200':
+          description: "Service is ready"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: ["ready"]
+                  dependencies:
+                    type: object
+                    properties:
+                      redis:
+                        type: string
+                        enum: ["up", "down"]
+                      audit_logging:
+                        type: string
+                        enum: ["up", "down"]
+
+components:
+  securitySchemes:
+    mTLS:
+      type: mutualTLS
+      description: "Mutual TLS authentication with client certificates"
+
+  parameters:
+    RequestID:
+      name: X-Request-ID
+      in: header
+      required: true
+      description: "Unique request identifier for tracing"
+      schema:
+        type: string
+        format: uuid
+        example: "550e8400-e29b-41d4-a716-446655440000"
+    
+    TraceID:
+      name: X-Trace-ID
+      in: header
+      required: false
+      description: "Optional trace ID for distributed tracing"
+      schema:
+        type: string
+        pattern: '^[a-f0-9]{32}$'
+
+  schemas:
+    Hash:
+      type: string
+      pattern: '^[a-f0-9]{64}$'
+      minLength: 64
+      maxLength: 64
+      description: "SHA3-256 hash (64 hex characters)"
+      example: "acf3ed6fd1cb3a09bcc93f876b36d2614084365faed6d7c72d82095edad87e6a"
+    
+    RiskScoreRequest:
+      type: object
+      required:
+        - data_hash
+      properties:
+        data_hash:
+          $ref: '#/components/schemas/Hash'
+        context:
+          type: object
+          description: "Optional context metadata (hashed)"
+          additionalProperties: true
+      additionalProperties: false
+    
+    RiskScoreResponse:
+      type: object
+      required:
+        - risk_score
+        - evidence_anchor
+      properties:
+        risk_score:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: "Risk score between 0 (low) and 1 (high)"
+          example: 0.15
+        confidence:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: "Confidence in risk score"
+          example: 0.95
+        evidence_anchor:
+          type: object
+          required:
+            - hash
+            - timestamp
+          properties:
+            hash:
+              $ref: '#/components/schemas/Hash'
+            timestamp:
+              type: string
+              format: date-time
+            blockchain_tx:
+              type: string
+              description: "Optional blockchain transaction hash"
+      additionalProperties: false
+    
+    Error:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: "Error code"
+          example: "validation_error"
+        message:
+          type: string
+          description: "Human-readable error message"
+          example: "Invalid hash format"
+        timestamp:
+          type: string
+          format: date-time
+        trace_id:
+          type: string
+          description: "Request trace ID for debugging"
+
+  responses:
+    BadRequest:
+      description: "Bad Request - Invalid input"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: "bad_request"
+            message: "Invalid request format"
+    
+    Unauthorized:
+      description: "Unauthorized - Invalid or missing authentication"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    Forbidden:
+      description: "Forbidden - Insufficient permissions"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    TooManyRequests:
+      description: "Too Many Requests - Rate limit exceeded"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+          description: "Request limit per window"
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+          description: "Remaining requests in current window"
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+          description: "Unix timestamp when limit resets"
+    
+    InternalServerError:
+      description: "Internal Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    ServiceUnavailable:
+      description: "Service Unavailable"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

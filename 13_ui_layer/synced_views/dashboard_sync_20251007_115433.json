@@ -1,0 +1,146 @@
+{
+  "type": "technical_dashboard",
+  "generated_at": "2025-10-07T11:54:33.260496",
+  "widgets": {
+    "framework_compliance_chart": {
+      "type": "bar_chart",
+      "title": "Framework Compliance",
+      "data": [
+        {
+          "framework": "GDPR",
+          "coverage": 95.0,
+          "status": "good"
+        },
+        {
+          "framework": "DORA",
+          "coverage": 92.0,
+          "status": "good"
+        },
+        {
+          "framework": "MICA",
+          "coverage": 88.0,
+          "status": "acceptable"
+        },
+        {
+          "framework": "AMLD6",
+          "coverage": 94.0,
+          "status": "good"
+        },
+        {
+          "framework": "UNIFIED_AVERAGE",
+          "coverage": 92.0,
+          "status": "good"
+        }
+      ],
+      "x_axis": "framework",
+      "y_axis": "coverage",
+      "unit": "percent"
+    },
+    "risk_level_distribution": {
+      "type": "pie_chart",
+      "title": "Risk Level Coverage",
+      "data": [
+        {
+          "level": "CRITICAL",
+          "value": 100.0
+        },
+        {
+          "level": "HIGH",
+          "value": 95.0
+        },
+        {
+          "level": "MEDIUM",
+          "value": 88.0
+        },
+        {
+          "level": "LOW",
+          "value": 75.0
+        }
+      ]
+    },
+    "control_implementation_status": {
+      "type": "gauge",
+      "title": "Control Implementation",
+      "value": 91.66666666666666,
+      "max": 100,
+      "thresholds": [
+        {
+          "value": 90,
+          "color": "green"
+        },
+        {
+          "value": 75,
+          "color": "yellow"
+        },
+        {
+          "value": 0,
+          "color": "red"
+        }
+      ]
+    },
+    "critical_issues_list": {
+      "type": "alert_list",
+      "title": "Critical Issues",
+      "count": 0,
+      "items": []
+    },
+    "compliance_timeline": {
+      "type": "line_chart",
+      "title": "Compliance Trend",
+      "data": [
+        {
+          "date": "2025-Q1",
+          "score": 88
+        },
+        {
+          "date": "2025-Q2",
+          "score": 90
+        },
+        {
+          "date": "2025-Q3",
+          "score": 92
+        },
+        {
+          "date": "2025-Q4",
+          "score": 92.2
+        }
+      ],
+      "x_axis": "date",
+      "y_axis": "score"
+    },
+    "kpi_summary": {
+      "type": "kpi_panel",
+      "metrics": [
+        {
+          "label": "Overall Compliance",
+          "value": 92.2,
+          "unit": "%",
+          "trend": "stable"
+        },
+        {
+          "label": "Controls Implemented",
+          "value": 11,
+          "total": 12,
+          "unit": "controls"
+        },
+        {
+          "label": "Critical Issues",
+          "value": 0,
+          "severity": "low"
+        },
+        {
+          "label": "Risk Score",
+          "value": 4.5,
+          "unit": "score",
+          "scale": "0-100"
+        }
+      ]
+    }
+  },
+  "data_integrity": {
+    "controls_total": 12,
+    "controls_implemented": 11,
+    "controls_planned": 1,
+    "frameworks_tracked": 5
+  }
+}

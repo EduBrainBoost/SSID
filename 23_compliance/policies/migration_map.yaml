@@ -1,0 +1,134 @@
+# Policy Migration Mapping
+# Author: SSID Codex Engine
+# License: MIT
+# Purpose: Maps old policy locations to new centralized structure
+
+metadata:
+  version: "1.0.0"
+  last_updated: "2025-01-09"
+  description: "Policy migration mapping for Phase-2 centralization"
+
+# Mapping format:
+# source: Original policy location (relative to project root)
+# target: New centralized location under 23_compliance/policies/
+# root: Root module (01_ai_layer, 02_audit_logging, etc.)
+# shard: Shard identifier (S01, S02, etc.)
+# status: pending | migrated | verified
+# notes: Migration notes or special instructions
+
+migrations:
+  # Example migrations (template - update with actual paths)
+
+  - source: "01_ai_layer/shards/01_identitaet_personen/policy.yaml"
+    target: "23_compliance/policies/01_ai_layer/S01_identitaet_personen/policy.yaml"
+    root: "01_ai_layer"
+    shard: "S01_identitaet_personen"
+    status: "pending"
+    notes: "Update chart.yaml reference after migration"
+
+  - source: "02_audit_logging/shards/01_identitaet_personen/policy.yaml"
+    target: "23_compliance/policies/02_audit_logging/S01_identitaet_personen/policy.yaml"
+    root: "02_audit_logging"
+    shard: "S01_identitaet_personen"
+    status: "pending"
+    notes: "Verify WORM compliance after migration"
+
+  - source: "03_core/shards/01_identitaet_personen/policy.yaml"
+    target: "23_compliance/policies/03_core/S01_identitaet_personen/policy.yaml"
+    root: "03_core"
+    shard: "S01_identitaet_personen"
+    status: "pending"
+    notes: "Foundation bridge may reference this"
+
+  # Add more mappings as policies are discovered
+  # Use placeholder_removal_tool.py to find policy files
+
+batch_groups:
+  # Recommended migration batches
+  batch_1:
+    description: "High-priority roots"
+    roots:
+      - "01_ai_layer"
+      - "02_audit_logging"
+      - "23_compliance"
+    estimated_policies: 48  # 3 roots × 16 shards
+    priority: "high"
+
+  batch_2:
+    description: "Core infrastructure"
+    roots:
+      - "03_core"
+      - "20_foundation"
+      - "24_meta_orchestration"
+    estimated_policies: 48
+    priority: "high"
+
+  batch_3:
+    description: "Identity and authentication"
+    roots:
+      - "08_identity_score"
+      - "09_meta_identity"
+      - "14_zero_time_auth"
+    estimated_policies: 48
+    priority: "medium"
+
+  batch_4:
+    description: "Remaining modules"
+    roots:
+      - "04_deployment"
+      - "06_data_pipeline"
+      - "07_governance_legal"
+      - "10_interoperability"
+      - "15_infra"
+      - "17_observability"
+      - "18_data_layer"
+      - "19_adapters"
+      - "21_post_quantum_crypto"
+    estimated_policies: 144  # 9 roots × 16 shards
+    priority: "low"
+
+validation_rules:
+  # Rules for validating successful migration
+
+  required_fields:
+    - "metadata.version"
+    - "metadata.root"
+    - "metadata.shard"
+
+  path_pattern: "23_compliance/policies/{root}/{shard}/policy.yaml"
+
+  chart_yaml_update:
+    pattern: "policy:\\s+path:\\s+\"\\.\\./.*/23_compliance/policies/"
+    required: true
+
+  post_migration_checks:
+    - "File exists at target location"
+    - "Source file removed or archived"
+    - "chart.yaml updated"
+    - "YAML is valid"
+    - "SoT mapper score maintained or improved"
+    - "Tests passing"
+
+automation_hooks:
+  # Optional: Scripts to automate migration
+
+  pre_migration:
+    - "backup_policies.sh"
+    - "validate_source_yaml.py"
+
+  post_migration:
+    - "update_chart_yaml.py"
+    - "validate_target_yaml.py"
+    - "run_sot_mapper.sh"
+    - "run_placeholder_scan.sh"
+
+  verification:
+    - "pytest 11_test_simulation/tools/"
+    - "python 24_meta_orchestration/registry/tools/sot_requirement_mapper.py"
+
+notes:
+  - "Always commit in small batches (per shard or per root)"
+  - "Run validation after each batch"
+  - "Update this file as migrations are completed"
+  - "Use evidence trail for audit purposes"
+  - "Follow ROOT-24-LOCK: no new root directories"

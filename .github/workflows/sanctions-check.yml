@@ -1,0 +1,27 @@
+name: Daily Sanctions Check
+
+on:
+  schedule:
+    - cron: '15 3 * * *'  # Daily at 03:15 UTC
+  workflow_dispatch:
+
+jobs:
+  sanctions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check sources freshness
+        run: |
+          python3 23_compliance/scripts/check_sanctions_freshness.py
+      
+      - name: Build entities list
+        run: |
+          python3 23_compliance/scripts/build_entities_list.py \
+            --registry 24_meta_orchestration/registry/endpoints.yaml \
+            --out /tmp/entities_to_check.json
+      
+      - name: Run sanctions check (mock)
+        run: |
+          echo "⚠️  Mock mode - no real sanctions data"
+          echo "Would check entities against OFAC, EU, UN lists"

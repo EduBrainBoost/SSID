@@ -1,0 +1,46 @@
+# Change Management Process (aus Master-Definition)
+version: 1.0.0
+last_updated: "2025-10-05T15:29:16.202995Z"
+
+steps:
+  - step: 1
+    name: "RFC erstellen"
+    required_for: ["MUST-Changes"]
+    template: "../templates/rfc_template.md"
+    
+  - step: 2
+    name: "Contract-Tests implementieren"
+    required: true
+    tools: ["schemathesis", "pytest"]
+  
+  - step: 3
+    name: "Dual Review"
+    reviewers: ["Architecture Board", "Compliance Team"]
+    quorum: 2
+  
+  - step: 4
+    name: "Semver-Bump + Changelog"
+    automation: "../../scripts/versioning/bump_version.sh"
+  
+  - step: 5
+    name: "CI/CD Pipeline"
+    gates:
+      - "all_tests_green"
+      - "coverage >= 90%"
+      - "security_scan_passed"
+      - "opa_validation_passed"
+  
+  - step: 6
+    name: "Canary Deployment"
+    stages: ["5%", "25%", "50%", "100%"]
+    rollback_threshold:
+      error_rate: "> 0.5%"
+      latency_p95: "> target + 50ms"
+  
+  - step: 7
+    name: "Monitoring & Alerting"
+    duration: "24h"
+    metrics:
+      - "error_rate < 0.5%"
+      - "latency_p95 < target"
+      - "throughput >= target"

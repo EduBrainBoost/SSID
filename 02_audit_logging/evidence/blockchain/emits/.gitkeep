@@ -1,0 +1,33 @@
+# Blockchain Evidence Directory
+
+This directory stores immutable audit logs of on-chain proof emissions.
+
+## Structure
+
+- `blueprint42_proof.jsonl` - JSONL audit log for Blueprint 4.2 activation proofs
+- Additional `*.jsonl` files for other proof types
+
+## Format
+
+Each log entry is a JSON line with the following structure:
+
+```json
+{
+  "ts": "2025-10-07T08:15:00Z",
+  "component": "onchain_proof",
+  "network": "polygon-mumbai",
+  "proof_type": "BLUEPRINT_4_2_ACTIVATION",
+  "registry_hash": "0x...",
+  "metadata_uri": "ipfs://...",
+  "mode": "LIVE|DRY_RUN",
+  "tx": "0x...|null",
+  "status": "SUBMITTED|SIMULATED|ERROR"
+}
+```
+
+## Compliance
+
+- **WORM**: Write-Once-Read-Many (append-only)
+- **Non-custodial**: Only hashes and URIs, no PII
+- **GDPR Article 25**: Privacy by design
+- **MiCA compliant**: Non-custodial architecture

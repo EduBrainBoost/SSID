@@ -1,0 +1,88 @@
+# Placeholder Pattern Configuration
+# Author: SSID Codex Engine
+# License: MIT
+# Purpose: Define patterns for placeholder detection and removal
+
+metadata:
+  version: "1.0.0"
+  last_updated: "2025-01-09"
+  description: "Anti-gaming placeholder detection patterns"
+
+patterns:
+  # Python code placeholders
+  python:
+    - pattern: "pass\\s*#\\s*(TODO|FIXME|PLACEHOLDER|XXX|HACK)"
+      severity: "high"
+      description: "Empty function with TODO comment"
+
+    - pattern: "raise\\s+NotImplementedError"
+      severity: "high"
+      description: "Not implemented function"
+
+    - pattern: "\\.\\.\\.[\\s]*#.*placeholder"
+      severity: "medium"
+      description: "Ellipsis placeholder"
+
+    - pattern: "return\\s+None\\s*#\\s*placeholder"
+      severity: "medium"
+      description: "Placeholder return statement"
+
+    - pattern: "def\\s+\\w+\\(.*\\):\\s*pass\\s*$"
+      severity: "high"
+      description: "Empty function body"
+
+  # Markdown/Documentation placeholders
+  markdown:
+    - pattern: "\\[TODO:.*?\\]"
+      severity: "medium"
+      description: "TODO marker in documentation"
+
+    - pattern: "TBD|To Be Determined|PLACEHOLDER"
+      severity: "medium"
+      description: "TBD placeholder text"
+
+    - pattern: "\\{\\{.*?placeholder.*?\\}\\}"
+      severity: "medium"
+      description: "Template placeholder"
+
+    - pattern: "XXX:|FIXME:"
+      severity: "high"
+      description: "Action required marker"
+
+  # YAML/Config placeholders
+  yaml:
+    - pattern: ":\\s*null\\s*#.*placeholder"
+      severity: "medium"
+      description: "Null placeholder value"
+
+    - pattern: ":\\s*TBD"
+      severity: "medium"
+      description: "TBD configuration value"
+
+    - pattern: "placeholder_.*:"
+      severity: "low"
+      description: "Placeholder key name"
+
+exclusions:
+  # Files to skip during scanning
+  paths:
+    - "*/node_modules/*"
+    - "*/.git/*"
+    - "*/__pycache__/*"
+    - "*/venv/*"
+    - "*/.pytest_cache/*"
+    - "*/coverage_html/*"
+
+  # File patterns to skip
+  patterns:
+    - "*.pyc"
+    - "*.pyo"
+    - "*.log"
+    - "*.tmp"
+    - ".coverage"
+
+report:
+  output_format: "json"
+  include_line_numbers: true
+  include_context: true
+  context_lines: 2

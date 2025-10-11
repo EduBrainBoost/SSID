@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.example/schemas/finance_document.json",
+  "title": "Konten, Zahlungen Document",
+  "description": "Schema for finance documents in SSID system",
+  "type": "object",
+  "required": ["id", "data_hash"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique document identifier"
+    },
+    "data_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of document content"
+    },
+    "metadata_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of metadata"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Document creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Document version number"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "minLength": 64,
+      "maxLength": 64,
+      "description": "SHA3-256 hash (64 hex characters)"
+    }
+  },
+  "examples": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "data_hash": "773378ab7d23608a3e084bfe84ee364fa2cd7bfba004a126329fa829b0613327",
+      "metadata_hash": "cbe007911d0223bd0623b2c92a8d6c40f3069b924a35ac25ba5e2d913a3c1ce3",
+      "created_at": "2025-10-05T15:29:16.202995Z",
+      "updated_at": "2025-10-05T15:29:16.202995Z",
+      "version": 1
+    }
+  ]
+}

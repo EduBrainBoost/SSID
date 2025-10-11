@@ -1,0 +1,280 @@
+meta:
+  version: "2025-Q4"
+  type: "reviewer_assignments"
+  maintainer: "edubrainboost"
+  last_updated: "2025-10-07T12:00:00Z"
+  classification: "INTERNAL - Reviewer Assignments"
+  purpose: "Assignment of compliance review responsibilities with DID-based identities"
+
+assignments:
+  - reviewer_id: "did:ssid:alpha123"
+    name: "Lead Auditor – Alpha Identity GmbH"
+    role: "Lead Auditor"
+    organization: "Alpha Identity GmbH"
+    credentials:
+      - "ISO 27001 Lead Auditor"
+      - "GDPR Certified Data Protection Officer"
+      - "Certified Information Systems Auditor (CISA)"
+    scope:
+      frameworks: ["GDPR", "DORA"]
+      modules:
+        - "02_audit_logging"
+        - "07_governance_legal"
+        - "09_meta_identity"
+        - "17_observability"
+        - "23_compliance"
+    responsibilities:
+      - "GDPR Art. 5-32 compliance verification"
+      - "DORA ICT risk management review"
+      - "Audit trail integrity verification"
+      - "Evidence documentation review"
+    availability:
+      start_date: "2025-11-01"
+      end_date: "2025-12-15"
+      estimated_hours: 80
+    contact:
+      email: "lead.auditor@alpha-identity.example"
+      public_key: "0x..."
+    status: "assigned"
+
+  - reviewer_id: "did:ssid:beta456"
+    name: "Compliance Officer – Beta Trust AG"
+    role: "Compliance Officer"
+    organization: "Beta Trust AG"
+    credentials:
+      - "Certified Anti-Money Laundering Specialist (CAMS)"
+      - "MiCA Framework Expert"
+      - "Financial Services Compliance Professional"
+    scope:
+      frameworks: ["MiCA", "AMLD6"]
+      modules:
+        - "08_identity_score"
+        - "14_zero_time_auth"
+        - "20_foundation"
+        - "23_compliance"
+    responsibilities:
+      - "MiCA Art. 76+ compliance verification"
+      - "AMLD6 KYC/AML controls review"
+      - "Travel Rule implementation validation"
+      - "Token classification verification"
+    availability:
+      start_date: "2025-11-01"
+      end_date: "2025-12-15"
+      estimated_hours: 60
+    contact:
+      email: "compliance@beta-trust.example"
+      public_key: "0x..."
+    status: "assigned"
+
+  - reviewer_id: "did:ssid:gamma789"
+    name: "DAO Delegate – Gamma Secure Ltd."
+    role: "DAO Governance Representative"
+    organization: "Gamma Secure Ltd."
+    credentials:
+      - "Blockchain Security Specialist"
+      - "Smart Contract Auditor"
+      - "DAO Governance Expert"
+    scope:
+      frameworks: ["AI_COMPLIANCE", "SECURITY"]
+      modules:
+        - "01_ai_layer"
+        - "21_post_quantum_crypto"
+        - "23_compliance"
+        - "24_meta_orchestration"
+    responsibilities:
+      - "Anti-gaming controls validation"
+      - "AI risk scoring review"
+      - "Smart contract non-custody verification"
+      - "DAO consensus mechanism review"
+    availability:
+      start_date: "2025-11-01"
+      end_date: "2025-12-15"
+      estimated_hours: 40
+    contact:
+      email: "dao.delegate@gamma-secure.example"
+      public_key: "0x..."
+    status: "assigned"
+
+  - reviewer_id: "did:ssid:delta111"
+    name: "System Maintainer – Delta Risk S.A."
+    role: "Technical Maintainer"
+    organization: "Delta Risk S.A."
+    credentials:
+      - "DevSecOps Professional"
+      - "Cloud Security Architect"
+      - "ISO 27001 Implementation Specialist"
+    scope:
+      frameworks: ["STRUCTURE", "OBSERVABILITY"]
+      modules:
+        - "03_core"
+        - "04_deployment"
+        - "11_test_simulation"
+        - "12_tooling"
+        - "15_infra"
+        - "17_observability"
+        - "24_meta_orchestration"
+    responsibilities:
+      - "Root-24-LOCK structural integrity"
+      - "CI/CD pipeline validation"
+      - "Health check operational status"
+      - "WORM storage verification"
+      - "Infrastructure resilience testing"
+    availability:
+      start_date: "2025-11-01"
+      end_date: "2025-12-15"
+      estimated_hours: 50
+    contact:
+      email: "maintainer@delta-risk.example"
+      public_key: "0x..."
+    status: "assigned"
+
+review_schedule:
+  review_cycle: "2025-Q4"
+  start_date: "2025-11-01"
+  end_date: "2025-12-15"
+  duration_days: 45
+
+  milestones:
+    - date: "2025-11-01"
+      milestone: "Review kickoff meeting"
+      attendees: ["all reviewers", "technical lead", "compliance officer"]
+      deliverable: "Review plan finalized"
+
+    - date: "2025-11-07"
+      milestone: "Evidence collection deadline"
+      attendees: ["module owners", "reviewers"]
+      deliverable: "All evidence documents uploaded"
+
+    - date: "2025-11-21"
+      milestone: "Initial findings review"
+      attendees: ["all reviewers", "management"]
+      deliverable: "Draft findings report"
+
+    - date: "2025-12-05"
+      milestone: "Remediation plan submission"
+      attendees: ["technical team", "compliance team"]
+      deliverable: "Action plan with timelines"
+
+    - date: "2025-12-15"
+      milestone: "Final approval and sign-off"
+      attendees: ["all reviewers", "board", "dao representatives"]
+      deliverable: "Signed review completion certificate"
+
+  next_review_cycle: "2026-Q1"
+  next_review_start: "2026-02-01"
+
+coordination:
+  review_coordinator: "did:ssid:coordinator001"
+  coordinator_name: "Review Coordination Team"
+  coordinator_email: "review-coordination@ssid.example"
+
+  communication_channels:
+    - type: "Encrypted Messaging"
+      platform: "Signal / Matrix"
+      group_id: "ssid-q4-review-2025"
+    - type: "Document Sharing"
+      platform: "Secure Cloud Storage"
+      location: "23_compliance/reviews/2025-Q4/shared/"
+    - type: "Video Conferencing"
+      platform: "Jitsi / Zoom"
+      schedule: "Weekly on Fridays 14:00 UTC"
+
+  reporting_structure:
+    weekly_status: "Every Friday by 17:00 UTC"
+    issue_escalation: "Within 24 hours for critical findings"
+    final_report: "2025-12-15"
+
+independence_requirements:
+  conflicts_of_interest:
+    disclosure_required: true
+    declaration_form: "23_compliance/reviews/2025-Q4/forms/coi_declaration.pdf"
+    review_by: "Legal Counsel"
+
+  independence_criteria:
+    - "No financial interest in SSID project"
+    - "No employment relationship with SSID entities"
+    - "No family relationships with SSID management"
+    - "No prior consulting work for SSID in past 12 months"
+
+  attestations:
+    - reviewer_id: "did:ssid:alpha123"
+      independence_confirmed: true
+      conflicts_disclosed: false
+      attestation_date: "2025-10-15"
+    - reviewer_id: "did:ssid:beta456"
+      independence_confirmed: true
+      conflicts_disclosed: false
+      attestation_date: "2025-10-15"
+    - reviewer_id: "did:ssid:gamma789"
+      independence_confirmed: true
+      conflicts_disclosed: false
+      attestation_date: "2025-10-15"
+    - reviewer_id: "did:ssid:delta111"
+      independence_confirmed: true
+      conflicts_disclosed: false
+      attestation_date: "2025-10-15"
+
+approval_matrix:
+  required_signatures:
+    - role: "Lead Auditor"
+      reviewer_id: "did:ssid:alpha123"
+      signature_required: true
+      signature_received: false
+      signature_date: ""
+
+    - role: "Compliance Officer"
+      reviewer_id: "did:ssid:beta456"
+      signature_required: true
+      signature_received: false
+      signature_date: ""
+
+    - role: "DAO Delegate"
+      reviewer_id: "did:ssid:gamma789"
+      signature_required: true
+      signature_received: false
+      signature_date: ""
+
+    - role: "System Maintainer"
+      reviewer_id: "did:ssid:delta111"
+      signature_required: true
+      signature_received: false
+      signature_date: ""
+
+  approval_threshold: 0.75
+  unanimous_required_for_critical: true
+
+  signature_verification:
+    method: "DID-based cryptographic signature"
+    verification_tool: "14_zero_time_auth/signature_verify.py"
+    blockchain_anchor: true
+    evidence_path: "02_audit_logging/signatures/"
+
+compensation:
+  budget_allocated: true
+  payment_method: "SSID utility tokens + fiat equivalent"
+  rate_structure:
+    - role: "Lead Auditor"
+      hourly_rate: "€150"
+      estimated_total: "€12,000"
+    - role: "Compliance Officer"
+      hourly_rate: "€120"
+      estimated_total: "€7,200"
+    - role: "DAO Delegate"
+      hourly_rate: "€100"
+      estimated_total: "€4,000"
+    - role: "System Maintainer"
+      hourly_rate: "€90"
+      estimated_total: "€4,500"
+
+  payment_schedule:
+    - milestone: "Kickoff"
+      percentage: 25
+      due_date: "2025-11-01"
+    - milestone: "Interim Report"
+      percentage: 35
+      due_date: "2025-11-21"
+    - milestone: "Final Delivery"
+      percentage: 40
+      due_date: "2025-12-15"
+
+checksum: "sha256:TO_BE_FILLED_BY_CI"

@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "scan_type": "placeholder_guard",
+    "version": "2.0.0",
+    "timestamp": "YYYY-MM-DDTHH:MM:SSZ",
+    "scanner": "12_tooling/placeholder_guard/placeholder_scan_v2.py"
+  },
+  "configuration": {
+    "critical_areas": [
+      "23_compliance/anti_gaming",
+      "02_audit_logging/validators",
+      "08_identity_score"
+    ],
+    "allowlist_path": "12_tooling/placeholder_guard/allowlist_paths.yaml",
+    "patterns_detected": [
+      "TODO-comment",
+      "pass-line",
+      "assert-true",
+      "return-none-stub",
+      "not-implemented",
+      "empty-function"
+    ]
+  },
+  "results": {
+    "files_scanned": 0,
+    "violations": [],
+    "violation_count": 0,
+    "status": "PASS"
+  },
+  "evidence": {
+    "hash": "sha256_of_scan_output",
+    "log_path": "24_meta_orchestration/registry/logs/gate0_TIMESTAMP.log",
+    "ci_run_url": "https://github.com/repo/actions/runs/ID"
+  }
+}

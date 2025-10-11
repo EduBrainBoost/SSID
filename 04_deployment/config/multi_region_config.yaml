@@ -1,0 +1,47 @@
+version: "1.0.0"
+name: "SSID Multi-Region Deployment Configuration"
+compliance: "SHOULD-005-MULTI-REGION"
+generated: "2025-10-10T13:20:00Z"
+
+regions:
+  primary:
+    name: "eu-central-1"
+    location: "Frankfurt, Germany"
+    availability_zones: ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
+    services:
+      - "anti_gaming"
+      - "identity_score"
+      - "audit_logging"
+
+  secondary:
+    name: "eu-west-1"
+    location: "Ireland"
+    availability_zones: ["eu-west-1a", "eu-west-1b"]
+    services:
+      - "anti_gaming_replica"
+      - "identity_score_replica"
+
+  disaster_recovery:
+    name: "us-east-1"
+    location: "Virginia, USA"
+    availability_zones: ["us-east-1a"]
+    services:
+      - "audit_logging_backup"
+
+failover:
+  automatic: true
+  rpo_minutes: 5  # Recovery Point Objective
+  rto_minutes: 15  # Recovery Time Objective
+  health_check_interval_seconds: 30
+
+compliance:
+  gdpr_data_residency: "EU_ONLY"
+  dora_resilience: true
+  regulatory_requirements:
+    - "DORA Art.11 (Business Continuity)"
+    - "GDPR Art.32 (Security of Processing)"
+
+signoff:
+  config_version: "1.0.0"
+  approved_by: "SSID Infrastructure Team"
+  approval_date: "2025-10-10"

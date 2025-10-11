@@ -1,0 +1,308 @@
+# SSID Project - chart.yaml (Single Source of Truth)
+# Root: 12_tooling
+# Shard: Shard_10_Finanzen_Banking
+# Version: 2.0.0
+# Auto-generated: 2025-10-05T15:29:16.202995Z
+
+metadata:
+  shard_id: "Shard_10_Finanzen_Banking"
+  root: "12_tooling"
+  version: "2.0.0"
+  status: "production"
+  description: "Werkzeuge für Konten, Zahlungen"
+  created: "2025-10-05T15:29:16.202995Z"
+  updated: "2025-10-05T15:29:16.202995Z"
+  maintainers:
+    - name: "Team Lead tooling"
+      email: "lead-12-10@example.local"
+  tags:
+    - "tooling"
+    - "finance"
+    - "hash-only"
+  deprecation_notice: null
+  replaced_by: null
+
+governance:
+  owner:
+    team: "tooling-finanzen_banking-team"
+    lead: "lead-12-10@example.local"
+    contact: "team-12-10@example.local"
+  reviewers:
+    architecture: "arch-board@example.local"
+    compliance: "compliance@example.local"
+    security: "security@example.local"
+  change_process:
+    rfc_required: true
+    approval_quorum: 2
+    breaking_change_notice_days: 180
+    migration_guide_required: true
+    compatibility_layer_required: true
+
+capabilities:
+  MUST:
+    - capability: "Werkzeuge Kernfunktionen für Konten, Zahlungen"
+      use_cases:
+        - "Hash-basierte Datenverarbeitung"
+        - "Real-time Audit-Logging"
+      sla:
+        availability: "99.9%"
+        latency_p95: "50ms"
+        throughput: "1000 rps"
+    - capability: "Hash-basierte Speicherung (SHA3-256)"
+      use_cases:
+        - "Non-custodial data handling"
+        - "GDPR-compliant storage"
+      sla:
+        availability: "99.99%"
+        latency_p95: "10ms"
+    - capability: "Audit-Logging Integration"
+      use_cases:
+        - "Evidence trail creation"
+        - "Compliance reporting"
+      sla:
+        availability: "99.9%"
+        latency_p95: "100ms"
+  SHOULD:
+    - capability: "Performance-Optimierungen"
+      use_cases:
+        - "Caching layer"
+        - "Connection pooling"
+    - capability: "Erweiterte Monitoring-Metriken"
+      use_cases:
+        - "Business KPI tracking"
+        - "Custom dashboards"
+  HAVE:
+    - capability: "Experimentelle Features"
+      use_cases:
+        - "A/B testing framework"
+        - "Feature flags"
+    - capability: "ML-basierte Optimierungen"
+      use_cases:
+        - "Predictive scaling"
+        - "Anomaly detection"
+
+constraints:
+  pii_storage: "forbidden"
+  data_policy: "hash_only"
+  custody: "non_custodial_code_only"
+  max_depth: 3
+  no_circular_dependencies: true
+  forbidden_file_types:
+    - ".ipynb"
+    - ".parquet"
+    - ".sqlite"
+    - ".db"
+
+enforcement:
+  static_analysis:
+    - semgrep
+    - bandit
+    - mypy
+  runtime_checks:
+    - pii_detector
+    - bias_monitor
+    - drift_detector
+  audit:
+    log_to: "02_audit_logging"
+    retention_days: 3650
+    evidence_anchoring: true
+
+interfaces:
+  contracts:
+    - "finance_risk_scoring.openapi.yaml"
+    - "finance_matching.openapi.yaml"
+  data_schemas:
+    - "finance_document.schema.json"
+    - "finance_evidence.schema.json"
+  authentication:
+    type: "mTLS"
+    cert_rotation_days: 90
+  authorization:
+    model: "RBAC"
+    policies: "policies/rbac.yaml"
+
+dependencies:
+  required:
+    - root: "02_audit_logging"
+      reason: "Audit trail for all operations"
+      min_version: ">=2.0.0"
+      endpoints:
+        - "POST /v1/audit/log"
+    - root: "09_meta_identity"
+      reason: "Identity resolution"
+      min_version: ">=1.5.0"
+      endpoints:
+        - "GET /v1/identity/resolve"
+    - root: "17_observability"
+      reason: "Metrics and tracing"
+      min_version: ">=1.0.0"
+      endpoints:
+        - "POST /v1/metrics"
+  optional:
+    - root: "11_test_simulation"
+      reason: "Testing integration"
+    - root: "22_datasets"
+      reason: "Training datasets"
+
+compatibility:
+  semver: "2.0.0"
+  core_min_version: ">=3.0.0"
+  breaking_changes: []
+
+implementations:
+  default: "python-tensorflow"
+  available:
+    - "python-tensorflow"
+    - "rust-burn"
+
+conformance:
+  test_framework: "schemathesis"
+  contract_tests:
+    - "finance_scoring_contract_test.yaml"
+    - "finance_matching_contract_test.yaml"
+
+orchestration:
+  workflows:
+    - name: "finance_full_lifecycle"
+      triggers:
+        - "data_received"
+        - "periodic_rescoring"
+      steps:
+        - name: "validate_input"
+          root: "03_core"
+          timeout: "5s"
+        - name: "process_data"
+          root: "12_tooling"
+          timeout: "30s"
+        - name: "log_evidence"
+          root: "02_audit_logging"
+          timeout: "10s"
+        - name: "anchor_to_blockchain"
+          root: "02_audit_logging"
+          timeout: "60s"
+
+testing:
+  unit:
+    location: "11_test_simulation/tooling/Shard_10_Finanzen_Banking/unit/"
+    min_coverage: 90
+  integration:
+    location: "11_test_simulation/tooling/Shard_10_Finanzen_Banking/integration/"
+    min_coverage: 80
+  contract:
+    location: "../conformance/"
+    required: true
+  e2e:
+    location: "11_test_simulation/tooling/e2e/"
+    scenarios:
+      - "full_finance_lifecycle"
+      - "finance_error_recovery"
+      - "finance_high_load"
+
+documentation:
+  auto_generate:
+    - source: "contracts/*.openapi.yaml"
+      target: "05_documentation/api/tooling/Shard_10_Finanzen_Banking/"
+    - source: "contracts/schemas/*.schema.json"
+      target: "05_documentation/schemas/tooling/Shard_10_Finanzen_Banking/"
+  manual:
+    - "docs/getting-started.md"
+    - "docs/model_cards/"
+    - "docs/security/threat_model.md"
+
+observability:
+  metrics:
+    provider: "prometheus"
+    namespace: "ssid_tooling_finance"
+    custom_metrics: ['transactions_total', 'payment_processing_duration', 'fraud_detections_total']
+  tracing:
+    provider: "jaeger"
+    sample_rate: 0.1
+  logging:
+    provider: "loki"
+    format: "json"
+    pii_redaction: true
+    severity_levels: ["ERROR", "WARN", "INFO", "DEBUG"]
+  alerting:
+    rules:
+      - name: "error_rate_high"
+        condition: "error_rate > 0.05"
+        severity: "critical"
+        notification:
+          - "slack://alerts"
+          - "pagerduty://on-call"
+      - name: "latency_high"
+        condition: "latency_p95 > 100ms"
+        severity: "warning"
+
+evidence:
+  strategy: "hash_ledger_with_anchoring"
+  retention_days: 3650
+  storage_type: "WORM"
+  anchoring:
+    chains:
+      - "ethereum:sepolia"
+      - "polygon:amoy"
+    frequency: "hourly"
+    batch_size: 1000
+    batch_strategy: "time_or_count"
+    retry_policy:
+      max_retries: 3
+      backoff: "exponential"
+  logged_events:
+    - "data_processed"
+    - "model_inference"
+    - "evidence_created"
+
+security:
+  threat_model: "docs/security/threat_model.md"
+  secrets_management: "15_infra/vault"
+  encryption:
+    at_rest: "AES-256-GCM"
+    in_transit: "TLS 1.3"
+  rate_limiting:
+    enabled: true
+    requests_per_minute: 1000
+  network_policies:
+    ingress:
+      - from: ["02_audit_logging", "17_observability"]
+    egress:
+      - to: ["09_meta_identity"]
+
+deployment:
+  strategy: "blue-green"
+  environments:
+    - "dev"
+    - "staging"
+    - "production"
+  rollback:
+    automatic: true
+    conditions:
+      - "error_rate > 5%"
+      - "latency_p95 > 100ms"
+    retention_versions: 3
+
+resources:
+  compute:
+    cpu: "4 cores"
+    memory: "16Gi"
+    autoscaling:
+      enabled: true
+      min_replicas: 2
+      max_replicas: 20
+
+roadmap:
+  upcoming:
+    - version: "1.1.0"
+      release_date: "Q2 2025"
+      features:
+        - "Performance improvements (cache layer)"
+        - "Enhanced XAI (explainability)"
+      breaking_changes: false
+      migration_required: false
+    - version: "2.0.0"
+      release_date: "Q4 2025"
+      features:
+        - "Multi-region support"
+        - "Quantum-safe signatures"
+      breaking_changes: true
+      migration_required: true

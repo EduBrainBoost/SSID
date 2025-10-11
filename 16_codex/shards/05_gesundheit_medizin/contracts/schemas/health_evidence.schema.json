@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.example/schemas/health_evidence.json",
+  "title": "Krankenakte, Rezepte Evidence",
+  "description": "Evidence record for health operations",
+  "type": "object",
+  "required": ["evidence_id", "evidence_hash", "operation"],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique evidence identifier"
+    },
+    "evidence_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of evidence data"
+    },
+    "operation": {
+      "type": "string",
+      "enum": ["create", "read", "update", "delete", "verify"],
+      "description": "Operation type that generated evidence"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Evidence creation timestamp"
+    },
+    "anchors": {
+      "type": "array",
+      "description": "Blockchain anchors",
+      "items": {
+        "$ref": "#/$defs/Anchor"
+      },
+      "minItems": 0
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata (hashed)",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "Anchor": {
+      "type": "object",
+      "required": ["network", "tx_hash", "status"],
+      "properties": {
+        "network": {
+          "type": "string",
+          "enum": ["ethereum:sepolia", "polygon:amoy"],
+          "description": "Blockchain network"
+        },
+        "tx_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Transaction hash"
+        },
+        "block_number": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Block number"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "confirmed", "failed"],
+          "description": "Anchor status"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "evidence_id": "660f9511-f39c-52e5-b827-557766551111",
+      "evidence_hash": "06ed488b8badaa0262f97d0f280b19eaae9be6f8f42f47de908041a55aaebc64",
+      "operation": "create",
+      "timestamp": "2025-10-05T15:29:16.202995Z",
+      "anchors": [
+        {
+          "network": "polygon:amoy",
+          "tx_hash": "2750fa1d4423a714d1c6cb1d6f6cc89736687cf5d4882d389d559f8a1c701678",
+          "block_number": 12345678,
+          "status": "confirmed",
+          "timestamp": "2025-10-05T15:29:16.202995Z"
+        }
+      ]
+    }
+  ]
+}

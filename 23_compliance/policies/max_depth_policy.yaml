@@ -1,0 +1,125 @@
+version: 1.0.0
+title: Maximum Directory Depth Policy
+description: |
+  Enforces maximum directory depth constraint (MUST-010-DEPTH-LIMIT).
+  Limits directory nesting to maintain architectural simplicity,
+  reduce complexity, and ensure audit trail comprehensibility.
+
+compliance_requirement:
+  id: MUST-010-DEPTH-LIMIT
+  tier: MUST
+  category: governance
+  regulation_references:
+    - "DORA Art. 6 (ICT Risk Management)"
+    - "GDPR Art. 25 (Data Protection by Design)"
+    - "ISO 27001:2022 (Information Security Management)"
+
+depth_constraints:
+  # Maximum depth from repository root (depth 0)
+  max_depth: 3
+
+  # Depth calculation method
+  calculation:
+    root_level: 0  # Repository root = depth 0
+    first_level: 1  # 24 numbered roots (e.g., "01_ai_layer/") = depth 1
+    second_level: 2  # Subdirectories (e.g., "01_ai_layer/shards/") = depth 2
+    third_level: 3  # Final level (e.g., "01_ai_layer/shards/Shard_01/") = depth 3
+
+  # Permitted structure examples
+  examples:
+    valid:
+      - path: "01_ai_layer/README.md"
+        depth: 1
+        status: "ALLOWED"
+      - path: "01_ai_layer/shards/Shard_01/chart.yaml"
+        depth: 3
+        status: "ALLOWED"
+      - path: "23_compliance/policies/max_depth_policy.yaml"
+        depth: 2
+        status: "ALLOWED"
+
+    invalid:
+      - path: "01_ai_layer/shards/Shard_01/implementations/python/src/utils/helper.py"
+        depth: 7
+        status: "VIOLATION"
+        reason: "Exceeds max_depth=3 by 4 levels"
+      - path: "24_meta_orchestration/shards/Shard_16/implementations/python-tensorflow/src/services/matcher.py"
+        depth: 7
+        status: "VIOLATION"
+        reason: "Exceeds max_depth=3 by 4 levels"
+
+exceptions:
+  # Paths exempt from depth constraints (with justification)
+  allowed_deep_paths:
+    - pattern: ".claude/**"
+      reason: "AI assistant workspace (system artifact)"
+      approved_by: "Root-24-DAO"
+      max_depth_override: 5
+
+    - pattern: "02_audit_logging/evidence/**"
+      reason: "Evidence archive with date-based hierarchy"
+      approved_by: "Compliance-Lead"
+      max_depth_override: 5
+
+    - pattern: "05_documentation/legacy/**"
+      reason: "Legacy documentation archive"
+      approved_by: "Compliance-Lead"
+      max_depth_override: 4
+
+    - pattern: ".git/**"
+      reason: "Version control system (excluded from scans)"
+      approved_by: "System"
+      max_depth_override: null  # Not scanned
+
+enforcement:
+  mode: "STRICT"  # STRICT | WARN | AUDIT_ONLY
+
+  violation_handling:
+    - severity: "CRITICAL"
+      condition: "depth > max_depth + 2"
+      action: "BLOCK_COMMIT"
+
+    - severity: "HIGH"
+      condition: "depth > max_depth + 1"
+      action: "REQUIRE_EXCEPTION"
+
+    - severity: "MEDIUM"
+      condition: "depth == max_depth + 1"
+      action: "WARN"
+
+  ci_cd_gate:
+    enabled: true
+    gate_name: "depth-limit-validator"
+    script: "23_compliance/tools/validate_depth_limit.py"
+    fail_on_violation: true
+    evidence_logging: true
+
+remediation:
+  recommended_actions:
+    - "Flatten deeply nested directory structures"
+    - "Move implementation files to separate module repositories"
+    - "Use symbolic links for cross-module references (within depth limit)"
+    - "Archive legacy deep structures to evidence/legacy/"
+
+  refactoring_patterns:
+    - from: "XX_root/shards/Shard_YY/implementations/lang/src/module/file.py"
+      to: "XX_root/impl_lang/module_file.py"
+      depth_reduction: 4
+
+    - from: "XX_root/nested/level/deep/structure/file.yaml"
+      to: "XX_root/nested_level_deep/structure_file.yaml"
+      depth_reduction: 2
+
+audit_trail:
+  evidence_directory: "23_compliance/evidence/depth_limit/"
+  report_format: "JSON"
+  retention_period: "7_years"
+  hash_algorithm: "SHA-256"
+
+metadata:
+  created: "2025-10-09"
+  version: "1.0.0"
+  maintainer: "SSID Compliance Team"
+  review_frequency: "quarterly"
+  next_review: "2026-01-09"
+  compliance_status: "ENFORCED"

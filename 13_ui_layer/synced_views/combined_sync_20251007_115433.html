@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSID Compliance Dashboard - sync_20251007_115433</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab { padding: 10px 20px; background: white; border-radius: 8px; cursor: pointer; transition: background 0.3s; }
+        .tab.active { background: #007bff; color: white; }
+        .content { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .metric { display: inline-block; margin: 10px; padding: 15px; background: #f8f9fa; border-radius: 4px; min-width: 150px; }
+        .metric-value { font-size: 32px; font-weight: bold; color: #007bff; }
+        .metric-label { font-size: 14px; color: #666; margin-top: 5px; }
+        .status-good { color: #28a745; }
+        .status-warn { color: #ffc107; }
+        .status-critical { color: #dc3545; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6; }
+        th { background: #f8f9fa; font-weight: 600; }
+        .integrity { position: fixed; bottom: 20px; right: 20px; padding: 10px; background: white; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SSID Compliance Dashboard</h1>
+            <p>Sync ID: sync_20251007_115433 | Generated: 2025-10-07 11:54:33</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('technical')">Technical Dashboard</div>
+            <div class="tab" onclick="showTab('narrative')">Legal Narrative</div>
+            <div class="tab" onclick="showTab('combined')">Combined View</div>
+        </div>
+
+        <div id="technical" class="content">
+            <h2>Technical Dashboard</h2>
+            <div class='metrics'>
+            <div class="metric">
+                <div class="metric-value">92.2</div>
+                <div class="metric-label">Overall Compliance</div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-value">11</div>
+                <div class="metric-label">Controls Implemented</div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-value">0</div>
+                <div class="metric-label">Critical Issues</div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-value">4.5</div>
+                <div class="metric-label">Risk Score</div>
+            </div>
+            </div><h3>Framework Compliance</h3><table><tr><th>Framework</th><th>Coverage</th><th>Status</th></tr><tr><td>GDPR</td><td>95.0%</td><td class='status-good'>GOOD</td></tr><tr><td>DORA</td><td>92.0%</td><td class='status-good'>GOOD</td></tr><tr><td>MICA</td><td>88.0%</td><td class='status-warn'>ACCEPTABLE</td></tr><tr><td>AMLD6</td><td>94.0%</td><td class='status-good'>GOOD</td></tr><tr><td>UNIFIED_AVERAGE</td><td>92.0%</td><td class='status-good'>GOOD</td></tr></table>
+        </div>
+
+        <div id="narrative" class="content" style="display:none;">
+            <h2>Legal Narrative</h2>
+            <h3>Executive Summary</h3><p>The organization maintains 92.2% overall compliance across four major regulatory frameworks. Current status is GOOD. No critical control gaps identified.</p><h3>Regulatory Framework Analysis</h3><p>Analysis of 5 regulatory frameworks shows varying compliance levels. Each framework has specific requirements that must be addressed.</p><h3>Key Findings</h3><p>MICA compliance at 88.0% requires improvement</p><h3>Critical Control Status</h3><p>Analysis of 0 critical control gaps requiring immediate attention.</p><h3>Risk Assessment</h3><p>Low risk - All critical and high-priority controls implemented</p><h3>Recommendations</h3><p>Increase MICA compliance from 88.0% to 90% minimum</p>
+        </div>
+
+        <div id="combined" class="content" style="display:none;">
+            <h2>Combined View</h2>
+            <p>Side-by-side technical and legal perspective on the same data.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h3>Technical Metrics</h3>
+                    <div class='metrics'>
+            <div class="metric">
+                <div class="metric-value">92.2</div>
+                <div class="metric-label">Overall Compliance</div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-value">11</div>
+                <div class="metric-label">Controls Implemented</div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-value">0</div>
+                <div class="metric-label">Critical Issues</div>
+            </div>
+            
+            <div class="metric">
+                <div class="metric-value">4.5</div>
+                <div class="metric-label">Risk Score</div>
+            </div>
+            </div><h3>Framework Compliance</h3><table><tr><th>Framework</th><th>Coverage</th><th>Status</th></tr><tr><td>GDPR</td><td>95.0%</td><td class='status-good'>GOOD</td></tr><tr><td>DORA</td><td>92.0%</td><td class='status-good'>GOOD</td></tr><tr><td>MICA</td><td>88.0%</td><td class='status-warn'>ACCEPTABLE</td></tr><tr><td>AMLD6</td><td>94.0%</td><td class='status-good'>GOOD</td></tr><tr><td>UNIFIED_AVERAGE</td><td>92.0%</td><td class='status-good'>GOOD</td></tr></table>
+                </div>
+                <div>
+                    <h3>Legal Summary</h3>
+                    <h3>Executive Summary</h3><p>The organization maintains 92.2% overall compliance across four major regulatory frameworks. Current status is GOOD. No critical control gaps identified.</p><h3>Regulatory Framework Analysis</h3><p>Analysis of 5 regulatory frameworks shows varying compliance levels. Each framework has specific requirements that must be addressed.</p><h3>Key Findings</h3><p>MICA compliance at 88.0% requires improvement</p><h3>Critical Control Status</h3><p>Analysis of 0 critical control gaps requiring immediate attention.</p><h3>Risk Assessment</h3><p>Low risk - All critical and high-priority controls implemented</p><h3>Recommendations</h3><p>Increase MICA compliance from 88.0% to 90% minimum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="integrity">
+        Data Integrity: 16ab66f972aa...
+    </div>
+
+    <script>
+        function showTab(tab) {
+            document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tab).style.display = 'block';
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

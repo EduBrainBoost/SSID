@@ -1,0 +1,14 @@
+root_level_exceptions:
+  allowed_directories:
+    git_infrastructure: [".git", ".github", ".githooks"]
+    development_environment: [".venv", ".continue", ".claude"]
+    testing_artifacts: [".pytest_cache"]
+    excluded_directories: []
+  allowed_files:
+    version_control: [".gitattributes", ".gitignore", ".gitmodules"]
+    project_metadata: ["LICENSE", "README.md", "pytest.ini"]
+    testing_configuration: ["pytest.ini"]
+    code_quality: [".pre-commit-config.yaml"]
+    excluded_files: []
+    system_artifacts:
+      - .claude

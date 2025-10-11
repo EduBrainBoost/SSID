@@ -1,0 +1,720 @@
+# =============================================================================
+# Zeit- & Fortschrittsmatrix: Root24 Implementation Roadmap
+# =============================================================================
+# Definiert 5 Phasen zur Erreichung von 100% Root24-Compliance
+# Mit klaren Zeitzielen, Score-Progression und Verantwortlichkeiten
+#
+# Version: 1.0.0
+# Status: ACTIVE
+# Created: 2025-01-07
+# =============================================================================
+
+metadata:
+  name: "Root24 Implementation Timeline"
+  version: "1.0.0"
+  total_duration: "9-11 weeks"
+  baseline_score: 20
+  target_score: 100
+  start_date: "2025-01-07"  # Anpassen bei Start
+  estimated_completion: "2025-03-18"
+
+# =============================================================================
+# PHASE 1: INVENTAR (Foundation)
+# =============================================================================
+
+phase_1_inventar:
+  name: "Inventar & Assessment"
+  phase_number: 1
+
+  timeline:
+    duration: "1 week"
+    effort_days: 5
+    start_week: 1
+    end_week: 1
+
+  scores:
+    baseline: 20
+    target: 25
+    increment: 5
+
+  objectives:
+    primary: "Vollständige Bestandsaufnahme aller Requirements und aktueller Implementierungen"
+    secondary:
+      - "Mapping aller 24 Root-Directories zu NIST/Root24 Requirements"
+      - "Identifikation von Logic-Gaps (fehlende Implementierungen)"
+      - "Baseline-Messung der Compliance-Score"
+
+  deliverables:
+    - id: "INV-001"
+      name: "Complete Root-Directory Inventory"
+      type: "documentation"
+      owner: "16_codex"
+      output: "16_codex/root_directory_mapping.yaml"
+
+    - id: "INV-002"
+      name: "Requirement Coverage Matrix"
+      type: "analysis"
+      owner: "23_compliance"
+      output: "23_compliance/coverage_matrix.json"
+
+    - id: "INV-003"
+      name: "Logic-Gap Analysis Report"
+      type: "report"
+      owner: "23_compliance"
+      output: "23_compliance/reports/logic_gaps_phase1.md"
+
+    - id: "INV-004"
+      name: "Baseline Score Measurement"
+      type: "metric"
+      owner: "02_audit_logging"
+      output: "02_audit_logging/metrics/baseline_score.json"
+
+  responsible_roots:
+    primary:
+      - "16_codex"
+      - "23_compliance"
+    supporting:
+      - "02_audit_logging"
+      - "05_documentation"
+
+  tasks:
+    - id: "TASK-INV-001"
+      name: "Run Logic-Gap-Tester für Baseline"
+      command: "python3 11_test_simulation/tests_logic_gap.py"
+      owner: "23_compliance"
+      priority: "HIGH"
+
+    - id: "TASK-INV-002"
+      name: "Document alle 24 Roots mit RACI"
+      owner: "16_codex"
+      priority: "HIGH"
+
+    - id: "TASK-INV-003"
+      name: "Create Initial Coverage Dashboard"
+      owner: "17_observability"
+      priority: "MEDIUM"
+
+  success_criteria:
+    - "100% Root-Directories dokumentiert"
+    - "Alle MUST-Requirements identifiziert"
+    - "Logic-Gaps quantifiziert (Anzahl fehlender Impl.)"
+    - "Baseline-Score < 25 validiert"
+
+  risks:
+    - risk: "Unvollständige Requirement-Extraktion aus Legacy-Code"
+      mitigation: "Manuelle Code-Review zusätzlich zu automatischen Scans"
+      severity: "MEDIUM"
+
+    - risk: "Unklare Zuordnung Legacy → Root24"
+      mitigation: "Mapping-Workshop mit Architecture Team"
+      severity: "LOW"
+
+# =============================================================================
+# PHASE 2: MUST (Critical Foundation)
+# =============================================================================
+
+phase_2_must:
+  name: "MUST-Requirements Implementation"
+  phase_number: 2
+
+  timeline:
+    duration: "2-3 weeks"
+    effort_days: 15
+    start_week: 2
+    end_week: 4
+
+  scores:
+    baseline: 25
+    target: 65
+    increment: 40
+
+  objectives:
+    primary: "100% Implementierung aller MUST-Requirements"
+    secondary:
+      - "Audit-Trail für alle kritischen Operationen"
+      - "Identity & Access Control Hardening"
+      - "Orchestration-Layer für zentrale Policies"
+
+  deliverables:
+    - id: "MUST-001"
+      name: "Audit-Trail Implementation"
+      type: "code"
+      owner: "02_audit_logging"
+      output: "02_audit_logging/trail/*"
+      requirements:
+        - "REQ-ROOT24-002"
+        - "REQ-ROOT24-003"
+        - "REQ-NIST-AU-002"
+
+    - id: "MUST-002"
+      name: "Identity Score Engine"
+      type: "code"
+      owner: "08_identity_score"
+      output: "08_identity_score/engine/*"
+      requirements:
+        - "REQ-ROOT24-007"
+        - "REQ-NIST-IA-001"
+
+    - id: "MUST-003"
+      name: "Meta-Orchestration Layer"
+      type: "code"
+      owner: "24_meta_orchestration"
+      output: "24_meta_orchestration/core/*"
+      requirements:
+        - "REQ-ROOT24-024"
+        - "REQ-ROOT24-001"
+
+    - id: "MUST-004"
+      name: "OPA Policy Enforcement"
+      type: "policy"
+      owner: "23_compliance"
+      output: "23_compliance/policies/*.rego"
+      requirements:
+        - "REQ-ROOT24-023"
+
+  responsible_roots:
+    primary:
+      - "02_audit_logging"
+      - "08_identity_score"
+      - "24_meta_orchestration"
+    supporting:
+      - "23_compliance"
+      - "11_test_simulation"
+      - "17_observability"
+
+  tasks:
+    - id: "TASK-MUST-001"
+      name: "Implement immutable audit logs"
+      owner: "02_audit_logging"
+      priority: "CRITICAL"
+      estimated_hours: 40
+
+    - id: "TASK-MUST-002"
+      name: "Implement Identity scoring algorithms"
+      owner: "08_identity_score"
+      priority: "CRITICAL"
+      estimated_hours: 60
+
+    - id: "TASK-MUST-003"
+      name: "Build central policy orchestrator"
+      owner: "24_meta_orchestration"
+      priority: "CRITICAL"
+      estimated_hours: 80
+
+    - id: "TASK-MUST-004"
+      name: "Migrate all policies to 23_compliance"
+      owner: "23_compliance"
+      priority: "HIGH"
+      estimated_hours: 20
+
+    - id: "TASK-MUST-005"
+      name: "Write integration tests for MUST-requirements"
+      owner: "11_test_simulation"
+      priority: "HIGH"
+      estimated_hours: 40
+
+  success_criteria:
+    - "100% MUST-Requirements implementiert"
+    - "Alle MUST-Tests passing (100%)"
+    - "Logic-Gap-Tester zeigt 0 missing MUST-Impls"
+    - "Score >= 65 erreicht"
+    - "Zero critical vulnerabilities (SAST/DAST)"
+
+  risks:
+    - risk: "Performance-Overhead durch Audit-Logging"
+      mitigation: "Async logging + buffering + sampling für non-critical events"
+      severity: "MEDIUM"
+
+    - risk: "Breaking changes in Meta-Orchestration"
+      mitigation: "Phased rollout mit Feature-Flags"
+      severity: "HIGH"
+
+    - risk: "Time overrun auf 3 weeks"
+      mitigation: "Priorisierung: Audit > Identity > Orchestration"
+      severity: "MEDIUM"
+
+# =============================================================================
+# PHASE 3: SHOULD (Enhanced Functionality)
+# =============================================================================
+
+phase_3_should:
+  name: "SHOULD-Requirements Implementation"
+  phase_number: 3
+
+  timeline:
+    duration: "2 weeks"
+    effort_days: 10
+    start_week: 5
+    end_week: 6
+
+  scores:
+    baseline: 65
+    target: 80
+    increment: 15
+
+  objectives:
+    primary: "Implementierung aller SHOULD-Requirements für robuste Lösung"
+    secondary:
+      - "Enhanced Tooling & Automation"
+      - "Advanced Observability"
+      - "Foundation Services Hardening"
+
+  deliverables:
+    - id: "SHOULD-001"
+      name: "Advanced Tooling Suite"
+      type: "tooling"
+      owner: "12_tooling"
+      output: "12_tooling/automation/*"
+      requirements:
+        - "REQ-ROOT24-011"
+
+    - id: "SHOULD-002"
+      name: "Observability Dashboard"
+      type: "dashboard"
+      owner: "17_observability"
+      output: "17_observability/dashboards/*"
+      requirements:
+        - "REQ-ROOT24-016"
+        - "REQ-NIST-SI-004"
+
+    - id: "SHOULD-003"
+      name: "Foundation Services Enhancement"
+      type: "code"
+      owner: "20_foundation"
+      output: "20_foundation/services/*"
+      requirements:
+        - "REQ-ROOT24-019"
+
+  responsible_roots:
+    primary:
+      - "12_tooling"
+      - "17_observability"
+      - "20_foundation"
+    supporting:
+      - "23_compliance"
+      - "11_test_simulation"
+
+  tasks:
+    - id: "TASK-SHOULD-001"
+      name: "Build CI/CD automation tools"
+      owner: "12_tooling"
+      priority: "HIGH"
+      estimated_hours: 30
+
+    - id: "TASK-SHOULD-002"
+      name: "Implement real-time metrics collection"
+      owner: "17_observability"
+      priority: "HIGH"
+      estimated_hours: 40
+
+    - id: "TASK-SHOULD-003"
+      name: "Enhance foundation service resilience"
+      owner: "20_foundation"
+      priority: "MEDIUM"
+      estimated_hours: 25
+
+    - id: "TASK-SHOULD-004"
+      name: "Create Grafana dashboards"
+      owner: "17_observability"
+      priority: "MEDIUM"
+      estimated_hours: 20
+
+  success_criteria:
+    - "100% SHOULD-Requirements implementiert"
+    - "Observability dashboard operational"
+    - "Automation tools integrated in CI/CD"
+    - "Score >= 80 erreicht"
+
+  risks:
+    - risk: "Observability-Tool-Sprawl (zu viele Tools)"
+      mitigation: "Standardisierung auf Prometheus + Grafana"
+      severity: "LOW"
+
+# =============================================================================
+# PHASE 4: MAY (Nice-to-Have / Differentiators)
+# =============================================================================
+
+phase_4_may:
+  name: "MAY-Requirements Implementation"
+  phase_number: 4
+
+  timeline:
+    duration: "2 weeks"
+    effort_days: 10
+    start_week: 7
+    end_week: 8
+
+  scores:
+    baseline: 80
+    target: 90
+    increment: 10
+
+  objectives:
+    primary: "Implementierung ausgewählter MAY-Requirements für Differenzierung"
+    secondary:
+      - "Umfassende Dokumentation"
+      - "Governance & Legal Compliance"
+      - "User Experience Improvements"
+
+  deliverables:
+    - id: "MAY-001"
+      name: "Complete Documentation Suite"
+      type: "documentation"
+      owner: "05_documentation"
+      output: "05_documentation/**/*.md"
+      requirements:
+        - "REQ-ROOT24-005"
+
+    - id: "MAY-002"
+      name: "Governance Framework"
+      type: "framework"
+      owner: "07_governance_legal"
+      output: "07_governance_legal/framework/*"
+      requirements:
+        - "REQ-ROOT24-006"
+        - "REQ-NIST-GOV-001"
+
+    - id: "MAY-003"
+      name: "API Documentation Portal"
+      type: "portal"
+      owner: "05_documentation"
+      output: "05_documentation/api_portal/*"
+
+  responsible_roots:
+    primary:
+      - "05_documentation"
+      - "07_governance_legal"
+    supporting:
+      - "23_compliance"
+      - "16_codex"
+
+  tasks:
+    - id: "TASK-MAY-001"
+      name: "Write comprehensive API docs"
+      owner: "05_documentation"
+      priority: "MEDIUM"
+      estimated_hours: 30
+
+    - id: "TASK-MAY-002"
+      name: "Create governance policies"
+      owner: "07_governance_legal"
+      priority: "MEDIUM"
+      estimated_hours: 20
+
+    - id: "TASK-MAY-003"
+      name: "Build interactive API portal"
+      owner: "05_documentation"
+      priority: "LOW"
+      estimated_hours: 25
+
+  success_criteria:
+    - "80%+ MAY-Requirements implementiert (selektiv)"
+    - "Dokumentation vollständig und aktuell"
+    - "Governance-Framework definiert"
+    - "Score >= 90 erreicht"
+
+  risks:
+    - risk: "Documentation drift (out-of-date docs)"
+      mitigation: "Automated doc generation aus Code"
+      severity: "MEDIUM"
+
+# =============================================================================
+# PHASE 5: TESTS + EVIDENCE (Validation & Certification)
+# =============================================================================
+
+phase_5_tests_evidence:
+  name: "Tests, Evidence & Certification"
+  phase_number: 5
+
+  timeline:
+    duration: "2 weeks"
+    effort_days: 10
+    start_week: 9
+    end_week: 10
+
+  scores:
+    baseline: 90
+    target: 100
+    increment: 10
+
+  objectives:
+    primary: "Lückenlose Test-Coverage und Audit-Evidence für 100% Compliance"
+    secondary:
+      - "Vollständige Test-Suite (Unit, Integration, E2E)"
+      - "Evidence-Collection für Audit"
+      - "Compliance-Certification"
+
+  deliverables:
+    - id: "TEST-001"
+      name: "Complete Test Suite"
+      type: "tests"
+      owner: "11_test_simulation"
+      output: "11_test_simulation/tests/**/*"
+      coverage_target: "95%"
+
+    - id: "TEST-002"
+      name: "Evidence Package"
+      type: "evidence"
+      owner: "02_audit_logging"
+      output: "02_audit_logging/evidence/*"
+
+    - id: "TEST-003"
+      name: "Compliance Certification Report"
+      type: "report"
+      owner: "23_compliance"
+      output: "23_compliance/reports/certification_report.pdf"
+
+    - id: "TEST-004"
+      name: "Hash-Chain Verification"
+      type: "validation"
+      owner: "02_audit_logging"
+      output: "02_audit_logging/evidence_hashes.json"
+
+  responsible_roots:
+    primary:
+      - "11_test_simulation"
+      - "23_compliance"
+      - "02_audit_logging"
+    supporting:
+      - "All roots (for test support)"
+
+  tasks:
+    - id: "TASK-TEST-001"
+      name: "Write missing unit tests (target 95%)"
+      owner: "11_test_simulation"
+      priority: "CRITICAL"
+      estimated_hours: 50
+
+    - id: "TASK-TEST-002"
+      name: "Run full integration test suite"
+      owner: "11_test_simulation"
+      priority: "CRITICAL"
+      estimated_hours: 20
+
+    - id: "TASK-TEST-003"
+      name: "Generate evidence package"
+      owner: "02_audit_logging"
+      priority: "HIGH"
+      estimated_hours: 15
+
+    - id: "TASK-TEST-004"
+      name: "Run Evidence-Hasher für finale Chain"
+      command: "bash 02_audit_logging/utils/hash_all.sh"
+      owner: "02_audit_logging"
+      priority: "HIGH"
+      estimated_hours: 2
+
+    - id: "TASK-TEST-005"
+      name: "Run Logic-Gap-Tester (Final Validation)"
+      command: "python3 11_test_simulation/tests_logic_gap.py"
+      owner: "23_compliance"
+      priority: "CRITICAL"
+      estimated_hours: 2
+
+    - id: "TASK-TEST-006"
+      name: "Generate compliance certification report"
+      owner: "23_compliance"
+      priority: "HIGH"
+      estimated_hours: 20
+
+  success_criteria:
+    - "100% MUST-Requirements getestet"
+    - "Code coverage >= 95%"
+    - "Logic-Gap-Tester: 0 gaps"
+    - "Evidence-Hasher: Chain valid"
+    - "Score = 100 erreicht"
+    - "Compliance-Report signiert und archiviert"
+
+  risks:
+    - risk: "Test failures kurz vor Deadline"
+      mitigation: "Kontinuierliches Testing während Phase 1-4"
+      severity: "HIGH"
+
+    - risk: "Fehlende Test-Daten für Edge-Cases"
+      mitigation: "Synthetic test data generation"
+      severity: "MEDIUM"
+
+# =============================================================================
+# MILESTONES & CHECKPOINTS
+# =============================================================================
+
+milestones:
+  - id: "M1"
+    name: "Inventory Complete"
+    phase: 1
+    week: 1
+    score_target: 25
+    criteria:
+      - "All roots documented"
+      - "Logic-Gap baseline established"
+
+  - id: "M2"
+    name: "MUST Implementation Complete"
+    phase: 2
+    week: 4
+    score_target: 65
+    criteria:
+      - "100% MUST requirements implemented"
+      - "All critical tests passing"
+
+  - id: "M3"
+    name: "SHOULD Implementation Complete"
+    phase: 3
+    week: 6
+    score_target: 80
+    criteria:
+      - "Observability operational"
+      - "Tooling integrated"
+
+  - id: "M4"
+    name: "MAY Implementation Complete"
+    phase: 4
+    week: 8
+    score_target: 90
+    criteria:
+      - "Documentation complete"
+      - "Governance defined"
+
+  - id: "M5"
+    name: "Certification Ready"
+    phase: 5
+    week: 10
+    score_target: 100
+    criteria:
+      - "All tests passing"
+      - "Evidence collected"
+      - "Compliance certified"
+
+# =============================================================================
+# RESOURCE ALLOCATION
+# =============================================================================
+
+resources:
+  total_effort_days: 50
+
+  by_phase:
+    phase_1: 5
+    phase_2: 15
+    phase_3: 10
+    phase_4: 10
+    phase_5: 10
+
+  by_root:
+    "02_audit_logging": 12
+    "08_identity_score": 8
+    "11_test_simulation": 15
+    "23_compliance": 10
+    "24_meta_orchestration": 10
+    "05_documentation": 8
+    "07_governance_legal": 5
+    "12_tooling": 7
+    "16_codex": 5
+    "17_observability": 8
+    "20_foundation": 7
+    others: 5
+
+# =============================================================================
+# DEPENDENCIES & CRITICAL PATH
+# =============================================================================
+
+dependencies:
+  - from: "phase_1_inventar"
+    to: "phase_2_must"
+    type: "BLOCKING"
+    reason: "MUST-Gaps müssen bekannt sein"
+
+  - from: "phase_2_must"
+    to: "phase_3_should"
+    type: "BLOCKING"
+    reason: "Foundation muss stabil sein"
+
+  - from: "MUST-003"
+    to: "SHOULD-001"
+    type: "BLOCKING"
+    reason: "Orchestration-Layer für Tooling benötigt"
+
+  - from: "phase_3_should"
+    to: "phase_5_tests_evidence"
+    type: "SOFT"
+    reason: "Testing kann teilweise parallel laufen"
+
+critical_path:
+  - "phase_1_inventar"
+  - "MUST-001 (Audit-Trail)"
+  - "MUST-002 (Identity Score)"
+  - "MUST-003 (Meta-Orchestration)"
+  - "phase_5_tests_evidence"
+  - "Certification"
+
+# =============================================================================
+# TRACKING & REPORTING
+# =============================================================================
+
+tracking:
+  daily_standups: true
+  weekly_reviews: true
+
+  metrics:
+    - name: "Compliance Score"
+      frequency: "daily"
+      owner: "23_compliance"
+      tool: "02_audit_logging/utils/track_progress.py"
+
+    - name: "Logic-Gaps"
+      frequency: "weekly"
+      owner: "23_compliance"
+      tool: "11_test_simulation/tests_logic_gap.py"
+
+    - name: "Test Coverage"
+      frequency: "daily"
+      owner: "11_test_simulation"
+      tool: "pytest --cov"
+
+    - name: "Evidence Chain Integrity"
+      frequency: "weekly"
+      owner: "02_audit_logging"
+      tool: "02_audit_logging/utils/hash_all.sh --verify"
+
+  reports:
+    - name: "Weekly Progress Report"
+      frequency: "weekly"
+      recipients: ["Architecture Team", "Compliance Officer"]
+      template: "23_compliance/templates/weekly_report.md"
+
+    - name: "Phase Completion Report"
+      frequency: "per_phase"
+      recipients: ["Leadership", "Compliance Officer"]
+      template: "23_compliance/templates/phase_report.md"
+
+# =============================================================================
+# GOVERNANCE & APPROVALS
+# =============================================================================
+
+governance:
+  phase_approvals:
+    required: true
+    approvers:
+      - role: "Architecture Lead"
+        root: "24_meta_orchestration"
+      - role: "Compliance Officer"
+        root: "23_compliance"
+      - role: "Security Lead"
+        root: "02_audit_logging"
+
+  change_control:
+    minor_changes: "Team Lead approval"
+    major_changes: "Architecture Board approval"
+    scope_changes: "Stakeholder approval + timeline adjustment"
+
+  escalation:
+    - level: 1
+      trigger: "1 day delay"
+      action: "Team Lead notification"
+
+    - level: 2
+      trigger: "3 day delay or score < target by 10%"
+      action: "Architecture Board escalation"
+
+    - level: 3
+      trigger: "1 week delay or MUST failures"
+      action: "Executive escalation + mitigation plan"

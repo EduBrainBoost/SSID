@@ -1,0 +1,35 @@
+{
+  "queries": {
+    "gdpr_article_changes": {
+      "description": "Query GDPR article changes between snapshots",
+      "endpoint": "query_article_changes",
+      "parameters": [
+        "from_date",
+        "to_date",
+        "framework=gdpr"
+      ]
+    },
+    "module_impact_timeline": {
+      "description": "Query module impact timeline",
+      "endpoint": "query_module_impact_timeline",
+      "parameters": [
+        "module_name",
+        "from_date",
+        "to_date"
+      ]
+    }
+  },
+  "available_frameworks": [
+    "gdpr",
+    "dora",
+    "mica",
+    "amld6"
+  ],
+  "available_modules": [
+    "02_audit_logging",
+    "03_core",
+    "09_meta_identity",
+    "15_infra",
+    "21_post_quantum_crypto"
+  ]
+}

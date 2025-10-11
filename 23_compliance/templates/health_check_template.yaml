@@ -1,0 +1,140 @@
+version: "1.0.0"
+name: "SSID Health Check Template"
+description: "Standardized health check template for all SSID modules"
+generated: "2025-10-10T13:00:00Z"
+compliance: "SHOULD-001-HEALTH-TEMPLATE"
+
+template:
+  metadata:
+    module_name: "<module_name>"
+    module_id: "<module_id>"
+    version: "<semantic_version>"
+    owner: "<team_or_person>"
+    last_updated: "<ISO8601_timestamp>"
+
+  health_endpoints:
+    liveness:
+      path: "/health/live"
+      method: "GET"
+      description: "Basic liveness check - is the service running?"
+      expected_status: 200
+      timeout_ms: 1000
+      response_schema:
+        status: "string (UP|DOWN)"
+        timestamp: "ISO8601"
+        module: "string"
+
+    readiness:
+      path: "/health/ready"
+      method: "GET"
+      description: "Readiness check - is the service ready to accept traffic?"
+      expected_status: 200
+      timeout_ms: 2000
+      response_schema:
+        status: "string (READY|NOT_READY)"
+        timestamp: "ISO8601"
+        module: "string"
+        dependencies:
+          - name: "string"
+            status: "string (UP|DOWN)"
+            latency_ms: "integer"
+
+    startup:
+      path: "/health/startup"
+      method: "GET"
+      description: "Startup check - has the service completed initialization?"
+      expected_status: 200
+      timeout_ms: 5000
+      response_schema:
+        status: "string (STARTED|STARTING|FAILED)"
+        timestamp: "ISO8601"
+        module: "string"
+        initialization_duration_ms: "integer"
+
+  health_checks:
+    database:
+      name: "Database Connection"
+      type: "dependency"
+      critical: true
+      timeout_ms: 2000
+      check_interval_seconds: 30
+      failure_threshold: 3
+      recovery_threshold: 2
+
+    cache:
+      name: "Cache Layer"
+      type: "dependency"
+      critical: false
+      timeout_ms: 1000
+      check_interval_seconds: 60
+      failure_threshold: 5
+      recovery_threshold: 2
+
+    disk_space:
+      name: "Disk Space"
+      type: "resource"
+      critical: true
+      threshold_percent: 90
+      check_interval_seconds: 300
+
+    memory:
+      name: "Memory Usage"
+      type: "resource"
+      critical: true
+      threshold_percent: 85
+      check_interval_seconds: 60
+
+    cpu:
+      name: "CPU Usage"
+      type: "resource"
+      critical: false
+      threshold_percent: 95
+      check_interval_seconds: 30
+
+  monitoring:
+    metrics_endpoint: "/metrics"
+    metrics_format: "prometheus"
+    log_level: "INFO"
+    alert_destinations:
+      - type: "email"
+        recipients: ["ops-team@ssid.example.com"]
+      - type: "slack"
+        channel: "#ssid-alerts"
+      - type: "pagerduty"
+        integration_key: "<pagerduty_key>"
+
+  compliance:
+    audit_logging: true
+    health_check_retention_days: 30
+    failure_notification_required: true
+    sla_target_uptime_percent: 99.9
+    regulatory_requirements:
+      - "DORA Art.10 (Detection and Monitoring)"
+      - "GDPR Art.32 (Security of Processing)"
+      - "ISO 27001:2022 - A.17 (Information security aspects of business continuity management)"
+
+usage_example:
+  module_name: "anti_gaming_validator"
+  module_id: "SSID-AG-001"
+  version: "1.2.3"
+  owner: "Compliance Team"
+  implementation_notes: |
+    1. Copy this template to your module's health/ directory
+    2. Customize the health_checks section for your specific dependencies
+    3. Implement the three standard endpoints: /health/live, /health/ready, /health/startup
+    4. Ensure all health checks log to audit trail
+    5. Configure monitoring alerts based on failure thresholds
+    6. Test health checks during CI/CD pipeline
+
+compliance_validation:
+  required_endpoints: 3
+  required_checks: ["database", "memory", "disk_space"]
+  audit_logging: true
+  prometheus_metrics: true
+  sla_monitoring: true
+
+signoff:
+  template_version: "1.0.0"
+  approved_by: "SSID Compliance Team"
+  approval_date: "2025-10-10"
+  next_review: "2026-01-10"

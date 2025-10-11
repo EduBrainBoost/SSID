@@ -1,0 +1,100 @@
+{
+  "validation_result": {
+    "timestamp": "2025-10-09T23:40:38.475279Z",
+    "transaction": {
+      "amount": "5000.0",
+      "currency": "EUR",
+      "eur_equivalent": "5000.0"
+    },
+    "threshold_check": {
+      "threshold_amount": "1000.00",
+      "threshold_currency": "EUR",
+      "exceeds_threshold": true
+    },
+    "compliance_decision": "ALLOW",
+    "travel_rule_required": true,
+    "ivms101_message": {
+      "version": "1.0",
+      "originator": {
+        "natural_person": {
+          "name": {
+            "name_identifiers": [
+              {
+                "primary_identifier": {
+                  "type": "LEGL",
+                  "value": "Alice Smith"
+                }
+              }
+            ]
+          },
+          "national_identification": {
+            "national_identifier_type": "PASSPORT",
+            "national_identifier": "253c800da3ad217318707a11a455dc8f8d7036b6673b0109dd3b6895b7cc407f",
+            "registration_authority": "",
+            "country_of_issue": "US"
+          },
+          "geographic_addresses": [
+            {
+              "address_type": "HOME",
+              "building_number": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+              "street_name": "4249a5b864b0f3382e9d29c6fd98065fdea6a0ec263fa691842e7e52787aa3e6",
+              "post_code": "e443169117a184f91186b401133b20be670c7c0896f9886075e5d9b81e9d076b",
+              "town_name": "815eca977c7d75f72bd23bccc91bc6f9931a42fbf03451eb0d7db8d2a704d94f",
+              "country": "US"
+            }
+          ],
+          "date_and_place_of_birth": {
+            "date_of_birth": "a6012dc7389450f86d2a2d1bbdcf32c4ced2e4c5f8f4cf17e0d44f482a38afb3",
+            "place_of_birth": "815eca977c7d75f72bd23bccc91bc6f9931a42fbf03451eb0d7db8d2a704d94f"
+          }
+        }
+      },
+      "beneficiary": {
+        "natural_person": {
+          "name": {
+            "name_identifiers": [
+              {
+                "primary_identifier": {
+                  "type": "LEGL",
+                  "value": "Bob Johnson"
+                }
+              }
+            ]
+          },
+          "geographic_addresses": [
+            {
+              "address_type": "HOME",
+              "building_number": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "street_name": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "post_code": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "town_name": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "country": "DE"
+            }
+          ]
+        }
+      },
+      "transfer": {
+        "amount": "5000.0",
+        "currency": "EUR",
+        "timestamp": "2025-10-09T23:40:38.475328Z",
+        "originating_vasp": {
+          "vasp_identifier": "529900T8BM49AURSDO55",
+          "vasp_identifier_type": "LEIX",
+          "vasp_name": "SSID VASP"
+        },
+        "beneficiary_vasp": {
+          "vasp_identifier": "UNKNOWN",
+          "vasp_identifier_type": "LEIX",
+          "vasp_name": "Unknown VASP"
+        }
+      }
+    },
+    "reason": "IVMS101 message generated successfully"
+  },
+  "audit_metadata": {
+    "timestamp": "2025-10-09T23:40:38.475279Z",
+    "result_hash_sha256": "ddf989d22058717e17fefb4fba8cc48a5fe8f41429ad8a790a7c8d589cd6ccb8",
+    "validator_version": "1.0.0",
+    "compliance_requirement": "MUST-026-TRAVEL-RULE"
+  }
+}

@@ -1,0 +1,44 @@
+name: Structure Validation
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+      
+      - name: Run structure validator
+        run: |
+          python3 scripts/validators/structure_validator.py
+      
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
+      
+      - name: Run OPA validation
+        run: |
+          opa eval -d 23_compliance/opa/max_depth.rego \
+            -i 24_meta_orchestration/registry/generated/repo_scan.json \
+            'data.ssid.structure.depth.allow'
+      
+      - name: Upload scan results
+        uses: actions/upload-artifact@v4
+        with:
+          name: repo-scan
+          path: 24_meta_orchestration/registry/generated/repo_scan.json

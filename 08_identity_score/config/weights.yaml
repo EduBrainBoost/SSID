@@ -1,0 +1,15 @@
+version: 1
+scale: 100
+weights:
+  kyc_verified: 0.35
+  credential_count: 0.25
+  reputation_score: 0.20
+  compliance_flags: 0.10
+  activity_score: 0.10
+bounds:
+  credential_count_max: 20
+  reputation_score_max: 1.0
+  activity_score_max: 1.0
+penalties:
+  sanctions_hit: -40
+  fraud_suspected: -20

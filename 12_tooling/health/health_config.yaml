@@ -1,0 +1,28 @@
+# Central Health Check Configuration
+# Version: 4.2.0
+# Last Updated: 2025-10-09
+# Purpose: Template-based readiness/liveness configuration (read-only checks)
+
+readiness:
+  # Registry lock must exist for system to be ready
+  require_registry_lock: true
+  registry_lock_path: "24_meta_orchestration/registry/locks/registry_lock.yaml"
+
+  # Coverage evidence must exist
+  require_coverage_xml: true
+  coverage_xml_path: "23_compliance/evidence/coverage/coverage.xml"
+
+  # Recent CI guard log required (within 7 days)
+  require_ci_log_recent: true
+  ci_logs_glob: "24_meta_orchestration/registry/logs/ci_guard_*.log"
+  ci_log_max_age_minutes: 10080  # 7 days = 7 * 24 * 60
+
+liveness:
+  # Liveness OK if at least one CI guard log exists in last 2 days
+  require_recent_ci: true
+  ci_log_max_age_minutes: 2880  # 2 days = 2 * 24 * 60
+
+notes: |
+  This configuration drives template_health.py checks.
+  All checks are READ-ONLY - no writes to registry or evidence.
+  Paths are relative to repository root.

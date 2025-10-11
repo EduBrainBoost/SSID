@@ -1,0 +1,73 @@
+meta:
+  name: "SSID Blueprint 4.2 Manifest"
+  version: "4.2.0"
+  base_blueprint: "4.1.x"
+  status: "proposed"
+  last_updated: "2025-10-07T08:15:00Z"
+  maintainer: "edubrainboost"
+
+compatibility:
+  breaking_changes: false
+  min_required_components:
+    - "24_meta_orchestration/consortium/consortium_registry.yaml"
+    - "24_meta_orchestration/consortium/consensus_policy.yaml"
+    - "23_compliance/policy_as_code/rego_policies/ssid_compliance_policy.rego"
+    - "13_ui_layer/synced_views/sync_metadata.json"
+    - "23_compliance/ai_ml_ready/snapshot_diffs/index.json"
+
+gates:
+  - name: "consortium_compliance_gate"
+    path: "24_meta_orchestration/triggers/consortium_gate.py"
+  - name: "blueprint_compatibility_gate"
+    path: "24_meta_orchestration/triggers/blueprint_compat_gate.py"
+
+evidence:
+  anchors:
+    - "02_audit_logging/evidence/registry/registry_anchor.json"
+  logs:
+    - "02_audit_logging/logs/consortium_score_log.jsonl"
+    - "02_audit_logging/logs/blueprint_42_score_log.jsonl"
+
+features:
+  - name: "Federated Consortium Ledger"
+    description: "BFT-based quorum consensus with ≥11 weighted points, ≥5 distinct signers"
+    components:
+      - "24_meta_orchestration/consortium/consortium_registry.yaml"
+      - "24_meta_orchestration/consortium/consensus_policy.yaml"
+
+  - name: "AI-Driven Auto-Policy Learning"
+    description: "Machine learning framework for policy recommendation and risk assessment"
+    components:
+      - "23_compliance/ai_ml_ready/policy_learning/"
+      - "23_compliance/policy_as_code/rego_policies/"
+
+  - name: "Unified Technical/Legal Views"
+    description: "Synchronized dashboards with integrity hashing"
+    components:
+      - "13_ui_layer/synced_views/technical_dashboard.json"
+      - "13_ui_layer/synced_views/legal_narrative.md"
+      - "13_ui_layer/synced_views/sync_metadata.json"
+
+  - name: "Historical Semantic Diffs"
+    description: "Snapshot-based diff tracking with semantic indexing"
+    components:
+      - "23_compliance/ai_ml_ready/snapshot_diffs/index.json"
+
+upgrade_path:
+  from: "4.1.x"
+  steps:
+    - "Apply registry_lock.yaml delta (consortium_status, compliance_evidence)"
+    - "Run test suite: 11_test_simulation/blueprint_42/"
+    - "Execute CI gates: blueprint_compat_gate.py"
+    - "Fill checksums via CI workflow"
+    - "Optional: Anchor to blockchain after PASS"
+
+compliance_frameworks:
+  - "eIDAS"
+  - "MiCA"
+  - "DORA"
+  - "AMLD6"
+  - "GDPR"
+  - "PSD2"
+
+checksum: "sha256:TO_BE_FILLED_BY_CI"

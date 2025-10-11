@@ -1,0 +1,57 @@
+# Policy: GDPR Compliance
+version: 1.0.0
+policy_id: "gdpr_06_13"
+
+scope:
+  - "EU Data Subjects"
+  - "business domain"
+
+rights:
+  right_to_access:
+    enabled: true
+    response_time_days: 30
+    format: "JSON"
+    includes:
+      - "all_hashes"
+      - "metadata"
+      - "audit_trail"
+  
+  right_to_erasure:
+    enabled: true
+    mechanism: "hash_rotation"
+    implementation: "new_pepper_invalidates_old_hashes"
+    retention_override: "legal_hold_only"
+  
+  right_to_portability:
+    enabled: true
+    format: "JSON"
+    scope: "all_user_hashes"
+  
+  right_to_rectification:
+    enabled: true
+    mechanism: "new_hash_generation"
+
+purpose_limitation:
+  allowed_purposes:
+    - "Firmendaten processing"
+    - "audit_trail"
+    - "compliance_reporting"
+  forbidden_purposes:
+    - "marketing"
+    - "profiling_without_consent"
+
+data_minimization:
+  principle: "hash_only_no_raw_data"
+  enforcement: "automatic"
+
+consent:
+  required_for:
+    - "data_processing"
+    - "hash_storage"
+  granularity: "per_purpose"
+  withdrawal: "immediate_effect"
+
+breach_notification:
+  authority_notification_hours: 72
+  data_subject_notification: "without_undue_delay"
+  documentation_required: true

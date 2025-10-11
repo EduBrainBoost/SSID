@@ -1,0 +1,267 @@
+meta:
+  document: "Enterprise Maintainers Registry"
+  version: "2025-Q4"
+  maintainer: "edubrainboost"
+  last_updated: "2025-10-07T12:45:00Z"
+  classification: "PUBLIC - Governance Registry"
+  source: "SoT Level3 Governance Section"
+  purpose: "Official registry of enterprise maintainers with responsibilities and governance structure"
+
+maintainers:
+  - id: "did:ssid:maintainer001"
+    name: "Alpha Identity GmbH"
+    role: "Core Maintainer"
+    entity_type: "GmbH"
+    contact: "mailto:security@alphaid.de"
+    jurisdiction: "DE"
+    registration_number: "HRB 12345 B"
+    roots_responsible:
+      - "01_ai_layer"
+      - "08_identity_score"
+      - "09_meta_identity"
+      - "23_compliance"
+    responsibilities:
+      - "AI governance and risk management"
+      - "Identity scoring algorithms"
+      - "Privacy-preserving identity protocols"
+      - "Compliance framework maintenance"
+    expertise:
+      - "Machine Learning & AI"
+      - "Privacy Engineering"
+      - "GDPR Compliance"
+      - "Biometric Hashing"
+    pgp_fingerprint: "9F3E 122B D671 1CFE 48DA 1C41 77D3 22A9 48D2 B1AF"
+    public_key_url: "https://alphaid.example/pgp/maintainer001.asc"
+    status: "active"
+    joined_date: "2024-06-15"
+    voting_weight: 1
+
+  - id: "did:ssid:maintainer002"
+    name: "Beta Trust AG"
+    role: "Infrastructure Maintainer"
+    entity_type: "AG"
+    contact: "mailto:infra@betatrust.eu"
+    jurisdiction: "LU"
+    registration_number: "B 234567"
+    roots_responsible:
+      - "15_infra"
+      - "04_deployment"
+      - "17_observability"
+      - "11_test_simulation"
+    responsibilities:
+      - "Infrastructure architecture and deployment"
+      - "Observability and monitoring systems"
+      - "CI/CD pipeline management"
+      - "Test automation and simulation"
+    expertise:
+      - "DevOps & Infrastructure"
+      - "Kubernetes & Cloud Native"
+      - "Monitoring & Observability"
+      - "DORA Compliance"
+    pgp_fingerprint: "7C12 4F93 A2E1 9A22 F314 88B9 11E7 5AC2 2F4D 821C"
+    public_key_url: "https://betatrust.example/pgp/maintainer002.asc"
+    status: "active"
+    joined_date: "2024-07-01"
+    voting_weight: 1
+
+  - id: "did:ssid:maintainer003"
+    name: "Gamma Secure Ltd."
+    role: "Governance & Compliance Maintainer"
+    entity_type: "Ltd."
+    contact: "mailto:governance@gammasecure.co.uk"
+    jurisdiction: "UK"
+    registration_number: "12345678"
+    roots_responsible:
+      - "07_governance_legal"
+      - "24_meta_orchestration"
+      - "02_audit_logging"
+      - "23_compliance"
+    responsibilities:
+      - "Legal and governance framework"
+      - "Meta-orchestration and registry management"
+      - "Audit logging and WORM storage"
+      - "Regulatory compliance coordination"
+    expertise:
+      - "Legal & Regulatory Compliance"
+      - "DAO Governance"
+      - "Smart Contract Law"
+      - "MiCA & AMLD6 Compliance"
+    pgp_fingerprint: "B2EE 7C99 0E61 A777 8211 C4D2 9E6C 11AB 65F3 0FDC"
+    public_key_url: "https://gammasecure.example/pgp/maintainer003.asc"
+    status: "active"
+    joined_date: "2024-08-15"
+    voting_weight: 1
+
+  - id: "did:ssid:maintainer004"
+    name: "Delta Risk S.A."
+    role: "Security & Cryptography Maintainer"
+    entity_type: "S.A."
+    contact: "mailto:security@deltarisk.fr"
+    jurisdiction: "FR"
+    registration_number: "RCS Paris B 345678"
+    roots_responsible:
+      - "21_post_quantum_crypto"
+      - "14_zero_time_auth"
+      - "20_foundation"
+      - "03_core"
+    responsibilities:
+      - "Post-quantum cryptography implementation"
+      - "Zero-trust authentication systems"
+      - "Foundation layer security"
+      - "Core system security architecture"
+    expertise:
+      - "Applied Cryptography"
+      - "Post-Quantum Security"
+      - "Zero-Knowledge Proofs"
+      - "Security Auditing"
+    pgp_fingerprint: "4A8F 1E22 9D31 7CB2 8E11 D5F9 3C4E 92BB 7F1A 4D2C"
+    public_key_url: "https://deltarisk.example/pgp/maintainer004.asc"
+    status: "active"
+    joined_date: "2024-09-01"
+    voting_weight: 1
+
+governance_committee:
+  name: "SSID Maintainers Governance Committee"
+  total_members: 4
+  quorum_required: 3
+  voting_method: "weighted (1 vote per maintainer)"
+
+  decision_policies:
+    sot_changes:
+      description: "Changes to Source of Truth documents in 16_codex/structure/"
+      approval_required: "2/3 majority (minimum 3 votes)"
+      unanimous_required: false
+
+    root_structure_changes:
+      description: "Changes to Root-24-LOCK structure or addition/removal of root modules"
+      approval_required: "3/4 majority (minimum 3 votes)"
+      unanimous_required: false
+
+    compliance_framework_changes:
+      description: "Changes to compliance mappings or governance policies"
+      approval_required: "2/3 majority (minimum 3 votes)"
+      unanimous_required: false
+
+    emergency_security_fix:
+      description: "Critical security fixes requiring immediate deployment"
+      approval_required: "1 maintainer (with retrospective review within 48h)"
+      unanimous_required: false
+      notification_required: true
+
+    maintainer_addition:
+      description: "Addition of new enterprise maintainer"
+      approval_required: "3/4 majority (minimum 3 votes)"
+      unanimous_required: false
+      due_diligence_required: true
+
+    maintainer_removal:
+      description: "Removal of existing maintainer for cause"
+      approval_required: "unanimous (all maintainers except subject)"
+      unanimous_required: true
+      formal_process_required: true
+
+  meeting_cadence:
+    regular_meetings: "Monthly on first Friday"
+    extraordinary_meetings: "As needed with 48h notice"
+    annual_review: "December (year-end governance review)"
+
+  decision_tracking:
+    log_location: "07_governance_legal/decisions/"
+    format: "YAML with DID signatures"
+    blockchain_anchored: true
+    public_disclosure: true
+
+communication_channels:
+  primary: "Signal encrypted group"
+  backup: "PGP-encrypted email"
+  public: "GitHub Discussions - SSID Governance"
+  emergency: "24/7 security hotline"
+
+conflict_of_interest:
+  disclosure_required: true
+  annual_declaration: true
+  declaration_location: "07_governance_legal/coi_declarations/"
+
+  prohibited_activities:
+    - "Directly competing identity systems"
+    - "Custody services conflicting with non-custodial mandate"
+    - "Participation in regulatory enforcement against SSID"
+    - "Financial interest in entities seeking to compromise SSID"
+
+independence_requirements:
+  financial_independence: "No single entity may control >25% of maintainer voting power"
+  geographic_diversity: "Minimum 2 different EU jurisdictions"
+  expertise_diversity: "Coverage of technical, legal, and compliance domains"
+  no_common_ownership: "Maintainer entities must be independently owned"
+
+code_of_conduct:
+  document_location: "23_compliance/governance/community_guidelines_enterprise.md"
+  enforcement_body: "Governance Committee"
+  violation_reporting: "governance@ssid.foundation"
+  investigation_timeline: "48 hours for acknowledgment, 14 days for resolution"
+
+succession_planning:
+  maintainer_rotation: "Encouraged after 24 months, required after 48 months"
+  knowledge_transfer: "90-day overlap period for role transitions"
+  documentation_requirement: "Comprehensive handover documentation mandatory"
+  backup_maintainers: "Each root module must have identified backup"
+
+financial_governance:
+  treasury_management: "Multi-sig wallet (3-of-4 maintainers)"
+  budget_approval: "Annual budget requires 3/4 majority"
+  expense_limits:
+    individual_authorization: "€5,000"
+    committee_authorization: "€50,000"
+    dao_vote_required: ">€50,000"
+  transparency: "All expenses published quarterly"
+
+audit_oversight:
+  internal_audit: "Quarterly compliance reviews"
+  external_audit: "Annual third-party audit"
+  audit_committee: "See audit_committee_policy.md"
+  findings_publication: "Public within 30 days of audit completion"
+
+amendment_process:
+  proposal_submission: "Any maintainer may propose amendment"
+  review_period: "14 days for comment"
+  voting_period: "7 days"
+  approval_threshold: "2/3 majority"
+  effective_date: "30 days after approval (unless emergency)"
+
+emergency_procedures:
+  security_incident:
+    notification: "Immediate (all maintainers)"
+    decision_authority: "Any maintainer (with retrospective review)"
+    documentation: "Required within 24 hours"
+
+  regulatory_emergency:
+    notification: "Within 4 hours"
+    decision_authority: "Governance Committee"
+    legal_counsel: "Must be consulted"
+
+  infrastructure_failure:
+    notification: "Immediate"
+    decision_authority: "Infrastructure Maintainer + 1"
+    documentation: "Post-incident report within 72 hours"
+
+public_transparency:
+  governance_decisions: "Published in governance repository"
+  voting_records: "Anonymous voting tallies published"
+  financial_reports: "Quarterly summaries published"
+  security_incidents: "Published after remediation (responsible disclosure)"
+
+references:
+  governance_framework: "07_governance_legal/governance_framework.md"
+  decision_log: "07_governance_legal/decisions/"
+  community_guidelines: "23_compliance/governance/community_guidelines_enterprise.md"
+  audit_committee: "23_compliance/governance/audit_committee_policy.md"
+  sot_documents: "16_codex/structure/"
+
+attestation:
+  document_reviewed: true
+  reviewed_by: ["did:ssid:maintainer001", "did:ssid:maintainer002", "did:ssid:maintainer003", "did:ssid:maintainer004"]
+  review_date: "2025-10-07"
+  next_review: "2026-10-07"
+  cryptographic_signature: "required"
+
+checksum: "sha256:TO_BE_FILLED_BY_CI"

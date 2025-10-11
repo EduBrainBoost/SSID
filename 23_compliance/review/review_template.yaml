@@ -1,0 +1,244 @@
+meta:
+  version: "2025-Q4"
+  type: "review_template"
+  template_version: "1.0"
+  review_period: "2025-Q4"
+  last_updated: "2025-10-07T12:00:00Z"
+  maintainer: "edubrainboost"
+  classification: "INTERNAL - Compliance Review Template"
+  purpose: "Standardized quarterly compliance review framework for GDPR/DORA/MiCA/AMLD6"
+
+review_information:
+  review_id: "YYYY-QX-REVIEW-NNN"
+  review_date: "YYYY-MM-DD"
+  review_type: "quarterly"  # Options: monthly, quarterly, annual, ad-hoc
+  reviewer_name: ""
+  reviewer_organization: ""
+  reviewer_credentials: ""
+  review_scope: ""
+
+review_sections:
+  executive_summary:
+    compliance_status: ""  # Options: COMPLIANT, CONDITIONAL, NON-COMPLIANT
+    critical_issues: 0
+    major_issues: 0
+    minor_issues: 0
+    recommendations: 0
+    overall_score: ""  # Format: XX/100
+
+  scope_and_methodology:
+    frameworks_reviewed:
+      - framework: "GDPR"
+        version: "2025-Q4"
+        coverage: "0.95"
+        mapping_path: "23_compliance/mappings/gdpr_mapping.yaml"
+      - framework: "DORA"
+        version: "2025-Q4"
+        coverage: "0.92"
+        mapping_path: "23_compliance/mappings/dora_mapping.yaml"
+      - framework: "MiCA"
+        version: "2025-Q4"
+        coverage: "0.88"
+        mapping_path: "23_compliance/mappings/mica_mapping.yaml"
+      - framework: "AMLD6"
+        version: "2025-Q4"
+        coverage: "0.94"
+        mapping_path: "23_compliance/mappings/amld6_mapping.yaml"
+    review_methodology: "Risk-based compliance assessment per ISO 19011"
+    sampling_approach: "Stratified random sampling with focus on high-risk controls"
+    tools_used:
+      - "pytest (automated control testing)"
+      - "YAML validators"
+      - "Structure guard scripts"
+      - "Anti-gaming detection suite"
+    limitations:
+      - "External smart contract audit out of scope"
+      - "Production environment testing limited to read-only"
+
+  gdpr_review:
+    framework_version: "2025-Q4"
+    last_mapping_update: ""
+    controls_reviewed: 0
+    controls_compliant: 0
+    controls_non_compliant: 0
+    findings:
+      - id: ""
+        severity: ""  # Options: critical, major, minor, observation
+        description: ""
+        affected_modules: []
+        recommendation: ""
+        remediation_deadline: ""
+        status: ""  # Options: open, in_progress, resolved
+    evidence_reviewed: []
+    compliance_percentage: 0
+
+  dora_review:
+    framework_version: "2025-Q4"
+    last_mapping_update: ""
+    controls_reviewed: 0
+    controls_compliant: 0
+    controls_non_compliant: 0
+    findings:
+      - id: ""
+        severity: ""
+        description: ""
+        affected_modules: []
+        recommendation: ""
+        remediation_deadline: ""
+        status: ""
+    incident_response_tested: false
+    resilience_testing_status: ""
+    third_party_risk_assessment: ""
+    compliance_percentage: 0
+
+  mica_review:
+    framework_version: "2025-Q4"
+    last_mapping_update: ""
+    controls_reviewed: 0
+    controls_compliant: 0
+    controls_non_compliant: 0
+    token_classification_validated: false
+    casp_requirements_met: false
+    findings:
+      - id: ""
+        severity: ""
+        description: ""
+        affected_modules: []
+        recommendation: ""
+        remediation_deadline: ""
+        status: ""
+    compliance_percentage: 0
+
+  amld6_review:
+    framework_version: "2025-Q4"
+    last_mapping_update: ""
+    controls_reviewed: 0
+    controls_compliant: 0
+    controls_non_compliant: 0
+    cdd_procedures_tested: false
+    transaction_monitoring_validated: false
+    travel_rule_compliance: false
+    mlro_appointed: false
+    findings:
+      - id: ""
+        severity: ""
+        description: ""
+        affected_modules: []
+        recommendation: ""
+        remediation_deadline: ""
+        status: ""
+    compliance_percentage: 0
+
+  structure_compliance:
+    structure_score: 0  # Out of 100
+    root_compliance: true
+    must_folders_complete: true
+    naming_conventions: true
+    depth_compliance: true
+    violations: []
+    recommendations: []
+
+  badge_integrity:
+    badge_calculation_validated: false
+    circular_dependencies_found: 0
+    dependency_graph_reviewed: true
+    badge_logic_matches_documentation: true
+    threshold_rationale_validated: true
+    findings: []
+
+  anti_gaming_controls:
+    circular_dependency_check: ""  # Status: pass/fail
+    business_logic_overfitting: ""
+    badge_validation: ""
+    dependency_graph_generated: false
+    sampling_performed: false
+    sample_size: ""
+    findings: []
+
+  evidence_review:
+    worm_storage_validated: false
+    audit_trails_complete: true
+    blockchain_anchoring_verified: false
+    retention_policies_enforced: true
+    evidence_integrity_score: 0  # Out of 100
+    findings: []
+
+  cross_module_dependencies:
+    dependencies_mapped: true
+    critical_dependencies_identified: 0
+    circular_dependencies: 0
+    dependency_risks: []
+    recommendations: []
+
+  recommendations:
+    critical:
+      - id: ""
+        description: ""
+        affected_areas: []
+        implementation_effort: ""  # Options: low, medium, high
+        deadline: ""
+        priority: 1
+    major:
+      - id: ""
+        description: ""
+        affected_areas: []
+        implementation_effort: ""
+        deadline: ""
+        priority: 2
+    minor:
+      - id: ""
+        description: ""
+        affected_areas: []
+        implementation_effort: ""
+        deadline: ""
+        priority: 3
+
+  action_items:
+    - id: ""
+      description: ""
+      owner: ""
+      deadline: ""
+      status: ""  # Options: not_started, in_progress, completed
+      dependencies: []
+      business_impact: ""
+
+  next_review:
+    scheduled_date: ""
+    focus_areas: []
+    special_considerations: []
+
+reviewer_attestation:
+  reviewer_name: ""
+  review_date: ""
+  independence_confirmed: false
+  credentials_verified: false
+  statement: |
+    I confirm that this review was conducted in accordance with established
+    review procedures and that the findings and recommendations are based on
+    objective assessment of the compliance framework and implementation.
+  signature: ""
+
+approval:
+  compliance_officer:
+    name: ""
+    date: ""
+    approved: false
+  legal_counsel:
+    name: ""
+    date: ""
+    approved: false
+  technical_lead:
+    name: ""
+    date: ""
+    approved: false
+
+metadata:
+  review_duration_hours: 0
+  modules_reviewed: 0
+  files_reviewed: 0
+  tests_executed: 0
+  evidence_items_validated: 0
+  report_location: ""
+  supporting_documents: []
+
+checksum: "sha256:d701aeeb3f7439e528be2c67d4f2ebaba89794c1b0b1fcd1ccd4e99ddbef3e41"

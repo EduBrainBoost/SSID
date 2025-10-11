@@ -1,0 +1,15 @@
+[run]
+branch = True
+source =
+    23_compliance/anti_gaming
+    02_audit_logging/validators
+    08_identity_score/src
+data_file = 23_compliance/evidence/coverage/.coverage
+
+[report]
+show_missing = True
+fail_under = 80
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+    raise NotImplementedError

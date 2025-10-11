@@ -1,0 +1,321 @@
+name: Non-Custodial Architecture - CI/CD Gate
+
+# CRITICAL: This workflow blocks ANY code that violates non-custodial architecture.
+# Private key handling is STRICTLY FORBIDDEN and will FAIL the build.
+#
+# Compliance: MUST-006-NON-CUSTODIAL
+# Version: 1.0.0
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["main", "develop"]
+
+jobs:
+  private-key-prohibition-scan:
+    name: Private Key Handling Prohibition Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Scan for private key storage patterns
+        run: |
+          echo "=== Scanning for FORBIDDEN private key storage patterns ==="
+
+          # Scan for private key fields in database schemas/models
+          FORBIDDEN_SCHEMA_PATTERNS=$(grep -ri "private.?key" \
+            09_meta_identity/schema/ \
+            03_core/models/ \
+            20_foundation/*/schema/ \
+            --include="*.py" --include="*.sql" --include="*.yaml" --include="*.json" \
+            2>/dev/null | grep -v "# OK:" | grep -v "# ALLOWED:" || true)
+
+          if [ -n "$FORBIDDEN_SCHEMA_PATTERNS" ]; then
+            echo "❌ CRITICAL: Found private key fields in database schemas:"
+            echo "$FORBIDDEN_SCHEMA_PATTERNS"
+            exit 1
+          fi
+
+          echo "✅ PASS: No private key fields in database schemas"
+
+      - name: Scan for private key transmission in APIs
+        run: |
+          echo "=== Scanning for FORBIDDEN private key transmission ==="
+
+          # Scan for private key transmission in API endpoints
+          FORBIDDEN_API_PATTERNS=$(grep -ri "private.?key" \
+            19_adapters/api/ \
+            03_core/api/ \
+            --include="*.py" \
+            | grep -E "(json|request|response|body|payload)" \
+            | grep -v "# OK:" | grep -v "# ALLOWED:" || true)
+
+          if [ -n "$FORBIDDEN_API_PATTERNS" ]; then
+            echo "❌ CRITICAL: Found private key transmission in API code:"
+            echo "$FORBIDDEN_API_PATTERNS"
+            exit 1
+          fi
+
+          echo "✅ PASS: No private key transmission in API code"
+
+      - name: Scan for private key logging
+        run: |
+          echo "=== Scanning for FORBIDDEN private key logging ==="
+
+          # Scan for private key in logging statements
+          FORBIDDEN_LOG_PATTERNS=$(grep -ri "logger.*private.?key\|log.*private.?key\|print.*private.?key" \
+            03_core/ \
+            09_meta_identity/ \
+            19_adapters/ \
+            20_foundation/ \
+            --include="*.py" \
+            | grep -v "# OK:" | grep -v "# ALLOWED:" || true)
+
+          if [ -n "$FORBIDDEN_LOG_PATTERNS" ]; then
+            echo "❌ CRITICAL: Found private key in logging statements:"
+            echo "$FORBIDDEN_LOG_PATTERNS"
+            exit 1
+          fi
+
+          echo "✅ PASS: No private key in logging statements"
+
+      - name: Verify signature verification uses public keys only
+        run: |
+          echo "=== Verifying signature verification implementation ==="
+
+          # Ensure verify_signature functions use public keys, NOT private keys
+          VERIFY_FUNCS=$(find 03_core/crypto/ 09_meta_identity/ \
+            -name "*.py" \
+            -exec grep -l "def verify_signature\|def verify" {} \; 2>/dev/null || true)
+
+          if [ -n "$VERIFY_FUNCS" ]; then
+            for file in $VERIFY_FUNCS; do
+              # Check if verify function accesses private keys (forbidden)
+              if grep -A 20 "def verify" "$file" | grep -i "private.?key" | grep -v "# OK:" | grep -v "# ALLOWED:"; then
+                echo "❌ CRITICAL: Signature verification accesses private keys in $file"
+                exit 1
+              fi
+            done
+          fi
+
+          echo "✅ PASS: Signature verification uses public keys only"
+
+      - name: Scan for custodial wallet patterns
+        run: |
+          echo "=== Scanning for FORBIDDEN custodial wallet patterns ==="
+
+          # Scan for custodial patterns (storing/retrieving private keys)
+          CUSTODIAL_PATTERNS=$(grep -ri \
+            -E "(store|save|persist|insert|update).*private.?key|private.?key.*(store|save|persist|insert|update)" \
+            03_core/ \
+            09_meta_identity/ \
+            19_adapters/ \
+            20_foundation/ \
+            --include="*.py" \
+            | grep -v "# OK:" | grep -v "# ALLOWED:" | grep -v "UserDevice" || true)
+
+          if [ -n "$CUSTODIAL_PATTERNS" ]; then
+            echo "❌ CRITICAL: Found custodial wallet patterns (private key storage):"
+            echo "$CUSTODIAL_PATTERNS"
+            exit 1
+          fi
+
+          echo "✅ PASS: No custodial wallet patterns detected"
+
+      - name: Verify hash-only architecture
+        run: |
+          echo "=== Verifying hash-only architecture compliance ==="
+
+          # Ensure identity registry stores ONLY public key hashes
+          if grep -ri "identity_registry\|identity.?store" 09_meta_identity/ --include="*.py" -A 20 \
+            | grep -E "private.?key.*:" | grep -v "# OK:" | grep -v "# ALLOWED:"; then
+            echo "❌ CRITICAL: Identity registry stores private keys (hash-only violation)"
+            exit 1
+          fi
+
+          echo "✅ PASS: Hash-only architecture verified"
+
+      - name: Check for private key handling in new files
+        run: |
+          echo "=== Checking for private key handling in changed files ==="
+
+          # Get list of changed Python files (if in PR context)
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep "\.py$" || true)
+
+            if [ -n "$CHANGED_FILES" ]; then
+              for file in $CHANGED_FILES; do
+                # Check if file contains private key handling
+                if [ -f "$file" ] && grep -i "private.?key" "$file" | grep -v "# OK:" | grep -v "# ALLOWED:" | grep -v "UserDevice"; then
+                  echo "❌ CRITICAL: Changed file $file contains private key handling"
+                  exit 1
+                fi
+              done
+            fi
+          fi
+
+          echo "✅ PASS: No private key handling in changed files"
+
+      - name: Run Non-Custodial PoC validation
+        run: |
+          echo "=== Running Non-Custodial PoC Flow Validation ==="
+
+          # Execute PoC to verify non-custodial properties
+          python 23_compliance/evidence/non_custodial/poc_flow_validation.py
+
+          if [ $? -ne 0 ]; then
+            echo "❌ CRITICAL: Non-custodial PoC validation failed"
+            exit 1
+          fi
+
+          echo "✅ PASS: Non-custodial PoC validation successful"
+
+      - name: Audit trail verification
+        run: |
+          echo "=== Verifying audit trail contains no private keys ==="
+
+          # Check recent audit logs for accidental private key leakage
+          if find 02_audit_logging/logs/ 23_compliance/evidence/ \
+            -name "*.json" -o -name "*.log" \
+            -exec grep -l "\"private.?key\":" {} \; 2>/dev/null | head -5; then
+            echo "❌ WARNING: Found potential private key material in audit logs"
+            exit 1
+          fi
+
+          echo "✅ PASS: No private key material in audit logs"
+
+      - name: Generate compliance report
+        if: success()
+        run: |
+          echo "=== Non-Custodial Architecture Compliance Report ==="
+          echo "Scan Date: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "Compliance Requirement: MUST-006-NON-CUSTODIAL"
+          echo "Status: COMPLIANT"
+          echo ""
+          echo "Validations Performed:"
+          echo "  ✅ No private key fields in database schemas"
+          echo "  ✅ No private key transmission in API code"
+          echo "  ✅ No private key in logging statements"
+          echo "  ✅ Signature verification uses public keys only"
+          echo "  ✅ No custodial wallet patterns detected"
+          echo "  ✅ Hash-only architecture verified"
+          echo "  ✅ Non-custodial PoC validation passed"
+          echo "  ✅ No private key material in audit logs"
+          echo ""
+          echo "Conclusion: Non-custodial architecture integrity maintained."
+
+  semgrep-security-scan:
+    name: Semgrep Security Analysis (Private Key Detection)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: |
+            rules:
+              - id: forbidden-private-key-storage
+                pattern: |
+                  $DB.insert({..., "private_key": $KEY, ...})
+                message: "CRITICAL: Storing private keys in database is FORBIDDEN (non-custodial violation)"
+                severity: ERROR
+                languages: [python]
+
+              - id: forbidden-private-key-transmission
+                pattern: |
+                  requests.$METHOD(..., json={..., "private_key": $KEY, ...})
+                message: "CRITICAL: Transmitting private keys over network is FORBIDDEN"
+                severity: ERROR
+                languages: [python]
+
+              - id: forbidden-private-key-logging
+                patterns:
+                  - pattern: logger.$LEVEL(..., $MSG)
+                  - metavariable-regex:
+                      metavariable: $MSG
+                      regex: .*private.?key.*
+                message: "CRITICAL: Logging private keys is FORBIDDEN"
+                severity: ERROR
+                languages: [python]
+
+      - name: Fail on violations
+        if: failure()
+        run: |
+          echo "❌ CRITICAL: Semgrep detected non-custodial architecture violations"
+          echo "Private key handling is STRICTLY FORBIDDEN in the SSID system."
+          echo "Review security scan results and remove all private key handling code."
+          exit 1
+
+  architecture-decision-enforcement:
+    name: Architecture Decision Record Enforcement
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify ADR-006 compliance
+        run: |
+          echo "=== Enforcing Architecture Decision Record ADR-006 ==="
+
+          # Check if non_custodial_architecture.md exists and is up to date
+          if [ ! -f "23_compliance/architecture/non_custodial_architecture.md" ]; then
+            echo "❌ ERROR: Non-custodial architecture documentation missing"
+            exit 1
+          fi
+
+          # Verify PoC validation script exists
+          if [ ! -f "23_compliance/evidence/non_custodial/poc_flow_validation.py" ]; then
+            echo "❌ ERROR: Non-custodial PoC validation script missing"
+            exit 1
+          fi
+
+          echo "✅ PASS: ADR-006 compliance artifacts present"
+
+      - name: Verify registry compliance
+        run: |
+          echo "=== Verifying Registry Compliance ==="
+
+          # Check if MUST-006 is marked as implemented in registry
+          if ! grep -A 10 "MUST-006-NON-CUSTODIAL" 23_compliance/mappings/sot_to_repo_matrix.yaml \
+            | grep -q "status: implemented"; then
+            echo "❌ ERROR: MUST-006 not marked as implemented in registry"
+            exit 1
+          fi
+
+          echo "✅ PASS: Registry compliance verified"
+
+  final-gate:
+    name: Final Non-Custodial Gate (Block on ANY Violation)
+    runs-on: ubuntu-latest
+    needs: [private-key-prohibition-scan, semgrep-security-scan, architecture-decision-enforcement]
+
+    steps:
+      - name: Enforce zero-tolerance policy
+        run: |
+          echo "======================================================================="
+          echo "Non-Custodial Architecture - Zero-Tolerance Enforcement"
+          echo "======================================================================="
+          echo ""
+          echo "All non-custodial validation checks PASSED."
+          echo ""
+          echo "Guarantees:"
+          echo "  ✅ NO private key storage in system databases"
+          echo "  ✅ NO private key transmission over network"
+          echo "  ✅ NO private key logging"
+          echo "  ✅ NO custodial wallet patterns"
+          echo "  ✅ Hash-only architecture maintained"
+          echo ""
+          echo "Compliance: MUST-006-NON-CUSTODIAL = ENFORCED"
+          echo "======================================================================="

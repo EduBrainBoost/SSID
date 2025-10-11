@@ -1,0 +1,40 @@
+meta:
+  name: SSID Consortium Consensus Policy
+  version: 1.0.0
+  last_updated: '2025-10-07T08:00:00Z'
+  maintainer: edubrainboost
+  status: active
+membership_tiers:
+  founding:
+    weight: 5
+    min_signers: 3
+  full:
+    weight: 3
+    min_signers: 3
+  associate:
+    weight: 2
+    min_signers: 2
+  observer:
+    weight: 1
+    min_signers: 0
+  muted:
+    weight: 0
+    min_signers: 0
+quorum:
+  min_weight_sum: 11
+  min_distinct_signers: 5
+  bft_tolerance: 1
+  signature_scheme: threshold-bls
+  sybil_resistance: proof-of-authority
+evidence_sources:
+- 02_audit_logging/evidence/registry/registry_anchor.jsonl
+- 02_audit_logging/evidence/registry/registry_anchor.json
+- 24_meta_orchestration/registry/locks/registry_lock.yaml
+validation_rules:
+- id: ANCHOR-HASH-IN-REGISTRY
+  description: Anchor-Hash muss im registry_lock vorkommen
+  severity: high
+- id: SIGNATURE-THRESHOLD
+  description: Threshold-Signaturen erfüllen Quorum
+  severity: critical
+checksum: sha256:5607333f1f71f30bfa0e5c2d13d3be95e22ac3f095b61c54565101a2aa6fb65d

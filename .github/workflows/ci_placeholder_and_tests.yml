@@ -1,0 +1,38 @@
+name: SSID Placeholder Guard & Tests
+on:
+  push:
+  pull_request:
+jobs:
+  guard-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pytest coverage
+      - name: Placeholder Guard
+        run: |
+          python 12_tooling/placeholder_guard/placeholder_scan.py . 12_tooling/placeholder_guard/allowlist_paths.yaml
+      - name: Run tests with coverage
+        run: |
+          pytest -q
+          coverage run -m pytest -q
+          coverage xml -o 23_compliance/evidence/coverage/coverage.xml
+          coverage report --fail-under=80
+      - name: Persist logs
+        if: always()
+        run: |
+          mkdir -p 24_meta_orchestration/registry/logs
+          echo "run_ts=2025-10-07T13:23:25Z" > 24_meta_orchestration/registry/logs/ci_guard_2025-10-07T13:23:25Z.log
+          echo "status=${ job.status }" >> 24_meta_orchestration/registry/logs/ci_guard_2025-10-07T13:23:25Z.log
+      - name: Upload coverage artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: 23_compliance/evidence/coverage/coverage.xml

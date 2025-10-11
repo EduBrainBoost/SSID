@@ -1,0 +1,74 @@
+version: 4.2
+title: SSID Structure Exceptions Registry
+description: >
+  Enthält definierte Ausnahmen für Struktur-, Policy- oder Governance-Abweichungen.
+  Diese Datei wird vom Structure Guard und vom Structure Lock L3 gelesen,
+  um genehmigte temporäre oder permanente Strukturabweichungen
+  von der Root-24-Policy zu berücksichtigen.
+
+structure_exceptions:
+
+  # Temporäre Abweichungen (werden nach Review automatisch entfernt)
+  temporary:
+    - id: TMP-001
+      scope: "12_tooling/scripts/maintenance"
+      reason: "Wartungsskripte dürfen außerhalb der Standard-Shard-Struktur liegen."
+      expires: "never"
+      approved_by: ["AI-Auditor", "Compliance-Lead"]
+      evidence: "23_compliance/evidence/ci_runs/exception_TMP-001.json"
+    - id: TMP-002
+      scope: "23_compliance/evidence/legacy"
+      reason: "Archivierte Bootstrap-Artefakte dürfen bestehen bleiben."
+      expires: "never"
+      approved_by: ["AI-Auditor"]
+      evidence: "23_compliance/evidence/legacy/"
+
+  # Permanente Design-Ausnahmen (fest in der Architektur verankert)
+  permanent:
+    - id: PERM-001
+      scope: ".claude"
+      reason: "AI-Assistent-Arbeitsbereich; system_artifact."
+      approved_by: ["Root-24-DAO"]
+      evidence: "23_compliance/evidence/ci_runs/perm_exception_claude.json"
+    - id: PERM-002
+      scope: ".pre-commit-config.yaml"
+      reason: "Zulässige Code-Quality-Konfiguration im Root-Verzeichnis."
+      approved_by: ["Compliance-Core"]
+      evidence: "23_compliance/evidence/ci_runs/perm_exception_precommit.json"
+
+  # Legacy-Bestände (werden geprüft, aber nicht als Verstoß gewertet)
+  legacy:
+    - id: LEG-001
+      scope: "23_compliance/evidence/legacy/"
+      reason: "Alt-Skripte, Bootstrap- und Setup-Dateien archiviert."
+      approved_by: ["AI-Auditor"]
+      evidence: "23_compliance/evidence/legacy/"
+
+validation_rules:
+  - must_have_keys: ["id", "scope", "reason", "approved_by", "evidence"]
+  - duplicate_ids_not_allowed: true
+  - all_scopes_must_exist: true
+  - evidence_paths_must_resolve: true
+
+governance:
+  review_frequency: "monthly"
+  reviewers_required: 2
+  approval_flow: "PLAN → APPROVAL → APPLY"
+  change_requires_dual_review: true
+  auto_expiration_check: true
+  auto_remove_expired: false
+
+enforcement:
+  apply_review_first: true
+  quarantine_for_structure_exceptions: false
+  exit_codes:
+    success: 0
+    exception_detected: 42
+    violation: 24
+    quarantine: 99
+
+metadata:
+  maintainer: SSID Codex Engine (AI Compliance Layer)
+  last_reviewed: 2025-10-05
+  hash_algorithm: SHA-256
+  schema_version: Root24-Policy-v4.2

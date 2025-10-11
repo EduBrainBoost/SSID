@@ -1,0 +1,388 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2025-10-07",
+    "description": "Source of Truth Requirements Index for SSID Project",
+    "total_requirements": 47,
+    "framework_coverage": ["GDPR", "DORA", "MiCA", "AMLD6"]
+  },
+  "requirements": {
+    "MUST": [
+      {
+        "id": "MUST-001-POL-CENTRAL",
+        "name": "Central Policy Management",
+        "description": "All compliance policies must be managed centrally in 23_compliance/policies/",
+        "category": "governance",
+        "frameworks": ["GDPR", "DORA", "MiCA", "AMLD6"]
+      },
+      {
+        "id": "MUST-002-ANTI-GAMING",
+        "name": "Anti-Gaming Controls",
+        "description": "Anti-gaming validators must be active and enforced",
+        "category": "security",
+        "frameworks": ["MiCA", "AMLD6"]
+      },
+      {
+        "id": "MUST-003-AUDIT-LOGGING",
+        "name": "Audit Trail Requirement",
+        "description": "All critical operations must be logged to 02_audit_logging with WORM storage",
+        "category": "audit",
+        "frameworks": ["GDPR", "DORA", "MiCA", "AMLD6"]
+      },
+      {
+        "id": "MUST-004-IDENTITY-SCORE",
+        "name": "Identity Risk Scoring",
+        "description": "Identity scoring system must be operational for risk assessment",
+        "category": "identity",
+        "frameworks": ["MiCA", "AMLD6"]
+      },
+      {
+        "id": "MUST-005-HASH-ONLY",
+        "name": "Hash-Only Data Policy",
+        "description": "No PII storage - only SHA3-256 hashes with tenant-specific peppers",
+        "category": "privacy",
+        "frameworks": ["GDPR"]
+      },
+      {
+        "id": "MUST-006-NON-CUSTODIAL",
+        "name": "Non-Custodial Architecture",
+        "description": "System must maintain non-custodial architecture - users control keys",
+        "category": "architecture",
+        "frameworks": ["MiCA"]
+      },
+      {
+        "id": "MUST-007-WORM-STORAGE",
+        "name": "Immutable Evidence Storage",
+        "description": "Evidence must be stored in WORM (Write-Once-Read-Many) format",
+        "category": "audit",
+        "frameworks": ["GDPR", "DORA", "AMLD6"]
+      },
+      {
+        "id": "MUST-008-BLOCKCHAIN-ANCHOR",
+        "name": "Blockchain Anchoring",
+        "description": "Critical audit logs must be anchored to blockchain (Ethereum/Polygon)",
+        "category": "audit",
+        "frameworks": ["DORA", "MiCA"]
+      },
+      {
+        "id": "MUST-009-STRUCTURE-LOCK",
+        "name": "Structure Lock Enforcement",
+        "description": "24-Root structure must be enforced via CI gates (Exit Code 24)",
+        "category": "governance",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "MUST-010-DEPTH-LIMIT",
+        "name": "Maximum Depth Constraint",
+        "description": "Directory structure must not exceed max_depth=3",
+        "category": "governance",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "MUST-011-CIRCULAR-DEPS",
+        "name": "No Circular Dependencies",
+        "description": "Circular dependencies between modules are forbidden",
+        "category": "architecture",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "MUST-012-GDPR-ART5",
+        "name": "GDPR Article 5 Compliance",
+        "description": "Data processing principles (lawfulness, fairness, transparency)",
+        "category": "compliance",
+        "frameworks": ["GDPR"]
+      },
+      {
+        "id": "MUST-013-GDPR-ART25",
+        "name": "Privacy by Design",
+        "description": "Privacy by design and by default (GDPR Art. 25)",
+        "category": "privacy",
+        "frameworks": ["GDPR"]
+      },
+      {
+        "id": "MUST-014-GDPR-ART32",
+        "name": "Security of Processing",
+        "description": "Appropriate technical and organizational measures (GDPR Art. 32)",
+        "category": "security",
+        "frameworks": ["GDPR"]
+      },
+      {
+        "id": "MUST-015-DORA-ART6",
+        "name": "ICT Risk Management",
+        "description": "ICT risk management framework (DORA Art. 6)",
+        "category": "risk",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "MUST-016-DORA-ART9",
+        "name": "Protection and Prevention",
+        "description": "ICT systems protection and prevention measures (DORA Art. 9)",
+        "category": "security",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "MUST-017-DORA-ART10",
+        "name": "Detection and Monitoring",
+        "description": "Detection and monitoring capabilities (DORA Art. 10)",
+        "category": "monitoring",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "MUST-018-DORA-ART11",
+        "name": "Incident Response",
+        "description": "Incident response and recovery (DORA Art. 11)",
+        "category": "incident",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "MUST-019-MICA-ART57",
+        "name": "CASP Operational Requirements",
+        "description": "Crypto-Asset Service Provider operational requirements (MiCA Art. 57)",
+        "category": "operations",
+        "frameworks": ["MiCA"]
+      },
+      {
+        "id": "MUST-020-MICA-ART60",
+        "name": "Asset Protection",
+        "description": "Safeguarding of crypto-assets and funds (MiCA Art. 60)",
+        "category": "security",
+        "frameworks": ["MiCA"]
+      },
+      {
+        "id": "MUST-021-MICA-ART74",
+        "name": "Record Keeping",
+        "description": "Record-keeping requirements for transactions (MiCA Art. 74)",
+        "category": "audit",
+        "frameworks": ["MiCA"]
+      },
+      {
+        "id": "MUST-022-AMLD6-ART8",
+        "name": "Customer Due Diligence",
+        "description": "Customer Due Diligence (CDD) requirements (AMLD6 Art. 8)",
+        "category": "kyc",
+        "frameworks": ["AMLD6"]
+      },
+      {
+        "id": "MUST-023-AMLD6-ART18",
+        "name": "Enhanced Due Diligence",
+        "description": "Enhanced Due Diligence for high-risk scenarios (AMLD6 Art. 18)",
+        "category": "kyc",
+        "frameworks": ["AMLD6"]
+      },
+      {
+        "id": "MUST-024-AMLD6-ART30",
+        "name": "Suspicious Transaction Reporting",
+        "description": "Suspicious activity monitoring and reporting (AMLD6 Art. 30)",
+        "category": "aml",
+        "frameworks": ["AMLD6"]
+      },
+      {
+        "id": "MUST-025-AMLD6-ART40",
+        "name": "Record Retention",
+        "description": "5-year minimum retention for CDD and transaction records (AMLD6 Art. 40)",
+        "category": "retention",
+        "frameworks": ["AMLD6"]
+      },
+      {
+        "id": "MUST-026-TRAVEL-RULE",
+        "name": "Travel Rule Compliance",
+        "description": "IVMS101 Travel Rule compliance (€1000 threshold)",
+        "category": "aml",
+        "frameworks": ["AMLD6"]
+      },
+      {
+        "id": "MUST-027-MTLS-AUTH",
+        "name": "Mutual TLS Authentication",
+        "description": "mTLS authentication for all inter-module communication",
+        "category": "security",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "MUST-028-PII-PROHIBITION",
+        "name": "PII Storage Prohibition",
+        "description": "Static analysis enforcement preventing PII storage",
+        "category": "privacy",
+        "frameworks": ["GDPR"]
+      }
+    ],
+    "SHOULD": [
+      {
+        "id": "SHOULD-001-HEALTH-TEMPLATE",
+        "name": "Health Check Templates",
+        "description": "Standardized health check templates for all modules",
+        "category": "monitoring",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "SHOULD-002-CACHE-LAYER",
+        "name": "Performance Caching",
+        "description": "Caching layer for improved performance",
+        "category": "performance",
+        "frameworks": []
+      },
+      {
+        "id": "SHOULD-003-ADVANCED-METRICS",
+        "name": "Enhanced Monitoring Metrics",
+        "description": "Extended observability with custom business KPIs",
+        "category": "monitoring",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "SHOULD-004-RESILIENCE-TEST",
+        "name": "Resilience Testing",
+        "description": "Regular resilience and penetration testing (DORA Art. 21, 24)",
+        "category": "testing",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "SHOULD-005-MULTI-REGION",
+        "name": "Multi-Region Deployment",
+        "description": "Geographic redundancy and multi-region support",
+        "category": "resilience",
+        "frameworks": ["DORA"]
+      },
+      {
+        "id": "SHOULD-006-XAI-EXPLAINABILITY",
+        "name": "Explainable AI",
+        "description": "Enhanced explainability features for AI/ML models",
+        "category": "ai_governance",
+        "frameworks": ["EU AI Act"]
+      },
+      {
+        "id": "SHOULD-007-QUANTUM-SAFE",
+        "name": "Quantum-Safe Cryptography",
+        "description": "Post-quantum cryptographic algorithms preparation",
+        "category": "security",
+        "frameworks": ["DORA"]
+      }
+    ],
+    "HAVE": [
+      {
+        "id": "HAVE-001-EVIDENCE-COVERAGE",
+        "name": "Evidence Coverage Metrics",
+        "description": "Detailed coverage metrics for compliance evidence",
+        "category": "audit",
+        "frameworks": []
+      },
+      {
+        "id": "HAVE-002-AB-TESTING",
+        "name": "A/B Testing Framework",
+        "description": "Experimental feature testing and rollout framework",
+        "category": "experimentation",
+        "frameworks": []
+      },
+      {
+        "id": "HAVE-003-FEATURE-FLAGS",
+        "name": "Feature Flag System",
+        "description": "Dynamic feature toggling without deployment",
+        "category": "experimentation",
+        "frameworks": []
+      },
+      {
+        "id": "HAVE-004-ML-OPTIMIZATION",
+        "name": "ML-Based Optimizations",
+        "description": "Machine learning for predictive scaling and optimization",
+        "category": "ai_optimization",
+        "frameworks": []
+      },
+      {
+        "id": "HAVE-005-ANOMALY-DETECTION",
+        "name": "ML Anomaly Detection",
+        "description": "Advanced anomaly detection using machine learning",
+        "category": "ai_monitoring",
+        "frameworks": []
+      },
+      {
+        "id": "HAVE-006-FEDERATED-LEARNING",
+        "name": "Federated Learning Support",
+        "description": "Privacy-preserving federated learning capabilities",
+        "category": "ai_privacy",
+        "frameworks": ["GDPR"]
+      },
+      {
+        "id": "HAVE-007-ADVANCED-BIAS-CONTROL",
+        "name": "Advanced Bias Controls",
+        "description": "Enhanced bias detection and mitigation for AI models",
+        "category": "ai_fairness",
+        "frameworks": ["EU AI Act"]
+      },
+      {
+        "id": "HAVE-008-DRIFT-DETECTION",
+        "name": "Model Drift Detection",
+        "description": "Automated detection of ML model drift",
+        "category": "ai_monitoring",
+        "frameworks": []
+      },
+      {
+        "id": "HAVE-009-CUSTOM-DASHBOARDS",
+        "name": "Custom Analytics Dashboards",
+        "description": "Customizable business intelligence dashboards",
+        "category": "analytics",
+        "frameworks": []
+      },
+      {
+        "id": "HAVE-010-PREDICTIVE-SCALING",
+        "name": "Predictive Auto-Scaling",
+        "description": "ML-based predictive resource scaling",
+        "category": "infrastructure",
+        "frameworks": []
+      },
+      {
+        "id": "HAVE-011-MULTI-MODAL-AI",
+        "name": "Multi-Modal AI Processing",
+        "description": "Advanced multi-modal AI (text, image, audio, video)",
+        "category": "ai_advanced",
+        "frameworks": []
+      },
+      {
+        "id": "HAVE-012-IPFS-INTEGRATION",
+        "name": "IPFS Distributed Storage",
+        "description": "Integration with IPFS for distributed evidence storage",
+        "category": "storage",
+        "frameworks": []
+      }
+    ]
+  },
+  "statistics": {
+    "total": 47,
+    "MUST": 28,
+    "SHOULD": 7,
+    "HAVE": 12,
+    "by_category": {
+      "governance": 3,
+      "security": 7,
+      "audit": 5,
+      "identity": 1,
+      "privacy": 3,
+      "architecture": 2,
+      "monitoring": 4,
+      "risk": 1,
+      "incident": 1,
+      "operations": 1,
+      "kyc": 2,
+      "aml": 2,
+      "retention": 1,
+      "performance": 1,
+      "testing": 1,
+      "resilience": 1,
+      "ai_governance": 1,
+      "experimentation": 2,
+      "ai_optimization": 1,
+      "ai_monitoring": 2,
+      "ai_privacy": 1,
+      "ai_fairness": 1,
+      "analytics": 1,
+      "infrastructure": 1,
+      "ai_advanced": 1,
+      "storage": 1
+    },
+    "by_framework": {
+      "GDPR": 7,
+      "DORA": 11,
+      "MiCA": 7,
+      "AMLD6": 7,
+      "EU AI Act": 2,
+      "None": 13
+    }
+  }
+}

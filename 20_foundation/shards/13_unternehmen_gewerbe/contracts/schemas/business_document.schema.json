@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.example/schemas/business_document.json",
+  "title": "Firmendaten Document",
+  "description": "Schema for business documents in SSID system",
+  "type": "object",
+  "required": ["id", "data_hash"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique document identifier"
+    },
+    "data_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of document content"
+    },
+    "metadata_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of metadata"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Document creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Document version number"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "minLength": 64,
+      "maxLength": 64,
+      "description": "SHA3-256 hash (64 hex characters)"
+    }
+  },
+  "examples": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "data_hash": "b6af815a611431e73898030fcaf34aed8fee363c9782089402b8d16b918d702f",
+      "metadata_hash": "bc293dc694c1a0bd4e4d6b61b88b4158135758a09bbbe32cf9b6aa348b17bd1e",
+      "created_at": "2025-10-05T15:29:16.202995Z",
+      "updated_at": "2025-10-05T15:29:16.202995Z",
+      "version": 1
+    }
+  ]
+}

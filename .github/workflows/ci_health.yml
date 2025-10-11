@@ -1,0 +1,195 @@
+name: SSID Health Template & Adoption Guard
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - '12_tooling/health/**'
+      - '*/shards/*/health.py'
+      - '11_test_simulation/tests_health/**'
+      - '.github/workflows/ci_health.yml'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - '12_tooling/health/**'
+      - '*/shards/*/health.py'
+      - '11_test_simulation/tests_health/**'
+      - '.github/workflows/ci_health.yml'
+
+jobs:
+  health-guard-and-tests:
+    name: Health Check Adoption & Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pytest
+
+      - name: Run Adoption Guard (Enforce Template Usage)
+        id: adoption_guard
+        run: |
+          echo "=== Running Health Check Adoption Guard ==="
+          python 12_tooling/health/adoption_guard.py --json > adoption_guard_report.json
+          cat adoption_guard_report.json
+
+          # Parse results
+          FILES_SCANNED=$(python -c "import json; print(json.load(open('adoption_guard_report.json'))['files_scanned'])")
+          VIOLATIONS=$(python -c "import json; print(len(json.load(open('adoption_guard_report.json'))['violations']))")
+
+          echo "files_scanned=$FILES_SCANNED" >> $GITHUB_OUTPUT
+          echo "violations=$VIOLATIONS" >> $GITHUB_OUTPUT
+
+          if [ "$VIOLATIONS" -gt 0 ]; then
+            echo "❌ ADOPTION GUARD FAILED: $VIOLATIONS violations found"
+            python 12_tooling/health/adoption_guard.py  # Run again for human-readable output
+            exit 1
+          else
+            echo "✅ ADOPTION GUARD PASSED: All health files compliant"
+            exit 0
+          fi
+
+      - name: Run Health Template Tests
+        run: |
+          export PYTHONPATH="${PYTHONPATH}:${GITHUB_WORKSPACE}"
+          pytest 11_test_simulation/tests_health/ \
+            --verbose \
+            --tb=short \
+            --maxfail=3
+
+      - name: Generate CI Guard Evidence Log
+        if: always()
+        run: |
+          mkdir -p 24_meta_orchestration/registry/logs
+
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          LOG_FILE="24_meta_orchestration/registry/logs/ci_guard_${TIMESTAMP//:/-}.log"
+
+          cat > "$LOG_FILE" <<EOF
+          run_ts=$TIMESTAMP
+          workflow=ci_health
+          job=${{ github.job }}
+          status=${{ job.status }}
+          commit=${{ github.sha }}
+          branch=${{ github.ref_name }}
+          files_scanned=${{ steps.adoption_guard.outputs.files_scanned }}
+          violations=${{ steps.adoption_guard.outputs.violations }}
+          tests_passed=${{ job.status == 'success' }}
+          EOF
+
+          echo "Evidence log created: $LOG_FILE"
+          cat "$LOG_FILE"
+
+      - name: Upload Adoption Guard Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adoption-guard-report
+          path: adoption_guard_report.json
+          retention-days: 90
+
+      - name: Upload CI Guard Evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-guard-evidence
+          path: 24_meta_orchestration/registry/logs/ci_guard_*.log
+          retention-days: 90
+
+  health-integration-test:
+    name: Integration Test (Real Health Check)
+    runs-on: ubuntu-latest
+    needs: health-guard-and-tests
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Create Mock Evidence Structure
+        run: |
+          # Create minimal structure for health checks to validate against
+          mkdir -p 24_meta_orchestration/registry/locks
+          mkdir -p 24_meta_orchestration/registry/logs
+          mkdir -p 23_compliance/evidence/coverage
+
+          # Registry lock
+          cat > 24_meta_orchestration/registry/locks/registry_lock.yaml <<EOF
+          owner: ci-health-test
+          timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)
+          locked: true
+          EOF
+
+          # Coverage XML
+          cat > 23_compliance/evidence/coverage/coverage.xml <<EOF
+          <?xml version="1.0"?>
+          <coverage version="7.0.0" timestamp="$(date +%s)" lines-valid="1000" lines-covered="850" line-rate="0.85">
+          </coverage>
+          EOF
+
+          # Recent CI log
+          echo "status=success" > 24_meta_orchestration/registry/logs/ci_guard_integration_test.log
+          echo "run_ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> 24_meta_orchestration/registry/logs/ci_guard_integration_test.log
+
+      - name: Run Template Health Check
+        run: |
+          export PYTHONPATH="${PYTHONPATH}:${GITHUB_WORKSPACE}"
+
+          echo "=== Running template_health.status() ==="
+          python 12_tooling/health/template_health.py
+
+          # Capture exit code
+          EXIT_CODE=$?
+
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "✅ Health check PASSED (status: ready)"
+          else
+            echo "⚠️ Health check returned degraded status (exit code: $EXIT_CODE)"
+            echo "This may be expected if evidence files are missing or stale."
+          fi
+
+  summary:
+    name: CI Summary
+    runs-on: ubuntu-latest
+    needs: [health-guard-and-tests, health-integration-test]
+    if: always()
+
+    steps:
+      - name: Check Job Status
+        run: |
+          echo "## Health Check CI Summary"
+          echo "Adoption Guard & Tests: ${{ needs.health-guard-and-tests.result }}"
+          echo "Integration Test: ${{ needs.health-integration-test.result }}"
+
+          if [ "${{ needs.health-guard-and-tests.result }}" == "success" ] && \
+             [ "${{ needs.health-integration-test.result }}" == "success" ]; then
+            echo "✅ All health check CI jobs passed!"
+            exit 0
+          else
+            echo "❌ Some health check CI jobs failed"
+            exit 1
+          fi

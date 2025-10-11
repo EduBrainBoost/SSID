@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.example/schemas/insurance_document.json",
+  "title": "Policen, Claims Document",
+  "description": "Schema for insurance documents in SSID system",
+  "type": "object",
+  "required": ["id", "data_hash"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique document identifier"
+    },
+    "data_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of document content"
+    },
+    "metadata_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of metadata"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Document creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Document version number"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "minLength": 64,
+      "maxLength": 64,
+      "description": "SHA3-256 hash (64 hex characters)"
+    }
+  },
+  "examples": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "data_hash": "f51f2842c4a044919415a462151ade84927cb69924062f63ab971aaeb04be29e",
+      "metadata_hash": "ad93004cceba2a5cfb52ba3a4025e38430280a5df5564dd24f503769ec0f3a56",
+      "created_at": "2025-10-05T15:29:16.202995Z",
+      "updated_at": "2025-10-05T15:29:16.202995Z",
+      "version": 1
+    }
+  ]
+}

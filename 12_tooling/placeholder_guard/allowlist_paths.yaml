@@ -1,0 +1,11 @@
+# Paths or file patterns allowed to contain reserved keywords (rare cases).
+allowed:
+  - "*/__init__.py"   # 'pass' can be acceptable in empty package initializers
+  - "05_documentation/docs/*"  # docs may quote 'TODO' verbatim when documenting history
+  - "scripts/*.py"   # Tool scripts may contain TODO comments for future enhancements
+  - "12_tooling/placeholder_guard/*"  # The scanner itself
+  - "*/evidence/sprint2/*.md"  # Sprint documentation may reference TODOs
+  - "ANTI_GAMING_DEPLOYMENT_COMPLETE.md"  # Deployment docs
+  - "*/roadmap/*.md"  # Roadmap files track future work
+  - "except *:"  # Allow pass in except blocks
+  - "finally:"  # Allow pass in finally blocks

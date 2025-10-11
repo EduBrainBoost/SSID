@@ -1,0 +1,46 @@
+# Policy: Evidence & Audit
+version: 1.0.0
+policy_id: "evidence_audit_02_02"
+
+strategy: "hash_ledger_with_anchoring"
+
+evidence_collection:
+  events:
+    - "data_received"
+    - "data_processed"
+    - "model_inference"
+    - "evidence_created"
+    - "hash_generated"
+  granularity: "per_operation"
+  storage: "WORM"
+
+hash_ledger:
+  algorithm: "SHA3-256"
+  chain_validation: true
+  immutability: "enforced"
+
+anchoring:
+  chains:
+    - network: "ethereum:sepolia"
+      frequency: "hourly"
+      batch_size: 1000
+    - network: "polygon:amoy"
+      frequency: "hourly"
+      batch_size: 1000
+  retry_policy:
+    max_retries: 3
+    backoff: "exponential"
+  verification: "automatic"
+
+retention:
+  evidence_days: 3650
+  audit_logs_days: 3650
+  anchors_permanent: true
+
+compliance_reporting:
+  formats:
+    - "JSON"
+    - "PDF"
+  frequency: "on_demand"
+  automated: true
+  encryption: "AES-256-GCM"

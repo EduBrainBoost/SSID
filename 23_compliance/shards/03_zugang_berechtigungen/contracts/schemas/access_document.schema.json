@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.example/schemas/access_document.json",
+  "title": "Rollen, Rechte Document",
+  "description": "Schema for access documents in SSID system",
+  "type": "object",
+  "required": ["id", "data_hash"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique document identifier"
+    },
+    "data_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of document content"
+    },
+    "metadata_hash": {
+      "$ref": "#/$defs/Hash",
+      "description": "SHA3-256 hash of metadata"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Document creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Document version number"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "minLength": 64,
+      "maxLength": 64,
+      "description": "SHA3-256 hash (64 hex characters)"
+    }
+  },
+  "examples": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "data_hash": "63840bc9b02da58bcca7a9dba08458ecef0e45102a6d73e3ecd33a51945a23c5",
+      "metadata_hash": "8f152f64dfbd8809f38fc3f8871499de0f561ce623a3af4a1fdd87c0aacfeec5",
+      "created_at": "2025-10-05T15:29:16.202995Z",
+      "updated_at": "2025-10-05T15:29:16.202995Z",
+      "version": 1
+    }
+  ]
+}

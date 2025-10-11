@@ -1,0 +1,56 @@
+{
+  "evidence_type": "health_check_report",
+  "template_version": "4.2.0",
+  "run_ts": "2025-10-09T12:00:00Z",
+  "generated_by": "template_health.status()",
+
+  "readiness": {
+    "status": null,
+    "checks": [
+      {
+        "check": "registry_lock_exists",
+        "path": "24_meta_orchestration/registry/locks/registry_lock.yaml",
+        "ok": null
+      },
+      {
+        "check": "coverage_xml_exists",
+        "path": "23_compliance/evidence/coverage/coverage.xml",
+        "ok": null
+      },
+      {
+        "check": "ci_log_recent",
+        "glob": "24_meta_orchestration/registry/logs/ci_guard_*.log",
+        "latest": null,
+        "ok": null
+      }
+    ]
+  },
+
+  "liveness": {
+    "status": null,
+    "checks": [
+      {
+        "check": "recent_ci_activity",
+        "glob": "24_meta_orchestration/registry/logs/ci_guard_*.log",
+        "latest": null,
+        "ok": null
+      }
+    ]
+  },
+
+  "aggregate_status": null,
+
+  "notes": "Populate via: python 12_tooling/health/template_health.py at CI runtime",
+
+  "compliance": {
+    "requirement": "SHOULD-004-HEALTH-CHECKS",
+    "frameworks": ["DORA", "MiCA"],
+    "score_impact": "+10-15 points"
+  },
+
+  "metadata": {
+    "schema_version": "1.0.0",
+    "evidence_format": "JSON",
+    "retention_days": 90
+  }
+}

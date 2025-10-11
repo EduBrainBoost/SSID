@@ -1,0 +1,46 @@
+{
+  "poc_flow_id": "poc_1760047702",
+  "timestamp": "2025-10-09T22:08:22.733934+00:00",
+  "compliance_requirement": "MUST-006-NON-CUSTODIAL",
+  "flow_validation": {
+    "identity_registration": "success",
+    "challenge_response": "success",
+    "signature_verification": "failed"
+  },
+  "non_custodial_guarantees": {
+    "private_key_in_system_storage": false,
+    "private_key_transmitted_over_network": false,
+    "private_key_in_system_memory": false,
+    "user_maintains_full_key_control": true
+  },
+  "cryptographic_proof": {
+    "identity_hash": "4d80bf4e1fcb8fd64b27379eb2d0b93cfdb68b85e5352597cd779425e5ab6a7d",
+    "challenge_hash": "3fa4a8366228b6be1b38fd71a3d3f2e8f42c8c298773c7936fd4ec9d41650a4f",
+    "signature_hash": "47aecd9c4dedf3859ba745668e980e1a5301f5cd41710b7a9c84676ac7698672",
+    "verification_result": false
+  },
+  "audit_trail": [
+    {
+      "event": "identity_registered",
+      "identity_hash": "4d80bf4e1fcb8fd64b27379eb2d0b93cfdb68b85e5352597cd779425e5ab6a7d",
+      "commitment": "ef3ae1463155989bec5042db73db9365a0cda4f37b37a3a5442005a63254f45a",
+      "tx_hash": "0xd46286781adbe3de099678e815e547a7c546368d",
+      "timestamp": "2025-10-09T22:08:22.733934+00:00"
+    },
+    {
+      "event": "signature_verified",
+      "identity_hash": "4d80bf4e1fcb8fd64b27379eb2d0b93cfdb68b85e5352597cd779425e5ab6a7d",
+      "message_hash": "3fa4a8366228b6be1b38fd71a3d3f2e8f42c8c298773c7936fd4ec9d41650a4f",
+      "signature_hash": "47aecd9c4dedf3859ba745668e980e1a5301f5cd41710b7a9c84676ac7698672",
+      "result": false,
+      "timestamp": "2025-10-09T22:08:22.733934+00:00"
+    }
+  ],
+  "architecture_validation": {
+    "user_device_code": "UserDevice class (client-side only)",
+    "ssid_system_code": "SSIDSystem class (hash-only storage)",
+    "separation_verified": true,
+    "private_key_access_forbidden": true
+  },
+  "evidence_hash": "c5f5bd657d54dfbff039e2ffc988bc5c12c51a4c1f3f6731b848fe60979b0e3e"
+}

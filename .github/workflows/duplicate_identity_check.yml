@@ -1,0 +1,29 @@
+name: SSID Duplicate Identity Check
+on: [push, pull_request]
+
+jobs:
+  duplicate-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Duplicate Identity Detector
+        run: |
+          python 12_tooling/duplicate_checks/detect_duplicate_identity_hashes.py \
+            --identity-dir 08_identity_score/identity_score \
+            --audit-dir 02_audit_logging/audit_logging \
+            --fail-on-findings
+
+      - name: Upload Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duplicate_identity_hashes_reports
+          path: |
+            23_compliance/reports/detect_duplicate_identity_hashes_report.md
+            24_meta_orchestration/registry/logs/detect_duplicate_identity_hashes_last.json

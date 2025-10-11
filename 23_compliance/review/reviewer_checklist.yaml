@@ -1,0 +1,383 @@
+meta:
+  version: "2025-Q4"
+  type: "reviewer_checklist"
+  maintainer: "edubrainboost"
+  last_updated: "2025-10-07T12:00:00Z"
+  classification: "INTERNAL - Compliance Checklist"
+  purpose: "Detailed compliance review checklist with evidence tracking"
+
+checklist:
+  gdpr:
+    framework: "GDPR"
+    regulatory_basis: "EU 2016/679"
+    items:
+      - article: 5
+        topic: "Grundsätze der Verarbeitung - Datenminimierung & Zweckbindung"
+        evidence_path: "23_compliance/mappings/gdpr_mapping.yaml"
+        test_reference: "test_gdpr_art5_compliance.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 6
+        topic: "Rechtmäßigkeit der Verarbeitung"
+        evidence_path: "23_compliance/evidence/gdpr/art6_legal_basis.json"
+        test_reference: "test_lawful_basis.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 13
+        topic: "Informationspflichten bei Datenerhebung"
+        evidence_path: "13_ui_layer/"
+        test_reference: "test_transparency.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 17
+        topic: "Recht auf Löschung (Recht auf Vergessenwerden)"
+        evidence_path: "09_meta_identity/"
+        test_reference: "test_data_subject_rights.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 25
+        topic: "Datenschutz durch Technikgestaltung (Privacy by Design)"
+        evidence_path: "23_compliance/evidence/gdpr/art25_privacy_design.json"
+        test_reference: "test_privacy_by_design.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 30
+        topic: "Verzeichnis von Verarbeitungstätigkeiten"
+        evidence_path: "23_compliance/evidence/gdpr/art30_records.json"
+        test_reference: "test_processing_records.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 32
+        topic: "Sicherheit der Verarbeitung"
+        evidence_path: "21_post_quantum_crypto/"
+        test_reference: "test_security_controls.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+  dora:
+    framework: "DORA"
+    regulatory_basis: "EU 2022/2554"
+    items:
+      - article: 6
+        topic: "ICT-Risikomanagementrahmen"
+        evidence_path: "23_compliance/evidence/dora/art6_ict_risk.json"
+        test_reference: "test_ict_risk_framework.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 8
+        topic: "Identifizierung kritischer Funktionen"
+        evidence_path: "17_observability/"
+        test_reference: "test_asset_identification.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 9
+        topic: "Schutz und Prävention"
+        evidence_path: "23_compliance/evidence/dora/art9_protection.json"
+        test_reference: "test_protection_prevention.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 11
+        topic: "Reaktion und Wiederherstellung"
+        evidence_path: "04_deployment/"
+        test_reference: "test_incident_response.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 13
+        topic: "Backup- und Recovery-Prozesse"
+        evidence_path: "15_infra/"
+        test_reference: "test_continuous_improvement.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 17
+        topic: "Überwachung der ICT-Drittparteienrisiken"
+        evidence_path: "23_compliance/evidence/dora/art17_third_party.json"
+        test_reference: "test_third_party_risk.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 21
+        topic: "Allgemeine Grundsätze für Resilienz-Testing"
+        evidence_path: "11_test_simulation/"
+        test_reference: "test_resilience_testing.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+  mica:
+    framework: "MiCA"
+    regulatory_basis: "EU 2023/1114"
+    items:
+      - article: 3
+        topic: "Token-Klassifizierung (Utility Token)"
+        evidence_path: "23_compliance/evidence/mica/art3_classification.json"
+        test_reference: "test_token_classification.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 60
+        topic: "Schutz von Vermögenswerten (Non-Custodial)"
+        evidence_path: "20_foundation/"
+        test_reference: "test_asset_protection.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 67
+        topic: "Transparenz und Auftragsabwicklung"
+        evidence_path: "13_ui_layer/"
+        test_reference: "test_transparency.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 74
+        topic: "Aufzeichnungs- und Aufbewahrungspflichten"
+        evidence_path: "02_audit_logging/storage/worm/"
+        test_reference: "test_record_keeping.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 76
+        topic: "Transparenzpflichten Whitepaper"
+        evidence_path: "20_foundation/"
+        test_reference: "test_disclosure_requirements.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+  amld6:
+    framework: "AMLD6"
+    regulatory_basis: "EU 6th AMLD + AMLR"
+    items:
+      - article: 2
+        topic: "Geltungsbereich - Verpflichtete Personen"
+        evidence_path: "23_compliance/evidence/amld6/art2_scope.json"
+        test_reference: "test_obliged_entities.py"
+        verification_method: "manual"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 8
+        topic: "Sorgfaltspflichten gegenüber Kunden (CDD)"
+        evidence_path: "14_zero_time_auth/"
+        test_reference: "test_customer_due_diligence.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 10
+        topic: "KYC-Prüfungen implementiert"
+        evidence_path: "08_identity_score/"
+        test_reference: "test_kyc_procedures.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 18
+        topic: "Verstärkte Sorgfaltspflichten (EDD)"
+        evidence_path: "23_compliance/evidence/amld6/art18_edd.json"
+        test_reference: "test_enhanced_due_diligence.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 30
+        topic: "Meldung verdächtiger Transaktionen (STR)"
+        evidence_path: "02_audit_logging/"
+        test_reference: "test_suspicious_transaction_reporting.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - article: 40
+        topic: "Aufbewahrung von Unterlagen (5 Jahre)"
+        evidence_path: "02_audit_logging/storage/worm/"
+        test_reference: "test_record_retention.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - amlr_article: 22
+        topic: "Travel Rule - Informationen bei Krypto-Transfers"
+        evidence_path: "23_compliance/evidence/amld6/amlr_art22_travel_rule.json"
+        test_reference: "test_travel_rule.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+  technical_infrastructure:
+    category: "Technical Compliance"
+    items:
+      - id: "TECH-001"
+        topic: "Root-24-LOCK enforcement"
+        evidence_path: "24_meta_orchestration/registry/locks/registry_lock.yaml"
+        test_reference: "test_structure_integrity.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - id: "TECH-002"
+        topic: "Health-Checks operational"
+        evidence_path: "24_meta_orchestration/registry/locks/service_health_registry.yaml"
+        test_reference: "test_readiness_health.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - id: "TECH-003"
+        topic: "WORM-Logs vollständig & unveränderlich"
+        evidence_path: "02_audit_logging/storage/worm/"
+        test_reference: "test_worm_integrity.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - id: "TECH-004"
+        topic: "Anti-Gaming Suite: alle Checks PASS"
+        evidence_path: "23_compliance/policies/anti_gaming_policy.yaml"
+        test_reference: "test_anti_gaming_suite.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+      - id: "TECH-005"
+        topic: "Hash-only PII storage (keine Plaintext-Speicherung)"
+        evidence_path: "08_identity_score/"
+        test_reference: "test_hash_only_storage.py"
+        verification_method: "automated"
+        status: "pending"
+        reviewer_assigned: ""
+        review_notes: ""
+        last_reviewed: ""
+
+review_progress:
+  initialized_by: "registry_automation"
+  review_cycle: "2025-Q4"
+  start_date: "2025-11-01"
+  target_completion: "2025-12-15"
+  updated: "2025-10-07T12:00:00Z"
+
+  summary:
+    total_items: 30
+    pending: 30
+    in_progress: 0
+    completed: 0
+    failed: 0
+    completion_percent: 0
+
+  by_framework:
+    gdpr:
+      total: 7
+      pending: 7
+      completed: 0
+    dora:
+      total: 7
+      pending: 7
+      completed: 0
+    mica:
+      total: 5
+      pending: 5
+      completed: 0
+    amld6:
+      total: 7
+      pending: 7
+      completed: 0
+    technical:
+      total: 5
+      pending: 5
+      completed: 0
+
+status_definitions:
+  pending: "Not yet reviewed"
+  in_progress: "Currently under review"
+  completed: "Review completed, evidence verified"
+  failed: "Control not implemented or evidence insufficient"
+  not_applicable: "Control not applicable to current system state"
+
+checksum: "sha256:TO_BE_FILLED_BY_CI"

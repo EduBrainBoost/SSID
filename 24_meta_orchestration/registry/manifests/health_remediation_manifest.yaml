@@ -1,0 +1,236 @@
+# Health Check Remediation Manifest (v4.2)
+# Bundle: health_check_remediation_v4_2
+# Created: 2025-10-09T12:00:00Z
+# Purpose: Template-based health check migration for 388 shard health files
+
+manifest:
+  bundle_id: "health_check_remediation_v4_2"
+  bundle_name: "Health Check Remediation Bundle"
+  version: "4.2.0"
+  status: "production-ready"
+  created: "2025-10-09"
+  last_updated: "2025-10-09"
+  maintainer: "SSID Tooling Team"
+  contact: "tooling@ssid.org"
+
+description: >
+  Complete health check remediation bundle that replaces 388 hardcoded "up"
+  health files with a centralized template-based system. Includes adoption
+  guard enforcement, comprehensive tests, CI integration, and evidence logging.
+
+compliance:
+  requirement_id: "SHOULD-004-HEALTH-CHECKS"
+  requirement_tier: "SHOULD"
+  frameworks:
+    - "DORA - Operational Resilience (health monitoring)"
+    - "MiCA - System availability requirements"
+  score_impact: "+10-15 points"
+  baseline_score: 35-40
+  target_score: 45-55
+
+components:
+  core:
+    - name: "template_health"
+      path: "12_tooling/health/template_health.py"
+      description: "Central health check template with readiness/liveness logic"
+      functions:
+        - readiness()
+        - liveness()
+        - status()
+
+    - name: "health_config"
+      path: "12_tooling/health/health_config.yaml"
+      description: "Configuration for health check thresholds and paths"
+
+    - name: "adoption_guard"
+      path: "12_tooling/health/adoption_guard.py"
+      description: "CI enforcement tool to prevent hardcoded 'up' status"
+
+    - name: "shard_adapter_snippet"
+      path: "12_tooling/health/SHARD_HEALTH_ADAPTER_SNIPPET.py"
+      description: "Drop-in adapter code for all shard health.py files"
+
+  tests:
+    - name: "test_template_health"
+      path: "11_test_simulation/tests_health/test_template_health.py"
+      test_count: 10
+      coverage_areas:
+        - "readiness checks (all pass/fail scenarios)"
+        - "liveness checks (recent/stale activity)"
+        - "aggregate status"
+        - "configuration handling"
+
+    - name: "test_adoption_guard"
+      path: "11_test_simulation/tests_health/test_adoption_guard.py"
+      test_count: 11
+      coverage_areas:
+        - "missing template import detection"
+        - "hardcoded 'up' status detection"
+        - "compliant file acceptance"
+        - "multiple shard scanning"
+
+    - name: "pytest_config"
+      path: "11_test_simulation/pytest.ini"
+      description: "Updated pytest configuration including tests_health"
+
+  ci_cd:
+    - name: "ci_health_workflow"
+      path: ".github/workflows/ci_health.yml"
+      jobs:
+        - "health-guard-and-tests"
+        - "health-integration-test"
+        - "summary"
+      triggers:
+        - "push to main/develop"
+        - "pull_request to main/develop"
+      enforcement:
+        - "Adoption guard must pass (no violations)"
+        - "All tests must pass"
+        - "Evidence logs generated"
+
+evidence:
+  templates:
+    - path: "23_compliance/evidence/health/health_report_TEMPLATE.json"
+      description: "Template for health check evidence reports"
+
+  ci_logs:
+    - path: "24_meta_orchestration/registry/logs/ci_guard_*.log"
+      description: "CI-generated evidence logs with timestamps and status"
+      retention: "90 days"
+
+  artifacts:
+    - "adoption-guard-report (JSON)"
+    - "ci-guard-evidence (log files)"
+
+migration:
+  target_files: 388
+  pattern: "*/shards/*/health.py"
+
+  steps:
+    - step: 1
+      action: "Deploy core template and configuration"
+      paths:
+        - "12_tooling/health/template_health.py"
+        - "12_tooling/health/health_config.yaml"
+
+    - step: 2
+      action: "Activate CI workflow with adoption guard"
+      path: ".github/workflows/ci_health.yml"
+
+    - step: 3
+      action: "Replace shard health files with adapter"
+      source: "12_tooling/health/SHARD_HEALTH_ADAPTER_SNIPPET.py"
+      targets: "All */shards/*/health.py files"
+      method: "Copy adapter content to each file"
+
+    - step: 4
+      action: "Validate compliance"
+      validation:
+        - "Run adoption guard: python 12_tooling/health/adoption_guard.py"
+        - "Run tests: pytest 11_test_simulation/tests_health/"
+        - "Check CI: All jobs must pass"
+
+  timeline:
+    phase_1_deploy: "0.5 days"
+    phase_2_ci_activation: "0.1 days"
+    phase_3_shard_migration: "1-2 days (parallel)"
+    phase_4_validation: "0.2 days"
+    total: "2-3 days"
+
+quality_gates:
+  - gate: "adoption_guard_pass"
+    description: "No hardcoded 'up' status, all files reference template"
+    enforced_by: ".github/workflows/ci_health.yml"
+
+  - gate: "tests_pass"
+    description: "All 21+ health tests pass"
+    enforced_by: "pytest 11_test_simulation/tests_health/"
+
+  - gate: "evidence_generation"
+    description: "CI logs generated with timestamps and status"
+    location: "24_meta_orchestration/registry/logs/"
+
+safety:
+  safe_fix_compliant: true
+  read_only_checks: true
+  no_registry_writes: true
+  no_evidence_modification: true
+
+  notes: >
+    All health checks are READ-ONLY. Template reads configuration and evidence
+    files but never writes. Adoption guard is purely scanning/validation.
+
+integration:
+  used_by:
+    - "24_meta_orchestration/orchestrator (system health monitoring)"
+    - "17_observability/metrics (health metrics collection)"
+    - "12_tooling/deployment (pre-deployment health checks)"
+
+  dependencies:
+    - "PyYAML (for config loading)"
+    - "Python 3.11+ (for importlib.util)"
+
+  api_stable: true
+  backward_compatible: true
+
+documentation:
+  migration_guide: "05_documentation/docs/health_check_migration_guide.md"
+  quickstart: "12_tooling/health/README.md"
+  template_api: "12_tooling/health/template_health.py (docstrings)"
+
+deployment:
+  status: "ready_for_deployment"
+  prerequisites:
+    - status: "complete"
+      item: "Core template implemented"
+    - status: "complete"
+      item: "Adoption guard implemented"
+    - status: "complete"
+      item: "Tests written (21 functions)"
+    - status: "complete"
+      item: "CI workflow configured"
+    - status: "complete"
+      item: "Evidence templates created"
+
+  next_steps:
+    - "Test locally: pytest 11_test_simulation/tests_health/ -v"
+    - "Run adoption guard: python 12_tooling/health/adoption_guard.py"
+    - "Create feature branch: feature/health-check-remediation-v4.2"
+    - "Migrate first 10 shards as pilot"
+    - "Validate pilot with adoption guard"
+    - "Roll out to remaining shards (parallel)"
+    - "Merge to develop after CI validation"
+
+metadata:
+  schema_version: "2.1.0"
+  manifest_format: "YAML"
+  generated_by: "SSID Meta-Orchestration Registry"
+  last_validated: "2025-10-09"
+
+  tags:
+    - "health-checks"
+    - "template-based"
+    - "adoption-guard"
+    - "should-requirement"
+    - "production-ready"
+    - "dora-compliance"
+
+  links:
+    documentation: "05_documentation/docs/health_check_migration_guide.md"
+    template: "12_tooling/health/template_health.py"
+    adapter: "12_tooling/health/SHARD_HEALTH_ADAPTER_SNIPPET.py"
+    tests: "11_test_simulation/tests_health/"
+    ci_workflow: ".github/workflows/ci_health.yml"
+    requirement_spec: "23_compliance/sot_index.json#SHOULD-004-HEALTH-CHECKS"
+
+changelog:
+  - version: "4.2.0"
+    date: "2025-10-09"
+    changes:
+      - "Initial production release"
+      - "Template-based health checks (readiness + liveness)"
+      - "Adoption guard CI enforcement"
+      - "21 comprehensive test functions"
+      - "Shard adapter snippet for 388 files"
+      - "Evidence logging and manifest"
+    author: "SSID Tooling Team"

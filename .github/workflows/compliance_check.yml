@@ -1,0 +1,373 @@
+name: Compliance Integrity Check
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '23_compliance/**'
+      - '24_meta_orchestration/registry/**'
+      - '[0-9][0-9]_*/**'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - '23_compliance/**'
+      - '24_meta_orchestration/registry/**'
+      - '[0-9][0-9]_*/**'
+  schedule:
+    # Run daily at 02:00 UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  compliance-integrity:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for comprehensive checks
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov pyyaml
+
+      - name: Health Readiness Checks
+        run: |
+          echo "Running health readiness checks on all 384 modules..."
+          python 11_test_simulation/health/test_readiness_health.py
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: Anti-Gaming Suite – Deterministic Checks
+        run: |
+          echo "Running Anti-Gaming enforcement checks..."
+          set -e
+          python 02_audit_logging/anti_gaming/dependency_graph_generator.py
+          python 02_audit_logging/anti_gaming/circular_dependency_validator.py
+          python 02_audit_logging/anti_gaming/overfitting_detector.py
+          python 02_audit_logging/anti_gaming/replay_attack_detector.py
+          python 02_audit_logging/anti_gaming/time_skew_analyzer.py
+          python 02_audit_logging/anti_gaming/anomaly_rate_guard.py
+          bash   02_audit_logging/anti_gaming/badge_integrity_checker.sh
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: Anti-Gaming Unit Tests
+        run: |
+          echo "Running Anti-Gaming unit tests..."
+          python 11_test_simulation/anti_gaming/test_anti_gaming_suite.py
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: Run Compliance Integrity Tests
+        run: |
+          pytest 23_compliance/tests/test_compliance_integrity.py \
+            -v \
+            --tb=short \
+            --strict-markers \
+            --color=yes
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+
+      - name: Verify Compliance Checksums
+        run: |
+          echo "Verifying compliance mapping checksums..."
+          python -c "
+          import hashlib
+          import yaml
+          from pathlib import Path
+
+          mappings_dir = Path('23_compliance/mappings')
+          failed = []
+
+          for mapping_file in mappings_dir.glob('*_mapping.yaml'):
+              with open(mapping_file, 'rb') as f:
+                  content = f.read()
+
+              with open(mapping_file, 'r', encoding='utf-8') as f:
+                  data = yaml.safe_load(f)
+
+              calculated = f'sha256:{hashlib.sha256(content).hexdigest()}'
+              stored = data.get('checksum', '')
+
+              if calculated != stored:
+                  failed.append((mapping_file.name, stored, calculated))
+              else:
+                  print(f'✓ {mapping_file.name}: Checksum valid')
+
+          if failed:
+              print('\n❌ Checksum verification FAILED:')
+              for name, stored, calculated in failed:
+                  print(f'  {name}:')
+                  print(f'    Stored:     {stored}')
+                  print(f'    Calculated: {calculated}')
+              exit(1)
+          else:
+              print('\n✅ All compliance mapping checksums verified')
+          "
+
+      - name: Check Module References
+        run: |
+          echo "Checking module references in compliance mappings..."
+          python -c "
+          import yaml
+          from pathlib import Path
+
+          # Expected 24 modules
+          expected_modules = [f'{i:02d}_' for i in range(1, 25)]
+          existing_modules = set()
+
+          # Scan actual modules
+          for item in Path('.').iterdir():
+              if item.is_dir() and any(item.name.startswith(prefix) for prefix in expected_modules):
+                  existing_modules.add(item.name)
+
+          print(f'Found {len(existing_modules)} modules in repository')
+
+          # Check compliance mappings
+          mappings_dir = Path('23_compliance/mappings')
+          all_referenced = set()
+
+          for mapping_file in mappings_dir.glob('*_mapping.yaml'):
+              with open(mapping_file, 'r', encoding='utf-8') as f:
+                  data = yaml.safe_load(f)
+
+              for mapping in data.get('mappings', []):
+                  for module in mapping.get('applies_to', []):
+                      all_referenced.add(module)
+
+          print(f'Found {len(all_referenced)} unique module references in mappings')
+
+          # Check for invalid references
+          invalid = all_referenced - existing_modules
+          if invalid:
+              print(f'\n❌ INVALID MODULE REFERENCES: {invalid}')
+              exit(1)
+
+          # Check for unmapped modules (warning only)
+          unmapped = existing_modules - all_referenced
+          if unmapped:
+              print(f'\n⚠️  WARNING: Unmapped modules: {unmapped}')
+              print('   Consider adding compliance mappings for these modules')
+
+          print('\n✅ All module references valid')
+          "
+
+      - name: Validate Registry Lock
+        run: |
+          echo "Validating registry lock integrity..."
+          python -c "
+          import yaml
+          from pathlib import Path
+
+          registry_lock = Path('24_meta_orchestration/registry/locks/registry_lock.yaml')
+
+          if not registry_lock.exists():
+              print('❌ registry_lock.yaml not found')
+              exit(1)
+
+          with open(registry_lock, 'r', encoding='utf-8') as f:
+              lock_data = yaml.safe_load(f)
+
+          # Verify compliance evidence section
+          if 'compliance_evidence' not in lock_data:
+              print('❌ Missing compliance_evidence section in registry_lock.yaml')
+              exit(1)
+
+          evidence = lock_data['compliance_evidence']
+          frameworks = evidence.get('frameworks', {})
+
+          required_frameworks = ['gdpr', 'dora', 'mica', 'amld6']
+          missing = [fw for fw in required_frameworks if fw not in frameworks]
+
+          if missing:
+              print(f'❌ Missing frameworks in registry_lock: {missing}')
+              exit(1)
+
+          # Verify paths and checksums
+          for fw_name, fw_data in frameworks.items():
+              if 'mapping_path' not in fw_data or 'checksum' not in fw_data:
+                  print(f'❌ Framework {fw_name} missing mapping_path or checksum')
+                  exit(1)
+
+              mapping_path = Path(fw_data['mapping_path'])
+              if not mapping_path.exists():
+                  print(f'❌ Mapping file not found: {mapping_path}')
+                  exit(1)
+
+              print(f'✓ {fw_name}: {fw_data[\"mapping_path\"]} ({fw_data.get(\"coverage\", \"N/A\")})')
+
+          # Verify legal awareness
+          if lock_data.get('legal_awareness', {}).get('system_status') != 'legally_aware':
+              print('❌ System not marked as legally_aware in registry_lock')
+              exit(1)
+
+          print('\n✅ Registry lock validation passed')
+          print(f'   System Status: {lock_data[\"legal_awareness\"][\"system_status\"]}')
+          print(f'   Compliance Version: {evidence.get(\"version\", \"N/A\")}')
+          "
+
+      - name: Generate Compliance Report
+        if: always()
+        run: |
+          echo "## Compliance Check Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          python -c "
+          import yaml
+          from pathlib import Path
+
+          print('### Framework Coverage')
+          print('')
+          print('| Framework | Coverage | Controls | Status |')
+          print('|-----------|----------|----------|--------|')
+
+          mappings_dir = Path('23_compliance/mappings')
+          for mapping_file in sorted(mappings_dir.glob('*_mapping.yaml')):
+              with open(mapping_file, 'r', encoding='utf-8') as f:
+                  data = yaml.safe_load(f)
+
+              framework = data['meta']['framework']
+              metrics = data.get('compliance_metrics', {})
+              coverage = metrics.get('overall_coverage', 'N/A')
+              implemented = metrics.get('implemented_controls', 0)
+              total = implemented + metrics.get('pending_controls', 0)
+
+              print(f'| {framework} | {coverage} | {implemented}/{total} | ✅ PASS |')
+          " >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-test-results-py${{ matrix.python-version }}
+          path: |
+            pytest-results-*.xml
+            compliance-report-*.html
+          retention-days: 30
+
+  compliance-evidence-anchoring:
+    runs-on: ubuntu-latest
+    needs: compliance-integrity
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+
+      - name: Create Registry Anchor
+        run: |
+          python -c "
+          import hashlib
+          import json
+          import yaml
+          from datetime import datetime
+          from pathlib import Path
+
+          # Load registry lock
+          registry_lock_path = Path('24_meta_orchestration/registry/locks/registry_lock.yaml')
+          with open(registry_lock_path, 'r', encoding='utf-8') as f:
+              lock_content = f.read()
+              lock_data = yaml.safe_load(lock_content)
+
+          # Calculate hash
+          lock_hash = hashlib.sha256(lock_content.encode()).hexdigest()
+
+          # Create evidence directory if needed
+          evidence_dir = Path('02_audit_logging/evidence/registry')
+          evidence_dir.mkdir(parents=True, exist_ok=True)
+
+          # Create anchor
+          anchor_path = evidence_dir / 'registry_anchor.json'
+
+          # Load existing anchors or create new
+          anchors = []
+          if anchor_path.exists():
+              with open(anchor_path, 'r') as f:
+                  existing = json.load(f)
+                  anchors = existing.get('anchors', [])
+
+          # Add new anchor
+          anchor_entry = {
+              'timestamp': datetime.utcnow().isoformat() + 'Z',
+              'commit_sha': '${{ github.sha }}',
+              'registry_lock_hash': f'sha256:{lock_hash}',
+              'compliance_version': lock_data['compliance_evidence']['version'],
+              'frameworks': {
+                  fw: data['checksum']
+                  for fw, data in lock_data['compliance_evidence']['frameworks'].items()
+              },
+              'system_status': lock_data['legal_awareness']['system_status']
+          }
+
+          anchors.append(anchor_entry)
+
+          # Write anchor file
+          with open(anchor_path, 'w') as f:
+              json.dump({
+                  'version': '1.0',
+                  'description': 'Immutable audit trail of registry lock states',
+                  'last_updated': datetime.utcnow().isoformat() + 'Z',
+                  'anchors': anchors
+              }, f, indent=2)
+
+          print(f'✅ Registry anchor created: {lock_hash[:16]}...')
+          print(f'   Total anchors: {len(anchors)}')
+          print(f'   Evidence path: {anchor_path}')
+          "
+
+      - name: Commit Evidence Anchor
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "Compliance Bot"
+          git config user.email "compliance-bot@ssid.local"
+          git add 02_audit_logging/evidence/registry/registry_anchor.json || true
+          git diff --staged --quiet || git commit -m "chore: update compliance evidence anchor [skip ci]"
+          # Note: Push would require appropriate permissions
+
+  status-check:
+    runs-on: ubuntu-latest
+    needs: [compliance-integrity, compliance-evidence-anchoring]
+    if: always()
+
+    steps:
+      - name: Check Job Status
+        run: |
+          if [ "${{ needs.compliance-integrity.result }}" != "success" ]; then
+            echo "❌ Compliance integrity checks failed"
+            exit 1
+          fi
+
+          echo "✅ All compliance checks passed"

@@ -1,0 +1,47 @@
+[
+  {
+    "proposal_id": "prop_new_req_UNI-AI-001_20251007",
+    "rule_name": "New control: UNI-AI-001",
+    "rule_type": "new_rule",
+    "confidence_score": 0.75,
+    "rationale": "New compliance requirement detected in audit findings. Appears 3 times across audits.",
+    "impact_assessment": {
+      "affected_controls": [
+        "UNI-AI-001"
+      ],
+      "new_control_added": true,
+      "requires_implementation": true,
+      "breaking_changes": false
+    },
+    "approval_status": "pending"
+  },
+  {
+    "proposal_id": "prop_threshold_max_audit_log_age_20251007",
+    "rule_name": "Adjust max_audit_log_age threshold",
+    "rule_type": "parameter_change",
+    "confidence_score": 0.85,
+    "rationale": "Parameter 'max_audit_log_age' breached 4 times. Adjusted threshold accounts for operational reality.",
+    "impact_assessment": {
+      "parameter": "max_audit_log_age",
+      "old_threshold": "current",
+      "new_threshold": 121.0,
+      "breach_reduction": "80-90%",
+      "breaking_changes": false
+    },
+    "approval_status": "pending"
+  },
+  {
+    "proposal_id": "prop_trend_mica_20251007",
+    "rule_name": "Monitor MICA compliance trend",
+    "rule_type": "new_rule",
+    "confidence_score": 0.8,
+    "rationale": "MICA compliance declining over 6 measurements. Proactive monitoring prevents further degradation.",
+    "impact_assessment": {
+      "framework": "MICA",
+      "monitoring_added": true,
+      "early_warning": true,
+      "breaking_changes": false
+    },
+    "approval_status": "pending"
+  }
+]

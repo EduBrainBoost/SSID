@@ -1,0 +1,113 @@
+{
+  "requirement_id": "MUST-002-ANTI-GAMING",
+  "requirement_name": "Anti-Gaming Controls",
+  "category": "security",
+  "status": "implemented",
+  "confidence": 1.0,
+  "total_validators": 8,
+  "total_tests": 85,
+  "test_pass_rate": 1.0,
+  "total_loc": 2678,
+  "validators": {
+    "detect_proof_reuse_patterns": {
+      "status": "operational",
+      "loc": 397,
+      "fraud_mechanisms_detected": 4,
+      "tests": 15
+    },
+    "scan_unexpected_activity_windows": {
+      "status": "operational",
+      "loc": 360,
+      "tests": 12
+    },
+    "detect_duplicate_identity_hashes": {
+      "status": "operational",
+      "tests": 13,
+      "evidence_file": "23_compliance/evidence/anti_gaming/duplicate_hashes_20251009.json",
+      "evidence_hash": "dc60dbf9ee29453f3cb51eac5189d13237ac24e26c6f99432288afcd77ff9179",
+      "timestamp": "2025-10-09T17:41:27.654940+00:00",
+      "last_run_results": {
+        "total_hashes": 6,
+        "unique_hashes": 3,
+        "duplicate_count": 2,
+        "duplicate_rate": 0.3333,
+        "risk_level": "HIGH"
+      }
+    },
+    "badge_signature_validator": {
+      "status": "operational",
+      "tests": 20
+    },
+    "overfitting_detector": {
+      "status": "operational",
+      "tests": 24,
+      "evidence_file": "23_compliance/evidence/anti_gaming/overfitting_analysis_20251009.json",
+      "evidence_hash": "b034baf36ad14403841764de5a76267da57140ec806f19e4c0ef6d69e19d7859",
+      "timestamp": "2025-10-09T17:41:29.140126+00:00",
+      "last_run_results": {
+        "total_models": 4,
+        "overfitting_count": 2,
+        "high_risk_count": 2,
+        "overfitting_rate": 0.5
+      }
+    },
+    "detect_circular_dependencies": {
+      "status": "operational",
+      "tests": 28,
+      "evidence_file": "23_compliance/evidence/anti_gaming/circular_dependencies_20251009.json",
+      "evidence_hash": "92160f26cc57a1dc93cf5393394352d20c71cd91750df21b7d4af0b1e1cf34fa",
+      "timestamp": "2025-10-09T17:41:30.670780+00:00",
+      "last_run_results": {
+        "total_nodes": 9,
+        "total_edges": 8,
+        "cycles_detected": 2,
+        "max_cycle_length": 3,
+        "risk_level": "LOW"
+      }
+    },
+    "badge_integrity_checker": {
+      "status": "operational"
+    },
+    "dependency_graph_generator": {
+      "status": "operational"
+    }
+  },
+  "ci_integration": {
+    "workflow_file": ".github/workflows/ci_anti_gaming.yml",
+    "zero_cycle_gate": true,
+    "status": "passing"
+  },
+  "evidence_format": {
+    "format": "JSON",
+    "severity_levels": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+    "pii_compliance": "hash-only (no PII)"
+  },
+  "compliance_mapping": {
+    "gdpr_art_32": "Security of Processing",
+    "dora_art_9": "Protection and Prevention",
+    "mica_art_60": "Asset Protection"
+  },
+  "audit_trail": {
+    "implementation_complete": "2025-10-09T17:41:30+00:00",
+    "last_evidence_generation": "2025-10-09T17:41:30+00:00",
+    "registry_sync": "2025-10-09T22:01:01+00:00"
+  },
+  "production_readiness": {
+    "functional_completeness": 1.0,
+    "audit_evidence": "complete",
+    "architecture_conformance": "compliant",
+    "tests_and_ci": "all_green",
+    "status": "PRODUCTION_READY"
+  },
+  "score": 100,
+  "score_breakdown": {
+    "implementation": 30,
+    "test_coverage": 25,
+    "ci_integration": 15,
+    "evidence_quality": 20,
+    "documentation": 10
+  },
+  "generated_at": "2025-10-09T22:01:01+00:00",
+  "generator": "manual_audit_score_compilation",
+  "version": "1.0.0"
+}

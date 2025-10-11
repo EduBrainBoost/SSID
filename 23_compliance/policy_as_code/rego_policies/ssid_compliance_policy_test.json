@@ -1,0 +1,65 @@
+{
+  "test_scenarios": [
+    {
+      "name": "Full compliance",
+      "input": {
+        "all_controls_implemented": true,
+        "framework_scores": {
+          "gdpr": 95,
+          "dora": 92,
+          "mica": 88,
+          "amld6": 94
+        }
+      },
+      "expected": {
+        "allow": true,
+        "deny": []
+      }
+    },
+    {
+      "name": "Critical control missing",
+      "input": {
+        "all_controls_implemented": false,
+        "critical_gaps": 1,
+        "framework_scores": {
+          "gdpr": 95,
+          "dora": 92,
+          "mica": 88,
+          "amld6": 94
+        }
+      },
+      "expected": {
+        "allow": false,
+        "deny": [
+          "Critical controls not fully implemented"
+        ]
+      }
+    },
+    {
+      "name": "GDPR below threshold",
+      "input": {
+        "all_controls_implemented": true,
+        "framework_scores": {
+          "gdpr": 85,
+          "dora": 92,
+          "mica": 88,
+          "amld6": 94
+        }
+      },
+      "expected": {
+        "allow": false,
+        "deny": [
+          "GDPR compliance below 90% threshold"
+        ]
+      }
+    }
+  ],
+  "sample_queries": [
+    "data.ssid.compliance.allow",
+    "data.ssid.compliance.audit_report",
+    "data.ssid.compliance.risk_assessment",
+    "data.ssid.compliance.framework_controls(\"GDPR\")",
+    "data.ssid.compliance.module_controls(\"09_meta_identity\")",
+    "data.ssid.compliance.non_compliant_controls"
+  ]
+}

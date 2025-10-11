@@ -1,0 +1,130 @@
+rfc:
+  id: "RFC-BP-4.2"
+  title: "Blueprint 4.2 — Föderation & Lernende Compliance"
+  authors: ["edubrainboost"]
+  status: "draft"
+  created: "2025-10-07T08:15:00Z"
+  review_window: "2025-Q4"
+  decision_model: "weighted-quorum"
+
+criteria:
+  must:
+    - "Quorum≥11 & ≥5 Signers (BFT=1)"
+    - "Auto-Policy HIGH-risk proposals require approval"
+    - "Sync-Integrity Hash valid"
+    - "Snapshot-Diff index present"
+    - "Evidence anchoring WORM-compliant"
+    - "OPA/Rego policy export functional"
+
+  should:
+    - "On-chain proof optional nach CI PASS"
+    - "Quarterly narrative reports automated"
+    - "Unified Compliance Index as central ontology"
+
+  must_not:
+    - "Neue Root-Ordner erstellen"
+    - "PII on-chain speichern"
+    - "Custody/Intermediär-Funktionen einführen"
+    - "Breaking changes zu Blueprint 4.1"
+
+approvers:
+  tiers:
+    founding:
+      required: 2
+      weight: 3
+    full:
+      required: 2
+      weight: 2
+    associate:
+      required: 1
+      weight: 1
+
+  required_total_approvals: 4
+  required_weighted_score: 11
+  bft_tolerance: 1
+
+decision_process:
+  phases:
+    - name: "Draft"
+      duration_days: 14
+      activities:
+        - "Internal review by maintainers"
+        - "Technical feasibility assessment"
+        - "Compliance mapping validation"
+
+    - name: "Community Review"
+      duration_days: 21
+      activities:
+        - "Public RFC publication"
+        - "Stakeholder feedback collection"
+        - "Test implementation in sandbox"
+
+    - name: "Voting"
+      duration_days: 7
+      activities:
+        - "Weighted quorum voting"
+        - "Signature collection"
+        - "BFT consensus verification"
+
+    - name: "Implementation"
+      duration_days: 30
+      activities:
+        - "CI/CD pipeline integration"
+        - "Evidence anchoring"
+        - "Registry lock update"
+
+impact_analysis:
+  technical:
+    complexity: "medium"
+    breaking_changes: false
+    migration_effort: "low"
+    testing_coverage: "high"
+
+  legal:
+    regulatory_frameworks:
+      - "eIDAS: Enhanced signature federation support"
+      - "MiCA: Non-custodial compliance maintained"
+      - "DORA: Operational resilience through BFT"
+      - "AMLD6: AML/CFT policy learning readiness"
+      - "GDPR: Hash-only, no PII on-chain"
+
+  operational:
+    deployment_risk: "low"
+    rollback_plan: "Delta manifests can be reverted"
+    monitoring_requirements:
+      - "Consortium quorum health"
+      - "Sync integrity checks"
+      - "Policy learning audit trail"
+
+testing_requirements:
+  unit_tests:
+    - "test_blueprint_42_compat.py"
+    - "test_consortium_quorum.py"
+    - "test_sync_integrity.py"
+    - "test_policy_learning.py"
+
+  integration_tests:
+    - "blueprint_compat_gate.py"
+    - "consortium_gate.py"
+
+  ci_gates:
+    - "blueprint_42_gate.yml"
+
+references:
+  - id: "BP-4.1"
+    title: "Blueprint 4.1 Specification"
+    location: "16_codex/structure/blueprint_4_1_*.md"
+
+  - id: "CONSORTIUM"
+    title: "Consortium Registry"
+    location: "24_meta_orchestration/consortium/consortium_registry.yaml"
+
+  - id: "COMPLIANCE"
+    title: "Compliance Mappings"
+    location: "23_compliance/mappings/"
+
+  - id: "REGO"
+    title: "Policy-as-Code (OPA/Rego)"
+    location: "23_compliance/policy_as_code/rego_policies/"
+
+checksum: "sha256:TO_BE_FILLED_BY_CI"

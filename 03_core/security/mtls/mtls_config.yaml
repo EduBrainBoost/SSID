@@ -1,0 +1,218 @@
+version: 1.0.0
+title: Mutual TLS (mTLS) Authentication Configuration
+description: |
+  Mutual TLS configuration for inter-module authentication in SSID system.
+  Both client and server authenticate using X.509 certificates.
+
+compliance:
+  requirement: "MUST-027-MTLS-AUTH"
+  regulations:
+    - "DORA Art.9 (Protection and Prevention)"
+    - "GDPR Art.32 (Security of Processing)"
+    - "ISO 27001:2022 (Cryptographic Controls)"
+  effective_date: "2025-10-09"
+
+# Certificate Authority (CA) Configuration
+certificate_authority:
+  ca_name: "SSID Root CA"
+  organization: "SSID System"
+  organizational_unit: "Security"
+  country: "DE"
+  validity_days: 3650  # 10 years for CA
+
+  ca_cert_path: "03_core/security/mtls/certs/ca-cert.pem"
+  ca_key_path: "03_core/security/mtls/certs/ca-key.pem"
+
+  key_algorithm: "RSA"
+  key_size: 4096
+  hash_algorithm: "SHA-256"
+
+# Server Certificate Configuration
+server_certificates:
+  default_validity_days: 365  # 1 year
+
+  template:
+    organization: "SSID System"
+    organizational_unit: "Inter-Module Communication"
+    country: "DE"
+    key_algorithm: "RSA"
+    key_size: 2048
+    hash_algorithm: "SHA-256"
+
+  # Pre-defined server certificates for core modules
+  modules:
+    - module_id: "01_ai_layer"
+      common_name: "ai-layer.ssid.internal"
+      san_dns:
+        - "ai-layer.ssid.internal"
+        - "localhost"
+      san_ip:
+        - "127.0.0.1"
+
+    - module_id: "02_audit_logging"
+      common_name: "audit-logging.ssid.internal"
+      san_dns:
+        - "audit-logging.ssid.internal"
+        - "localhost"
+
+    - module_id: "03_core"
+      common_name: "core.ssid.internal"
+      san_dns:
+        - "core.ssid.internal"
+        - "localhost"
+
+    - module_id: "08_identity_score"
+      common_name: "identity-score.ssid.internal"
+      san_dns:
+        - "identity-score.ssid.internal"
+        - "localhost"
+
+    - module_id: "09_meta_identity"
+      common_name: "meta-identity.ssid.internal"
+      san_dns:
+        - "meta-identity.ssid.internal"
+        - "localhost"
+
+    - module_id: "17_observability"
+      common_name: "observability.ssid.internal"
+      san_dns:
+        - "observability.ssid.internal"
+        - "localhost"
+
+    - module_id: "24_meta_orchestration"
+      common_name: "meta-orchestration.ssid.internal"
+      san_dns:
+        - "meta-orchestration.ssid.internal"
+        - "localhost"
+
+# Client Certificate Configuration
+client_certificates:
+  default_validity_days: 365
+
+  # Client authentication for inter-module calls
+  require_client_cert: true
+  verify_client_cert: true
+
+  # Certificate revocation
+  crl_enabled: false  # Certificate Revocation List (future implementation)
+  ocsp_enabled: false  # Online Certificate Status Protocol (future)
+
+# TLS Protocol Configuration
+tls_configuration:
+  min_tls_version: "TLS1.3"  # Enforce TLS 1.3
+  allowed_tls_versions:
+    - "TLS1.3"
+    - "TLS1.2"  # Fallback for compatibility
+
+  # Cipher suites (TLS 1.3)
+  tls13_cipher_suites:
+    - "TLS_AES_256_GCM_SHA384"
+    - "TLS_CHACHA20_POLY1305_SHA256"
+    - "TLS_AES_128_GCM_SHA256"
+
+  # Cipher suites (TLS 1.2 fallback)
+  tls12_cipher_suites:
+    - "ECDHE-RSA-AES256-GCM-SHA384"
+    - "ECDHE-RSA-AES128-GCM-SHA256"
+
+  # Disable insecure options
+  disable_compression: true
+  disable_session_tickets: false
+
+# mTLS Handshake Verification
+handshake_verification:
+  verify_peer_certificate: true
+  verify_certificate_chain: true
+  verify_hostname: true
+
+  fail_if_no_peer_cert: true  # Reject connections without client cert
+
+  # Certificate validation checks
+  checks:
+    - "Certificate not expired"
+    - "Certificate signed by trusted CA"
+    - "Certificate hostname matches"
+    - "Certificate key usage allows TLS client auth"
+    - "Certificate not revoked (if CRL/OCSP enabled)"
+
+# Certificate Storage
+certificate_storage:
+  cert_directory: "03_core/security/mtls/certs/"
+  private_key_directory: "03_core/security/mtls/certs/private/"
+
+  # Private key encryption
+  encrypt_private_keys: true
+  encryption_algorithm: "AES-256-CBC"
+
+  # File permissions (Unix)
+  cert_file_permissions: "0644"
+  private_key_permissions: "0600"
+
+# Audit Logging
+audit_trail:
+  log_directory: "23_compliance/evidence/mtls/"
+
+  logged_events:
+    - "mTLS handshake initiated"
+    - "Client certificate presented"
+    - "Server certificate verified"
+    - "Client certificate verified"
+    - "mTLS handshake success/failure"
+    - "Certificate expiration warnings"
+    - "Certificate renewal events"
+
+  evidence_format: "JSON"
+  hash_algorithm: "SHA-256"
+
+# Certificate Lifecycle Management
+lifecycle:
+  # Certificate expiration monitoring
+  expiration_warning_days: 30  # Warn 30 days before expiration
+
+  # Auto-renewal (future)
+  auto_renewal_enabled: false
+  renewal_before_days: 7
+
+  # Certificate rotation
+  rotation_policy: "manual"  # manual | automatic
+
+# Security Policies
+security_policies:
+  # Require mTLS for these inter-module connections
+  required_connections:
+    - source: "01_ai_layer"
+      target: "08_identity_score"
+      reason: "Identity risk scoring API calls"
+
+    - source: "09_meta_identity"
+      target: "02_audit_logging"
+      reason: "Audit trail writes"
+
+    - source: "24_meta_orchestration"
+      target: "*"
+      reason: "Orchestration requires authenticated access to all modules"
+
+  # Optional mTLS (backwards compatibility)
+  optional_connections:
+    - source: "13_ui_layer"
+      target: "19_adapters"
+      reason: "User-facing layer may use separate auth (OAuth2)"
+
+# Post-Quantum Cryptography (Future)
+post_quantum:
+  enabled: false
+  migration_plan: "Phase 3 - Quantum-safe algorithms (Kyber, Dilithium)"
+  integration_path: "21_post_quantum_crypto/"
+
+# References
+references:
+  standards:
+    - "RFC 8446 (TLS 1.3)"
+    - "RFC 5280 (X.509 Public Key Infrastructure)"
+    - "RFC 6125 (Hostname Verification)"
+    - "NIST SP 800-52 Rev. 2 (TLS Guidelines)"
+
+  tools:
+    - "OpenSSL 3.0+"
+    - "Python cryptography library"
+    - "certifi (CA bundle)"

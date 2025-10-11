@@ -1,0 +1,1065 @@
+---
+metadata:
+  plan_name: "Phase 5 - Testing & Evidence (Nachweisbare Funktionsfähigkeit)"
+  version: "1.0.0"
+  created: "2025-10-07"
+  objective: "Comprehensive test coverage + cryptographic evidence trail"
+  prerequisite: "Phases 2-4 complete"
+  target_completion: "2026-07-31"
+  owner: "SSID QA & Compliance Team"
+
+executive_summary:
+  goal: "Achieve verifiable, auditable proof of system functionality"
+  focus_areas:
+    - "Complete pytest test suite (90%+ coverage)"
+    - "Automated coverage reporting (coverage.json)"
+    - "Evidence hash chain (cryptographic proof)"
+    - "Audit log automation (timestamped, immutable)"
+  current_status:
+    test_files: 21
+    coverage: "~60% (estimated)"
+    evidence_chain: "Not implemented"
+    audit_logging: "Manual"
+  estimated_effort: "8 person-weeks"
+  estimated_budget: "€40,000"
+  risk_level: "LOW"
+
+phase_5_objectives:
+  primary:
+    - "Complete pytest suite: 90%+ coverage for all MUST/SHOULD components"
+    - "Automate coverage report generation (JSON + HTML + XML)"
+    - "Implement cryptographic evidence hash chain"
+    - "Automate audit log generation with timestamps"
+    - "CI/CD integration for evidence collection"
+
+  secondary:
+    - "Performance benchmarking suite"
+    - "Load testing for critical paths"
+    - "Chaos engineering tests (resilience)"
+    - "Security penetration testing evidence"
+
+current_state_analysis:
+  testing_infrastructure:
+    runner_script: "11_test_simulation/run_all_tests.sh"
+    status: "✅ Operational (151 LOC)"
+    capabilities:
+      - "File extension validation"
+      - "Global hash ledger (file_hashes.json)"
+      - "Structure guard execution"
+      - "Policy validation"
+      - "Shard-level pytest"
+      - "Compliance evidence checks"
+      - "Conformance tests"
+      - "E2E tests"
+      - "Recursive root-level test discovery"
+      - "Summary JSON generation"
+    limitations:
+      - "No coverage reporting"
+      - "No evidence hash chain"
+      - "No audit log integration"
+      - "Exit code 24 only (no granular reporting)"
+
+  existing_tests:
+    count: 21
+    categories:
+      anti_gaming:
+        - "test_anti_gaming_suite.py"
+        - "test_anti_gaming_duplicate_hashes.py"
+        - "test_badge_integrity.py"
+        - "test_circular_dependencies.py"
+      audit:
+        - "test_hash_chain.py"
+        - "test_log_schema.py"
+        - "test_worm_meta.py"
+      compliance:
+        - "test_quarterly_review_validator.py"
+        - "test_compliance.py"
+      integration:
+        - "test_registry_parser.py"
+        - "test_structure_validation.py"
+      unit:
+        - "test_ai_layer.py"
+        - "test_registry.py"
+        - "test_registry_logic.py"
+      other:
+        - "test_blueprint_42_compat.py"
+        - "test_contract_compliance.py"
+        - "test_onchain_emit_sim.py"
+        - "test_readiness_health.py"
+        - "test_structure_guard_smoke.py"
+
+  coverage_config:
+    file: "11_test_simulation/.coveragerc"
+    source_paths:
+      - "23_compliance/anti_gaming"
+      - "02_audit_logging/validators"
+      - "08_identity_score/src"
+    target: "80% (fail_under)"
+    data_file: "23_compliance/evidence/coverage/.coverage"
+    status: "⚠️ Configured but not running"
+
+  evidence_gaps:
+    coverage_report: "Missing: coverage.json, coverage.xml, coverage.html"
+    hash_chain: "Missing: 23_compliance/evidence/hash_chain.json"
+    audit_logs: "Partial: Manual logs only"
+
+implementation_tasks:
+  task_1_complete_test_suite:
+    priority: "P0 - CRITICAL"
+    objective: "Achieve 90%+ test coverage for all critical components"
+
+    test_categories:
+      unit_tests:
+        target_coverage: 95%
+        modules_to_test:
+          - module: "23_compliance/anti_gaming/"
+            tests_needed:
+              - "test_detect_duplicate_identity_hashes.py"
+              - "test_overfitting_detector.py"
+              - "test_detect_circular_dependencies.py"
+              - "test_detect_proof_reuse_patterns.py"
+              - "test_monitor_inconsistent_scores.py"
+              - "test_scan_unexpected_activity_windows.py"
+            current_coverage: 60%
+            target_coverage: 95%
+            effort: "3 days"
+
+          - module: "02_audit_logging/storage/worm/"
+            tests_needed:
+              - "test_worm_writer.py"
+              - "test_worm_reader.py"
+              - "test_worm_verifier.py"
+              - "test_blockchain_anchor.py"
+            current_coverage: 40%
+            target_coverage: 95%
+            effort: "3 days"
+
+          - module: "08_identity_score/src/"
+            tests_needed:
+              - "test_identity_score_calculator.py (comprehensive)"
+              - "test_edge_cases.py"
+              - "test_config_validation.py"
+            current_coverage: 70%
+            target_coverage: 100%
+            effort: "2 days"
+
+          - module: "03_core/healthcheck/"
+            tests_needed:
+              - "test_health_check_core.py"
+              - "test_health_audit_logger.py"
+              - "test_registry_update.py"
+            current_coverage: 50%
+            target_coverage: 95%
+            effort: "2 days"
+
+          - module: "03_core/cache/"
+            tests_needed:
+              - "test_cache_manager.py"
+              - "test_cache_decorators.py"
+              - "test_cache_invalidation.py"
+            current_coverage: 0%
+            target_coverage: 90%
+            effort: "3 days"
+
+          - module: "17_observability/metrics/"
+            tests_needed:
+              - "test_prometheus_exporter.py"
+              - "test_metrics_collector.py"
+            current_coverage: 0%
+            target_coverage: 85%
+            effort: "2 days"
+
+      integration_tests:
+        target_coverage: 80%
+        scenarios_to_test:
+          - scenario: "End-to-end identity verification flow"
+            path: "11_test_simulation/e2e/test_identity_lifecycle.py"
+            steps:
+              - "Submit identity document"
+              - "Hash and store in WORM"
+              - "Calculate identity score"
+              - "Anchor to blockchain"
+              - "Verify audit trail"
+            effort: "2 days"
+
+          - scenario: "Compliance review workflow"
+            path: "11_test_simulation/e2e/test_compliance_workflow.py"
+            steps:
+              - "Initialize quarterly review"
+              - "Collect evidence"
+              - "Generate report"
+              - "Track findings"
+            effort: "2 days"
+
+          - scenario: "Cache + Observability integration"
+            path: "11_test_simulation/e2e/test_cache_observability.py"
+            steps:
+              - "Cache write/read operations"
+              - "Metrics exported to Prometheus"
+              - "Cache hit rate monitored"
+              - "Alerts triggered on low hit rate"
+            effort: "1 day"
+
+      conformance_tests:
+        target_coverage: 100%
+        contracts_to_test:
+          - "OpenAPI spec validation (all contracts/*.openapi.yaml)"
+          - "JSON schema validation (all contracts/schemas/*.schema.json)"
+          - "OPA policy evaluation (all rego policies)"
+        effort: "2 days"
+
+      resilience_tests:
+        target: "DORA Art. 21/24 compliance"
+        scenarios:
+          - "Service failure simulation"
+          - "Network partition tolerance"
+          - "Database unavailability"
+          - "High load (10,000 req/s)"
+          - "Chaos monkey (random failures)"
+        effort: "3 days"
+
+    total_effort: "25 person-days"
+    dependencies: []
+    blocking: true
+    success_criteria:
+      - "Overall test coverage ≥90%"
+      - "All MUST components ≥95% coverage"
+      - "All SHOULD components ≥85% coverage"
+      - "CI test suite runs in <10 minutes"
+      - "Zero flaky tests"
+
+  task_2_coverage_reporting:
+    priority: "P0 - CRITICAL"
+    objective: "Automate coverage report generation in multiple formats"
+
+    implementation:
+      pytest_config:
+        file: "pytest.ini"
+        location: "Root directory"
+        content: |
+          [pytest]
+          minversion = 7.0
+          addopts =
+              --cov=23_compliance/anti_gaming
+              --cov=02_audit_logging/validators
+              --cov=02_audit_logging/storage
+              --cov=08_identity_score/src
+              --cov=03_core/healthcheck
+              --cov=03_core/cache
+              --cov=17_observability/metrics
+              --cov-report=json:23_compliance/evidence/coverage/coverage.json
+              --cov-report=xml:23_compliance/evidence/coverage/coverage.xml
+              --cov-report=html:23_compliance/evidence/coverage/html
+              --cov-report=term-missing
+              --cov-fail-under=90
+              -v
+          testpaths =
+              11_test_simulation/tests
+              11_test_simulation/tests_audit
+              11_test_simulation/tests_compliance
+          python_files = test_*.py
+          python_classes = Test*
+          python_functions = test_*
+
+      coverage_config_update:
+        file: "11_test_simulation/.coveragerc"
+        changes:
+          - "Add all critical source paths"
+          - "Update fail_under from 80 to 90"
+          - "Add omit patterns (tests, __init__, migrations)"
+        content: |
+          [run]
+          branch = True
+          source =
+              23_compliance/anti_gaming
+              02_audit_logging/validators
+              02_audit_logging/storage
+              08_identity_score/src
+              03_core/healthcheck
+              03_core/cache
+              17_observability/metrics
+          omit =
+              */tests/*
+              */__init__.py
+              */migrations/*
+              */venv/*
+          data_file = 23_compliance/evidence/coverage/.coverage
+
+          [report]
+          show_missing = True
+          fail_under = 90
+          exclude_lines =
+              pragma: no cover
+              def __repr__
+              if __name__ == .__main__.:
+              raise NotImplementedError
+              raise AssertionError
+              if TYPE_CHECKING:
+          precision = 2
+
+          [html]
+          directory = 23_compliance/evidence/coverage/html
+
+          [json]
+          output = 23_compliance/evidence/coverage/coverage.json
+          pretty_print = True
+          show_contexts = True
+
+          [xml]
+          output = 23_compliance/evidence/coverage/coverage.xml
+
+      run_all_tests_enhancement:
+        file: "11_test_simulation/run_all_tests.sh"
+        additions:
+          - section: "Coverage Report Generation"
+            location: "After step 6 (E2E tests)"
+            code: |
+              # 7️⃣  Coverage Report Generation
+              echo "📊  Generating coverage reports ..."
+              pytest \
+                --cov=23_compliance/anti_gaming \
+                --cov=02_audit_logging/validators \
+                --cov=02_audit_logging/storage \
+                --cov=08_identity_score/src \
+                --cov=03_core/healthcheck \
+                --cov=03_core/cache \
+                --cov=17_observability/metrics \
+                --cov-report=json:23_compliance/evidence/coverage/coverage.json \
+                --cov-report=xml:23_compliance/evidence/coverage/coverage.xml \
+                --cov-report=html:23_compliance/evidence/coverage/html \
+                --cov-report=term-missing \
+                --cov-fail-under=90 \
+                -q \
+                "$ROOT/11_test_simulation" || exit 24
+
+              echo "✅  Coverage reports generated:"
+              echo "    • JSON: 23_compliance/evidence/coverage/coverage.json"
+              echo "    • XML:  23_compliance/evidence/coverage/coverage.xml"
+              echo "    • HTML: 23_compliance/evidence/coverage/html/index.html"
+
+              # Extract coverage percentage
+              COVERAGE_PCT=$(python3 -c "import json; data=json.load(open('23_compliance/evidence/coverage/coverage.json')); print(f\"{data['totals']['percent_covered']:.2f}\")")
+              echo "    • Total Coverage: ${COVERAGE_PCT}%"
+
+              if (( $(echo "$COVERAGE_PCT < 90" | bc -l) )); then
+                echo "❌  Coverage below 90% threshold: ${COVERAGE_PCT}%"
+                exit 24
+              fi
+            effort: "1 day"
+
+      coverage_badge:
+        file: "README.md"
+        badge_url: "![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen)"
+        automation: "Update badge via CI based on coverage.json"
+        effort: "0.5 day"
+
+    total_effort: "1.5 person-days"
+    dependencies: ["task_1_complete_test_suite"]
+    blocking: true
+    success_criteria:
+      - "coverage.json generated with detailed metrics"
+      - "coverage.xml available for CI tools (Codecov, SonarQube)"
+      - "coverage.html browsable report"
+      - "Coverage ≥90% or CI fails"
+      - "Coverage badge in README.md auto-updates"
+
+  task_3_evidence_hash_chain:
+    priority: "P0 - CRITICAL"
+    objective: "Implement cryptographic hash chain for evidence integrity"
+
+    hash_chain_design:
+      purpose: "Tamper-proof evidence trail linking all test runs"
+      algorithm: "SHA-256 with previous hash linking"
+      format: "JSON with metadata + hash chain"
+
+    implementation:
+      component: "evidence_chain_manager.py"
+      location: "23_compliance/tools/evidence_chain_manager.py"
+      functionality: "Manage evidence hash chain"
+      features:
+        - "Initialize chain (genesis block)"
+        - "Append entry with previous hash"
+        - "Verify chain integrity"
+        - "Export to JSON"
+      implementation: |
+        import json
+        import hashlib
+        from pathlib import Path
+        from datetime import datetime
+        from typing import Dict, List, Optional, Any
+
+        class EvidenceChainManager:
+            """
+            Cryptographic hash chain for evidence integrity.
+
+            Each entry links to the previous entry via SHA-256 hash,
+            creating a tamper-proof chain of evidence.
+            """
+
+            def __init__(self, chain_file: Path):
+                self.chain_file = chain_file
+                self.chain_file.parent.mkdir(parents=True, exist_ok=True)
+                self.chain = self._load_chain()
+
+            def _load_chain(self) -> List[Dict[str, Any]]:
+                """Load existing chain or create genesis block."""
+                if self.chain_file.exists():
+                    with open(self.chain_file) as f:
+                        data = json.load(f)
+                        return data.get("chain", [])
+
+                # Create genesis block
+                genesis = {
+                    "index": 0,
+                    "timestamp": datetime.utcnow().isoformat() + "Z",
+                    "event_type": "genesis",
+                    "description": "Evidence chain initialized",
+                    "data": {},
+                    "previous_hash": "0" * 64,
+                    "hash": self._calculate_hash(0, "genesis", {}, "0" * 64)
+                }
+                return [genesis]
+
+            def _calculate_hash(
+                self,
+                index: int,
+                event_type: str,
+                data: Dict,
+                previous_hash: str
+            ) -> str:
+                """Calculate SHA-256 hash of entry."""
+                content = json.dumps({
+                    "index": index,
+                    "event_type": event_type,
+                    "data": data,
+                    "previous_hash": previous_hash
+                }, sort_keys=True)
+                return hashlib.sha256(content.encode()).hexdigest()
+
+            def append_entry(
+                self,
+                event_type: str,
+                description: str,
+                data: Dict[str, Any]
+            ) -> Dict[str, Any]:
+                """Append new entry to chain."""
+                previous_entry = self.chain[-1]
+                index = len(self.chain)
+
+                entry = {
+                    "index": index,
+                    "timestamp": datetime.utcnow().isoformat() + "Z",
+                    "event_type": event_type,
+                    "description": description,
+                    "data": data,
+                    "previous_hash": previous_entry["hash"],
+                    "hash": self._calculate_hash(
+                        index, event_type, data, previous_entry["hash"]
+                    )
+                }
+
+                self.chain.append(entry)
+                self._save_chain()
+                return entry
+
+            def verify_chain(self) -> bool:
+                """Verify entire chain integrity."""
+                for i in range(1, len(self.chain)):
+                    current = self.chain[i]
+                    previous = self.chain[i - 1]
+
+                    # Check hash linkage
+                    if current["previous_hash"] != previous["hash"]:
+                        return False
+
+                    # Recalculate and verify hash
+                    expected_hash = self._calculate_hash(
+                        current["index"],
+                        current["event_type"],
+                        current["data"],
+                        current["previous_hash"]
+                    )
+                    if current["hash"] != expected_hash:
+                        return False
+
+                return True
+
+            def _save_chain(self) -> None:
+                """Save chain to JSON file."""
+                with open(self.chain_file, "w") as f:
+                    json.dump({
+                        "version": "1.0.0",
+                        "chain_length": len(self.chain),
+                        "last_updated": datetime.utcnow().isoformat() + "Z",
+                        "chain": self.chain
+                    }, f, indent=2)
+
+            def get_latest_entry(self) -> Optional[Dict[str, Any]]:
+                """Get most recent entry."""
+                return self.chain[-1] if self.chain else None
+
+            def export_summary(self) -> Dict[str, Any]:
+                """Export chain summary."""
+                return {
+                    "chain_length": len(self.chain),
+                    "genesis_timestamp": self.chain[0]["timestamp"],
+                    "latest_timestamp": self.chain[-1]["timestamp"],
+                    "integrity_verified": self.verify_chain(),
+                    "events_by_type": self._count_events_by_type()
+                }
+
+            def _count_events_by_type(self) -> Dict[str, int]:
+                """Count events by type."""
+                counts = {}
+                for entry in self.chain:
+                    event_type = entry["event_type"]
+                    counts[event_type] = counts.get(event_type, 0) + 1
+                return counts
+
+        # CLI interface
+        if __name__ == "__main__":
+            import sys
+            from argparse import ArgumentParser
+
+            parser = ArgumentParser()
+            parser.add_argument("action", choices=["init", "append", "verify", "summary"])
+            parser.add_argument("--chain-file", default="23_compliance/evidence/hash_chain.json")
+            parser.add_argument("--event-type", help="Event type for append")
+            parser.add_argument("--description", help="Description for append")
+            parser.add_argument("--data", help="JSON data for append")
+            args = parser.parse_args()
+
+            manager = EvidenceChainManager(Path(args.chain_file))
+
+            if args.action == "init":
+                print(f"Chain initialized: {args.chain_file}")
+                print(f"Genesis hash: {manager.chain[0]['hash']}")
+
+            elif args.action == "append":
+                if not args.event_type or not args.description:
+                    print("Error: --event-type and --description required")
+                    sys.exit(1)
+
+                data = json.loads(args.data) if args.data else {}
+                entry = manager.append_entry(args.event_type, args.description, data)
+                print(f"Entry appended: index {entry['index']}")
+                print(f"Hash: {entry['hash']}")
+
+            elif args.action == "verify":
+                if manager.verify_chain():
+                    print("✅ Chain integrity verified")
+                    sys.exit(0)
+                else:
+                    print("❌ Chain integrity compromised!")
+                    sys.exit(1)
+
+            elif args.action == "summary":
+                summary = manager.export_summary()
+                print(json.dumps(summary, indent=2))
+      effort: "3 days"
+
+    integration_with_run_all_tests:
+      additions:
+        - section: "Evidence Chain Update"
+          location: "After coverage report generation"
+          code: |
+            # 8️⃣  Evidence Chain Update
+            echo "🔗  Updating evidence hash chain ..."
+            python "$ROOT/23_compliance/tools/evidence_chain_manager.py" append \
+              --event-type "test_run" \
+              --description "Run-all-tests execution completed successfully" \
+              --data "{\"timestamp\":\"$TIMESTAMP\",\"coverage\":\"${COVERAGE_PCT}%\",\"tests_passed\":\"all\",\"evidence_hash\":\"${EVIDENCE_HASH}\"}"
+
+            # Verify chain integrity
+            python "$ROOT/23_compliance/tools/evidence_chain_manager.py" verify || exit 24
+
+            echo "✅  Evidence chain updated and verified"
+            echo "    • Chain file: 23_compliance/evidence/hash_chain.json"
+          effort: "0.5 day"
+
+    total_effort: "3.5 person-days"
+    dependencies: []
+    blocking: true
+    success_criteria:
+      - "hash_chain.json created and maintained"
+      - "Every test run appends entry"
+      - "Chain integrity verifiable (verify command)"
+      - "Tampering detectable"
+
+  task_4_audit_log_automation:
+    priority: "P0 - CRITICAL"
+    objective: "Automate audit log generation with timestamps"
+
+    audit_log_format:
+      location: "24_meta_orchestration/registry/logs/"
+      filename_pattern: "audit_YYYYMMDD.log"
+      format: "JSON Lines (one JSON object per line)"
+      retention: "10 years"
+
+    log_entry_schema:
+      fields:
+        - "timestamp (ISO 8601 UTC)"
+        - "event_type (test_run, coverage_report, evidence_chain, etc.)"
+        - "severity (INFO, WARN, ERROR)"
+        - "source (module/script name)"
+        - "description (human-readable)"
+        - "data (JSON object with details)"
+        - "user (system user or CI user)"
+        - "session_id (unique per test run)"
+
+    implementation:
+      component: "audit_logger.py"
+      location: "24_meta_orchestration/registry/tools/audit_logger.py"
+      functionality: "Structured audit logging"
+      features:
+        - "JSON Lines format"
+        - "Automatic log rotation (daily)"
+        - "Severity filtering"
+        - "Session tracking"
+      implementation: |
+        import json
+        import uuid
+        from pathlib import Path
+        from datetime import datetime
+        from typing import Dict, Any, Optional
+
+        class AuditLogger:
+            """
+            Structured audit logging for SSID compliance.
+
+            Logs written in JSON Lines format to daily log files.
+            """
+
+            def __init__(self, log_dir: Path, session_id: Optional[str] = None):
+                self.log_dir = log_dir
+                self.log_dir.mkdir(parents=True, exist_ok=True)
+                self.session_id = session_id or str(uuid.uuid4())
+
+            def _get_log_file(self) -> Path:
+                """Get current log file based on date."""
+                date_str = datetime.utcnow().strftime("%Y%m%d")
+                return self.log_dir / f"audit_{date_str}.log"
+
+            def log(
+                self,
+                event_type: str,
+                description: str,
+                data: Optional[Dict[str, Any]] = None,
+                severity: str = "INFO",
+                source: Optional[str] = None
+            ) -> None:
+                """Write audit log entry."""
+                entry = {
+                    "timestamp": datetime.utcnow().isoformat() + "Z",
+                    "event_type": event_type,
+                    "severity": severity,
+                    "source": source or "unknown",
+                    "description": description,
+                    "data": data or {},
+                    "session_id": self.session_id
+                }
+
+                log_file = self._get_log_file()
+                with open(log_file, "a") as f:
+                    f.write(json.dumps(entry) + "\n")
+
+            def info(self, event_type: str, description: str, data: Optional[Dict] = None, source: Optional[str] = None):
+                """Log INFO level event."""
+                self.log(event_type, description, data, "INFO", source)
+
+            def warn(self, event_type: str, description: str, data: Optional[Dict] = None, source: Optional[str] = None):
+                """Log WARN level event."""
+                self.log(event_type, description, data, "WARN", source)
+
+            def error(self, event_type: str, description: str, data: Optional[Dict] = None, source: Optional[str] = None):
+                """Log ERROR level event."""
+                self.log(event_type, description, data, "ERROR", source)
+
+        # Global logger instance
+        _logger = None
+
+        def get_audit_logger() -> AuditLogger:
+            """Get global audit logger instance."""
+            global _logger
+            if _logger is None:
+                log_dir = Path("24_meta_orchestration/registry/logs")
+                _logger = AuditLogger(log_dir)
+            return _logger
+
+        # Convenience functions
+        def audit_info(event_type: str, description: str, data: Optional[Dict] = None, source: Optional[str] = None):
+            get_audit_logger().info(event_type, description, data, source)
+
+        def audit_warn(event_type: str, description: str, data: Optional[Dict] = None, source: Optional[str] = None):
+            get_audit_logger().warn(event_type, description, data, source)
+
+        def audit_error(event_type: str, description: str, data: Optional[Dict] = None, source: Optional[str] = None):
+            get_audit_logger().error(event_type, description, data, source)
+
+        # CLI interface
+        if __name__ == "__main__":
+            import sys
+            from argparse import ArgumentParser
+
+            parser = ArgumentParser()
+            parser.add_argument("severity", choices=["info", "warn", "error"])
+            parser.add_argument("event_type")
+            parser.add_argument("description")
+            parser.add_argument("--data", help="JSON data")
+            parser.add_argument("--source")
+            args = parser.parse_args()
+
+            logger = get_audit_logger()
+            data = json.loads(args.data) if args.data else None
+
+            if args.severity == "info":
+                logger.info(args.event_type, args.description, data, args.source)
+            elif args.severity == "warn":
+                logger.warn(args.event_type, args.description, data, args.source)
+            elif args.severity == "error":
+                logger.error(args.event_type, args.description, data, args.source)
+
+            print(f"✅ Audit log entry written to: {logger._get_log_file()}")
+      effort: "2 days"
+
+    integration_with_run_all_tests:
+      additions:
+        - section: "Audit Logging Integration"
+          location: "Throughout run_all_tests.sh"
+          code: |
+            # At start of script
+            SESSION_ID=$(uuidgen)
+            export AUDIT_SESSION_ID="$SESSION_ID"
+
+            python "$ROOT/24_meta_orchestration/registry/tools/audit_logger.py" info \
+              "test_run_started" \
+              "Run-all-tests execution initiated" \
+              --data "{\"session_id\":\"$SESSION_ID\",\"timestamp\":\"$TIMESTAMP\"}" \
+              --source "run_all_tests.sh"
+
+            # After each major step
+            python "$ROOT/24_meta_orchestration/registry/tools/audit_logger.py" info \
+              "structure_guard_passed" \
+              "Structure guard validation completed" \
+              --source "run_all_tests.sh"
+
+            # After coverage report
+            python "$ROOT/24_meta_orchestration/registry/tools/audit_logger.py" info \
+              "coverage_report_generated" \
+              "Coverage report generated: ${COVERAGE_PCT}%" \
+              --data "{\"coverage\":\"${COVERAGE_PCT}%\",\"json\":\"23_compliance/evidence/coverage/coverage.json\"}" \
+              --source "run_all_tests.sh"
+
+            # At end of script
+            python "$ROOT/24_meta_orchestration/registry/tools/audit_logger.py" info \
+              "test_run_completed" \
+              "All tests passed successfully" \
+              --data "{\"session_id\":\"$SESSION_ID\",\"duration\":\"${DURATION}s\"}" \
+              --source "run_all_tests.sh"
+          effort: "1 day"
+
+    log_analysis_tool:
+      component: "audit_log_analyzer.py"
+      location: "24_meta_orchestration/registry/tools/audit_log_analyzer.py"
+      functionality: "Query and analyze audit logs"
+      features:
+        - "Query by date range"
+        - "Filter by event type, severity"
+        - "Search by session ID"
+        - "Generate summary reports"
+        - "Export to CSV/JSON"
+      effort: "2 days"
+
+    total_effort: "5 person-days"
+    dependencies: []
+    blocking: true
+    success_criteria:
+      - "Audit logs auto-generated for every test run"
+      - "Logs in JSON Lines format"
+      - "Daily log rotation (audit_YYYYMMDD.log)"
+      - "Searchable by session ID"
+      - "Retention policy enforced (10 years)"
+
+  task_5_ci_cd_integration:
+    priority: "P1 - HIGH"
+    objective: "Integrate all evidence collection into CI/CD pipeline"
+
+    github_actions_workflow:
+      file: ".github/workflows/test_and_evidence.yml"
+      content: |
+        name: Test & Evidence Collection
+
+        on:
+          push:
+            branches: [main, develop]
+          pull_request:
+            branches: [main]
+          schedule:
+            - cron: '0 2 * * *'  # Daily at 2 AM UTC
+
+        jobs:
+          test-and-evidence:
+            runs-on: ubuntu-latest
+            timeout-minutes: 30
+
+            steps:
+              - name: Checkout code
+                uses: actions/checkout@v4
+
+              - name: Set up Python
+                uses: actions/setup-python@v4
+                with:
+                  python-version: '3.11'
+
+              - name: Install dependencies
+                run: |
+                  pip install -r requirements.txt
+                  pip install pytest pytest-cov
+
+              - name: Run all tests with coverage
+                run: |
+                  bash 11_test_simulation/run_all_tests.sh
+
+              - name: Verify evidence chain
+                run: |
+                  python 23_compliance/tools/evidence_chain_manager.py verify
+
+              - name: Upload coverage reports
+                uses: codecov/codecov-action@v3
+                with:
+                  files: ./23_compliance/evidence/coverage/coverage.xml
+                  fail_ci_if_error: true
+
+              - name: Upload evidence artifacts
+                uses: actions/upload-artifact@v3
+                with:
+                  name: evidence-${{ github.sha }}
+                  path: |
+                    23_compliance/evidence/coverage/
+                    23_compliance/evidence/hash_chain.json
+                    24_meta_orchestration/registry/logs/audit_*.log
+                  retention-days: 365
+
+              - name: Generate compliance badge
+                if: github.ref == 'refs/heads/main'
+                run: |
+                  python 23_compliance/tools/generate_badge.py \
+                    --coverage 23_compliance/evidence/coverage/coverage.json \
+                    --output coverage-badge.json
+
+              - name: Audit log summary
+                run: |
+                  python 24_meta_orchestration/registry/tools/audit_log_analyzer.py summary \
+                    --date today
+      effort: "2 days"
+
+    pre_commit_hook:
+      file: ".git/hooks/pre-commit"
+      content: |
+        #!/bin/bash
+        # Run quick smoke tests before commit
+
+        echo "🔍 Running pre-commit tests..."
+
+        # Structure validation
+        bash 12_tooling/scripts/structure_guard.sh || exit 1
+
+        # Quick unit tests (fail fast)
+        pytest -x -q 11_test_simulation/tests/unit/ || exit 1
+
+        echo "✅ Pre-commit checks passed"
+      effort: "0.5 day"
+
+    total_effort: "2.5 person-days"
+    dependencies: ["All previous tasks"]
+    blocking: false
+    success_criteria:
+      - "CI runs on every push"
+      - "Coverage uploaded to Codecov"
+      - "Evidence artifacts saved (365 days)"
+      - "Pre-commit hook prevents broken commits"
+
+timeline:
+  phase_5_duration: "8 weeks (2026-07-01 to 2026-08-31)"
+
+  week_1_2:
+    dates: "2026-07-01 to 2026-07-14"
+    focus: "Test Suite Completion"
+    tasks:
+      - "Anti-gaming tests (3 days)"
+      - "WORM storage tests (3 days)"
+      - "Identity score tests (2 days)"
+      - "Health check tests (2 days)"
+    deliverables:
+      - "Unit tests for critical modules (≥95% coverage)"
+
+  week_3_4:
+    dates: "2026-07-15 to 2026-07-28"
+    focus: "Integration & Resilience Tests"
+    tasks:
+      - "Cache tests (3 days)"
+      - "Observability tests (2 days)"
+      - "E2E tests (4 days)"
+      - "Resilience tests (3 days)"
+    deliverables:
+      - "Integration tests complete"
+      - "Resilience scenarios passing"
+
+  week_5_6:
+    dates: "2026-07-29 to 2026-08-11"
+    focus: "Evidence Infrastructure"
+    tasks:
+      - "Coverage reporting (1.5 days)"
+      - "Evidence hash chain (3.5 days)"
+      - "Audit logging (5 days)"
+    deliverables:
+      - "coverage.json/xml/html generated"
+      - "hash_chain.json operational"
+      - "audit_YYYYMMDD.log auto-generated"
+
+  week_7_8:
+    dates: "2026-08-12 to 2026-08-31"
+    focus: "CI/CD Integration & Validation"
+    tasks:
+      - "CI/CD workflow (2.5 days)"
+      - "End-to-end validation"
+      - "Performance tuning"
+      - "Documentation"
+    deliverables:
+      - "GitHub Actions workflow deployed"
+      - "Evidence collection automated"
+      - "Phase 5 complete"
+
+resource_allocation:
+  team_structure:
+    - role: "QA Engineer"
+      count: 2
+      allocation: "100%"
+      tasks: ["Test suite completion", "Integration tests"]
+
+    - role: "DevOps Engineer"
+      count: 1
+      allocation: "50%"
+      tasks: ["CI/CD integration", "Evidence automation"]
+
+    - role: "Backend Engineer"
+      count: 1
+      allocation: "25%"
+      tasks: ["Evidence chain", "Audit logging"]
+
+  total_effort: "8 person-weeks"
+
+budget_breakdown:
+  personnel:
+    qa_engineers: "€16,000 (2 × 8 weeks × €1,000/week)"
+    devops_engineer: "€8,000 (1 × 8 weeks × 50% × €2,000/week)"
+    backend_engineer: "€3,200 (1 × 8 weeks × 25% × €1,600/week)"
+    subtotal: "€27,200"
+
+  tools_and_services:
+    codecov_pro: "€300 (annual subscription)"
+    ci_runners: "€1,000 (additional GitHub Actions minutes)"
+    test_data: "€500 (test fixtures, sample data)"
+    subtotal: "€1,800"
+
+  total_budget: "€29,000"
+  recommended_budget: "€35,000 (with 20% contingency)"
+
+risk_assessment:
+  technical_risks:
+    - risk: "Achieving 90% coverage difficult for legacy code"
+      likelihood: "MEDIUM"
+      mitigation: "Focus on critical paths first, allow 85% for non-critical"
+
+    - risk: "Flaky tests in CI/CD"
+      likelihood: "MEDIUM"
+      mitigation: "Implement retry logic, isolation, timeouts"
+
+  schedule_risks:
+    - risk: "Test writing takes longer than estimated"
+      likelihood: "MEDIUM"
+      mitigation: "Prioritize MUST components, defer HAVE"
+
+success_criteria:
+  phase_5_complete_when:
+    - "Overall test coverage ≥90%"
+    - "coverage.json/xml/html generated automatically"
+    - "hash_chain.json updated on every test run"
+    - "audit_YYYYMMDD.log auto-generated"
+    - "CI/CD pipeline runs tests on every commit"
+    - "Evidence artifacts saved for 365 days"
+    - "Zero flaky tests (3 consecutive green runs)"
+    - "Test suite runs in <10 minutes"
+
+  acceptance_tests:
+    - "Run all tests 10 times → 0 failures"
+    - "Tamper with hash_chain.json → verification fails"
+    - "Query audit logs by session ID → entries found"
+    - "CI pipeline → coverage uploaded to Codecov"
+
+next_steps:
+  immediate_actions:
+    - action: "Approve Phase 5 plan and budget"
+      owner: "Engineering Management"
+      deadline: "2026-06-15"
+
+    - action: "Allocate QA resources (2 engineers)"
+      owner: "Engineering Management"
+      deadline: "2026-06-25"
+
+    - action: "Begin test suite completion"
+      owner: "QA Team"
+      deadline: "2026-07-01"
+
+  reporting:
+    - "Weekly test coverage reports"
+    - "Bi-weekly demos of new test suites"
+    - "Final presentation on 2026-08-31"
+
+appendix:
+  dependencies_on_previous_phases:
+    phase_2: "WORM storage, anti-gaming scripts operational"
+    phase_3: "Cache, observability, health checks deployed"
+    phase_4: "Audit workflow, maturity matrix tools available"
+
+  future_work:
+    phase_6:
+      focus: "Production readiness and enterprise deployment"
+      timeline: "2026-Q4"
+      features:
+        - "Security penetration testing"
+        - "Performance load testing (100k req/s)"
+        - "Disaster recovery drills"
+        - "Multi-region failover tests"
+
+  related_documents:
+    - "11_test_simulation/run_all_tests.sh (test runner)"
+    - "11_test_simulation/.coveragerc (coverage config)"
+    - "23_compliance/reports/phase2_must_implementation_plan.yaml"
+    - "23_compliance/reports/phase3_should_implementation_plan.yaml"
+    - "23_compliance/reports/phase4_have_implementation_plan.yaml"
+
+  tools_and_frameworks:
+    testing:
+      - "pytest (test framework)"
+      - "pytest-cov (coverage plugin)"
+      - "pytest-xdist (parallel execution)"
+      - "hypothesis (property-based testing)"
+    ci_cd:
+      - "GitHub Actions (CI/CD)"
+      - "Codecov (coverage tracking)"
+      - "SonarQube (code quality)"
+    evidence:
+      - "SHA-256 (cryptographic hashing)"
+      - "JSON Lines (audit log format)"
+      - "JSON/XML/HTML (coverage formats)"
+
+document_control:
+  classification: "INTERNAL - Implementation Plan"
+  version: "1.0.0"
+  created: "2025-10-07"
+  approvals_required:
+    - "QA Team Lead"
+    - "DevOps Team Lead"
+    - "Compliance Team"
+  next_review: "2026-07-01 (Phase 5 kick-off)"

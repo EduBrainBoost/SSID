@@ -1,0 +1,131 @@
+openapi: 3.1.0
+info:
+  title: "Rollen, Rechte - Matching API"
+  description: "Feature matching API für access"
+  version: "2.0.0"
+
+servers:
+  - url: "https://zero_time_auth-access.ssid.example"
+
+security:
+  - mTLS: []
+
+paths:
+  /v1/match:
+    post:
+      operationId: performMatching
+      summary: "Perform feature matching"
+      parameters:
+        - $ref: '#/components/parameters/RequestID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [feature_hash]
+              properties:
+                feature_hash:
+                  $ref: '#/components/schemas/Hash'
+                threshold:
+                  type: number
+                  format: float
+                  minimum: 0.0
+                  maximum: 1.0
+                  default: 0.8
+              additionalProperties: false
+      responses:
+        '200':
+          description: "Match result"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  match_found:
+                    type: boolean
+                  similarity:
+                    type: number
+                    format: float
+                  evidence_hash:
+                    $ref: '#/components/schemas/Hash'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    mTLS:
+      type: mutualTLS
+  
+  parameters:
+    RequestID:
+      name: X-Request-ID
+      in: header
+      required: true
+      schema:
+        type: string
+        format: uuid
+  
+  schemas:
+    Hash:
+      type: string
+      pattern: '^[a-f0-9]{64}$'
+      minLength: 64
+      maxLength: 64
+      example: "115c99a9e9975b552b3917925f7acd248400176495ae8090cd2d72f827bff0f2"
+    
+    Error:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+  
+  responses:
+    BadRequest:
+      description: "Bad Request"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    Unauthorized:
+      description: "Unauthorized"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    UnprocessableEntity:
+      description: "Unprocessable Entity - PII detected"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    TooManyRequests:
+      description: "Too Many Requests"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    InternalServerError:
+      description: "Internal Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

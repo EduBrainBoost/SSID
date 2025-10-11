@@ -1,0 +1,903 @@
+---
+metadata:
+  plan_name: "Phase 2 - MUST Requirements Implementation"
+  version: "1.0.0"
+  created: "2025-10-07"
+  objective: "Achieve 100% MUST requirement compliance"
+  target_completion: "2025-11-15"
+  owner: "SSID Engineering & Compliance Team"
+
+executive_summary:
+  goal: "Make all 28 MUST requirements fully operational"
+  current_status: "27/28 implemented (96.4%)"
+  remaining_gap: "MUST-026-TRAVEL-RULE (partial)"
+  estimated_effort: "12 person-weeks"
+  estimated_budget: "€75,000 - €125,000"
+  risk_level: "MEDIUM"
+
+current_state_analysis:
+  policies:
+    distributed_count: 2693
+    central_count: 2
+    status: "REQUIRES_CONSOLIDATION"
+    issue: "Policies scattered across 24 root modules × 16 shards = 384 locations"
+
+  anti_gaming:
+    total_scripts: 13
+    implemented: 5
+    stubs: 8
+    status: "PARTIALLY_IMPLEMENTED"
+    implemented_scripts:
+      - "badge_integrity_checker.py"
+      - "overfitting_detector.py"
+      - "detect_duplicate_identity_hashes.py"
+      - "detect_circular_dependencies.py"
+      - "badge_integrity_checker.sh"
+    stub_scripts:
+      - "circular_dependency_validator.py (12 bytes)"
+      - "dependency_graph_generator.py (12 bytes)"
+      - "detect_proof_reuse_patterns.py (41 bytes)"
+      - "monitor_inconsistent_scores.sh (41 bytes)"
+      - "scan_unexpected_activity_windows.py (41 bytes)"
+
+  evidence_logging:
+    worm_storage: "EXISTS (empty)"
+    location: "02_audit_logging/storage/worm/immutable_store/"
+    status: "NEEDS_IMPLEMENTATION"
+
+  registry_integrity:
+    location: "24_meta_orchestration/registry/"
+    registry_lock: "NOT_FOUND"
+    hash_chain: "NOT_FOUND"
+    status: "NEEDS_VALIDATION"
+
+  identity_scoring:
+    location: "08_identity_score/src/identity_score_calculator.py"
+    status: "IMPLEMENTED"
+    quality: "PRODUCTION_READY"
+
+implementation_tasks:
+  task_1_policy_consolidation:
+    priority: "P0 - CRITICAL"
+    requirement: "MUST-001-POL-CENTRAL"
+    objective: "Centralize all 2693 policy files to 23_compliance/policies/"
+    current_gap: "2691 policies need migration"
+
+    approach:
+      strategy: "Hierarchical consolidation with root/shard organization"
+      structure: |
+        23_compliance/policies/
+        ├── root_01_ai_layer/
+        │   ├── shard_01_identitaet_personen/
+        │   │   ├── no_pii_storage.yaml
+        │   │   ├── hash_only_enforcement.yaml
+        │   │   ├── gdpr_compliance.yaml
+        │   │   ├── bias_fairness.yaml
+        │   │   ├── evidence_audit.yaml
+        │   │   ├── secrets_management.yaml
+        │   │   └── versioning_policy.yaml
+        │   ├── shard_02_dokumente_nachweise/
+        │   └── ... (16 shards)
+        ├── root_02_audit_logging/
+        ├── ... (24 roots)
+        ├── global/
+        │   ├── anti_gaming_policy.yaml
+        │   ├── structure_policy.yaml
+        │   └── master_compliance_policy.yaml
+        └── index.yaml
+
+    steps:
+      - step: 1
+        action: "Create target directory structure"
+        command: |
+          mkdir -p 23_compliance/policies/{root_{01..24}_*,global}
+          for root in 01_ai_layer 02_audit_logging 03_core 23_compliance; do
+            for shard in $(seq -f "%02g" 1 16); do
+              mkdir -p "23_compliance/policies/${root}/shard_${shard}_*"
+            done
+          done
+        duration: "30 minutes"
+
+      - step: 2
+        action: "Migrate policies maintaining structure"
+        script: |
+          #!/bin/bash
+          # Policy migration script
+          find . -type f \( -name "*.yaml" -o -name "*.rego" \) \
+               \( -path "*/policies/*" -o -name "*policy*" \) \
+               ! -path "*/23_compliance/policies/*" \
+               ! -path "*node_modules*" | while read src; do
+            # Extract root and shard from path
+            root=$(echo "$src" | cut -d'/' -f2)
+            shard=$(echo "$src" | grep -oP 'shard_\d+_\w+' || echo "common")
+            filename=$(basename "$src")
+
+            # Determine target path
+            if [[ "$shard" == "common" ]]; then
+              target="23_compliance/policies/${root}/${filename}"
+            else
+              target="23_compliance/policies/${root}/${shard}/${filename}"
+            fi
+
+            # Copy file
+            mkdir -p "$(dirname "$target")"
+            cp "$src" "$target"
+
+            # Add SHA-256 hash annotation
+            sha256=$(sha256sum "$target" | awk '{print $1}')
+            echo "" >> "$target"
+            echo "# sha256:$sha256" >> "$target"
+          done
+        duration: "2 hours"
+        validation: "Verify all 2693 files copied with hash annotations"
+
+      - step: 3
+        action: "Replace original policies with references"
+        approach: "Create .policy_ref files pointing to central location"
+        example: |
+          # 01_ai_layer/shards/01_identitaet_personen/policies/no_pii_storage.policy_ref
+          central_policy: "23_compliance/policies/root_01_ai_layer/shard_01_identitaet_personen/no_pii_storage.yaml"
+          migrated: "2025-10-07"
+          original_sha256: "abc123..."
+        duration: "1 hour"
+
+      - step: 4
+        action: "Create central policy index"
+        output_file: "23_compliance/policies/index.yaml"
+        content: |
+          version: "1.0.0"
+          total_policies: 2693
+          by_root:
+            01_ai_layer: 224
+            02_audit_logging: 196
+            03_core: 168
+            ...
+          by_type:
+            no_pii_storage: 384
+            hash_only_enforcement: 384
+            gdpr_compliance: 384
+            ...
+        duration: "30 minutes"
+
+      - step: 5
+        action: "Update CI/CD to reference central policies"
+        files:
+          - "12_tooling/scripts/structure_guard.sh"
+          - "24_meta_orchestration/triggers/ci/gates/structure_lock_l3.py"
+        duration: "1 hour"
+
+    effort_estimate: "5 person-days"
+    dependencies: []
+    blocking: false
+    success_criteria:
+      - "All 2693 policies in 23_compliance/policies/"
+      - "SHA-256 hash on every policy file"
+      - "Index file created and validated"
+      - "CI gates updated and passing"
+
+  task_2_anti_gaming_implementation:
+    priority: "P0 - CRITICAL"
+    requirement: "MUST-002-ANTI-GAMING"
+    objective: "Replace 8 stub scripts with production implementations"
+
+    scripts_to_implement:
+      - script: "circular_dependency_validator.py"
+        current_size: "12 bytes (stub)"
+        functionality: "Validate no circular dependencies in module graph"
+        implementation:
+          approach: "Wrap detect_circular_dependencies.py with file I/O"
+          input: "24_meta_orchestration/registry/manifests/*.yaml"
+          output: "Validation report with cycle list"
+          algorithm: "DFS-based cycle detection (already implemented)"
+        testing:
+          - "Test case: No cycles (should pass)"
+          - "Test case: A->B->C->A (should detect)"
+          - "Test case: Complex graph with multiple cycles"
+        effort: "2 days"
+
+      - script: "dependency_graph_generator.py"
+        current_size: "12 bytes (stub)"
+        functionality: "Generate DOT/SVG dependency graphs"
+        implementation:
+          approach: "Parse chart.yaml dependencies, output GraphViz DOT format"
+          libraries: "graphviz (Python)"
+          output_formats: ["dot", "svg", "png"]
+        testing:
+          - "Generate graph for single root"
+          - "Generate full 24-root dependency graph"
+          - "Highlight critical paths"
+        effort: "2 days"
+
+      - script: "detect_proof_reuse_patterns.py"
+        current_size: "41 bytes (stub)"
+        functionality: "Detect suspicious proof credential reuse"
+        implementation:
+          approach: |
+            1. Query 02_audit_logging for proof submissions
+            2. Group by proof_hash, user_id, timestamp
+            3. Flag patterns:
+               - Same proof used by multiple identities
+               - Proof used more frequently than expected
+               - Proof timing patterns (batch submissions)
+          data_source: "02_audit_logging/storage/worm/"
+          thresholds:
+            max_reuse_count: 3
+            max_reuse_window_days: 7
+            suspicious_batch_size: 10
+        testing:
+          - "Test: Legitimate proof reuse (e.g., passport scan)"
+          - "Test: Suspicious reuse (100+ identities same proof)"
+          - "Test: Batch submission detection"
+        effort: "3 days"
+
+      - script: "monitor_inconsistent_scores.sh"
+        current_size: "41 bytes (stub)"
+        functionality: "Monitor for gaming of identity scores"
+        implementation:
+          approach: |
+            #!/bin/bash
+            # Query identity scores from 08_identity_score
+            # Detect anomalies:
+            #   - Sudden score jumps (>20 points in 24h)
+            #   - Scores inconsistent with evidence
+            #   - Multiple identities with identical score patterns
+            python3 23_compliance/anti_gaming/_monitor_scores.py --threshold 20 --window 24h
+          supporting_script: "_monitor_scores.py"
+          alerts: "Send to compliance@ssid.org"
+        testing:
+          - "Test: Normal score evolution"
+          - "Test: Suspicious jump (20->95 overnight)"
+          - "Test: Pattern matching across identities"
+        effort: "3 days"
+
+      - script: "scan_unexpected_activity_windows.py"
+        current_size: "41 bytes (stub)"
+        functionality: "Detect off-hours batch activity (bot detection)"
+        implementation:
+          approach: |
+            1. Analyze 02_audit_logging timestamps
+            2. Build activity profile per identity/tenant
+            3. Flag anomalies:
+               - Batch operations at 3am (local time)
+               - Superhuman operation speed (ms between actions)
+               - Weekend/holiday batch processing
+          data_retention: "90 days rolling window"
+          ml_approach: "Isolation Forest for anomaly detection"
+        testing:
+          - "Test: Normal business hours activity"
+          - "Test: Bot-like patterns (3am, 1000 ops/hour)"
+          - "Test: Time zone handling"
+        effort: "4 days"
+
+      - script: "pii_detector.py (enhancement)"
+        current_status: "Basic implementation exists"
+        enhancements:
+          - "Add regex patterns for 20+ PII types"
+          - "Integrate with NER model for advanced detection"
+          - "Real-time blocking at API gateway"
+        effort: "2 days"
+
+      - script: "bias_monitor.py (new)"
+        functionality: "Monitor AI models for bias drift"
+        implementation:
+          approach: "Analyze 01_ai_layer model outputs for demographic disparities"
+          metrics: ["demographic parity", "equalized odds", "calibration"]
+          alert_threshold: "5% drift from baseline"
+        effort: "3 days"
+
+      - script: "drift_detector.py (new)"
+        functionality: "Monitor ML model performance drift"
+        implementation:
+          approach: "Track accuracy, F1, AUC over time"
+          window: "7-day rolling average"
+          alert_threshold: "10% performance degradation"
+        effort: "2 days"
+
+    total_effort: "21 person-days"
+    dependencies: ["WORM storage operational"]
+    blocking: true
+    success_criteria:
+      - "All 8 stub scripts replaced with >100 LOC implementations"
+      - "Unit tests: 90%+ coverage"
+      - "Integration tests passing"
+      - "CI gates enforcing anti-gaming checks"
+
+  task_3_worm_storage_implementation:
+    priority: "P0 - CRITICAL"
+    requirement: "MUST-007-WORM-STORAGE, MUST-003-AUDIT-LOGGING"
+    objective: "Implement Write-Once-Read-Many immutable evidence storage"
+
+    current_state:
+      location: "02_audit_logging/storage/worm/immutable_store/"
+      status: "Directory exists but empty (only .gitkeep)"
+
+    implementation:
+      approach: "Append-only file system with cryptographic integrity"
+
+      components:
+        - component: "worm_writer.py"
+          functionality: "Write audit logs to immutable storage"
+          features:
+            - "Append-only writes (no updates/deletes)"
+            - "SHA-256 hash chain linking"
+            - "Timestamp with RFC3339 format"
+            - "Atomic writes with fsync()"
+            - "File permissions: 0444 (read-only after write)"
+          implementation: |
+            import os, hashlib, json, time
+            from pathlib import Path
+
+            class WORMWriter:
+                def __init__(self, base_path: str):
+                    self.base = Path(base_path)
+                    self.base.mkdir(parents=True, exist_ok=True)
+                    self.chain_file = self.base / "hash_chain.json"
+
+                def write_entry(self, log_entry: dict) -> str:
+                    """Write entry and return its hash."""
+                    # Generate filename: YYYY-MM-DD/HH/entry_<timestamp>.json
+                    now = time.gmtime()
+                    date_dir = self.base / f"{now.tm_year:04d}-{now.tm_mon:02d}-{now.tm_mday:02d}"
+                    hour_dir = date_dir / f"{now.tm_hour:02d}"
+                    hour_dir.mkdir(parents=True, exist_ok=True)
+
+                    # Add metadata
+                    log_entry["_worm_timestamp"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", now)
+                    log_entry["_worm_prev_hash"] = self._get_last_hash()
+
+                    # Serialize and hash
+                    content = json.dumps(log_entry, sort_keys=True)
+                    entry_hash = hashlib.sha256(content.encode()).hexdigest()
+                    log_entry["_worm_hash"] = entry_hash
+
+                    # Write atomically
+                    filename = hour_dir / f"entry_{int(time.time())}_{entry_hash[:8]}.json"
+                    tmp_file = filename.with_suffix(".tmp")
+                    with open(tmp_file, "w") as f:
+                        json.dump(log_entry, f, indent=2)
+                        f.flush()
+                        os.fsync(f.fileno())
+                    os.rename(tmp_file, filename)
+                    os.chmod(filename, 0o444)  # Read-only
+
+                    # Update hash chain
+                    self._append_to_chain(entry_hash, str(filename))
+                    return entry_hash
+          effort: "3 days"
+
+        - component: "worm_reader.py"
+          functionality: "Read and verify audit logs"
+          features:
+            - "Read by date range"
+            - "Read by hash"
+            - "Verify hash chain integrity"
+            - "Export to CSV/JSON"
+          effort: "2 days"
+
+        - component: "worm_verifier.py"
+          functionality: "Verify storage integrity"
+          features:
+            - "Check hash chain continuity"
+            - "Verify file permissions (must be 0444)"
+            - "Detect tampering attempts"
+            - "Generate integrity report"
+          effort: "2 days"
+
+        - component: "blockchain_anchor.py"
+          functionality: "Anchor hash chains to blockchain"
+          networks: ["Ethereum Sepolia", "Polygon Amoy"]
+          frequency: "Hourly batching"
+          implementation:
+            approach: "Merkle tree of hourly hashes, anchor root"
+            gas_optimization: "Batch up to 1000 entries per anchor"
+          effort: "4 days"
+
+    testing:
+      unit_tests:
+        - "Test write immutability (attempt to modify file should fail)"
+        - "Test hash chain integrity"
+        - "Test concurrent writes"
+        - "Test read by date range"
+      integration_tests:
+        - "Write 10,000 entries, verify all readable"
+        - "Simulate tampering, verify detection"
+        - "Blockchain anchoring end-to-end"
+      performance_tests:
+        - "Throughput: 1000 writes/second"
+        - "Storage efficiency: <10% overhead"
+
+    total_effort: "11 person-days"
+    dependencies: []
+    blocking: true
+    success_criteria:
+      - "Immutable storage operational"
+      - "Hash chain verified"
+      - "Blockchain anchoring every hour"
+      - "Unit tests: 95%+ coverage"
+
+  task_4_registry_integrity:
+    priority: "P1 - HIGH"
+    requirement: "MUST-009-STRUCTURE-LOCK"
+    objective: "Validate registry lock and hash chain mechanisms"
+
+    files_to_create:
+      - file: "24_meta_orchestration/registry/registry_lock.yaml"
+        purpose: "Lock file preventing unauthorized registry changes"
+        content: |
+          version: "1.0.0"
+          locked: true
+          lock_timestamp: "2025-10-07T00:00:00Z"
+          lock_hash: "sha256:abc123..."
+          authorized_keys:
+            - key_id: "compliance-team-key"
+              pubkey: "ssh-ed25519 AAAA..."
+            - key_id: "ci-system-key"
+              pubkey: "ssh-ed25519 BBBB..."
+          unlock_requires: 2  # Multi-sig: 2 of 2 keys required
+        effort: "1 day"
+
+      - file: "24_meta_orchestration/registry/hash_chain.json"
+        purpose: "Cryptographic chain of all registry changes"
+        content: |
+          {
+            "version": "1.0.0",
+            "chain": [
+              {
+                "seq": 1,
+                "timestamp": "2025-10-05T12:00:00Z",
+                "action": "registry_init",
+                "files_changed": ["registry_index.yaml"],
+                "hash": "sha256:abc...",
+                "prev_hash": "0000000000000000"
+              },
+              {
+                "seq": 2,
+                "timestamp": "2025-10-06T14:30:00Z",
+                "action": "manifest_update",
+                "files_changed": ["manifests/01_ai_layer.yaml"],
+                "hash": "sha256:def...",
+                "prev_hash": "sha256:abc..."
+              }
+            ]
+          }
+        effort: "1 day"
+
+      - script: "registry_validator.py"
+        functionality: "Validate registry integrity"
+        checks:
+          - "Lock file present and valid"
+          - "Hash chain continuous (no gaps)"
+          - "All manifests referenced in chain"
+          - "No unauthorized modifications"
+        effort: "2 days"
+
+    total_effort: "4 person-days"
+    dependencies: []
+    blocking: false
+
+  task_5_identity_scoring_validation:
+    priority: "P2 - MEDIUM"
+    requirement: "MUST-004-IDENTITY-SCORE"
+    objective: "Validate existing implementation is production-ready"
+
+    current_assessment:
+      status: "IMPLEMENTED"
+      file: "08_identity_score/src/identity_score_calculator.py"
+      quality: "Production-ready (42 LOC, deterministic, config-driven)"
+
+    validation_tasks:
+      - task: "Create weights.yaml configuration"
+        location: "08_identity_score/config/weights.yaml"
+        content: |
+          version: "1.0.0"
+          scale: 100
+          weights:
+            kyc_verified: 0.35
+            credential_count: 0.20
+            reputation_score: 0.20
+            compliance_flags: 0.15
+            activity_score: 0.10
+          bounds:
+            credential_count_max: 20
+          penalties:
+            sanctions_hit: -40
+            fraud_suspected: -20
+        effort: "4 hours"
+
+      - task: "Unit tests"
+        location: "11_test_simulation/tests_root_08/test_identity_score.py"
+        test_cases:
+          - "Perfect profile → 100 score"
+          - "Minimal profile → low score"
+          - "Sanctions hit → penalty applied"
+          - "Fraud suspected → penalty applied"
+          - "Edge cases: missing fields, invalid ranges"
+        coverage_target: "100%"
+        effort: "1 day"
+
+      - task: "Integration test with 08_identity_score service"
+        scenarios:
+          - "REST API endpoint returns correct scores"
+          - "Score caching behavior"
+          - "Audit logging of score calculations"
+        effort: "1 day"
+
+      - task: "Performance benchmark"
+        target: "10,000 scores/second"
+        approach: "Benchmark with realistic profile data"
+        effort: "0.5 day"
+
+    total_effort: "2.5 person-days"
+    dependencies: []
+    blocking: false
+
+  task_6_travel_rule_integration:
+    priority: "P0 - CRITICAL"
+    requirement: "MUST-026-TRAVEL-RULE"
+    objective: "Complete IVMS101 Travel Rule implementation"
+
+    status: "PARTIAL - Requires external provider"
+
+    provider_options:
+      - provider: "Notabene"
+        pros: ["Market leader", "Full IVMS101 support", "90+ VASPs"]
+        cons: ["€50k+ annual fee"]
+        integration_time: "4 weeks"
+
+      - provider: "Sygna Bridge"
+        pros: ["Strong APAC presence", "Lower cost"]
+        cons: ["Fewer VASPs in EU"]
+        integration_time: "4 weeks"
+
+      - provider: "TRP.red"
+        pros: ["EU-focused", "Open protocol"]
+        cons: ["Smaller network"]
+        integration_time: "5 weeks"
+
+    recommended: "Notabene (best EU coverage)"
+
+    implementation_phases:
+      phase_1_provider_selection:
+        duration: "2 weeks"
+        activities:
+          - "RFP to 3 providers"
+          - "Technical evaluation"
+          - "Contract negotiation"
+        owner: "Procurement + Compliance"
+
+      phase_2_technical_integration:
+        duration: "3 weeks"
+        activities:
+          - "API integration in 03_core/"
+          - "IVMS101 message formatting"
+          - "€1000 threshold enforcement"
+          - "Testing with provider sandbox"
+        owner: "Engineering"
+
+      phase_3_testing_validation:
+        duration: "1 week"
+        activities:
+          - "End-to-end testing"
+          - "Compliance validation"
+          - "Production readiness review"
+        owner: "QA + Compliance"
+
+    total_effort: "6 weeks (15 person-days engineering)"
+    budget: "€50,000 - €100,000 (provider fees)"
+    dependencies: ["Provider contract signed"]
+    blocking: true
+    deadline: "2025-11-15"
+
+  task_7_unit_test_suite:
+    priority: "P1 - HIGH"
+    objective: "Create comprehensive test suite for all MUST implementations"
+
+    test_structure:
+      location: "11_test_simulation/tests_root_*/test_*.py"
+      framework: "pytest"
+      coverage_target: "90%"
+
+    test_files_to_create:
+      - file: "tests_root_23/test_policy_consolidation.py"
+        tests:
+          - "All 2693 policies in central location"
+          - "SHA-256 hashes present and valid"
+          - "Policy references resolve correctly"
+        effort: "1 day"
+
+      - file: "tests_root_23/test_anti_gaming.py"
+        tests:
+          - "Circular dependency detection"
+          - "Duplicate hash detection"
+          - "Badge integrity verification"
+          - "Proof reuse detection"
+          - "Score consistency monitoring"
+        effort: "2 days"
+
+      - file: "tests_root_02/test_worm_storage.py"
+        tests:
+          - "Write immutability"
+          - "Hash chain integrity"
+          - "Blockchain anchoring"
+          - "Tamper detection"
+        effort: "2 days"
+
+      - file: "tests_root_24/test_registry_integrity.py"
+        tests:
+          - "Registry lock enforcement"
+          - "Hash chain validation"
+          - "Unauthorized modification detection"
+        effort: "1 day"
+
+      - file: "tests_root_08/test_identity_score.py"
+        tests:
+          - "Score calculation accuracy"
+          - "Penalty application"
+          - "Edge cases and bounds"
+        effort: "1 day"
+
+    ci_integration:
+      - "Add to GitHub Actions / GitLab CI"
+      - "Fail build on <90% coverage"
+      - "Generate coverage reports"
+
+    total_effort: "7 person-days"
+
+  task_8_hash_annotations:
+    priority: "P2 - MEDIUM"
+    objective: "Add SHA-256 hash annotations to all policy files"
+
+    implementation:
+      script: |
+        #!/bin/bash
+        # add_hash_annotations.sh
+        find 23_compliance/policies -type f -name "*.yaml" -o -name "*.rego" | while read file; do
+          # Check if hash already exists
+          if ! grep -q "^# sha256:" "$file"; then
+            # Calculate hash (excluding any existing hash line)
+            hash=$(grep -v "^# sha256:" "$file" | sha256sum | awk '{print $1}')
+
+            # Append hash
+            echo "" >> "$file"
+            echo "# sha256:$hash" >> "$file"
+
+            echo "Added hash to $file"
+          fi
+        done
+
+    validation:
+      script: |
+        #!/bin/bash
+        # verify_hash_annotations.sh
+        errors=0
+        find 23_compliance/policies -type f -name "*.yaml" -o -name "*.rego" | while read file; do
+          if ! grep -q "^# sha256:" "$file"; then
+            echo "ERROR: Missing hash in $file"
+            ((errors++))
+          else
+            # Verify hash is correct
+            stored_hash=$(grep "^# sha256:" "$file" | cut -d':' -f2)
+            actual_hash=$(grep -v "^# sha256:" "$file" | sha256sum | awk '{print $1}')
+            if [[ "$stored_hash" != "$actual_hash" ]]; then
+              echo "ERROR: Hash mismatch in $file"
+              ((errors++))
+            fi
+          fi
+        done
+        exit $errors
+
+    total_effort: "1 person-day"
+
+timeline:
+  week_1:
+    dates: "2025-10-07 to 2025-10-13"
+    focus: "Foundation & Analysis"
+    tasks:
+      - "Task 1: Policy consolidation (days 1-5)"
+      - "Task 3: WORM storage design (days 1-3)"
+      - "Task 6: Travel Rule provider selection (days 1-5)"
+    deliverables:
+      - "All policies centralized"
+      - "WORM storage design approved"
+      - "Travel Rule provider selected"
+
+  week_2:
+    dates: "2025-10-14 to 2025-10-20"
+    focus: "Core Implementation"
+    tasks:
+      - "Task 2: Anti-gaming scripts (days 1-5)"
+      - "Task 3: WORM storage implementation (days 4-9)"
+      - "Task 6: Travel Rule contract negotiation"
+    deliverables:
+      - "5 anti-gaming scripts implemented"
+      - "WORM storage operational"
+      - "Travel Rule contract signed"
+
+  week_3:
+    dates: "2025-10-21 to 2025-10-27"
+    focus: "Integration & Testing"
+    tasks:
+      - "Task 2: Remaining anti-gaming scripts (days 6-10)"
+      - "Task 4: Registry integrity validation"
+      - "Task 5: Identity scoring validation"
+      - "Task 6: Travel Rule integration (phase 2 start)"
+      - "Task 7: Unit tests (days 1-3)"
+    deliverables:
+      - "All anti-gaming scripts complete"
+      - "Registry integrity validated"
+      - "Identity scoring validated"
+      - "Unit tests at 60% coverage"
+
+  week_4:
+    dates: "2025-10-28 to 2025-11-03"
+    focus: "Travel Rule & Testing"
+    tasks:
+      - "Task 6: Travel Rule integration (phase 2 continue)"
+      - "Task 7: Complete unit tests (days 4-7)"
+      - "Task 8: Hash annotations"
+    deliverables:
+      - "Travel Rule 80% integrated"
+      - "Unit tests at 90% coverage"
+      - "All policies hash-annotated"
+
+  week_5:
+    dates: "2025-11-04 to 2025-11-10"
+    focus: "Travel Rule Completion"
+    tasks:
+      - "Task 6: Travel Rule testing & validation (phase 3)"
+    deliverables:
+      - "Travel Rule testing complete"
+      - "Compliance validation passed"
+
+  week_6:
+    dates: "2025-11-11 to 2025-11-17"
+    focus: "Final Validation & Documentation"
+    tasks:
+      - "End-to-end integration testing"
+      - "Documentation updates"
+      - "Compliance review"
+    deliverables:
+      - "All 28 MUST requirements operational"
+      - "Documentation complete"
+      - "Ready for production"
+
+resource_allocation:
+  team_structure:
+    - role: "Backend Engineer"
+      count: 2
+      allocation: "100%"
+      tasks: ["Anti-gaming", "WORM storage", "Travel Rule integration"]
+
+    - role: "Compliance Engineer"
+      count: 1
+      allocation: "100%"
+      tasks: ["Policy consolidation", "Travel Rule validation"]
+
+    - role: "QA Engineer"
+      count: 1
+      allocation: "50%"
+      tasks: ["Unit tests", "Integration tests"]
+
+    - role: "DevOps Engineer"
+      count: 1
+      allocation: "25%"
+      tasks: ["CI/CD updates", "Registry integrity"]
+
+  total_effort: "12 person-weeks"
+
+budget_breakdown:
+  personnel:
+    backend_engineers: "€20,000 (2 × 6 weeks × €1,667/week)"
+    compliance_engineer: "€10,000 (1 × 6 weeks × €1,667/week)"
+    qa_engineer: "€5,000 (1 × 3 weeks × €1,667/week)"
+    devops_engineer: "€2,500 (1 × 1.5 weeks × €1,667/week)"
+    subtotal: "€37,500"
+
+  external_services:
+    travel_rule_provider: "€50,000 - €100,000 (annual, prorated)"
+    blockchain_gas_fees: "€2,000 (Ethereum/Polygon anchoring)"
+    subtotal: "€52,000 - €102,000"
+
+  total_budget: "€89,500 - €139,500"
+  recommended_budget: "€125,000 (with 10% contingency)"
+
+risk_assessment:
+  technical_risks:
+    - risk: "Travel Rule provider integration complexity"
+      likelihood: "MEDIUM"
+      impact: "HIGH"
+      mitigation: "Select provider with strong API support, allocate extra time"
+
+    - risk: "WORM storage performance at scale"
+      likelihood: "LOW"
+      impact: "MEDIUM"
+      mitigation: "Performance testing with 100k+ entries, optimize indexing"
+
+    - risk: "Policy consolidation breaks existing CI/CD"
+      likelihood: "MEDIUM"
+      impact: "MEDIUM"
+      mitigation: "Staged rollout, maintain backward compatibility for 1 sprint"
+
+  schedule_risks:
+    - risk: "Travel Rule provider delays (contract, onboarding)"
+      likelihood: "MEDIUM"
+      impact: "HIGH"
+      mitigation: "Start procurement immediately, have backup provider"
+
+    - risk: "Anti-gaming scripts more complex than estimated"
+      likelihood: "LOW"
+      impact: "MEDIUM"
+      mitigation: "Prioritize critical scripts, defer nice-to-haves"
+
+  compliance_risks:
+    - risk: "Travel Rule not operational by deadline"
+      likelihood: "LOW"
+      impact: "CRITICAL"
+      mitigation: "Executive escalation, consider expedited provider onboarding"
+
+success_criteria:
+  phase_2_complete_when:
+    - "All 28 MUST requirements show status: implemented"
+    - "sot_to_repo_matrix.yaml shows 100% MUST compliance"
+    - "All 2693 policies in 23_compliance/policies/ with SHA-256 hashes"
+    - "All 8 anti-gaming stubs replaced with production code"
+    - "WORM storage operational with blockchain anchoring"
+    - "Travel Rule integrated and tested"
+    - "Unit tests at 90%+ coverage for all MUST components"
+    - "CI gates passing"
+    - "Compliance team sign-off"
+
+  acceptance_tests:
+    - "End-to-end compliance validation"
+    - "Load test: 10,000 operations/minute"
+    - "Penetration test: Anti-gaming controls withstand attacks"
+    - "Disaster recovery: WORM storage integrity after simulated failure"
+
+next_steps:
+  immediate_actions:
+    - action: "Approve Phase 2 plan and budget"
+      owner: "Management Board"
+      deadline: "2025-10-08"
+
+    - action: "Assemble implementation team"
+      owner: "Engineering Management"
+      deadline: "2025-10-08"
+
+    - action: "Initiate Travel Rule provider RFP"
+      owner: "Procurement + Compliance"
+      deadline: "2025-10-09"
+
+    - action: "Begin policy consolidation"
+      owner: "Compliance Engineer"
+      deadline: "2025-10-10"
+
+  weekly_checkpoints:
+    - "Monday standup: Review progress, blockers"
+    - "Wednesday: Mid-week sync with Travel Rule provider"
+    - "Friday: Weekly status report to stakeholders"
+
+  reporting:
+    - "Weekly status email to stakeholders"
+    - "Bi-weekly demo to compliance team"
+    - "Final presentation on 2025-11-17"
+
+appendix:
+  related_documents:
+    - "23_compliance/sot_index.json"
+    - "23_compliance/mappings/sot_to_repo_matrix.yaml"
+    - "23_compliance/reports/sot_gap_report.yaml"
+
+  contact:
+    project_lead: "engineering-lead@ssid.org"
+    compliance_lead: "compliance@ssid.org"
+    technical_lead: "tech-lead@ssid.org"
+
+document_control:
+  classification: "INTERNAL - Implementation Plan"
+  version: "1.0.0"
+  created: "2025-10-07"
+  approvals_required:
+    - "Engineering Management"
+    - "Compliance Team Lead"
+    - "CFO (budget approval)"
+  next_review: "2025-10-14 (week 1 checkpoint)"

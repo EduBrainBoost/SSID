@@ -1,0 +1,179 @@
+meta:
+  version: "2025-Q4"
+  last_updated: "2025-10-07T00:00:00Z"
+  maintainer: "edubrainboost"
+  classification: "PUBLIC - Audit Findings"
+  audit_period: "2025-Q4"
+  status: "draft"
+
+audit_information:
+  audit_id: "AUDIT-2025-Q4-001"
+  audit_type: "compliance"  # Options: compliance, security, operational, financial
+  audit_date_start: "2025-10-01"
+  audit_date_end: "2025-12-31"
+  lead_auditor: ""
+  audit_team: []
+  audit_standard: "Internal Compliance Framework + EU Regulations"
+
+findings:
+  - finding_id: "F-2025-Q4-001"
+    finding_date: "2025-10-07"
+    severity: "medium"  # Options: critical, high, medium, low, observation
+    category: "compliance"  # Options: compliance, security, operational, documentation
+    framework: "GDPR"
+    article_reference: "Art. 30"
+    title: "Processing Activities Register - Sample Finding"
+    description: |
+      This is a sample finding entry demonstrating the structure for recording
+      audit findings. In an actual audit, this would contain specific details
+      about identified gaps or non-conformities.
+    affected_modules:
+      - "07_governance_legal"
+      - "23_compliance"
+    root_cause: ""
+    business_impact: "medium"  # Options: critical, high, medium, low, negligible
+    regulatory_risk: "medium"
+    financial_impact: ""
+    recommendation: |
+      Implement recommendation here. Include specific, actionable steps for
+      remediation.
+    management_response: ""
+    action_plan:
+      - step: ""
+        owner: ""
+        deadline: ""
+        status: "not_started"  # Options: not_started, in_progress, completed, overdue
+    evidence:
+      - type: "document"
+        location: ""
+        description: ""
+    status: "open"  # Options: open, in_progress, resolved, closed, accepted_risk
+    created_date: "2025-10-07"
+    target_closure_date: ""
+    actual_closure_date: ""
+    follow_up_required: true
+
+  - finding_id: "F-2025-Q4-002"
+    finding_date: "2025-10-07"
+    severity: "low"
+    category: "documentation"
+    framework: "DORA"
+    article_reference: "Art. 11"
+    title: "Incident Response Plan - Sample Finding"
+    description: |
+      Sample finding for documentation review. Replace with actual audit findings.
+    affected_modules:
+      - "05_documentation"
+      - "07_governance_legal"
+    root_cause: ""
+    business_impact: "low"
+    regulatory_risk: "low"
+    financial_impact: ""
+    recommendation: ""
+    management_response: ""
+    action_plan: []
+    evidence: []
+    status: "open"
+    created_date: "2025-10-07"
+    target_closure_date: ""
+    actual_closure_date: ""
+    follow_up_required: false
+
+positive_observations:
+  - observation_id: "PO-2025-Q4-001"
+    date: "2025-10-07"
+    area: "Hash-only Data Architecture"
+    description: |
+      The implementation of a strict hash-only data policy for PII represents
+      a best practice approach that exceeds standard GDPR requirements and
+      significantly reduces privacy risk.
+    framework: "GDPR"
+    modules:
+      - "09_meta_identity"
+      - "03_core"
+    best_practice_demonstrated: true
+
+  - observation_id: "PO-2025-Q4-002"
+    date: "2025-10-07"
+    area: "WORM Storage Implementation"
+    description: |
+      The use of WORM storage for audit trails and compliance evidence
+      demonstrates strong commitment to evidence integrity and regulatory
+      compliance.
+    framework: "DORA"
+    modules:
+      - "02_audit_logging"
+    best_practice_demonstrated: true
+
+summary_statistics:
+  total_findings: 2
+  by_severity:
+    critical: 0
+    high: 0
+    medium: 1
+    low: 1
+    observation: 0
+  by_status:
+    open: 2
+    in_progress: 0
+    resolved: 0
+    closed: 0
+    accepted_risk: 0
+  by_framework:
+    GDPR: 1
+    DORA: 1
+    MiCA: 0
+    AMLD6: 0
+    Other: 0
+  compliance_score: 0  # Percentage, calculated based on findings
+
+risk_assessment:
+  overall_risk_level: "low"  # Options: critical, high, medium, low, minimal
+  regulatory_risk: "low"
+  operational_risk: "low"
+  reputational_risk: "low"
+  financial_risk: "low"
+  key_risks:
+    - risk: ""
+      likelihood: ""  # Options: very_high, high, medium, low, very_low
+      impact: ""  # Options: critical, high, medium, low, negligible
+      mitigation: ""
+
+action_tracker:
+  total_actions: 0
+  actions_not_started: 0
+  actions_in_progress: 0
+  actions_completed: 0
+  actions_overdue: 0
+  completion_rate: 0  # Percentage
+
+follow_up_audit:
+  required: false
+  scheduled_date: ""
+  focus_areas: []
+  scope: ""
+
+auditor_sign_off:
+  lead_auditor_name: ""
+  lead_auditor_signature: ""
+  audit_completion_date: ""
+  report_location: ""
+  attestation: |
+    I confirm that this audit was conducted in accordance with applicable
+    auditing standards and that the findings represent an accurate assessment
+    of the compliance status at the time of the audit.
+
+management_acknowledgment:
+  acknowledged_by: ""
+  acknowledgment_date: ""
+  comments: ""
+
+references:
+  - title: "Audit Plan 2025-Q4"
+    location: "23_compliance/reviews/2025-Q4/audit_plan.pdf"
+  - title: "Previous Audit Findings"
+    location: "23_compliance/reviews/2025-Q3/audit_findings.yaml"
+  - title: "Compliance Framework Documentation"
+    location: "23_compliance/README.md"
+
+checksum: "sha256:4639e1c06bd35591fda803fd15deebe7b01d0528a1707d8b9c0db9383f4adcff"

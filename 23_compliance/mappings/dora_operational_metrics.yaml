@@ -1,0 +1,282 @@
+meta:
+  framework: "DORA"
+  metrics_type: "operational"
+  version: "2025-Q4"
+  source: "DORA Articles 15-16 + ICT Risk Management"
+  last_updated: "2025-10-07T00:00:00Z"
+  maintainer: "edubrainboost"
+  status: "draft"
+  classification: "OPERATIONAL - Real-time Metrics"
+
+description: |
+  DORA operational metrics framework for real-time compliance measurement.
+  Extends static compliance mappings with measurable operational indicators.
+  Enables continuous monitoring of DORA Article 11 (Response & Recovery) requirements.
+
+operational_metrics:
+  incident_management:
+    - metric_id: "DORA-OM-001"
+      name: "Incident Reporting Rate"
+      description: "Percentage of ICT incidents reported within DORA timelines"
+      dora_article: "Art. 26"
+      target_value: ">= 95%"
+      measurement_frequency: "continuous"
+      data_source: "02_audit_logging/incident_logs/"
+      calculation: "(incidents_reported_on_time / total_ict_incidents) * 100"
+      thresholds:
+        critical: "< 80%"
+        warning: "80-95%"
+        acceptable: ">= 95%"
+      remediation_trigger: "< 90% for 7 consecutive days"
+
+    - metric_id: "DORA-OM-002"
+      name: "Initial Notification Compliance"
+      description: "Percentage of incidents with initial notification within 4 hours"
+      dora_article: "Art. 26(5)"
+      target_value: "100%"
+      measurement_frequency: "per_incident"
+      data_source: "02_audit_logging/incident_logs/"
+      calculation: "(incidents_notified_4h / total_major_incidents) * 100"
+      thresholds:
+        critical: "< 90%"
+        warning: "90-99%"
+        acceptable: "100%"
+      regulatory_requirement: "4 hour initial notification (DORA Art. 26)"
+
+  resilience_testing:
+    - metric_id: "DORA-OM-003"
+      name: "Resilience Test Completion Rate"
+      description: "Percentage of scheduled resilience tests completed on time"
+      dora_article: "Art. 21"
+      target_value: "100%"
+      measurement_frequency: "monthly"
+      data_source: "11_test_simulation/resilience_tests/"
+      calculation: "(tests_completed / tests_scheduled) * 100"
+      thresholds:
+        critical: "< 80%"
+        warning: "80-95%"
+        acceptable: ">= 95%"
+      test_frequency:
+        basic: "annual"
+        advanced_tlpt: "triennial"
+
+    - metric_id: "DORA-OM-004"
+      name: "Resilience Test Pass Rate"
+      description: "Percentage of resilience tests passed without critical findings"
+      dora_article: "Art. 21-24"
+      target_value: ">= 90%"
+      measurement_frequency: "per_test"
+      data_source: "11_test_simulation/test_results/"
+      calculation: "(tests_passed / tests_executed) * 100"
+      thresholds:
+        critical: "< 70%"
+        warning: "70-90%"
+        acceptable: ">= 90%"
+
+  recovery_objectives:
+    - metric_id: "DORA-OM-005"
+      name: "Recovery Time Objective (RTO) Compliance"
+      description: "Percentage of services meeting defined RTO targets"
+      dora_article: "Art. 11(4)"
+      target_value: ">= 95%"
+      measurement_frequency: "per_incident"
+      data_source: "17_observability/recovery_metrics/"
+      calculation: "(services_meeting_rto / total_critical_services) * 100"
+      thresholds:
+        critical: "< 85%"
+        warning: "85-95%"
+        acceptable: ">= 95%"
+      rto_targets:
+        critical_services: "< 4 hours"
+        important_services: "< 24 hours"
+        standard_services: "< 72 hours"
+
+    - metric_id: "DORA-OM-006"
+      name: "Recovery Point Objective (RPO) Compliance"
+      description: "Percentage of data recovery within RPO targets"
+      dora_article: "Art. 11(4)"
+      target_value: ">= 99%"
+      measurement_frequency: "per_incident"
+      data_source: "02_audit_logging/backup_logs/"
+      calculation: "(recovery_within_rpo / total_recovery_operations) * 100"
+      thresholds:
+        critical: "< 90%"
+        warning: "90-99%"
+        acceptable: ">= 99%"
+      rpo_targets:
+        critical_data: "< 15 minutes"
+        important_data: "< 1 hour"
+        standard_data: "< 24 hours"
+
+  security_monitoring:
+    - metric_id: "DORA-OM-007"
+      name: "Security Monitoring Coverage"
+      description: "Percentage of ICT assets under continuous security monitoring"
+      dora_article: "Art. 10"
+      target_value: "100%"
+      measurement_frequency: "daily"
+      data_source: "17_observability/monitoring_coverage/"
+      calculation: "(monitored_assets / total_ict_assets) * 100"
+      thresholds:
+        critical: "< 95%"
+        warning: "95-99%"
+        acceptable: "100%"
+
+    - metric_id: "DORA-OM-008"
+      name: "Anomaly Detection Response Time"
+      description: "Average time to respond to detected anomalies"
+      dora_article: "Art. 10(1)"
+      target_value: "< 15 minutes"
+      measurement_frequency: "continuous"
+      data_source: "17_observability/alert_logs/"
+      calculation: "avg(anomaly_detected_timestamp - response_initiated_timestamp)"
+      thresholds:
+        critical: "> 60 minutes"
+        warning: "15-60 minutes"
+        acceptable: "< 15 minutes"
+      unit: "minutes"
+
+  third_party_risk:
+    - metric_id: "DORA-OM-009"
+      name: "Third-Party Risk Assessment Currency"
+      description: "Percentage of critical third parties with current risk assessments"
+      dora_article: "Art. 17"
+      target_value: "100%"
+      measurement_frequency: "monthly"
+      data_source: "07_governance_legal/third_party_assessments/"
+      calculation: "(assessed_current / total_critical_third_parties) * 100"
+      thresholds:
+        critical: "< 90%"
+        warning: "90-99%"
+        acceptable: "100%"
+      assessment_validity: "12 months"
+
+    - metric_id: "DORA-OM-010"
+      name: "Third-Party Incident Rate"
+      description: "Number of incidents originating from third-party services"
+      dora_article: "Art. 17(9)"
+      target_value: "< 5 per quarter"
+      measurement_frequency: "quarterly"
+      data_source: "02_audit_logging/third_party_incidents/"
+      calculation: "count(incidents WHERE source = 'third_party')"
+      thresholds:
+        critical: "> 10 per quarter"
+        warning: "5-10 per quarter"
+        acceptable: "< 5 per quarter"
+      trend_monitoring: true
+
+  change_management:
+    - metric_id: "DORA-OM-011"
+      name: "Change Failure Rate"
+      description: "Percentage of changes resulting in incidents"
+      dora_article: "Art. 9(4) - Security Measures"
+      target_value: "< 5%"
+      measurement_frequency: "monthly"
+      data_source: "04_deployment/change_logs/"
+      calculation: "(failed_changes / total_changes) * 100"
+      thresholds:
+        critical: "> 15%"
+        warning: "5-15%"
+        acceptable: "< 5%"
+
+    - metric_id: "DORA-OM-012"
+      name: "Emergency Change Rate"
+      description: "Percentage of changes classified as emergency"
+      dora_article: "Art. 11 - Response capability"
+      target_value: "< 10%"
+      measurement_frequency: "monthly"
+      data_source: "04_deployment/change_logs/"
+      calculation: "(emergency_changes / total_changes) * 100"
+      thresholds:
+        critical: "> 25%"
+        warning: "10-25%"
+        acceptable: "< 10%"
+      trend_monitoring: true
+
+  availability_metrics:
+    - metric_id: "DORA-OM-013"
+      name: "Critical Service Availability"
+      description: "Uptime percentage for critical ICT services"
+      dora_article: "Art. 6 - ICT Risk Management"
+      target_value: ">= 99.95%"
+      measurement_frequency: "continuous"
+      data_source: "17_observability/uptime_metrics/"
+      calculation: "(uptime_minutes / total_minutes) * 100"
+      thresholds:
+        critical: "< 99.5%"
+        warning: "99.5-99.95%"
+        acceptable: ">= 99.95%"
+      sla_commitment: "99.95% (four nines)"
+
+    - metric_id: "DORA-OM-014"
+      name: "Mean Time to Recovery (MTTR)"
+      description: "Average time to restore services after incidents"
+      dora_article: "Art. 11 - Recovery"
+      target_value: "< 2 hours"
+      measurement_frequency: "per_incident"
+      data_source: "17_observability/incident_metrics/"
+      calculation: "avg(service_restored_timestamp - incident_detected_timestamp)"
+      thresholds:
+        critical: "> 8 hours"
+        warning: "2-8 hours"
+        acceptable: "< 2 hours"
+      unit: "hours"
+
+dashboard_integration:
+  primary_dashboard: "17_observability/dashboards/dora_compliance_dashboard.json"
+  realtime_metrics: true
+  alert_integration: true
+  reporting_frequency: "daily"
+  executive_summary: "weekly"
+  regulatory_report: "quarterly"
+
+automation:
+  metric_collection: "automated"
+  threshold_monitoring: "continuous"
+  alert_generation: "realtime"
+  report_generation: "scheduled"
+  evidence_collection: "automatic"
+
+evidence_trail:
+  metrics_storage: "02_audit_logging/metrics/dora_operational/"
+  retention_period: "7 years"
+  immutable_storage: true
+  audit_ready: true
+  external_auditor_access: true
+
+integration_points:
+  incident_management: "02_audit_logging/incident_logs/"
+  monitoring_platform: "17_observability/"
+  testing_framework: "11_test_simulation/"
+  change_management: "04_deployment/"
+  third_party_management: "07_governance_legal/third_party/"
+  backup_systems: "02_audit_logging/backup_logs/"
+
+compliance_reporting:
+  monthly_report: "23_compliance/reports/dora_monthly_metrics.json"
+  quarterly_board_report: "23_compliance/reports/dora_quarterly_board.pdf"
+  annual_regulatory_report: "23_compliance/reports/dora_annual_regulatory.pdf"
+  incident_report: "ad-hoc per Art. 26 requirements"
+
+thresholds_rationale:
+  incident_reporting_95: "DORA requires prompt reporting; 95% allows 5% operational buffer"
+  rto_compliance_95: "Balance between operational reality and regulatory expectations"
+  rpo_compliance_99: "Higher standard for data integrity per DORA Art. 11"
+  availability_99_95: "Four nines standard for critical financial infrastructure"
+  mttr_2hours: "Based on DORA Art. 11 recovery time objectives"
+
+continuous_improvement:
+  metric_review_frequency: "quarterly"
+  threshold_adjustment: "based on trending data"
+  new_metrics_addition: "as DORA guidance evolves"
+  benchmark_comparison: "against industry standards"
+
+references:
+  - title: "DORA Article 11 - Response and Recovery"
+    url: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj#d1e2573-38-1"
+  - title: "DORA Article 26 - Incident Reporting"
+    url: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj#d1e3885-38-1"
+  - title: "EBA Guidelines on ICT Risk Management"
+    url: "https://www.eba.europa.eu/regulation-and-policy/internal-governance/guidelines-ict-and-security-risk-management"
+
+checksum: "sha256:placeholder_will_be_calculated"

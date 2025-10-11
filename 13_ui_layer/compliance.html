@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSID Compliance Dashboard</title>
+    <style>
+        :root {
+            --green: #10b981;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+            --bg-dark: #1f2937;
+            --bg-light: #f9fafb;
+            --border: #e5e7eb;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-dark);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        .status-badge.legally-aware {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-badge.not-aware {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .traffic-light {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .traffic-light.green {
+            background: var(--green);
+            animation: pulse-green 2s infinite;
+        }
+
+        .traffic-light.yellow {
+            background: var(--yellow);
+            animation: pulse-yellow 2s infinite;
+        }
+
+        .traffic-light.red {
+            background: var(--red);
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.6); }
+        }
+
+        @keyframes pulse-yellow {
+            0%, 100% { box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(245, 158, 11, 0.6); }
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.6); }
+        }
+
+        .card-content {
+            color: var(--text-light);
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .metrics-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .metrics-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .metric-card {
+            background: var(--bg-light);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border-left: 4px solid var(--green);
+        }
+
+        .metric-card-title {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .anchor-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .anchor-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .anchor-info {
+            background: var(--bg-light);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timestamp {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            text-align: right;
+            margin-top: 2rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.green { background: var(--green); }
+        .progress-fill.yellow { background: var(--yellow); }
+        .progress-fill.red { background: var(--red); }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>🎯 SSID Compliance Dashboard</h1>
+            <p class="subtitle">Real-time Regulatory Compliance Monitoring - Blueprint 4.1 (Root-24-LOCK)</p>
+            <div id="systemStatus"></div>
+        </div>
+
+        <div id="frameworksGrid" class="grid"></div>
+
+        <div id="doraMetrics" class="metrics-section"></div>
+
+        <div id="evidenceAnchor" class="anchor-section"></div>
+
+        <div class="timestamp" id="timestamp"></div>
+    </div>
+
+    <script>
+        // Simulated data loading (replace with actual API call)
+        async function loadComplianceData() {
+            // In production, this would fetch from compliance_dashboard.py endpoint
+            // For now, we'll use simulated data based on the actual structure
+            return {
+                timestamp: new Date().toISOString(),
+                system_status: {
+                    system_status: "legally_aware",
+                    legally_aware: true,
+                    compliance_framework: "EU Regulatory Package 2024/2025",
+                    blueprint_version: "4.1-ROOT24-LOCK"
+                },
+                frameworks: {
+                    GDPR: {
+                        status: "green",
+                        label: "COMPLIANT",
+                        coverage: "95%",
+                        coverage_numeric: 95,
+                        implemented_controls: 11,
+                        pending_controls: 0,
+                        planned_controls: 0
+                    },
+                    DORA: {
+                        status: "green",
+                        label: "COMPLIANT",
+                        coverage: "92%",
+                        coverage_numeric: 92,
+                        implemented_controls: 10,
+                        pending_controls: 0,
+                        planned_controls: 1
+                    },
+                    MiCA: {
+                        status: "yellow",
+                        label: "PARTIAL",
+                        coverage: "88%",
+                        coverage_numeric: 88,
+                        implemented_controls: 11,
+                        pending_controls: 0,
+                        planned_controls: 1
+                    },
+                    AMLD6: {
+                        status: "green",
+                        label: "COMPLIANT",
+                        coverage: "94%",
+                        coverage_numeric: 94,
+                        implemented_controls: 12,
+                        pending_controls: 0,
+                        planned_controls: 0
+                    }
+                },
+                dora_metrics: {
+                    total_metrics: 14,
+                    categories: {
+                        incident_management: 2,
+                        resilience_testing: 2,
+                        recovery_objectives: 2,
+                        security_monitoring: 2,
+                        third_party_risk: 2,
+                        change_management: 2,
+                        availability_metrics: 2
+                    },
+                    status: "active"
+                },
+                latest_anchor: {
+                    anchor_id: "ANCHOR-2025-Q4-001",
+                    timestamp: "2025-10-07T00:00:00Z",
+                    system_status: "legally_aware",
+                    compliance_version: "2025-Q4",
+                    frameworks: {
+                        gdpr: "sha256:1edcc508d227c18478a359f485c3fe54a0e94532bd7a180ae774eb6ff5572b29",
+                        dora: "sha256:8b57a13328463640fe55e60b95984ea646de14b31063a0efff9a7e2fbe4984f9",
+                        mica: "sha256:a63e6269101d886148598dc340b07c6d24d9a0d3bf07e38d5e676ceabb05466d",
+                        amld6: "sha256:0089e376745f4c7ee162510645c41f276838214c2a3d51a7c9ed34c6ab9368e3"
+                    }
+                }
+            };
+        }
+
+        function renderSystemStatus(systemStatus) {
+            const statusDiv = document.getElementById('systemStatus');
+            const badgeClass = systemStatus.legally_aware ? 'legally-aware' : 'not-aware';
+            const badgeText = systemStatus.legally_aware ? '✅ LEGALLY AWARE' : '❌ NOT AWARE';
+
+            statusDiv.innerHTML = `
+                <div class="status-badge ${badgeClass}">
+                    ${badgeText}
+                </div>
+                <p style="margin-top: 0.5rem; color: var(--text-light);">
+                    System Status: <strong>${systemStatus.system_status.toUpperCase()}</strong> |
+                    Framework: ${systemStatus.compliance_framework} |
+                    Blueprint: ${systemStatus.blueprint_version}
+                </p>
+            `;
+        }
+
+        function renderFrameworks(frameworks) {
+            const grid = document.getElementById('frameworksGrid');
+            grid.innerHTML = '';
+
+            const trafficLightEmoji = {
+                green: '🟢',
+                yellow: '🟡',
+                red: '🔴'
+            };
+
+            for (const [name, data] of Object.entries(frameworks)) {
+                const total = data.implemented_controls + data.pending_controls + data.planned_controls;
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h3 class="card-title">${name}</h3>
+                        <div class="traffic-light ${data.status}">
+                            ${trafficLightEmoji[data.status]}
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="metric-row">
+                            <span class="metric-label">Status</span>
+                            <span class="metric-value">${data.label}</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Coverage</span>
+                            <span class="metric-value">${data.coverage}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ${data.status}" style="width: ${data.coverage_numeric}%"></div>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Controls</span>
+                            <span class="metric-value">${data.implemented_controls}/${total} implemented</span>
+                        </div>
+                        ${data.planned_controls > 0 ? `
+                        <div class="metric-row">
+                            <span class="metric-label">Planned</span>
+                            <span class="metric-value">${data.planned_controls} controls</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        function renderDoraMetrics(doraMetrics) {
+            const section = document.getElementById('doraMetrics');
+
+            section.innerHTML = `
+                <h2>📊 DORA Operational Metrics</h2>
+                <div style="margin-bottom: 1rem;">
+                    <div class="metric-row">
+                        <span class="metric-label">Total Active Metrics</span>
+                        <span class="metric-value">${doraMetrics.total_metrics}</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Status</span>
+                        <span class="metric-value">${doraMetrics.status.toUpperCase()}</span>
+                    </div>
+                </div>
+                <div class="metrics-grid" id="metricsGrid"></div>
+            `;
+
+            const metricsGrid = document.getElementById('metricsGrid');
+
+            for (const [category, count] of Object.entries(doraMetrics.categories)) {
+                if (count > 0) {
+                    const metricCard = document.createElement('div');
+                    metricCard.className = 'metric-card';
+                    metricCard.innerHTML = `
+                        <div class="metric-card-title">${category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</div>
+                        <div class="metric-card-value">${count} metrics</div>
+                    `;
+                    metricsGrid.appendChild(metricCard);
+                }
+            }
+        }
+
+        function renderEvidenceAnchor(anchor) {
+            const section = document.getElementById('evidenceAnchor');
+
+            section.innerHTML = `
+                <h2>🔒 Latest Evidence Anchor</h2>
+                <div class="anchor-info">
+                    <div class="metric-row">
+                        <span class="metric-label">Anchor ID</span>
+                        <span class="metric-value">${anchor.anchor_id}</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Timestamp</span>
+                        <span class="metric-value">${new Date(anchor.timestamp).toLocaleString('de-DE')}</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">System Status</span>
+                        <span class="metric-value">${anchor.system_status.toUpperCase()}</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Compliance Version</span>
+                        <span class="metric-value">${anchor.compliance_version}</span>
+                    </div>
+                </div>
+                <h3 style="margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1.25rem;">Framework Checksums</h3>
+                ${Object.entries(anchor.frameworks).map(([fw, checksum]) => `
+                    <div class="anchor-info">
+                        <strong>${fw.toUpperCase()}</strong><br>
+                        <code style="font-size: 0.75rem; color: var(--text-light); word-break: break-all;">
+                            ${checksum}
+                        </code>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        async function initDashboard() {
+            try {
+                const data = await loadComplianceData();
+
+                renderSystemStatus(data.system_status);
+                renderFrameworks(data.frameworks);
+                renderDoraMetrics(data.dora_metrics);
+                renderEvidenceAnchor(data.latest_anchor);
+
+                document.getElementById('timestamp').textContent =
+                    `Last updated: ${new Date(data.timestamp).toLocaleString('de-DE')}`;
+
+            } catch (error) {
+                console.error('Error loading compliance data:', error);
+                document.body.innerHTML = '<div class="loading">❌ Error loading compliance data</div>';
+            }
+        }
+
+        // Initialize dashboard
+        initDashboard();
+
+        // Auto-refresh every 5 minutes
+        setInterval(initDashboard, 5 * 60 * 1000);
+    </script>
+</body>
+</html>

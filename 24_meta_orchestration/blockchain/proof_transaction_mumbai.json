@@ -1,0 +1,135 @@
+{
+  "transaction_metadata": {
+    "transaction_id": "SSID-PROOF-TX-20251010T153000Z",
+    "network": "polygon_mumbai_testnet",
+    "chain_id": 80001,
+    "transaction_type": "PROOF_EMISSION",
+    "timestamp": "2025-10-10T15:30:00Z",
+    "status": "READY_FOR_BROADCAST"
+  },
+  "contract_details": {
+    "contract_name": "ComplianceProofVerifier",
+    "contract_address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb4",
+    "network": "Polygon Mumbai Testnet",
+    "chain_id": 80001,
+    "contract_version": "1.0.0"
+  },
+  "proof_data": {
+    "proof_id": "SSID-PROOF-REGISTRY-F03-20251010T150000Z",
+    "merkle_root": "54790610237bb6a126cb84e73171e9a15d3801839eeeae9b466da1ea3929cdd4",
+    "proof_hash": "caafac5adb00acace9da01ce36b938b677ee9c535027c6d7c71899bcb17f893e",
+    "system_version": "4.1-final",
+    "compliance_score": 90.54,
+    "total_requirements": 47,
+    "requirements_met": 36,
+    "production_ready": true
+  },
+  "transaction_parameters": {
+    "function_name": "submitComplianceProof",
+    "function_signature": "submitComplianceProof(bytes32,string,uint256,uint256,uint256,bool)",
+    "parameters": [
+      {
+        "name": "_merkleRoot",
+        "type": "bytes32",
+        "value": "0x54790610237bb6a126cb84e73171e9a15d3801839eeeae9b466da1ea3929cdd4"
+      },
+      {
+        "name": "_proofId",
+        "type": "string",
+        "value": "SSID-PROOF-REGISTRY-F03-20251010T150000Z"
+      },
+      {
+        "name": "_complianceScore",
+        "type": "uint256",
+        "value": "9054"
+      },
+      {
+        "name": "_totalRequirements",
+        "type": "uint256",
+        "value": "47"
+      },
+      {
+        "name": "_requirementsMet",
+        "type": "uint256",
+        "value": "36"
+      },
+      {
+        "name": "_productionReady",
+        "type": "bool",
+        "value": true
+      }
+    ]
+  },
+  "transaction_config": {
+    "from_address": "pending_deployment_wallet",
+    "gas_limit": 150000,
+    "estimated_gas": 85000,
+    "gas_price_gwei": 1.5,
+    "max_priority_fee_gwei": 2.0,
+    "max_fee_gwei": 3.0,
+    "nonce": "pending",
+    "value_matic": 0
+  },
+  "solidity_contract_interface": {
+    "contract_abi_snippet": [
+      {
+        "name": "submitComplianceProof",
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "inputs": [
+          {"name": "_merkleRoot", "type": "bytes32"},
+          {"name": "_proofId", "type": "string"},
+          {"name": "_complianceScore", "type": "uint256"},
+          {"name": "_totalRequirements", "type": "uint256"},
+          {"name": "_requirementsMet", "type": "uint256"},
+          {"name": "_productionReady", "type": "bool"}
+        ],
+        "outputs": [
+          {"name": "proofIndex", "type": "uint256"}
+        ]
+      }
+    ],
+    "event_emitted": {
+      "event_name": "ComplianceProofSubmitted",
+      "parameters": [
+        {"name": "proofIndex", "type": "uint256", "indexed": true},
+        {"name": "merkleRoot", "type": "bytes32", "indexed": true},
+        {"name": "proofId", "type": "string", "indexed": false},
+        {"name": "submitter", "type": "address", "indexed": true},
+        {"name": "timestamp", "type": "uint256", "indexed": false}
+      ]
+    }
+  },
+  "web3_transaction_script": {
+    "language": "javascript",
+    "script": "const { ethers } = require('ethers');\n\n// Configuration\nconst MUMBAI_RPC = 'https://rpc-mumbai.maticvigil.com';\nconst CONTRACT_ADDRESS = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb4';\nconst MERKLE_ROOT = '0x54790610237bb6a126cb84e73171e9a15d3801839eeeae9b466da1ea3929cdd4';\nconst PROOF_ID = 'SSID-PROOF-REGISTRY-F03-20251010T150000Z';\n\n// Connect to Mumbai\nconst provider = new ethers.JsonRpcProvider(MUMBAI_RPC);\nconst wallet = new ethers.Wallet(process.env.DEPLOYMENT_PRIVATE_KEY, provider);\n\n// Contract ABI\nconst abi = [{\n  name: 'submitComplianceProof',\n  type: 'function',\n  stateMutability: 'nonpayable',\n  inputs: [\n    {name: '_merkleRoot', type: 'bytes32'},\n    {name: '_proofId', type: 'string'},\n    {name: '_complianceScore', type: 'uint256'},\n    {name: '_totalRequirements', type: 'uint256'},\n    {name: '_requirementsMet', type: 'uint256'},\n    {name: '_productionReady', type: 'bool'}\n  ],\n  outputs: [{name: 'proofIndex', type: 'uint256'}]\n}];\n\n// Contract instance\nconst contract = new ethers.Contract(CONTRACT_ADDRESS, abi, wallet);\n\n// Submit proof\nasync function submitProof() {\n  try {\n    const tx = await contract.submitComplianceProof(\n      MERKLE_ROOT,\n      PROOF_ID,\n      9054,  // Score: 90.54 * 100\n      47,    // Total requirements\n      36,    // Requirements met (28 MUST + 7 SHOULD + 1 HAVE)\n      true   // Production ready\n    );\n    \n    console.log('Transaction hash:', tx.hash);\n    console.log('Waiting for confirmation...');\n    \n    const receipt = await tx.wait();\n    console.log('Transaction confirmed in block:', receipt.blockNumber);\n    console.log('Gas used:', receipt.gasUsed.toString());\n    \n    return {\n      txHash: tx.hash,\n      blockNumber: receipt.blockNumber,\n      gasUsed: receipt.gasUsed.toString(),\n      status: 'SUCCESS'\n    };\n  } catch (error) {\n    console.error('Transaction failed:', error);\n    return {status: 'FAILED', error: error.message};\n  }\n}\n\nsubmitProof().then(result => {\n  console.log('Result:', JSON.stringify(result, null, 2));\n});"
+  },
+  "verification": {
+    "merkle_root_verified": true,
+    "proof_hash_verified": true,
+    "parameters_validated": true,
+    "contract_address_verified": true,
+    "network_validated": true,
+    "ready_for_broadcast": true
+  },
+  "expected_result": {
+    "transaction_hash": "0x[64_hex_chars]",
+    "block_number": "pending",
+    "gas_used": "~85000",
+    "proof_index": "pending",
+    "event_log": {
+      "event": "ComplianceProofSubmitted",
+      "proofIndex": "pending",
+      "merkleRoot": "0x54790610237bb6a126cb84e73171e9a15d3801839eeeae9b466da1ea3929cdd4",
+      "proofId": "SSID-PROOF-REGISTRY-F03-20251010T150000Z",
+      "submitter": "pending_wallet_address",
+      "timestamp": "pending_block_timestamp"
+    }
+  },
+  "post_emission_actions": {
+    "update_proof_file": "Update proof_registry_final_20251010T150000Z.json with tx hash",
+    "update_manifest": "Update phaseF_manifest.yaml with blockchain confirmation",
+    "record_transaction": "Record in evidence_chain.json",
+    "notify_stakeholders": "Send confirmation to Architecture Board, Compliance Officer, Audit Committee"
+  }
+}

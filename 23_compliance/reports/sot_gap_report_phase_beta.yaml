@@ -1,0 +1,224 @@
+gaps:
+  HAVE:
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-002-AB-TESTING
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: A/B Testing Framework
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-003-FEATURE-FLAGS
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Feature Flag System
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-004-ML-OPTIMIZATION
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: ML-Based Optimizations
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-005-ANOMALY-DETECTION
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: ML Anomaly Detection
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-006-FEDERATED-LEARNING
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Federated Learning Support
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-007-ADVANCED-BIAS-CONTROL
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Advanced Bias Controls
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-008-DRIFT-DETECTION
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Model Drift Detection
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-009-CUSTOM-DASHBOARDS
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Custom Analytics Dashboards
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-010-PREDICTIVE-SCALING
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Predictive Auto-Scaling
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-011-MULTI-MODAL-AI
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Multi-Modal AI Processing
+    priority: MEDIUM
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: HAVE-012-IPFS-INTEGRATION
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: IPFS Distributed Storage
+    priority: MEDIUM
+    status: missing
+  MUST: []
+  SHOULD:
+  - confidence: 0.5
+    dependencies: []
+    effort_estimate: 2-5 days
+    id: SHOULD-001-HEALTH-TEMPLATE
+    issues: []
+    maps_to:
+    - 17_observability/
+    - 12_tooling/health/
+    name: Health Check Templates
+    priority: HIGH
+    status: partial
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: SHOULD-002-CACHE-LAYER
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Performance Caching
+    priority: HIGH
+    status: missing
+  - confidence: 0.5
+    dependencies: []
+    effort_estimate: 2-5 days
+    id: SHOULD-003-ADVANCED-METRICS
+    issues: []
+    maps_to:
+    - 17_observability/
+    - 12_tooling/health/
+    name: Enhanced Monitoring Metrics
+    priority: HIGH
+    status: partial
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: SHOULD-004-RESILIENCE-TEST
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Resilience Testing
+    priority: HIGH
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: SHOULD-005-MULTI-REGION
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Multi-Region Deployment
+    priority: HIGH
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: SHOULD-006-XAI-EXPLAINABILITY
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 23_compliance/
+    name: Explainable AI
+    priority: HIGH
+    status: missing
+  - confidence: 0.0
+    dependencies: []
+    effort_estimate: 5-10 days
+    id: SHOULD-007-QUANTUM-SAFE
+    issues:
+    - No specific mapping rule - needs manual review
+    maps_to:
+    - 21_post_quantum_crypto/
+    - 03_core/security/
+    name: Quantum-Safe Cryptography
+    priority: HIGH
+    status: missing
+metadata:
+  generated: '2025-10-09T21:51:15.882387Z'
+  purpose: Phase beta Gap Analysis
+  version: 2.0.0
+recommendations:
+- action: Complete MUST-026-TRAVEL-RULE by 2025-11-15
+  priority: CRITICAL
+  reason: AMLD6 compliance deadline
+- action: Implement caching layer for performance
+  priority: HIGH
+  reason: SHOULD requirements improve system resilience
+- action: Document HAVE features for compliance score
+  priority: MEDIUM
+  reason: Many partial implementations just need documentation
+summary:
+  by_tier:
+    HAVE: 11
+    MUST: 0
+    SHOULD: 7
+  total_effort_estimate: 127 person-days (25 person-weeks)
+  total_gaps: 18

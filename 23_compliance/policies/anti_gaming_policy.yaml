@@ -1,0 +1,382 @@
+---
+# SSID Anti-Gaming Policy Configuration
+# Threshold-based enforcement for duplicate identity detection
+# Author: edubrainboost ©2025 MIT License
+# Version: 1.0.0
+# Last Updated: 2025-10-07
+
+metadata:
+  policy_id: "anti_gaming_duplicate_identity_v1"
+  version: "1.0.0"
+  effective_date: "2025-10-07"
+  review_cycle: "quarterly"
+  owner: "compliance_team"
+  classification: "INTERNAL - Policy Configuration"
+
+description: |
+  This policy defines thresholds and enforcement rules for the duplicate identity
+  hash detection system. It establishes when the system should transition between
+  PASS, WARN, and FAIL states based on collision counts.
+
+scope:
+  component: "anti_gaming"
+  check_type: "duplicate_identity_hashes"
+  monitored_directories:
+    - "08_identity_score/"
+    - "02_audit_logging/evidence/"
+  supported_formats:
+    - ".json"
+    - ".yaml"
+    - ".yml"
+    - ".csv"
+
+# ============================================================================
+# ADDITIONAL ANTI-GAMING RULES
+# ============================================================================
+
+rules:
+  circular_deps:
+    max_cycle_length: 4
+    severity: "high"
+    description: "Maximum allowed import cycle length before enforcement triggers"
+    enforcement: "CI gate blocks merge"
+
+  overfitting:
+    max_overfit_gap:
+      accuracy: 0.07
+      f1: 0.08
+    severity: "medium"
+    description: "Maximum acceptable gap between train and eval metrics"
+    enforcement: "Warning + manual review required"
+
+  replay:
+    nonce_uniqueness_window_minutes: 120
+    severity: "critical"
+    description: "Time window for nonce uniqueness validation (replay attack prevention)"
+    enforcement: "CI gate blocks merge + security alert"
+
+  time_skew:
+    max_allowed_skew_seconds: 300
+    severity: "high"
+    description: "Maximum allowed timestamp skew (5 minutes) to prevent backdating"
+    enforcement: "CI gate blocks merge"
+
+  anomaly_rate:
+    rate_limits:
+      events_per_minute_per_did: 10
+      events_per_hour_per_did: 500
+    burst_limits:
+      per_5s: 5
+    severity: "high"
+    description: "Rate limiting to prevent botting and spam attacks"
+    enforcement: "CI gate blocks merge + automated throttling"
+
+  badge_integrity:
+    severity: "medium"
+    description: "Validate badge assets against documented checksums"
+    enforcement: "Warning + manual verification"
+
+# ============================================================================
+# THRESHOLD CONFIGURATION (Duplicate Identity Detection)
+# ============================================================================
+
+thresholds:
+  # PASS: No action required
+  pass:
+    collision_count_max: 0
+    description: "No duplicate identities detected"
+    action: "none"
+    exit_code: 0
+    alert_level: "info"
+
+  # WARN: Monitoring required, but not blocking
+  warn:
+    collision_count_min: 1
+    collision_count_max: 2
+    description: "Minor duplicates detected - requires investigation"
+    action: "alert_compliance_team"
+    exit_code: 0  # Don't block CI, but log warning
+    alert_level: "warning"
+    notification_channels:
+      - "slack"
+      - "email"
+    escalation_delay_hours: 24
+
+  # FAIL: Critical violation, immediate action required
+  fail:
+    collision_count_min: 3
+    description: "Critical gaming attempt detected - multiple duplicate identities"
+    action: "block_ci_and_alert"
+    exit_code: 2  # Policy violation exit code
+    alert_level: "critical"
+    notification_channels:
+      - "slack"
+      - "email"
+      - "pagerduty"
+    escalation_delay_hours: 1
+
+  # CRITICAL: Severe gaming attack
+  critical:
+    collision_count_min: 10
+    description: "Severe gaming attack - immediate lockdown required"
+    action: "emergency_lockdown"
+    exit_code: 2
+    alert_level: "emergency"
+    notification_channels:
+      - "slack"
+      - "email"
+      - "pagerduty"
+      - "sms"
+    escalation_delay_hours: 0  # Immediate escalation
+
+# ============================================================================
+# COLLISION TYPE SEVERITY
+# ============================================================================
+
+collision_severity:
+  hash_duplicate:
+    base_severity: "high"
+    description: "Same hash appearing in multiple files - possible copy attack"
+    weight_multiplier: 1.5
+
+  did_duplicate:
+    base_severity: "critical"
+    description: "Same DID in multiple proofs - definite identity fraud"
+    weight_multiplier: 2.0
+
+  cross_directory_duplicate:
+    base_severity: "critical"
+    description: "Duplicates across identity_score/ and evidence/ - sophisticated attack"
+    weight_multiplier: 2.5
+
+# ============================================================================
+# ENFORCEMENT ACTIONS
+# ============================================================================
+
+enforcement:
+  automatic_actions:
+    on_warn:
+      - action: "log_to_audit_trail"
+        target: "02_audit_logging/logs/anti_gaming_duplicate_hashes.jsonl"
+      - action: "send_notification"
+        channels: ["slack", "email"]
+      - action: "create_compliance_ticket"
+        system: "jira"
+        priority: "medium"
+      - action: "update_registry_lock"
+        file: "24_meta_orchestration/registry/locks/registry_lock.yaml"
+
+    on_fail:
+      - action: "log_to_audit_trail"
+        target: "02_audit_logging/logs/anti_gaming_duplicate_hashes.jsonl"
+      - action: "send_notification"
+        channels: ["slack", "email", "pagerduty"]
+      - action: "block_ci_pipeline"
+        exit_code: 2
+      - action: "create_compliance_ticket"
+        system: "jira"
+        priority: "high"
+      - action: "update_registry_lock"
+        file: "24_meta_orchestration/registry/locks/registry_lock.yaml"
+      - action: "quarantine_affected_files"
+        target_dir: "02_audit_logging/quarantine/anti_gaming/"
+
+    on_critical:
+      - action: "log_to_audit_trail"
+        target: "02_audit_logging/logs/anti_gaming_duplicate_hashes.jsonl"
+      - action: "send_notification"
+        channels: ["slack", "email", "pagerduty", "sms"]
+      - action: "block_ci_pipeline"
+        exit_code: 2
+      - action: "emergency_lockdown"
+        lock_registry: true
+        disable_deployments: true
+      - action: "create_compliance_ticket"
+        system: "jira"
+        priority: "critical"
+      - action: "trigger_incident_response"
+        playbook: "07_governance_legal/incident_response/gaming_attack.md"
+      - action: "blockchain_anchor_evidence"
+        chains: ["ethereum", "polygon"]
+      - action: "update_registry_lock"
+        file: "24_meta_orchestration/registry/locks/registry_lock.yaml"
+
+  manual_override:
+    allowed: true
+    requires_approval:
+      - "compliance_lead"
+      - "security_lead"
+    audit_trail: true
+    justification_required: true
+
+# ============================================================================
+# NOTIFICATION CONFIGURATION
+# ============================================================================
+
+notifications:
+  slack:
+    enabled: true
+    webhook_env_var: "SLACK_COMPLIANCE_WEBHOOK"
+    channel: "#ssid-compliance-alerts"
+    mention_on_fail: "@compliance-team"
+    mention_on_critical: "@here"
+
+  email:
+    enabled: true
+    recipients:
+      warn: ["compliance@ssid.org"]
+      fail: ["compliance@ssid.org", "security@ssid.org"]
+      critical: ["compliance@ssid.org", "security@ssid.org", "cto@ssid.org"]
+    subject_template: "[{alert_level}] SSID Anti-Gaming Alert: {collision_count} duplicates detected"
+
+  pagerduty:
+    enabled: false  # Set to true in production
+    integration_key_env_var: "PAGERDUTY_INTEGRATION_KEY"
+    severity_mapping:
+      warn: "warning"
+      fail: "error"
+      critical: "critical"
+
+  sms:
+    enabled: false  # Set to true in production
+    provider: "twilio"
+    recipients_env_var: "EMERGENCY_SMS_RECIPIENTS"
+
+# ============================================================================
+# AUDIT & EVIDENCE
+# ============================================================================
+
+audit:
+  log_format: "jsonl"
+  log_location: "02_audit_logging/logs/anti_gaming_duplicate_hashes.jsonl"
+  retention_days: 3650  # 10 years
+  append_only: true  # WORM-compatible
+
+  required_fields:
+    - "timestamp"
+    - "component"
+    - "check"
+    - "status"
+    - "collision_count"
+    - "collisions"
+
+  optional_fields:
+    - "threshold_level"
+    - "severity_score"
+    - "affected_files"
+    - "enforcement_actions_taken"
+
+evidence:
+  blockchain_anchoring:
+    enabled: true
+    chains: ["ethereum", "polygon"]
+    frequency: "on_fail_or_critical"
+    anchor_hash_algorithm: "sha3-256"
+
+  quarantine:
+    enabled: true
+    on_threshold: "fail"
+    target_directory: "02_audit_logging/quarantine/anti_gaming/"
+    preserve_original: true
+    add_metadata: true
+
+# ============================================================================
+# INTEGRATION POINTS
+# ============================================================================
+
+integrations:
+  registry_lock:
+    file: "24_meta_orchestration/registry/locks/registry_lock.yaml"
+    update_on_run: true
+    fields_to_update:
+      - "anti_gaming_status.last_run"
+      - "anti_gaming_status.collision_count"
+      - "anti_gaming_status.status"
+      - "anti_gaming_status.evidence_log"
+
+  observability:
+    monitoring_script: "17_observability/compliance_alert_monitor.py"
+    metrics_export: true
+    prometheus_metrics:
+      - "ssid_anti_gaming_collision_count"
+      - "ssid_anti_gaming_check_duration_seconds"
+      - "ssid_anti_gaming_status"
+
+  ci_cd:
+    workflow_integration: true
+    fail_on_threshold: "fail"
+    allow_override: false
+
+  on_chain_proof:
+    enabled: false  # Future feature
+    contract: "ComplianceProofVerifier.sol"
+    method: "recordAntiGamingProof"
+    proof_type: "no_duplicate_identity"
+
+# ============================================================================
+# COMPLIANCE NOTES
+# ============================================================================
+
+compliance:
+  gdpr:
+    article_5_integrity: "Hash-only processing ensures data integrity without PII exposure"
+    article_25_privacy_by_design: "Non-custodial detection, no PII stored"
+    article_30_processing_records: "Comprehensive audit logs maintained"
+
+  eidas:
+    article_24_security: "Secure detection mechanisms with append-only logging"
+    trust_services: "Non-repudiation via blockchain anchoring"
+
+  mica:
+    article_60_custody: "Non-custodial architecture, no private key handling"
+    article_76_resilience: "Automated enforcement with manual override capability"
+
+# ============================================================================
+# TESTING & VALIDATION
+# ============================================================================
+
+testing:
+  unit_tests: "tests/12_tooling/duplicate_checks/test_detect_duplicate_identity_hashes.py"
+  threshold_tests:
+    - test_pass_threshold_zero_collisions
+    - test_warn_threshold_one_collision
+    - test_warn_threshold_two_collisions
+    - test_fail_threshold_three_collisions
+    - test_critical_threshold_ten_collisions
+
+  integration_tests:
+    - test_registry_lock_update
+    - test_notification_dispatch
+    - test_ci_pipeline_blocking
+    - test_quarantine_execution
+
+# ============================================================================
+# CHANGE LOG
+# ============================================================================
+
+changelog:
+  - version: "1.0.0"
+    date: "2025-10-07"
+    changes:
+      - "Initial policy definition"
+      - "Threshold configuration (PASS/WARN/FAIL/CRITICAL)"
+      - "Notification channel setup"
+      - "Registry lock integration"
+      - "Compliance mapping (GDPR/eIDAS/MiCA)"
+    author: "edubrainboost"
+    approved_by: "compliance_lead"
+
+# ============================================================================
+# NEXT REVIEW
+# ============================================================================
+
+next_review:
+  scheduled_date: "2026-01-07"
+  trigger_events:
+    - "Major gaming attack detected"
+    - "Regulatory requirement change"
+    - "System architecture update"
+  review_participants:
+    - "compliance_lead"
+    - "security_lead"
+    - "architecture_board"

@@ -1,0 +1,40 @@
+# Policy: No PII Storage
+version: 1.0.0
+policy_id: "no_pii_06_06"
+
+scope:
+  - "All implementations"
+  - "06_data_pipeline/shards/Shard_06_Bildung_Qualifikationen"
+
+rules:
+  - rule_id: "R001"
+    description: "Forbid raw PII storage"
+    enforcement: "blocking"
+    checks:
+      - type: "semgrep"
+        severity: "ERROR"
+        patterns:
+          - "ssn"
+          - "passport"
+          - "biometric"
+          - "password"
+      - type: "runtime"
+        detector: "pii_detector"
+        action: "reject_request"
+
+  - rule_id: "R002"
+    description: "Enforce immediate hashing"
+    requirement: "Hash within 100ms of receipt"
+    algorithm: "SHA3-256"
+    pepper: "per_tenant"
+
+violations:
+  - level: "CRITICAL"
+    action: "system_block"
+    notification: "compliance@example.local"
+    escalation: "immediate"
+
+audit:
+  log_to: "02_audit_logging"
+  retention_days: 3650
+  evidence_required: true

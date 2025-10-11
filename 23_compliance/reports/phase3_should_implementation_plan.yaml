@@ -1,0 +1,1009 @@
+---
+metadata:
+  plan_name: "Phase 3 - SHOULD Requirements Implementation"
+  version: "1.0.0"
+  created: "2025-10-07"
+  objective: "Activate recommended but non-mandatory features"
+  prerequisite: "Phase 2 complete (100% MUST compliance)"
+  target_completion: "2026-01-31"
+  owner: "SSID Engineering Team"
+
+executive_summary:
+  goal: "Implement 7 SHOULD requirements (71.4% → 100%)"
+  current_status: "1/7 implemented, 4/7 partial, 2/7 missing"
+  priority: "MEDIUM - Enhances operational excellence but not blocking"
+  estimated_effort: "8 person-weeks"
+  estimated_budget: "€35,000 - €50,000"
+  risk_level: "LOW"
+
+current_state_analysis:
+  should_requirements:
+    - id: "SHOULD-001-HEALTH-TEMPLATE"
+      name: "Health Check Templates"
+      status: "implemented"
+      implementation: "03_core/healthcheck/health_check_core.py (232 LOC)"
+      quality: "PRODUCTION_READY"
+      coverage: "388 services (24 roots × 16 shards + core)"
+      assessment: "✅ Complete - only documentation needed"
+
+    - id: "SHOULD-002-CACHE-LAYER"
+      name: "Performance Caching"
+      status: "partial"
+      implementation: "03_core/cache/ (basic structure)"
+      gap: "Redis integration, TTL management, cache invalidation"
+      assessment: "🟡 40% complete - needs production hardening"
+
+    - id: "SHOULD-003-ADVANCED-METRICS"
+      name: "Enhanced Monitoring Metrics"
+      status: "partial"
+      implementation: "17_observability/ (directory exists, no metrics exporter)"
+      gap: "Prometheus exporter, custom business metrics"
+      assessment: "🟡 20% complete - needs full observability stack"
+
+    - id: "SHOULD-004-RESILIENCE-TEST"
+      name: "Resilience Testing"
+      status: "partial"
+      implementation: "11_test_simulation/ (unit tests only)"
+      gap: "Chaos engineering, DORA resilience tests"
+      assessment: "🟡 30% complete - needs resilience framework"
+
+    - id: "SHOULD-005-MULTI-REGION"
+      name: "Multi-Region Deployment"
+      status: "missing"
+      implementation: "None"
+      gap: "Geographic redundancy, multi-region K8s"
+      assessment: "❌ 0% complete - infrastructure overhaul required"
+
+    - id: "SHOULD-006-XAI-EXPLAINABILITY"
+      name: "Explainable AI"
+      status: "partial"
+      implementation: "01_ai_layer/explainability/ (basic SHAP)"
+      gap: "EU AI Act compliance, model cards, bias reports"
+      assessment: "🟡 50% complete - needs EU AI Act alignment"
+
+    - id: "SHOULD-007-QUANTUM-SAFE"
+      name: "Quantum-Safe Cryptography"
+      status: "partial"
+      implementation: "21_post_quantum_crypto/ (research phase)"
+      gap: "NIST algorithm integration, key rotation"
+      assessment: "🟡 30% complete - NIST standardization in progress"
+
+implementation_tasks:
+  task_1_health_check_standardization:
+    priority: "P2 - MEDIUM"
+    requirement: "SHOULD-001-HEALTH-TEMPLATE"
+    objective: "Standardize and document existing health check framework"
+
+    current_state:
+      status: "IMPLEMENTED"
+      core_implementation: "03_core/healthcheck/health_check_core.py"
+      wrappers_generated: 388
+      quality: "Production-ready"
+
+    remaining_work:
+      documentation:
+        - file: "12_tooling/health/README.md"
+          content: |
+            # SSID Health Check Framework
+
+            ## Overview
+            Unified readiness framework for all 388 services (24 roots × 16 shards + core).
+
+            ## Architecture
+            - **Core:** 03_core/healthcheck/health_check_core.py
+            - **Wrappers:** */shards/*/implementations/*/src/api/health.py
+            - **Registry:** 24_meta_orchestration/registry/locks/service_health_registry.yaml
+
+            ## Health Check Types
+            1. **Port Check:** TCP connection to service port
+            2. **HTTP Check:** GET request to /health endpoint
+            3. **Registry Check:** YAML status lookup
+
+            ## Usage
+            ```python
+            from healthcheck.health_check_core import HealthChecker, run_checks
+
+            checkers = [
+                HealthChecker(name="my-service", port=8080, endpoint="/health")
+            ]
+            success = run_checks(checkers)
+            ```
+
+            ## Registry Format
+            ```yaml
+            services:
+              01_ai_layer-01_identitaet_personen:
+                status: up
+                port: 8101
+                endpoint: /health
+                last_check: "2025-10-07T12:00:00Z"
+            summary:
+              healthy: 385
+              total: 388
+              percentage: 99.23
+            ```
+          effort: "1 day"
+
+        - file: "12_tooling/health/integration_guide.md"
+          content: "Step-by-step guide for adding health checks to new services"
+          effort: "0.5 day"
+
+      template_creation:
+        - file: "12_tooling/health/template_health.py"
+          purpose: "Reference template for new health check implementations"
+          content: |
+            #!/usr/bin/env python3
+            """
+            Health check template for SSID services.
+            Copy this file to your service's src/api/health.py
+            """
+            import sys
+            from pathlib import Path
+
+            ROOT = Path(__file__).resolve().parents[N]  # Adjust N based on depth
+            CORE_PATH = ROOT / "03_core"
+            sys.path.insert(0, str(CORE_PATH))
+
+            from healthcheck.health_check_core import HealthChecker, run_checks
+
+            def check_health() -> bool:
+                checkers = [
+                    HealthChecker(
+                        name="ROOT-SHARD",  # e.g., "01_ai_layer-01_identitaet_personen"
+                        port=8XXX,          # Assigned port number
+                        endpoint="/health",
+                        timeout=3.0
+                    ),
+                ]
+                return run_checks(checkers)
+
+            if __name__ == "__main__":
+                success = check_health()
+                sys.exit(0 if success else 1)
+          effort: "0.5 day"
+
+      ci_integration:
+        - action: "Add health check validation to CI/CD"
+          location: "24_meta_orchestration/triggers/ci/gates/health_check_gate.py"
+          validation:
+            - "All 388 services have health.py"
+            - "All services respond to health checks in <5s"
+            - "Registry shows >95% healthy"
+          effort: "1 day"
+
+    total_effort: "3 person-days"
+    dependencies: []
+    blocking: false
+    success_criteria:
+      - "Documentation complete and published"
+      - "Template available in 12_tooling/health/"
+      - "CI gates enforcing health checks"
+      - "All 388 services reporting to registry"
+
+  task_2_cache_layer_implementation:
+    priority: "P1 - HIGH"
+    requirement: "SHOULD-002-CACHE-LAYER"
+    objective: "Complete production-ready caching layer with Redis"
+
+    current_gap:
+      existing: "03_core/cache/ (basic structure)"
+      missing:
+        - "Redis integration"
+        - "TTL management"
+        - "Cache invalidation strategies"
+        - "Distributed cache coherence"
+
+    implementation:
+      components:
+        - component: "cache_manager.py"
+          location: "03_core/cache/cache_manager.py"
+          functionality: "Unified caching interface"
+          features:
+            - "Redis backend with connection pooling"
+            - "Fallback to in-memory cache (development)"
+            - "TTL support (seconds, minutes, hours)"
+            - "Key namespacing by root/shard"
+            - "Cache statistics and monitoring"
+          implementation: |
+            import redis
+            import json
+            import time
+            from typing import Any, Optional, Dict
+            from dataclasses import dataclass
+
+            @dataclass
+            class CacheConfig:
+                redis_host: str = "localhost"
+                redis_port: int = 6379
+                redis_db: int = 0
+                redis_password: Optional[str] = None
+                default_ttl: int = 300  # 5 minutes
+                key_prefix: str = "ssid:"
+
+            class CacheManager:
+                """Production-ready caching layer with Redis backend."""
+
+                def __init__(self, config: CacheConfig):
+                    self.config = config
+                    self.redis = redis.Redis(
+                        host=config.redis_host,
+                        port=config.redis_port,
+                        db=config.redis_db,
+                        password=config.redis_password,
+                        decode_responses=True,
+                        socket_timeout=2.0,
+                        socket_connect_timeout=2.0
+                    )
+                    self.stats = {"hits": 0, "misses": 0, "sets": 0}
+
+                def _make_key(self, key: str, namespace: str = "") -> str:
+                    """Create namespaced cache key."""
+                    if namespace:
+                        return f"{self.config.key_prefix}{namespace}:{key}"
+                    return f"{self.config.key_prefix}{key}"
+
+                def get(self, key: str, namespace: str = "") -> Optional[Any]:
+                    """Get value from cache."""
+                    full_key = self._make_key(key, namespace)
+                    try:
+                        value = self.redis.get(full_key)
+                        if value is None:
+                            self.stats["misses"] += 1
+                            return None
+                        self.stats["hits"] += 1
+                        return json.loads(value)
+                    except (redis.RedisError, json.JSONDecodeError):
+                        self.stats["misses"] += 1
+                        return None
+
+                def set(
+                    self,
+                    key: str,
+                    value: Any,
+                    ttl: Optional[int] = None,
+                    namespace: str = ""
+                ) -> bool:
+                    """Set value in cache with optional TTL."""
+                    full_key = self._make_key(key, namespace)
+                    ttl = ttl or self.config.default_ttl
+                    try:
+                        serialized = json.dumps(value)
+                        self.redis.setex(full_key, ttl, serialized)
+                        self.stats["sets"] += 1
+                        return True
+                    except (redis.RedisError, TypeError):
+                        return False
+
+                def delete(self, key: str, namespace: str = "") -> bool:
+                    """Delete key from cache."""
+                    full_key = self._make_key(key, namespace)
+                    try:
+                        self.redis.delete(full_key)
+                        return True
+                    except redis.RedisError:
+                        return False
+
+                def delete_pattern(self, pattern: str, namespace: str = "") -> int:
+                    """Delete all keys matching pattern."""
+                    full_pattern = self._make_key(pattern, namespace)
+                    try:
+                        keys = self.redis.keys(full_pattern)
+                        if keys:
+                            return self.redis.delete(*keys)
+                        return 0
+                    except redis.RedisError:
+                        return 0
+
+                def flush_namespace(self, namespace: str) -> int:
+                    """Flush all keys in namespace."""
+                    return self.delete_pattern("*", namespace)
+
+                def get_stats(self) -> Dict[str, int]:
+                    """Get cache statistics."""
+                    total = self.stats["hits"] + self.stats["misses"]
+                    hit_rate = (self.stats["hits"] / total * 100) if total > 0 else 0
+                    return {
+                        **self.stats,
+                        "total_requests": total,
+                        "hit_rate_percent": round(hit_rate, 2)
+                    }
+          effort: "4 days"
+
+        - component: "cache_decorators.py"
+          location: "03_core/cache/cache_decorators.py"
+          functionality: "Python decorators for easy caching"
+          features:
+            - "@cached decorator for functions"
+            - "@cached_property for class properties"
+            - "Automatic key generation from function args"
+          implementation: |
+            from functools import wraps
+            import hashlib
+            import json
+
+            def cached(ttl: int = 300, namespace: str = ""):
+                """Decorator to cache function results."""
+                def decorator(func):
+                    @wraps(func)
+                    def wrapper(*args, **kwargs):
+                        from .cache_manager import get_cache  # Lazy import
+                        cache = get_cache()
+
+                        # Generate cache key from function name and args
+                        key_data = {
+                            "func": func.__name__,
+                            "args": args,
+                            "kwargs": sorted(kwargs.items())
+                        }
+                        key_str = json.dumps(key_data, sort_keys=True)
+                        key_hash = hashlib.md5(key_str.encode()).hexdigest()
+
+                        # Try cache first
+                        cached_value = cache.get(key_hash, namespace)
+                        if cached_value is not None:
+                            return cached_value
+
+                        # Execute function and cache result
+                        result = func(*args, **kwargs)
+                        cache.set(key_hash, result, ttl, namespace)
+                        return result
+
+                    return wrapper
+                return decorator
+          effort: "2 days"
+
+        - component: "cache_invalidation.py"
+          location: "03_core/cache/cache_invalidation.py"
+          functionality: "Cache invalidation strategies"
+          strategies:
+            - "Time-based (TTL expiration)"
+            - "Event-based (invalidate on data change)"
+            - "Pattern-based (invalidate by key pattern)"
+            - "Cascade invalidation (dependent keys)"
+          effort: "3 days"
+
+      configuration:
+        - file: "03_core/cache/config/redis_dev.yaml"
+          content: |
+            redis_host: "localhost"
+            redis_port: 6379
+            redis_db: 0
+            default_ttl: 300
+            key_prefix: "ssid:dev:"
+
+        - file: "03_core/cache/config/redis_prod.yaml"
+          content: |
+            redis_host: "redis-cluster.ssid.internal"
+            redis_port: 6379
+            redis_db: 0
+            redis_password: "${REDIS_PASSWORD}"
+            default_ttl: 600
+            key_prefix: "ssid:prod:"
+            sentinel:
+              enabled: true
+              service_name: "ssid-redis"
+
+      deployment:
+        - action: "Deploy Redis cluster (3 nodes for HA)"
+          infrastructure: "15_infra/redis/"
+          configuration:
+            mode: "cluster"
+            nodes: 3
+            memory: "4GB per node"
+            persistence: "RDB + AOF"
+          effort: "2 days"
+
+    testing:
+      unit_tests:
+        - "Cache hit/miss scenarios"
+        - "TTL expiration"
+        - "Pattern deletion"
+        - "Namespace isolation"
+      integration_tests:
+        - "Redis connection failure handling"
+        - "Cache coherence across services"
+        - "High concurrency (1000+ req/s)"
+      performance_tests:
+        - "Throughput: 10,000 ops/second"
+        - "Latency: p95 < 5ms"
+      effort: "3 days"
+
+    total_effort: "14 person-days"
+    dependencies: ["Redis deployment"]
+    blocking: false
+    success_criteria:
+      - "Redis cluster deployed and operational"
+      - "CacheManager implemented with 95%+ test coverage"
+      - "Decorators available for easy integration"
+      - "Performance benchmarks met (10k ops/s, <5ms p95)"
+
+  task_3_observability_metrics:
+    priority: "P1 - HIGH"
+    requirement: "SHOULD-003-ADVANCED-METRICS"
+    objective: "Implement Prometheus metrics exporter and custom business KPIs"
+
+    current_gap:
+      existing: "17_observability/ (directory exists)"
+      missing:
+        - "Prometheus exporter"
+        - "Custom business metrics"
+        - "Grafana dashboards"
+        - "Alert rules"
+
+    implementation:
+      components:
+        - component: "prometheus_exporter.py"
+          location: "17_observability/metrics/prometheus_exporter.py"
+          functionality: "Prometheus-compatible metrics exporter"
+          metrics:
+            technical:
+              - "ssid_http_requests_total (counter)"
+              - "ssid_http_request_duration_seconds (histogram)"
+              - "ssid_http_errors_total (counter)"
+              - "ssid_service_health_status (gauge)"
+              - "ssid_cache_hit_rate (gauge)"
+              - "ssid_worm_writes_total (counter)"
+              - "ssid_blockchain_anchors_total (counter)"
+            business:
+              - "ssid_identity_verifications_total (counter)"
+              - "ssid_identity_score_distribution (histogram)"
+              - "ssid_compliance_checks_total (counter)"
+              - "ssid_anti_gaming_violations_total (counter)"
+              - "ssid_active_identities (gauge)"
+              - "ssid_token_transactions_total (counter)"
+          implementation: |
+            from prometheus_client import Counter, Histogram, Gauge, generate_latest
+            from prometheus_client.core import CollectorRegistry
+            from flask import Flask, Response
+
+            # Create registry
+            registry = CollectorRegistry()
+
+            # Technical metrics
+            http_requests_total = Counter(
+                'ssid_http_requests_total',
+                'Total HTTP requests',
+                ['method', 'endpoint', 'status'],
+                registry=registry
+            )
+
+            http_request_duration = Histogram(
+                'ssid_http_request_duration_seconds',
+                'HTTP request duration',
+                ['method', 'endpoint'],
+                buckets=(0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0),
+                registry=registry
+            )
+
+            service_health = Gauge(
+                'ssid_service_health_status',
+                'Service health status (1=up, 0=down)',
+                ['service'],
+                registry=registry
+            )
+
+            # Business metrics
+            identity_verifications = Counter(
+                'ssid_identity_verifications_total',
+                'Total identity verifications',
+                ['root', 'shard', 'result'],
+                registry=registry
+            )
+
+            identity_score_distribution = Histogram(
+                'ssid_identity_score_distribution',
+                'Distribution of identity scores',
+                buckets=(0, 20, 40, 60, 80, 100),
+                registry=registry
+            )
+
+            # Flask app for /metrics endpoint
+            app = Flask(__name__)
+
+            @app.route('/metrics')
+            def metrics():
+                return Response(generate_latest(registry), mimetype='text/plain')
+
+            if __name__ == '__main__':
+                app.run(host='0.0.0.0', port=9090)
+          effort: "4 days"
+
+        - component: "metrics_collector.py"
+          location: "17_observability/metrics/metrics_collector.py"
+          functionality: "Collect metrics from all SSID services"
+          features:
+            - "Pull health registry (service status)"
+            - "Query audit logs (WORM writes, anchors)"
+            - "Query identity scores (score distribution)"
+            - "Query cache stats (hit rate)"
+          effort: "3 days"
+
+        - component: "custom_metrics_registry.yaml"
+          location: "17_observability/metrics/custom_metrics_registry.yaml"
+          purpose: "Define custom business metrics per shard"
+          content: |
+            version: "1.0.0"
+            metrics:
+              01_ai_layer:
+                - name: "ssid_ai_model_inferences_total"
+                  type: "counter"
+                  labels: ["shard", "model_version"]
+                - name: "ssid_ai_bias_score"
+                  type: "gauge"
+                  labels: ["shard", "demographic"]
+              02_audit_logging:
+                - name: "ssid_audit_log_entries_total"
+                  type: "counter"
+                  labels: ["event_type"]
+                - name: "ssid_worm_storage_bytes"
+                  type: "gauge"
+              08_identity_score:
+                - name: "ssid_identity_scores_calculated_total"
+                  type: "counter"
+                  labels: ["shard"]
+                - name: "ssid_identity_risk_alerts_total"
+                  type: "counter"
+                  labels: ["risk_level"]
+          effort: "1 day"
+
+      dashboards:
+        - dashboard: "SSID Overview"
+          location: "17_observability/dashboards/ssid_overview.json"
+          panels:
+            - "Service Health (388 services)"
+            - "Request Rate (HTTP requests/s)"
+            - "Error Rate (%)"
+            - "P95 Latency"
+            - "Cache Hit Rate"
+            - "Active Identities"
+          effort: "2 days"
+
+        - dashboard: "Compliance Monitoring"
+          location: "17_observability/dashboards/compliance.json"
+          panels:
+            - "WORM Writes (rate)"
+            - "Blockchain Anchors (hourly)"
+            - "Anti-Gaming Violations"
+            - "Identity Verifications by Shard"
+            - "Policy Checks (pass/fail)"
+          effort: "2 days"
+
+      alerting:
+        - file: "17_observability/alerts/prometheus_rules.yaml"
+          content: |
+            groups:
+              - name: ssid_alerts
+                interval: 30s
+                rules:
+                  - alert: ServiceDown
+                    expr: ssid_service_health_status == 0
+                    for: 2m
+                    labels:
+                      severity: critical
+                    annotations:
+                      summary: "Service {{ $labels.service }} is down"
+
+                  - alert: HighErrorRate
+                    expr: rate(ssid_http_errors_total[5m]) > 0.05
+                    for: 5m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Error rate > 5% for {{ $labels.endpoint }}"
+
+                  - alert: CacheHitRateLow
+                    expr: ssid_cache_hit_rate < 0.7
+                    for: 10m
+                    labels:
+                      severity: info
+                    annotations:
+                      summary: "Cache hit rate below 70%"
+          effort: "1 day"
+
+      deployment:
+        - action: "Deploy Prometheus server"
+          location: "15_infra/observability/prometheus/"
+          configuration:
+            retention: "30 days"
+            scrape_interval: "15s"
+            targets: ["17_observability:9090"]
+          effort: "1 day"
+
+        - action: "Deploy Grafana"
+          location: "15_infra/observability/grafana/"
+          configuration:
+            datasource: "Prometheus"
+            dashboards: ["ssid_overview", "compliance"]
+          effort: "1 day"
+
+    total_effort: "15 person-days"
+    dependencies: ["Prometheus deployment", "Grafana deployment"]
+    blocking: false
+    success_criteria:
+      - "Prometheus exporter running on port 9090"
+      - "20+ custom metrics defined and collected"
+      - "2 Grafana dashboards deployed"
+      - "Alert rules configured and tested"
+
+  task_4_dependency_graph_enhancement:
+    priority: "P2 - MEDIUM"
+    requirement: "SHOULD-002-ANTI-GAMING (enhancement)"
+    objective: "Add real inter-root dependency visualization"
+
+    current_state:
+      existing: "23_compliance/anti_gaming/dependency_graph_generator.py (stub)"
+      implemented: "detect_circular_dependencies.py (DFS algorithm)"
+
+    implementation:
+      - component: "dependency_graph_generator.py"
+        location: "23_compliance/anti_gaming/dependency_graph_generator.py"
+        functionality: "Generate DOT/SVG dependency graphs from chart.yaml files"
+        features:
+          - "Parse all 384 chart.yaml files (24 roots × 16 shards)"
+          - "Extract dependencies from chart.yaml"
+          - "Generate GraphViz DOT format"
+          - "Output SVG, PNG, PDF formats"
+          - "Color-code by root module"
+          - "Highlight circular dependencies (red edges)"
+        implementation: |
+          import yaml
+          import graphviz
+          from pathlib import Path
+          from typing import Dict, List, Tuple, Set
+
+          def parse_chart_dependencies(chart_path: Path) -> List[Tuple[str, str]]:
+              """Extract dependencies from chart.yaml."""
+              with open(chart_path) as f:
+                  chart = yaml.safe_load(f)
+
+              source = f"{chart['metadata']['root']}/{chart['metadata']['shard_id']}"
+              edges = []
+
+              for dep in chart.get('dependencies', {}).get('required', []):
+                  target = dep['root']
+                  edges.append((source, target))
+
+              return edges
+
+          def generate_dependency_graph(
+              ssid_root: Path,
+              output_format: str = "svg",
+              output_path: Path = Path("dependency_graph")
+          ) -> None:
+              """Generate dependency graph from all chart.yaml files."""
+
+              # Collect all edges
+              all_edges = []
+              for root_dir in ssid_root.glob("**/chart.yaml"):
+                  if "23_compliance/shards" in str(root_dir):
+                      all_edges.extend(parse_chart_dependencies(root_dir))
+
+              # Create graph
+              dot = graphviz.Digraph(
+                  comment='SSID Dependency Graph',
+                  format=output_format,
+                  graph_attr={
+                      'rankdir': 'LR',
+                      'bgcolor': 'white',
+                      'fontname': 'Helvetica',
+                      'fontsize': '12'
+                  }
+              )
+
+              # Add edges with color coding
+              root_colors = {
+                  '01_ai_layer': '#FF6B6B',
+                  '02_audit_logging': '#4ECDC4',
+                  '03_core': '#45B7D1',
+                  '08_identity_score': '#FFA07A',
+                  '09_meta_identity': '#98D8C8',
+                  '17_observability': '#FFE66D',
+                  '23_compliance': '#95E1D3'
+              }
+
+              for source, target in all_edges:
+                  source_root = source.split('/')[0]
+                  color = root_colors.get(source_root, 'gray')
+                  dot.edge(source, target, color=color)
+
+              # Highlight circular dependencies
+              from .detect_circular_dependencies import detect_cycles
+              cycles = detect_cycles(all_edges)
+              for cycle in cycles:
+                  for i in range(len(cycle) - 1):
+                      dot.edge(cycle[i], cycle[i+1], color='red', style='bold')
+
+              # Render
+              dot.render(output_path, cleanup=True)
+              print(f"Graph generated: {output_path}.{output_format}")
+
+          if __name__ == "__main__":
+              from argparse import ArgumentParser
+              parser = ArgumentParser()
+              parser.add_argument("--root", default=".", help="SSID root directory")
+              parser.add_argument("--format", default="svg", choices=["svg", "png", "pdf"])
+              parser.add_argument("--output", default="dependency_graph")
+              args = parser.parse_args()
+
+              generate_dependency_graph(
+                  Path(args.root),
+                  args.format,
+                  Path(args.output)
+              )
+        effort: "3 days"
+
+      visualization_examples:
+        - graph: "Full dependency graph (384 nodes)"
+          output: "23_compliance/anti_gaming/graphs/full_dependency_graph.svg"
+        - graph: "Root-level graph (24 nodes)"
+          output: "23_compliance/anti_gaming/graphs/root_dependency_graph.svg"
+        - graph: "Critical path (shortest path 01→23)"
+          output: "23_compliance/anti_gaming/graphs/critical_path.svg"
+
+      ci_integration:
+        - action: "Generate graph on every commit"
+          location: ".github/workflows/dependency_graph.yml"
+          trigger: "On push to main branch"
+          artifact: "Upload SVG to GitHub Actions artifacts"
+
+    total_effort: "3 person-days"
+    dependencies: []
+    blocking: false
+    success_criteria:
+      - "Graph generator produces SVG/PNG/PDF"
+      - "All 384 chart.yaml dependencies included"
+      - "Circular dependencies highlighted in red"
+      - "CI generates graph on every commit"
+
+  task_5_token_integration_tests:
+    priority: "P2 - MEDIUM"
+    requirement: "Token-Integration (preparation for future)"
+    objective: "Create test suite for smart contract interfaces"
+
+    current_state:
+      existing: "20_foundation/tokenomics/ (YAML definitions)"
+      missing: "Smart contract tests, integration tests"
+
+    implementation:
+      test_framework:
+        framework: "Hardhat + Foundry"
+        language: "Solidity 0.8.x"
+        location: "20_foundation/contracts/"
+
+      contracts_to_test:
+        - contract: "SSIDToken.sol (ERC-20)"
+          tests:
+            - "Token deployment"
+            - "Transfer functionality"
+            - "Allowance mechanisms"
+            - "Fee collection (3%: 1% dev, 2% treasury)"
+            - "Access control (ownership)"
+          location: "20_foundation/contracts/test/SSIDToken.test.js"
+          effort: "3 days"
+
+        - contract: "GovernanceToken.sol"
+          tests:
+            - "Voting mechanism"
+            - "Proposal creation"
+            - "Quorum requirements"
+            - "Timelock execution"
+          location: "20_foundation/contracts/test/Governance.test.js"
+          effort: "3 days"
+
+        - contract: "RewardDistributor.sol"
+          tests:
+            - "Reward calculation"
+            - "Claim functionality"
+            - "Vesting schedules"
+            - "Anti-gaming checks"
+          location: "20_foundation/contracts/test/Rewards.test.js"
+          effort: "2 days"
+
+      integration_tests:
+        - scenario: "Full identity lifecycle with token rewards"
+          steps:
+            - "User verifies identity → receives SSID tokens"
+            - "User accumulates reputation → reward multiplier increases"
+            - "User participates in governance → voting power calculated"
+          location: "20_foundation/contracts/test/integration/IdentityLifecycle.test.js"
+          effort: "3 days"
+
+        - scenario: "Fee collection and treasury management"
+          steps:
+            - "Transaction occurs → 3% fee collected"
+            - "Fees distributed: 1% dev, 2% treasury"
+            - "Treasury funds governance proposals"
+          location: "20_foundation/contracts/test/integration/FeeManagement.test.js"
+          effort: "2 days"
+
+      testnet_deployment:
+        networks:
+          - "Polygon Amoy (testnet)"
+          - "Ethereum Sepolia (testnet)"
+        contracts:
+          - "SSIDToken"
+          - "GovernanceToken"
+          - "RewardDistributor"
+        verification: "Verify on Etherscan/Polygonscan"
+        effort: "2 days"
+
+    total_effort: "15 person-days"
+    dependencies: ["Hardhat setup", "Testnet funds"]
+    blocking: false
+    success_criteria:
+      - "All 3 contracts tested (unit + integration)"
+      - "Test coverage >90%"
+      - "Contracts deployed to testnets"
+      - "Contract addresses documented"
+
+timeline:
+  phase_3_duration: "12 weeks (2025-11-01 to 2026-01-31)"
+
+  week_1_2:
+    dates: "2025-11-01 to 2025-11-14"
+    focus: "Foundation & Documentation"
+    tasks:
+      - "Task 1: Health check documentation (3 days)"
+      - "Task 4: Dependency graph generator (3 days)"
+    deliverables:
+      - "Health check framework fully documented"
+      - "Dependency graph SVG generator operational"
+
+  week_3_6:
+    dates: "2025-11-15 to 2025-12-13"
+    focus: "Cache Layer & Observability"
+    tasks:
+      - "Task 2: Cache layer implementation (14 days)"
+      - "Task 3: Observability metrics (start, 8 days)"
+    deliverables:
+      - "Redis cluster deployed"
+      - "CacheManager production-ready"
+      - "Prometheus exporter operational"
+
+  week_7_10:
+    dates: "2025-12-14 to 2026-01-10"
+    focus: "Observability & Token Tests"
+    tasks:
+      - "Task 3: Observability complete (7 days)"
+      - "Task 5: Token integration tests (15 days)"
+    deliverables:
+      - "Grafana dashboards deployed"
+      - "Alert rules configured"
+      - "Token contracts tested on testnets"
+
+  week_11_12:
+    dates: "2026-01-11 to 2026-01-31"
+    focus: "Integration & Validation"
+    tasks:
+      - "End-to-end testing"
+      - "Performance validation"
+      - "Documentation finalization"
+    deliverables:
+      - "All SHOULD requirements implemented"
+      - "Phase 3 complete"
+
+resource_allocation:
+  team_structure:
+    - role: "Backend Engineer"
+      count: 2
+      allocation: "50%"
+      tasks: ["Cache layer", "Observability"]
+
+    - role: "DevOps Engineer"
+      count: 1
+      allocation: "100%"
+      tasks: ["Redis deployment", "Prometheus/Grafana"]
+
+    - role: "Smart Contract Developer"
+      count: 1
+      allocation: "100%"
+      tasks: ["Token integration tests"]
+
+    - role: "Technical Writer"
+      count: 1
+      allocation: "25%"
+      tasks: ["Documentation"]
+
+  total_effort: "8 person-weeks"
+
+budget_breakdown:
+  personnel:
+    backend_engineers: "€10,000 (2 × 6 weeks × 50% × €1,667/week)"
+    devops_engineer: "€20,000 (1 × 12 weeks × €1,667/week)"
+    smart_contract_developer: "€15,000 (1 × 9 weeks × €1,667/week)"
+    technical_writer: "€2,500 (1 × 3 weeks × 25% × €3,333/week)"
+    subtotal: "€47,500"
+
+  infrastructure:
+    redis_cluster: "€1,500 (3 nodes × 4GB × 3 months)"
+    prometheus_grafana: "€1,000 (monitoring stack × 3 months)"
+    testnet_gas_fees: "€500 (Polygon/Ethereum testnet)"
+    subtotal: "€3,000"
+
+  total_budget: "€50,500"
+  recommended_budget: "€55,000 (with 10% contingency)"
+
+risk_assessment:
+  technical_risks:
+    - risk: "Redis performance not meeting requirements"
+      likelihood: "LOW"
+      impact: "MEDIUM"
+      mitigation: "Benchmark early, have fallback to in-memory cache"
+
+    - risk: "Prometheus metric cardinality explosion"
+      likelihood: "MEDIUM"
+      impact: "MEDIUM"
+      mitigation: "Limit label combinations, review metric design"
+
+  schedule_risks:
+    - risk: "Token tests delayed by testnet issues"
+      likelihood: "LOW"
+      impact: "LOW"
+      mitigation: "Use multiple testnets, have local Hardhat fallback"
+
+success_criteria:
+  phase_3_complete_when:
+    - "All 7 SHOULD requirements show status: implemented"
+    - "Health check framework documented and standardized"
+    - "Redis cache operational with >70% hit rate"
+    - "Prometheus exporting 20+ custom metrics"
+    - "Grafana dashboards deployed and accessible"
+    - "Dependency graph generator producing SVG/PNG"
+    - "Token contracts tested on testnets (>90% coverage)"
+    - "All deliverables documented"
+
+  acceptance_tests:
+    - "Cache performance: 10k ops/s, <5ms p95 latency"
+    - "Observability: All 388 services reporting metrics"
+    - "Dependency graph: Render in <10 seconds"
+    - "Token tests: 100% passing on Polygon Amoy"
+
+next_steps:
+  immediate_actions:
+    - action: "Review and approve Phase 3 plan"
+      owner: "Engineering Management"
+      deadline: "2025-10-15"
+
+    - action: "Allocate resources (0.5 backend, 1 DevOps, 1 smart contract dev)"
+      owner: "Engineering Management"
+      deadline: "2025-10-20"
+
+    - action: "Procure Redis infrastructure"
+      owner: "DevOps Team"
+      deadline: "2025-11-01"
+
+    - action: "Begin health check documentation"
+      owner: "Technical Writer"
+      deadline: "2025-11-01"
+
+  reporting:
+    - "Bi-weekly status updates to stakeholders"
+    - "Monthly demo of new features"
+    - "Final presentation on 2026-01-31"
+
+appendix:
+  dependencies_on_phase_2:
+    - "Phase 2 must be 100% complete before starting Phase 3"
+    - "All MUST requirements operational"
+    - "WORM storage operational (needed for observability metrics)"
+    - "Anti-gaming scripts operational (needed for dependency graph)"
+
+  future_phases:
+    phase_4_have_requirements:
+      start: "2026-02-01"
+      focus: "Experimental features (A/B testing, ML optimization, etc.)"
+      priority: "LOW"
+
+  related_documents:
+    - "23_compliance/reports/phase2_must_implementation_plan.yaml"
+    - "23_compliance/sot_index.json"
+    - "23_compliance/mappings/sot_to_repo_matrix.yaml"
+
+document_control:
+  classification: "INTERNAL - Implementation Plan"
+  version: "1.0.0"
+  created: "2025-10-07"
+  approvals_required:
+    - "Engineering Management"
+    - "DevOps Team Lead"
+  next_review: "2025-11-01 (Phase 3 kick-off)"

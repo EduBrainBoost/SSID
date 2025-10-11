@@ -1,0 +1,3 @@
+# Modul core
+
+Beschreibung folgt.

@@ -1,0 +1,9 @@
+name: Structure Guard
+on: [push, pull_request]
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Guard
+        run: bash 12_tooling/scripts/structure_guard.sh

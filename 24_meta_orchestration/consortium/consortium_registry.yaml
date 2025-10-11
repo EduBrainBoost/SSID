@@ -1,0 +1,380 @@
+meta:
+  consortium_name: SSID-Consortium
+  version: 1.0.0
+  registry_type: distributed_consortium_ledger
+  status: operational
+  created: '2025-10-07T00:00:00Z'
+  last_updated: '2025-10-07T08:00:00Z'
+  maintainer: edubrainboost
+  classification: OPERATIONAL - Consortium Governance
+organizations:
+- org_id: ORG-A
+  name: Alpha Identity GmbH
+  tier: founding
+  did: did:ssid:alpha123
+  pubkey: bls12-381:ALPHA...
+- org_id: ORG-B
+  name: Beta Trust AG
+  tier: full
+  did: did:ssid:beta456
+  pubkey: bls12-381:BETA...
+- org_id: ORG-C
+  name: Gamma Secure Ltd.
+  tier: full
+  did: did:ssid:gamma789
+  pubkey: bls12-381:GAMMA...
+- org_id: ORG-D
+  name: Delta Risk S.A.
+  tier: associate
+  did: did:ssid:delta111
+  pubkey: bls12-381:DELTA...
+- org_id: ORG-E
+  name: Epsilon Verify BV
+  tier: observer
+  did: did:ssid:eps999
+  pubkey: bls12-381:EPS...
+consensus:
+  policy_path: 24_meta_orchestration/consortium/consensus_policy.yaml
+  min_weight_sum: 11
+  min_distinct_signers: 5
+  signature_scheme: threshold-bls
+  bft_tolerance: 1
+audit:
+  evidence_log: 02_audit_logging/evidence/blockchain/compliance_events.jsonl
+  registry_anchor: 02_audit_logging/evidence/registry/registry_anchor.json
+  append_only: true
+description: 'SSID Consortium Registry - Distributed Audit Ledger
+
+
+  Links federated evidence nodes into a consortium ledger where each organization
+
+  cross-signs foreign anchors. Creates a distributed audit network without central
+
+  oversight authority.
+
+
+  Key Features:
+
+  - Multi-organization anchor cross-validation
+
+  - Distributed consensus without central authority
+
+  - Cryptographic proof chains across organizations
+
+  - Immutable consortium audit trail
+
+  - Multi-signature validation requirements
+
+  '
+consortium_governance:
+  name: SSID Audit Consortium
+  establishment_date: '2025-10-07'
+  legal_structure: Decentralized Autonomous Organization (DAO)
+  jurisdiction: Multi-jurisdictional (EU-wide)
+  charter:
+    mission: Provide decentralized, trustworthy compliance verification across SSID
+      implementations
+    principles:
+    - No single point of control
+    - Transparent validation processes
+    - Cryptographic proof over authority
+    - Open membership with reputation governance
+    - Community-driven rule evolution
+  membership_tiers:
+  - tier: founding_member
+    requirements:
+    - Operating SSID implementation for 12+ months
+    - Minimum 95% compliance score
+    - Public audit trail available
+    - Endorsement from 3 existing members
+    voting_weight: 3
+    cross_signing_quota: 100
+  - tier: full_member
+    requirements:
+    - Operating SSID implementation for 6+ months
+    - Minimum 90% compliance score
+    - Passing external audit
+    - Endorsement from 2 existing members
+    voting_weight: 2
+    cross_signing_quota: 50
+  - tier: associate_member
+    requirements:
+    - Operating SSID implementation for 3+ months
+    - Minimum 85% compliance score
+    - Internal audit completed
+    - Endorsement from 1 existing member
+    voting_weight: 1
+    cross_signing_quota: 20
+  - tier: observer
+    requirements:
+    - Valid SSID instance
+    - Registered organization
+    voting_weight: 0
+    cross_signing_quota: 0
+ledger_architecture:
+  storage_model: hybrid_distributed
+  consensus_mechanism: multi_signature_threshold
+  data_structure: merkle_dag
+  replication_strategy: quorum_based
+  components:
+  - component: anchor_pool
+    description: Pool of pending anchors awaiting cross-validation
+    storage: distributed_hash_table
+    replication_factor: 5
+  - component: validation_chain
+    description: Chain of validated anchors with cross-signatures
+    storage: append_only_log
+    immutability: cryptographic_seal
+  - component: member_registry
+    description: Registry of consortium members and their keys
+    storage: replicated_state_machine
+    update_mechanism: governance_vote
+  - component: reputation_ledger
+    description: Track member reputation and validation accuracy
+    storage: weighted_graph
+    decay_function: time_weighted
+cross_validation_protocol:
+  workflow:
+  - step: 1
+    name: Anchor Submission
+    actor: Member Organization
+    action: Submit compliance anchor to consortium pool
+    payload:
+    - anchor_hash: sha256
+    - member_id: ed25519_public_key
+    - timestamp: ISO8601
+    - evidence_merkle_root: sha256
+    - compliance_summary: compressed_json
+    - member_signature: ed25519_signature
+  - step: 2
+    name: Broadcast to Validators
+    actor: Consortium Network
+    action: Distribute anchor to eligible validators
+    selection_criteria:
+    - Active member status
+    - Reputation score > 0.7
+    - Not same organization as submitter
+    - Available cross-signing quota
+  - step: 3
+    name: Independent Validation
+    actor: Validator Organizations
+    action: Each validator independently verifies anchor
+    validation_checks:
+    - signature_verification: Verify submitter signature
+    - merkle_proof: Validate evidence tree integrity
+    - policy_compliance: Check against consortium rules
+    - implementation_audit: Verify SSID module implementation
+    - historical_consistency: Compare with previous anchors
+    timeout: 48 hours
+  - step: 4
+    name: Cross-Signature Generation
+    actor: Validator Organizations
+    action: Generate cross-signature for verified anchor
+    signature_format:
+      validator_id: ed25519_public_key
+      anchor_hash: sha256
+      validation_result: PASS|FAIL|CONDITIONAL
+      validation_timestamp: ISO8601
+      validation_evidence: ipfs_cid
+      cross_signature: ed25519_signature
+  - step: 5
+    name: Consortium Consensus
+    actor: Consensus Engine
+    action: Determine if anchor achieves consortium consensus
+    consensus_rules:
+      min_signatures_required: 5
+      min_weighted_votes: 10
+      max_fail_percentage: 10
+      quorum_percentage: 51
+  - step: 6
+    name: Ledger Commit
+    actor: Distributed Ledger
+    action: Commit validated anchor to consortium ledger
+    commit_data:
+      anchor: original_anchor_data
+      cross_signatures: array_of_validator_signatures
+      consensus_proof: merkle_proof_of_consensus
+      ledger_sequence: monotonic_counter
+      consortium_hash: sha256(prev_hash + anchor + signatures)
+  - step: 7
+    name: Reputation Update
+    actor: Reputation Engine
+    action: Update member reputation based on validation accuracy
+    scoring:
+    - accurate_validation: '+0.02'
+    - inaccurate_validation: '-0.05'
+    - timely_response: '+0.01'
+    - delayed_response: '-0.01'
+consortium_ledger_structure:
+  block_format:
+    sequence_number: uint64
+    timestamp: ISO8601
+    previous_hash: sha256
+    anchor_batch:
+    - anchor_id: sha256
+      submitter_id: member_public_key
+      submission_timestamp: ISO8601
+      compliance_data: ipfs_cid
+      cross_signatures:
+      - validator_id: member_public_key
+        result: PASS|FAIL
+        signature: ed25519_signature
+        timestamp: ISO8601
+      consensus_achieved: boolean
+      consensus_timestamp: ISO8601
+    consortium_hash: sha256
+    merkle_root: sha256
+  verification_proof:
+    type: merkle_proof
+    elements:
+    - anchor_hash: leaf_hash
+    - merkle_path: array_of_hashes
+    - root_hash: merkle_root
+    - signatures: array_of_consortium_member_signatures
+member_reputation_system:
+  reputation_score:
+    initial_score: 1.0
+    min_score: 0.0
+    max_score: 2.0
+  scoring_factors:
+    validation_accuracy:
+      weight: 0.4
+      calculation: correct_validations / total_validations
+    response_timeliness:
+      weight: 0.2
+      calculation: on_time_responses / total_requests
+    uptime_availability:
+      weight: 0.2
+      calculation: available_hours / total_hours
+    community_endorsements:
+      weight: 0.1
+      calculation: positive_endorsements - negative_endorsements
+    historical_consistency:
+      weight: 0.1
+      calculation: consistent_validations / total_validations
+  reputation_decay:
+    mechanism: exponential_decay
+    half_life: 90_days
+    min_activity_threshold: 1_validation_per_quarter
+  reputation_gates:
+  - threshold: 1.5
+    privilege: Founding member eligibility
+  - threshold: 1.2
+    privilege: Governance proposal rights
+  - threshold: 1.0
+    privilege: Full validation rights
+  - threshold: 0.7
+    privilege: Limited validation rights
+  - threshold: 0.5
+    privilege: Observer status only
+governance_mechanisms:
+  proposal_types:
+  - type: protocol_upgrade
+    required_votes: 2/3 supermajority
+    voting_period: 30 days
+    execution_delay: 14 days
+  - type: member_admission
+    required_votes: simple majority
+    voting_period: 14 days
+    execution_delay: 7 days
+  - type: member_suspension
+    required_votes: 2/3 supermajority
+    voting_period: 7 days
+    execution_delay: immediate
+  - type: parameter_change
+    required_votes: simple majority
+    voting_period: 21 days
+    execution_delay: 7 days
+  voting_mechanism:
+    type: weighted_voting
+    weight_calculation: tier_weight * reputation_score
+    delegation: allowed
+    vote_privacy: public_votes
+  dispute_resolution:
+    process:
+    - step: evidence_submission
+      deadline: 7 days
+    - step: community_review
+      duration: 14 days
+    - step: arbitration_panel
+      composition: 5 random high-reputation members
+    - step: binding_decision
+      appeal_allowed: false
+integration_points:
+  federation_node: 23_compliance/federated_evidence/federation_node.py
+  anchor_source: 02_audit_logging/evidence/registry/registry_anchor.json
+  blockchain_integration: 24_meta_orchestration/compliance_chain_trigger.py
+  consensus_engine: 24_meta_orchestration/consortium/consensus_engine.py
+  reputation_tracker: 24_meta_orchestration/consortium/reputation_tracker.py
+api_endpoints:
+- endpoint: /api/v1/consortium/submit-anchor
+  method: POST
+  description: Submit anchor for consortium validation
+  authentication: member_certificate
+- endpoint: /api/v1/consortium/validate-anchor/{hash}
+  method: POST
+  description: Submit cross-validation for anchor
+  authentication: validator_certificate
+- endpoint: /api/v1/consortium/ledger
+  method: GET
+  description: Query consortium ledger
+  authentication: api_key
+- endpoint: /api/v1/consortium/members
+  method: GET
+  description: List consortium members
+  authentication: public
+- endpoint: /api/v1/consortium/reputation/{member_id}
+  method: GET
+  description: Query member reputation
+  authentication: public
+security_guarantees:
+- guarantee: No single point of failure
+  mechanism: Distributed consensus across 5+ members
+- guarantee: Byzantine fault tolerance
+  mechanism: Quorum-based validation with outlier detection
+- guarantee: Sybil attack resistance
+  mechanism: Reputation-weighted voting and proof-of-authority
+- guarantee: Replay attack prevention
+  mechanism: Monotonic sequence numbers and timestamp validation
+- guarantee: Censorship resistance
+  mechanism: No central authority can block valid anchors
+- guarantee: Audit trail immutability
+  mechanism: Cryptographic hash chains and distributed replication
+performance_targets:
+  consensus_latency: < 24 hours
+  throughput: 100 anchors/day per member
+  ledger_size_growth: < 1 GB/year
+  replication_bandwidth: < 100 MB/day per node
+  query_response_time: < 500 ms
+compliance_benefits:
+- benefit: Multi-organization verification
+  value: Reduces single-auditor bias
+- benefit: Transparent audit process
+  value: Public validation history
+- benefit: Regulatory acceptance
+  value: Distributed verification more credible than self-attestation
+- benefit: Cost efficiency
+  value: Shared audit infrastructure across consortium
+- benefit: Continuous compliance
+  value: Real-time validation vs. annual audits
+future_enhancements:
+- enhancement: Zero-knowledge proofs
+  description: Validate compliance without revealing sensitive data
+  timeline: 2026-Q2
+- enhancement: AI-assisted validation
+  description: Automated anomaly detection in audit data
+  timeline: 2026-Q3
+- enhancement: Cross-chain anchoring
+  description: Anchor consortium state to public blockchains
+  timeline: 2026-Q4
+- enhancement: Automated remediation
+  description: Smart contracts trigger fixes for common issues
+  timeline: 2027-Q1
+references:
+- title: Distributed Ledger Technology
+  url: https://en.wikipedia.org/wiki/Distributed_ledger
+- title: Byzantine Fault Tolerance
+  url: https://en.wikipedia.org/wiki/Byzantine_fault
+- title: Reputation Systems
+  url: https://en.wikipedia.org/wiki/Reputation_system
+checksum: sha256:9066948cd49f4f37ff5e598cd6cdeaff66e533b780bb668ce61bbac3b34ab0b5

@@ -1,0 +1,19 @@
+repos:
+  - repo: local
+    hooks:
+      - id: root24-guard
+        name: Root-24-LOCK Enforcement
+        entry: bash 12_tooling/hooks/pre_commit/root24_enforcer.sh
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  - repo: https://github.com/psf/black
+    rev: 23.11.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.6
+    hooks:
+      - id: ruff

@@ -1,0 +1,24 @@
+version: 1.0.0
+last_updated: "2025-10-05T15:29:16.202995Z"
+sources:
+  ofac_sdn:
+    url: "https://www.treasury.gov/ofac/downloads/sdn.xml"
+    description: "OFAC Specially Designated Nationals"
+    sha256: "mock_hash_for_testnet"
+  eu_consolidated:
+    url: "https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions"
+    description: "EU Financial Sanctions"
+    sha256: "mock_hash_for_testnet"
+  un_consolidated:
+    url: "https://www.un.org/securitycouncil/content/un-sc-consolidated-list"
+    description: "UN Security Council Consolidated List"
+    sha256: "mock_hash_for_testnet"
+
+freshness_policy:
+  max_age_hours: 24
+  update_frequency: "daily"
+  notification_on_stale: true
+
+mock_mode:
+  enabled: true
+  warning: "TESTNET ONLY - No real sanctions data"

@@ -1,0 +1,246 @@
+version: 1.0.0
+title: IVMS101 Travel Rule Schema
+description: |
+  InterVASP Messaging Standard (IVMS101) for Travel Rule compliance.
+  Implements FATF Recommendation 16 for cryptocurrency transfers ≥ €1,000.
+
+compliance:
+  regulation: "FATF Recommendation 16, AMLD6 Art.1(14)"
+  standard: "IVMS101 (Joint Working Group on interVASP Messaging Standards)"
+  threshold: "€1,000 EUR equivalent"
+  effective_date: "2025-11-15"
+
+# IVMS101 Message Structure
+ivms101_message:
+  version: "1.0"
+
+  # Originator Information (Sender)
+  originator:
+    natural_person:
+      name:
+        name_identifiers:
+          - primary_identifier:
+              type: "LEGL"  # Legal name
+              value: "string"  # e.g., "John Doe"
+          - secondary_identifier:
+              type: "ALIAS"  # Alias/trading name (optional)
+              value: "string"
+
+      national_identification:
+        national_identifier_type: "string"  # PASSPORT, ID_CARD, TAX_ID, etc.
+        national_identifier: "hash"  # SHA-256 hash (NO PII)
+        registration_authority: "string"  # ISO 3166-2 country code
+        country_of_issue: "string"  # ISO 3166-1 alpha-2
+
+      geographic_addresses:
+        - address_type: "HOME"  # HOME, BIZZ, GEOG
+          building_number: "hash"
+          street_name: "hash"
+          post_code: "hash"
+          town_name: "hash"
+          country: "string"  # ISO 3166-1 alpha-2
+
+      date_and_place_of_birth:
+        date_of_birth: "hash"  # SHA-256(YYYY-MM-DD)
+        place_of_birth: "hash"  # SHA-256(city name)
+
+    legal_person:
+      name:
+        name_identifiers:
+          - legal_person_name: "string"
+            legal_person_name_identifier_type: "LEGL"
+
+      national_identification:
+        national_identifier_type: "LEIX"  # Legal Entity Identifier
+        national_identifier: "string"  # LEI code (public)
+        registration_authority: "string"
+
+      geographic_addresses:
+        - address_type: "BIZZ"
+          country: "string"
+
+  # Beneficiary Information (Receiver)
+  beneficiary:
+    natural_person:
+      # Same structure as originator.natural_person
+      name:
+        name_identifiers:
+          - primary_identifier:
+              type: "LEGL"
+              value: "string"
+
+      national_identification:
+        national_identifier_type: "string"
+        national_identifier: "hash"
+        registration_authority: "string"
+        country_of_issue: "string"
+
+      geographic_addresses:
+        - address_type: "HOME"
+          country: "string"
+
+    legal_person:
+      # Same structure as originator.legal_person
+      name:
+        name_identifiers:
+          - legal_person_name: "string"
+            legal_person_name_identifier_type: "LEGL"
+
+  # Transaction Details
+  transfer:
+    amount: "decimal"  # Transaction amount
+    currency: "string"  # ISO 4217 currency code (e.g., "EUR", "USD", "BTC")
+    timestamp: "string"  # ISO 8601 timestamp
+
+    originating_vasp:
+      vasp_identifier: "string"  # VASP identifier
+      vasp_identifier_type: "LEIX"  # LEI code
+      vasp_name: "string"
+
+    beneficiary_vasp:
+      vasp_identifier: "string"
+      vasp_identifier_type: "LEIX"
+      vasp_name: "string"
+
+# Hash-Only Privacy Compliance
+privacy_constraints:
+  prohibited_fields:
+    - "Full PII in plaintext"
+    - "Unencrypted national identifiers"
+    - "Birthdates in plaintext"
+    - "Addresses in plaintext (except country code)"
+
+  required_hashing:
+    algorithm: "SHA-256"
+
+    hash_fields:
+      - "national_identification.national_identifier"
+      - "date_and_place_of_birth.date_of_birth"
+      - "date_and_place_of_birth.place_of_birth"
+      - "geographic_addresses[].building_number"
+      - "geographic_addresses[].street_name"
+      - "geographic_addresses[].post_code"
+      - "geographic_addresses[].town_name"
+
+  allowed_plaintext:
+    - "name.name_identifiers[].value"  # Legal names (required for compliance)
+    - "geographic_addresses[].country"  # Country codes (ISO 3166-1)
+    - "legal_person.national_identification.national_identifier"  # LEI codes (public)
+    - "currency"  # ISO 4217 codes
+    - "timestamp"  # ISO 8601 timestamps
+
+# Threshold Enforcement
+threshold_rules:
+  minimum_threshold:
+    amount: 1000
+    currency: "EUR"
+
+  currency_conversion:
+    method: "ECB reference rates"
+    source: "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/"
+    update_frequency: "daily"
+
+  exemptions:
+    - "Peer-to-peer transfers within same VASP"
+    - "Transfers < €1,000 equivalent"
+
+# Risk Categorization
+risk_assessment:
+  high_risk_jurisdictions:
+    source: "FATF Grey/Black Lists"
+    action: "Enhanced Due Diligence required"
+
+  pep_screening:
+    required: true
+    source: "Politically Exposed Persons database"
+
+  sanctions_screening:
+    required: true
+    sources:
+      - "EU Sanctions List"
+      - "OFAC SDN List"
+      - "UN Sanctions List"
+
+# VASP Provider Integration
+supported_providers:
+  - provider: "Notabene"
+    api_endpoint: "https://api.notabene.id/v1/travel-rule"
+    authentication: "API_KEY"
+    format: "IVMS101"
+
+  - provider: "Sygna Bridge"
+    api_endpoint: "https://api.sygna.io/v1/travel-rule"
+    authentication: "OAUTH2"
+    format: "IVMS101"
+
+  - provider: "TRP.red"
+    api_endpoint: "https://api.trp.red/v1/travel-rule"
+    authentication: "API_KEY"
+    format: "IVMS101"
+
+# Compliance Evidence
+audit_trail:
+  evidence_directory: "23_compliance/evidence/travel_rule/"
+  retention_period: "5_years"  # AMLD6 Art.40
+
+  logged_events:
+    - "Travel Rule check initiated"
+    - "Threshold comparison (amount vs. €1,000)"
+    - "IVMS101 message generated"
+    - "VASP provider notification sent"
+    - "VASP provider response received"
+    - "Risk assessment result"
+    - "Compliance decision (ALLOW/BLOCK)"
+
+  evidence_format:
+    type: "JSON"
+    hash_algorithm: "SHA-256"
+    encryption: "AES-256-GCM"  # Encrypt PII in transit
+
+# Example IVMS101 Message (Hash-Only)
+example_message:
+  originator:
+    natural_person:
+      name:
+        name_identifiers:
+          - primary_identifier:
+              type: "LEGL"
+              value: "Alice Smith"  # Allowed plaintext
+
+      national_identification:
+        national_identifier_type: "PASSPORT"
+        national_identifier: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"  # SHA-256(passport_number)
+        registration_authority: "US"
+        country_of_issue: "US"
+
+      geographic_addresses:
+        - address_type: "HOME"
+          country: "US"  # ISO 3166-1 (plaintext allowed)
+          town_name: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"  # SHA-256("New York")
+
+  beneficiary:
+    natural_person:
+      name:
+        name_identifiers:
+          - primary_identifier:
+              type: "LEGL"
+              value: "Bob Johnson"
+
+      geographic_addresses:
+        - address_type: "HOME"
+          country: "DE"
+
+  transfer:
+    amount: 5000.00
+    currency: "EUR"
+    timestamp: "2025-10-09T23:45:00Z"
+
+    originating_vasp:
+      vasp_identifier: "529900T8BM49AURSDO55"  # Example LEI
+      vasp_identifier_type: "LEIX"
+      vasp_name: "SSID VASP"
+
+    beneficiary_vasp:
+      vasp_identifier: "549300XQOWVRMW9RUK79"  # Example LEI
+      vasp_identifier_type: "LEIX"
+      vasp_name: "Target VASP"
