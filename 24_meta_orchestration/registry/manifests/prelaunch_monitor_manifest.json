@@ -1,0 +1,54 @@
+{
+  "manifest_version": "1.0.0",
+  "blueprint_version": "v4.5.0-prelaunch",
+  "timestamp": "2025-10-11T21:04:10.175656+00:00",
+  "manifest_type": "prelaunch_monitoring",
+  "monitoring_scripts": {
+    "governance_warmup_monitor.py": {
+      "path": "12_tooling/scripts/governance_warmup_monitor.py",
+      "hash": "7961d599024d64d61ab21673165e5cdbb2a6290ccb4356e6ceb5c7d55a7886b6",
+      "size": 9108
+    },
+    "proof_chain_integrity_watcher.py": {
+      "path": "12_tooling/scripts/proof_chain_integrity_watcher.py",
+      "hash": "e7da07e9a74086390f2f89c478c2f2a6f78da8d5a7bf2f5080e57e7c80e8edf7",
+      "size": 12511
+    },
+    "telemetry_sync_preview.py": {
+      "path": "12_tooling/scripts/telemetry_sync_preview.py",
+      "hash": "7e687156c56c98f4929538919f554b02cc5b3d788fd9904d591e7664be47bc9c",
+      "size": 12960
+    }
+  },
+  "generated_reports": {
+    "prelaunch_status_log.json": {
+      "path": "02_audit_logging/reports/prelaunch_status_log.json",
+      "hash": "8f4efce80e25c8e8fe6469c5409bf58dc409c2126bf68a5b414dd62702b196b4",
+      "size": 1965
+    },
+    "proof_chain_integrity_report.json": {
+      "path": "23_compliance/reports/proof_chain_integrity_report.json",
+      "hash": "9ec909d61c1664b233637cf5865c76b78de76764ed13c684ef36bd820b320a3e",
+      "size": 2402
+    },
+    "telemetry_preview_report.json": {
+      "path": "23_compliance/reports/telemetry_preview_report.json",
+      "hash": "c8932777406ced0225aa8ff0d92acc8f3db42cbf631b976908040e437770ad4e",
+      "size": 1211
+    }
+  },
+  "workflow": {
+    "file": ".github/workflows/prelaunch_monitor.yml",
+    "cron_schedule": "0 6 * * *",
+    "trigger_time_utc": "06:00",
+    "description": "Daily pre-launch monitoring for Q1 2026",
+    "hash": "7cd077922c058b78b345ed995d3dc9e2ae52fd4e5ededcaa9dd2f1df234c83ca",
+    "size": 7631
+  },
+  "q1_2026_launch": {
+    "launch_date": "2026-01-01T08:00:00Z",
+    "countdown_days": 81,
+    "status": "COUNTDOWN_ACTIVE"
+  },
+  "proof_anchor": "86c49050859846660be4042d80c61bab7df8c3468163fbbbb9271335b987301e"
+}

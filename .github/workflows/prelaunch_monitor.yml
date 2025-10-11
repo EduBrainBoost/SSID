@@ -1,0 +1,178 @@
+name: Pre-Launch Governance Monitor
+
+on:
+  schedule:
+    # Daily at 06:00 UTC (monitoring Q1 2026 readiness)
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      repair_mode:
+        description: 'Enable proof-chain repair mode'
+        required: false
+        default: 'false'
+
+jobs:
+  governance-warmup:
+    runs-on: ubuntu-latest
+    name: Governance Warm-Up Monitor
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Governance Warm-Up Monitor
+        id: warmup
+        run: |
+          python3 12_tooling/scripts/governance_warmup_monitor.py
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Upload Warm-Up Status Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prelaunch-status-log
+          path: 02_audit_logging/reports/prelaunch_status_log.json
+          retention-days: 90
+
+  proof-chain-integrity:
+    runs-on: ubuntu-latest
+    name: Proof-Chain Integrity Watcher
+    needs: governance-warmup
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Proof-Chain Integrity Watcher
+        id: integrity
+        run: |
+          if [ "${{ github.event.inputs.repair_mode }}" = "true" ]; then
+            python3 12_tooling/scripts/proof_chain_integrity_watcher.py --repair
+          else
+            python3 12_tooling/scripts/proof_chain_integrity_watcher.py
+          fi
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Upload Integrity Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-chain-integrity-report
+          path: 23_compliance/reports/proof_chain_integrity_report.json
+          retention-days: 90
+
+      - name: Create Issue on Integrity Failure
+        if: steps.integrity.outputs.exit_code != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const exitCode = '${{ steps.integrity.outputs.exit_code }}';
+            let issueTitle = '';
+            let issueBody = '';
+
+            if (exitCode === '1') {
+              issueTitle = '[CRITICAL] Proof-Chain Hash Drift Detected';
+              issueBody = `## Proof-Chain Integrity Alert\n\n**Status:** Hash drift detected in proof chain\n\n**Exit Code:** ${exitCode}\n\n**Action Required:**\n1. Review proof-chain integrity report\n2. Verify all proof anchors\n3. Run manual verification\n\n**Workflow:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\n**Generated:** ${new Date().toISOString()}`;
+            } else if (exitCode === '2') {
+              issueTitle = '[ERROR] Proof-Chain Layer Missing';
+              issueBody = `## Proof-Chain Integrity Alert\n\n**Status:** Missing proof layer(s)\n\n**Exit Code:** ${exitCode}\n\n**Action Required:**\n1. Check missing proof layers\n2. Verify file integrity\n3. Restore from backup if necessary\n\n**Workflow:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\n**Generated:** ${new Date().toISOString()}`;
+            } else {
+              issueTitle = '[WARNING] Proof-Chain Verification Failed';
+              issueBody = `## Proof-Chain Integrity Alert\n\n**Status:** Verification failure\n\n**Exit Code:** ${exitCode}\n\n**Action Required:**\n1. Review error logs\n2. Run manual diagnostics\n\n**Workflow:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\n**Generated:** ${new Date().toISOString()}`;
+            }
+
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: issueBody,
+              labels: ['governance', 'proof-chain', 'alert']
+            });
+
+  telemetry-preview:
+    runs-on: ubuntu-latest
+    name: Telemetry Sync Preview
+    needs: proof-chain-integrity
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies (optional)
+        run: |
+          pip install requests || echo "requests not installed - using simulation mode"
+        continue-on-error: true
+
+      - name: Run Telemetry Sync Preview
+        id: telemetry
+        run: |
+          python3 12_tooling/scripts/telemetry_sync_preview.py
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Upload Telemetry Preview Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: telemetry-preview-report
+          path: 23_compliance/reports/telemetry_preview_report.json
+          retention-days: 90
+
+  summary:
+    runs-on: ubuntu-latest
+    name: Monitoring Summary
+    needs: [governance-warmup, proof-chain-integrity, telemetry-preview]
+    if: always()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Generate Summary
+        run: |
+          echo "## Pre-Launch Monitoring Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Workflow Run:** ${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f "prelaunch-status-log/prelaunch_status_log.json" ]; then
+            echo "### Governance Warm-Up Status" >> $GITHUB_STEP_SUMMARY
+            python3 -c "import json; d=json.load(open('prelaunch-status-log/prelaunch_status_log.json')); print(f\"- Launch Countdown: {d['launch_countdown']['days_remaining']} days\\n- Overall Readiness: {d['overall_readiness']['status']}\")" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ -f "proof-chain-integrity-report/proof_chain_integrity_report.json" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Proof-Chain Integrity" >> $GITHUB_STEP_SUMMARY
+            python3 -c "import json; d=json.load(open('proof-chain-integrity-report/proof_chain_integrity_report.json')); print(f\"- Chain Integrity: {d['overall_status']['chain_integrity']}\\n- Layers Verified: {d['integrity_summary']['layers_verified']}/{d['integrity_summary']['total_layers']}\\n- Total Drift: {d['integrity_summary']['total_drift_bits']} bits\")" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ -f "telemetry-preview-report/telemetry_preview_report.json" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Telemetry Preview" >> $GITHUB_STEP_SUMMARY
+            python3 -c "import json; d=json.load(open('telemetry-preview-report/telemetry_preview_report.json')); print(f\"- Channels Configured: {d['telemetry_config']['channels_configured']}\\n- Status: {d['overall_status']['status']}\")" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "*Pre-Launch monitoring for Blueprint v4.5 → Q1 2026*" >> $GITHUB_STEP_SUMMARY
