@@ -1,0 +1,107 @@
+{
+  "contract_version": "1.0.0",
+  "contract_type": "dao_federation_handshake",
+  "description": "DAO governance handshake schema for federated continuity mesh",
+  "activation_date": "2026-04-01T00:00:00+00:00",
+  "governance_cycle": "Q2_2026",
+  "handshake_parameters": {
+    "node_id": {
+      "type": "string",
+      "description": "Unique identifier of federated node",
+      "required": true,
+      "format": "node_[a-z0-9_]{3,64}"
+    },
+    "proof_anchor": {
+      "type": "string",
+      "description": "SHA-256 proof anchor hash",
+      "required": true,
+      "format": "hex",
+      "length": 64
+    },
+    "governance_vote": {
+      "type": "object",
+      "description": "DAO governance vote parameters",
+      "required": true,
+      "properties": {
+        "vote_type": {
+          "type": "string",
+          "enum": ["ACCEPT", "REJECT", "ABSTAIN"]
+        },
+        "vote_weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "vote_timestamp": {
+          "type": "string",
+          "format": "iso8601"
+        },
+        "voter_did": {
+          "type": "string",
+          "description": "Decentralized Identifier of voter"
+        }
+      }
+    },
+    "epoch_id": {
+      "type": "string",
+      "description": "Governance epoch identifier",
+      "required": true,
+      "format": "Q[1-4]_YYYY"
+    }
+  },
+  "signature_policy": {
+    "type": "multi_sig",
+    "quorum_requirement": "2/3",
+    "description": "Requires ≥ 2/3 (66.67%) of federation nodes to sign",
+    "signature_types": ["PGP", "ECDSA", "Ed25519"],
+    "replay_protection": true,
+    "timestamp_tolerance_hours": 24
+  },
+  "execution_rules": {
+    "min_trust_score": 60,
+    "max_timestamp_drift_hours": 48,
+    "consensus_threshold": 0.667,
+    "byzantine_tolerance": 0.33,
+    "handshake_timeout_hours": 72
+  },
+  "registry_integration": {
+    "event_type": "FEDERATION_HANDSHAKE",
+    "event_path": "24_meta_orchestration/registry/events/federation_handshake_event.json",
+    "proof_layer": 7,
+    "merkle_root_calculation": "SHA256(node_id || proof_anchor || governance_vote || epoch_id)"
+  },
+  "compliance": {
+    "gdpr": "No PII, only cryptographic identifiers (DIDs, public keys, hashes)",
+    "eidas": "Multi-signature policy enforces qualified electronic signatures",
+    "mica": "DAO governance compatible with crypto asset regulatory framework",
+    "dora": "Byzantine fault tolerance ensures operational resilience",
+    "amld6": "Anti-money laundering compliance through audit trail"
+  },
+  "example_handshake": {
+    "node_id": "node_example_001",
+    "proof_anchor": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2",
+    "governance_vote": {
+      "vote_type": "ACCEPT",
+      "vote_weight": 85.5,
+      "vote_timestamp": "2026-04-01T12:00:00+00:00",
+      "voter_did": "did:ssid:node_example_001"
+    },
+    "epoch_id": "Q2_2026",
+    "signatures": [
+      {
+        "node_id": "node_001",
+        "signature_type": "ECDSA",
+        "signature_value": "0x123456789abcdef...",
+        "public_key": "0xabcdef123456...",
+        "timestamp": "2026-04-01T12:05:00+00:00"
+      },
+      {
+        "node_id": "node_002",
+        "signature_type": "Ed25519",
+        "signature_value": "ed25519:abcd1234...",
+        "public_key": "ed25519:pubkey...",
+        "timestamp": "2026-04-01T12:10:00+00:00"
+      }
+    ]
+  }
+}
