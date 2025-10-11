@@ -1,0 +1,370 @@
+# SSID Blueprint Promotion Rules
+# Blueprint v4.2.1 - Governance & Role-Based Access Control
+# Repository: https://github.com/EduBrainBoost/SSID
+
+---
+
+promotion_rules:
+  # Role: Blueprint Owner
+  # Primary maintainer responsible for blueprint lifecycle
+  - role: blueprint_owner
+    description: "Primary maintainer with full blueprint lifecycle authority"
+    permissions:
+      - create_draft                 # Create new blueprint drafts
+      - request_review               # Request peer review
+      - trigger_validation           # Run structure guard and compliance checks
+      - update_documentation         # Modify blueprint documentation
+      - create_branches              # Create feature/promotion branches
+    responsibilities:
+      - "Maintain blueprint integrity and consistency"
+      - "Coordinate with reviewers and committee"
+      - "Ensure all validation checks pass before promotion"
+      - "Document all changes and rationale"
+    approval_requirements:
+      can_self_approve: false
+      requires_committee: true
+
+  # Role: Compliance Reviewer
+  # Validates compliance and audit requirements
+  - role: compliance_reviewer
+    description: "Validates compliance score and audit requirements"
+    permissions:
+      - run_audit                    # Execute quarterly compliance audits
+      - approve_release              # Approve blueprint release after validation
+      - verify_structure             # Run structure guard validation
+      - review_reports               # Review compliance reports
+      - request_changes              # Request modifications before approval
+    responsibilities:
+      - "Verify 100% Root-24-LOCK compliance"
+      - "Review quarterly audit results"
+      - "Validate proof-anchor integrity"
+      - "Ensure all violations are remediated"
+    approval_requirements:
+      can_self_approve: false
+      requires_committee: false
+
+  # Role: Governance Committee
+  # Final approval authority for major changes
+  - role: governance_committee
+    description: "Final approval authority for blueprint activation"
+    permissions:
+      - activate_blueprint           # Activate new blueprint version
+      - emit_proof_anchor            # Generate and emit proof-anchors
+      - archive_previous             # Archive previous blueprint versions
+      - override_rules               # Override promotion rules (emergency only)
+      - modify_promotion_rules       # Update this file
+    responsibilities:
+      - "Provide final approval for blueprint activation"
+      - "Ensure governance integrity"
+      - "Emit cryptographic proof-anchors"
+      - "Archive and maintain historical blueprints"
+    approval_requirements:
+      can_self_approve: false
+      requires_quorum: true
+
+  # Role: Technical Reviewer
+  # Reviews technical implementation and code quality
+  - role: technical_reviewer
+    description: "Reviews technical implementation and code quality"
+    permissions:
+      - review_code                  # Review technical changes
+      - run_tests                    # Execute test suites
+      - verify_ci_cd                 # Validate CI/CD pipeline
+      - suggest_improvements         # Suggest technical improvements
+    responsibilities:
+      - "Review code quality and implementation"
+      - "Verify test coverage"
+      - "Validate CI/CD workflows"
+      - "Ensure best practices adherence"
+    approval_requirements:
+      can_self_approve: false
+      requires_committee: false
+
+---
+
+# Approval Thresholds
+thresholds:
+  # Minimum number of approvals required for promotion
+  min_approvals: 2
+
+  # Quorum required for governance committee votes
+  quorum: 3
+
+  # Minimum compliance score for promotion
+  min_compliance_score: 100
+
+  # Maximum allowed violations
+  max_violations: 0
+
+  # Required Root-24-LOCK status
+  required_root24_status: "PASS"
+
+  # Minimum time between promotions (days)
+  min_promotion_interval: 30
+
+---
+
+# Promotion Workflow
+promotion_workflow:
+  steps:
+    - step: 1
+      name: "Draft Creation"
+      owner: blueprint_owner
+      actions:
+        - "Create feature branch from main"
+        - "Implement blueprint changes"
+        - "Update documentation"
+        - "Run local validation"
+      completion_criteria:
+        - "All changes implemented"
+        - "Documentation updated"
+        - "Local structure guard passes"
+
+    - step: 2
+      name: "Validation & Testing"
+      owner: blueprint_owner
+      reviewers:
+        - technical_reviewer
+        - compliance_reviewer
+      actions:
+        - "Run structure_guard.sh"
+        - "Execute quarterly audit (if applicable)"
+        - "Run test suite"
+        - "Verify CI/CD pipelines"
+      completion_criteria:
+        - "Root-24-LOCK: PASS"
+        - "Compliance Score: 100/100"
+        - "All tests passing"
+        - "CI/CD workflows green"
+
+    - step: 3
+      name: "Peer Review"
+      owner: technical_reviewer
+      actions:
+        - "Review code changes"
+        - "Verify documentation accuracy"
+        - "Check compliance with blueprint standards"
+        - "Provide feedback or approve"
+      completion_criteria:
+        - "Minimum 1 technical reviewer approval"
+        - "All review comments addressed"
+
+    - step: 4
+      name: "Compliance Review"
+      owner: compliance_reviewer
+      actions:
+        - "Run quarterly compliance audit"
+        - "Verify Root-24-LOCK compliance"
+        - "Review proof-anchors"
+        - "Check violation status"
+      completion_criteria:
+        - "Compliance reviewer approval"
+        - "Compliance score: 100/100"
+        - "Zero violations detected"
+
+    - step: 5
+      name: "Governance Committee Approval"
+      owner: governance_committee
+      actions:
+        - "Review all approvals"
+        - "Verify quorum reached"
+        - "Final approval vote"
+        - "Emit proof-anchor"
+      completion_criteria:
+        - "Quorum of 3 committee members"
+        - "Minimum 2 approvals from committee"
+        - "Proof-anchor generated"
+
+    - step: 6
+      name: "Blueprint Activation"
+      owner: governance_committee
+      actions:
+        - "Merge promotion branch to main"
+        - "Create version tag"
+        - "Emit registry event"
+        - "Update README with new version"
+        - "Archive previous blueprint"
+      completion_criteria:
+        - "Branch merged successfully"
+        - "Version tag created"
+        - "Registry event emitted"
+        - "Previous version archived"
+
+    - step: 7
+      name: "Post-Promotion"
+      owner: blueprint_owner
+      actions:
+        - "Verify production deployment"
+        - "Monitor for issues"
+        - "Update dashboard"
+        - "Announce to stakeholders"
+      completion_criteria:
+        - "No critical issues detected"
+        - "Dashboard updated"
+        - "Stakeholders notified"
+
+---
+
+# Emergency Procedures
+emergency_procedures:
+  # Critical security issue requiring immediate action
+  critical_security_issue:
+    trigger: "Security vulnerability detected"
+    authority: governance_committee
+    process:
+      - "Committee chair can authorize emergency promotion"
+      - "Minimum 2 committee members must approve"
+      - "Normal promotion steps can be expedited"
+      - "Post-mortem required within 48 hours"
+    documentation: "Must document in 07_governance_legal/emergency_actions.md"
+
+  # Compliance failure requiring immediate remediation
+  compliance_failure:
+    trigger: "Root-24-LOCK violation or compliance score < 100"
+    authority: compliance_reviewer
+    process:
+      - "Immediate structure validation required"
+      - "Root cause analysis"
+      - "Remediation plan within 24 hours"
+      - "Re-validation after fix"
+    documentation: "Must document in compliance report"
+
+  # CI/CD failure blocking normal operations
+  ci_cd_failure:
+    trigger: "CI/CD pipeline failure blocking development"
+    authority: technical_reviewer
+    process:
+      - "Investigate and document failure"
+      - "Implement hotfix if needed"
+      - "Bypass approval if necessary (with documentation)"
+      - "Full review in next meeting"
+    documentation: "Must document in incident report"
+
+---
+
+# Rollback Procedures
+rollback_procedures:
+  # When to rollback
+  triggers:
+    - "Compliance score drops below 100"
+    - "Critical security vulnerability discovered"
+    - "Root-24-LOCK validation failure"
+    - "Governance committee vote for rollback"
+
+  # Who can initiate rollback
+  authority:
+    - governance_committee         # Can authorize immediate rollback
+    - blueprint_owner             # Can request rollback (requires approval)
+
+  # Rollback process
+  process:
+    - step: 1
+      action: "Create emergency branch from previous version tag"
+    - step: 2
+      action: "Revert to previous blueprint version"
+    - step: 3
+      action: "Run structure guard validation"
+    - step: 4
+      action: "Emit rollback registry event"
+    - step: 5
+      action: "Update documentation with rollback rationale"
+    - step: 6
+      action: "Notify all stakeholders"
+
+  # Post-rollback requirements
+  post_rollback:
+    - "Root cause analysis within 48 hours"
+    - "Remediation plan for original issue"
+    - "Prevention strategy documentation"
+    - "Governance committee review"
+
+---
+
+# Audit Requirements
+audit_requirements:
+  # Quarterly audit must pass for promotion
+  quarterly_audit:
+    required: true
+    must_be_current: true  # Must be from current or previous quarter
+    min_score: 100
+
+  # Structure validation required
+  structure_validation:
+    required: true
+    tool: "12_tooling/scripts/structure_guard.sh"
+    expected_result: "PASS"
+
+  # Proof-anchor generation required
+  proof_anchor:
+    required: true
+    tool: "12_tooling/scripts/registry_event_trigger.sh"
+    must_be_valid: true
+
+  # Dashboard update required
+  dashboard_update:
+    required: true
+    tool: "12_tooling/scripts/update_governance_dashboard.py"
+    must_complete: true
+
+---
+
+# Version Increment Rules
+version_rules:
+  # Major version (v4.x.x -> v5.0.0)
+  major:
+    triggers:
+      - "Breaking changes to Root-24-LOCK"
+      - "Fundamental blueprint restructuring"
+      - "Major architectural changes"
+    approval_required: governance_committee
+    min_approvals: 3
+
+  # Minor version (v4.2.x -> v4.3.0)
+  minor:
+    triggers:
+      - "New features added"
+      - "Non-breaking enhancements"
+      - "New tools or workflows"
+    approval_required: compliance_reviewer
+    min_approvals: 2
+
+  # Patch version (v4.2.1 -> v4.2.2)
+  patch:
+    triggers:
+      - "Bug fixes"
+      - "Documentation updates"
+      - "Minor improvements"
+    approval_required: technical_reviewer
+    min_approvals: 1
+
+---
+
+# Status and Metadata
+status: ACTIVE
+version: "1.0.0"
+effective_date: "2025-10-11"
+last_updated: "2025-10-11T16:05:00Z"
+updated_by: "EduBrainBoost"
+review_frequency: "quarterly"
+next_review: "2026-01-11"
+
+# Related Documentation
+related_docs:
+  - "05_documentation/OPERATIONS_GUIDE.md"
+  - "07_governance_legal/branch_protection_rules.yaml"
+  - "24_meta_orchestration/registry/events/README.md"
+  - "16_codex/structure/blueprint_v4.2/"
+
+# Contact
+maintainer:
+  name: "EduBrainBoost"
+  email: "EduBrainBoost@fakemail.com"
+  repository: "https://github.com/EduBrainBoost/SSID"
+
+---
+
+# Notes
+# - This file defines who can promote blueprints and under what conditions
+# - All promotions must follow these rules unless emergency procedures apply
+# - Any modifications to this file require governance committee approval
+# - Review this file quarterly and update as needed
