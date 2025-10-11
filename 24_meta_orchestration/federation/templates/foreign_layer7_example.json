@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Foreign Layer 7 Proof Template",
+  "description": "Template for Layer 7 federation proofs received from foreign mesh nodes",
+  "version": "1.0.0",
+  "blueprint_version": "v4.9.0-interfederation",
+  "example": {
+    "node_id": "node_002",
+    "layer7_hash": "a3f8b912c4e5d6f7890abcdef1234567890abcdef1234567890abcdef1234567",
+    "timestamp_utc": "2026-04-15T12:00:00Z",
+    "epoch_id": "Q2_2026",
+    "signature": {
+      "key_id": "did:example:node002#key-1",
+      "signature_hex": "3045022100abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456789002207890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456",
+      "algorithm": "ed25519"
+    },
+    "mesh_metadata": {
+      "mesh_name": "SSID-Federation-EU",
+      "node_endpoint": "https://node002.ssid-eu.example.com",
+      "trust_score": 82,
+      "last_consensus": "2026-04-15T00:00:00Z"
+    },
+    "proof_summary": {
+      "local_mesh_count": 3,
+      "consensus_percentage": 0.87,
+      "proof_anchor": "b5c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9"
+    }
+  },
+  "schema": {
+    "type": "object",
+    "required": [
+      "node_id",
+      "layer7_hash",
+      "timestamp_utc",
+      "epoch_id",
+      "signature"
+    ],
+    "properties": {
+      "node_id": {
+        "type": "string",
+        "pattern": "^node_[a-z0-9_]{3,64}$",
+        "description": "Unique identifier for the foreign mesh node"
+      },
+      "layer7_hash": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$",
+        "description": "SHA-256 hash of Layer 7 federation proof (64 hex chars)"
+      },
+      "timestamp_utc": {
+        "type": "string",
+        "format": "date-time",
+        "description": "ISO 8601 UTC timestamp (must be within 48 hours of current time)"
+      },
+      "epoch_id": {
+        "type": "string",
+        "pattern": "^Q[1-4]_[0-9]{4}$",
+        "description": "Epoch identifier (e.g., Q2_2026)"
+      },
+      "signature": {
+        "type": "object",
+        "required": [
+          "key_id",
+          "signature_hex",
+          "algorithm"
+        ],
+        "properties": {
+          "key_id": {
+            "type": "string",
+            "description": "DID-based key identifier (e.g., did:example:node002#key-1)"
+          },
+          "signature_hex": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64,}$",
+            "description": "Hexadecimal signature (minimum 64 chars)"
+          },
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "ed25519",
+              "ecdsa",
+              "pgp"
+            ],
+            "description": "Signature algorithm used"
+          }
+        }
+      },
+      "mesh_metadata": {
+        "type": "object",
+        "description": "Optional metadata about the foreign mesh",
+        "properties": {
+          "mesh_name": {
+            "type": "string",
+            "description": "Human-readable mesh name"
+          },
+          "node_endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "HTTPS endpoint for node communication"
+          },
+          "trust_score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Current trust score of the node"
+          },
+          "last_consensus": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last successful consensus participation timestamp"
+          }
+        }
+      },
+      "proof_summary": {
+        "type": "object",
+        "description": "Optional summary of the Layer 7 proof",
+        "properties": {
+          "local_mesh_count": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Number of nodes in the foreign mesh"
+          },
+          "consensus_percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Consensus percentage in foreign mesh (0-1)"
+          },
+          "proof_anchor": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "Proof anchor hash from Layer 7 proof"
+          }
+        }
+      }
+    }
+  },
+  "validation_notes": {
+    "timestamp_validation": "Timestamp must be within 48 hours of current UTC time. Proofs older than 48 hours are rejected.",
+    "signature_validation": "In v4.9-prep phase: stub validation (format check only). In production: full cryptographic verification using public key.",
+    "hash_format": "Must be exactly 64 hexadecimal characters (SHA-256 output).",
+    "epoch_match": "epoch_id must match the current epoch being processed.",
+    "trust_threshold": "Nodes with trust_score < 60 may be excluded from consensus."
+  },
+  "usage_instructions": [
+    "1. Receive Layer 7 proof from foreign mesh (via IPFS, API, or manual transfer)",
+    "2. Validate proof structure against this schema",
+    "3. Copy proof JSON to 25_federation/inbox/ directory",
+    "4. Use naming convention: foreign_<node_id>_<epoch_id>.json",
+    "5. Run interfederation_consensus.py to validate and process",
+    "6. Check validation results in 24_meta_orchestration/consensus/intermesh_vote_tally.json"
+  ],
+  "example_filenames": [
+    "foreign_node_002_Q2_2026.json",
+    "foreign_node_003_Q2_2026.json",
+    "foreign_node_eu_central_Q2_2026.json"
+  ]
+}
