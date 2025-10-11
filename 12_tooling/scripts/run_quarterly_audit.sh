@@ -202,3 +202,17 @@ echo ""
 echo -e "${BLUE}Review the full report at:${NC}"
 echo -e "${BLUE}${REPORT_FILE}${NC}"
 echo ""
+
+# Update governance dashboard
+echo -e "${YELLOW}[BONUS] Updating Governance Dashboard...${NC}"
+if command -v python3 &> /dev/null; then
+    if python3 "${PROJECT_ROOT}/12_tooling/scripts/update_governance_dashboard.py"; then
+        echo -e "${GREEN}✅ Dashboard updated successfully${NC}"
+        echo -e "   Dashboard: ${PROJECT_ROOT}/05_documentation/reports/dashboard/SSID_Governance_Dashboard.md"
+    else
+        echo -e "${RED}❌ Dashboard update failed${NC}"
+    fi
+else
+    echo -e "${YELLOW}⚠️  Python3 not available - skipping dashboard update${NC}"
+fi
+echo ""
