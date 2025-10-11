@@ -1,0 +1,290 @@
+name: Governance Review Flow
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      item_id:
+        description: 'Review Item ID'
+        required: false
+        type: string
+      action:
+        description: 'Action (quarterly-check or finalize-quarter)'
+        required: false
+        type: choice
+        options:
+          - quarterly-check
+          - finalize-quarter
+
+jobs:
+  auto-assign-reviewers:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Auto-assign reviewers based on promotion rules
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Define reviewers based on PR type
+            const prTitle = context.payload.pull_request.title.toLowerCase();
+            const prBody = context.payload.pull_request.body || '';
+
+            let reviewers = [];
+            let labels = [];
+
+            // Determine review type and assign appropriate reviewers
+            if (prTitle.includes('blueprint') || prBody.includes('blueprint')) {
+              reviewers = ['governance-lead', 'technical-lead', 'compliance-officer'];
+              labels = ['blueprint', 'governance-review'];
+            } else if (prTitle.includes('policy') || prBody.includes('policy')) {
+              reviewers = ['compliance-officer', 'security-officer'];
+              labels = ['policy', 'compliance-review'];
+            } else if (prTitle.includes('security') || prBody.includes('security')) {
+              reviewers = ['security-officer', 'technical-lead'];
+              labels = ['security', 'technical-review'];
+            } else {
+              reviewers = ['technical-lead'];
+              labels = ['general-review'];
+            }
+
+            // Request reviews (filter out PR author and non-existent users)
+            const author = context.payload.pull_request.user.login;
+            const validReviewers = reviewers.filter(r => r !== author);
+
+            try {
+              if (validReviewers.length > 0) {
+                await github.rest.pulls.requestReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  reviewers: validReviewers
+                });
+                console.log(`Assigned reviewers: ${validReviewers.join(', ')}`);
+              }
+            } catch (error) {
+              console.log(`Could not assign reviewers: ${error.message}`);
+            }
+
+            // Add labels
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: labels
+              });
+              console.log(`Added labels: ${labels.join(', ')}`);
+            } catch (error) {
+              console.log(`Could not add labels: ${error.message}`);
+            }
+
+      - name: Add review instructions comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prTitle = context.payload.pull_request.title;
+
+            const comment = `## Governance Review Process
+
+            This PR has been automatically assigned for governance review.
+
+            ### Review Stages
+
+            **Stage 1: Technical Review**
+            - Technical feasibility assessment
+            - Code quality and architecture review
+            - Security implications review
+
+            **Stage 2: Compliance Review**
+            - Regulatory compliance check (GDPR/eIDAS/MiCA/DORA)
+            - Policy alignment verification
+            - Audit trail validation
+
+            ### Approval Requirements
+
+            - **Technical Quorum:** 2 approvals
+            - **Compliance Quorum:** 2 approvals
+            - **Both stages required:** Yes
+
+            ### Reviewers
+
+            Assigned reviewers will be notified. Please review according to your role:
+            - **Technical Lead / Architect:** Focus on implementation quality
+            - **Compliance Officer:** Focus on regulatory requirements
+            - **Security Officer:** Focus on security implications
+            - **Governance Lead:** Final approval authority
+
+            ### Next Steps
+
+            1. Reviewers: Approve or request changes
+            2. Author: Address feedback if needed
+            3. System: Auto-promote when quorum reached
+
+            ---
+
+            *This is an automated comment from the SSID Governance Review Flow (Blueprint v4.4.0)*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  review-status-check:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check review status
+        run: |
+          echo "Checking review status for PR #${{ github.event.pull_request.number }}..."
+
+          # This would integrate with review_flow_manager.py in production
+          # For now, we'll just check basic PR status
+
+          echo "PR Title: ${{ github.event.pull_request.title }}"
+          echo "PR State: ${{ github.event.pull_request.state }}"
+          echo "Draft: ${{ github.event.pull_request.draft }}"
+
+      - name: Send review status notification
+        if: github.event.action == 'ready_for_review'
+        continue-on-error: true
+        run: |
+          echo "PR is ready for review - would send notification here"
+          # In production, this would call governance_telemetry.py
+
+  quarterly-governance-check:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'quarterly-check'
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run quarterly review check
+        run: |
+          echo "Running quarterly governance review check..."
+          python3 07_governance_legal/automation/review_flow_manager.py --quarterly-check
+
+  finalize-quarter:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'finalize-quarter'
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Configure Git
+        run: |
+          git config user.name "SSID Governance Bot"
+          git config user.email "governance-bot@ssid.local"
+
+      - name: Finalize quarterly governance cycle
+        run: |
+          echo "Finalizing quarterly governance review cycle..."
+          python3 07_governance_legal/automation/review_flow_manager.py --finalize-quarter > /tmp/finalize_output.txt
+
+          cat /tmp/finalize_output.txt
+
+      - name: Commit quarterly summary
+        id: commit
+        continue-on-error: true
+        run: |
+          # Check if there are changes to commit
+          if git diff --quiet 24_meta_orchestration/registry/; then
+            echo "No changes to commit"
+            echo "committed=false" >> $GITHUB_OUTPUT
+          else
+            TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            QUARTER=$(python3 -c "from datetime import datetime; now=datetime.utcnow(); print(f'{now.year}-Q{(now.month-1)//3+1}')")
+
+            git add 24_meta_orchestration/registry/
+
+            git commit -m "Governance Review Cycle Complete - $QUARTER
+
+Blueprint v4.4 - Quarterly Governance Finalization
+
+This commit finalizes the governance review cycle for $QUARTER.
+
+**Finalization Timestamp:** $TIMESTAMP
+**Workflow Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+Automated by governance review flow workflow.
+
+Co-Authored-By: SSID Governance Bot <governance-bot@ssid.local>"
+
+            git push origin main
+
+            echo "committed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create summary
+        if: always()
+        run: |
+          echo "=" >> $GITHUB_STEP_SUMMARY
+          echo "=" >> $GITHUB_STEP_SUMMARY
+          echo "=" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Governance Review Flow - Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Action:** ${{ github.event.inputs.action || 'PR Review' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date -u +\"%Y-%m-%dT%H:%M:%SZ\")" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "### PR Review" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "- **PR:** #${{ github.event.pull_request.number }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Title:** ${{ github.event.pull_request.title }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Reviewers:** Automatically assigned" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ github.event.inputs.action }}" = "finalize-quarter" ]; then
+            echo "### Quarterly Finalization" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "- **Status:** ${{ steps.commit.outputs.committed == 'true' && 'Committed' || 'No changes' }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Quarter:** $(python3 -c 'from datetime import datetime; now=datetime.utcnow(); print(f\"{now.year}-Q{(now.month-1)//3+1}\")')" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
