@@ -1,0 +1,22 @@
+# 16_codex/registry/registry_manifest_v5_foundation_optB_thr90.yaml
+registry_version: "1.0.0"
+artifact_set: "v5.0.1-foundation-optB-thr90"
+timestamp_utc: "2025-10-12T11:10:36Z"
+owner_author_id: "edubrainboost"
+system_user: "bibel"
+artifacts:
+  - path: "02_audit_logging/config/layer_readiness_policy.yaml"
+    sha256: "8d190e732b2a87e6470eb8d702ce0eb4865fcf66b010a43a9e06004a13d3fcd2"
+  - path: "11_test_simulation/layer_readiness_audit.py"
+    sha256: "a5f9c387631b05024b61edde97d7423b26c87e14e2eea5587b324b97c8de1513"
+  - path: "03_core/simulation/layer9_proof_aggregator.py"
+    sha256: "7d6cfd202dbf8f37bbf6fdd0ecf16baa653fb82dac604e2a4e282ec632902818"
+  - path: "12_tooling/ci/layer_v5_foundation_check.yml"
+    sha256: "7693aee120c5e5bb824f845e4d50ba40950211502ffd12603a336b4762114021"
+  - path: "11_test_simulation/tests/test_layer_readiness_audit.py"
+    sha256: "ef157d9e02eb6ccfe3d84dfe7c12b2e6b23c9ec4d6fe6085f0b696613995105f"
+  - path: "11_test_simulation/tests/test_layer9_proof_aggregator.py"
+    sha256: "5aa5db9311eb8caaf7a42670602a6f8c9ba4483811803ab28c2f1f7bb08356a6"
+signatures:
+  publisher_signature: "WORM-LOG-PENDING"
+  integrity_chain: "to-be-sealed-in-CI"
