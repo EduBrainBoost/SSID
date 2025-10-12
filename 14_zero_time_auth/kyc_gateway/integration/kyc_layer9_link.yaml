@@ -1,0 +1,145 @@
+# KYC Gateway → Layer 9 Integration Configuration
+# License: GPL-3.0-or-later
+# Purpose: Defines communication between Layer 14 (KYC) and Layer 9 (Global Proof Nexus)
+
+version: "1.0"
+integration_id: "kyc-layer9-link-v1"
+updated: "2025-10-12"
+
+# Endpoint configuration
+endpoints:
+  layer3_interface:
+    url: "http://localhost:8080/api/v1/proof/emit"
+    method: "POST"
+    timeout_seconds: 10
+    retry_policy:
+      max_attempts: 3
+      backoff_multiplier: 2
+      initial_delay_ms: 500
+      max_delay_ms: 5000
+    headers:
+      Content-Type: "application/json"
+      X-Integration-Version: "1.0"
+      X-Source-Layer: "14"
+      X-Target-Layer: "9"
+
+  layer9_nexus:
+    # Internal function call (no HTTP)
+    mode: "function_call"
+    module: "20_foundation.global_proof_nexus_engine"
+    function: "receive_kyc_digest"
+
+# Digest schema
+digest_schema:
+  format: "json"
+  required_fields:
+    - provider_id
+    - digest
+    - algorithm
+    - timestamp
+    - policy_version
+    - session_id
+    - proof_id
+  optional_fields:
+    - evidence_chain
+    - metadata
+  validation:
+    provider_id:
+      type: "string"
+      enum: ["didit", "yoti", "idnow", "signicat"]
+    digest:
+      type: "string"
+      pattern: "^[a-f0-9]{64}$"  # SHA-256 hex
+      description: "SHA-256 or BLAKE2b hex digest"
+    algorithm:
+      type: "string"
+      enum: ["SHA-256", "BLAKE2b"]
+    timestamp:
+      type: "string"
+      format: "date-time"
+      description: "ISO 8601 UTC timestamp"
+    policy_version:
+      type: "string"
+      pattern: "^\\d+\\.\\d+$"
+    session_id:
+      type: "string"
+      format: "uuid"
+    proof_id:
+      type: "string"
+      format: "uuid"
+
+# Security configuration
+security:
+  tls_required: true
+  mutual_tls: false  # Optional for future
+  api_key_header: "X-API-Key"
+  api_key_required: false  # Internal communication
+  signature_verification:
+    enabled: false  # Optional: HMAC for payload integrity
+    algorithm: "HS256"
+    secret_path: "secrets/integration_hmac.key"
+
+# OPA policy enforcement
+opa_policy:
+  policy_path: "23_compliance/policies/kyc_integration_policy.rego"
+  enforce_before_emit: true
+  required_checks:
+    - "proof_only_mode"
+    - "no_pii_fields"
+    - "valid_provider"
+    - "valid_digest_format"
+
+# Rate limiting
+rate_limiting:
+  enabled: true
+  max_requests_per_minute: 60
+  max_requests_per_hour: 1000
+  burst_size: 20
+
+# Logging
+logging:
+  audit_log_path: "02_audit_logging/logs/kyc_proof_emit.log"
+  format: "json"
+  level: "INFO"
+  include_payload: false  # Never log full payload (PII risk)
+  include_digest: true
+  worm_mode: true
+
+# Monitoring
+monitoring:
+  metrics_enabled: true
+  metrics_path: "/metrics"
+  health_check_path: "/health"
+  alerts:
+    - name: "high_failure_rate"
+      condition: "failure_rate > 0.1"
+      action: "notify"
+    - name: "layer9_unavailable"
+      condition: "layer9_unavailable_count > 5"
+      action: "fallback_mode"
+
+# Fallback behavior
+fallback:
+  on_layer9_failure:
+    mode: "graceful_degrade"
+    action: "store_locally"
+    storage_path: "14_zero_time_auth/kyc_gateway/pending_digests.jsonl"
+    retry_interval_seconds: 300
+  on_opa_failure:
+    mode: "strict"
+    action: "reject"
+
+# Testing
+testing:
+  mock_mode: false
+  mock_endpoints:
+    layer3_interface: "http://localhost:9999/mock/proof/emit"
+  test_fixtures_path: "11_test_simulation/scenarios/kyc_integration_fixtures/"
+
+# Compliance markers
+compliance:
+  gdpr_mode: true
+  no_pii_enforcement: true
+  proof_only_mode: true
+  worm_logging: true
+  root_24_lock_compliant: true

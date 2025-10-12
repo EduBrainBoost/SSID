@@ -1,0 +1,128 @@
+# KYC Digest Emitter Configuration
+# License: GPL-3.0-or-later
+# Purpose: Optional on-chain anchoring configuration for KYC proof digests
+
+version: "1.0"
+emitter_id: "kyc-digest-emitter-v1"
+updated: "2025-10-12"
+
+# Emission mode
+mode: "off_chain_only"  # Options: off_chain_only, testnet, mainnet
+
+# Off-chain configuration (default)
+off_chain:
+  enabled: true
+  registry_path: "14_zero_time_auth/kyc_gateway/proof_registry.jsonl"
+  format: "jsonl"
+  worm_mode: true
+
+# Testnet configuration
+testnet:
+  enabled: false
+  networks:
+    - name: "Mumbai"
+      chain_id: 80001
+      rpc_url: "https://rpc-mumbai.maticvigil.com"
+      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
+      gas_limit: 150000
+      max_gas_price_gwei: 50
+    - name: "Sepolia"
+      chain_id: 11155111
+      rpc_url: "https://sepolia.infura.io/v3/PROJECT_ID"  # Placeholder
+      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
+      gas_limit: 150000
+      max_gas_price_gwei: 50
+
+# Mainnet configuration (production only)
+mainnet:
+  enabled: false
+  networks:
+    - name: "Ethereum"
+      chain_id: 1
+      rpc_url: "https://mainnet.infura.io/v3/PROJECT_ID"  # Placeholder
+      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
+      gas_limit: 150000
+      max_gas_price_gwei: 100
+    - name: "Arbitrum"
+      chain_id: 42161
+      rpc_url: "https://arb1.arbitrum.io/rpc"
+      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
+      gas_limit: 150000
+      max_gas_price_gwei: 10
+    - name: "Optimism"
+      chain_id: 10
+      rpc_url: "https://mainnet.optimism.io"
+      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
+      gas_limit: 150000
+      max_gas_price_gwei: 10
+
+# Smart contract interface
+contract:
+  abi_path: "07_governance_legal/contracts/ProofAnchor.sol"
+  function: "anchorProof"
+  parameters:
+    - name: "proofId"
+      type: "bytes32"
+      description: "Keccak256 hash of proof ID"
+    - name: "digest"
+      type: "bytes32"
+      description: "SHA-256 digest of proof claims"
+    - name: "providerId"
+      type: "string"
+      description: "Provider identifier (didit, yoti, etc.)"
+
+# Wallet configuration
+wallet:
+  type: "env_var"  # Options: env_var, keystore, hardware
+  private_key_env: "PROOF_EMITTER_PRIVATE_KEY"
+  address: "0x0000000000000000000000000000000000000000"  # Placeholder
+
+# Retry policy
+retry:
+  max_attempts: 3
+  backoff_multiplier: 2
+  initial_delay_ms: 1000
+  max_delay_ms: 10000
+  on_failure:
+    mode: "fallback_off_chain"
+    log_path: "02_audit_logging/logs/on_chain_failures.log"
+
+# Monitoring
+monitoring:
+  enabled: true
+  metrics:
+    - "tx_count"
+    - "gas_used"
+    - "failure_rate"
+    - "avg_confirmation_time"
+  alerts:
+    - name: "high_gas_price"
+      condition: "gas_price_gwei > max_gas_price_gwei * 1.5"
+      action: "pause_emission"
+    - name: "tx_failure"
+      condition: "failure_count > 5"
+      action: "fallback_off_chain"
+
+# Privacy enforcement
+privacy:
+  pii_check: true
+  digest_only: true
+  no_raw_claims: true
+  gdpr_compliant: true
+
+# Compliance markers
+compliance:
+  gdpr_mode: true
+  mica_aware: true
+  no_custody: true
+  proof_only: true
+  root_24_lock_compliant: true
+
+# Testing
+testing:
+  mock_mode: false
+  mock_network:
+    name: "Hardhat"
+    chain_id: 31337
+    rpc_url: "http://localhost:8545"
+    contract_address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"  # Hardhat default
