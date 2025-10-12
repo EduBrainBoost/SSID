@@ -1,0 +1,66 @@
+# SSID Proof Emission Configuration v5.2
+# License: GPL-3.0-or-later
+
+version: "5.2.0"
+integration_id: "proof-emission-v5.2"
+updated: "2025-10-12"
+
+# Proof emission settings
+emission:
+  enabled: true
+  mode: "bidirectional"  # unidirectional, bidirectional
+  hash_algorithm: "SHA-512"
+  hash_chain_enabled: true
+
+# On-chain anchoring
+on_chain:
+  enabled: false  # Set to true for production
+  network: "testnet"  # testnet, mainnet
+  contract_address: "0x0000000000000000000000000000000000000000"
+  rpc_url: "https://rpc.testnet.example.invalid"
+  gas_limit: 150000
+  max_gas_price_gwei: 50
+
+# Provider acknowledgement
+provider_ack:
+  enabled: true
+  timeout_seconds: 60
+  retry_attempts: 3
+  signature_algorithms: ["EdDSA", "RS256", "ES256"]
+  jwk_cache_ttl_seconds: 3600
+
+# Digest sync
+digest_sync:
+  enabled: true
+  interval_seconds: 3600  # 1 hour
+  max_discrepancy: 10
+  alert_on_mismatch: true
+
+# Security
+security:
+  replay_protection: true
+  nonce_required: true
+  max_token_age_seconds: 300
+  tls_required: true
+  signature_validation: true
+
+# Logging
+logging:
+  audit_log: "02_audit_logging/logs/proof_emission.log"
+  provider_ack_log: "02_audit_logging/logs/provider_ack.log"
+  sync_log: "02_audit_logging/logs/digest_sync.log"
+  format: "json"
+  level: "INFO"
+  worm_mode: true
+
+# OPA policy
+opa:
+  policy_path: "23_compliance/policies/proof_emission_policy.rego"
+  enforce: true
+
+# Compliance
+compliance:
+  gdpr_mode: true
+  no_pii: true
+  proof_only: true
+  root_24_lock: true
