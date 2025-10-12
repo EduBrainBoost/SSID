@@ -1,0 +1,36 @@
+# 02_audit_logging/config/layer_readiness_policy.yaml
+policy_version: "1.1.0"
+root_24_lock: true
+sot_paths:
+  master_sot: "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md"
+  level3_part1: "16_codex/structure/level3/SSID_structure_level3_part1_MAX.md"
+  level3_part2: "16_codex/structure/level3/SSID_structure_level3_part2_MAX.md"
+  level3_part3: "16_codex/structure/level3/SSID_structure_level3_part3_MAX.md"
+layers_1_8_requirements:
+  layer1_identity_foundation:
+    must_exist: ["08_identity_score", "14_zero_time_auth"]
+    must_contain_any: ["08_identity_score/src", "08_identity_score/config"]
+  layer2_score_calculation:
+    must_exist: ["08_identity_score"]
+    must_contain_any: ["08_identity_score/src", "08_identity_score/tests"]
+  layer3_ai_validation:
+    must_exist: ["01_ai_layer"]
+    must_contain_any: ["01_ai_layer/src", "01_ai_layer/models"]
+  layer4_zero_time_auth:
+    must_exist: ["14_zero_time_auth"]
+    must_contain_any: ["14_zero_time_auth/src", "14_zero_time_auth/tests"]
+  layer5_post_quantum_crypto:
+    must_exist: ["21_post_quantum_crypto"]
+    must_contain_any: ["21_post_quantum_crypto/src"]
+  layer6_interoperability_mesh:
+    must_exist: ["10_interoperability"]
+    must_contain_any: ["10_interoperability/src"]
+  layer7_federation_roots:
+    must_exist: ["07_governance_legal", "09_meta_identity"]
+    must_contain_any: ["07_governance_legal/contracts", "09_meta_identity/src"]
+  layer8_inter_federation_consensus:
+    must_exist: ["24_meta_orchestration", "11_test_simulation"]
+    must_contain_any: ["24_meta_orchestration/src", "11_test_simulation/tests"]
+scoring:
+  weights: {existence: 0.6, contents: 0.4}
+  pass_threshold: 0.90

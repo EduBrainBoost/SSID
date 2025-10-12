@@ -1,0 +1,17 @@
+# 03_core/simulation/config/layer9_simulation.yaml
+epoch_schedule:
+  sync_interval_hours: 24
+  planned_activation_utc: "2026-07-01T00:00:00Z"
+consensus:
+  threshold_pct: 0.85
+  min_ecosystems: 2
+  min_proof_quality: 0.70
+hashing:
+  algorithm: "SHA-512"
+  hex_length: 128
+ecosystems:
+  - SSID
+  - EUDI
+  - OpenCore
+  - TrustNet
+  - GovChain
