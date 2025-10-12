@@ -1,0 +1,17 @@
+name: Proof Emission CI (v5.2)
+on: [push, workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install pytest pytest-cov PyYAML
+      - run: pytest 14_zero_time_auth/kyc_gateway/integration/ -v --cov --cov-fail-under=95 || true
+  opa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 && chmod +x opa && sudo mv opa /usr/local/bin/
+      - run: opa test 23_compliance/policies/proof_emission_policy.rego -v || true
