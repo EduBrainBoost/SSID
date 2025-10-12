@@ -1,0 +1,318 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "version": "5.0.0",
+  "blueprint": "Global Proof Nexus - Layer 9 Planetary Consensus",
+  "status": "PREPARATION_PHASE",
+  "activation_date": "2026-07-15T10:00:00Z",
+  "first_aggregation": "2026-07-15T10:00:00Z",
+
+  "metadata": {
+    "description": "Manifest for Layer 9 Global Proof Nexus - Cross-Ecosystem Consensus Aggregation",
+    "license": "GPL-3.0-or-later",
+    "maintainer": "SSID Consortium",
+    "created": "2025-01-15T00:00:00Z",
+    "last_updated": "2025-01-15T00:00:00Z"
+  },
+
+  "epoch_policy": {
+    "current_epoch": "2026-Q3",
+    "rotation_schedule": "quarterly",
+    "next_rotation": "2026-10-01T00:00:00Z",
+    "target_epoch": "2026-Q4",
+    "rotation_triggers": [
+      "quarterly_boundary",
+      "consensus_failure_threshold",
+      "dao_governance_vote"
+    ]
+  },
+
+  "consensus": {
+    "threshold": 0.85,
+    "byzantine_tolerance": 0.20,
+    "description": "Hash-majority voting requires ≥85% agreement with ≤20% Byzantine fault tolerance",
+    "algorithm": "hash_majority_voting",
+    "quorum_requirement": "min_ecosystems",
+    "max_timestamp_drift_h": 48,
+    "timestamp_validation": "strict",
+    "proof_format": "merkle_aggregation"
+  },
+
+  "trust": {
+    "increment": 1,
+    "decrement": -3,
+    "floor": 0,
+    "ceiling": 100,
+    "description": "Trust redistribution algorithm: +1 for cooperation, -3 for deviation",
+    "convergence_target": 0.85,
+    "adjustment_frequency": "per_epoch",
+    "reset_policy": "never"
+  },
+
+  "data_paths": {
+    "layer8_inbox": "24_meta_orchestration/federation/inbox",
+    "layer8_consensus": "24_meta_orchestration/consensus",
+    "layer9_output": "24_meta_orchestration/registry/layer9",
+    "audit_logs": "02_audit_logging/reports",
+    "manifests": "24_meta_orchestration/registry/manifests",
+    "templates": "24_meta_orchestration/federation/templates",
+    "artifacts": "artifacts"
+  },
+
+  "compliance": {
+    "GDPR": {
+      "enabled": true,
+      "description": "Hash-only anchoring, no PII",
+      "data_retention": {
+        "proofs": "365 days",
+        "logs": "90 days",
+        "reports": "365 days"
+      },
+      "privacy_policy": "zero_custody",
+      "right_to_erasure": "hash_only_no_personal_data"
+    },
+    "eIDAS": {
+      "enabled": true,
+      "description": "Qualified timestamps, QTSP-compatible anchoring",
+      "timestamp_provider": "qtsp_optional",
+      "signature_validation": "supported",
+      "cross_border_recognition": true
+    },
+    "MiCA": {
+      "enabled": true,
+      "description": "DAO governance transparency and accountability",
+      "governance_model": "dao_consensus",
+      "transparency_level": "full_audit_trail",
+      "regulatory_reporting": "automated"
+    },
+    "DORA": {
+      "enabled": true,
+      "description": "Cross-system resilience and operational continuity",
+      "resilience_testing": "quarterly",
+      "incident_response": "automated",
+      "recovery_time_objective": "24h"
+    },
+    "AMLD6": {
+      "enabled": true,
+      "description": "Full audit trail across ecosystem boundaries",
+      "audit_trail": "complete",
+      "cross_border_tracking": true,
+      "reporting_threshold": "none"
+    },
+    "Root_24_LOCK": {
+      "enabled": true,
+      "description": "Structural registry enforcement - only approved directories",
+      "enforcement_level": "strict",
+      "allowed_roots": [
+        "20_foundation",
+        "07_governance_legal",
+        "24_meta_orchestration",
+        "02_audit_logging",
+        "05_documentation",
+        ".github"
+      ]
+    }
+  },
+
+  "proof_schema": {
+    "layer9": {
+      "root_format": "hex64",
+      "hash_algorithm": "SHA-256",
+      "aggregation_method": "merkle_tree",
+      "required_fields": [
+        "ecosystem_id",
+        "layer8_root",
+        "epoch_id",
+        "timestamp",
+        "trust_weight",
+        "signature"
+      ],
+      "optional_fields": [
+        "proof_anchor",
+        "metadata",
+        "compliance_markers"
+      ]
+    },
+    "signature": {
+      "supported_algorithms": [
+        "ed25519",
+        "ecdsa",
+        "pgp",
+        "rsa"
+      ],
+      "minimum_key_size": {
+        "rsa": 2048,
+        "ecdsa": 256
+      },
+      "verification": "mandatory"
+    }
+  },
+
+  "ecosystems": {
+    "registered": [
+      {
+        "id": "ssid",
+        "name": "Self-Sovereign Identity Decentralized",
+        "type": "primary",
+        "trust_weight": 100,
+        "status": "active",
+        "contact": "registry@ssid.global"
+      },
+      {
+        "id": "eudi",
+        "name": "European Digital Identity",
+        "type": "federation",
+        "trust_weight": 95,
+        "status": "active",
+        "contact": "info@eudi.eu"
+      },
+      {
+        "id": "trustnet",
+        "name": "TrustNet Protocol",
+        "type": "federation",
+        "trust_weight": 90,
+        "status": "active",
+        "contact": "admin@trustnet.org"
+      },
+      {
+        "id": "opencore",
+        "name": "OpenCore Identity Framework",
+        "type": "federation",
+        "trust_weight": 85,
+        "status": "active",
+        "contact": "core@opencore.io"
+      },
+      {
+        "id": "custom",
+        "name": "Custom/Experimental Ecosystem",
+        "type": "experimental",
+        "trust_weight": 80,
+        "status": "active",
+        "contact": "dev@custom.test"
+      }
+    ],
+    "minimum_required": 2,
+    "maximum_supported": 50,
+    "registration_policy": "dao_approval"
+  },
+
+  "ci_cd": {
+    "schedule": "0 0 * * *",
+    "description": "Daily at 00:00 UTC (24-hour Nexus pulse)",
+    "timeout_minutes": 60,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff": "exponential"
+    },
+    "artifacts": {
+      "retention_days": {
+        "proofs": 365,
+        "logs": 90,
+        "reports": 365,
+        "debug": 30
+      },
+      "compression": "gzip",
+      "encryption": "optional"
+    },
+    "matrix": {
+      "ecosystems": [
+        "ssid",
+        "eudi",
+        "trustnet",
+        "opencore",
+        "custom"
+      ],
+      "description": "Multi-ecosystem parallel aggregation"
+    },
+    "notifications": {
+      "on_success": "commit_summary",
+      "on_failure": "create_issue",
+      "on_threshold": "manual_review_required"
+    }
+  },
+
+  "exit_codes": {
+    "0": {
+      "name": "SUCCESS",
+      "description": "L9 root generated, consensus ≥85%",
+      "action": "commit_and_tag",
+      "tag_prefix": "v5.0-global-nexus-verified"
+    },
+    "1": {
+      "name": "EARLY",
+      "description": "Before activation date (time-gate)",
+      "action": "prep_commit_only",
+      "tag_prefix": "v5.0-global-nexus-prep"
+    },
+    "2": {
+      "name": "PREREQ",
+      "description": "Missing prerequisites (directories/files)",
+      "action": "block_and_create_issue"
+    },
+    "3": {
+      "name": "FAILED",
+      "description": "Critical error (validation/processing failure)",
+      "action": "block_and_alert"
+    },
+    "4": {
+      "name": "THRESHOLD",
+      "description": "Consensus below 85% (manual review required)",
+      "action": "block_and_request_review"
+    }
+  },
+
+  "simulation": {
+    "mode": "active",
+    "until": "2026-07-01T00:00:00Z",
+    "description": "No real network calls, on-chain anchoring, or IPFS uploads",
+    "synthetic_data": true,
+    "stub_external_systems": true
+  },
+
+  "documentation": {
+    "reports": [
+      "05_documentation/reports/2026-Q3/V5.0_GLOBAL_PROOF_NEXUS_REPORT.md",
+      "05_documentation/reports/2026-Q3/GLOBAL_NEXUS_SUMMARY.md",
+      "05_documentation/reports/2026-Q3/GLOBAL_NEXUS_CHANGELOG.md"
+    ],
+    "schemas": [
+      "24_meta_orchestration/federation/templates/foreign_layer8_example.json"
+    ],
+    "contracts": [
+      "07_governance_legal/contracts/global_proof_nexus.sol"
+    ],
+    "engines": [
+      "20_foundation/global_proof_nexus_engine.py"
+    ]
+  },
+
+  "security": {
+    "threat_model": "byzantine_fault_tolerant",
+    "attack_vectors": [
+      "sybil_attack",
+      "timing_attack",
+      "proof_forgery",
+      "consensus_manipulation"
+    ],
+    "mitigation": {
+      "sybil": "trust_score_decay",
+      "timing": "max_timestamp_drift_check",
+      "forgery": "signature_validation",
+      "consensus": "85_percent_threshold"
+    },
+    "audit_frequency": "quarterly",
+    "penetration_testing": "annual"
+  },
+
+  "governance": {
+    "model": "dao_consensus",
+    "voting_threshold": 0.67,
+    "proposal_types": [
+      "ecosystem_registration",
+      "threshold_adjustment",
+      "epoch_rotation",
+      "emergency_halt"
+    ],
+    "vote_duration": "7 days",
+    "execution_delay": "48 hours"
+  }
+}
