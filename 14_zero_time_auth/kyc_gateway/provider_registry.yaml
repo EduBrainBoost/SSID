@@ -1,0 +1,104 @@
+# KYC Provider Registry v1.0
+# License: GPL-3.0-or-later
+# Description: Registry of third-party KYC providers for delegation-based verification
+# IMPORTANT: No secrets, credentials, or API keys in this file - public metadata only
+
+version: "1.0"
+registry_id: "ssid-kyc-gateway-v1"
+last_updated: "2025-10-12T00:00:00Z"
+
+# Provider list - All endpoints are PLACEHOLDERS for testing only
+providers:
+  - id: "didit"
+    name: "Didit"
+    description: "Web3 identity verification provider"
+    jwk_set_url: "https://example.didit.invalid/jwks.json"
+    token_issuer: "didit:issuer:placeholder"
+    auth_flow: "redirect"
+    proof_format: "jwt"
+    hash_algos: ["SHA-256", "BLAKE2b"]
+    supported_scopes: ["kyc:basic", "kyc:full", "kyc:aml"]
+    redirect_base_url: "https://example.didit.invalid/auth"
+    docs_url: "https://docs.didit.invalid"
+    privacy_policy_url: "https://example.didit.invalid/privacy"
+    terms_url: "https://example.didit.invalid/terms"
+    status: "mock"
+
+  - id: "yoti"
+    name: "Yoti"
+    description: "Digital identity platform"
+    jwk_set_url: "https://example.yoti.invalid/jwks.json"
+    token_issuer: "yoti:issuer:placeholder"
+    auth_flow: "sdk"
+    proof_format: "vc"
+    hash_algos: ["SHA-256"]
+    supported_scopes: ["kyc:identity", "kyc:age", "kyc:address"]
+    sdk_url: "https://example.yoti.invalid/sdk.js"
+    docs_url: "https://docs.yoti.invalid"
+    privacy_policy_url: "https://example.yoti.invalid/privacy"
+    terms_url: "https://example.yoti.invalid/terms"
+    status: "mock"
+
+  - id: "idnow"
+    name: "IDnow"
+    description: "European identity verification platform"
+    jwk_set_url: "https://example.idnow.invalid/jwks.json"
+    token_issuer: "idnow:issuer:placeholder"
+    auth_flow: "redirect"
+    proof_format: "jwt"
+    hash_algos: ["SHA-256", "BLAKE2b"]
+    supported_scopes: ["kyc:video", "kyc:auto", "kyc:esign"]
+    redirect_base_url: "https://example.idnow.invalid/identify"
+    docs_url: "https://docs.idnow.invalid"
+    privacy_policy_url: "https://example.idnow.invalid/privacy"
+    terms_url: "https://example.idnow.invalid/terms"
+    status: "mock"
+
+  - id: "signicat"
+    name: "Signicat"
+    description: "Nordic digital identity provider"
+    jwk_set_url: "https://example.signicat.invalid/jwks.json"
+    token_issuer: "signicat:issuer:placeholder"
+    auth_flow: "redirect"
+    proof_format: "jwt"
+    hash_algos: ["SHA-256"]
+    supported_scopes: ["kyc:eid", "kyc:bank", "kyc:mobile"]
+    redirect_base_url: "https://example.signicat.invalid/auth"
+    docs_url: "https://docs.signicat.invalid"
+    privacy_policy_url: "https://example.signicat.invalid/privacy"
+    terms_url: "https://example.signicat.invalid/terms"
+    status: "mock"
+
+# Security requirements
+security_requirements:
+  min_jwt_key_size: 2048
+  allowed_jwt_algorithms: ["RS256", "RS384", "RS512", "ES256", "ES384", "ES512", "EdDSA"]
+  max_token_age_seconds: 300
+  require_audience: true
+  require_issuer: true
+  require_jti: true
+  require_nonce: true
+
+# Privacy constraints
+privacy_constraints:
+  no_pii_storage: true
+  proof_only_mode: true
+  hash_before_store: true
+  forbidden_fields: ["name", "given_name", "family_name", "birthdate", "birth_date", "address", "email", "phone_number", "phone", "ssn", "tax_id", "passport", "id_number", "drivers_license"]
+  max_claim_size_bytes: 10240
+
+# Operational limits
+operational_limits:
+  max_providers: 50
+  max_sessions_per_ip_per_hour: 10
+  max_callbacks_per_session: 3
+  session_ttl_seconds: 3600
+  proof_retention_days: 365
+
+# Compliance markers (design intent, not legal advice)
+compliance_markers:
+  gdpr_compliant_design: true
+  eidas_aware: true
+  no_custody: true
+  user_provider_direct: true
+  ssid_role: "code_publisher_only"

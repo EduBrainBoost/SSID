@@ -1,0 +1,19 @@
+{
+  "description": "Mock JWT for testing (deterministic, offline)",
+  "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im1vY2sta2V5LTEifQ.eyJpc3MiOiJkaWRpdDppc3N1ZXI6bW9jayIsImF1ZCI6InNzaWQ6a3ljOnRlc3QiLCJleHAiOjk5OTk5OTk5OTksImlhdCI6MTYzMDAwMDAwMCwianRpIjoibW9jay1qdGktMTIzNDUiLCJreWNfbGV2ZWwiOiJiYXNpYyIsInZlcmlmaWVkIjp0cnVlfQ.mock-signature",
+  "header": {
+    "alg": "RS256",
+    "typ": "JWT",
+    "kid": "mock-key-1"
+  },
+  "payload": {
+    "iss": "didit:issuer:mock",
+    "aud": "ssid:kyc:test",
+    "exp": 9999999999,
+    "iat": 1630000000,
+    "jti": "mock-jti-12345",
+    "kyc_level": "basic",
+    "verified": true
+  },
+  "note": "This is a MOCK token for testing only. Do not use in production."
+}

@@ -1,0 +1,92 @@
+# SSID KYC Gateway Configuration (Example)
+# License: GPL-3.0-or-later
+# IMPORTANT: Replace all placeholders before production use
+
+# Server configuration
+server:
+  host: "0.0.0.0"
+  port: 8080
+  base_url: "https://example.ssid.invalid"
+  callback_base_url: "https://example.ssid.invalid/api/v1/kyc/callback"
+
+# Security settings
+security:
+  # JWT audience (must match provider-issued tokens)
+  expected_audience: "ssid:kyc:gateway"
+
+  # Maximum clock skew for exp/nbf validation (seconds)
+  max_clock_skew: 60
+
+  # JTI cache TTL for replay protection (seconds)
+  jti_cache_ttl: 3600
+
+  # CORS settings
+  cors:
+    enabled: true
+    allowed_origins: ["https://example.ssid.invalid"]
+    allowed_methods: ["GET", "POST"]
+    allowed_headers: ["Content-Type", "Authorization"]
+    max_age: 3600
+
+# Rate limiting
+rate_limiting:
+  enabled: true
+  max_sessions_per_ip_per_hour: 10
+  max_callbacks_per_session: 3
+  burst_size: 20
+
+# File paths (Root-24-LOCK compliant)
+paths:
+  provider_registry: "14_zero_time_auth/kyc_gateway/provider_registry.yaml"
+  proof_registry: "14_zero_time_auth/kyc_gateway/proof_registry.jsonl"
+  audit_log: "02_audit_logging/logs/kyc_gateway/kyc_gateway_audit.log"
+  opa_policy: "23_compliance/policies/kyc_delegation_policy.rego"
+
+# Session settings
+sessions:
+  ttl_seconds: 3600
+  max_active_sessions: 10000
+
+# Proof retention
+retention:
+  proof_retention_days: 365
+  log_retention_days: 90
+
+# Provider allowlist (leave empty to allow all from registry)
+allowed_providers: []
+  # - "didit"
+  # - "yoti"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "json"
+  output: "file"  # file, console, both
+
+# Optional: On-chain anchoring (experimental)
+blockchain:
+  enabled: false
+  contract_address: "0x0000000000000000000000000000000000000000"
+  provider_url: "https://example.ethereum.invalid"
+  # Gas settings
+  max_gas_price_gwei: 100
+  gas_limit: 150000
+
+# Operational limits
+limits:
+  max_claim_size_bytes: 10240
+  max_proof_records: 1000000
+  max_concurrent_verifications: 100
+
+# Privacy enforcement
+privacy:
+  enforce_pii_filter: true
+  hash_algorithm: "SHA-256"  # SHA-256 or BLAKE2b
+  strict_mode: true  # Reject any PII-like patterns
+
+# Compliance markers (design intent, not legal advice)
+compliance:
+  gdpr_mode: true
+  eidas_aware: true
+  no_custody_mode: true
+  ssid_role: "code_publisher_only"

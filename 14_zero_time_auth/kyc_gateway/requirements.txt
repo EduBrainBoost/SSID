@@ -1,0 +1,26 @@
+# SSID KYC Gateway - Python Dependencies
+# License: GPL-3.0-or-later
+# Generated: 2025-10-12
+
+# Core dependencies
+PyJWT==2.8.0           # JWT encoding/decoding
+cryptography==41.0.7   # Cryptographic primitives
+PyYAML==6.0.1          # YAML parsing
+
+# Testing
+pytest==7.4.3          # Testing framework
+pytest-cov==4.1.0      # Coverage reporting
+
+# Linting & Type Checking
+ruff==0.1.8            # Fast Python linter
+mypy==1.7.1            # Static type checker
+
+# Security
+pip-audit==2.6.1       # Dependency vulnerability scanner
+
+# Optional (for development)
+black==23.12.1         # Code formatting
+isort==5.13.2          # Import sorting
+
+# Note: Install with `pip install -r requirements.txt`
+# For production, pin exact versions and use hash verification
