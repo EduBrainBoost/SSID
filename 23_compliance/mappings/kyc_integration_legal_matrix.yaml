@@ -1,0 +1,260 @@
+# KYC Integration Legal Matrix
+# License: GPL-3.0-or-later
+# Purpose: Clear role separation and liability boundaries
+# IMPORTANT: This is NOT legal advice. Independent legal review required.
+
+version: "1.0"
+document_type: "legal_responsibility_matrix"
+scope: "KYC Delegation Gateway Integration (Layer 14 ↔ Layer 9)"
+updated: "2025-10-12"
+
+# Role definitions
+roles:
+  ssid_system:
+    name: "SSID System"
+    description: "Code publisher, proof verification infrastructure"
+    legal_status: "Not a data controller or processor (GDPR Art. 4)"
+    responsibilities:
+      - "Publish open-source code (GPL-3.0-or-later)"
+      - "Provide technical interfaces (APIs, webhooks)"
+      - "Verify cryptographic proofs (JWT/VC signatures)"
+      - "Store hash digests (SHA-256/BLAKE2b, no PII)"
+      - "Emit WORM audit logs (metadata only, no PII)"
+      - "Maintain code quality and security"
+    not_responsible_for:
+      - "KYC/AML execution"
+      - "PII processing or storage"
+      - "User identity verification"
+      - "Payment processing"
+      - "Fund custody"
+      - "Legal compliance of third parties"
+    liability:
+      type: "Limited (code quality)"
+      scope: "GPL-3.0 'AS IS' warranty disclaimer"
+      insurance: "Not applicable (open-source project)"
+    gdpr_role: "Neither controller nor processor"
+    eidas_role: "Not a trust service provider"
+    mica_role: "Not a CASP"
+    amld6_role: "Not an obliged entity"
+
+  kyc_provider:
+    name: "KYC Provider (Didit, Yoti, IDnow, Signicat, etc.)"
+    description: "External identity verification service"
+    legal_status: "Data controller (GDPR Art. 4(7))"
+    responsibilities:
+      - "Execute KYC/AML verification"
+      - "Process personal identifiable information (PII)"
+      - "Obtain user consent (GDPR Art. 6)"
+      - "Issue cryptographic proofs (JWT/VC)"
+      - "Maintain GDPR compliance"
+      - "Comply with eIDAS (if applicable)"
+      - "Handle payment processing (if applicable)"
+      - "Provide customer support"
+      - "Data breach notification (GDPR Art. 33)"
+    not_responsible_for:
+      - "SSID system availability"
+      - "Layer 9 proof aggregation"
+      - "On-chain anchoring"
+    liability:
+      type: "Full (verification accuracy, GDPR compliance)"
+      scope: "Terms of service with user"
+      insurance: "Provider-specific (E&O, cyber insurance)"
+    gdpr_role: "Data controller"
+    eidas_role: "May be QTSP-qualified (provider-dependent)"
+    mica_role: "Not applicable"
+    amld6_role: "Obliged entity (if financial services)"
+
+  user:
+    name: "User (Identity Owner)"
+    description: "Natural person seeking identity verification"
+    legal_status: "Data subject (GDPR Art. 4(1))"
+    responsibilities:
+      - "Provide accurate identity information to provider"
+      - "Grant consent for KYC processing (GDPR Art. 7)"
+      - "Select KYC provider (informed choice)"
+      - "Pay provider fees (if applicable)"
+      - "Review provider terms of service"
+      - "Exercise GDPR rights (access, erasure, etc.)"
+    not_responsible_for:
+      - "SSID system operation"
+      - "Provider KYC accuracy"
+      - "Third-party service failures"
+    liability:
+      type: "Self-responsibility"
+      scope: "Provider selection, consent, data accuracy"
+      insurance: "Not applicable"
+    gdpr_role: "Data subject"
+    eidas_role: "Identity holder"
+    mica_role: "Not applicable"
+    amld6_role: "Not applicable"
+
+# Responsibility matrix
+responsibility_matrix:
+  kyc_execution:
+    responsible: "kyc_provider"
+    ssid_role: "None (delegation only)"
+    user_role: "Consent provider"
+    legal_basis: "Provider contract with user"
+
+  pii_storage:
+    responsible: "kyc_provider"
+    ssid_role: "None (hash-only storage)"
+    user_role: "Data subject (GDPR rights)"
+    legal_basis: "GDPR Art. 6(1)(b) - Contract performance"
+
+  payment_processing:
+    responsible: "user_to_provider_direct"
+    ssid_role: "None (no payment flow)"
+    user_role: "Payment to provider"
+    legal_basis: "Provider terms of service"
+
+  gdpr_data_controller:
+    responsible: "kyc_provider"
+    ssid_role: "Not applicable (no PII processing)"
+    user_role: "Data subject"
+    legal_basis: "GDPR Art. 4(7)"
+
+  gdpr_data_processor:
+    responsible: "None"
+    ssid_role: "Not applicable (no PII processing)"
+    user_role: "N/A"
+    legal_basis: "GDPR Art. 4(8)"
+
+  eidas_trust_services:
+    responsible: "kyc_provider (if QTSP)"
+    ssid_role: "Signature verification (technical only)"
+    user_role: "Trust service recipient"
+    legal_basis: "eIDAS Regulation (EU) 910/2014"
+
+  mica_casp:
+    responsible: "None"
+    ssid_role: "Not a CASP"
+    user_role: "N/A"
+    legal_basis: "MiCA Regulation (EU) 2023/1114"
+
+  amld6_obliged_entity:
+    responsible: "kyc_provider (if financial services)"
+    ssid_role: "Not an obliged entity"
+    user_role: "N/A"
+    legal_basis: "AMLD6 Directive (EU) 2018/1673"
+
+# Data flow boundaries
+data_flow:
+  user_to_provider:
+    data_type: "PII (name, birthdate, documents, etc.)"
+    transport: "Provider-specific (HTTPS, SDK)"
+    encryption: "Provider TLS/SSL"
+    retention: "Provider privacy policy"
+    gdpr_basis: "Art. 6(1)(b) - Contract"
+
+  provider_to_ssid:
+    data_type: "Cryptographic proof (JWT/VC, hash-only)"
+    transport: "HTTPS webhook"
+    encryption: "TLS 1.3"
+    retention: "365 days (proof digest), 90 days (logs)"
+    gdpr_basis: "Not applicable (no PII)"
+
+  ssid_layer14_to_layer9:
+    data_type: "Proof digest (SHA-256/BLAKE2b hex)"
+    transport: "Internal function call or HTTP"
+    encryption: "N/A (hash-only, no PII)"
+    retention: "365 days"
+    gdpr_basis: "Not applicable (no PII)"
+
+  ssid_to_blockchain:
+    data_type: "Proof digest (bytes32, hash-only)"
+    transport: "Ethereum RPC"
+    encryption: "N/A (public blockchain)"
+    retention: "Immutable (blockchain)"
+    gdpr_basis: "Not applicable (no PII, Art. 5(1)(c))"
+
+# Liability boundaries
+liability:
+  ssid_limits:
+    - "No warranty (GPL-3.0 'AS IS')"
+    - "No liability for provider KYC accuracy"
+    - "No liability for user data breaches at provider"
+    - "No liability for blockchain network failures"
+    - "Code quality only (standard of care)"
+
+  provider_limits:
+    - "Terms of service with user (contractual)"
+    - "GDPR compliance obligations"
+    - "KYC/AML accuracy (regulatory)"
+    - "E&O insurance (provider-specific)"
+
+  user_limits:
+    - "Self-responsibility for provider selection"
+    - "Consent accuracy and validity"
+    - "Payment obligations to provider"
+
+# Dispute resolution
+disputes:
+  user_vs_provider:
+    jurisdiction: "Provider terms of service"
+    mechanism: "Provider customer support, arbitration"
+    ssid_role: "None (third party)"
+
+  user_vs_ssid:
+    jurisdiction: "Not applicable (no user contract)"
+    mechanism: "Open-source community (GitHub issues)"
+    ssid_role: "Community support only"
+
+  provider_vs_ssid:
+    jurisdiction: "Not applicable (no provider contract)"
+    mechanism: "Open-source license (GPL-3.0)"
+    ssid_role: "Code availability only"
+
+# Compliance summary
+compliance_summary:
+  gdpr:
+    ssid_compliant: true
+    reason: "No PII processing, hash-only storage"
+    controller: "KYC Provider"
+    processor: "None"
+
+  eidas:
+    ssid_compliant: true
+    reason: "Not a trust service provider, signature verification technical only"
+    trust_service: "KYC Provider (if QTSP)"
+
+  mica:
+    ssid_compliant: true
+    reason: "Not a CASP, no crypto-asset custody"
+
+  dora:
+    ssid_compliant: true
+    reason: "Not a financial entity, resilience via testing"
+
+  amld6:
+    ssid_compliant: true
+    reason: "Not an obliged entity, no financial services"
+
+# Legal disclaimer
+legal_disclaimer: |
+  This legal matrix is an architectural justification document, NOT legal advice.
+  It describes the intended role separation and liability boundaries based on the
+  technical architecture of the SSID KYC Delegation Gateway.
+
+  Independent legal review is REQUIRED before production deployment.
+
+  Deploying organizations assume full legal responsibility for:
+  - Compliance with applicable laws (GDPR, eIDAS, MiCA, DORA, AMLD6)
+  - Contracts with KYC providers
+  - User terms of service
+  - Data protection impact assessments (DPIA)
+  - Privacy policies
+  - Regulatory approvals (if required)
+
+  SSID Consortium provides software code only (GPL-3.0-or-later).
+  Use at your own risk. No warranty provided.
+
+# References
+references:
+  - "GDPR (EU) 2016/679"
+  - "eIDAS (EU) 910/2014"
+  - "MiCA (EU) 2023/1114"
+  - "DORA (EU) 2022/2554"
+  - "AMLD6 (EU) 2018/1673"
+  - "GPL-3.0-or-later"
+  - "SSID Blueprint v5.0/v5.1"
