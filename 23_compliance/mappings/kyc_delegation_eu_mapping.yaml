@@ -1,0 +1,139 @@
+# SSID KYC Delegation - EU Regulatory Mapping
+# License: GPL-3.0-or-later
+# Purpose: Architecture justification for SSID's non-custodial, delegation-based KYC model
+# IMPORTANT: This is NOT legal advice. Independent legal review required.
+
+version: "1.0"
+document_type: "architectural_justification"
+scope: "EU regulatory context (GDPR, eIDAS, MiCA, DORA, AMLD6)"
+ssid_role: "code_publisher_only"
+updated: "2025-10-12"
+
+# Core architectural principle
+principle:
+  model: "delegation"
+  pattern: "web3_non_custodial"
+  reference: "MetaMask-style provider delegation"
+  data_handling: "proof_only_no_pii"
+  custody: "zero_custody"
+  payment_flow: "user_to_provider_direct"
+
+# GDPR (General Data Protection Regulation)
+gdpr:
+  article_6_lawful_basis:
+    justification: |
+      SSID does not process personal data. Users interact directly with KYC providers.
+      SSID receives only cryptographic proofs (hashed claims, no PII).
+      SSID is not a data controller or processor under GDPR Article 4(7) and 4(8).
+    data_minimization: "Only hash digests stored (Article 5(1)(c))"
+    storage_limitation: "Proof retention: 365 days, logs: 90 days (Article 5(1)(e))"
+    integrity_confidentiality: "Hash-only storage, WORM logs, TLS transport (Article 5(1)(f))"
+    no_pii_storage: "Forbidden fields enforced via OPA policy"
+
+  data_subject_rights:
+    right_to_erasure_article_17:
+      justification: |
+        SSID stores only hash digests (not personal data).
+        Users exercise erasure rights directly with KYC provider.
+        SSID can delete proof records containing hash digests on request.
+    right_to_access_article_15:
+      justification: |
+        SSID provides proof metadata (digest, timestamp, provider) via API.
+        No PII to access, as SSID does not store PII.
+
+# eIDAS (Electronic Identification, Authentication and trust Services)
+eidas:
+  trust_framework:
+    justification: |
+      SSID delegates identity verification to third-party providers.
+      Providers may be QTSP-qualified or eIDAS-notified (user's choice).
+      SSID validates cryptographic proofs using provider-issued JWKs.
+      SSID is not a trust service provider under eIDAS Article 3(19).
+    timestamp_validation: "UTC timestamps, max clock skew 60s"
+    signature_validation: "JWK-based JWT signature verification"
+    qualified_trust_services: "Provider-dependent (Didit, Yoti, IDnow, Signicat may be QTSP)"
+
+# MiCA (Markets in Crypto-Assets Regulation)
+mica:
+  applicability:
+    justification: |
+      SSID is not a crypto-asset service provider (CASP).
+      No custody of crypto-assets, no exchange services, no wallet custody.
+      KYC delegation is architectural choice, not MiCA-regulated activity.
+      If SSID integrates with blockchain (optional on-chain anchoring), only hash digests
+      are anchored (no personal data, no asset custody).
+    transparency: "Open-source code (GPL-3.0), public documentation"
+    governance: "DAO-based provider registration (optional future feature)"
+
+# DORA (Digital Operational Resilience Act)
+dora:
+  operational_resilience:
+    justification: |
+      SSID is not a financial entity under DORA Article 2.
+      However, resilience principles applied:
+      - CI/CD with automated testing (≥90% coverage)
+      - WORM audit logs for incident forensics
+      - Deterministic proof verification (reproducible)
+      - Rate limiting and replay protection
+    incident_reporting: "Audit logs provide forensic trail (24h RTO target)"
+    testing_framework: "pytest with coverage ≥90%, OPA policy checks"
+
+# AMLD6 (6th Anti-Money Laundering Directive)
+amld6:
+  kyc_aml_obligations:
+    justification: |
+      SSID does not perform KYC/AML. Delegated to third-party providers.
+      SSID does not handle payments, does not custody funds.
+      Users pay providers directly (outside SSID scope).
+      SSID role: Technical infrastructure for proof verification only.
+    cross_border_cooperation:
+      justification: |
+        Audit logs provide cross-border trail (if required by provider).
+        SSID stores provider_id + proof_digest (no PII, no transaction data).
+    reporting_obligations:
+      justification: |
+        SSID has no reporting obligations (not a financial institution, no AML role).
+        Providers are responsible for AML compliance.
+
+# Summary matrix
+responsibility_matrix:
+  kyc_execution:
+    responsible_party: "KYC Provider (Didit, Yoti, IDnow, Signicat, etc.)"
+    ssid_role: "None (delegation only)"
+  pii_storage:
+    responsible_party: "KYC Provider"
+    ssid_role: "None (hash-only proof storage)"
+  payment_processing:
+    responsible_party: "User ↔ Provider (direct)"
+    ssid_role: "None (no payment flow)"
+  data_controller_gdpr:
+    responsible_party: "KYC Provider"
+    ssid_role: "Not applicable (no PII processing)"
+  eidas_trust_services:
+    responsible_party: "KYC Provider (if QTSP-qualified)"
+    ssid_role: "Signature verification only"
+  mica_casp:
+    responsible_party: "Not applicable"
+    ssid_role: "Not a CASP"
+  dora_financial_entity:
+    responsible_party: "Not applicable"
+    ssid_role: "Not a financial entity"
+  amld6_obliged_entity:
+    responsible_party: "KYC Provider"
+    ssid_role: "Not an obliged entity"
+
+# Legal disclaimer
+legal_disclaimer: |
+  This mapping is an architectural justification document, NOT legal advice.
+  Independent legal review required before production deployment.
+  SSID Consortium provides software code only (GPL-3.0-or-later).
+  Deploying organizations assume full legal responsibility for compliance.
+
+# References
+references:
+  - "GDPR (EU) 2016/679"
+  - "eIDAS (EU) 910/2014"
+  - "MiCA (EU) 2023/1114"
+  - "DORA (EU) 2022/2554"
+  - "AMLD6 (EU) 2018/1673"
+  - "SSID Blueprint v5.0 - Global Proof Nexus"

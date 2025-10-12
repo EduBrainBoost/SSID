@@ -1,0 +1,479 @@
+openapi: 3.1.0
+info:
+  title: SSID KYC Delegation Gateway API
+  version: 1.0.0
+  description: |
+    Non-custodial KYC delegation gateway for SSID. Provides interfaces for third-party
+    KYC provider integration following the Web3 delegation pattern (similar to MetaMask).
+
+    **Architecture**: SSID does not perform KYC, does not store PII, and does not handle payments.
+    Users interact directly with KYC providers. SSID receives only cryptographic proofs (JWT/VC),
+    validates them, and stores hash-based proof records.
+
+    **Security**: All proofs are verified (signature, issuer, expiry). Only hashed claims are persisted.
+
+    **Privacy**: Zero PII storage. Hash-only proof registry. WORM audit logs.
+
+    **Compliance**: Design follows GDPR/eIDAS principles. SSID acts as code publisher only.
+  license:
+    name: GPL-3.0-or-later
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+  contact:
+    name: SSID Technical Team
+    url: https://github.com/EduBrainBoost/SSID
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local development
+  - url: https://example.ssid.invalid/api/v1
+    description: Mock production (placeholder)
+
+tags:
+  - name: providers
+    description: KYC provider registry operations
+  - name: sessions
+    description: KYC session management
+  - name: callbacks
+    description: Provider callback handling
+  - name: proofs
+    description: Proof verification and retrieval
+
+paths:
+  /kyc/providers:
+    get:
+      tags: [providers]
+      summary: List available KYC providers
+      description: Returns registry of supported third-party KYC providers (public metadata only)
+      operationId: listProviders
+      responses:
+        '200':
+          description: Provider list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderList'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /kyc/start:
+    post:
+      tags: [sessions]
+      summary: Start KYC session
+      description: |
+        Initiates a KYC verification session with the specified provider.
+        Returns redirect URL or SDK parameters for user to complete KYC with provider.
+      operationId: startKycSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartSessionRequest'
+      responses:
+        '200':
+          description: Session created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSessionResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Provider not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /kyc/callback:
+    post:
+      tags: [callbacks]
+      summary: Handle provider callback
+      description: |
+        Receives verification proof from KYC provider (JWT or VC format).
+        Validates signature, issuer, expiry, audience. Computes proof digest.
+        Stores proof record (hash-only). Emits audit log. Returns validation status.
+
+        **Security**: Request signature verification, nonce/jti replay protection, strict audience check.
+        **Privacy**: No PII stored. Only normalized claim hash persisted.
+      operationId: handleCallback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallbackRequest'
+      responses:
+        '200':
+          description: Callback processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallbackResponse'
+        '400':
+          description: Invalid callback payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Invalid signature or token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Replay detected (duplicate jti/nonce)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /kyc/status/{session_id}:
+    get:
+      tags: [sessions]
+      summary: Get session status
+      description: Returns current status of KYC session (no PII, deterministic)
+      operationId: getSessionStatus
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Session UUID
+      responses:
+        '200':
+          description: Session status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionStatus'
+        '404':
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /kyc/proofs/{proof_id}:
+    get:
+      tags: [proofs]
+      summary: Get proof metadata
+      description: |
+        Returns proof record metadata (digest, algorithm, timestamp, provider).
+        Does NOT return raw claims or PII. Hash-based proof retrieval only.
+      operationId: getProofMetadata
+      parameters:
+        - name: proof_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Proof record UUID
+      responses:
+        '200':
+          description: Proof metadata retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofRecord'
+        '404':
+          description: Proof not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Provider:
+      type: object
+      required:
+        - id
+        - name
+        - jwk_set_url
+        - token_issuer
+        - auth_flow
+        - proof_format
+        - hash_algos
+      properties:
+        id:
+          type: string
+          description: Provider unique identifier
+          example: "didit"
+        name:
+          type: string
+          description: Provider display name
+          example: "Didit"
+        jwk_set_url:
+          type: string
+          format: uri
+          description: Provider JWK Set URL for signature verification
+          example: "https://example.didit.invalid/jwks.json"
+        token_issuer:
+          type: string
+          description: Expected JWT issuer claim value
+          example: "didit:issuer:placeholder"
+        auth_flow:
+          type: string
+          enum: [redirect, sdk]
+          description: Authentication flow type
+        proof_format:
+          type: string
+          enum: [jwt, vc]
+          description: Proof format (JWT or Verifiable Credential)
+        hash_algos:
+          type: array
+          items:
+            type: string
+            enum: [SHA-256, BLAKE2b]
+          description: Supported hash algorithms for proof digest
+        supported_scopes:
+          type: array
+          items:
+            type: string
+          description: Available verification scopes
+          example: ["kyc:basic", "kyc:full"]
+        status:
+          type: string
+          enum: [active, mock, disabled]
+          description: Provider operational status
+
+    ProviderList:
+      type: object
+      required:
+        - providers
+        - count
+      properties:
+        providers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Provider'
+        count:
+          type: integer
+          description: Total number of providers
+        timestamp:
+          type: string
+          format: date-time
+          description: Response timestamp (UTC)
+
+    StartSessionRequest:
+      type: object
+      required:
+        - provider_id
+        - session_id
+      properties:
+        provider_id:
+          type: string
+          description: Provider ID from registry
+          example: "didit"
+        session_id:
+          type: string
+          format: uuid
+          description: Client-generated session UUID
+        scopes:
+          type: array
+          items:
+            type: string
+          description: Requested verification scopes
+          example: ["kyc:basic"]
+        redirect_uri:
+          type: string
+          format: uri
+          description: User redirect URI after provider flow
+          example: "https://example.com/callback"
+
+    StartSessionResponse:
+      type: object
+      required:
+        - session_id
+        - provider_id
+        - auth_url
+        - state
+        - nonce
+      properties:
+        session_id:
+          type: string
+          format: uuid
+        provider_id:
+          type: string
+        auth_url:
+          type: string
+          format: uri
+          description: Provider authorization URL (redirect flow)
+        state:
+          type: string
+          description: CSRF protection state parameter
+        nonce:
+          type: string
+          description: Replay protection nonce
+        expires_at:
+          type: string
+          format: date-time
+          description: Session expiration (UTC)
+
+    CallbackRequest:
+      type: object
+      required:
+        - session_id
+        - proof_token
+      properties:
+        session_id:
+          type: string
+          format: uuid
+          description: Session UUID from start flow
+        proof_token:
+          type: string
+          description: JWT or VC from provider (base64 or JSON)
+        state:
+          type: string
+          description: State parameter for validation
+
+    CallbackResponse:
+      type: object
+      required:
+        - status
+        - proof_id
+        - digest
+      properties:
+        status:
+          type: string
+          enum: [PASS, FAIL]
+          description: Validation result
+        proof_id:
+          type: string
+          format: uuid
+          description: Generated proof record ID
+        digest:
+          type: string
+          description: SHA-256 or BLAKE2b digest of normalized claims (hex)
+        algorithm:
+          type: string
+          enum: [SHA-256, BLAKE2b]
+        timestamp:
+          type: string
+          format: date-time
+          description: Proof creation timestamp (UTC)
+        provider_id:
+          type: string
+          description: Provider that issued the proof
+
+    SessionStatus:
+      type: object
+      required:
+        - session_id
+        - status
+        - created_at
+      properties:
+        session_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [pending, completed, expired, failed]
+        provider_id:
+          type: string
+        proof_id:
+          type: string
+          format: uuid
+          description: Associated proof ID (if completed)
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+
+    ProofRecord:
+      type: object
+      required:
+        - id
+        - provider_id
+        - digest
+        - algorithm
+        - timestamp
+        - policy_version
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Proof record UUID
+        provider_id:
+          type: string
+          description: Provider that issued the original proof
+        digest:
+          type: string
+          description: Cryptographic hash of normalized claims (hex)
+          example: "a3c5f8d2e9b1047c6d8e2f5a9b3c7d1e..."
+        algorithm:
+          type: string
+          enum: [SHA-256, BLAKE2b]
+          description: Hash algorithm used
+        timestamp:
+          type: string
+          format: date-time
+          description: Proof creation timestamp (UTC)
+        policy_version:
+          type: string
+          description: Policy version at time of proof creation
+          example: "1.0"
+        evidence_chain:
+          type: array
+          items:
+            type: string
+          description: Chain of evidence hashes (optional)
+        metadata:
+          type: object
+          description: Additional non-PII metadata
+          additionalProperties:
+            type: string
+
+    Error:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: "INVALID_TOKEN"
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: object
+          description: Additional error context (no PII)
+          additionalProperties: true
+        timestamp:
+          type: string
+          format: date-time
+
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Admin API key for internal operations (local only)
+
+security: []
