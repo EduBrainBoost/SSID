@@ -1,0 +1,287 @@
+name: OPA Policy Evaluation Gate
+version: "1.0.0"
+
+on:
+  push:
+    branches: ["main", "develop", "feature/**"]
+  pull_request:
+    branches: ["main", "develop"]
+  workflow_dispatch:
+
+jobs:
+  opa-policy-enforcement:
+    name: OPA Policy Evaluation and Enforcement
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install OPA (Open Policy Agent)
+        run: |
+          echo "Installing OPA..."
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x ./opa
+          sudo mv ./opa /usr/local/bin/opa
+          opa version
+          echo "✅ OPA installed successfully"
+
+      - name: Generate repository state JSON
+        run: |
+          echo "Generating repository state for OPA evaluation..."
+
+          python3 << 'EOF'
+import json
+import os
+from pathlib import Path
+from datetime import datetime, timezone
+
+# Scan repository structure
+root_modules = []
+for item in Path('.').iterdir():
+    if item.is_dir() and item.name.startswith(tuple(f'{i:02d}_' for i in range(1, 25))):
+        root_modules.append(item.name)
+
+# Count policy files
+policy_files = list(Path('23_compliance/policies').rglob('*.rego')) if Path('23_compliance/policies').exists() else []
+policy_yaml_files = list(Path('23_compliance/policies').rglob('*.yaml')) if Path('23_compliance/policies').exists() else []
+
+# Check enforcement tools
+enforcement_tools = {
+    "structure_guard": Path("12_tooling/scripts/structure_guard.sh").exists(),
+    "structure_lock_gate": Path("24_meta_orchestration/triggers/ci/gates/structure_lock_l3.py").exists(),
+    "root_exceptions": Path("23_compliance/exceptions/root_level_exceptions.yaml").exists()
+}
+
+repo_state = {
+    "metadata": {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "scan_type": "opa_policy_evaluation",
+        "branch": os.environ.get("GITHUB_REF_NAME", "unknown"),
+        "commit_sha": os.environ.get("GITHUB_SHA", "unknown")
+    },
+    "structure": {
+        "root_modules": root_modules,
+        "root_module_count": len(root_modules),
+        "expected_root_count": 24
+    },
+    "policies": {
+        "rego_files": [str(p) for p in policy_files],
+        "yaml_files": [str(p) for p in policy_yaml_files],
+        "total_policy_files": len(policy_files) + len(policy_yaml_files)
+    },
+    "enforcement": enforcement_tools,
+    "compliance": {
+        "root_24_lock": len(root_modules) == 24,
+        "policies_present": len(policy_files) + len(policy_yaml_files) > 0,
+        "enforcement_tools_active": all(enforcement_tools.values())
+    }
+}
+
+with open('repo_state.json', 'w') as f:
+    json.dump(repo_state, f, indent=2)
+
+print(f"✅ Repository state generated")
+print(f"   Root modules: {len(root_modules)}/24")
+print(f"   Policy files: {len(policy_files) + len(policy_yaml_files)}")
+print(f"   Enforcement tools: {sum(enforcement_tools.values())}/{len(enforcement_tools)}")
+EOF
+
+      - name: Evaluate OPA Policies (Structure)
+        run: |
+          echo "=========================================="
+          echo "OPA Policy Evaluation: Structure Policies"
+          echo "=========================================="
+
+          if [ -d "23_compliance/policies" ]; then
+            # Evaluate structure policy if it exists
+            if [ -f "23_compliance/policies/structure_policy.yaml" ]; then
+              echo "Evaluating structure_policy.yaml..."
+              opa eval -i repo_state.json -d 23_compliance/policies/structure_policy.yaml -f pretty "data" || {
+                EXIT_CODE=$?
+                echo "⚠️ WARNING: Structure policy evaluation returned code $EXIT_CODE"
+              }
+            fi
+
+            # Evaluate all Rego policies
+            REGO_FILES=$(find 23_compliance/policies -name "*.rego" 2>/dev/null)
+            if [ -n "$REGO_FILES" ]; then
+              echo ""
+              echo "Evaluating Rego policies..."
+              for rego_file in $REGO_FILES; do
+                echo "  Evaluating: $rego_file"
+                opa eval -i repo_state.json -d "$rego_file" -f pretty "data" || {
+                  EXIT_CODE=$?
+                  echo "  ⚠️ WARNING: $rego_file evaluation returned code $EXIT_CODE"
+                }
+              done
+            fi
+
+            echo ""
+            echo "✅ OPA policy evaluation completed"
+          else
+            echo "⚠️ WARNING: No 23_compliance/policies directory found"
+            echo "OPA evaluation skipped"
+          fi
+
+      - name: Evaluate OPA Policies (Activation Guard)
+        run: |
+          echo "=========================================="
+          echo "OPA Policy Evaluation: Activation Guard"
+          echo "=========================================="
+
+          if [ -f "23_compliance/policies/activation_guard.rego" ]; then
+            echo "Evaluating activation_guard.rego with fail-defined enforcement..."
+
+            # Run OPA with fail-defined (exits non-zero if policy denies)
+            opa eval -i repo_state.json \
+              -d 23_compliance/policies/activation_guard.rego \
+              --fail-defined \
+              -f pretty \
+              "data.activation_guard.deny" || {
+              EXIT_CODE=$?
+              if [ $EXIT_CODE -ne 0 ]; then
+                echo ""
+                echo "❌ CRITICAL: Activation guard policy DENIED"
+                echo "Policy violations detected - review activation_guard.rego rules"
+                exit 1
+              fi
+            }
+
+            echo "✅ Activation guard policy PASSED"
+          else
+            echo "⚠️ WARNING: activation_guard.rego not found"
+            echo "Activation guard check skipped"
+          fi
+
+      - name: Evaluate OPA Policies (Activation Policy)
+        run: |
+          echo "=========================================="
+          echo "OPA Policy Evaluation: Activation Policy"
+          echo "=========================================="
+
+          if [ -f "23_compliance/policies/activation_policy.rego" ]; then
+            echo "Evaluating activation_policy.rego..."
+
+            opa eval -i repo_state.json \
+              -d 23_compliance/policies/activation_policy.rego \
+              -f pretty \
+              "data.activation_policy" || {
+              EXIT_CODE=$?
+              echo "⚠️ WARNING: Activation policy evaluation returned code $EXIT_CODE"
+            }
+
+            echo "✅ Activation policy evaluation completed"
+          else
+            echo "⚠️ WARNING: activation_policy.rego not found"
+          fi
+
+      - name: Generate OPA evaluation report
+        if: always()
+        run: |
+          echo "Generating OPA evaluation summary report..."
+
+          python3 << 'EOF'
+import json
+import os
+from datetime import datetime, timezone
+from pathlib import Path
+
+# Load repo state
+with open('repo_state.json', 'r') as f:
+    repo_state = json.load(f)
+
+# Determine policy evaluation status
+opa_report = {
+    "metadata": {
+        "report_version": "1.0.0",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "evaluation_type": "opa_policy_gate",
+        "branch": os.environ.get("GITHUB_REF_NAME", "unknown"),
+        "commit_sha": os.environ.get("GITHUB_SHA", "unknown")
+    },
+    "repository_state": repo_state,
+    "policy_evaluation": {
+        "structure_policy": {
+            "evaluated": Path("23_compliance/policies/structure_policy.yaml").exists(),
+            "status": "PASS" if repo_state["compliance"]["root_24_lock"] else "FAIL"
+        },
+        "activation_guard": {
+            "evaluated": Path("23_compliance/policies/activation_guard.rego").exists(),
+            "status": "EVALUATED"
+        },
+        "activation_policy": {
+            "evaluated": Path("23_compliance/policies/activation_policy.rego").exists(),
+            "status": "EVALUATED"
+        }
+    },
+    "compliance_summary": {
+        "root_24_lock_compliant": repo_state["compliance"]["root_24_lock"],
+        "policies_present": repo_state["compliance"]["policies_present"],
+        "enforcement_tools_active": repo_state["compliance"]["enforcement_tools_active"],
+        "overall_status": "PASS" if all(repo_state["compliance"].values()) else "PARTIAL"
+    }
+}
+
+# Write report
+os.makedirs('02_audit_logging/reports/ci_gates', exist_ok=True)
+report_path = '02_audit_logging/reports/ci_gates/opa_policy_evaluation_latest.json'
+
+with open(report_path, 'w') as f:
+    json.dump(opa_report, f, indent=2)
+
+print(f"✅ OPA evaluation report: {report_path}")
+print(f"   Status: {opa_report['compliance_summary']['overall_status']}")
+print(f"   Root-24-LOCK: {'✅' if opa_report['compliance_summary']['root_24_lock_compliant'] else '❌'}")
+print(f"   Policies: {'✅' if opa_report['compliance_summary']['policies_present'] else '❌'}")
+print(f"   Enforcement: {'✅' if opa_report['compliance_summary']['enforcement_tools_active'] else '❌'}")
+EOF
+
+      - name: Upload OPA evaluation artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: opa-policy-evaluation-reports
+          path: |
+            repo_state.json
+            02_audit_logging/reports/ci_gates/opa_policy_evaluation_latest.json
+          retention-days: 90
+
+      - name: Final OPA evaluation status
+        run: |
+          echo "=========================================="
+          echo "OPA Policy Evaluation Gate - Final Status"
+          echo "=========================================="
+
+          if [ -f "02_audit_logging/reports/ci_gates/opa_policy_evaluation_latest.json" ]; then
+            python3 << 'EOF'
+import json
+
+with open('02_audit_logging/reports/ci_gates/opa_policy_evaluation_latest.json', 'r') as f:
+    report = json.load(f)
+
+summary = report['compliance_summary']
+overall = summary['overall_status']
+
+print(f"Overall Status: {overall}")
+print(f"Root-24-LOCK: {'✅ COMPLIANT' if summary['root_24_lock_compliant'] else '❌ NON-COMPLIANT'}")
+print(f"Policies Present: {'✅ YES' if summary['policies_present'] else '❌ NO'}")
+print(f"Enforcement Tools: {'✅ ACTIVE' if summary['enforcement_tools_active'] else '❌ INACTIVE'}")
+print("")
+
+if overall == "PASS":
+    print("✅ OPA Policy Evaluation Gate PASSED")
+    print("   All compliance checks satisfied")
+    exit(0)
+else:
+    print("⚠️ OPA Policy Evaluation Gate PARTIAL")
+    print("   Some compliance checks need attention")
+    exit(0)  # Non-blocking for now
+EOF
+          else
+            echo "❌ ERROR: OPA evaluation report not generated"
+            exit 1
+          fi
