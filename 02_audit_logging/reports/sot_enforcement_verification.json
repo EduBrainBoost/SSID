@@ -1,0 +1,339 @@
+{
+  "metadata": {
+    "report_version": "1.0.0",
+    "generated_at": "2025-10-15T14:09:57.986729+00:00",
+    "tool": "verify_sot_enforcement.py",
+    "purpose": "SoT Functional Enforcement Verification"
+  },
+  "summary": {
+    "overall_score": 27,
+    "certification_level": "NONE",
+    "certification_status": "INSUFFICIENT_ENFORCEMENT",
+    "phase_scores": {
+      "static_analysis": 28,
+      "dynamic_execution": 0,
+      "audit_proof": 70
+    }
+  },
+  "phase1_static_analysis": {
+    "score": 28,
+    "weight": "35%",
+    "description": "CI/Test/Hook file reference verification",
+    "results": {
+      "structure_guard": {
+        "tool_exists": true,
+        "tool_path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\12_tooling\\scripts\\structure_guard.sh",
+        "ci_references": {
+          ".github/workflows/ci_structure_guard.yml": false
+        },
+        "refs_found": 0,
+        "refs_total": 1,
+        "score": 4.0,
+        "max_score": 20,
+        "description": "Root-24-LOCK structure validator"
+      },
+      "structure_policy_opa": {
+        "tool_exists": true,
+        "tool_path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\23_compliance\\policies\\structure_policy.yaml",
+        "ci_references": {
+          ".github/workflows/ci_opa_structure.yml": false,
+          "23_compliance/tests/integration/test_opa_structure.py": false
+        },
+        "refs_found": 0,
+        "refs_total": 2,
+        "score": 3.0,
+        "max_score": 15,
+        "description": "OPA-based structure policy enforcement"
+      },
+      "root_exceptions": {
+        "tool_exists": true,
+        "tool_path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\23_compliance\\exceptions\\root_level_exceptions.yaml",
+        "ci_references": {
+          "12_tooling/scripts/structure_guard.sh": true,
+          "24_meta_orchestration/triggers/ci/gates/structure_lock_l3.py": true
+        },
+        "refs_found": 2,
+        "refs_total": 2,
+        "score": 10.0,
+        "max_score": 10,
+        "description": "Root-level exceptions registry"
+      },
+      "structure_lock_gate": {
+        "tool_exists": true,
+        "tool_path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\24_meta_orchestration\\triggers\\ci\\gates\\structure_lock_l3.py",
+        "ci_references": {
+          ".github/workflows/ci_structure_guard.yml": false,
+          ".pre-commit-config.yaml": false
+        },
+        "refs_found": 0,
+        "refs_total": 2,
+        "score": 4.0,
+        "max_score": 20,
+        "description": "Structure lock CI gate (exit 24 on violation)"
+      },
+      "pre_commit_hooks": {
+        "tool_exists": true,
+        "tool_path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\.pre-commit-config.yaml",
+        "ci_references": {
+          ".github/workflows/pre-commit.yml": false
+        },
+        "refs_found": 0,
+        "refs_total": 1,
+        "score": 3.0,
+        "max_score": 15,
+        "description": "Pre-commit structure validation hooks"
+      },
+      "pytest_structure_tests": {
+        "tool_exists": true,
+        "tool_path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\23_compliance\\tests\\unit\\test_structure_policy_vs_md.py",
+        "ci_references": {
+          "pytest.ini": false,
+          ".github/workflows/ci_pytest_compliance.yml": false
+        },
+        "refs_found": 0,
+        "refs_total": 2,
+        "score": 2.0,
+        "max_score": 10,
+        "description": "Pytest structure policy unit tests"
+      },
+      "worm_audit_logging": {
+        "tool_exists": true,
+        "tool_path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\worm_storage\\worm_storage_engine.py",
+        "ci_references": {
+          "02_audit_logging/evidence_trails/integrated_audit_trail.py": false,
+          "11_test_simulation/tests/unit/test_registry_logic.py": false
+        },
+        "refs_found": 0,
+        "refs_total": 2,
+        "score": 2.0,
+        "max_score": 10,
+        "description": "WORM immutable audit logging"
+      }
+    }
+  },
+  "phase2_dynamic_execution": {
+    "score": 0,
+    "weight": "40%",
+    "description": "Tool execution and exit code verification",
+    "results": {}
+  },
+  "phase3_audit_proof": {
+    "score": 70,
+    "weight": "25%",
+    "description": "WORM log and evidence trail verification",
+    "results": {
+      "worm_storage_integrity": {
+        "paths_checked": [
+          "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\worm_storage\\immutable_store",
+          "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\storage\\worm"
+        ],
+        "evidence_found": [],
+        "evidence_count": 0,
+        "patterns_required": 4,
+        "score": 0.0,
+        "max_score": 30,
+        "status": "PARTIAL"
+      },
+      "evidence_trails": {
+        "paths_checked": [
+          "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\logs",
+          "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\evidence"
+        ],
+        "evidence_found": [
+          {
+            "file": "02_audit_logging\\logs\\backup_purge_summary.json",
+            "pattern": "structure.*validation"
+          },
+          {
+            "file": "02_audit_logging\\logs\\ROOT_24_LOCK_V5_3_COMPLETE_STATUS.md",
+            "pattern": "enforcement"
+          },
+          {
+            "file": "02_audit_logging\\logs\\test_inventory_audit.json",
+            "pattern": "structure.*validation"
+          },
+          {
+            "file": "02_audit_logging\\logs\\test_inventory_audit.json",
+            "pattern": "enforcement"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\continuum_proof_chain_v10.json",
+            "pattern": "structure.*validation"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\continuum_proof_chain_v10.json",
+            "pattern": "enforcement"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\FORENSIC_CHAIN_CLOSURE.md",
+            "pattern": "enforcement"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\FORENSIC_MANIFEST_GUIDE.md",
+            "pattern": "enforcement"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\meta_interfederation_proof_chain.json",
+            "pattern": "compliance.*check"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\deps\\dependency_graph.json",
+            "pattern": "structure.*validation"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\deps\\dependency_graph.json",
+            "pattern": "compliance.*check"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\import_resolution\\canonical_edges_20251014_111202.json",
+            "pattern": "structure.*validation"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\import_resolution\\canonical_edges_20251014_111202.json",
+            "pattern": "compliance.*check"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\import_resolution\\resolved_edges_20251014_111202.json",
+            "pattern": "structure.*validation"
+          },
+          {
+            "file": "02_audit_logging\\evidence\\import_resolution\\resolved_edges_20251014_111202.json",
+            "pattern": "compliance.*check"
+          }
+        ],
+        "evidence_count": 15,
+        "patterns_required": 3,
+        "score": 30.0,
+        "max_score": 30,
+        "status": "PASS"
+      },
+      "anti_gaming_logs": {
+        "paths_checked": [
+          "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\logs"
+        ],
+        "evidence_found": [
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_anomaly_rate.jsonl",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_badge_integrity.jsonl",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_circular_deps.jsonl",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_circular_deps.jsonl",
+            "pattern": "circular.*dep"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_dependency_graph.jsonl",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_duplicate_hashes.jsonl",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_overfitting.jsonl",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_overfitting.jsonl",
+            "pattern": "overfitting"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_replay.jsonl",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_time_skew.jsonl",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_time_skew.jsonl",
+            "pattern": "circular.*dep"
+          },
+          {
+            "file": "02_audit_logging\\logs\\backup_purge_summary.json",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\backup_purge_summary.json",
+            "pattern": "circular.*dep"
+          },
+          {
+            "file": "02_audit_logging\\logs\\backup_purge_summary.json",
+            "pattern": "overfitting"
+          },
+          {
+            "file": "02_audit_logging\\logs\\test_inventory_audit.json",
+            "pattern": "anti_gaming"
+          },
+          {
+            "file": "02_audit_logging\\logs\\test_inventory_audit.json",
+            "pattern": "circular.*dep"
+          },
+          {
+            "file": "02_audit_logging\\logs\\test_inventory_audit.json",
+            "pattern": "overfitting"
+          }
+        ],
+        "evidence_count": 17,
+        "patterns_required": 3,
+        "score": 20.0,
+        "max_score": 20,
+        "status": "PASS"
+      },
+      "hygiene_certificate": {
+        "paths_checked": [
+          "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\reports\\test_hygiene_certificate_v1.md",
+          "C:\\Users\\bibel\\Documents\\Github\\SSID\\24_meta_orchestration\\registry\\test_hygiene_certificate.yaml"
+        ],
+        "evidence_found": [
+          {
+            "file": "02_audit_logging\\reports\\test_hygiene_certificate_v1.md",
+            "pattern": "CERTIFIED"
+          },
+          {
+            "file": "02_audit_logging\\reports\\test_hygiene_certificate_v1.md",
+            "pattern": "LOCK"
+          },
+          {
+            "file": "02_audit_logging\\reports\\test_hygiene_certificate_v1.md",
+            "pattern": "score.*100"
+          },
+          {
+            "file": "24_meta_orchestration\\registry\\test_hygiene_certificate.yaml",
+            "pattern": "CERTIFIED"
+          },
+          {
+            "file": "24_meta_orchestration\\registry\\test_hygiene_certificate.yaml",
+            "pattern": "LOCK"
+          },
+          {
+            "file": "24_meta_orchestration\\registry\\test_hygiene_certificate.yaml",
+            "pattern": "score.*100"
+          }
+        ],
+        "evidence_count": 6,
+        "patterns_required": 3,
+        "score": 20.0,
+        "max_score": 20,
+        "status": "PASS"
+      }
+    }
+  },
+  "recommendations": [
+    "CRITICAL: Overall enforcement score below 50% - immediate remediation required",
+    "HIGH: Integrate structure_guard into CI/test workflows (currently not referenced)",
+    "HIGH: Integrate structure_policy_opa into CI/test workflows (currently not referenced)",
+    "HIGH: Integrate structure_lock_gate into CI/test workflows (currently not referenced)",
+    "HIGH: Integrate pre_commit_hooks into CI/test workflows (currently not referenced)",
+    "HIGH: Integrate pytest_structure_tests into CI/test workflows (currently not referenced)",
+    "HIGH: Integrate worm_audit_logging into CI/test workflows (currently not referenced)",
+    "HIGH: No audit evidence found for worm_storage_integrity - verify logging is active"
+  ]
+}
