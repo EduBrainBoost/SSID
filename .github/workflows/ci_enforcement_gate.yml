@@ -79,9 +79,10 @@ jobs:
         env:
           WORM_SIGN: "1"
         run: |
-          echo "Running SoT functional enforcement verification with dynamic execution..."
+          echo "Running SoT functional enforcement verification with Phase-2 dynamic execution..."
           python 02_audit_logging/tools/verify_sot_enforcement_v2.py \
             --ci-mode \
+            --execute \
             --worm-sign \
             --verbose \
             --json-out 02_audit_logging/reports/sot_enforcement_verification_ci.json
