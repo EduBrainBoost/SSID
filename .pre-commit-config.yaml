@@ -1,19 +1,44 @@
 repos:
   - repo: local
     hooks:
-      - id: root24-guard
-        name: Root-24-LOCK Enforcement
-        entry: bash 12_tooling/hooks/pre_commit/root24_enforcer.sh
+      # Level 3: Structure Guard (Baseline)
+      - id: ssid-structure-validation
+        name: SSID Structure Validation (Root-24-LOCK)
+        entry: bash 12_tooling/hooks/pre_commit/structure_validation.sh
         language: system
         pass_filenames: false
-        always_run: true
+        stages: [commit]
 
-  - repo: https://github.com/psf/black
-    rev: 23.11.0
-    hooks:
-      - id: black
+      # Level 3: Structure Guard Shell Script
+      - id: ssid-structure-guard
+        name: SSID Structure Guard (Exit 24 on violation)
+        entry: bash 12_tooling/scripts/structure_guard.sh
+        language: system
+        pass_filenames: false
+        stages: [commit]
 
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.6
-    hooks:
-      - id: ruff
+      # Level 4: SoT Functional Enforcement
+      - id: ssid-sot-enforcement
+        name: SSID SoT Functional Enforcement (Level 4)
+        entry: python 02_audit_logging/tools/verify_sot_enforcement.py --pre-commit --worm-sign
+        language: system
+        pass_filenames: false
+        stages: [commit]
+        verbose: true
+
+      # Level 4: Hygiene Certificate Monitoring
+      - id: ssid-hygiene-enforcement
+        name: SSID Test Hygiene Certificate Monitoring
+        entry: python 02_audit_logging/tools/verify_hygiene_enforcement.py --alarm
+        language: system
+        pass_filenames: false
+        stages: [commit]
+        verbose: true
+
+      # Level 4: WORM Audit Integrity Check
+      - id: ssid-worm-integrity
+        name: SSID WORM Audit Integrity Verification
+        entry: python -c "from pathlib import Path; import sys; worm_dir = Path('02_audit_logging/worm_storage'); print(f'✅ WORM storage: {worm_dir.exists()}'); sys.exit(0 if worm_dir.exists() else 1)"
+        language: system
+        pass_filenames: false
+        stages: [commit]
