@@ -34,11 +34,11 @@ jobs:
           echo "Pre-Commit Configuration Verification"
           echo "=========================================="
 
-          if [ -f ".pre-commit-config.yaml" ]; then
-            echo "✅ .pre-commit-config.yaml found"
+          if [ -f "12_tooling/hooks/pre_commit/config.yaml" ]; then
+            echo "✅ Pre-commit config found at 12_tooling/hooks/pre_commit/config.yaml"
             echo ""
             echo "Configured hooks:"
-            pre-commit run --all-files --show-diff-on-failure || {
+            pre-commit run --all-files --config 12_tooling/hooks/pre_commit/config.yaml --show-diff-on-failure || {
               EXIT_CODE=$?
               echo ""
               echo "⚠️ Pre-commit hooks exited with code $EXIT_CODE"
@@ -48,7 +48,7 @@ jobs:
               exit $EXIT_CODE
             }
           else
-            echo "❌ ERROR: .pre-commit-config.yaml not found"
+            echo "❌ ERROR: Pre-commit config not found at 12_tooling/hooks/pre_commit/config.yaml"
             exit 1
           fi
 
@@ -58,5 +58,5 @@ jobs:
         with:
           name: pre-commit-validation-reports
           path: |
-            .pre-commit-config.yaml
+            12_tooling/hooks/pre_commit/config.yaml
           retention-days: 30

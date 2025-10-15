@@ -74,13 +74,13 @@ jobs:
             echo "::warning::No 23_compliance/policies directory"
           fi
 
-      - name: Run SoT functional enforcement verification (Level 4)
+      - name: Run SoT functional enforcement verification (Level 4 + Phase 2)
         id: enforcement_check
         env:
           WORM_SIGN: "1"
         run: |
-          echo "Running SoT functional enforcement verification..."
-          python 02_audit_logging/tools/verify_sot_enforcement.py \
+          echo "Running SoT functional enforcement verification with dynamic execution..."
+          python 02_audit_logging/tools/verify_sot_enforcement_v2.py \
             --ci-mode \
             --worm-sign \
             --verbose \
@@ -294,6 +294,42 @@ EOF
             fi
           }
           echo "✅ Hygiene certificate monitoring completed"
+
+      - name: OPA Policy Enforcement - Hygiene Score Threshold (fail-defined)
+        run: |
+          echo "=========================================="
+          echo "OPA Policy Enforcement: Hygiene Score Gate"
+          echo "=========================================="
+
+          if [ -f "23_compliance/policies/hygiene_score_threshold.rego" ] && [ -f "02_audit_logging/reports/hygiene_verification_ci.json" ]; then
+            echo "Evaluating hygiene score policy with --fail-defined..."
+
+            # Install OPA if not present
+            if ! command -v opa &> /dev/null; then
+              curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+              chmod +x ./opa
+              sudo mv ./opa /usr/local/bin/opa
+            fi
+
+            # Run OPA with fail-defined (exits non-zero if policy denies)
+            opa eval -i 02_audit_logging/reports/hygiene_verification_ci.json \
+              -d 23_compliance/policies/hygiene_score_threshold.rego \
+              --fail-defined \
+              -f pretty \
+              "data.ssid.hygiene.enforcement.deny" || {
+              EXIT_CODE=$?
+              if [ $EXIT_CODE -ne 0 ]; then
+                echo ""
+                echo "❌ CRITICAL: Hygiene score policy DENIED"
+                echo "Policy violations detected - review hygiene_score_threshold.rego rules"
+                exit 1
+              fi
+            }
+
+            echo "✅ Hygiene score policy enforcement PASSED"
+          else
+            echo "⚠️ WARNING: OPA policy or hygiene report not found - skipping enforcement"
+          fi
 
       - name: Upload hygiene artifacts
         uses: actions/upload-artifact@v4
