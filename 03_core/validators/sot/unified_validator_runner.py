@@ -22,6 +22,7 @@ from enhanced_validators import EnhancedValidators
 from additional_validators import AdditionalValidators
 from maximalstand_validators import MaximalstandValidators
 from critical_validators_v2 import CriticalValidatorsV2
+from important_validators_v2 import ImportantValidatorsV2
 
 
 class UnifiedValidatorRunner:
@@ -34,20 +35,24 @@ class UnifiedValidatorRunner:
         self.additional = AdditionalValidators(repo_root)
         self.maximalstand = MaximalstandValidators(repo_root)
         self.critical = CriticalValidatorsV2(repo_root)
+        self.important = ImportantValidatorsV2(repo_root)
 
     def run_all(self, category_filter: str = None, priority_filter: str = None) -> Dict:
         """Run all validators with optional filters"""
         results = {}
         start_time = time.time()
 
-        # Run CRITICAL validators
+        # Run CRITICAL validators (Priority 1)
         if priority_filter in [None, 'critical']:
             print("Running CRITICAL validators (26)...")
             critical_results = self.critical.validate_all_critical()
             results.update(critical_results)
 
-        # TODO: Add other validator modules when needed
-        # Currently focused on CRITICAL validators for Phase 1
+        # Run IMPORTANT validators (Priority 2)
+        if priority_filter in [None, 'important']:
+            print("Running IMPORTANT validators (37)...")
+            important_results = self.important.validate_all_important()
+            results.update(important_results)
 
         elapsed_time = time.time() - start_time
 
