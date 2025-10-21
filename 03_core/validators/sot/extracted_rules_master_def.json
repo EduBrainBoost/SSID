@@ -1,0 +1,3766 @@
+{
+  "total_rules": 416,
+  "source_file": "C:\\Users\\bibel\\Documents\\Github\\SSID\\16_codex\\structure\\ssid_master_definition_corrected_v1.1.1.md",
+  "extraction_date": "2025-10-21",
+  "categories": {
+    "roots": 74,
+    "shards": 39,
+    "architecture": 13,
+    "structure": 7,
+    "chart_yaml": 46,
+    "manifest_yaml": 45,
+    "naming": 10,
+    "policies": 32,
+    "governance": 31,
+    "principles": 51,
+    "roadmap": 26,
+    "standards": 8,
+    "additions_v1_1_1": 34
+  },
+  "rules": [
+    {
+      "rule_id": "ROOT-ai_layer-01",
+      "category": "roots",
+      "subcategory": "ai_layer",
+      "description": "KI-Modelle (Training, Inferenz, Federated Learning)",
+      "line_number": 56,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > ai_layer"
+    },
+    {
+      "rule_id": "ROOT-ai_layer-02",
+      "category": "roots",
+      "subcategory": "ai_layer",
+      "description": "Risk/Trust-Scoring, Bias- & Fairness-Kontrollen",
+      "line_number": 57,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > ai_layer"
+    },
+    {
+      "rule_id": "ROOT-ai_layer-03",
+      "category": "roots",
+      "subcategory": "ai_layer",
+      "description": "AI Governance (EU AI Act, Drift Detection, Safety)",
+      "line_number": 58,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > ai_layer"
+    },
+    {
+      "rule_id": "ROOT-ai_layer-04",
+      "category": "roots",
+      "subcategory": "ai_layer",
+      "description": "Multi-Modal (Text, Bild, Audio, Video)",
+      "line_number": 59,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > ai_layer"
+    },
+    {
+      "rule_id": "ROOT-audit_logging-05",
+      "category": "roots",
+      "subcategory": "audit_logging",
+      "description": "Hash-Ledger, Evidence-Matrix, Blockchain Anchors",
+      "line_number": 63,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > audit_logging"
+    },
+    {
+      "rule_id": "ROOT-audit_logging-06",
+      "category": "roots",
+      "subcategory": "audit_logging",
+      "description": "Audit-Trails, Logging, Retention, Quarantine",
+      "line_number": 64,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > audit_logging"
+    },
+    {
+      "rule_id": "ROOT-audit_logging-07",
+      "category": "roots",
+      "subcategory": "audit_logging",
+      "description": "Compliance-Protokolle, DAO-Governance-Audits",
+      "line_number": 65,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > audit_logging"
+    },
+    {
+      "rule_id": "ROOT-core-08",
+      "category": "roots",
+      "subcategory": "core",
+      "description": "Smart Contract Kernsystem (On-Chain-Regeln)",
+      "line_number": 69,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > core"
+    },
+    {
+      "rule_id": "ROOT-core-09",
+      "category": "roots",
+      "subcategory": "core",
+      "description": "Dispatcher-Schnittstellen",
+      "line_number": 70,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > core"
+    },
+    {
+      "rule_id": "ROOT-core-10",
+      "category": "roots",
+      "subcategory": "core",
+      "description": "Identity-Resolver, Core-APIs",
+      "line_number": 71,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > core"
+    },
+    {
+      "rule_id": "ROOT-core-11",
+      "category": "roots",
+      "subcategory": "core",
+      "description": "Root-24-LOCK Enforcement",
+      "line_number": 72,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > core"
+    },
+    {
+      "rule_id": "ROOT-deployment-12",
+      "category": "roots",
+      "subcategory": "deployment",
+      "description": "CI/CD-Pipelines, Rollouts, Cluster-Konfiguration",
+      "line_number": 76,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > deployment"
+    },
+    {
+      "rule_id": "ROOT-deployment-13",
+      "category": "roots",
+      "subcategory": "deployment",
+      "description": "Deployment-Strategien (Canary, Blue/Green)",
+      "line_number": 77,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > deployment"
+    },
+    {
+      "rule_id": "ROOT-deployment-14",
+      "category": "roots",
+      "subcategory": "deployment",
+      "description": "Container & Orchestrierung (K8s, Terraform)",
+      "line_number": 78,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > deployment"
+    },
+    {
+      "rule_id": "ROOT-documentation-15",
+      "category": "roots",
+      "subcategory": "documentation",
+      "description": "Developer Guides, User Manuals, API Docs",
+      "line_number": 82,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > documentation"
+    },
+    {
+      "rule_id": "ROOT-documentation-16",
+      "category": "roots",
+      "subcategory": "documentation",
+      "description": "Mehrsprachigkeit (I18N-Layer)",
+      "line_number": 83,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > documentation"
+    },
+    {
+      "rule_id": "ROOT-documentation-17",
+      "category": "roots",
+      "subcategory": "documentation",
+      "description": "Strukturdateien, Docusaurus Export",
+      "line_number": 84,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > documentation"
+    },
+    {
+      "rule_id": "ROOT-data_pipeline-18",
+      "category": "roots",
+      "subcategory": "data_pipeline",
+      "description": "ETL/ELT-Prozesse, Datenströme",
+      "line_number": 88,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > data_pipeline"
+    },
+    {
+      "rule_id": "ROOT-data_pipeline-19",
+      "category": "roots",
+      "subcategory": "data_pipeline",
+      "description": "Orchestrierung (Batch, Stream, Realtime)",
+      "line_number": 89,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > data_pipeline"
+    },
+    {
+      "rule_id": "ROOT-data_pipeline-20",
+      "category": "roots",
+      "subcategory": "data_pipeline",
+      "description": "ML/AI Data-Feeds",
+      "line_number": 90,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > data_pipeline"
+    },
+    {
+      "rule_id": "ROOT-governance_legal-21",
+      "category": "roots",
+      "subcategory": "governance_legal",
+      "description": "eIDAS, MiCA, DSGVO, DORA",
+      "line_number": 94,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > governance_legal"
+    },
+    {
+      "rule_id": "ROOT-governance_legal-22",
+      "category": "roots",
+      "subcategory": "governance_legal",
+      "description": "Juristische Policies, Verträge mit Providern",
+      "line_number": 95,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > governance_legal"
+    },
+    {
+      "rule_id": "ROOT-governance_legal-23",
+      "category": "roots",
+      "subcategory": "governance_legal",
+      "description": "DAO-Governance-Regeln",
+      "line_number": 96,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > governance_legal"
+    },
+    {
+      "rule_id": "ROOT-identity_score-24",
+      "category": "roots",
+      "subcategory": "identity_score",
+      "description": "Identity Trust Levels, Reputationssysteme",
+      "line_number": 100,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > identity_score"
+    },
+    {
+      "rule_id": "ROOT-identity_score-25",
+      "category": "roots",
+      "subcategory": "identity_score",
+      "description": "Scoring-Algorithmen für SSI/DIDs",
+      "line_number": 101,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > identity_score"
+    },
+    {
+      "rule_id": "ROOT-identity_score-26",
+      "category": "roots",
+      "subcategory": "identity_score",
+      "description": "Verhaltensanalysen (nur Hash-Proofs, keine PII)",
+      "line_number": 102,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > identity_score"
+    },
+    {
+      "rule_id": "ROOT-meta_identity-27",
+      "category": "roots",
+      "subcategory": "meta_identity",
+      "description": "DID-Schemas, Identity Wallets",
+      "line_number": 106,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > meta_identity"
+    },
+    {
+      "rule_id": "ROOT-meta_identity-28",
+      "category": "roots",
+      "subcategory": "meta_identity",
+      "description": "Selective Disclosure, Profile, Avatare",
+      "line_number": 107,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > meta_identity"
+    },
+    {
+      "rule_id": "ROOT-meta_identity-29",
+      "category": "roots",
+      "subcategory": "meta_identity",
+      "description": "Identity Lifecycle Management",
+      "line_number": 108,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > meta_identity"
+    },
+    {
+      "rule_id": "ROOT-interoperability-30",
+      "category": "roots",
+      "subcategory": "interoperability",
+      "description": "DID-Resolver, Standards (DIF, W3C)",
+      "line_number": 112,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > interoperability"
+    },
+    {
+      "rule_id": "ROOT-interoperability-31",
+      "category": "roots",
+      "subcategory": "interoperability",
+      "description": "Cross-Chain Bridges, Protokoll-Adapter",
+      "line_number": 113,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > interoperability"
+    },
+    {
+      "rule_id": "ROOT-interoperability-32",
+      "category": "roots",
+      "subcategory": "interoperability",
+      "description": "API-Gateways",
+      "line_number": 114,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > interoperability"
+    },
+    {
+      "rule_id": "ROOT-test_simulation-33",
+      "category": "roots",
+      "subcategory": "test_simulation",
+      "description": "Testumgebungen, Simulationen, Mock-Chains",
+      "line_number": 118,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > test_simulation"
+    },
+    {
+      "rule_id": "ROOT-test_simulation-34",
+      "category": "roots",
+      "subcategory": "test_simulation",
+      "description": "Chaos Engineering, Attack Simulations",
+      "line_number": 119,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > test_simulation"
+    },
+    {
+      "rule_id": "ROOT-test_simulation-35",
+      "category": "roots",
+      "subcategory": "test_simulation",
+      "description": "Benchmarking & Performance-Tests",
+      "line_number": 120,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > test_simulation"
+    },
+    {
+      "rule_id": "ROOT-tooling-36",
+      "category": "roots",
+      "subcategory": "tooling",
+      "description": "Developer Tools, CLI, SDKs",
+      "line_number": 124,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > tooling"
+    },
+    {
+      "rule_id": "ROOT-tooling-37",
+      "category": "roots",
+      "subcategory": "tooling",
+      "description": "CI-Helper, Linter, Formatter",
+      "line_number": 125,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > tooling"
+    },
+    {
+      "rule_id": "ROOT-tooling-38",
+      "category": "roots",
+      "subcategory": "tooling",
+      "description": "Automation Scripts",
+      "line_number": 126,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > tooling"
+    },
+    {
+      "rule_id": "ROOT-ui_layer-39",
+      "category": "roots",
+      "subcategory": "ui_layer",
+      "description": "Frontend, Dashboards, Apps",
+      "line_number": 130,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > ui_layer"
+    },
+    {
+      "rule_id": "ROOT-ui_layer-40",
+      "category": "roots",
+      "subcategory": "ui_layer",
+      "description": "Partner- & User-Portale",
+      "line_number": 131,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > ui_layer"
+    },
+    {
+      "rule_id": "ROOT-ui_layer-41",
+      "category": "roots",
+      "subcategory": "ui_layer",
+      "description": "Admin-GUIs",
+      "line_number": 132,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > ui_layer"
+    },
+    {
+      "rule_id": "ROOT-zero_time_auth-42",
+      "category": "roots",
+      "subcategory": "zero_time_auth",
+      "description": "Real-Time KYC/KYB über Anbieter",
+      "line_number": 136,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > zero_time_auth"
+    },
+    {
+      "rule_id": "ROOT-zero_time_auth-43",
+      "category": "roots",
+      "subcategory": "zero_time_auth",
+      "description": "Zero-Time Login, Biometrie, MFA",
+      "line_number": 137,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > zero_time_auth"
+    },
+    {
+      "rule_id": "ROOT-zero_time_auth-44",
+      "category": "roots",
+      "subcategory": "zero_time_auth",
+      "description": "DID-gebundene Session-Tokens",
+      "line_number": 138,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > zero_time_auth"
+    },
+    {
+      "rule_id": "ROOT-infra-45",
+      "category": "roots",
+      "subcategory": "infra",
+      "description": "Cloud, Bare-Metal, Netzwerke",
+      "line_number": 142,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > infra"
+    },
+    {
+      "rule_id": "ROOT-infra-46",
+      "category": "roots",
+      "subcategory": "infra",
+      "description": "Storage, Compute, Load Balancing",
+      "line_number": 143,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > infra"
+    },
+    {
+      "rule_id": "ROOT-infra-47",
+      "category": "roots",
+      "subcategory": "infra",
+      "description": "Secrets & Key Management",
+      "line_number": 144,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > infra"
+    },
+    {
+      "rule_id": "ROOT-codex-48",
+      "category": "roots",
+      "subcategory": "codex",
+      "description": "Codex, Policies, Blaupausen",
+      "line_number": 148,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > codex"
+    },
+    {
+      "rule_id": "ROOT-codex-49",
+      "category": "roots",
+      "subcategory": "codex",
+      "description": "Regelwerke für Module",
+      "line_number": 149,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > codex"
+    },
+    {
+      "rule_id": "ROOT-codex-50",
+      "category": "roots",
+      "subcategory": "codex",
+      "description": "SSID-Bibeln (Manifeste, Strukturlevel3)",
+      "line_number": 150,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > codex"
+    },
+    {
+      "rule_id": "ROOT-observability-51",
+      "category": "roots",
+      "subcategory": "observability",
+      "description": "Logging, Metrics, Tracing",
+      "line_number": 154,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > observability"
+    },
+    {
+      "rule_id": "ROOT-observability-52",
+      "category": "roots",
+      "subcategory": "observability",
+      "description": "Alerts, Dashboards, SIEM",
+      "line_number": 155,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > observability"
+    },
+    {
+      "rule_id": "ROOT-observability-53",
+      "category": "roots",
+      "subcategory": "observability",
+      "description": "AI-Ops Monitoring",
+      "line_number": 156,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > observability"
+    },
+    {
+      "rule_id": "ROOT-data_layer-54",
+      "category": "roots",
+      "subcategory": "data_layer",
+      "description": "Datenbanken, GraphDBs, Time-Series",
+      "line_number": 160,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > data_layer"
+    },
+    {
+      "rule_id": "ROOT-data_layer-55",
+      "category": "roots",
+      "subcategory": "data_layer",
+      "description": "Encryption-at-Rest, Backups",
+      "line_number": 161,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > data_layer"
+    },
+    {
+      "rule_id": "ROOT-data_layer-56",
+      "category": "roots",
+      "subcategory": "data_layer",
+      "description": "Hash-Speicher",
+      "line_number": 162,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > data_layer"
+    },
+    {
+      "rule_id": "ROOT-adapters-57",
+      "category": "roots",
+      "subcategory": "adapters",
+      "description": "Adapter zu externen APIs/Chains",
+      "line_number": 166,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > adapters"
+    },
+    {
+      "rule_id": "ROOT-adapters-58",
+      "category": "roots",
+      "subcategory": "adapters",
+      "description": "Payment-Provider-Connectoren",
+      "line_number": 167,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > adapters"
+    },
+    {
+      "rule_id": "ROOT-adapters-59",
+      "category": "roots",
+      "subcategory": "adapters",
+      "description": "Identity Provider SDKs",
+      "line_number": 168,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > adapters"
+    },
+    {
+      "rule_id": "ROOT-foundation-60",
+      "category": "roots",
+      "subcategory": "foundation",
+      "description": "SSID-Token (Utility, Governance, Rewards)",
+      "line_number": 172,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > foundation"
+    },
+    {
+      "rule_id": "ROOT-foundation-61",
+      "category": "roots",
+      "subcategory": "foundation",
+      "description": "Tokenomics, Distribution, Rewards",
+      "line_number": 173,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > foundation"
+    },
+    {
+      "rule_id": "ROOT-foundation-62",
+      "category": "roots",
+      "subcategory": "foundation",
+      "description": "Lizenzmodelle (NFT-Licenses)",
+      "line_number": 174,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > foundation"
+    },
+    {
+      "rule_id": "ROOT-post_quantum_crypto-63",
+      "category": "roots",
+      "subcategory": "post_quantum_crypto",
+      "description": "PQC-Algorithmen (Kyber, Dilithium)",
+      "line_number": 178,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > post_quantum_crypto"
+    },
+    {
+      "rule_id": "ROOT-post_quantum_crypto-64",
+      "category": "roots",
+      "subcategory": "post_quantum_crypto",
+      "description": "Quantum-Safe Migration",
+      "line_number": 179,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > post_quantum_crypto"
+    },
+    {
+      "rule_id": "ROOT-post_quantum_crypto-65",
+      "category": "roots",
+      "subcategory": "post_quantum_crypto",
+      "description": "Hybrid-Signaturen",
+      "line_number": 180,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > post_quantum_crypto"
+    },
+    {
+      "rule_id": "ROOT-datasets-66",
+      "category": "roots",
+      "subcategory": "datasets",
+      "description": "Public Datasets, Trainingsdaten",
+      "line_number": 184,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > datasets"
+    },
+    {
+      "rule_id": "ROOT-datasets-67",
+      "category": "roots",
+      "subcategory": "datasets",
+      "description": "Hash-Referenzen statt PII",
+      "line_number": 185,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > datasets"
+    },
+    {
+      "rule_id": "ROOT-datasets-68",
+      "category": "roots",
+      "subcategory": "datasets",
+      "description": "Zugriff via DID & Consent",
+      "line_number": 186,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > datasets"
+    },
+    {
+      "rule_id": "ROOT-compliance-69",
+      "category": "roots",
+      "subcategory": "compliance",
+      "description": "Blacklists, Whitelists, Jurisdiktionsregeln",
+      "line_number": 190,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > compliance"
+    },
+    {
+      "rule_id": "ROOT-compliance-70",
+      "category": "roots",
+      "subcategory": "compliance",
+      "description": "Policies (AML, KYC, GDPR)",
+      "line_number": 191,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > compliance"
+    },
+    {
+      "rule_id": "ROOT-compliance-71",
+      "category": "roots",
+      "subcategory": "compliance",
+      "description": "Audit-Logs, Evidence-Registrierung",
+      "line_number": 192,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > compliance"
+    },
+    {
+      "rule_id": "ROOT-meta_orchestration-72",
+      "category": "roots",
+      "subcategory": "meta_orchestration",
+      "description": "Dispatcher, Registry, Locks",
+      "line_number": 196,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > meta_orchestration"
+    },
+    {
+      "rule_id": "ROOT-meta_orchestration-73",
+      "category": "roots",
+      "subcategory": "meta_orchestration",
+      "description": "Trigger & Gates",
+      "line_number": 197,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > meta_orchestration"
+    },
+    {
+      "rule_id": "ROOT-meta_orchestration-74",
+      "category": "roots",
+      "subcategory": "meta_orchestration",
+      "description": "Versionierung, Global Hash-Ledger",
+      "line_number": 198,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 24 Root-Ordner > meta_orchestration"
+    },
+    {
+      "rule_id": "SHARD-01-01",
+      "category": "shards",
+      "subcategory": "01_Identität & Personen",
+      "description": "DIDs, Ausweise, Profile, Authentifizierung",
+      "line_number": 209,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 01_Identität & Personen"
+    },
+    {
+      "rule_id": "SHARD-01-02",
+      "category": "shards",
+      "subcategory": "01_Identität & Personen",
+      "description": "Personen, Firmen, Organisationen, Behörden",
+      "line_number": 210,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 01_Identität & Personen"
+    },
+    {
+      "rule_id": "SHARD-02-03",
+      "category": "shards",
+      "subcategory": "02_Dokumente & Nachweise",
+      "description": "Urkunden, Bescheinigungen, Zertifikate, Vollmachten",
+      "line_number": 213,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 02_Dokumente & Nachweise"
+    },
+    {
+      "rule_id": "SHARD-02-04",
+      "category": "shards",
+      "subcategory": "02_Dokumente & Nachweise",
+      "description": "Digitale Signaturen, Notarisierungen",
+      "line_number": 214,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 02_Dokumente & Nachweise"
+    },
+    {
+      "rule_id": "SHARD-03-05",
+      "category": "shards",
+      "subcategory": "03_Zugang & Berechtigungen",
+      "description": "Rollen, Rechte, Mandanten, Delegationen",
+      "line_number": 217,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 03_Zugang & Berechtigungen"
+    },
+    {
+      "rule_id": "SHARD-03-06",
+      "category": "shards",
+      "subcategory": "03_Zugang & Berechtigungen",
+      "description": "MFA, Zero-Trust, Session-Management",
+      "line_number": 218,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 03_Zugang & Berechtigungen"
+    },
+    {
+      "rule_id": "SHARD-04-07",
+      "category": "shards",
+      "subcategory": "04_Kommunikation & Daten",
+      "description": "Nachrichten, E-Mail, Chat, Datenaustausch",
+      "line_number": 221,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 04_Kommunikation & Daten"
+    },
+    {
+      "rule_id": "SHARD-04-08",
+      "category": "shards",
+      "subcategory": "04_Kommunikation & Daten",
+      "description": "APIs, Schnittstellen, Benachrichtigungen",
+      "line_number": 222,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 04_Kommunikation & Daten"
+    },
+    {
+      "rule_id": "SHARD-04-09",
+      "category": "shards",
+      "subcategory": "04_Kommunikation & Daten",
+      "description": "",
+      "line_number": 224,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 04_Kommunikation & Daten"
+    },
+    {
+      "rule_id": "SHARD-05-10",
+      "category": "shards",
+      "subcategory": "05_Gesundheit & Medizin",
+      "description": "Krankenakte, Rezepte, Impfpass, Behandlungen",
+      "line_number": 229,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 05_Gesundheit & Medizin"
+    },
+    {
+      "rule_id": "SHARD-05-11",
+      "category": "shards",
+      "subcategory": "05_Gesundheit & Medizin",
+      "description": "Ärzte, Kliniken, Apotheken, Pflegedienste",
+      "line_number": 230,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 05_Gesundheit & Medizin"
+    },
+    {
+      "rule_id": "SHARD-06-12",
+      "category": "shards",
+      "subcategory": "06_Bildung & Qualifikationen",
+      "description": "Zeugnisse, Abschlüsse, Kurse, Weiterbildung",
+      "line_number": 233,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 06_Bildung & Qualifikationen"
+    },
+    {
+      "rule_id": "SHARD-06-13",
+      "category": "shards",
+      "subcategory": "06_Bildung & Qualifikationen",
+      "description": "Schulen, Unis, Zertifizierungen, Skills",
+      "line_number": 234,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 06_Bildung & Qualifikationen"
+    },
+    {
+      "rule_id": "SHARD-07-14",
+      "category": "shards",
+      "subcategory": "07_Familie & Soziales",
+      "description": "Geburt, Heirat, Scheidung, Adoption, Erbe",
+      "line_number": 237,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 07_Familie & Soziales"
+    },
+    {
+      "rule_id": "SHARD-07-15",
+      "category": "shards",
+      "subcategory": "07_Familie & Soziales",
+      "description": "Vormundschaft, Betreuung, Sozialleistungen",
+      "line_number": 238,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 07_Familie & Soziales"
+    },
+    {
+      "rule_id": "SHARD-07-16",
+      "category": "shards",
+      "subcategory": "07_Familie & Soziales",
+      "description": "Vereine, Mitgliedschaften, Ehrenamt",
+      "line_number": 239,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 07_Familie & Soziales"
+    },
+    {
+      "rule_id": "SHARD-08-17",
+      "category": "shards",
+      "subcategory": "08_Mobilität & Fahrzeuge",
+      "description": "Führerschein, KFZ-Zulassung, Fahrzeugpapiere",
+      "line_number": 242,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 08_Mobilität & Fahrzeuge"
+    },
+    {
+      "rule_id": "SHARD-08-18",
+      "category": "shards",
+      "subcategory": "08_Mobilität & Fahrzeuge",
+      "description": "TÜV/AU, Fahrzeugkauf/-verkauf, Parkausweise",
+      "line_number": 243,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 08_Mobilität & Fahrzeuge"
+    },
+    {
+      "rule_id": "SHARD-08-19",
+      "category": "shards",
+      "subcategory": "08_Mobilität & Fahrzeuge",
+      "description": "Maut-Accounts, Kfz-Versicherung, Fahrzeughistorie",
+      "line_number": 244,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 08_Mobilität & Fahrzeuge"
+    },
+    {
+      "rule_id": "SHARD-08-20",
+      "category": "shards",
+      "subcategory": "08_Mobilität & Fahrzeuge",
+      "description": "",
+      "line_number": 246,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 08_Mobilität & Fahrzeuge"
+    },
+    {
+      "rule_id": "SHARD-09-21",
+      "category": "shards",
+      "subcategory": "09_Arbeit & Karriere",
+      "description": "Arbeitsverträge, Gehalt, Bewerbungen, Referenzen",
+      "line_number": 251,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 09_Arbeit & Karriere"
+    },
+    {
+      "rule_id": "SHARD-09-22",
+      "category": "shards",
+      "subcategory": "09_Arbeit & Karriere",
+      "description": "Freelancing, Honorare, Arbeitszeugnisse",
+      "line_number": 252,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 09_Arbeit & Karriere"
+    },
+    {
+      "rule_id": "SHARD-10-23",
+      "category": "shards",
+      "subcategory": "10_Finanzen & Banking",
+      "description": "Konten, Zahlungen, Überweisungen, Kredite",
+      "line_number": 255,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 10_Finanzen & Banking"
+    },
+    {
+      "rule_id": "SHARD-10-24",
+      "category": "shards",
+      "subcategory": "10_Finanzen & Banking",
+      "description": "Investments, Portfolios, DeFi, Krypto",
+      "line_number": 256,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 10_Finanzen & Banking"
+    },
+    {
+      "rule_id": "SHARD-10-25",
+      "category": "shards",
+      "subcategory": "10_Finanzen & Banking",
+      "description": "Abonnements, Loyalitäts-Programme",
+      "line_number": 257,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 10_Finanzen & Banking"
+    },
+    {
+      "rule_id": "SHARD-11-26",
+      "category": "shards",
+      "subcategory": "11_Versicherungen & Risiken",
+      "description": "Alle Versicherungsarten (Kranken, Leben, Haftpflicht, etc.)",
+      "line_number": 260,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 11_Versicherungen & Risiken"
+    },
+    {
+      "rule_id": "SHARD-11-27",
+      "category": "shards",
+      "subcategory": "11_Versicherungen & Risiken",
+      "description": "Schäden, Claims, Policen, Prämien",
+      "line_number": 261,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 11_Versicherungen & Risiken"
+    },
+    {
+      "rule_id": "SHARD-12-28",
+      "category": "shards",
+      "subcategory": "12_Immobilien & Grundstücke",
+      "description": "Eigentum, Miete, Pacht, Grundbuch",
+      "line_number": 264,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 12_Immobilien & Grundstücke"
+    },
+    {
+      "rule_id": "SHARD-12-29",
+      "category": "shards",
+      "subcategory": "12_Immobilien & Grundstücke",
+      "description": "Hypotheken, Bewertungen, Nutzungsrechte",
+      "line_number": 265,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 12_Immobilien & Grundstücke"
+    },
+    {
+      "rule_id": "SHARD-12-30",
+      "category": "shards",
+      "subcategory": "12_Immobilien & Grundstücke",
+      "description": "",
+      "line_number": 267,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 12_Immobilien & Grundstücke"
+    },
+    {
+      "rule_id": "SHARD-13-31",
+      "category": "shards",
+      "subcategory": "13_Unternehmen & Gewerbe",
+      "description": "Firmendaten, Handelsregister, Lizenzen, B2B",
+      "line_number": 272,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 13_Unternehmen & Gewerbe"
+    },
+    {
+      "rule_id": "SHARD-13-32",
+      "category": "shards",
+      "subcategory": "13_Unternehmen & Gewerbe",
+      "description": "Buchhaltung, Bilanzen, Jahresabschlüsse",
+      "line_number": 273,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 13_Unternehmen & Gewerbe"
+    },
+    {
+      "rule_id": "SHARD-14-33",
+      "category": "shards",
+      "subcategory": "14_Verträge & Vereinbarungen",
+      "description": "Smart Contracts, Geschäftsverträge, AGBs",
+      "line_number": 276,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 14_Verträge & Vereinbarungen"
+    },
+    {
+      "rule_id": "SHARD-14-34",
+      "category": "shards",
+      "subcategory": "14_Verträge & Vereinbarungen",
+      "description": "SLAs, Lieferantenverträge, Partnerschaften",
+      "line_number": 277,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 14_Verträge & Vereinbarungen"
+    },
+    {
+      "rule_id": "SHARD-15-35",
+      "category": "shards",
+      "subcategory": "15_Handel & Transaktionen",
+      "description": "Käufe, Verkäufe, Rechnungen, Garantien",
+      "line_number": 280,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 15_Handel & Transaktionen"
+    },
+    {
+      "rule_id": "SHARD-15-36",
+      "category": "shards",
+      "subcategory": "15_Handel & Transaktionen",
+      "description": "Supply Chain, Logistik, Lieferscheine",
+      "line_number": 281,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 15_Handel & Transaktionen"
+    },
+    {
+      "rule_id": "SHARD-15-37",
+      "category": "shards",
+      "subcategory": "15_Handel & Transaktionen",
+      "description": "Reisen, Events, Tickets",
+      "line_number": 282,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 15_Handel & Transaktionen"
+    },
+    {
+      "rule_id": "SHARD-16-38",
+      "category": "shards",
+      "subcategory": "16_Behörden & Verwaltung",
+      "description": "Ämter, Anträge, Genehmigungen, Steuern",
+      "line_number": 285,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 16_Behörden & Verwaltung"
+    },
+    {
+      "rule_id": "SHARD-16-39",
+      "category": "shards",
+      "subcategory": "16_Behörden & Verwaltung",
+      "description": "Meldewesen, Gerichtsurteile, Ordnungswidrigkeiten",
+      "line_number": 286,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Die 16 Shards > 16_Behörden & Verwaltung"
+    },
+    {
+      "rule_id": "MATRIX-001",
+      "category": "architecture",
+      "subcategory": "matrix",
+      "description": "24 Roots × 16 Shards = 384 Chart-Dateien",
+      "line_number": 307,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Matrix-Architektur"
+    },
+    {
+      "rule_id": "MATRIX-002",
+      "category": "architecture",
+      "subcategory": "matrix",
+      "description": "Deterministisch - Jede Kombination eindeutig adressierbar",
+      "line_number": 321,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Matrix-Architektur > Vorteile"
+    },
+    {
+      "rule_id": "MATRIX-003",
+      "category": "architecture",
+      "subcategory": "matrix",
+      "description": "Skalierbar - Unbegrenzte Unterkategorien innerhalb der Shards",
+      "line_number": 322,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Matrix-Architektur > Vorteile"
+    },
+    {
+      "rule_id": "MATRIX-004",
+      "category": "architecture",
+      "subcategory": "matrix",
+      "description": "Konsistent - Alle Roots folgen demselben Muster",
+      "line_number": 323,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Matrix-Architektur > Vorteile"
+    },
+    {
+      "rule_id": "MATRIX-005",
+      "category": "architecture",
+      "subcategory": "matrix",
+      "description": "Audit-sicher - Hash-Ledger über alle 384 Felder",
+      "line_number": 324,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Matrix-Architektur > Vorteile"
+    },
+    {
+      "rule_id": "MATRIX-006",
+      "category": "architecture",
+      "subcategory": "matrix",
+      "description": "Modular - Jedes Root-Shard-Paar isoliert entwickelbar",
+      "line_number": 325,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Matrix-Architektur > Vorteile"
+    },
+    {
+      "rule_id": "HYBRID-001",
+      "category": "architecture",
+      "subcategory": "hybrid",
+      "description": "chart.yaml (SoT) - Abstrakt: WAS (Capabilities, Policies, Interfaces)",
+      "line_number": 333,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Hybrid-Struktur"
+    },
+    {
+      "rule_id": "HYBRID-002",
+      "category": "architecture",
+      "subcategory": "hybrid",
+      "description": "manifest.yaml (Impl.) - Konkret: WIE (Dateien, Tech-Stack, Artefakte)",
+      "line_number": 334,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Hybrid-Struktur"
+    },
+    {
+      "rule_id": "HYBRID-003",
+      "category": "architecture",
+      "subcategory": "hybrid",
+      "description": "Zukunftssicher - SoT bleibt stabil, Implementierung austauschbar",
+      "line_number": 337,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Hybrid-Struktur > Vorteile"
+    },
+    {
+      "rule_id": "HYBRID-004",
+      "category": "architecture",
+      "subcategory": "hybrid",
+      "description": "Technologie-agnostisch - Python, Rust, Services möglich",
+      "line_number": 338,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Hybrid-Struktur > Vorteile"
+    },
+    {
+      "rule_id": "HYBRID-005",
+      "category": "architecture",
+      "subcategory": "hybrid",
+      "description": "Governance-fähig - Capabilities mit MoSCoW (MUST/SHOULD/HAVE)",
+      "line_number": 339,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Hybrid-Struktur > Vorteile"
+    },
+    {
+      "rule_id": "HYBRID-006",
+      "category": "architecture",
+      "subcategory": "hybrid",
+      "description": "Contract-First - Interfaces (OpenAPI/JSON-Schema) als Vertrag",
+      "line_number": 340,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Hybrid-Struktur > Vorteile"
+    },
+    {
+      "rule_id": "HYBRID-007",
+      "category": "architecture",
+      "subcategory": "hybrid",
+      "description": "Compliance-sicher - Policies im SoT zentral verbindlich",
+      "line_number": 341,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Hybrid-Struktur > Vorteile"
+    },
+    {
+      "rule_id": "FOLDER-001",
+      "category": "structure",
+      "subcategory": "folder_layout",
+      "description": "Required: chart.yaml - SoT (abstrakt, WAS)",
+      "line_number": 361,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Ordnerstruktur Beispiele"
+    },
+    {
+      "rule_id": "FOLDER-002",
+      "category": "structure",
+      "subcategory": "folder_layout",
+      "description": "Required: contracts/ - API-Definitionen",
+      "line_number": 366,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Ordnerstruktur Beispiele"
+    },
+    {
+      "rule_id": "FOLDER-003",
+      "category": "structure",
+      "subcategory": "folder_layout",
+      "description": "Required: implementations/ - Konkrete Umsetzungen",
+      "line_number": 371,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Ordnerstruktur Beispiele"
+    },
+    {
+      "rule_id": "FOLDER-004",
+      "category": "structure",
+      "subcategory": "folder_layout",
+      "description": "Required: conformance/ - Contract-Tests",
+      "line_number": 376,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Ordnerstruktur Beispiele"
+    },
+    {
+      "rule_id": "FOLDER-005",
+      "category": "structure",
+      "subcategory": "folder_layout",
+      "description": "Required: policies/ - Enforcement-Regeln",
+      "line_number": 381,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Ordnerstruktur Beispiele"
+    },
+    {
+      "rule_id": "FOLDER-006",
+      "category": "structure",
+      "subcategory": "folder_layout",
+      "description": "Required: docs/ - Shard-spezifische Doku",
+      "line_number": 386,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Ordnerstruktur Beispiele"
+    },
+    {
+      "rule_id": "FOLDER-007",
+      "category": "structure",
+      "subcategory": "folder_layout",
+      "description": "Required: CHANGELOG.md - Versionsverlauf",
+      "line_number": 391,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Ordnerstruktur Beispiele"
+    },
+    {
+      "rule_id": "CHART-001",
+      "category": "chart_yaml",
+      "subcategory": "metadata",
+      "description": "metadata.shard_id MUSS vorhanden sein",
+      "line_number": 437,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > metadata"
+    },
+    {
+      "rule_id": "CHART-002",
+      "category": "chart_yaml",
+      "subcategory": "metadata",
+      "description": "metadata.version MUSS vorhanden sein",
+      "line_number": 440,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > metadata"
+    },
+    {
+      "rule_id": "CHART-003",
+      "category": "chart_yaml",
+      "subcategory": "metadata",
+      "description": "metadata.status MUSS vorhanden sein",
+      "line_number": 443,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > metadata"
+    },
+    {
+      "rule_id": "CHART-004",
+      "category": "chart_yaml",
+      "subcategory": "governance",
+      "description": "governance.owner MUSS vorhanden sein",
+      "line_number": 446,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > governance"
+    },
+    {
+      "rule_id": "CHART-005",
+      "category": "chart_yaml",
+      "subcategory": "governance",
+      "description": "governance.reviewers MUSS vorhanden sein",
+      "line_number": 449,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > governance"
+    },
+    {
+      "rule_id": "CHART-006",
+      "category": "chart_yaml",
+      "subcategory": "governance",
+      "description": "governance.change_process MUSS vorhanden sein",
+      "line_number": 452,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > governance"
+    },
+    {
+      "rule_id": "CHART-007",
+      "category": "chart_yaml",
+      "subcategory": "capabilities",
+      "description": "capabilities.MUST MUSS vorhanden sein",
+      "line_number": 455,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > capabilities"
+    },
+    {
+      "rule_id": "CHART-008",
+      "category": "chart_yaml",
+      "subcategory": "capabilities",
+      "description": "capabilities.SHOULD MUSS vorhanden sein",
+      "line_number": 458,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > capabilities"
+    },
+    {
+      "rule_id": "CHART-009",
+      "category": "chart_yaml",
+      "subcategory": "capabilities",
+      "description": "capabilities.HAVE MUSS vorhanden sein",
+      "line_number": 461,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > capabilities"
+    },
+    {
+      "rule_id": "CHART-010",
+      "category": "chart_yaml",
+      "subcategory": "constraints",
+      "description": "constraints.pii_storage MUSS vorhanden sein",
+      "line_number": 464,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > constraints"
+    },
+    {
+      "rule_id": "CHART-011",
+      "category": "chart_yaml",
+      "subcategory": "constraints",
+      "description": "constraints.data_policy MUSS vorhanden sein",
+      "line_number": 467,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > constraints"
+    },
+    {
+      "rule_id": "CHART-012",
+      "category": "chart_yaml",
+      "subcategory": "constraints",
+      "description": "constraints.custody MUSS vorhanden sein",
+      "line_number": 470,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > constraints"
+    },
+    {
+      "rule_id": "CHART-013",
+      "category": "chart_yaml",
+      "subcategory": "enforcement",
+      "description": "enforcement.static_analysis MUSS vorhanden sein",
+      "line_number": 473,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > enforcement"
+    },
+    {
+      "rule_id": "CHART-014",
+      "category": "chart_yaml",
+      "subcategory": "enforcement",
+      "description": "enforcement.runtime_checks MUSS vorhanden sein",
+      "line_number": 476,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > enforcement"
+    },
+    {
+      "rule_id": "CHART-015",
+      "category": "chart_yaml",
+      "subcategory": "enforcement",
+      "description": "enforcement.audit MUSS vorhanden sein",
+      "line_number": 479,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > enforcement"
+    },
+    {
+      "rule_id": "CHART-016",
+      "category": "chart_yaml",
+      "subcategory": "interfaces",
+      "description": "interfaces.contracts MUSS vorhanden sein",
+      "line_number": 482,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > interfaces"
+    },
+    {
+      "rule_id": "CHART-017",
+      "category": "chart_yaml",
+      "subcategory": "interfaces",
+      "description": "interfaces.data_schemas MUSS vorhanden sein",
+      "line_number": 485,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > interfaces"
+    },
+    {
+      "rule_id": "CHART-018",
+      "category": "chart_yaml",
+      "subcategory": "interfaces",
+      "description": "interfaces.authentication MUSS vorhanden sein",
+      "line_number": 488,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > interfaces"
+    },
+    {
+      "rule_id": "CHART-019",
+      "category": "chart_yaml",
+      "subcategory": "dependencies",
+      "description": "dependencies.required MUSS vorhanden sein",
+      "line_number": 491,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > dependencies"
+    },
+    {
+      "rule_id": "CHART-020",
+      "category": "chart_yaml",
+      "subcategory": "dependencies",
+      "description": "dependencies.optional MUSS vorhanden sein",
+      "line_number": 494,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > dependencies"
+    },
+    {
+      "rule_id": "CHART-021",
+      "category": "chart_yaml",
+      "subcategory": "compatibility",
+      "description": "compatibility.semver MUSS vorhanden sein",
+      "line_number": 497,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > compatibility"
+    },
+    {
+      "rule_id": "CHART-022",
+      "category": "chart_yaml",
+      "subcategory": "compatibility",
+      "description": "compatibility.core_min_version MUSS vorhanden sein",
+      "line_number": 500,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > compatibility"
+    },
+    {
+      "rule_id": "CHART-023",
+      "category": "chart_yaml",
+      "subcategory": "implementations",
+      "description": "implementations.default MUSS vorhanden sein",
+      "line_number": 503,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > implementations"
+    },
+    {
+      "rule_id": "CHART-024",
+      "category": "chart_yaml",
+      "subcategory": "implementations",
+      "description": "implementations.available MUSS vorhanden sein",
+      "line_number": 506,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > implementations"
+    },
+    {
+      "rule_id": "CHART-025",
+      "category": "chart_yaml",
+      "subcategory": "conformance",
+      "description": "conformance.test_framework MUSS vorhanden sein",
+      "line_number": 509,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > conformance"
+    },
+    {
+      "rule_id": "CHART-026",
+      "category": "chart_yaml",
+      "subcategory": "conformance",
+      "description": "conformance.contract_tests MUSS vorhanden sein",
+      "line_number": 512,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > conformance"
+    },
+    {
+      "rule_id": "CHART-027",
+      "category": "chart_yaml",
+      "subcategory": "orchestration",
+      "description": "orchestration.workflows MUSS vorhanden sein",
+      "line_number": 515,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > orchestration"
+    },
+    {
+      "rule_id": "CHART-028",
+      "category": "chart_yaml",
+      "subcategory": "testing",
+      "description": "testing.unit MUSS vorhanden sein",
+      "line_number": 518,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > testing"
+    },
+    {
+      "rule_id": "CHART-029",
+      "category": "chart_yaml",
+      "subcategory": "testing",
+      "description": "testing.integration MUSS vorhanden sein",
+      "line_number": 521,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > testing"
+    },
+    {
+      "rule_id": "CHART-030",
+      "category": "chart_yaml",
+      "subcategory": "testing",
+      "description": "testing.contract MUSS vorhanden sein",
+      "line_number": 524,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > testing"
+    },
+    {
+      "rule_id": "CHART-031",
+      "category": "chart_yaml",
+      "subcategory": "testing",
+      "description": "testing.e2e MUSS vorhanden sein",
+      "line_number": 527,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > testing"
+    },
+    {
+      "rule_id": "CHART-032",
+      "category": "chart_yaml",
+      "subcategory": "documentation",
+      "description": "documentation.auto_generate MUSS vorhanden sein",
+      "line_number": 530,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > documentation"
+    },
+    {
+      "rule_id": "CHART-033",
+      "category": "chart_yaml",
+      "subcategory": "documentation",
+      "description": "documentation.manual MUSS vorhanden sein",
+      "line_number": 533,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > documentation"
+    },
+    {
+      "rule_id": "CHART-034",
+      "category": "chart_yaml",
+      "subcategory": "observability",
+      "description": "observability.metrics MUSS vorhanden sein",
+      "line_number": 536,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > observability"
+    },
+    {
+      "rule_id": "CHART-035",
+      "category": "chart_yaml",
+      "subcategory": "observability",
+      "description": "observability.tracing MUSS vorhanden sein",
+      "line_number": 539,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > observability"
+    },
+    {
+      "rule_id": "CHART-036",
+      "category": "chart_yaml",
+      "subcategory": "observability",
+      "description": "observability.logging MUSS vorhanden sein",
+      "line_number": 542,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > observability"
+    },
+    {
+      "rule_id": "CHART-037",
+      "category": "chart_yaml",
+      "subcategory": "observability",
+      "description": "observability.alerting MUSS vorhanden sein",
+      "line_number": 545,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > observability"
+    },
+    {
+      "rule_id": "CHART-038",
+      "category": "chart_yaml",
+      "subcategory": "evidence",
+      "description": "evidence.strategy MUSS vorhanden sein",
+      "line_number": 548,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > evidence"
+    },
+    {
+      "rule_id": "CHART-039",
+      "category": "chart_yaml",
+      "subcategory": "evidence",
+      "description": "evidence.anchoring MUSS vorhanden sein",
+      "line_number": 551,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > evidence"
+    },
+    {
+      "rule_id": "CHART-040",
+      "category": "chart_yaml",
+      "subcategory": "security",
+      "description": "security.threat_model MUSS vorhanden sein",
+      "line_number": 554,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > security"
+    },
+    {
+      "rule_id": "CHART-041",
+      "category": "chart_yaml",
+      "subcategory": "security",
+      "description": "security.secrets_management MUSS vorhanden sein",
+      "line_number": 557,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > security"
+    },
+    {
+      "rule_id": "CHART-042",
+      "category": "chart_yaml",
+      "subcategory": "security",
+      "description": "security.encryption MUSS vorhanden sein",
+      "line_number": 560,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > security"
+    },
+    {
+      "rule_id": "CHART-043",
+      "category": "chart_yaml",
+      "subcategory": "deployment",
+      "description": "deployment.strategy MUSS vorhanden sein",
+      "line_number": 563,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > deployment"
+    },
+    {
+      "rule_id": "CHART-044",
+      "category": "chart_yaml",
+      "subcategory": "deployment",
+      "description": "deployment.environments MUSS vorhanden sein",
+      "line_number": 566,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > deployment"
+    },
+    {
+      "rule_id": "CHART-045",
+      "category": "chart_yaml",
+      "subcategory": "resources",
+      "description": "resources.compute MUSS vorhanden sein",
+      "line_number": 569,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > resources"
+    },
+    {
+      "rule_id": "CHART-046",
+      "category": "chart_yaml",
+      "subcategory": "roadmap",
+      "description": "roadmap.upcoming MUSS vorhanden sein",
+      "line_number": 572,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "chart.yaml Struktur > roadmap"
+    },
+    {
+      "rule_id": "MANIFEST-001",
+      "category": "manifest_yaml",
+      "subcategory": "metadata",
+      "description": "metadata.implementation_id MUSS vorhanden sein",
+      "line_number": 532,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > metadata"
+    },
+    {
+      "rule_id": "MANIFEST-002",
+      "category": "manifest_yaml",
+      "subcategory": "metadata",
+      "description": "metadata.implementation_version MUSS vorhanden sein",
+      "line_number": 535,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > metadata"
+    },
+    {
+      "rule_id": "MANIFEST-003",
+      "category": "manifest_yaml",
+      "subcategory": "metadata",
+      "description": "metadata.chart_version MUSS vorhanden sein",
+      "line_number": 538,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > metadata"
+    },
+    {
+      "rule_id": "MANIFEST-004",
+      "category": "manifest_yaml",
+      "subcategory": "metadata",
+      "description": "metadata.maturity MUSS vorhanden sein",
+      "line_number": 541,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > metadata"
+    },
+    {
+      "rule_id": "MANIFEST-005",
+      "category": "manifest_yaml",
+      "subcategory": "technology_stack",
+      "description": "technology_stack.language MUSS vorhanden sein",
+      "line_number": 544,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > technology_stack"
+    },
+    {
+      "rule_id": "MANIFEST-006",
+      "category": "manifest_yaml",
+      "subcategory": "technology_stack",
+      "description": "technology_stack.frameworks MUSS vorhanden sein",
+      "line_number": 547,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > technology_stack"
+    },
+    {
+      "rule_id": "MANIFEST-007",
+      "category": "manifest_yaml",
+      "subcategory": "technology_stack",
+      "description": "technology_stack.testing MUSS vorhanden sein",
+      "line_number": 550,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > technology_stack"
+    },
+    {
+      "rule_id": "MANIFEST-008",
+      "category": "manifest_yaml",
+      "subcategory": "technology_stack",
+      "description": "technology_stack.linting_formatting MUSS vorhanden sein",
+      "line_number": 553,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > technology_stack"
+    },
+    {
+      "rule_id": "MANIFEST-009",
+      "category": "manifest_yaml",
+      "subcategory": "artifacts",
+      "description": "artifacts.source_code MUSS vorhanden sein",
+      "line_number": 556,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > artifacts"
+    },
+    {
+      "rule_id": "MANIFEST-010",
+      "category": "manifest_yaml",
+      "subcategory": "artifacts",
+      "description": "artifacts.configuration MUSS vorhanden sein",
+      "line_number": 559,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > artifacts"
+    },
+    {
+      "rule_id": "MANIFEST-011",
+      "category": "manifest_yaml",
+      "subcategory": "artifacts",
+      "description": "artifacts.models MUSS vorhanden sein",
+      "line_number": 562,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > artifacts"
+    },
+    {
+      "rule_id": "MANIFEST-012",
+      "category": "manifest_yaml",
+      "subcategory": "artifacts",
+      "description": "artifacts.protocols MUSS vorhanden sein",
+      "line_number": 565,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > artifacts"
+    },
+    {
+      "rule_id": "MANIFEST-013",
+      "category": "manifest_yaml",
+      "subcategory": "artifacts",
+      "description": "artifacts.tests MUSS vorhanden sein",
+      "line_number": 568,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > artifacts"
+    },
+    {
+      "rule_id": "MANIFEST-014",
+      "category": "manifest_yaml",
+      "subcategory": "artifacts",
+      "description": "artifacts.documentation MUSS vorhanden sein",
+      "line_number": 571,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > artifacts"
+    },
+    {
+      "rule_id": "MANIFEST-015",
+      "category": "manifest_yaml",
+      "subcategory": "dependencies",
+      "description": "dependencies.python_packages MUSS vorhanden sein",
+      "line_number": 574,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > dependencies"
+    },
+    {
+      "rule_id": "MANIFEST-016",
+      "category": "manifest_yaml",
+      "subcategory": "dependencies",
+      "description": "dependencies.development_packages MUSS vorhanden sein",
+      "line_number": 577,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > dependencies"
+    },
+    {
+      "rule_id": "MANIFEST-017",
+      "category": "manifest_yaml",
+      "subcategory": "dependencies",
+      "description": "dependencies.system_dependencies MUSS vorhanden sein",
+      "line_number": 580,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > dependencies"
+    },
+    {
+      "rule_id": "MANIFEST-018",
+      "category": "manifest_yaml",
+      "subcategory": "dependencies",
+      "description": "dependencies.external_services MUSS vorhanden sein",
+      "line_number": 583,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > dependencies"
+    },
+    {
+      "rule_id": "MANIFEST-019",
+      "category": "manifest_yaml",
+      "subcategory": "build",
+      "description": "build.commands MUSS vorhanden sein",
+      "line_number": 586,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > build"
+    },
+    {
+      "rule_id": "MANIFEST-020",
+      "category": "manifest_yaml",
+      "subcategory": "build",
+      "description": "build.docker MUSS vorhanden sein",
+      "line_number": 589,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > build"
+    },
+    {
+      "rule_id": "MANIFEST-021",
+      "category": "manifest_yaml",
+      "subcategory": "deployment",
+      "description": "deployment.kubernetes MUSS vorhanden sein",
+      "line_number": 592,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > deployment"
+    },
+    {
+      "rule_id": "MANIFEST-022",
+      "category": "manifest_yaml",
+      "subcategory": "deployment",
+      "description": "deployment.helm MUSS vorhanden sein",
+      "line_number": 595,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > deployment"
+    },
+    {
+      "rule_id": "MANIFEST-023",
+      "category": "manifest_yaml",
+      "subcategory": "deployment",
+      "description": "deployment.environment_variables MUSS vorhanden sein",
+      "line_number": 598,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > deployment"
+    },
+    {
+      "rule_id": "MANIFEST-024",
+      "category": "manifest_yaml",
+      "subcategory": "testing",
+      "description": "testing.unit_tests MUSS vorhanden sein",
+      "line_number": 601,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > testing"
+    },
+    {
+      "rule_id": "MANIFEST-025",
+      "category": "manifest_yaml",
+      "subcategory": "testing",
+      "description": "testing.integration_tests MUSS vorhanden sein",
+      "line_number": 604,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > testing"
+    },
+    {
+      "rule_id": "MANIFEST-026",
+      "category": "manifest_yaml",
+      "subcategory": "testing",
+      "description": "testing.contract_tests MUSS vorhanden sein",
+      "line_number": 607,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > testing"
+    },
+    {
+      "rule_id": "MANIFEST-027",
+      "category": "manifest_yaml",
+      "subcategory": "testing",
+      "description": "testing.security_tests MUSS vorhanden sein",
+      "line_number": 610,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > testing"
+    },
+    {
+      "rule_id": "MANIFEST-028",
+      "category": "manifest_yaml",
+      "subcategory": "testing",
+      "description": "testing.performance_tests MUSS vorhanden sein",
+      "line_number": 613,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > testing"
+    },
+    {
+      "rule_id": "MANIFEST-029",
+      "category": "manifest_yaml",
+      "subcategory": "observability",
+      "description": "observability.metrics MUSS vorhanden sein",
+      "line_number": 616,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > observability"
+    },
+    {
+      "rule_id": "MANIFEST-030",
+      "category": "manifest_yaml",
+      "subcategory": "observability",
+      "description": "observability.tracing MUSS vorhanden sein",
+      "line_number": 619,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > observability"
+    },
+    {
+      "rule_id": "MANIFEST-031",
+      "category": "manifest_yaml",
+      "subcategory": "observability",
+      "description": "observability.logging MUSS vorhanden sein",
+      "line_number": 622,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > observability"
+    },
+    {
+      "rule_id": "MANIFEST-032",
+      "category": "manifest_yaml",
+      "subcategory": "observability",
+      "description": "observability.health_checks MUSS vorhanden sein",
+      "line_number": 625,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > observability"
+    },
+    {
+      "rule_id": "MANIFEST-033",
+      "category": "manifest_yaml",
+      "subcategory": "development",
+      "description": "development.setup MUSS vorhanden sein",
+      "line_number": 628,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > development"
+    },
+    {
+      "rule_id": "MANIFEST-034",
+      "category": "manifest_yaml",
+      "subcategory": "development",
+      "description": "development.local_development MUSS vorhanden sein",
+      "line_number": 631,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > development"
+    },
+    {
+      "rule_id": "MANIFEST-035",
+      "category": "manifest_yaml",
+      "subcategory": "development",
+      "description": "development.pre_commit_hooks MUSS vorhanden sein",
+      "line_number": 634,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > development"
+    },
+    {
+      "rule_id": "MANIFEST-036",
+      "category": "manifest_yaml",
+      "subcategory": "compliance",
+      "description": "compliance.non_custodial_enforcement MUSS vorhanden sein",
+      "line_number": 637,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > compliance"
+    },
+    {
+      "rule_id": "MANIFEST-037",
+      "category": "manifest_yaml",
+      "subcategory": "compliance",
+      "description": "compliance.gdpr_compliance MUSS vorhanden sein",
+      "line_number": 640,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > compliance"
+    },
+    {
+      "rule_id": "MANIFEST-038",
+      "category": "manifest_yaml",
+      "subcategory": "compliance",
+      "description": "compliance.bias_fairness MUSS vorhanden sein",
+      "line_number": 643,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > compliance"
+    },
+    {
+      "rule_id": "MANIFEST-039",
+      "category": "manifest_yaml",
+      "subcategory": "performance",
+      "description": "performance.baseline_benchmarks MUSS vorhanden sein",
+      "line_number": 646,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > performance"
+    },
+    {
+      "rule_id": "MANIFEST-040",
+      "category": "manifest_yaml",
+      "subcategory": "performance",
+      "description": "performance.optimization_targets MUSS vorhanden sein",
+      "line_number": 649,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > performance"
+    },
+    {
+      "rule_id": "MANIFEST-041",
+      "category": "manifest_yaml",
+      "subcategory": "performance",
+      "description": "performance.resource_requirements MUSS vorhanden sein",
+      "line_number": 652,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > performance"
+    },
+    {
+      "rule_id": "MANIFEST-042",
+      "category": "manifest_yaml",
+      "subcategory": "changelog",
+      "description": "changelog.location MUSS vorhanden sein",
+      "line_number": 655,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > changelog"
+    },
+    {
+      "rule_id": "MANIFEST-043",
+      "category": "manifest_yaml",
+      "subcategory": "changelog",
+      "description": "changelog.latest_versions MUSS vorhanden sein",
+      "line_number": 658,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > changelog"
+    },
+    {
+      "rule_id": "MANIFEST-044",
+      "category": "manifest_yaml",
+      "subcategory": "support",
+      "description": "support.documentation MUSS vorhanden sein",
+      "line_number": 661,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > support"
+    },
+    {
+      "rule_id": "MANIFEST-045",
+      "category": "manifest_yaml",
+      "subcategory": "support",
+      "description": "support.contacts MUSS vorhanden sein",
+      "line_number": 664,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "manifest.yaml Struktur > support"
+    },
+    {
+      "rule_id": "NAMING-001",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "Root-Ordner Format: {NR}_{NAME}",
+      "line_number": 627,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NAMING-002",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "Shards Format: Shard_{NR}_{NAME}",
+      "line_number": 630,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NAMING-003",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "chart.yaml - SoT (abstrakt)",
+      "line_number": 633,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NAMING-004",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "manifest.yaml - Implementierung (konkret)",
+      "line_number": 636,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NAMING-005",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "CHANGELOG.md - Versionsverlauf",
+      "line_number": 639,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NAMING-006",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "README.md - Übersicht",
+      "line_number": 642,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NAMING-007",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "Pfad: {ROOT}/shards/{SHARD}/chart.yaml",
+      "line_number": 645,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NAMING-008",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "Pfad: {ROOT}/shards/{SHARD}/implementations/{IMPL_ID}/manifest.yaml",
+      "line_number": 648,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NAMING-009",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "Pfad: {ROOT}/shards/{SHARD}/contracts/{CONTRACT_NAME}.openapi.yaml",
+      "line_number": 651,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NAMING-010",
+      "category": "naming",
+      "subcategory": "conventions",
+      "description": "Pfad: {ROOT}/shards/{SHARD}/contracts/schemas/{SCHEMA_NAME}.schema.json",
+      "line_number": 654,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Naming Conventions"
+    },
+    {
+      "rule_id": "NON-CUSTODIAL-001",
+      "category": "policies",
+      "subcategory": "non",
+      "description": "NIEMALS Rohdaten von PII oder biometrischen Daten speichern",
+      "line_number": 664,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "NON-CUSTODIAL-002",
+      "category": "policies",
+      "subcategory": "non",
+      "description": "Nur Hash-basierte Speicherung (SHA3-256)",
+      "line_number": 666,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "NON-CUSTODIAL-003",
+      "category": "policies",
+      "subcategory": "non",
+      "description": "Tenant-spezifische Peppers",
+      "line_number": 668,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "NON-CUSTODIAL-004",
+      "category": "policies",
+      "subcategory": "non",
+      "description": "Immediate Discard nach Hashing",
+      "line_number": 670,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "NON-CUSTODIAL-005",
+      "category": "policies",
+      "subcategory": "non",
+      "description": "Static Analysis (Semgrep) blockiert PII-Storage",
+      "line_number": 672,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "NON-CUSTODIAL-006",
+      "category": "policies",
+      "subcategory": "non",
+      "description": "Runtime PII-Detector blockiert Verstöße",
+      "line_number": 674,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "HASH-ONLY-001",
+      "category": "policies",
+      "subcategory": "hash",
+      "description": "storage_type: hash_only",
+      "line_number": 676,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "HASH-ONLY-002",
+      "category": "policies",
+      "subcategory": "hash",
+      "description": "hash_algorithm: SHA3-256",
+      "line_number": 678,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "HASH-ONLY-003",
+      "category": "policies",
+      "subcategory": "hash",
+      "description": "pepper_strategy: per_tenant",
+      "line_number": 680,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "HASH-ONLY-004",
+      "category": "policies",
+      "subcategory": "hash",
+      "description": "deterministic: true",
+      "line_number": 682,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "HASH-ONLY-005",
+      "category": "policies",
+      "subcategory": "hash",
+      "description": "raw_data_retention: 0 seconds",
+      "line_number": 684,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "GDPR-001",
+      "category": "policies",
+      "subcategory": "gdpr",
+      "description": "Right to Erasure: Hash-Rotation",
+      "line_number": 686,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "GDPR-002",
+      "category": "policies",
+      "subcategory": "gdpr",
+      "description": "Data Portability: JSON-Export aller Hashes + Metadaten",
+      "line_number": 688,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "GDPR-003",
+      "category": "policies",
+      "subcategory": "gdpr",
+      "description": "Purpose Limitation: Nur definierte Zwecke erlaubt",
+      "line_number": 690,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "GDPR-004",
+      "category": "policies",
+      "subcategory": "gdpr",
+      "description": "PII Redaction: Automatisch in Logs & Traces",
+      "line_number": 692,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "BIAS-001",
+      "category": "policies",
+      "subcategory": "bias",
+      "description": "Bias Testing: Pflicht für alle AI/ML-Modelle",
+      "line_number": 694,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "BIAS-002",
+      "category": "policies",
+      "subcategory": "bias",
+      "description": "Metrics: Demographic Parity, Equal Opportunity",
+      "line_number": 696,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "BIAS-003",
+      "category": "policies",
+      "subcategory": "bias",
+      "description": "Audit: Quarterly Reports an Ethics Board",
+      "line_number": 698,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "BIAS-004",
+      "category": "policies",
+      "subcategory": "bias",
+      "description": "Mitigation: Fairness-aware Training",
+      "line_number": 700,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "EVIDENCE-001",
+      "category": "policies",
+      "subcategory": "evidence",
+      "description": "Strategy: Hash-Ledger mit Blockchain-Anchoring",
+      "line_number": 702,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "EVIDENCE-002",
+      "category": "policies",
+      "subcategory": "evidence",
+      "description": "Storage: WORM (Write-Once-Read-Many)",
+      "line_number": 704,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "EVIDENCE-003",
+      "category": "policies",
+      "subcategory": "evidence",
+      "description": "Retention: 10 Jahre",
+      "line_number": 706,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "EVIDENCE-004",
+      "category": "policies",
+      "subcategory": "evidence",
+      "description": "Chains: Ethereum Mainnet, Polygon",
+      "line_number": 708,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "EVIDENCE-005",
+      "category": "policies",
+      "subcategory": "evidence",
+      "description": "Frequency: Hourly Anchoring",
+      "line_number": 710,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "SECRETS-001",
+      "category": "policies",
+      "subcategory": "secrets",
+      "description": "Provider: Vault (15_infra/vault)",
+      "line_number": 712,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "SECRETS-002",
+      "category": "policies",
+      "subcategory": "secrets",
+      "description": "Rotation: 90 Tage",
+      "line_number": 714,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "SECRETS-003",
+      "category": "policies",
+      "subcategory": "secrets",
+      "description": "Niemals in Git: Nur .template-Dateien",
+      "line_number": 716,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "SECRETS-004",
+      "category": "policies",
+      "subcategory": "secrets",
+      "description": "Encryption: AES-256-GCM at-rest, TLS 1.3 in-transit",
+      "line_number": 718,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "VERSIONING-001",
+      "category": "policies",
+      "subcategory": "versioning",
+      "description": "Semver: MAJOR.MINOR.PATCH",
+      "line_number": 720,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "VERSIONING-002",
+      "category": "policies",
+      "subcategory": "versioning",
+      "description": "Breaking Changes: Migration Guide + Compatibility Layer",
+      "line_number": 722,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "VERSIONING-003",
+      "category": "policies",
+      "subcategory": "versioning",
+      "description": "Deprecations: 180 Tage Notice Period",
+      "line_number": 724,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "VERSIONING-004",
+      "category": "policies",
+      "subcategory": "versioning",
+      "description": "RFC-Prozess: Für alle MUST-Capability-Änderungen",
+      "line_number": 726,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kritische Policies"
+    },
+    {
+      "rule_id": "GOV-ROLE-001",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Owner: Verantwortlich für Shard-Entwicklung",
+      "line_number": 721,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-002",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Owner: Entscheidet über SHOULD/HAVE-Promotions",
+      "line_number": 723,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-003",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Owner: Koordiniert Implementierungen",
+      "line_number": 725,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-004",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Architecture Board: Reviewed alle chart.yaml-Änderungen",
+      "line_number": 727,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-005",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Architecture Board: Genehmigt Breaking Changes",
+      "line_number": 729,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-006",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Architecture Board: Definiert Schnittstellen-Standards",
+      "line_number": 731,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-007",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Compliance Team: Prüft alle Policies",
+      "line_number": 733,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-008",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Compliance Team: Genehmigt Constraint-Änderungen",
+      "line_number": 735,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-009",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Compliance Team: Audit-Oversight",
+      "line_number": 737,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-010",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Security Team: Threat Modeling",
+      "line_number": 739,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-011",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Security Team: Penetration Testing",
+      "line_number": 741,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-ROLE-012",
+      "category": "governance",
+      "subcategory": "role",
+      "description": "Security Team: Vulnerability Management",
+      "line_number": 743,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROCESS-001",
+      "category": "governance",
+      "subcategory": "process",
+      "description": "RFC erstellen für MUST-Changes",
+      "line_number": 745,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROCESS-002",
+      "category": "governance",
+      "subcategory": "process",
+      "description": "Contract-Tests implementieren",
+      "line_number": 747,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROCESS-003",
+      "category": "governance",
+      "subcategory": "process",
+      "description": "Dual Review (Architecture + Compliance)",
+      "line_number": 749,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROCESS-004",
+      "category": "governance",
+      "subcategory": "process",
+      "description": "Semver-Bump + Changelog",
+      "line_number": 751,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROCESS-005",
+      "category": "governance",
+      "subcategory": "process",
+      "description": "CI/CD Pipeline (alle Tests grün)",
+      "line_number": 753,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROCESS-006",
+      "category": "governance",
+      "subcategory": "process",
+      "description": "Canary Deployment (5% → 25% → 50% → 100%)",
+      "line_number": 755,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROCESS-007",
+      "category": "governance",
+      "subcategory": "process",
+      "description": "Monitoring & Alerting (Error Rate < 0.5%)",
+      "line_number": 757,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-001",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "SHOULD → MUST: In Production >= 90 Tage",
+      "line_number": 759,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-002",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "SHOULD → MUST: SLA Compliance >= 99.5%",
+      "line_number": 761,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-003",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "SHOULD → MUST: Contract Test Coverage >= 95%",
+      "line_number": 763,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-004",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "SHOULD → MUST: Approver: Architecture Board + Product Owner",
+      "line_number": 765,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-005",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "HAVE → SHOULD: Feature complete",
+      "line_number": 767,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-006",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "HAVE → SHOULD: Beta-Testing erfolgreich",
+      "line_number": 769,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-007",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "HAVE → SHOULD: Dokumentation vollständig",
+      "line_number": 771,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-008",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "HAVE → SHOULD: Approver: Owner + Architecture Board",
+      "line_number": 773,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-009",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "MUST → Deprecated: Notice Period 180 Tage",
+      "line_number": 775,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-010",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "MUST → Deprecated: Migration Guide vorhanden",
+      "line_number": 777,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-011",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "MUST → Deprecated: Compatibility Layer implementiert",
+      "line_number": 779,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "GOV-PROMO-012",
+      "category": "governance",
+      "subcategory": "promo",
+      "description": "MUST → Deprecated: Approver: Architecture Board + alle Teams",
+      "line_number": 781,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Governance-Modell"
+    },
+    {
+      "rule_id": "PRINC-CONTRACT-FIRST-001",
+      "category": "principles",
+      "subcategory": "contract_first",
+      "description": "API-Contract (OpenAPI/JSON-Schema) VOR Implementierung",
+      "line_number": 793,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > CONTRACT-FIRST"
+    },
+    {
+      "rule_id": "PRINC-CONTRACT-FIRST-002",
+      "category": "principles",
+      "subcategory": "contract_first",
+      "description": "Klare Schnittstellen",
+      "line_number": 795,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > CONTRACT-FIRST"
+    },
+    {
+      "rule_id": "PRINC-CONTRACT-FIRST-003",
+      "category": "principles",
+      "subcategory": "contract_first",
+      "description": "Parallele Entwicklung möglich",
+      "line_number": 797,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > CONTRACT-FIRST"
+    },
+    {
+      "rule_id": "PRINC-CONTRACT-FIRST-004",
+      "category": "principles",
+      "subcategory": "contract_first",
+      "description": "Automatische Tests (Contract-Tests)",
+      "line_number": 799,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > CONTRACT-FIRST"
+    },
+    {
+      "rule_id": "PRINC-CONTRACT-FIRST-005",
+      "category": "principles",
+      "subcategory": "contract_first",
+      "description": "Auto-generierte Dokumentation",
+      "line_number": 801,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > CONTRACT-FIRST"
+    },
+    {
+      "rule_id": "PRINC-SEPARATION-006",
+      "category": "principles",
+      "subcategory": "separation",
+      "description": "SoT (chart.yaml): WAS soll getan werden",
+      "line_number": 803,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SEPARATION"
+    },
+    {
+      "rule_id": "PRINC-SEPARATION-007",
+      "category": "principles",
+      "subcategory": "separation",
+      "description": "SoT (chart.yaml): Policies & Constraints",
+      "line_number": 805,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SEPARATION"
+    },
+    {
+      "rule_id": "PRINC-SEPARATION-008",
+      "category": "principles",
+      "subcategory": "separation",
+      "description": "SoT (chart.yaml): Capabilities & Interfaces",
+      "line_number": 807,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SEPARATION"
+    },
+    {
+      "rule_id": "PRINC-SEPARATION-009",
+      "category": "principles",
+      "subcategory": "separation",
+      "description": "Implementierung (manifest.yaml): WIE wird es umgesetzt",
+      "line_number": 809,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SEPARATION"
+    },
+    {
+      "rule_id": "PRINC-SEPARATION-010",
+      "category": "principles",
+      "subcategory": "separation",
+      "description": "Implementierung (manifest.yaml): Tech-Stack, Dateien",
+      "line_number": 811,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SEPARATION"
+    },
+    {
+      "rule_id": "PRINC-SEPARATION-011",
+      "category": "principles",
+      "subcategory": "separation",
+      "description": "Implementierung (manifest.yaml): Konkrete Dependencies",
+      "line_number": 813,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SEPARATION"
+    },
+    {
+      "rule_id": "PRINC-MULTI-IMPL-012",
+      "category": "principles",
+      "subcategory": "multi_impl",
+      "description": "Ein Shard, mehrere Implementierungen möglich",
+      "line_number": 815,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > MULTI-IMPL"
+    },
+    {
+      "rule_id": "PRINC-MULTI-IMPL-013",
+      "category": "principles",
+      "subcategory": "multi_impl",
+      "description": "Python-TensorFlow (Production)",
+      "line_number": 817,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > MULTI-IMPL"
+    },
+    {
+      "rule_id": "PRINC-MULTI-IMPL-014",
+      "category": "principles",
+      "subcategory": "multi_impl",
+      "description": "Rust-Burn (Performance-Optimiert)",
+      "line_number": 819,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > MULTI-IMPL"
+    },
+    {
+      "rule_id": "PRINC-MULTI-IMPL-015",
+      "category": "principles",
+      "subcategory": "multi_impl",
+      "description": "External Service (Commercial Vendor)",
+      "line_number": 821,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > MULTI-IMPL"
+    },
+    {
+      "rule_id": "PRINC-MULTI-IMPL-016",
+      "category": "principles",
+      "subcategory": "multi_impl",
+      "description": "Technologie-Unabhängigkeit, A/B-Testing",
+      "line_number": 823,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > MULTI-IMPL"
+    },
+    {
+      "rule_id": "PRINC-DETERMINISTIC-017",
+      "category": "principles",
+      "subcategory": "deterministic",
+      "description": "24 × 16 = 384 Chart-Dateien, keine Ausnahmen",
+      "line_number": 825,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DETERMINISTIC"
+    },
+    {
+      "rule_id": "PRINC-DETERMINISTIC-018",
+      "category": "principles",
+      "subcategory": "deterministic",
+      "description": "Eindeutige Adressierung",
+      "line_number": 827,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DETERMINISTIC"
+    },
+    {
+      "rule_id": "PRINC-DETERMINISTIC-019",
+      "category": "principles",
+      "subcategory": "deterministic",
+      "description": "Automatische Generierung möglich",
+      "line_number": 829,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DETERMINISTIC"
+    },
+    {
+      "rule_id": "PRINC-DETERMINISTIC-020",
+      "category": "principles",
+      "subcategory": "deterministic",
+      "description": "Konsistente Struktur",
+      "line_number": 831,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DETERMINISTIC"
+    },
+    {
+      "rule_id": "PRINC-DETERMINISTIC-021",
+      "category": "principles",
+      "subcategory": "deterministic",
+      "description": "Leichte Navigation",
+      "line_number": 833,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DETERMINISTIC"
+    },
+    {
+      "rule_id": "PRINC-EVIDENCE-BASED-022",
+      "category": "principles",
+      "subcategory": "evidence_based",
+      "description": "Alles relevante wird gehasht, geloggt, geanchort",
+      "line_number": 835,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > EVIDENCE-BASED"
+    },
+    {
+      "rule_id": "PRINC-EVIDENCE-BASED-023",
+      "category": "principles",
+      "subcategory": "evidence_based",
+      "description": "Hash-Ledger für alle Operationen",
+      "line_number": 837,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > EVIDENCE-BASED"
+    },
+    {
+      "rule_id": "PRINC-EVIDENCE-BASED-024",
+      "category": "principles",
+      "subcategory": "evidence_based",
+      "description": "Blockchain-Anchoring (Ethereum, Polygon)",
+      "line_number": 839,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > EVIDENCE-BASED"
+    },
+    {
+      "rule_id": "PRINC-EVIDENCE-BASED-025",
+      "category": "principles",
+      "subcategory": "evidence_based",
+      "description": "WORM-Storage (10 Jahre Retention)",
+      "line_number": 841,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > EVIDENCE-BASED"
+    },
+    {
+      "rule_id": "PRINC-EVIDENCE-BASED-026",
+      "category": "principles",
+      "subcategory": "evidence_based",
+      "description": "Audit-Trails für Compliance-Nachweise",
+      "line_number": 843,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > EVIDENCE-BASED"
+    },
+    {
+      "rule_id": "PRINC-ZERO-TRUST-027",
+      "category": "principles",
+      "subcategory": "zero_trust",
+      "description": "Niemandem vertrauen, alles verifizieren",
+      "line_number": 845,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > ZERO-TRUST"
+    },
+    {
+      "rule_id": "PRINC-ZERO-TRUST-028",
+      "category": "principles",
+      "subcategory": "zero_trust",
+      "description": "mTLS für alle internen Verbindungen",
+      "line_number": 847,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > ZERO-TRUST"
+    },
+    {
+      "rule_id": "PRINC-ZERO-TRUST-029",
+      "category": "principles",
+      "subcategory": "zero_trust",
+      "description": "RBAC für alle Zugriffe",
+      "line_number": 849,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > ZERO-TRUST"
+    },
+    {
+      "rule_id": "PRINC-ZERO-TRUST-030",
+      "category": "principles",
+      "subcategory": "zero_trust",
+      "description": "PII-Detection zur Laufzeit",
+      "line_number": 851,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > ZERO-TRUST"
+    },
+    {
+      "rule_id": "PRINC-ZERO-TRUST-031",
+      "category": "principles",
+      "subcategory": "zero_trust",
+      "description": "Continuous Vulnerability Scanning",
+      "line_number": 853,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > ZERO-TRUST"
+    },
+    {
+      "rule_id": "PRINC-OBSERVABILITY-032",
+      "category": "principles",
+      "subcategory": "observability",
+      "description": "Metrics, Tracing, Logging von Anfang an",
+      "line_number": 855,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > OBSERVABILITY"
+    },
+    {
+      "rule_id": "PRINC-OBSERVABILITY-033",
+      "category": "principles",
+      "subcategory": "observability",
+      "description": "Metrics: Prometheus",
+      "line_number": 857,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > OBSERVABILITY"
+    },
+    {
+      "rule_id": "PRINC-OBSERVABILITY-034",
+      "category": "principles",
+      "subcategory": "observability",
+      "description": "Tracing: Jaeger (OpenTelemetry)",
+      "line_number": 859,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > OBSERVABILITY"
+    },
+    {
+      "rule_id": "PRINC-OBSERVABILITY-035",
+      "category": "principles",
+      "subcategory": "observability",
+      "description": "Logging: Loki (JSON-Format, PII-Redaction)",
+      "line_number": 861,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > OBSERVABILITY"
+    },
+    {
+      "rule_id": "PRINC-OBSERVABILITY-036",
+      "category": "principles",
+      "subcategory": "observability",
+      "description": "Alerting: AlertManager",
+      "line_number": 863,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > OBSERVABILITY"
+    },
+    {
+      "rule_id": "PRINC-BIAS-AWARE-037",
+      "category": "principles",
+      "subcategory": "bias_aware",
+      "description": "Alle AI/ML-Modelle auf Bias testen",
+      "line_number": 865,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > BIAS-AWARE"
+    },
+    {
+      "rule_id": "PRINC-BIAS-AWARE-038",
+      "category": "principles",
+      "subcategory": "bias_aware",
+      "description": "Fairness-Metrics: Demographic Parity, Equal Opportunity",
+      "line_number": 867,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > BIAS-AWARE"
+    },
+    {
+      "rule_id": "PRINC-BIAS-AWARE-039",
+      "category": "principles",
+      "subcategory": "bias_aware",
+      "description": "Quarterly Bias Audits",
+      "line_number": 869,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > BIAS-AWARE"
+    },
+    {
+      "rule_id": "PRINC-BIAS-AWARE-040",
+      "category": "principles",
+      "subcategory": "bias_aware",
+      "description": "Transparent Model Cards",
+      "line_number": 871,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > BIAS-AWARE"
+    },
+    {
+      "rule_id": "PRINC-BIAS-AWARE-041",
+      "category": "principles",
+      "subcategory": "bias_aware",
+      "description": "Bias-Mitigation-Strategien verpflichtend",
+      "line_number": 873,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > BIAS-AWARE"
+    },
+    {
+      "rule_id": "PRINC-SCALABILITY-042",
+      "category": "principles",
+      "subcategory": "scalability",
+      "description": "Jeder Shard muss skalieren können",
+      "line_number": 875,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SCALABILITY"
+    },
+    {
+      "rule_id": "PRINC-SCALABILITY-043",
+      "category": "principles",
+      "subcategory": "scalability",
+      "description": "Horizontal Pod Autoscaling (HPA)",
+      "line_number": 877,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SCALABILITY"
+    },
+    {
+      "rule_id": "PRINC-SCALABILITY-044",
+      "category": "principles",
+      "subcategory": "scalability",
+      "description": "Load Balancing",
+      "line_number": 879,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SCALABILITY"
+    },
+    {
+      "rule_id": "PRINC-SCALABILITY-045",
+      "category": "principles",
+      "subcategory": "scalability",
+      "description": "Caching-Strategien",
+      "line_number": 881,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SCALABILITY"
+    },
+    {
+      "rule_id": "PRINC-SCALABILITY-046",
+      "category": "principles",
+      "subcategory": "scalability",
+      "description": "Performance-Benchmarks als Gates",
+      "line_number": 883,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > SCALABILITY"
+    },
+    {
+      "rule_id": "PRINC-DOCS-AS-CODE-047",
+      "category": "principles",
+      "subcategory": "docs_as_code",
+      "description": "Dokumentation aus Code/Contracts generiert",
+      "line_number": 885,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DOCS-AS-CODE"
+    },
+    {
+      "rule_id": "PRINC-DOCS-AS-CODE-048",
+      "category": "principles",
+      "subcategory": "docs_as_code",
+      "description": "OpenAPI → Swagger UI",
+      "line_number": 887,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DOCS-AS-CODE"
+    },
+    {
+      "rule_id": "PRINC-DOCS-AS-CODE-049",
+      "category": "principles",
+      "subcategory": "docs_as_code",
+      "description": "JSON-Schema → json-schema-for-humans",
+      "line_number": 889,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DOCS-AS-CODE"
+    },
+    {
+      "rule_id": "PRINC-DOCS-AS-CODE-050",
+      "category": "principles",
+      "subcategory": "docs_as_code",
+      "description": "chart.yaml → Jinja2-Templates → Markdown",
+      "line_number": 891,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DOCS-AS-CODE"
+    },
+    {
+      "rule_id": "PRINC-DOCS-AS-CODE-051",
+      "category": "principles",
+      "subcategory": "docs_as_code",
+      "description": "Publish to 05_documentation/",
+      "line_number": 893,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Kernprinzipien > DOCS-AS-CODE"
+    },
+    {
+      "rule_id": "PHASE1-001",
+      "category": "roadmap",
+      "subcategory": "phase1",
+      "description": "16 Shards definiert",
+      "line_number": 888,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE1"
+    },
+    {
+      "rule_id": "PHASE1-002",
+      "category": "roadmap",
+      "subcategory": "phase1",
+      "description": "24 Roots definiert",
+      "line_number": 890,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE1"
+    },
+    {
+      "rule_id": "PHASE1-003",
+      "category": "roadmap",
+      "subcategory": "phase1",
+      "description": "Matrix-Architektur festgelegt",
+      "line_number": 892,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE1"
+    },
+    {
+      "rule_id": "PHASE1-004",
+      "category": "roadmap",
+      "subcategory": "phase1",
+      "description": "chart.yaml Struktur erstellt",
+      "line_number": 894,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE1"
+    },
+    {
+      "rule_id": "PHASE1-005",
+      "category": "roadmap",
+      "subcategory": "phase1",
+      "description": "manifest.yaml Struktur erstellt",
+      "line_number": 896,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE1"
+    },
+    {
+      "rule_id": "PHASE1-006",
+      "category": "roadmap",
+      "subcategory": "phase1",
+      "description": "Master-Dokument erstellt",
+      "line_number": 898,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE1"
+    },
+    {
+      "rule_id": "PHASE2-001",
+      "category": "roadmap",
+      "subcategory": "phase2",
+      "description": "OpenAPI-Contracts erstellen",
+      "line_number": 900,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE2"
+    },
+    {
+      "rule_id": "PHASE2-002",
+      "category": "roadmap",
+      "subcategory": "phase2",
+      "description": "JSON-Schemas erstellen",
+      "line_number": 902,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE2"
+    },
+    {
+      "rule_id": "PHASE2-003",
+      "category": "roadmap",
+      "subcategory": "phase2",
+      "description": "Python-Implementation schreiben",
+      "line_number": 904,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE2"
+    },
+    {
+      "rule_id": "PHASE2-004",
+      "category": "roadmap",
+      "subcategory": "phase2",
+      "description": "Contract-Tests implementieren",
+      "line_number": 906,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE2"
+    },
+    {
+      "rule_id": "PHASE2-005",
+      "category": "roadmap",
+      "subcategory": "phase2",
+      "description": "Deployment-Manifeste",
+      "line_number": 908,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE2"
+    },
+    {
+      "rule_id": "PHASE2-006",
+      "category": "roadmap",
+      "subcategory": "phase2",
+      "description": "Dokumentation",
+      "line_number": 910,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE2"
+    },
+    {
+      "rule_id": "PHASE3-001",
+      "category": "roadmap",
+      "subcategory": "phase3",
+      "description": "Shard_02_Dokumente_Nachweise",
+      "line_number": 912,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE3"
+    },
+    {
+      "rule_id": "PHASE3-002",
+      "category": "roadmap",
+      "subcategory": "phase3",
+      "description": "Shard_03_Zugang_Berechtigungen",
+      "line_number": 914,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE3"
+    },
+    {
+      "rule_id": "PHASE3-003",
+      "category": "roadmap",
+      "subcategory": "phase3",
+      "description": "Shard_04_Kommunikation_Daten",
+      "line_number": 916,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE3"
+    },
+    {
+      "rule_id": "PHASE3-004",
+      "category": "roadmap",
+      "subcategory": "phase3",
+      "description": "Shard_05 bis Shard_16",
+      "line_number": 918,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE3"
+    },
+    {
+      "rule_id": "PHASE4-001",
+      "category": "roadmap",
+      "subcategory": "phase4",
+      "description": "02_audit_logging (alle 16 Shards)",
+      "line_number": 920,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE4"
+    },
+    {
+      "rule_id": "PHASE4-002",
+      "category": "roadmap",
+      "subcategory": "phase4",
+      "description": "03_core (alle 16 Shards)",
+      "line_number": 922,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE4"
+    },
+    {
+      "rule_id": "PHASE4-003",
+      "category": "roadmap",
+      "subcategory": "phase4",
+      "description": "04 bis 24",
+      "line_number": 924,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE4"
+    },
+    {
+      "rule_id": "PHASE5-001",
+      "category": "roadmap",
+      "subcategory": "phase5",
+      "description": "24_meta_orchestration als Service Registry",
+      "line_number": 926,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE5"
+    },
+    {
+      "rule_id": "PHASE5-002",
+      "category": "roadmap",
+      "subcategory": "phase5",
+      "description": "Workflow-Definitionen",
+      "line_number": 928,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE5"
+    },
+    {
+      "rule_id": "PHASE5-003",
+      "category": "roadmap",
+      "subcategory": "phase5",
+      "description": "Saga-Pattern",
+      "line_number": 930,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE5"
+    },
+    {
+      "rule_id": "PHASE6-001",
+      "category": "roadmap",
+      "subcategory": "phase6",
+      "description": "Load Testing",
+      "line_number": 932,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE6"
+    },
+    {
+      "rule_id": "PHASE6-002",
+      "category": "roadmap",
+      "subcategory": "phase6",
+      "description": "Security Audits",
+      "line_number": 934,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE6"
+    },
+    {
+      "rule_id": "PHASE6-003",
+      "category": "roadmap",
+      "subcategory": "phase6",
+      "description": "Compliance-Zertifizierung",
+      "line_number": 936,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE6"
+    },
+    {
+      "rule_id": "PHASE6-004",
+      "category": "roadmap",
+      "subcategory": "phase6",
+      "description": "Production Deployment",
+      "line_number": 938,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Nächste Schritte > PHASE6"
+    },
+    {
+      "rule_id": "STANDARD-001",
+      "category": "standards",
+      "subcategory": "specifications",
+      "description": "Compliance with W3C DID Core 1.0",
+      "line_number": 939,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Anhang > Standards & Spezifikationen"
+    },
+    {
+      "rule_id": "STANDARD-002",
+      "category": "standards",
+      "subcategory": "specifications",
+      "description": "Compliance with W3C Verifiable Credentials",
+      "line_number": 940,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Anhang > Standards & Spezifikationen"
+    },
+    {
+      "rule_id": "STANDARD-003",
+      "category": "standards",
+      "subcategory": "specifications",
+      "description": "Compliance with OpenAPI 3.1",
+      "line_number": 941,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Anhang > Standards & Spezifikationen"
+    },
+    {
+      "rule_id": "STANDARD-004",
+      "category": "standards",
+      "subcategory": "specifications",
+      "description": "Compliance with JSON-Schema Draft 2020-12",
+      "line_number": 942,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Anhang > Standards & Spezifikationen"
+    },
+    {
+      "rule_id": "STANDARD-005",
+      "category": "standards",
+      "subcategory": "specifications",
+      "description": "Compliance with ISO/IEC 27001",
+      "line_number": 943,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Anhang > Standards & Spezifikationen"
+    },
+    {
+      "rule_id": "STANDARD-006",
+      "category": "standards",
+      "subcategory": "specifications",
+      "description": "Compliance with GDPR (EU 2016/679)",
+      "line_number": 944,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Anhang > Standards & Spezifikationen"
+    },
+    {
+      "rule_id": "STANDARD-007",
+      "category": "standards",
+      "subcategory": "specifications",
+      "description": "Compliance with eIDAS 2.0",
+      "line_number": 945,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Anhang > Standards & Spezifikationen"
+    },
+    {
+      "rule_id": "STANDARD-008",
+      "category": "standards",
+      "subcategory": "specifications",
+      "description": "Compliance with EU AI Act",
+      "line_number": 946,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Anhang > Standards & Spezifikationen"
+    },
+    {
+      "rule_id": "REG-UK-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "UK: ico_uk_gdpr mandatory",
+      "line_number": 970,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "REG-UK-002",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "UK: dpa_2018_alignment: true",
+      "line_number": 972,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "REG-UK-003",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "UK: dpo_contact_records: true",
+      "line_number": 974,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "REG-SG-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "Singapore: mas_pdpa mandatory",
+      "line_number": 976,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "REG-SG-002",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "Singapore: data_breach_notification: true",
+      "line_number": 978,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "REG-SG-003",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "Singapore: consent_purposes_documented: true",
+      "line_number": 980,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "REG-JP-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "Japan: jfsa_appi mandatory",
+      "line_number": 982,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "REG-JP-002",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "Japan: cross_border_transfer_rules: true",
+      "line_number": 984,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "REG-AU-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "Australia: au_privacy_act_1988 mandatory",
+      "line_number": 986,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "REG-AU-002",
+      "category": "additions_v1_1_1",
+      "subcategory": "reg",
+      "description": "Australia: app11_security_of_personal_information: true",
+      "line_number": 988,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "OPA-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "opa",
+      "description": "Substring-Helper umbenannt: has_substr()",
+      "line_number": 990,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "OPA-002",
+      "category": "additions_v1_1_1",
+      "subcategory": "opa",
+      "description": "Fuzzy-Matching aktiviert: string_similarity()",
+      "line_number": 992,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "CI-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "ci",
+      "description": "on: push branches: [main, develop]",
+      "line_number": 994,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "CI-002",
+      "category": "additions_v1_1_1",
+      "subcategory": "ci",
+      "description": "on: pull_request branches: [main, develop]",
+      "line_number": 996,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "CI-003",
+      "category": "additions_v1_1_1",
+      "subcategory": "ci",
+      "description": "schedule: cron daily sanctions",
+      "line_number": 998,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "CI-004",
+      "category": "additions_v1_1_1",
+      "subcategory": "ci",
+      "description": "schedule: cron quarterly audit",
+      "line_number": 1000,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "CI-005",
+      "category": "additions_v1_1_1",
+      "subcategory": "ci",
+      "description": "Artifacts: upload-artifact@v4",
+      "line_number": 1002,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "Build entities_to_check.json vor OPA",
+      "line_number": 1004,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-002",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "Python script: build_entities_list.py",
+      "line_number": 1006,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-003",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "Freshness-Quelle: sources.yaml",
+      "line_number": 1008,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-004",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "sources.yaml: version field",
+      "line_number": 1010,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-005",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "sources.yaml: last_updated field",
+      "line_number": 1012,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-006",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "sources.yaml: ofac_sdn source",
+      "line_number": 1014,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-007",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "sources.yaml: eu_consolidated source",
+      "line_number": 1016,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-008",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "sources.yaml: sha256 hashes",
+      "line_number": 1018,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-009",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "sources.yaml: freshness_policy",
+      "line_number": 1020,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "SANCTIONS-010",
+      "category": "additions_v1_1_1",
+      "subcategory": "sanctions",
+      "description": "sources.yaml: max_age_hours: 24",
+      "line_number": 1022,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "DORA-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "dora",
+      "description": "Pro Root: docs/incident_response_plan.md",
+      "line_number": 1024,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "DORA-002",
+      "category": "additions_v1_1_1",
+      "subcategory": "dora",
+      "description": "Vorlage: TEMPLATE_INCIDENT_RESPONSE.md",
+      "line_number": 1026,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "ROOT-STRUCT-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "root",
+      "description": "Verboten: .ipynb Dateien",
+      "line_number": 1028,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "ROOT-STRUCT-002",
+      "category": "additions_v1_1_1",
+      "subcategory": "root",
+      "description": "Verboten: .parquet Dateien",
+      "line_number": 1030,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "ROOT-STRUCT-003",
+      "category": "additions_v1_1_1",
+      "subcategory": "root",
+      "description": "Verboten: .sqlite Dateien",
+      "line_number": 1032,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "ROOT-STRUCT-004",
+      "category": "additions_v1_1_1",
+      "subcategory": "root",
+      "description": "Verboten: .db Dateien",
+      "line_number": 1034,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    },
+    {
+      "rule_id": "OPA-INPUT-001",
+      "category": "additions_v1_1_1",
+      "subcategory": "opa",
+      "description": "Verwende repo_scan.json (nicht depth_report.json)",
+      "line_number": 1036,
+      "source": "ssid_master_definition_corrected_v1.1.1.md",
+      "section": "Konsolidierte Ergänzungen v1.1.1"
+    }
+  ]
+}

@@ -551,16 +551,30 @@ def write_worm_signature(result: Dict) -> Tuple[str, Dict]:
     # Create signature payload
     payload = json.dumps(result, ensure_ascii=True, separators=(",", ":"), sort_keys=True).encode("utf-8")
 
+    # Get CI context from environment
+    commit_sha = os.environ.get("GITHUB_SHA", "local")
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+    run_number = os.environ.get("GITHUB_RUN_NUMBER", "0")
+    event_name = os.environ.get("GITHUB_EVENT_NAME", "manual")
+
     signature = {
         "kind": "sot_enforcement_verification_v2",
-        "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "sha512": sha512_hex(payload),
         "blake2b": blake2b_hex(payload),
         "uuid": str(uuid.uuid4()),
         "algorithm": "Dilithium2(placeholder)-HMAC-SHA256",
         "overall_score": result.get("summary", {}).get("overall_score", 0),
         "certification_level": result.get("summary", {}).get("certification_level", "NONE"),
-        "certification_status": result.get("summary", {}).get("certification_status", "UNKNOWN")
+        "certification_status": result.get("summary", {}).get("certification_status", "UNKNOWN"),
+        "ci_context": {
+            "commit_sha": commit_sha,
+            "commit_sha_short": commit_sha[:8] if len(commit_sha) >= 8 else commit_sha,
+            "run_id": run_id,
+            "run_number": run_number,
+            "event_name": event_name,
+            "correlation_key": f"{commit_sha[:8]}_{run_id}" if commit_sha != "local" else "local"
+        }
     }
 
     # Create final WORM entry
@@ -635,13 +649,21 @@ def run_all_checks(verbose: bool = False, execute: bool = False) -> Tuple[Dict, 
             cert_status = level_config["status"]
             break
 
+    # Get CI context for correlation
+    commit_sha = os.environ.get("GITHUB_SHA", "local")
+    run_id = os.environ.get("GITHUB_RUN_ID", "local")
+
     # Compile full results
     results = {
         "metadata": {
             "report_version": "2.0.0",
-            "generated_at": datetime.datetime.utcnow().isoformat() + "Z",
+            "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "tool": "verify_sot_enforcement_v2.py",
-            "purpose": "SoT Functional Enforcement Verification (Level 3 → Level 4)"
+            "purpose": "SoT Functional Enforcement Verification (Level 3 → Level 4)",
+            "ci_correlation": {
+                "commit_sha": commit_sha[:8] if commit_sha != "local" and len(commit_sha) >= 8 else commit_sha,
+                "run_id": run_id
+            }
         },
         "summary": {
             "overall_score": overall_score,
