@@ -1,0 +1,104 @@
+{
+  "timestamp": "2025-10-17T14:30:00Z",
+  "scan_mode": "read_only_discovery",
+  "working_directory": "C:\Users\bibel\Documents\Github\SSID",
+  "total_scanned": 847,
+  "whitelist_check": "PASS",
+  "summary": {
+    "active": 15,
+    "duplicates": 2,
+    "orphans": 0,
+    "placeholders": 36,
+    "legacy": 8
+  },
+  "duplicates": [
+    {
+      "path": "23_compliance\anti_gaming\circular_dependency_validator.py",
+      "duplicate_of": "02_audit_logging\anti_gaming\circular_dependency_validator.py",
+      "overlap": "2-line stub vs full implementation",
+      "recommendation": "DELETE 23_compliance version"
+    },
+    {
+      "path": "11_test_simulation\tools\root_integrity_validator.py",
+      "duplicate_of": "12_tooling\root_24_integrity_validator.py",
+      "overlap": "14-line minimal vs 558-line comprehensive",
+      "recommendation": "DELETE or MERGE 11_test_simulation version"
+    }
+  ],
+  "placeholders": [
+    "12_tooling\generators\generate_all_80_new_rules.py",
+    "11_test_simulation\tests_identity\test_identity_score_calculator.py",
+    "12_tooling\quality\score_improvement_engine.py",
+    "07_governance_legal\proof_credit_registry.py",
+    "02_audit_logging\event_bus\__init__.py",
+    "02_audit_logging\event_bus\config_loader.py",
+    "12_tooling\reports\generate_final_forensic_score.py",
+    "24_meta_orchestration\registry\logs\dependency_graph_versioning.py",
+    "24_meta_orchestration\consortium\consortium_ledger.py",
+    "23_compliance\evidence_system_legacy\blockchain\proof_emitter.py",
+    "23_compliance\reports\auto_report_generator.py",
+    "23_compliance\hooks\audit_findings_injector.py",
+    "23_compliance\federated_evidence\federation_node.py",
+    "23_compliance\anti_gaming\detect_circular_dependencies.py",
+    "23_compliance\ai_ml_ready\snapshot_diff_engine.py",
+    "23_compliance\ai_ml_ready\historical_simulator.py",
+    "23_compliance\ai_ml_ready\auto_policy_learner.py",
+    "12_tooling\tests\scaffold_tests_from_map.py",
+    "12_tooling\scripts\sot_inventory_generator.py",
+    "12_tooling\policy\scaffold_policy_from_chart.py",
+    "11_test_simulation\tests_compliance\run_anti_gaming_tests.py",
+    "11_test_simulation\tests_bridges\run_bridge_tests.py",
+    "11_test_simulation\templates\template_template_health.py",
+    "11_test_simulation\templates\template_template_anti_gaming.py",
+    "11_test_simulation\templates\template_template_bridge.py",
+    "02_audit_logging\anti_gaming\overfitting_detector.py",
+    "02_audit_logging\anti_gaming\replay_attack_detector.py",
+    "02_audit_logging\anti_gaming\anomaly_rate_guard.py",
+    "24_meta_orchestration\compliance_chain_trigger.py",
+    "13_ui_layer\compliance_dashboard.py",
+    "11_test_simulation\conftest_proof_emitter.py",
+    "08_identity_score\dashboard.py",
+    "12_tooling\structure\structure_guard.py"
+  ],
+  "legacy": [
+    {
+      "path": "02_audit_logging\archives\**",
+      "file_count": "~500",
+      "recommendation": "Keep archived, compress for storage"
+    },
+    {
+      "path": "**\__pycache__\**",
+      "file_count": "~200",
+      "recommendation": "Add to .gitignore, remove from git"
+    },
+    {
+      "path": "11_test_simulation\coverage_reports\coverage_html\**",
+      "file_count": "~50",
+      "recommendation": "Add to .gitignore, regenerate as needed"
+    },
+    {
+      "path": "02_audit_logging\adapters\legacy_adapter.py",
+      "recommendation": "Assess backward compatibility needs"
+    },
+    {
+      "path": "23_compliance\evidence_system_legacy\**",
+      "recommendation": "Move to archives if unused"
+    }
+  ],
+  "recommendations": {
+    "immediate": [
+      "DELETE: 23_compliance\anti_gaming\circular_dependency_validator.py",
+      "REVIEW: 11_test_simulation\tools\root_integrity_validator.py"
+    ],
+    "short_term": [
+      "Add __pycache__ and coverage_html to .gitignore",
+      "Categorize 36 placeholders: implement vs archive",
+      "Complete anti-gaming tools"
+    ],
+    "long_term": [
+      "Implement AI/ML scaffolds per roadmap",
+      "Complete federation features",
+      "Compress archives for storage"
+    ]
+  }
+}

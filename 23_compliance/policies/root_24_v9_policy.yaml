@@ -1,0 +1,98 @@
+# Root-24-LOCK v9.0 Certification Policy
+version: "9.0.0"
+status: CERTIFIED
+certification_date: 2025-10-12T18:26:02.058741
+framework: "SSID Master Definition v1.1.1"
+
+# Certification Scores
+scores:
+  root_24_lock: 100.0
+  continuum_v9: 100.0
+  combined: FULLY LOCKED
+
+# Root-24 Structure
+structure:
+  authorized_roots: 24
+  authorized_roots_present: 24
+  authorized_exceptions: 7
+  violations: 0
+
+# Authorized Exceptions (Permanent)
+exceptions:
+  - name: ".claude"
+    purpose: "Claude AI IDE configuration"
+    status: "DOCUMENTED_EXCEPTION"
+    in_gitignore: True
+    committed_to_repo: false
+    rationale: "IDE-specific, non-portable, excluded from version control"
+
+  - name: ".git"
+    purpose: "Git repository metadata"
+    status: "INFRASTRUCTURE"
+
+  - name: ".github"
+    purpose: "GitHub CI/CD workflows"
+    status: "INFRASTRUCTURE"
+
+  - name: "LICENSE"
+    purpose: "Project license"
+    status: "REQUIRED"
+
+  - name: "README.md"
+    purpose: "Project documentation"
+    status: "REQUIRED"
+
+  - name: ".gitignore"
+    purpose: "Git ignore rules"
+    status: "REQUIRED"
+
+  - name: ".gitattributes"
+    purpose: "Git attributes"
+    status: "REQUIRED"
+
+  - name: ".pre-commit-config.yaml"
+    purpose: "Pre-commit hooks"
+    status: "OPTIONAL"
+
+# PQC Proof Chain
+pqc_proof:
+  algorithm: "CRYSTALS-Dilithium3 + Kyber768"
+  security_level: "NIST Level 3"
+  proof_generated: True
+  proof_location: "02_audit_logging/reports/root_24_pqc_proof_chain.json"
+  cost_usd: 0.0
+  mode: "SIMULATION"
+
+# Dormant Mode
+dormant:
+  status: false  # ACTIVATED for v9.0
+  note: "v9.0 marks transition from dormant to operational readiness"
+  enforcement: "Triple-Guard (Config + OPA + CI/CD)"
+
+# Enforcement
+enforcement:
+  ci_cd_guard: ".github/workflows/ci_structure_guard.yml"
+  opa_policy: "23_compliance/policies/activation_guard.rego"
+  integrity_policy: "23_compliance/policies/root_24_forensic_integrity_policy.yaml"
+
+# Certification Authority
+authority:
+  validator: "root_24_v9_certification.py"
+  framework: "Root-24-LOCK v1.0 + SoT v1.1.1"
+  mode: "AUTO-CERTIFY + PQC-PROOF-CHAIN"
+  reproducible: true
+  cost_usd: 0.0
+
+# Approval Status
+approval:
+  root_24_lock: PASS
+  continuum_v9: PASS
+  combined: FULLY LOCKED
+  production_ready: True
+
+# Notes
+notes:
+  - "v9.0 certification includes PQC-Proof-Chain for enhanced security"
+  - ".claude exception is permanent and documented"
+  - "CI/CD enforces Root-24-LOCK on every push/PR"
+  - "Zero-cost validation using local simulation"

@@ -1,0 +1,285 @@
+{
+  "_comment": "SSID Pricing v5.2 Edge Cases / Violation Test Fixtures",
+  "_version": "v5.2.0",
+  "_created": "2025-10-13",
+  "_purpose": "Invalid scenarios that should FAIL OPA rules",
+  "test_cases": [
+    {
+      "name": "S3' threshold violation",
+      "description": "S3' below minimum €6.67M",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 5000000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "tenants": 1,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "S3' threshold violated"
+    },
+    {
+      "name": "Enterprise price too low",
+      "description": "Enterprise tier below €4,990",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 2499}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "tenants": 1,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Enterprise base price too low"
+    },
+    {
+      "name": "Enterprise Plus price too low",
+      "description": "Enterprise Plus tier below €14,990",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise_plus": {"price_eur": 9990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4B_ENTERPRISE_PLUS",
+        "tenants": 1,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Enterprise Plus base price too low"
+    },
+    {
+      "name": "Add-on cap exceeded (85%)",
+      "description": "Add-ons totaling 85% of base price (exceeds 80% cap)",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "subscription": {
+          "tier_id": "enterprise",
+          "add_ons": [
+            {"name": "addon1", "price_eur": 2000},
+            {"name": "addon2", "price_eur": 2240}
+          ]
+        },
+        "tenants": 1,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Add-on adoption cap exceeded"
+    },
+    {
+      "name": "Region surcharge exceeds 15%",
+      "description": "Region with 20% surcharge (invalid)",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {
+          "INVALID_REGION": {"surcharge_percentage": 20}
+        }
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "tenants": 1,
+        "region": {"id": "INVALID_REGION"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Region surcharge exceeds maximum"
+    },
+    {
+      "name": "Multi-tenancy disabled but multiple tenants requested",
+      "description": "Tenants > 1 when multi-tenancy is disabled",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": false},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "tenants": 5,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Multi-tenancy disabled but multiple tenants requested"
+    },
+    {
+      "name": "Tenant count exceeds tier limit",
+      "description": "Enterprise tier requesting 15 tenants (max 10)",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {
+            "T4_ENTERPRISE": 10
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "tenants": 15,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Tenant count.*exceeds maximum"
+    },
+    {
+      "name": "Invalid partner tier",
+      "description": "Partner tier not in BRONZE/SILVER/GOLD",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "partner_program": {
+          "tiers": {
+            "BRONZE": {"discount_percent": 5, "min_tenants": 2}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "partner_tier": "PLATINUM",
+        "tenants": 5,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Invalid partner tier"
+    },
+    {
+      "name": "Partner tier tenant requirement not met",
+      "description": "Gold tier requires 10 tenants but only 5 provided",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise_plus": {"price_eur": 14990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {
+            "T4B_ENTERPRISE_PLUS": 100
+          }
+        },
+        "partner_program": {
+          "tiers": {
+            "GOLD": {"discount_percent": 15, "min_tenants": 10}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4B_ENTERPRISE_PLUS",
+        "partner_tier": "GOLD",
+        "tenants": 5,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Partner tier.*requires minimum.*tenants"
+    },
+    {
+      "name": "Interfederation API on non-Enterprise Plus tier",
+      "description": "Enterprise tier attempting interfederation API access",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "requested_api": "interfederation",
+        "tenants": 5,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Interfederation API requires ENTERPRISE_PLUS"
+    },
+    {
+      "name": "Sovereign tier below floor",
+      "description": "Sovereign tier at €35,000 (below €40,000 floor)",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "sovereign": {"price_eur": 40000}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T5_SOVEREIGN",
+        "subscription": {
+          "total_price_eur": 35000
+        },
+        "tenants": 1,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Sovereign tier price.*below minimum floor"
+    }
+  ]
+}

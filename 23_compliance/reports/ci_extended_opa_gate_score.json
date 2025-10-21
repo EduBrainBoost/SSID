@@ -1,0 +1,157 @@
+{
+  "audit_id": "ci_extended_opa_gate_v5_1_to_v5_2",
+  "timestamp": "2025-10-13T01:25:00Z",
+  "version": "5.1",
+  "target_version": "5.2",
+  "registry": "ci_extended_yaml_json_opa_gate_v5.1",
+  "root_24_lock": true,
+  "safe_fix": true,
+  "scores": {
+    "structural_integrity": {
+      "score": 100.0,
+      "weight": 0.15,
+      "contribution": 15.0,
+      "details": {
+        "workflows_present": true,
+        "scripts_present": true,
+        "policies_present": true,
+        "documentation_present": true,
+        "artifacts_found": 10,
+        "artifacts_expected": 10
+      }
+    },
+    "compilation_determinism": {
+      "score": 100.0,
+      "weight": 0.20,
+      "contribution": 20.0,
+      "details": {
+        "hash_match": true,
+        "run_1_sha256": "44fa217b06c82b4e49be1ca60d7999018f6610d97271b6a8972dfe0fc1fbc5d9",
+        "run_2_sha256": "44fa217b06c82b4e49be1ca60d7999018f6610d97271b6a8972dfe0fc1fbc5d9",
+        "yaml_safe_load": true,
+        "json_deterministic": true,
+        "utf8_encoding": true
+      }
+    },
+    "opa_gate_enforcement": {
+      "score": 100.0,
+      "weight": 0.15,
+      "contribution": 15.0,
+      "details": {
+        "pricing_enforcement": "ALLOW",
+        "rat_enforcement": "ALLOW",
+        "fail_fast": true,
+        "error_reporting": true,
+        "exit_code_correct": true
+      }
+    },
+    "job_chaining": {
+      "score": 100.0,
+      "weight": 0.10,
+      "contribution": 10.0,
+      "details": {
+        "workflow_1_jobs": 2,
+        "workflow_2_jobs": 1,
+        "sequential_execution": true,
+        "artifact_passing": true,
+        "no_race_conditions": true,
+        "estimated_time_wf1": "45s",
+        "estimated_time_wf2": "35s"
+      }
+    },
+    "interoperability": {
+      "score": 100.0,
+      "weight": 0.10,
+      "contribution": 10.0,
+      "details": {
+        "ci_mini_compatible": true,
+        "no_port_conflicts": true,
+        "parallel_safe": true,
+        "producer_consumer_flow": true
+      }
+    },
+    "worm_logging": {
+      "score": 20.0,
+      "weight": 0.15,
+      "contribution": 3.0,
+      "details": {
+        "json_hash_computed": true,
+        "json_hash_persisted": false,
+        "opa_decision_log": false,
+        "policy_trace": false,
+        "artifact_manifest": false,
+        "compliance_attestation": false
+      }
+    },
+    "test_coverage": {
+      "score": 20.0,
+      "weight": 0.15,
+      "contribution": 3.0,
+      "details": {
+        "positive_cases": "100%",
+        "negative_cases": "0%",
+        "edge_cases": "0%",
+        "opa_test_suite": false,
+        "coverage_report": false,
+        "boundary_tests": false,
+        "schema_validation": false
+      }
+    }
+  },
+  "composite_score": 68.5,
+  "target_score": 100.0,
+  "status": "UPGRADE_REQUIRED",
+  "critical_gaps": [
+    {
+      "gap": "OPA test coverage missing",
+      "severity": "CRITICAL",
+      "impact": "No unit tests for policies"
+    },
+    {
+      "gap": "Negative test cases missing",
+      "severity": "CRITICAL",
+      "impact": "Gate may not fail correctly"
+    },
+    {
+      "gap": "JSON Schema validation missing",
+      "severity": "HIGH",
+      "impact": "No schema enforcement"
+    },
+    {
+      "gap": "WORM logging incomplete",
+      "severity": "HIGH",
+      "impact": "No audit trail persistence"
+    },
+    {
+      "gap": "Multi-environment support missing",
+      "severity": "MEDIUM",
+      "impact": "No dev/stage/prod separation"
+    }
+  ],
+  "upgrade_actions": [
+    "Add OPA test suite (pricing_test.rego, rat_test.rego)",
+    "Add negative test cases (discount >20%, global bundle <tier 3)",
+    "Add JSON Schema validation (schemas/pricing.schema.json)",
+    "Add WORM audit logging (generate_worm_manifest.py)",
+    "Add multi-environment matrix (dev/stage/prod)",
+    "Integrate opa test --coverage into CI",
+    "Upload WORM manifest as artifact"
+  ],
+  "compliance": {
+    "non_custodial": true,
+    "no_pii_onchain": true,
+    "gdpr_compliant": true,
+    "eidas_ready": true,
+    "mica_exempt": true,
+    "root_24_lock": true,
+    "safe_fix": true
+  },
+  "v5_2_deliverables": [
+    "23_compliance/policies/pricing_test.rego",
+    "23_compliance/policies/rat_test.rego",
+    "schemas/pricing.schema.json",
+    "scripts/generate_worm_manifest.py",
+    ".github/workflows/ci_extended_yaml_json_opa_gate_v5_2.yml",
+    "05_documentation/CI_README_EXTENDED_v5_2.md"
+  ]
+}

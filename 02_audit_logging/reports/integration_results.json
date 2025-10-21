@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-10-20T20:11:48.112614",
+  "repo_root": ".",
+  "phases": {
+    "phase1_baseline": {
+      "status": "warning",
+      "exit_code": 1,
+      "stdout": "Types (7)\n  JURIS_T1: Tier 1 Markets (7)\n  REWARD_POOL: Reward Pools (5)\n  NETWORK: Blockchain Networks (6)\n  AUTH_METHOD: Authentication Methods (6)\n  PII_CAT: PII Categories (10)\n  HASH_ALG: Hash Algorithms (4)\n  RETENTION: Retention Periods (5)\n  DID_METHOD: DID Methods (4)\n\nMaster Rules (47):\n  CS: Chart Structure (11)\n  MS: Manifest Structure (6)\n  KP: Core Principles (10)\n  CE: Consolidated Extensions (8)\n  TS: Technology Standards (5)\n  DC: Deployment & CI/CD (4)\n  MR: Matrix & Registry (3)\n\nMaster-Definition Rules (57):\n  MD-STRUCT: Structure Paths (2)\n  MD-CHART: Chart Fields (5)\n  MD-MANIFEST: Manifest Fields (28)\n  MD-POLICY: Critical Policies (5)\n  MD-PRINC: Principles (6)\n  MD-GOV: Governance (7)\n  MD-EXT: Extensions v1.1.1 (4)\n\nTotal: 280 + 47 + 57 = 384 (24x16 Matrix Alignment)\n================================================================================\n\n[+] JSON report saved: 02_audit_logging\\reports\\baseline_count.json\n\n[FAIL] Coverage 66.1% below threshold 100.0%\n",
+      "total_rules": 384,
+      "overall_percentage": 66.14583333333334
+    },
+    "phase2_yaml": {
+      "status": "success",
+      "exit_code": 0,
+      "stdout": "\n[*] Parsing validator: 03_core\\validators\\sot\\sot_validator_core.py\n[+] Extracted 145 rules\n\n[*] Integrating with existing contract: 16_codex\\contracts\\sot\\sot_contract.yaml\n\n[*] Existing rules: 310\n[*] New rules to add: 55\n[+] Integrated contract saved: 02_audit_logging\\reports\\sot_contract_generated.yaml\n\n============================================================\nYAML GENERATION COMPLETE\n============================================================\nTotal Rules: 145\n\nSeverity Breakdown:\n  CRITICAL: 38\n  HIGH: 66\n  LOW: 3\n  MEDIUM: 38\n\nOutput: 02_audit_logging\\reports\\sot_contract_generated.yaml\n============================================================\n\n"
+    },
+    "phase3_tests": {
+      "status": "success",
+      "exit_code": 0,
+      "stdout": "\n[*] Parsing validator: 03_core\\validators\\sot\\sot_validator_core.py\n[+] Generated 276 test cases\n[+] Test file saved: 02_audit_logging\\reports\\test_sot_validator_generated.py\n\n============================================================\nTEST GENERATION COMPLETE\n============================================================\nTotal Test Cases: 276\n\nTest Types:\n  Positive Tests: 138\n  Negative Tests: 138\n\nOutput: 02_audit_logging\\reports\\test_sot_validator_generated.py\n============================================================\n\n"
+    },
+    "phase4_consistency": {
+      "status": "warning",
+      "exit_code": 1,
+      "stdout": "\n[*] Cross-Artifact Consistency Verification\n[*] Repository: .\n================================================================================\n\n[*] Extracting rules from all artefacts...\n[+] Python Validator: 145 rules\n[+] OPA Policy: 129 rules\n"
+    },
+    "phase5_final": {
+      "status": "warning",
+      "exit_code": 1,
+      "stdout": "al Types (7)\n  JURIS_T1: Tier 1 Markets (7)\n  REWARD_POOL: Reward Pools (5)\n  NETWORK: Blockchain Networks (6)\n  AUTH_METHOD: Authentication Methods (6)\n  PII_CAT: PII Categories (10)\n  HASH_ALG: Hash Algorithms (4)\n  RETENTION: Retention Periods (5)\n  DID_METHOD: DID Methods (4)\n\nMaster Rules (47):\n  CS: Chart Structure (11)\n  MS: Manifest Structure (6)\n  KP: Core Principles (10)\n  CE: Consolidated Extensions (8)\n  TS: Technology Standards (5)\n  DC: Deployment & CI/CD (4)\n  MR: Matrix & Registry (3)\n\nMaster-Definition Rules (57):\n  MD-STRUCT: Structure Paths (2)\n  MD-CHART: Chart Fields (5)\n  MD-MANIFEST: Manifest Fields (28)\n  MD-POLICY: Critical Policies (5)\n  MD-PRINC: Principles (6)\n  MD-GOV: Governance (7)\n  MD-EXT: Extensions v1.1.1 (4)\n\nTotal: 280 + 47 + 57 = 384 (24x16 Matrix Alignment)\n================================================================================\n\n[+] JSON report saved: 02_audit_logging\\reports\\final_count.json\n\n[FAIL] Coverage 66.1% below threshold 100.0%\n",
+      "total_rules": 384,
+      "overall_percentage": 66.14583333333334
+    }
+  }
+}

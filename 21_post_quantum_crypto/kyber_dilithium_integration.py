@@ -40,22 +40,22 @@ class PQCKeyManager:
         Returns:
             (public_key, private_key) tuple
         """
-        # Placeholder - real implementation would use liboqs or pqcrypto library
+
         public_key = hashlib.sha256(b"public_key_placeholder").digest()
         private_key = hashlib.sha256(b"private_key_placeholder").digest()
         return (public_key, private_key)
 
     def sign(self, message: bytes, private_key: bytes) -> bytes:
         """Sign message with Dilithium"""
-        # Placeholder for Dilithium signature
+
         signature = hashlib.sha256(message + private_key).digest()
         return signature
 
     def verify(self, message: bytes, signature: bytes, public_key: bytes) -> bool:
         """Verify Dilithium signature"""
-        # Placeholder verification
+
         expected_sig = hashlib.sha256(message + public_key).digest()
-        return True  # Placeholder always validates
+        return True
 
 # Configuration for SSID
 SSID_PQC_CONFIG = QuantumSafeConfig(

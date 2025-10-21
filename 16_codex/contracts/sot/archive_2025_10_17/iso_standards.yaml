@@ -1,0 +1,33 @@
+# ISO Standards SoT Contract (Rule 9)
+# ====================================
+sot_contract_metadata:
+  contract_id: "SOT-ISO-STANDARDS-004"
+  version: "1.0.0"
+  date: "2025-10-17"
+  classification: "CONFIDENTIAL"
+  enforcement_level: "MEDIUM"
+
+sot_rule_009_iso24165_dti:
+  rule_id: "SOT-009"
+  rule_name: "ISO 24165-2:2025 Digital Token Identifier"
+  scientific_foundation:
+    standard: "ISO 24165-2:2025 DTI Standard"
+    reference: "https://www.iso.org/standard/78244.html"
+    principle: "Digital Token Identifier Registry"
+  technical_manifestation:
+    validator: "03_core/validators/sot/iso_validators.py::validate_iso24165_dti"
+    opa_policy: "23_compliance/policies/sot/iso_policy.rego"
+    cli_command: "python 12_tooling/cli/sot_validator.py --rule iso24165-dti"
+    test_path: "11_test_simulation/tests_compliance/test_sot_rules.py::test_iso24165"
+  enforcement:
+    expected_values:
+      name: "ISO 24165-2:2025 Registry-Flows, DTIF-RA-Hinweise"
+      path: "23_compliance/global/iso/iso24165_dti/"
+      deprecated: false
+      business_priority: "MEDIUM"
+
+evidence:
+  python_modules: ["03_core/validators/sot/iso_validators.py"]
+  rego_policies: ["23_compliance/policies/sot/iso_policy.rego"]
+  yaml_contracts: ["16_codex/contracts/sot/iso_standards.yaml"]
+  cli_commands: ["python 12_tooling/cli/sot_validator.py --rule iso24165-dti"]

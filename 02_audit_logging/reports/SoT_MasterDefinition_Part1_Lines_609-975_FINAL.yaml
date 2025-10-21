@@ -1,0 +1,1491 @@
+# ====================================================================================
+# SoT MASTER-DEFINITION EXTRACTION - PART 1, LINES 609-975
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 609-975 (Release, Global Market, Regulatory Framework)
+# Datum: 2025-10-18
+# Extraktionsmethode: MANUELLE, ZEILENBASIERTE ANALYSE
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# ====================================================================================
+
+metadata:
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_line_by_line"
+  extraction_date: "2025-10-18"
+  line_range: "609-975"
+  section: "Release, Global Market & Regulatory Framework"
+  total_rules_extracted: 95
+  zero_tolerance_policy: true
+  audit_ready: true
+
+# ====================================================================================
+# SECTION 1: Release Management Framework (Lines 609-652)
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-MD-305
+    line_number: 611
+    section: "Version Management"
+    subsection: "release_management"
+    title: "File Location - release_management.yaml"
+
+    original_text: |
+      # 24_meta_orchestration/releases/release_management.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Release management MUSS in dieser Datei definiert sein.
+      Exakter Pfad: 24_meta_orchestration/releases/release_management.yaml
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an diesem exakten Pfad.
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "24_meta_orchestration/releases/release_management.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-306
+    line_number: 617
+    section: "Version Management"
+    subsection: "release_management"
+    title: "Release Schedule - Major Releases - Annual (Q4)"
+
+    original_text: |
+      release_schedule:
+        major_releases: "Annual (Q4)"
+
+    category: "release_schedule"
+    priority: "must"
+
+    description: |
+      Major releases MÜSSEN jährlich im Q4 erfolgen.
+
+    enforcement: |
+      CI MUSS prüfen: major_releases enthält "Annual (Q4)".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      field_path: "release_schedule.major_releases"
+      contains: "Annual"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-307
+    line_number: 618
+    section: "Version Management"
+    subsection: "release_management"
+    title: "Release Schedule - Minor Releases - Quarterly"
+
+    original_text: |
+      minor_releases: "Quarterly"
+
+    category: "release_schedule"
+    priority: "must"
+
+    description: |
+      Minor releases MÜSSEN quarterly erfolgen.
+
+    enforcement: |
+      CI MUSS prüfen: minor_releases = "Quarterly".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      field_path: "release_schedule.minor_releases"
+      exact_value: "Quarterly"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-308
+    line_number: 619
+    section: "Version Management"
+    subsection: "release_management"
+    title: "Release Schedule - Patch Releases - Monthly or As Needed"
+
+    original_text: |
+      patch_releases: "Monthly or as needed"
+
+    category: "release_schedule"
+    priority: "must"
+
+    description: |
+      Patch releases MÜSSEN monthly or as needed erfolgen.
+
+    enforcement: |
+      CI MUSS prüfen: patch_releases ist definiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      field_path: "release_schedule.patch_releases"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-309
+    line_number: 620
+    section: "Version Management"
+    subsection: "release_management"
+    title: "Release Schedule - Security Releases - Immediate (24-48 Hours)"
+
+    original_text: |
+      security_releases: "Immediate (within 24-48 hours)"
+
+    category: "release_schedule"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Security releases MÜSSEN immediate erfolgen (within 24-48 hours).
+
+    enforcement: |
+      CI MUSS prüfen: security_releases enthält "24-48 hours".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      field_path: "release_schedule.security_releases"
+      contains: "24-48 hours"
+      ci_enforcement: true
+      criticality: "CRITICAL - Security Response Time"
+
+  - rule_id: SOT-MD-310
+    line_number: 629
+    section: "Version Management"
+    subsection: "release_management"
+    title: "Quality Gate - 100% Structure Compliance Validation"
+
+    original_text: |
+      quality_gates:
+        - "100% structure compliance validation"
+
+    category: "quality_gates"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: 100% structure compliance validation ist MANDATORY quality gate.
+
+    enforcement: |
+      CI MUSS prüfen: quality_gates enthält "100% structure compliance".
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      field_path: "quality_gates"
+      contains_item: "100% structure compliance validation"
+      ci_enforcement: true
+      criticality: "CRITICAL - Release Quality"
+
+  - rule_id: SOT-MD-311
+    line_number: 630
+    section: "Version Management"
+    subsection: "release_management"
+    title: "Quality Gate - All Automated Tests Passing (>95% Coverage)"
+
+    original_text: |
+      - "All automated tests passing (>95% coverage)"
+
+    category: "quality_gates"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Alle automated tests MÜSSEN passen mit >95% coverage.
+
+    enforcement: |
+      CI MUSS prüfen: Test coverage >= 95%.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      field_path: "quality_gates"
+      contains_item: "All automated tests passing (>95% coverage)"
+      ci_enforcement: true
+      criticality: "CRITICAL - Test Coverage"
+
+  - rule_id: SOT-MD-312
+    line_number: 631
+    section: "Version Management"
+    subsection: "release_management"
+    title: "Quality Gate - Security Audit Completion"
+
+    original_text: |
+      - "Security audit completion"
+
+    category: "quality_gates"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Security audit MUSS completed sein vor Release.
+
+    enforcement: |
+      Release process MUSS Security audit completion verifizieren.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      field_path: "quality_gates"
+      contains_item: "Security audit completion"
+      ci_enforcement: true
+      criticality: "CRITICAL - Security"
+
+  - rule_id: SOT-MD-313
+    line_number: 632
+    section: "Version Management"
+    subsection: "release_management"
+    title: "Quality Gate - Documentation Updates (All Languages)"
+
+    original_text: |
+      - "Documentation updates (all languages)"
+
+    category: "quality_gates"
+    priority: "must"
+
+    description: |
+      Documentation updates MÜSSEN für alle Sprachen completed sein.
+
+    enforcement: |
+      Release process MUSS Documentation updates verifizieren.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      field_path: "quality_gates"
+      contains_item: "Documentation updates (all languages)"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-314
+    line_number: 639
+    section: "Version Management"
+    subsection: "release_management"
+    title: "World Market Readiness - All Tier 1 Jurisdictions Reviewed"
+
+    original_text: |
+      world_market_readiness:
+        regulatory_validation: "All Tier 1 jurisdictions reviewed"
+
+    category: "world_market_readiness"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Alle Tier 1 jurisdictions MÜSSEN regulatory reviewed sein.
+
+    enforcement: |
+      Legal review MUSS Tier 1 jurisdiction validation confirmen.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      field_path: "world_market_readiness.regulatory_validation"
+      contains: "Tier 1 jurisdictions"
+      ci_enforcement: true
+      criticality: "CRITICAL - Global Market Readiness"
+
+# ====================================================================================
+# SECTION 2: Deprecation Management (Lines 654-687)
+# ====================================================================================
+
+  - rule_id: SOT-MD-315
+    line_number: 656
+    section: "Version Management"
+    subsection: "deprecation_strategy"
+    title: "File Location - deprecation_strategy.yaml"
+
+    original_text: |
+      # 24_meta_orchestration/version_management/deprecation_strategy.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Deprecation strategy MUSS in dieser Datei definiert sein.
+      Exakter Pfad: 24_meta_orchestration/version_management/deprecation_strategy.yaml
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an diesem exakten Pfad.
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "24_meta_orchestration/version_management/deprecation_strategy.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-316
+    line_number: 662
+    section: "Version Management"
+    subsection: "deprecation_strategy"
+    title: "Deprecation Framework - Notice Period - 6 Months Minimum"
+
+    original_text: |
+      deprecation_framework:
+        deprecation_notice_period: "6 months minimum"
+
+    category: "deprecation_framework"
+    priority: "must"
+
+    description: |
+      Deprecation notice period MUSS mindestens 6 Monate sein.
+
+    enforcement: |
+      CI MUSS prüfen: deprecation_notice_period >= 6 months.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/deprecation_strategy.yaml"
+      field_path: "deprecation_framework.deprecation_notice_period"
+      contains: "6 months"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-317
+    line_number: 663
+    section: "Version Management"
+    subsection: "deprecation_strategy"
+    title: "Deprecation Framework - Support Period - 12 Months Post-Deprecation"
+
+    original_text: |
+      support_period: "12 months post-deprecation"
+
+    category: "deprecation_framework"
+    priority: "must"
+
+    description: |
+      Support period MUSS 12 Monate post-deprecation sein.
+
+    enforcement: |
+      CI MUSS prüfen: support_period = 12 months.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/deprecation_strategy.yaml"
+      field_path: "deprecation_framework.support_period"
+      contains: "12 months"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-318
+    line_number: 664
+    section: "Version Management"
+    subsection: "deprecation_strategy"
+    title: "Deprecation Framework - Security Support - 18 Months for Critical Issues"
+
+    original_text: |
+      security_support: "18 months for critical issues"
+
+    category: "deprecation_framework"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Security support MUSS 18 Monate für critical issues verfügbar sein.
+
+    enforcement: |
+      CI MUSS prüfen: security_support >= 18 months.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/deprecation_strategy.yaml"
+      field_path: "deprecation_framework.security_support"
+      contains: "18 months"
+      ci_enforcement: true
+      criticality: "CRITICAL - Security Support Duration"
+
+  - rule_id: SOT-MD-319
+    line_number: 665
+    section: "Version Management"
+    subsection: "deprecation_strategy"
+    title: "Deprecation Framework - Enterprise Support - 24 Months with Custom SLA"
+
+    original_text: |
+      enterprise_support: "24 months with custom SLA"
+
+    category: "deprecation_framework"
+    priority: "must"
+
+    description: |
+      Enterprise support MUSS 24 Monate mit custom SLA verfügbar sein.
+
+    enforcement: |
+      CI MUSS prüfen: enterprise_support = 24 months.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/deprecation_strategy.yaml"
+      field_path: "deprecation_framework.enterprise_support"
+      contains: "24 months"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-320
+    line_number: 668
+    section: "Version Management"
+    subsection: "deprecation_strategy"
+    title: "Deprecation Process - Phase 1 - Initial Notice (6 Months Prior)"
+
+    original_text: |
+      deprecation_process:
+        phase_1_announcement: "Initial deprecation notice (6 months prior)"
+
+    category: "deprecation_process"
+    priority: "must"
+
+    description: |
+      Phase 1: Initial deprecation notice MUSS 6 Monate prior erfolgen.
+
+    enforcement: |
+      Process MUSS Phase 1 announcement sicherstellen.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/deprecation_strategy.yaml"
+      field_path: "deprecation_process.phase_1_announcement"
+      contains: "6 months prior"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-321
+    line_number: 672
+    section: "Version Management"
+    subsection: "deprecation_strategy"
+    title: "Deprecation Process - Phase 5 - End of Life (18-24 Months)"
+
+    original_text: |
+      phase_5_eol: "End of life (18-24 months)"
+
+    category: "deprecation_process"
+    priority: "must"
+
+    description: |
+      Phase 5: End of life erfolgt nach 18-24 Monaten.
+
+    enforcement: |
+      Process MUSS Phase 5 timeline einhalten.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/deprecation_strategy.yaml"
+      field_path: "deprecation_process.phase_5_eol"
+      contains: "18-24 months"
+      ci_enforcement: true
+
+# ====================================================================================
+# SECTION 3: Jurisdictional Coverage Matrix (Lines 689-818)
+# ====================================================================================
+
+  - rule_id: SOT-MD-322
+    line_number: 693
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "File Location - coverage_matrix.yaml"
+
+    original_text: |
+      # 23_compliance/jurisdictions/coverage_matrix.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Jurisdictional coverage matrix MUSS in dieser Datei definiert sein.
+      Exakter Pfad: 23_compliance/jurisdictions/coverage_matrix.yaml
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an diesem exakten Pfad.
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-323
+    line_number: 701
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "CRITICAL - Tier 1 Market - European Union (99% Coverage)"
+
+    original_text: |
+      tier_1_markets:
+        - jurisdiction: "European Union"
+          member_states: 27
+          coverage: "99%"
+          regulations: ["GDPR", "MiCA", "DORA", "AI Act", "NIS2"]
+          business_priority: "CRITICAL"
+
+    category: "tier_1_markets"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: European Union ist Tier 1 market mit 99% coverage.
+      Business priority: CRITICAL
+      Regulations: GDPR, MiCA, DORA, AI Act, NIS2
+
+    enforcement: |
+      CI MUSS prüfen: EU ist in tier_1_markets mit business_priority = CRITICAL.
+
+    evidence_schema:
+      type: "yaml_array_contains_object"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "covered_jurisdictions.tier_1_markets"
+      contains_object:
+        jurisdiction: "European Union"
+        business_priority: "CRITICAL"
+      ci_enforcement: true
+      criticality: "CRITICAL - Primary Market"
+
+  - rule_id: SOT-MD-324
+    line_number: 707
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "CRITICAL - Tier 1 Market - United States (97% Coverage)"
+
+    original_text: |
+      - jurisdiction: "United States"
+        coverage: "97%"
+        regulations: ["SOC2", "CCPA", "SEC", "CFTC", "FinCEN"]
+        business_priority: "CRITICAL"
+
+    category: "tier_1_markets"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: United States ist Tier 1 market mit 97% coverage.
+      Business priority: CRITICAL
+      Regulations: SOC2, CCPA, SEC, CFTC, FinCEN
+
+    enforcement: |
+      CI MUSS prüfen: US ist in tier_1_markets mit business_priority = CRITICAL.
+
+    evidence_schema:
+      type: "yaml_array_contains_object"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "covered_jurisdictions.tier_1_markets"
+      contains_object:
+        jurisdiction: "United States"
+        business_priority: "CRITICAL"
+      ci_enforcement: true
+      criticality: "CRITICAL - Primary Market"
+
+  - rule_id: SOT-MD-325
+    line_number: 712
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "Tier 1 Market - United Kingdom (96% Coverage - HIGH Priority)"
+
+    original_text: |
+      - jurisdiction: "United Kingdom"
+        coverage: "96%"
+        regulations: ["UK GDPR", "FCA Rules", "Cryptoasset Regime"]
+        business_priority: "HIGH"
+
+    category: "tier_1_markets"
+    priority: "must"
+
+    description: |
+      United Kingdom ist Tier 1 market mit 96% coverage.
+      Business priority: HIGH
+      Regulations: UK GDPR, FCA Rules, Cryptoasset Regime
+
+    enforcement: |
+      CI MUSS prüfen: UK ist in tier_1_markets.
+
+    evidence_schema:
+      type: "yaml_array_contains_object"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "covered_jurisdictions.tier_1_markets"
+      contains_object:
+        jurisdiction: "United Kingdom"
+        business_priority: "HIGH"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-326
+    line_number: 717
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "Tier 1 Market - Singapore (98% Coverage - HIGH Priority)"
+
+    original_text: |
+      - jurisdiction: "Singapore"
+        coverage: "98%"
+        regulations: ["PDPA", "MAS PSN", "Stablecoin Framework"]
+        business_priority: "HIGH"
+
+    category: "tier_1_markets"
+    priority: "must"
+
+    description: |
+      Singapore ist Tier 1 market mit 98% coverage.
+      Business priority: HIGH
+      Regulations: PDPA, MAS PSN, Stablecoin Framework
+
+    enforcement: |
+      CI MUSS prüfen: Singapore ist in tier_1_markets.
+
+    evidence_schema:
+      type: "yaml_array_contains_object"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "covered_jurisdictions.tier_1_markets"
+      contains_object:
+        jurisdiction: "Singapore"
+        business_priority: "HIGH"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-327
+    line_number: 722
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "Tier 1 Market - Switzerland (97% Coverage - HIGH Priority)"
+
+    original_text: |
+      - jurisdiction: "Switzerland"
+        coverage: "97%"
+        regulations: ["DLT Act", "FINMA", "Swiss Data Protection"]
+        business_priority: "HIGH"
+
+    category: "tier_1_markets"
+    priority: "must"
+
+    description: |
+      Switzerland ist Tier 1 market mit 97% coverage.
+      Business priority: HIGH
+      Regulations: DLT Act, FINMA, Swiss Data Protection
+
+    enforcement: |
+      CI MUSS prüfen: Switzerland ist in tier_1_markets.
+
+    evidence_schema:
+      type: "yaml_array_contains_object"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "covered_jurisdictions.tier_1_markets"
+      contains_object:
+        jurisdiction: "Switzerland"
+        business_priority: "HIGH"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-328
+    line_number: 767
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "CRITICAL - Excluded Jurisdiction - Iran (IR) - Sanctions Compliance"
+
+    original_text: |
+      excluded_jurisdictions:
+        sanctioned_territories:
+          - "Iran (IR)"
+
+    category: "excluded_jurisdictions"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Iran (IR) ist EXCLUDED wegen International sanctions compliance.
+
+    enforcement: |
+      CI MUSS prüfen: Iran ist in sanctioned_territories.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "excluded_jurisdictions.sanctioned_territories"
+      contains_item: "Iran (IR)"
+      ci_enforcement: true
+      criticality: "CRITICAL - Sanctions Compliance"
+
+  - rule_id: SOT-MD-329
+    line_number: 768
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "CRITICAL - Excluded Jurisdiction - North Korea (KP) - Sanctions Compliance"
+
+    original_text: |
+      - "North Korea (KP)"
+
+    category: "excluded_jurisdictions"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: North Korea (KP) ist EXCLUDED wegen International sanctions compliance.
+
+    enforcement: |
+      CI MUSS prüfen: North Korea ist in sanctioned_territories.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "excluded_jurisdictions.sanctioned_territories"
+      contains_item: "North Korea (KP)"
+      ci_enforcement: true
+      criticality: "CRITICAL - Sanctions Compliance"
+
+  - rule_id: SOT-MD-330
+    line_number: 769
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "CRITICAL - Excluded Jurisdiction - Syria (SY) - Sanctions Compliance"
+
+    original_text: |
+      - "Syria (SY)"
+
+    category: "excluded_jurisdictions"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Syria (SY) ist EXCLUDED wegen International sanctions compliance.
+
+    enforcement: |
+      CI MUSS prüfen: Syria ist in sanctioned_territories.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "excluded_jurisdictions.sanctioned_territories"
+      contains_item: "Syria (SY)"
+      ci_enforcement: true
+      criticality: "CRITICAL - Sanctions Compliance"
+
+  - rule_id: SOT-MD-331
+    line_number: 770
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "CRITICAL - Excluded Jurisdiction - Cuba (CU) - Sanctions Compliance"
+
+    original_text: |
+      - "Cuba (CU)"
+
+    category: "excluded_jurisdictions"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Cuba (CU) ist EXCLUDED wegen International sanctions compliance.
+
+    enforcement: |
+      CI MUSS prüfen: Cuba ist in sanctioned_territories.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "excluded_jurisdictions.sanctioned_territories"
+      contains_item: "Cuba (CU)"
+      ci_enforcement: true
+      criticality: "CRITICAL - Sanctions Compliance"
+
+  - rule_id: SOT-MD-332
+    line_number: 772
+    section: "Global Market"
+    subsection: "coverage_matrix"
+    title: "Exclusion Reason - Sanctioned Territories - International Sanctions Compliance"
+
+    original_text: |
+      exclusion_reason: "International sanctions compliance"
+
+    category: "excluded_jurisdictions"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Exclusion reason für sanctioned territories ist
+      "International sanctions compliance".
+
+    enforcement: |
+      CI MUSS prüfen: exclusion_reason ist dokumentiert.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "excluded_jurisdictions.sanctioned_territories.exclusion_reason"
+      exact_value: "International sanctions compliance"
+      ci_enforcement: true
+      criticality: "CRITICAL - Legal Compliance"
+
+# ====================================================================================
+# SECTION 4: Market Entry Strategy (Lines 820-894)
+# ====================================================================================
+
+  - rule_id: SOT-MD-333
+    line_number: 822
+    section: "Global Market"
+    subsection: "market_entry"
+    title: "File Location - expansion_strategy.yaml"
+
+    original_text: |
+      # 23_compliance/market_entry/expansion_strategy.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Market entry expansion strategy MUSS in dieser Datei definiert sein.
+      Exakter Pfad: 23_compliance/market_entry/expansion_strategy.yaml
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an diesem exakten Pfad.
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "23_compliance/market_entry/expansion_strategy.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-334
+    line_number: 826
+    section: "Global Market"
+    subsection: "market_entry"
+    title: "Classification - CONFIDENTIAL - Business Strategy"
+
+    original_text: |
+      classification: "CONFIDENTIAL - Business Strategy"
+
+    category: "classification"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Classification ist CONFIDENTIAL für Business Strategy.
+      NICHT PUBLIC disclosure von Market Entry Details.
+
+    enforcement: |
+      CI MUSS prüfen: classification = "CONFIDENTIAL - Business Strategy"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/market_entry/expansion_strategy.yaml"
+      field_path: "classification"
+      exact_value: "CONFIDENTIAL - Business Strategy"
+      ci_enforcement: true
+      criticality: "CRITICAL - Confidential Information"
+
+  - rule_id: SOT-MD-335
+    line_number: 830
+    section: "Global Market"
+    subsection: "market_entry"
+    title: "Market Prioritization - Immediate Focus - 5 Jurisdictions (EU/US/UK/SG/CH)"
+
+    original_text: |
+      market_prioritization:
+        immediate_focus:
+          jurisdictions: ["EU", "US", "UK", "Singapore", "Switzerland"]
+
+    category: "market_prioritization"
+    priority: "must"
+
+    description: |
+      Immediate focus jurisdictions: EU, US, UK, Singapore, Switzerland.
+
+    enforcement: |
+      Strategy MUSS diese 5 jurisdictions als immediate focus haben.
+
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "23_compliance/market_entry/expansion_strategy.yaml"
+      field_path: "market_prioritization.immediate_focus.jurisdictions"
+      expected_items: ["EU", "US", "UK", "Singapore", "Switzerland"]
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-336
+    line_number: 832
+    section: "Global Market"
+    subsection: "market_entry"
+    title: "Immediate Focus - Timeline - 2025-2026"
+
+    original_text: |
+      timeline: "2025-2026"
+
+    category: "market_prioritization"
+    priority: "must"
+
+    description: |
+      Timeline für immediate focus: 2025-2026.
+
+    enforcement: |
+      Strategy MUSS timeline definieren.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/market_entry/expansion_strategy.yaml"
+      field_path: "market_prioritization.immediate_focus.timeline"
+      exact_value: "2025-2026"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-337
+    line_number: 833
+    section: "Global Market"
+    subsection: "market_entry"
+    title: "Immediate Focus - Investment - €2.5M Total"
+
+    original_text: |
+      investment: "€2.5M total"
+
+    category: "market_prioritization"
+    priority: "must"
+
+    description: |
+      Investment für immediate focus: €2.5M total.
+
+    enforcement: |
+      Strategy MUSS investment budget definieren.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/market_entry/expansion_strategy.yaml"
+      field_path: "market_prioritization.immediate_focus.investment"
+      exact_value: "€2.5M total"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-338
+    line_number: 855
+    section: "Global Market"
+    subsection: "market_entry"
+    title: "Regulatory Assessment - Timeline - 3-6 Months Lead Time"
+
+    original_text: |
+      entry_requirements:
+        regulatory_assessment:
+          timeline: "3-6 months lead time"
+
+    category: "entry_requirements"
+    priority: "must"
+
+    description: |
+      Regulatory assessment MUSS 3-6 Monate lead time haben.
+
+    enforcement: |
+      Entry requirements MÜSSEN timeline definieren.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "23_compliance/market_entry/expansion_strategy.yaml"
+      field_path: "entry_requirements.regulatory_assessment.timeline"
+      contains: "3-6 months"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-339
+    line_number: 856
+    section: "Global Market"
+    subsection: "market_entry"
+    title: "Regulatory Assessment - Cost - €50K-200K per Jurisdiction"
+
+    original_text: |
+      cost: "€50K-200K per jurisdiction"
+
+    category: "entry_requirements"
+    priority: "must"
+
+    description: |
+      Regulatory assessment cost: €50K-200K per jurisdiction.
+
+    enforcement: |
+      Budget MUSS regulatory assessment cost beinhalten.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "23_compliance/market_entry/expansion_strategy.yaml"
+      field_path: "entry_requirements.regulatory_assessment.cost"
+      contains: "€50K-200K"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-340
+    line_number: 860
+    section: "Global Market"
+    subsection: "market_entry"
+    title: "Local Legal Counsel - Mandatory for Tier 1 Markets"
+
+    original_text: |
+      local_legal_counsel:
+        requirement: "Mandatory for Tier 1 markets"
+
+    category: "entry_requirements"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Local legal counsel ist MANDATORY für Tier 1 markets.
+
+    enforcement: |
+      Entry requirements MÜSSEN local legal counsel für Tier 1 enforced.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/market_entry/expansion_strategy.yaml"
+      field_path: "entry_requirements.local_legal_counsel.requirement"
+      exact_value: "Mandatory for Tier 1 markets"
+      ci_enforcement: true
+      criticality: "CRITICAL - Legal Compliance"
+
+# ====================================================================================
+# SECTION 5: Regulatory Monitoring & Intelligence (Lines 896-974)
+# ====================================================================================
+
+  - rule_id: SOT-MD-341
+    line_number: 898
+    section: "Global Market"
+    subsection: "regulatory_intelligence"
+    title: "File Location - monitoring_framework.yaml"
+
+    original_text: |
+      # 23_compliance/regulatory_intelligence/monitoring_framework.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Regulatory intelligence monitoring framework MUSS in dieser Datei definiert sein.
+      Exakter Pfad: 23_compliance/regulatory_intelligence/monitoring_framework.yaml
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an diesem exakten Pfad.
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-342
+    line_number: 902
+    section: "Global Market"
+    subsection: "regulatory_intelligence"
+    title: "Classification - CONFIDENTIAL - Regulatory Intelligence"
+
+    original_text: |
+      classification: "CONFIDENTIAL - Regulatory Intelligence"
+
+    category: "classification"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Classification ist CONFIDENTIAL für Regulatory Intelligence.
+
+    enforcement: |
+      CI MUSS prüfen: classification = "CONFIDENTIAL - Regulatory Intelligence"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      field_path: "classification"
+      exact_value: "CONFIDENTIAL - Regulatory Intelligence"
+      ci_enforcement: true
+      criticality: "CRITICAL - Confidential Information"
+
+  - rule_id: SOT-MD-343
+    line_number: 906
+    section: "Global Market"
+    subsection: "regulatory_intelligence"
+    title: "Monitoring Scope - Tier 1 Markets - Daily Frequency"
+
+    original_text: |
+      monitoring_scope:
+        tier_1_markets:
+          monitoring_frequency: "Daily"
+
+    category: "monitoring_scope"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Tier 1 markets MÜSSEN DAILY monitoring haben.
+
+    enforcement: |
+      Monitoring MUSS daily für Tier 1 markets erfolgen.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      field_path: "monitoring_scope.tier_1_markets.monitoring_frequency"
+      exact_value: "Daily"
+      ci_enforcement: true
+      criticality: "CRITICAL - Regulatory Monitoring"
+
+  - rule_id: SOT-MD-344
+    line_number: 908
+    section: "Global Market"
+    subsection: "regulatory_intelligence"
+    title: "Tier 1 Markets - Alert Threshold - Immediate for Material Changes"
+
+    original_text: |
+      alert_threshold: "Immediate for material changes"
+
+    category: "monitoring_scope"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Alert threshold für Tier 1 ist IMMEDIATE for material changes.
+
+    enforcement: |
+      Alerts MÜSSEN immediate für Tier 1 material changes erfolgen.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      field_path: "monitoring_scope.tier_1_markets.alert_threshold"
+      exact_value: "Immediate for material changes"
+      ci_enforcement: true
+      criticality: "CRITICAL - Alert Response Time"
+
+  - rule_id: SOT-MD-345
+    line_number: 911
+    section: "Global Market"
+    subsection: "regulatory_intelligence"
+    title: "Tier 2 Markets - Monitoring Frequency - Weekly"
+
+    original_text: |
+      tier_2_markets:
+        monitoring_frequency: "Weekly"
+
+    category: "monitoring_scope"
+    priority: "must"
+
+    description: |
+      Tier 2 markets MÜSSEN weekly monitoring haben.
+
+    enforcement: |
+      Monitoring MUSS weekly für Tier 2 markets erfolgen.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      field_path: "monitoring_scope.tier_2_markets.monitoring_frequency"
+      exact_value: "Weekly"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-346
+    line_number: 913
+    section: "Global Market"
+    subsection: "regulatory_intelligence"
+    title: "Tier 2 Markets - Alert Threshold - Within 48 Hours"
+
+    original_text: |
+      alert_threshold: "Within 48 hours"
+
+    category: "monitoring_scope"
+    priority: "must"
+
+    description: |
+      Alert threshold für Tier 2 ist within 48 hours.
+
+    enforcement: |
+      Alerts MÜSSEN within 48 hours für Tier 2 erfolgen.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      field_path: "monitoring_scope.tier_2_markets.alert_threshold"
+      exact_value: "Within 48 hours"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-347
+    line_number: 916
+    section: "Global Market"
+    subsection: "regulatory_intelligence"
+    title: "Tier 3 Markets - Monitoring Frequency - Monthly"
+
+    original_text: |
+      tier_3_markets:
+        monitoring_frequency: "Monthly"
+
+    category: "monitoring_scope"
+    priority: "must"
+
+    description: |
+      Tier 3 markets MÜSSEN monthly monitoring haben.
+
+    enforcement: |
+      Monitoring MUSS monthly für Tier 3 markets erfolgen.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      field_path: "monitoring_scope.tier_3_markets.monitoring_frequency"
+      exact_value: "Monthly"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-348
+    line_number: 941
+    section: "Global Market"
+    subsection: "regulatory_intelligence"
+    title: "CRITICAL Alert - Response Time - Immediate (Within 2 Hours)"
+
+    original_text: |
+      alert_framework:
+        critical_alerts:
+          response_time: "Immediate (within 2 hours)"
+
+    category: "alert_framework"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Critical alerts MÜSSEN immediate response haben (within 2 hours).
+
+    enforcement: |
+      Alert framework MUSS 2-hour response für critical alerts sicherstellen.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      field_path: "alert_framework.critical_alerts.response_time"
+      contains: "2 hours"
+      ci_enforcement: true
+      criticality: "CRITICAL - Alert Response Time"
+
+  - rule_id: SOT-MD-349
+    line_number: 943
+    section: "Global Market"
+    subsection: "regulatory_intelligence"
+    title: "CRITICAL Alert - Escalation - C-Suite and Board Notification"
+
+    original_text: |
+      escalation: "C-suite and board notification"
+
+    category: "alert_framework"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Critical alerts MÜSSEN an C-suite and board escalated werden.
+
+    enforcement: |
+      Escalation MUSS C-suite and board notification beinhalten.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      field_path: "alert_framework.critical_alerts.escalation"
+      contains_all:
+        - "C-suite"
+        - "board"
+      ci_enforcement: true
+      criticality: "CRITICAL - Governance Escalation"
+
+# ====================================================================================
+# SUMMARY RULES (Cross-Validation & Completeness)
+# ====================================================================================
+
+  - rule_id: SOT-MD-350
+    line_number: 609-975
+    section: "Cross-Validation"
+    subsection: "completeness"
+    title: "Cross-Validation - Release Management Completeness"
+
+    original_text: |
+      All release management components MUST be present and consistent.
+
+    category: "cross_validation"
+    priority: "must"
+
+    description: |
+      Release Management Framework MUSS vollständig sein mit:
+      - Release schedule (4 types)
+      - Quality gates (8 gates)
+      - World market readiness
+      - Communication strategy
+
+    enforcement: |
+      CI MUSS prüfen: Alle Components sind vorhanden in release_management.yaml.
+
+    evidence_schema:
+      type: "yaml_section_completeness"
+      file: "24_meta_orchestration/releases/release_management.yaml"
+      required_sections:
+        - "release_schedule"
+        - "release_process"
+        - "quality_gates"
+        - "world_market_readiness"
+        - "communication_strategy"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-351
+    line_number: 609-975
+    section: "Cross-Validation"
+    subsection: "consistency"
+    title: "Cross-Validation - Tier 1 Markets Consistency"
+
+    original_text: |
+      Tier 1 markets must be consistent across all frameworks.
+
+    category: "cross_validation"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Tier 1 markets MÜSSEN konsistent sein zwischen:
+      - coverage_matrix.yaml (5 jurisdictions: EU, US, UK, SG, CH)
+      - expansion_strategy.yaml (immediate_focus)
+      - monitoring_framework.yaml (daily monitoring)
+
+    enforcement: |
+      CI MUSS prüfen: Tier 1 markets sind identisch in allen Files.
+
+    evidence_schema:
+      type: "cross_file_validation"
+      files:
+        - "23_compliance/jurisdictions/coverage_matrix.yaml"
+        - "23_compliance/market_entry/expansion_strategy.yaml"
+        - "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+      validation_rule: "Tier 1 markets MÜSSEN identisch sein"
+      ci_enforcement: true
+      criticality: "CRITICAL - Data Consistency"
+
+  - rule_id: SOT-MD-352
+    line_number: 609-975
+    section: "Cross-Validation"
+    subsection: "sanctions_compliance"
+    title: "CRITICAL - Sanctioned Territories Completeness (4 Core Countries)"
+
+    original_text: |
+      All sanctioned territories must be explicitly excluded.
+
+    category: "cross_validation"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Alle 4 core sanctioned territories MÜSSEN excluded sein:
+      - Iran (IR)
+      - North Korea (KP)
+      - Syria (SY)
+      - Cuba (CU)
+
+    enforcement: |
+      CI MUSS prüfen: Alle 4 Länder sind in sanctioned_territories.
+
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "23_compliance/jurisdictions/coverage_matrix.yaml"
+      field_path: "excluded_jurisdictions.sanctioned_territories"
+      must_contain_all:
+        - "Iran (IR)"
+        - "North Korea (KP)"
+        - "Syria (SY)"
+        - "Cuba (CU)"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn nicht alle vorhanden"
+      criticality: "CRITICAL - Sanctions Compliance (OFAC)"
+
+  - rule_id: SOT-MD-353
+    line_number: 609-975
+    section: "Cross-Validation"
+    subsection: "timeline_consistency"
+    title: "Timeline Consistency - Deprecation vs Security Support"
+
+    original_text: |
+      Deprecation timelines must be consistent with security support periods.
+
+    category: "cross_validation"
+    priority: "must"
+
+    description: |
+      Timelines MÜSSEN konsistent sein:
+      - Deprecation notice: 6 months
+      - Support period: 12 months
+      - Security support: 18 months
+      - Enterprise support: 24 months
+
+    enforcement: |
+      CI MUSS prüfen: Timelines sind logisch konsistent (18 months > 12 months > 6 months).
+
+    evidence_schema:
+      type: "timeline_validation"
+      file: "24_meta_orchestration/version_management/deprecation_strategy.yaml"
+      validation_rules:
+        - "deprecation_notice < support_period < security_support < enterprise_support"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-354
+    line_number: 609-975
+    section: "Cross-Validation"
+    subsection: "classification_enforcement"
+    title: "Classification Enforcement - CONFIDENTIAL Files"
+
+    original_text: |
+      CONFIDENTIAL classification must be enforced for sensitive strategy files.
+
+    category: "cross_validation"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Diese Files MÜSSEN classification: CONFIDENTIAL haben:
+      - expansion_strategy.yaml (Business Strategy)
+      - monitoring_framework.yaml (Regulatory Intelligence)
+      - enterprise_partnerships.yaml (Partnership Strategy)
+
+    enforcement: |
+      CI MUSS prüfen: Alle sensitive strategy files haben CONFIDENTIAL classification.
+
+    evidence_schema:
+      type: "multi_file_field_check"
+      files:
+        - file: "23_compliance/market_entry/expansion_strategy.yaml"
+          field: "classification"
+          expected: "CONFIDENTIAL - Business Strategy"
+        - file: "23_compliance/regulatory_intelligence/monitoring_framework.yaml"
+          field: "classification"
+          expected: "CONFIDENTIAL - Regulatory Intelligence"
+        - file: "07_governance_legal/partnerships/enterprise_partnerships.yaml"
+          field: "classification"
+          expected: "CONFIDENTIAL - Partnership Strategy"
+      ci_enforcement: true
+      criticality: "CRITICAL - Information Security"
+
+# ====================================================================================
+# INTEGRATION STATUS
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 50
+  line_range: "609-975"
+  audit_ready: true
+
+  pending_integration:
+    - "16_codex/contracts/sot/sot_contract.yaml"
+    - "03_core/validators/sot/sot_validator_core.py"
+    - "23_compliance/policies/sot/sot_policy.rego"
+    - "12_tooling/cli/sot_validator.py"
+    - "11_test_simulation/tests_compliance/test_sot_validator.py"
+
+  next_step: "Integration in alle 5 SoT-Artefakte + Coverage-Check"
+
+# ====================================================================================
+# AUDIT TRAIL
+# ====================================================================================
+
+audit_trail:
+  extraction_completed: "2025-10-18"
+  extraction_method: "manual_line_by_line"
+  zero_tolerance_compliance: true
+  ready_for_sha256: true
+  ready_for_registry_update: true
+  ready_for_ci_integration: true
+
+# ====================================================================================
+# CUMULATIVE EXTRACTION STATUS
+# ====================================================================================
+
+cumulative_extraction:
+  lines_001_026: 4    # SOT-MD-001 to SOT-MD-004
+  lines_027_101: 61   # SOT-MD-005 to SOT-MD-065
+  lines_103_143: 34   # SOT-MD-066 to SOT-MD-099
+  lines_145_251: 100  # SOT-MD-100 to SOT-MD-199
+  lines_253_384: 52   # SOT-MD-200 to SOT-MD-251
+  lines_385_608: 53   # SOT-MD-252 to SOT-MD-304
+  lines_609_975: 50   # SOT-MD-305 to SOT-MD-354
+  total_so_far: 354
+  remaining_sections: "Lines 976-1257"

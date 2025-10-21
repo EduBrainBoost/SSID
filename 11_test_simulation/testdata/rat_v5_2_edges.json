@@ -1,0 +1,101 @@
+{
+  "tests": [
+    {
+      "name": "rat_edge_exceed_burst_limit",
+      "input": {
+        "tier": "S1",
+        "zone": "Z1",
+        "rate_limit": 100,
+        "burst_limit": 150,
+        "current_rate": 151,
+        "window_seconds": 60
+      },
+      "expected": {
+        "allow": false
+      }
+    },
+    {
+      "name": "rat_edge_invalid_zone",
+      "input": {
+        "tier": "S1",
+        "zone": "Z4",
+        "rate_limit": 100,
+        "burst_limit": 150,
+        "current_rate": 80,
+        "window_seconds": 60
+      },
+      "expected": {
+        "allow": false
+      }
+    },
+    {
+      "name": "rat_edge_tier_zone_mismatch",
+      "input": {
+        "tier": "S1",
+        "zone": "Z3",
+        "rate_limit": 2000,
+        "burst_limit": 3000,
+        "current_rate": 1000,
+        "window_seconds": 60
+      },
+      "expected": {
+        "allow": false
+      }
+    },
+    {
+      "name": "rat_edge_negative_current_rate",
+      "input": {
+        "tier": "S2",
+        "zone": "Z2",
+        "rate_limit": 500,
+        "burst_limit": 750,
+        "current_rate": -10,
+        "window_seconds": 60
+      },
+      "expected": {
+        "allow": false
+      }
+    },
+    {
+      "name": "rat_edge_missing_tier",
+      "input": {
+        "zone": "Z1",
+        "rate_limit": 100,
+        "burst_limit": 150,
+        "current_rate": 80,
+        "window_seconds": 60
+      },
+      "expected": {
+        "allow": false
+      }
+    },
+    {
+      "name": "rat_edge_invalid_window",
+      "input": {
+        "tier": "S1",
+        "zone": "Z1",
+        "rate_limit": 100,
+        "burst_limit": 150,
+        "current_rate": 80,
+        "window_seconds": -1
+      },
+      "expected": {
+        "allow": false
+      }
+    },
+    {
+      "name": "rat_edge_zero_rate_limit",
+      "input": {
+        "tier": "S1",
+        "zone": "Z1",
+        "rate_limit": 0,
+        "burst_limit": 150,
+        "current_rate": 80,
+        "window_seconds": 60
+      },
+      "expected": {
+        "allow": false
+      }
+    }
+  ]
+}

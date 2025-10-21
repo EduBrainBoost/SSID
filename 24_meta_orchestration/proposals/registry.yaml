@@ -1,0 +1,120 @@
+version: 1.0.0
+last_updated_utc: '2025-10-17T10:55:23.694348+00:00'
+total_proposals: 2
+active_proposals: 0
+archived_proposals: 1
+proposals:
+- proposal_id: LOCK-FEE-V5.4.3
+  title: Fee Distribution & Fairness v5.4.3 – Parameter-Lock
+  version: v5.4.3
+  type: parameter_lock
+  status: RATIFIED_AND_LOCKED
+  created_utc: '2025-10-14T20:42:11Z'
+  ratified_utc: '2025-10-21T21:00:01Z'
+  locked_since_utc: '2025-10-22T21:00:00Z'
+  files:
+    proposal:
+      path: 24_meta_orchestration/proposals/lock_fee_params_v5_4_3.yaml
+      sha256: 00499f83b649494e50708dbabf6b92d36189777f46c8cff9c885065c7f71328d
+      size_bytes: 2847
+    ballot:
+      path: 24_meta_orchestration/proposals/ballots/lock_fee_params_v5_4_3.json
+      sha256: TBD
+      size_bytes: 5247
+  voting_results:
+    quorum_reached: true
+    quorum_ratio: 1.0
+    approval_ratio: 0.977
+    true: 128
+    false: 3
+    abstain: 5
+  evidence:
+    production_certificate: 23_compliance/certificates/fee_fairness_production_certificate_v5_4_3.json
+    hash_manifest: 23_compliance/manifests/fee_distribution_hash_manifest_v5_4_3.json
+    integration_report: 16_codex/fee_distribution_integration_report.md
+    test_results: 24/24 tests passing
+  parameters_locked:
+    transaction_fee_total: 0.03
+    developer_share: 0.01
+    system_pool: 0.02
+    system_pool_formula: share_k = (gewicht_k / 90) * A
+    subscription_split: 50/30/10/10
+  governance:
+    immutability: true
+    change_requires: New DAO proposal with quorum >= 0.67 and approval >= 0.67
+    adjustable_ranges_defined: true
+    next_review_period: '2026-01-12'
+  compliance:
+    gdpr: COMPLIANT
+    mica: COMPLIANT
+    dora: COMPLIANT
+    amld6: COMPLIANT
+  signatures:
+  - member: DAO-GovNode-001
+    wallet: '0xABCDEF1234567890'
+    signature_sha256: fb839d2f2c17f6fbc95d5e945b6a3f6728c3290d7aeb2af18b334b1c0edb5c43
+  - member: DAO-GovNode-002
+    wallet: '0xFEEFA1DEE55ECA11'
+    signature_sha256: a81d9ceaa1e6eaa4c9ce7b7da9e9f1a47c2017c29bfa918c3528019301b8e72a
+  - member: DAO-GovNode-003
+    wallet: '0x9876543210FEDCBA'
+    signature_sha256: c3d5e8f12a4b6c9d7e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d
+- proposal_id: LINEAGE-UPDATE-20251017-102944
+  title: 'Registry Lineage Update - Entry #2'
+  type: lineage_update
+  status: APPROVED
+  created_utc: '2025-10-17T10:54:04.473268+00:00'
+  files:
+    proposal:
+      path: 24_meta_orchestration/proposals/lineage-update-20251017-102944.yaml
+      sha256: 52c80eac003b9eef376305283dfdfd7ddff336ad0a66746bf091ed4dbfe9fd1e
+      size_bytes: 2938
+  governance:
+    quorum: 0.67
+    approval_threshold: 0.67
+    execution_delay_hours: 24
+    voting_period_hours: 72
+    immutability: true
+  change_summary:
+    type: no_change
+    description: Registry unchanged (re-signature)
+    global_merkle_root: b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c
+    compliance_score_delta: 0.0
+    rules_delta: 0
+  finalized_at: '2025-10-17T10:55:23.694348+00:00'
+archived: null
+statistics:
+  total_votes_cast: 136
+  average_quorum: 1.0
+  average_approval: 0.977
+  proposals_ratified: 1
+  proposals_rejected: 0
+  proposals_pending: 0
+audit_trail:
+  merkle_root: TBD
+  last_audit_utc: '2025-10-14T23:59:59Z'
+  next_audit_due: '2026-01-14'
+  external_auditor: TBD
+compliance_status:
+  overall: FULLY_COMPLIANT
+  gdpr: ✓
+  mica: ✓
+  dora: ✓
+  amld6: ✓
+  last_compliance_check: '2025-10-14T23:59:59Z'
+next_actions:
+- action: Quarterly snapshot review
+  due_date: '2026-01-12'
+  assigned_to: DAO Governance Core
+- action: External audit
+  due_date: '2025-12-31'
+  assigned_to: External Auditor (TBD)
+- action: Merkle proof generation
+  due_date: '2025-11-01'
+  assigned_to: Audit Logging System
+- action: Blockchain anchoring (optional)
+  due_date: '2025-11-15'
+  assigned_to: Infrastructure Team
+maintainer: SSID DAO Governance Core
+support: GitHub Issues
+documentation: 24_meta_orchestration/proposals/README.md

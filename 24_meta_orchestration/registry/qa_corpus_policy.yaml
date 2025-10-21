@@ -1,0 +1,211 @@
+policy_id: QA_CORPUS_UNIFIED_V4
+description: |
+  DUAL-LAYER QA ARCHITECTURE für das SSID-Projekt.
+  Test-Wildwuchs, Redundanz oder Governance-Pollution werden strikt blockiert.
+
+  POLICY ENFORCEMENT:
+  - QA-Testdateien (.py, .yaml, .yml, .rego, .json) dürfen NUR in zwei autorisierten Orten liegen
+  - LAYER 1: 11_test_simulation/ (Active Test Directory - produktive, ausführbare Tests)
+  - LAYER 2: 02_audit_logging/archives/qa_master_suite/ (QA Archive - konsolidierte historische Tests, 853MB+)
+  - SoT-Governance-Artefakte (5 Dateien) sind von der QA-Policy ausgenommen
+  - Pre-Commit-Hook blockiert Commits außerhalb dieser zwei Orte
+  - OPA-Policy ermöglicht maschinenlesbare CI/CD-Validierung
+
+  GOVERNANCE SEPARATION:
+  - EBENE 1 (Compliance): 5 SoT-Artefakte für CI/CD-Enforcement und Audit-Trails
+  - EBENE 2 (Active QA): 11_test_simulation/ für laufende Tests, CI/CD, Coverage
+  - EBENE 3 (QA Archive): qa_master_suite.* (853MB+) für Regression, historische Tests
+  - Strikte Trennung verhindert Governance-Pollution und Test-Chaos
+
+created_at: '2025-10-18T13:41:32Z'
+updated_at: '2025-10-18T16:30:00Z'
+
+version: 2.0.0
+status: ENFORCED
+migration_note: "unified_* → qa_master_suite.* (sprechende Namensgebung)"
+
+# File integrity (computed 2025-10-18T16:30:00Z - FINALIZED)
+sha256_readme: 0de0d7e1ddaec373578244802043cfbea6efbeba8a9b01e4d44711daf3c48de8
+sha256_opa: 4154c6db335b7e742369c108367c642bc6417e1b9cce15e70f7529b4358f2a65
+sha256_hook_git: 4e3e589288e520e48c6e0d118a2196e70ef291744fb68a6e03a4ece6440361d3
+sha256_registry: 173aedef08b3db974b6d4891aa84269f52970d65b5389697ce7dd1811033602f
+
+# Enforcement mechanisms
+enforced_by:
+  - type: pre-commit-hook
+    path: .git/hooks/pre-commit
+    language: python3
+    version: 1.0.0
+    description: Blocks commits of QA test files outside unified corpus
+
+  - type: opa-policy
+    path: 23_compliance/policies/qa/qa_policy_enforcer.rego
+    version: 1.0.0
+    description: Machine-readable policy for CI/CD validation
+
+  - type: documentation
+    path: 02_audit_logging/archives/qa_master_suite/README.md
+    version: 2.0.0
+    description: Human-readable policy documentation
+
+# Allowed locations for QA test files
+allowed_locations:
+  - 02_audit_logging/archives/qa_master_suite/  # QA Archive (consolidated historical tests)
+  - 11_test_simulation/  # Active Test Directory (productive, executable tests)
+
+# SoT governance artifacts (exempt from QA policy)
+sot_governance_artifacts:
+  - 16_codex/contracts/sot/sot_contract.yaml
+  - 03_core/validators/sot/sot_validator_core.py
+  - 23_compliance/policies/sot/sot_policy.rego
+  - 12_tooling/cli/sot_validator.py
+  - 11_test_simulation/tests_compliance/test_sot_validator.py
+
+# File extensions subject to QA policy
+qa_test_extensions:
+  - .py
+  - .yaml
+  - .yml
+  - .rego
+  - .json
+
+# Review and approval
+reviewed_by:
+  - name: bibel
+    role: Lead Compliance Architect
+    date: '2025-10-18T13:41:32Z'
+    approval: APPROVED
+
+promotion_status: APPROVED
+
+# Compliance framework
+scope: QA
+compliance_level: ROOT-24-LOCK, SAFE-FIX
+regulatory_framework:
+  - SOC 2 (CC6.1 - Logical Access)
+  - ISO 27001 (A.12.1.2 - Change Management)
+  - NIST Cybersecurity Framework (PR.IP-3 - Configuration Change Control)
+
+# Audit trail
+audit_trail:
+  - timestamp: '2025-10-18T13:41:32Z'
+    action: POLICY_CREATED
+    author: SSID Core Team
+    version: 1.0.0
+    description: Initial QA/SoT Dual-Layer Policy creation
+    worm_reference: qa_corpus_policy_v1_20251018.json
+
+# Integration points
+integrations:
+  ci_cd:
+    - github_actions:
+        workflow: .github/workflows/qa_policy_check.yml
+        trigger: pull_request
+        enforcement: BLOCK_MERGE_ON_VIOLATION
+
+    - pre_commit:
+        hook: .git/hooks/pre-commit
+        trigger: git_commit
+        enforcement: BLOCK_COMMIT_ON_VIOLATION
+
+  documentation:
+    - policy_readme: 02_audit_logging/archives/qa_master_suite/README.md
+    - governance_arch: 02_audit_logging/reports/SOT_V4_GOVERNANCE_ARCHITECTURE.md
+    - migration_report: 02_audit_logging/reports/SOT_V4_MIGRATION_COMPLETE.md
+    - qa_migration_report: 02_audit_logging/reports/QA_MASTER_SUITE_MIGRATION.md
+
+  monitoring:
+    - log_location: 02_audit_logging/logs/qa_policy_enforcement.jsonl
+    - metrics_dashboard: 24_meta_orchestration/docs/qa_policy_metrics.md
+
+# Violation handling
+violation_response:
+  severity: CRITICAL
+  action: BLOCK
+  notification:
+    - email: compliance@ssid-project.internal
+    - ticket: JIRA QA-Policy Board
+  remediation:
+    - Move file to qa_master_suite/
+    - OR remove from commit
+    - Submit change request for policy exception
+
+# Change management
+change_control:
+  review_cycle: Quarterly
+  next_review_date: '2026-01-18'
+  approval_required:
+    - Architecture Lead
+    - Compliance Lead
+    - Chief Compliance Officer
+
+  change_procedure:
+    - step_1: Submit change request with rationale
+    - step_2: Dual control review (Architecture + Compliance)
+    - step_3: Evidence documentation (SHA256 hashes)
+    - step_4: Update policy version
+    - step_5: WORM storage of previous version
+    - step_6: Notify all stakeholders
+
+# Metrics and KPIs
+metrics:
+  - name: QA corpus consolidation rate
+    target: 100%
+    current: 100%
+    measurement: Percentage of QA tests in qa_master_suite
+
+  - name: Policy violation rate
+    target: 0%
+    current: 0%
+    measurement: Violations per commit
+
+  - name: Governance pollution incidents
+    target: 0
+    current: 0
+    measurement: SoT artifacts mixed with QA tests
+
+# Related policies
+related_policies:
+  - policy_id: SOT_V4_GOVERNANCE_ARCH
+    path: 02_audit_logging/reports/SOT_V4_GOVERNANCE_ARCHITECTURE.md
+    relationship: DUAL_LAYER_COMPANION
+
+  - policy_id: SOT_V4_MIGRATION
+    path: 02_audit_logging/reports/SOT_V4_MIGRATION_COMPLETE.md
+    relationship: IMPLEMENTATION_REPORT
+
+# Contact and support
+contact:
+  owner: SSID Core Team
+  lead: bibel
+  email: qa-policy@ssid-project.internal
+  ticket_system: JIRA QA-Policy Board
+  meeting: Bi-weekly Thursday 14:00 UTC
+
+# Document metadata
+document_classification: CONFIDENTIAL - Internal Policy Document
+document_type: POLICY_ENFORCEMENT
+document_format: YAML
+document_version: 2.0.0
+document_status: ACTIVE
+worm_storage_required: true
+blockchain_anchor_required: true
+
+# Signature block (to be filled post-approval)
+digital_signatures:
+  architecture_lead:
+    name: SSID Core Team
+    date: '2025-10-18T13:41:32Z'
+    signature: PENDING_DIGITAL_SIGNATURE
+
+  compliance_lead:
+    name: SSID Core Team
+    date: '2025-10-18T13:41:32Z'
+    signature: PENDING_DIGITAL_SIGNATURE
+
+  chief_compliance_officer:
+    name: PENDING
+    date: PENDING
+    signature: PENDING
+
+# End of policy document

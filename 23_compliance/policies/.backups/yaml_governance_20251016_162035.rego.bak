@@ -1,0 +1,211 @@
+# yaml_governance.rego - YAML Landscape Governance Policy
+# Author: edubrainboost ©2025 MIT License
+#
+# Evaluates YAML configuration landscape health:
+# - Backup retention limits
+# - Proportional YAML count to shard scale
+# - Duplication efficiency thresholds
+#
+# Input format:
+# {
+#   "total_yaml_files": 6667,
+#   "unique_templates": 6362,
+#   "duplicate_templates": 278,
+#   "deduplication_efficiency_pct": 4.57,
+#   "backup_yaml_count": 20124,
+#   "retention_limit": 3,
+#   "shard_count": 384
+# }
+
+package yaml_governance
+
+# ===== Configuration Parameters =====
+
+# Maximum YAMLs per shard (chart, values, deployment, policies, etc.)
+max_yamls_per_shard := 30
+
+# Maximum duplication efficiency percentage (lower is better)
+max_duplication_pct := 10.0
+
+# Maximum backup multiplier (backups should not exceed live files by this factor)
+max_backup_multiplier := 5
+
+# ===== Core Rules =====
+
+# YAML count is justified if proportional to shard scale
+yaml_count_justified if {
+    input.total_yaml_files <= input.shard_count * max_yamls_per_shard
+}
+
+# Backups are within retention policy
+backup_retention_healthy if {
+    input.backup_yaml_count <= input.retention_limit * 1000
+}
+
+# Backup accumulation is not excessive
+backup_ratio_healthy if {
+    live_yaml_count := input.total_yaml_files - input.backup_yaml_count
+    input.backup_yaml_count <= live_yaml_count * max_backup_multiplier
+}
+
+# Deduplication efficiency is acceptable (low duplication is good)
+duplication_acceptable if {
+    input.deduplication_efficiency_pct <= max_duplication_pct
+}
+
+# ===== Deny Rules =====
+
+deny[msg] if {
+    not backup_retention_healthy
+    msg := sprintf(
+        "Backup accumulation: %d YAMLs exceed retention limit (max: %d per backup × %d backups = %d)",
+        [input.backup_yaml_count, 1000, input.retention_limit, input.retention_limit * 1000]
+    )
+}
+
+deny[msg] if {
+    not backup_ratio_healthy
+    live_yaml_count := input.total_yaml_files - input.backup_yaml_count
+    msg := sprintf(
+        "Excessive backup ratio: %d backup YAMLs vs %d live YAMLs (max %dx)",
+        [input.backup_yaml_count, live_yaml_count, max_backup_multiplier]
+    )
+}
+
+deny[msg] if {
+    not yaml_count_justified
+    max_allowed := input.shard_count * max_yamls_per_shard
+    msg := sprintf(
+        "YAML count unjustified: %d YAMLs for %d shards (max %d per shard = %d total)",
+        [input.total_yaml_files, input.shard_count, max_yamls_per_shard, max_allowed]
+    )
+}
+
+# ===== Warning Rules =====
+
+warn[msg] if {
+    not duplication_acceptable
+    msg := sprintf(
+        "High YAML duplication: %.2f%% efficiency (threshold: %.1f%%)",
+        [input.deduplication_efficiency_pct, max_duplication_pct]
+    )
+}
+
+warn[msg] if {
+    # Warn if live YAML count approaching limit
+    yaml_count_justified
+    utilization := (input.total_yaml_files * 100.0) / (input.shard_count * max_yamls_per_shard)
+    utilization > 80.0
+    msg := sprintf(
+        "High YAML density: %.1f%% of capacity (consider consolidation)",
+        [utilization]
+    )
+}
+
+# ===== Info Rules =====
+
+info[msg] if {
+    live_yaml_count := input.total_yaml_files - input.backup_yaml_count
+    backup_pct := (input.backup_yaml_count * 100.0) / (input.total_yaml_files + input.backup_yaml_count)
+    msg := sprintf(
+        "Backup proportion: %.1f%% of total YAMLs (%d backup / %d live)",
+        [backup_pct, input.backup_yaml_count, live_yaml_count]
+    )
+}
+
+info[msg] if {
+    diversity_pct := (input.unique_templates * 100.0) / input.total_yaml_files
+    msg := sprintf(
+        "Semantic diversity: %.2f%% unique templates (%d unique / %d total)",
+        [diversity_pct, input.unique_templates, input.total_yaml_files]
+    )
+}
+
+# ===== Assessment =====
+
+assessment := {
+    "yaml_count_justified": yaml_count_justified,
+    "backup_retention_healthy": backup_retention_healthy,
+    "backup_ratio_healthy": backup_ratio_healthy,
+    "duplication_acceptable": duplication_acceptable,
+    "utilization_pct": utilization_pct,
+    "diversity_pct": diversity_pct
+}
+
+utilization_pct := (input.total_yaml_files * 100.0) / (input.shard_count * max_yamls_per_shard)
+
+diversity_pct := (input.unique_templates * 100.0) / input.total_yaml_files
+
+# ===== Policy Decision =====
+
+policy_decision := {
+    "allow": count(deny) == 0,
+    "deny_reasons": deny,
+    "warnings": warn,
+    "info": info,
+    "assessment": assessment,
+    "recommendation": recommendation
+}
+
+# Recommendation based on assessment
+recommendation := "Healthy YAML landscape - no action required" if {
+    count(deny) == 0
+    count(warn) == 0
+} else := "Execute backup cleanup script" if {
+    not backup_retention_healthy
+} else := "Review duplication patterns" if {
+    not duplication_acceptable
+} else := "Review YAML count growth" if {
+    not yaml_count_justified
+} else := "Monitor warnings"
+
+# ===== Testing =====
+
+# Test case: Healthy landscape
+test_healthy_landscape if {
+    test_input := {
+        "total_yaml_files": 6667,
+        "unique_templates": 6362,
+        "duplicate_templates": 278,
+        "deduplication_efficiency_pct": 4.57,
+        "backup_yaml_count": 2000,
+        "retention_limit": 3,
+        "shard_count": 384
+    }
+
+    result := policy_decision with input as test_input
+    result.allow == true
+}
+
+# Test case: Backup accumulation issue
+test_backup_accumulation if {
+    test_input := {
+        "total_yaml_files": 6667,
+        "unique_templates": 6362,
+        "duplicate_templates": 278,
+        "deduplication_efficiency_pct": 4.57,
+        "backup_yaml_count": 20124,
+        "retention_limit": 3,
+        "shard_count": 384
+    }
+
+    result := policy_decision with input as test_input
+    result.allow == false
+    count(result.deny_reasons) > 0
+}
+
+# Test case: High duplication
+test_high_duplication if {
+    test_input := {
+        "total_yaml_files": 6667,
+        "unique_templates": 5000,
+        "duplicate_templates": 1667,
+        "deduplication_efficiency_pct": 25.0,
+        "backup_yaml_count": 2000,
+        "retention_limit": 3,
+        "shard_count": 384
+    }
+
+    result := policy_decision with input as test_input
+    count(result.warnings) > 0
+}

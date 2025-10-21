@@ -1,0 +1,19 @@
+{
+  "version": "5.2",
+  "tenant_id": "did:ssid:partner-42",
+  "tier": "partner_enterprise",
+  "partner_code": "SPARROW-ALPHA",
+  "regions": ["EN-EU", "APAC-EN"],
+  "addons": ["compliance_mesh"],
+  "discount_term_months": 36,
+  "discount_percent": 15,
+  "bundle": "eu_bundle",
+  "api": {
+    "rate_class": "enhanced",
+    "feature_flags": ["partner_delegation"]
+  },
+  "limits": {
+    "users": 10000,
+    "tenants": 5
+  }
+}

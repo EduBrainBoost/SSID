@@ -1,0 +1,30 @@
+{
+  "id": "ea739c9c-84c8-4b74-b78c-7911d8c77cf4",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 3,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/reports/score_finalization_evidence_20251014.md",
+    "hash": "814e39be847c02fb942d8ac6a84d8682afd21938d7f8fc2e8551212b842e43d564e89dc117faabb06396df5703a16ee6e410a952bdf5917f4ab27ad40ddb204c",
+    "line": 30,
+    "context": "**Tool:** `12_tooling/quality/score_improvement_engine.py`\n\n**Initial State (from forensic report):**\n- Overall score: 87.3/100\n- Gap to target: 12.7 points\n- Critical issues: 7 root violations, 1 rel"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "cdc2eb78-23f5-47e2-ab50-985ed43c3b91",
+    "timestamp": "2025-10-16T19:32:37.296124Z"
+  },
+  "worm": {
+    "uuid": "c2e7c52f-2ff3-49ee-baa7-c6c5c8fbc092",
+    "signature": "da0830f701eb810cb0ec309d462ae9f15080850f5e7e473c0e20de7712ab31eb48ccdcb2e5df61614ab63d4149edb754839853cc68ac5ebf564c46e77fa2d326",
+    "chain_prev": "ddc1f160-6240-42a1-8de1-53a301f9575a"
+  },
+  "metadata": {
+    "label": "Forensic",
+    "component": "Audit & Compliance"
+  }
+}

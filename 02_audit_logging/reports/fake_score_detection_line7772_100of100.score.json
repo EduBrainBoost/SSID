@@ -1,0 +1,30 @@
+{
+  "id": "d89888f7-3422-4df8-a09c-92563c3e5d5b",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 100,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/reports/fake_score_detection.json",
+    "hash": "d0ae608a117b02def7dc2824b0caf3569b6076a8ca2be6fad7bd15dae01e54526b898c442c1c47055f17828e2ff0adbac8855904fcbee88cac22cb1757ce3dca",
+    "line": 7772,
+    "context": "      {\n        \"pattern\": \"Excessive perfect scores\",\n        \"count\": 861,\n        \"reason\": \"More than 3 instances of 100/100 score\",\n        \"severity\": \"LOW\"\n      }\n    ],"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "a506f102-a974-4635-b229-4d2f8eabf63f",
+    "timestamp": "2025-10-16T19:31:23.965125Z"
+  },
+  "worm": {
+    "uuid": "03f13cee-f791-4248-93ee-69bbb2516eea",
+    "signature": "83a5d00d7c22c5a91dcf6f6e9d72af339d716cb397b8b4b8ff96e4842b588b0b97275a3a9b92f4678374089c676c760ea5767b1e4e72ea67c1212d665ca45fe6",
+    "chain_prev": "6a07e7c0-e259-4fcf-b8c0-79f169f605d3"
+  },
+  "metadata": {
+    "grade": "PLATINUM",
+    "component": "Audit & Compliance"
+  }
+}

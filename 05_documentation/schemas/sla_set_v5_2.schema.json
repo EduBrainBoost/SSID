@@ -1,0 +1,187 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ssid.global/schemas/sla_set_v5_2.json",
+  "title": "SLA Set Definition v5.2",
+  "description": "JSON Schema for Service Level Agreement (SLA) definitions with tier-specific guarantees",
+  "type": "object",
+  "required": [
+    "version",
+    "model_name",
+    "sla_tiers",
+    "epistemic_certainty"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["5.2"],
+      "description": "Schema version"
+    },
+    "model_name": {
+      "type": "string",
+      "const": "sla_set_v5_2",
+      "description": "Canonical model name"
+    },
+    "sla_tiers": {
+      "type": "object",
+      "required": ["S1", "S2", "S3", "S3_prime"],
+      "properties": {
+        "S1": {
+          "$ref": "#/definitions/sla_tier"
+        },
+        "S2": {
+          "$ref": "#/definitions/sla_tier"
+        },
+        "S3": {
+          "$ref": "#/definitions/sla_tier"
+        },
+        "S3_prime": {
+          "$ref": "#/definitions/sla_tier_s3_prime"
+        }
+      },
+      "additionalProperties": false
+    },
+    "epistemic_certainty": {
+      "type": "number",
+      "minimum": 1.0,
+      "maximum": 1.0,
+      "description": "Deterministic certainty required for v5.2"
+    },
+    "compliance_references": {
+      "type": "object",
+      "properties": {
+        "dsgvo": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eidas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mica": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "sla_tier": {
+      "type": "object",
+      "required": [
+        "tier_name",
+        "uptime_guarantee",
+        "response_time_p95",
+        "response_time_p99",
+        "support_level"
+      ],
+      "properties": {
+        "tier_name": {
+          "type": "string",
+          "enum": ["S1", "S2", "S3"]
+        },
+        "uptime_guarantee": {
+          "type": "number",
+          "minimum": 0.95,
+          "maximum": 1.0,
+          "description": "Uptime percentage guarantee"
+        },
+        "response_time_p95": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "P95 response time in milliseconds"
+        },
+        "response_time_p99": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "P99 response time in milliseconds"
+        },
+        "support_level": {
+          "type": "string",
+          "enum": ["basic", "standard", "premium", "enterprise"]
+        },
+        "monthly_credits": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Monthly downtime credit percentage"
+        },
+        "incident_response_time": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Incident response time in minutes"
+        }
+      }
+    },
+    "sla_tier_s3_prime": {
+      "type": "object",
+      "required": [
+        "tier_name",
+        "uptime_guarantee",
+        "response_time_p95",
+        "response_time_p99",
+        "support_level",
+        "interfederation_sla"
+      ],
+      "properties": {
+        "tier_name": {
+          "type": "string",
+          "const": "S3_prime"
+        },
+        "uptime_guarantee": {
+          "type": "number",
+          "minimum": 0.9999,
+          "maximum": 1.0,
+          "description": "S3' requires ≥99.99% uptime"
+        },
+        "response_time_p95": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50,
+          "description": "P95 ≤50ms for S3'"
+        },
+        "response_time_p99": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "P99 ≤100ms for S3'"
+        },
+        "support_level": {
+          "type": "string",
+          "const": "enterprise"
+        },
+        "monthly_credits": {
+          "type": "integer",
+          "minimum": 10,
+          "description": "Monthly downtime credit percentage"
+        },
+        "incident_response_time": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 15,
+          "description": "≤15 min incident response for S3'"
+        },
+        "interfederation_sla": {
+          "type": "object",
+          "required": ["enabled", "cross_chain_latency_p99"],
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "const": true
+            },
+            "cross_chain_latency_p99": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "description": "Cross-chain P99 latency in milliseconds"
+            }
+          }
+        }
+      }
+    }
+  }
+}

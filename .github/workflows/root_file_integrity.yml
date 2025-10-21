@@ -1,0 +1,146 @@
+name: Root-24-LOCK File Integrity (v5.3)
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  root_file_integrity_check:
+    name: Root-24-LOCK File Policy Enforcement
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run Root-24-LOCK Integrity Validator (Strict Mode)
+        id: validator
+        run: |
+          echo "::group::Root-24-LOCK File Integrity Check"
+          python 11_test_simulation/tools/root_integrity_validator.py \
+            --repo . \
+            --strict \
+            --json > root_integrity_result.json || true
+          echo "::endgroup::"
+
+          # Show human-readable output
+          echo "::group::Human-Readable Report"
+          python 11_test_simulation/tools/root_integrity_validator.py --repo . || EXIT_CODE=$?
+          echo "::endgroup::"
+
+          # Parse JSON for artifacts
+          cat root_integrity_result.json
+
+          # Check compliance
+          COMPLIANT=$(jq -r '.compliant' root_integrity_result.json)
+          VIOLATION_COUNT=$(jq -r '.stats.violations' root_integrity_result.json)
+
+          echo "compliant=$COMPLIANT" >> $GITHUB_OUTPUT
+          echo "violation_count=$VIOLATION_COUNT" >> $GITHUB_OUTPUT
+
+          if [ "$COMPLIANT" != "true" ]; then
+            echo "::error::Root-24-LOCK Policy violations detected ($VIOLATION_COUNT violation(s))"
+            exit 2
+          fi
+
+      - name: Upload compliance report (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-integrity-violation-report
+          path: root_integrity_result.json
+          retention-days: 30
+
+      - name: Generate compliance badge data
+        if: always()
+        run: |
+          COMPLIANT="${{ steps.validator.outputs.compliant }}"
+          VIOLATIONS="${{ steps.validator.outputs.violation_count }}"
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+          mkdir -p 02_audit_logging/badges/
+
+          if [ "$COMPLIANT" = "true" ]; then
+            cat > 02_audit_logging/badges/root_file_integrity_badge.json <<EOF
+          {
+            "schemaVersion": 1,
+            "label": "Root-24-LOCK",
+            "message": "COMPLIANT",
+            "color": "success",
+            "timestamp": "$TIMESTAMP",
+            "policy_version": "v1.0"
+          }
+          EOF
+          else
+            cat > 02_audit_logging/badges/root_file_integrity_badge.json <<EOF
+          {
+            "schemaVersion": 1,
+            "label": "Root-24-LOCK",
+            "message": "$VIOLATIONS violations",
+            "color": "critical",
+            "timestamp": "$TIMESTAMP",
+            "policy_version": "v1.0"
+          }
+          EOF
+          fi
+
+      - name: Comment on PR (on failure)
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('root_integrity_result.json', 'utf8'));
+
+            let comment = `## ❌ Root-24-LOCK Policy Violations Detected\n\n`;
+            comment += `**Policy Version:** ${report.policy_version}\n`;
+            comment += `**Violations:** ${report.stats.violations}\n\n`;
+            comment += `### Violation Details:\n\n`;
+
+            report.violations.forEach((v, i) => {
+              comment += `#### ${i + 1}. ${v.name}\n`;
+              comment += `- **Type:** \`${v.type}\`\n`;
+              comment += `- **Message:** ${v.message}\n`;
+              comment += `- **Suggested Fix:** ${v.suggestion}\n\n`;
+            });
+
+            comment += `### Root-24-LOCK-Policy v1.0 Requirements:\n\n`;
+            comment += `Only **6 whitelisted files** are allowed at repository root:\n`;
+            comment += `1. \`.gitignore\`\n`;
+            comment += `2. \`LICENSE\`\n`;
+            comment += `3. \`README.md\`\n`;
+            comment += `4. \`package.json\`\n`;
+            comment += `5. \`pytest.ini\`\n`;
+            comment += `6. \`.pre-commit-config.yaml\`\n\n`;
+            comment += `All other files must reside in one of the **24 authorized Layer directories**.\n`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Fail if violations detected
+        if: steps.validator.outputs.compliant != 'true'
+        run: |
+          echo "::error::Root-24-LOCK Policy enforcement failed"
+          echo "Repository root contains unauthorized files"
+          echo "Please relocate files to appropriate Layer directories"
+          exit 1
+
+      - name: Success summary
+        if: success()
+        run: |
+          echo "::notice::✓ Root-24-LOCK compliance verified"
+          echo "Repository structure adheres to Root-24-LOCK-Policy v1.0"

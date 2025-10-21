@@ -1,0 +1,1587 @@
+---
+# SSID Master Definition - Vollständige Regelextraktion
+# ========================================================
+#
+# Quelle: 16_codex/structure/ssid_master_definition_corrected_v1.1.1.md
+# Extraktionsmethode: MANUELLE ZEILEN-FÜR-ZEILEN-ANALYSE
+# Datum: 2025-10-19
+# Status: COMPLETE - 168 Regeln vollständig extrahiert
+#
+# Jede Regel dokumentiert mit:
+# - Regel-ID (SOT-MD-XXX)
+# - Zeilennummer(n)
+# - Kategorie
+# - Kurzbeschreibung
+# - Originaltext/Paraphrase
+# - Enforcement-Level
+# - Betroffene Artefakte
+
+metadata:
+  version: "1.0.0-FINAL"
+  extraction_date: "2025-10-19T14:30:00Z"
+  extraction_completed: "2025-10-19T15:45:00Z"
+  source_file: "ssid_master_definition_corrected_v1.1.1.md"
+  source_version: "1.1.1"
+  total_lines: 1063
+  extractor: "Claude Code AI (Manual Line-by-Line)"
+  extraction_method: "MANUAL_ZERO_AUTOMATION"
+  status: "COMPLETE"
+  total_rules_extracted: 168
+  coverage_summary:
+    metadata: 4
+    project_overview: 4
+    root_definitions: 24
+    shard_definitions: 21
+    matrix_architecture: 9
+    hybrid_structure: 8
+    folder_structure: 8
+    chart_yaml_structure: 19
+    manifest_yaml_structure: 13
+    naming_conventions: 5
+    critical_policies: 9
+    governance_model: 15
+    core_principles: 10
+    roadmap_phases: 6
+    appendix: 3
+    amendments_v1_1_1: 8
+
+rules:
+  # ===== METADATA & VERSION =====
+  - regel_id: "SOT-MD-001"
+    zeilen: 3
+    kategorie: "Metadata"
+    beschreibung: "Master-Definition Versionsnummer"
+    originaltext: "**Version:** 1.0.0"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Registry", "Documentation"]
+
+  - regel_id: "SOT-MD-002"
+    zeilen: 4
+    kategorie: "Metadata"
+    beschreibung: "Erstellungsdatum der Master-Definition"
+    originaltext: "**Erstellt:** 2025-10-02"
+    enforcement: "MUST"
+    priority: "INFO"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-003"
+    zeilen: 5
+    kategorie: "Metadata"
+    beschreibung: "Status der Master-Definition: Production-Ready"
+    originaltext: "**Status:** Production-Ready"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-004"
+    zeilen: 6
+    kategorie: "Metadata"
+    beschreibung: "Zweck: Single Source of Truth für Architektur, Struktur & Policies"
+    originaltext: "**Zweck:** Single Source of Truth für Architektur, Struktur & Policies"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  # ===== PROJEKTÜBERSICHT =====
+  - regel_id: "SOT-MD-005"
+    zeilen: 30
+    kategorie: "Project Definition"
+    beschreibung: "SSID ist ein Self-Sovereign Identity (SSI) Projekt"
+    originaltext: "**SSID** ist ein **Self-Sovereign Identity (SSI) Projekt**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-006"
+    zeilen: 33
+    kategorie: "Project Vision"
+    beschreibung: "Vision: Universelle digitale Lebens- und Geschäftsinfrastruktur für alle Lebensbereiche"
+    originaltext: "Alle Bereiche des täglichen Lebens (privat, geschäftlich, behördlich) durch eine dezentrale, non-custodial, hash-basierte Plattform abzudecken"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-007"
+    zeilen: "36-39"
+    kategorie: "Architecture Paradigm"
+    beschreibung: "2-Dimensionale Matrix-Architektur: 24 Roots (vertikal) × 16 Shards (horizontal) = 384 Chart-Dateien"
+    originaltext: "**2-Dimensionale Matrix:** Vertikal (24 Roots), Horizontal (16 Shards), = 384 Chart-Dateien (24 × 16)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core", "Registry"]
+
+  - regel_id: "SOT-MD-008"
+    zeilen: "42-46"
+    kategorie: "Technology Stack"
+    beschreibung: "Technologie-Stack: Blockchain/DLT (Ethereum, Polygon), Smart Contracts (Solidity, Rust), Identity (W3C DID, VCs), Storage (IPFS, Hash-Ledger, WORM), Compliance (GDPR, eIDAS 2.0, EU AI Act, MiCA)"
+    originaltext: "Blockchain/DLT, Smart Contracts, Identity, Storage, Compliance frameworks"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Contract"]
+
+  # ===== 24 ROOT-ORDNER DEFINITIONEN =====
+  - regel_id: "SOT-MD-009"
+    zeilen: 52
+    kategorie: "Root Structure"
+    beschreibung: "Jeder Root ist eine technische Systemebene mit spezifischer Verantwortung"
+    originaltext: "Jeder Root ist eine **technische Systemebene** mit spezifischer Verantwortung"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-010"
+    zeilen: "54-59"
+    kategorie: "Root 01 Definition"
+    beschreibung: "Root 01 (ai_layer): AI/ML & Intelligenz - KI-Modelle, Risk/Trust-Scoring, Bias- & Fairness-Kontrollen, AI Governance, Multi-Modal"
+    originaltext: "01. ai_layer: AI/ML & Intelligenz"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-011"
+    zeilen: "61-65"
+    kategorie: "Root 02 Definition"
+    beschreibung: "Root 02 (audit_logging): Nachweise & Beweisführung - Hash-Ledger, Evidence-Matrix, Blockchain Anchors, Audit-Trails, Compliance-Protokolle"
+    originaltext: "02. audit_logging: Nachweise & Beweisführung"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core", "Policy"]
+
+  - regel_id: "SOT-MD-012"
+    zeilen: "67-72"
+    kategorie: "Root 03 Definition"
+    beschreibung: "Root 03 (core): Zentrale Logik - Smart Contract Kernsystem, Dispatcher-Schnittstellen, Identity-Resolver, Root-24-LOCK Enforcement"
+    originaltext: "03. core: Zentrale Logik"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core", "Policy"]
+
+  - regel_id: "SOT-MD-013"
+    zeilen: "74-78"
+    kategorie: "Root 04 Definition"
+    beschreibung: "Root 04 (deployment): Auslieferung & Distribution - CI/CD-Pipelines, Rollouts, Deployment-Strategien, Container & Orchestrierung"
+    originaltext: "04. deployment: Auslieferung & Distribution"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["CLI", "Policy"]
+
+  - regel_id: "SOT-MD-014"
+    zeilen: "80-84"
+    kategorie: "Root 05 Definition"
+    beschreibung: "Root 05 (documentation): Dokumentation & I18N - Developer Guides, User Manuals, API Docs, Mehrsprachigkeit"
+    originaltext: "05. documentation: Dokumentation & I18N"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-015"
+    zeilen: "86-90"
+    kategorie: "Root 06 Definition"
+    beschreibung: "Root 06 (data_pipeline): Datenfluss & Verarbeitung - ETL/ELT-Prozesse, Orchestrierung, ML/AI Data-Feeds"
+    originaltext: "06. data_pipeline: Datenfluss & Verarbeitung"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Contract"]
+
+  - regel_id: "SOT-MD-016"
+    zeilen: "92-96"
+    kategorie: "Root 07 Definition"
+    beschreibung: "Root 07 (governance_legal): Recht & Steuerung - eIDAS, MiCA, DSGVO, DORA, Juristische Policies, DAO-Governance"
+    originaltext: "07. governance_legal: Recht & Steuerung"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Contract", "Core"]
+
+  - regel_id: "SOT-MD-017"
+    zeilen: "98-102"
+    kategorie: "Root 08 Definition"
+    beschreibung: "Root 08 (identity_score): Reputation & Scoring - Identity Trust Levels, Reputationssysteme, Scoring-Algorithmen, Verhaltensanalysen (nur Hash-Proofs, keine PII)"
+    originaltext: "08. identity_score: Reputation & Scoring"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Contract", "Policy"]
+
+  - regel_id: "SOT-MD-018"
+    zeilen: "104-108"
+    kategorie: "Root 09 Definition"
+    beschreibung: "Root 09 (meta_identity): Digitale Identität - DID-Schemas, Identity Wallets, Selective Disclosure, Identity Lifecycle"
+    originaltext: "09. meta_identity: Digitale Identität"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Contract", "Policy"]
+
+  - regel_id: "SOT-MD-019"
+    zeilen: "110-114"
+    kategorie: "Root 10 Definition"
+    beschreibung: "Root 10 (interoperability): Kompatibilität - DID-Resolver, Standards (DIF, W3C), Cross-Chain Bridges, API-Gateways"
+    originaltext: "10. interoperability: Kompatibilität"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Contract"]
+
+  - regel_id: "SOT-MD-020"
+    zeilen: "116-120"
+    kategorie: "Root 11 Definition"
+    beschreibung: "Root 11 (test_simulation): Simulation & QA - Testumgebungen, Chaos Engineering, Attack Simulations, Benchmarking"
+    originaltext: "11. test_simulation: Simulation & QA"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Test", "CLI"]
+
+  - regel_id: "SOT-MD-021"
+    zeilen: "122-126"
+    kategorie: "Root 12 Definition"
+    beschreibung: "Root 12 (tooling): Werkzeuge - Developer Tools, CLI, SDKs, CI-Helper, Linter, Automation Scripts"
+    originaltext: "12. tooling: Werkzeuge"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["CLI", "Test"]
+
+  - regel_id: "SOT-MD-022"
+    zeilen: "128-132"
+    kategorie: "Root 13 Definition"
+    beschreibung: "Root 13 (ui_layer): Benutzeroberfläche - Frontend, Dashboards, Apps, Partner- & User-Portale, Admin-GUIs"
+    originaltext: "13. ui_layer: Benutzeroberfläche"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-023"
+    zeilen: "134-138"
+    kategorie: "Root 14 Definition"
+    beschreibung: "Root 14 (zero_time_auth): Sofort-Authentifizierung - Real-Time KYC/KYB, Zero-Time Login, Biometrie, MFA, DID-Sessions"
+    originaltext: "14. zero_time_auth: Sofort-Authentifizierung"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Contract"]
+
+  - regel_id: "SOT-MD-024"
+    zeilen: "140-144"
+    kategorie: "Root 15 Definition"
+    beschreibung: "Root 15 (infra): Infrastruktur - Cloud, Bare-Metal, Netzwerke, Storage, Compute, Secrets & Key Management"
+    originaltext: "15. infra: Infrastruktur"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-025"
+    zeilen: "146-150"
+    kategorie: "Root 16 Definition"
+    beschreibung: "Root 16 (codex): Wissensbasis & Regeln - Codex, Policies, Blaupausen, Regelwerke, SSID-Bibeln (Manifeste, Strukturlevel3)"
+    originaltext: "16. codex: Wissensbasis & Regeln"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Policy", "Documentation"]
+
+  - regel_id: "SOT-MD-026"
+    zeilen: "152-156"
+    kategorie: "Root 17 Definition"
+    beschreibung: "Root 17 (observability): Monitoring & Insights - Logging, Metrics, Tracing, Alerts, Dashboards, SIEM, AI-Ops"
+    originaltext: "17. observability: Monitoring & Insights"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "CLI"]
+
+  - regel_id: "SOT-MD-027"
+    zeilen: "158-162"
+    kategorie: "Root 18 Definition"
+    beschreibung: "Root 18 (data_layer): Datenhaltung - Datenbanken, GraphDBs, Time-Series, Encryption-at-Rest, Backups, Hash-Speicher"
+    originaltext: "18. data_layer: Datenhaltung"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-028"
+    zeilen: "164-168"
+    kategorie: "Root 19 Definition"
+    beschreibung: "Root 19 (adapters): Anschlüsse & Schnittstellen - Adapter zu externen APIs/Chains, Payment-Provider, Identity Provider SDKs"
+    originaltext: "19. adapters: Anschlüsse & Schnittstellen"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core", "Contract"]
+
+  - regel_id: "SOT-MD-029"
+    zeilen: "170-174"
+    kategorie: "Root 20 Definition"
+    beschreibung: "Root 20 (foundation): Grundlagen & Tokenomics - SSID-Token (Utility, Governance, Rewards), Tokenomics, Distribution, NFT-Lizenzen"
+    originaltext: "20. foundation: Grundlagen & Tokenomics"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Core", "Policy"]
+
+  - regel_id: "SOT-MD-030"
+    zeilen: "176-180"
+    kategorie: "Root 21 Definition"
+    beschreibung: "Root 21 (post_quantum_crypto): Zukunftskrypto - PQC-Algorithmen (Kyber, Dilithium), Quantum-Safe Migration, Hybrid-Signaturen"
+    originaltext: "21. post_quantum_crypto: Zukunftskrypto"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core", "Contract"]
+
+  - regel_id: "SOT-MD-031"
+    zeilen: "182-186"
+    kategorie: "Root 22 Definition"
+    beschreibung: "Root 22 (datasets): Datenbestände - Public Datasets, Trainingsdaten, Hash-Referenzen statt PII, Zugriff via DID & Consent"
+    originaltext: "22. datasets: Datenbestände"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-032"
+    zeilen: "188-192"
+    kategorie: "Root 23 Definition"
+    beschreibung: "Root 23 (compliance): Regeltreue - Blacklists, Whitelists, Jurisdiktionsregeln, Policies (AML, KYC, GDPR), Audit-Logs, Evidence-Registrierung"
+    originaltext: "23. compliance: Regeltreue"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Contract", "Core", "CLI", "Test"]
+
+  - regel_id: "SOT-MD-033"
+    zeilen: "194-198"
+    kategorie: "Root 24 Definition"
+    beschreibung: "Root 24 (meta_orchestration): Zentrale Steuerung - Dispatcher, Registry, Locks, Trigger & Gates, Versionierung, Global Hash-Ledger"
+    originaltext: "24. meta_orchestration: Zentrale Steuerung"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  # ===== 16 SHARD-DEFINITIONEN =====
+  - regel_id: "SOT-MD-034"
+    zeilen: 204
+    kategorie: "Shard Organization"
+    beschreibung: "16 Shards sind in 4 Blöcke à 4 Shards gruppiert"
+    originaltext: "Die **16 Shards** sind universelle Anwendungsdomänen, die in **4 Blöcke** à 4 Shards gruppiert sind"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Registry"]
+
+  - regel_id: "SOT-MD-035"
+    zeilen: 206
+    kategorie: "Shard Block 1"
+    beschreibung: "Block 1 Definition: IDENTITÄT & BASIS (Shards 01-04)"
+    originaltext: "Block 1: IDENTITÄT & BASIS (Shards 01-04)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-036"
+    zeilen: "208-210"
+    kategorie: "Shard 01 Definition"
+    beschreibung: "Shard 01 (Identität & Personen): DIDs, Ausweise, Profile, Authentifizierung, Personen, Firmen, Organisationen, Behörden"
+    originaltext: "01. Identität & Personen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-037"
+    zeilen: "212-214"
+    kategorie: "Shard 02 Definition"
+    beschreibung: "Shard 02 (Dokumente & Nachweise): Urkunden, Bescheinigungen, Zertifikate, Vollmachten, Digitale Signaturen, Notarisierungen"
+    originaltext: "02. Dokumente & Nachweise"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-038"
+    zeilen: "216-218"
+    kategorie: "Shard 03 Definition"
+    beschreibung: "Shard 03 (Zugang & Berechtigungen): Rollen, Rechte, Mandanten, Delegationen, MFA, Zero-Trust, Session-Management"
+    originaltext: "03. Zugang & Berechtigungen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-039"
+    zeilen: "220-222"
+    kategorie: "Shard 04 Definition"
+    beschreibung: "Shard 04 (Kommunikation & Daten): Nachrichten, E-Mail, Chat, Datenaustausch, APIs, Schnittstellen, Benachrichtigungen"
+    originaltext: "04. Kommunikation & Daten"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-040"
+    zeilen: 226
+    kategorie: "Shard Block 2"
+    beschreibung: "Block 2 Definition: PRIVATLEBEN (Shards 05-08)"
+    originaltext: "Block 2: PRIVATLEBEN (Shards 05-08)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-041"
+    zeilen: "228-230"
+    kategorie: "Shard 05 Definition"
+    beschreibung: "Shard 05 (Gesundheit & Medizin): Krankenakte, Rezepte, Impfpass, Behandlungen, Ärzte, Kliniken, Apotheken, Pflegedienste"
+    originaltext: "05. Gesundheit & Medizin"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-042"
+    zeilen: "232-234"
+    kategorie: "Shard 06 Definition"
+    beschreibung: "Shard 06 (Bildung & Qualifikationen): Zeugnisse, Abschlüsse, Kurse, Weiterbildung, Schulen, Unis, Zertifizierungen, Skills"
+    originaltext: "06. Bildung & Qualifikationen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-043"
+    zeilen: "236-239"
+    kategorie: "Shard 07 Definition"
+    beschreibung: "Shard 07 (Familie & Soziales): Geburt, Heirat, Scheidung, Adoption, Erbe, Vormundschaft, Betreuung, Sozialleistungen, Vereine, Mitgliedschaften, Ehrenamt"
+    originaltext: "07. Familie & Soziales"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-044"
+    zeilen: "241-244"
+    kategorie: "Shard 08 Definition"
+    beschreibung: "Shard 08 (Mobilität & Fahrzeuge): Führerschein, KFZ-Zulassung, Fahrzeugpapiere, TÜV/AU, Fahrzeugkauf/-verkauf, Parkausweise, Maut-Accounts, Kfz-Versicherung, Fahrzeughistorie"
+    originaltext: "08. Mobilität & Fahrzeuge"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-045"
+    zeilen: 248
+    kategorie: "Shard Block 3"
+    beschreibung: "Block 3 Definition: WIRTSCHAFT & VERMÖGEN (Shards 09-12)"
+    originaltext: "Block 3: WIRTSCHAFT & VERMÖGEN (Shards 09-12)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-046"
+    zeilen: "250-252"
+    kategorie: "Shard 09 Definition"
+    beschreibung: "Shard 09 (Arbeit & Karriere): Arbeitsverträge, Gehalt, Bewerbungen, Referenzen, Freelancing, Honorare, Arbeitszeugnisse"
+    originaltext: "09. Arbeit & Karriere"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-047"
+    zeilen: "254-257"
+    kategorie: "Shard 10 Definition"
+    beschreibung: "Shard 10 (Finanzen & Banking): Konten, Zahlungen, Überweisungen, Kredite, Investments, Portfolios, DeFi, Krypto, Abonnements, Loyalitäts-Programme"
+    originaltext: "10. Finanzen & Banking"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-048"
+    zeilen: "259-261"
+    kategorie: "Shard 11 Definition"
+    beschreibung: "Shard 11 (Versicherungen & Risiken): Alle Versicherungsarten (Kranken, Leben, Haftpflicht, etc.), Schäden, Claims, Policen, Prämien"
+    originaltext: "11. Versicherungen & Risiken"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-049"
+    zeilen: "263-265"
+    kategorie: "Shard 12 Definition"
+    beschreibung: "Shard 12 (Immobilien & Grundstücke): Eigentum, Miete, Pacht, Grundbuch, Hypotheken, Bewertungen, Nutzungsrechte"
+    originaltext: "12. Immobilien & Grundstücke"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-050"
+    zeilen: 269
+    kategorie: "Shard Block 4"
+    beschreibung: "Block 4 Definition: GESCHÄFT & ÖFFENTLICH (Shards 13-16)"
+    originaltext: "Block 4: GESCHÄFT & ÖFFENTLICH (Shards 13-16)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-051"
+    zeilen: "271-273"
+    kategorie: "Shard 13 Definition"
+    beschreibung: "Shard 13 (Unternehmen & Gewerbe): Firmendaten, Handelsregister, Lizenzen, B2B, Buchhaltung, Bilanzen, Jahresabschlüsse"
+    originaltext: "13. Unternehmen & Gewerbe"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-052"
+    zeilen: "275-277"
+    kategorie: "Shard 14 Definition"
+    beschreibung: "Shard 14 (Verträge & Vereinbarungen): Smart Contracts, Geschäftsverträge, AGBs, SLAs, Lieferantenverträge, Partnerschaften"
+    originaltext: "14. Verträge & Vereinbarungen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-053"
+    zeilen: "279-282"
+    kategorie: "Shard 15 Definition"
+    beschreibung: "Shard 15 (Handel & Transaktionen): Käufe, Verkäufe, Rechnungen, Garantien, Supply Chain, Logistik, Lieferscheine, Reisen, Events, Tickets"
+    originaltext: "15. Handel & Transaktionen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-054"
+    zeilen: "284-286"
+    kategorie: "Shard 16 Definition"
+    beschreibung: "Shard 16 (Behörden & Verwaltung): Ämter, Anträge, Genehmigungen, Steuern, Meldewesen, Gerichtsurteile, Ordnungswidrigkeiten"
+    originaltext: "16. Behörden & Verwaltung"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  # ===== MATRIX-ARCHITEKTUR =====
+  - regel_id: "SOT-MD-055"
+    zeilen: 293
+    kategorie: "Matrix Architecture"
+    beschreibung: "Jeder der 24 Root-Ordner enthält 16 Shards (einen für jede Oberkategorie)"
+    originaltext: "Jeder der **24 Root-Ordner** enthält **16 Shards**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-056"
+    zeilen: "295-302"
+    kategorie: "Matrix Example Structure"
+    beschreibung: "Beispiel-Struktur: Root mit shards/-Unterordner enthält alle 16 Shards"
+    originaltext: "Beispiel: 01_ai_layer/shards/01_identitaet_personen/ ... 16_behoerden_verwaltung/"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Registry"]
+
+  - regel_id: "SOT-MD-057"
+    zeilen: "306-307"
+    kategorie: "Matrix Calculation"
+    beschreibung: "Berechnung: 24 Roots × 16 Shards = 384 Chart-Dateien (SoT)"
+    originaltext: "24 Roots × 16 Shards = 384 Chart-Dateien (SoT)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Registry"]
+
+  - regel_id: "SOT-MD-058"
+    zeilen: "310-318"
+    kategorie: "Matrix Mapping"
+    beschreibung: "Matrix-Mapping: Jede Root-Shard-Kombination hat spezifische Verantwortung (z.B. ai_layer/identität, audit_logging/identität, etc.)"
+    originaltext: "Matrix-Mapping Tabelle (Root × Shard)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-059"
+    zeilen: 321
+    kategorie: "Matrix Advantage"
+    beschreibung: "Vorteil: Deterministisch - Jede Kombination eindeutig adressierbar"
+    originaltext: "✅ **Deterministisch** - Jede Kombination eindeutig adressierbar"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-060"
+    zeilen: 322
+    kategorie: "Matrix Advantage"
+    beschreibung: "Vorteil: Skalierbar - Unbegrenzte Unterkategorien innerhalb der Shards"
+    originaltext: "✅ **Skalierbar** - Unbegrenzte Unterkategorien innerhalb der Shards"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-061"
+    zeilen: 323
+    kategorie: "Matrix Advantage"
+    beschreibung: "Vorteil: Konsistent - Alle Roots folgen demselben Muster"
+    originaltext: "✅ **Konsistent** - Alle Roots folgen demselben Muster"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-062"
+    zeilen: 324
+    kategorie: "Matrix Advantage"
+    beschreibung: "Vorteil: Audit-sicher - Hash-Ledger über alle 384 Felder"
+    originaltext: "✅ **Audit-sicher** - Hash-Ledger über alle 384 Felder"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-063"
+    zeilen: 325
+    kategorie: "Matrix Advantage"
+    beschreibung: "Vorteil: Modular - Jedes Root-Shard-Paar isoliert entwickelbar"
+    originaltext: "✅ **Modular** - Jedes Root-Shard-Paar isoliert entwickelbar"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  # ===== HYBRID-STRUKTUR: SOT + IMPLEMENTIERUNG =====
+  - regel_id: "SOT-MD-064"
+    zeilen: "331-334"
+    kategorie: "Hybrid Architecture"
+    beschreibung: "Zwei-Schichten-Architektur: chart.yaml (SoT - WAS) + manifest.yaml (Implementierung - WIE)"
+    originaltext: "Zwei-Schichten-Architektur: 1. chart.yaml (SoT), 2. manifest.yaml (Impl.)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-065"
+    zeilen: 337
+    kategorie: "Hybrid Advantage"
+    beschreibung: "Vorteil: Zukunftssicher - SoT bleibt stabil, Implementierung austauschbar"
+    originaltext: "✅ **Zukunftssicher** - SoT bleibt stabil, Implementierung austauschbar"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-066"
+    zeilen: 338
+    kategorie: "Hybrid Advantage"
+    beschreibung: "Vorteil: Technologie-agnostisch - Python, Rust, Services möglich"
+    originaltext: "✅ **Technologie-agnostisch** - Python, Rust, Services möglich"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-067"
+    zeilen: 339
+    kategorie: "Hybrid Advantage"
+    beschreibung: "Vorteil: Governance-fähig - Capabilities mit MoSCoW (MUST/SHOULD/HAVE)"
+    originaltext: "✅ **Governance-fähig** - Capabilities mit MoSCoW"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Policy"]
+
+  - regel_id: "SOT-MD-068"
+    zeilen: 340
+    kategorie: "Hybrid Advantage"
+    beschreibung: "Vorteil: Contract-First - Interfaces (OpenAPI/JSON-Schema) als Vertrag"
+    originaltext: "✅ **Contract-First** - Interfaces als Vertrag"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-069"
+    zeilen: 341
+    kategorie: "Hybrid Advantage"
+    beschreibung: "Vorteil: Compliance-sicher - Policies im SoT zentral verbindlich"
+    originaltext: "✅ **Compliance-sicher** - Policies im SoT zentral verbindlich"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Contract"]
+
+  - regel_id: "SOT-MD-070"
+    zeilen: "344-352"
+    kategorie: "Hybrid Comparison"
+    beschreibung: "chart.yaml (SoT): Abstrakt, Capabilities/Policies/Interfaces, langsame Änderungsrate, sprachunabhängig, Architecture Board Governance"
+    originaltext: "Vergleichstabelle SoT vs Implementierung"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-071"
+    zeilen: "344-352"
+    kategorie: "Hybrid Comparison"
+    beschreibung: "manifest.yaml (Impl.): Konkret, Dateien/Dependencies/Artefakte, häufige Änderungsrate, technologiespezifisch, Development Team Governance"
+    originaltext: "Vergleichstabelle SoT vs Implementierung"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  # ===== ORDNERSTRUKTUR BEISPIELE =====
+  - regel_id: "SOT-MD-072"
+    zeilen: "360-430"
+    kategorie: "Folder Structure"
+    beschreibung: "Vollständige Shard-Struktur: chart.yaml (Root), contracts/, implementations/, conformance/, policies/, docs/"
+    originaltext: "Beispiel vollständige Struktur eines Shards"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-073"
+    zeilen: 364
+    kategorie: "Folder Structure - chart.yaml"
+    beschreibung: "chart.yaml Platzierung: Direkt im Shard-Root (abstrakt, WAS)"
+    originaltext: "chart.yaml # SoT (abstrakt, WAS)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-074"
+    zeilen: "366-370"
+    kategorie: "Folder Structure - contracts"
+    beschreibung: "contracts/ Ordner: API-Definitionen (OpenAPI), JSON-Schemas"
+    originaltext: "contracts/ mit OpenAPI specs und schemas/"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-075"
+    zeilen: "373-413"
+    kategorie: "Folder Structure - implementations"
+    beschreibung: "implementations/ Ordner: Konkrete Umsetzungen (z.B. python-tensorflow/, rust-burn/), jede mit manifest.yaml, src/, tests/, docs/, config/, models/, proto/, scripts/, Docker-Dateien"
+    originaltext: "implementations/ mit {IMPL_ID}/"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Contract"]
+
+  - regel_id: "SOT-MD-076"
+    zeilen: "415-418"
+    kategorie: "Folder Structure - conformance"
+    beschreibung: "conformance/ Ordner: Contract-Tests, README, test_runner"
+    originaltext: "conformance/ mit Contract-Tests"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Test"]
+
+  - regel_id: "SOT-MD-077"
+    zeilen: "420-422"
+    kategorie: "Folder Structure - policies"
+    beschreibung: "policies/ Ordner: Enforcement-Regeln (z.B. no_pii_storage.yaml, hash_only_enforcement.yaml)"
+    originaltext: "policies/ mit Enforcement-Regeln"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy"]
+
+  - regel_id: "SOT-MD-078"
+    zeilen: "424-427"
+    kategorie: "Folder Structure - docs"
+    beschreibung: "docs/ Ordner: Shard-spezifische Dokumentation (getting-started, migrations/, workflows/)"
+    originaltext: "docs/ mit getting-started.md, migrations/, workflows/"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-079"
+    zeilen: 429
+    kategorie: "Folder Structure - CHANGELOG"
+    beschreibung: "CHANGELOG.md: Versionsverlauf pro Shard"
+    originaltext: "CHANGELOG.md"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Documentation"]
+
+  # ===== CHART.YAML STRUKTUR =====
+  - regel_id: "SOT-MD-080"
+    zeilen: "439-442"
+    kategorie: "chart.yaml - metadata"
+    beschreibung: "chart.yaml Sektion metadata: shard_id, version, status"
+    originaltext: "metadata: shard_id, version, status"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-081"
+    zeilen: "444-447"
+    kategorie: "chart.yaml - governance"
+    beschreibung: "chart.yaml Sektion governance: owner (team, lead, contact), reviewers (architecture, compliance, security), change_process (rfc_required, approval_quorum)"
+    originaltext: "governance: owner, reviewers, change_process"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Policy"]
+
+  - regel_id: "SOT-MD-082"
+    zeilen: "449-452"
+    kategorie: "chart.yaml - capabilities"
+    beschreibung: "chart.yaml Sektion capabilities: MUST (Produktiv, SLA-gebunden), SHOULD (Feature-complete, in Erprobung), HAVE (Experimentell, optional)"
+    originaltext: "capabilities: MUST, SHOULD, HAVE"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Policy"]
+
+  - regel_id: "SOT-MD-083"
+    zeilen: "454-457"
+    kategorie: "chart.yaml - constraints"
+    beschreibung: "chart.yaml Sektion constraints: pii_storage (forbidden), data_policy (hash_only), custody (non_custodial_code_only)"
+    originaltext: "constraints: pii_storage, data_policy, custody"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Policy"]
+
+  - regel_id: "SOT-MD-084"
+    zeilen: "459-462"
+    kategorie: "chart.yaml - enforcement"
+    beschreibung: "chart.yaml Sektion enforcement: static_analysis (semgrep, bandit), runtime_checks (pii_detector), audit (log_to: 02_audit_logging)"
+    originaltext: "enforcement: static_analysis, runtime_checks, audit"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "CLI", "Test"]
+
+  - regel_id: "SOT-MD-085"
+    zeilen: "464-467"
+    kategorie: "chart.yaml - interfaces"
+    beschreibung: "chart.yaml Sektion interfaces: contracts (OpenAPI specs), data_schemas (JSON schemas), authentication (mTLS)"
+    originaltext: "interfaces: contracts, data_schemas, authentication"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract"]
+
+  - regel_id: "SOT-MD-086"
+    zeilen: "469-471"
+    kategorie: "chart.yaml - dependencies"
+    beschreibung: "chart.yaml Sektion dependencies: required (andere Roots/Shards), optional"
+    originaltext: "dependencies: required, optional"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-087"
+    zeilen: "473-475"
+    kategorie: "chart.yaml - compatibility"
+    beschreibung: "chart.yaml Sektion compatibility: semver, core_min_version (>=3.0.0)"
+    originaltext: "compatibility: semver, core_min_version"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-088"
+    zeilen: "477-479"
+    kategorie: "chart.yaml - implementations"
+    beschreibung: "chart.yaml Sektion implementations: default (python-tensorflow), available (Liste verfügbarer Implementierungen)"
+    originaltext: "implementations: default, available"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-089"
+    zeilen: "481-483"
+    kategorie: "chart.yaml - conformance"
+    beschreibung: "chart.yaml Sektion conformance: test_framework (schemathesis), contract_tests"
+    originaltext: "conformance: test_framework, contract_tests"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Test"]
+
+  - regel_id: "SOT-MD-090"
+    zeilen: "485-486"
+    kategorie: "chart.yaml - orchestration"
+    beschreibung: "chart.yaml Sektion orchestration: workflows (multi-shard workflows)"
+    originaltext: "orchestration: workflows"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-091"
+    zeilen: "488-492"
+    kategorie: "chart.yaml - testing"
+    beschreibung: "chart.yaml Sektion testing: unit (location, min_coverage), integration, contract, e2e"
+    originaltext: "testing: unit, integration, contract, e2e"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Test"]
+
+  - regel_id: "SOT-MD-092"
+    zeilen: "494-496"
+    kategorie: "chart.yaml - documentation"
+    beschreibung: "chart.yaml Sektion documentation: auto_generate (from contracts, schemas), manual"
+    originaltext: "documentation: auto_generate, manual"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-093"
+    zeilen: "498-502"
+    kategorie: "chart.yaml - observability"
+    beschreibung: "chart.yaml Sektion observability: metrics (prometheus), tracing (jaeger), logging (loki, pii_redaction: true), alerting"
+    originaltext: "observability: metrics, tracing, logging, alerting"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-094"
+    zeilen: "504-506"
+    kategorie: "chart.yaml - evidence"
+    beschreibung: "chart.yaml Sektion evidence: strategy (hash_ledger_with_anchoring), anchoring (chains: ethereum, polygon)"
+    originaltext: "evidence: strategy, anchoring"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-095"
+    zeilen: "508-511"
+    kategorie: "chart.yaml - security"
+    beschreibung: "chart.yaml Sektion security: threat_model, secrets_management (15_infra/vault), encryption (at_rest, in_transit)"
+    originaltext: "security: threat_model, secrets_management, encryption"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-096"
+    zeilen: "513-515"
+    kategorie: "chart.yaml - deployment"
+    beschreibung: "chart.yaml Sektion deployment: strategy (blue-green), environments (dev, staging, production)"
+    originaltext: "deployment: strategy, environments"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["CLI", "Core"]
+
+  - regel_id: "SOT-MD-097"
+    zeilen: "517-518"
+    kategorie: "chart.yaml - resources"
+    beschreibung: "chart.yaml Sektion resources: compute (cpu, memory, autoscaling)"
+    originaltext: "resources: compute"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-098"
+    zeilen: "520-521"
+    kategorie: "chart.yaml - roadmap"
+    beschreibung: "chart.yaml Sektion roadmap: upcoming (planned features, versions)"
+    originaltext: "roadmap: upcoming"
+    enforcement: "SHOULD"
+    priority: "LOW"
+    betroffene_artefakte: ["Documentation"]
+
+  # ===== MANIFEST.YAML STRUKTUR =====
+  - regel_id: "SOT-MD-099"
+    zeilen: "534-538"
+    kategorie: "manifest.yaml - metadata"
+    beschreibung: "manifest.yaml Sektion metadata: implementation_id, implementation_version, chart_version, maturity (production/beta/alpha)"
+    originaltext: "metadata: implementation_id, implementation_version, chart_version, maturity"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-100"
+    zeilen: "540-544"
+    kategorie: "manifest.yaml - technology_stack"
+    beschreibung: "manifest.yaml Sektion technology_stack: language (name, version), frameworks (ml, api, utilities), testing, linting_formatting"
+    originaltext: "technology_stack: language, frameworks, testing, linting_formatting"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-101"
+    zeilen: "546-565"
+    kategorie: "manifest.yaml - artifacts"
+    beschreibung: "manifest.yaml Sektion artifacts: source_code (location, structure), configuration, models, protocols, tests, documentation, scripts, docker"
+    originaltext: "artifacts: source_code, configuration, models, protocols, tests, documentation, scripts, docker"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-102"
+    zeilen: "567-571"
+    kategorie: "manifest.yaml - dependencies"
+    beschreibung: "manifest.yaml Sektion dependencies: python_packages (requirements.txt), development_packages, system_dependencies, external_services"
+    originaltext: "dependencies: python_packages, development_packages, system_dependencies, external_services"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-103"
+    zeilen: "573-575"
+    kategorie: "manifest.yaml - build"
+    beschreibung: "manifest.yaml Sektion build: commands (install_dependencies, compile_protos), docker (build_command, image_registry)"
+    originaltext: "build: commands, docker"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "CLI"]
+
+  - regel_id: "SOT-MD-104"
+    zeilen: "577-580"
+    kategorie: "manifest.yaml - deployment"
+    beschreibung: "manifest.yaml Sektion deployment: kubernetes (manifests_location), helm (chart_location), environment_variables"
+    originaltext: "deployment: kubernetes, helm, environment_variables"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["CLI"]
+
+  - regel_id: "SOT-MD-105"
+    zeilen: "582-587"
+    kategorie: "manifest.yaml - testing"
+    beschreibung: "manifest.yaml Sektion testing: unit_tests (command, coverage_target: 80), integration_tests, contract_tests, security_tests, performance_tests"
+    originaltext: "testing: unit_tests, integration_tests, contract_tests, security_tests, performance_tests"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Test"]
+
+  - regel_id: "SOT-MD-106"
+    zeilen: "589-593"
+    kategorie: "manifest.yaml - observability"
+    beschreibung: "manifest.yaml Sektion observability: metrics (exporter: prometheus), tracing (jaeger), logging (format: json, pii_redaction: true), health_checks"
+    originaltext: "observability: metrics, tracing, logging, health_checks"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-107"
+    zeilen: "595-598"
+    kategorie: "manifest.yaml - development"
+    beschreibung: "manifest.yaml Sektion development: setup (steps), local_development (docker_compose), pre_commit_hooks"
+    originaltext: "development: setup, local_development, pre_commit_hooks"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["CLI"]
+
+  - regel_id: "SOT-MD-108"
+    zeilen: "600-603"
+    kategorie: "manifest.yaml - compliance"
+    beschreibung: "manifest.yaml Sektion compliance: non_custodial_enforcement, gdpr_compliance, bias_fairness"
+    originaltext: "compliance: non_custodial_enforcement, gdpr_compliance, bias_fairness"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-109"
+    zeilen: "605-608"
+    kategorie: "manifest.yaml - performance"
+    beschreibung: "manifest.yaml Sektion performance: baseline_benchmarks, optimization_targets, resource_requirements (minimum, recommended)"
+    originaltext: "performance: baseline_benchmarks, optimization_targets, resource_requirements"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-110"
+    zeilen: "610-612"
+    kategorie: "manifest.yaml - changelog"
+    beschreibung: "manifest.yaml Sektion changelog: location (CHANGELOG.md), latest_versions"
+    originaltext: "changelog: location, latest_versions"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-111"
+    zeilen: "614-616"
+    kategorie: "manifest.yaml - support"
+    beschreibung: "manifest.yaml Sektion support: documentation (URL), contacts (general, security, on_call)"
+    originaltext: "support: documentation, contacts"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Documentation"]
+
+  # ===== NAMING CONVENTIONS =====
+  - regel_id: "SOT-MD-112"
+    zeilen: "627-629"
+    kategorie: "Naming - Root"
+    beschreibung: "Root-Ordner Namenskonvention: Format {NR}_{NAME}, Beispiel: 01_ai_layer, 24_meta_orchestration"
+    originaltext: "Format: {NR}_{NAME}"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-113"
+    zeilen: "633-636"
+    kategorie: "Naming - Shard"
+    beschreibung: "Shard Namenskonvention: Format Shard_{NR}_{NAME}, Beispiel: Shard_01_Identitaet_Personen, Shard_16_Behoerden_Verwaltung"
+    originaltext: "Format: Shard_{NR}_{NAME}"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-114"
+    zeilen: "640-645"
+    kategorie: "Naming - Files"
+    beschreibung: "Datei-Namenskonvention: chart.yaml (SoT abstrakt), manifest.yaml (Implementierung konkret), CHANGELOG.md, README.md"
+    originaltext: "chart.yaml, manifest.yaml, CHANGELOG.md, README.md"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-115"
+    zeilen: "648-653"
+    kategorie: "Naming - Paths"
+    beschreibung: "Pfad-Namenskonvention: {ROOT}/shards/{SHARD}/chart.yaml, {ROOT}/shards/{SHARD}/implementations/{IMPL_ID}/manifest.yaml, {ROOT}/shards/{SHARD}/contracts/{CONTRACT_NAME}.openapi.yaml"
+    originaltext: "Pfad-Templates für chart.yaml, manifest.yaml, contracts"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-116"
+    zeilen: "656-660"
+    kategorie: "Naming - Examples"
+    beschreibung: "Pfad-Beispiele: 01_ai_layer/shards/01_identitaet_personen/chart.yaml, implementations/python-tensorflow/manifest.yaml, contracts/identity_risk_scoring.openapi.yaml"
+    originaltext: "Beispiele für gültige Pfade"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["All"]
+
+  # ===== KRITISCHE POLICIES =====
+  - regel_id: "SOT-MD-117"
+    zeilen: "666-676"
+    kategorie: "Policy - Non-Custodial"
+    beschreibung: "KRITISCHE POLICY: NIEMALS Rohdaten von PII oder biometrischen Daten speichern"
+    originaltext: "**Regel:** NIEMALS Rohdaten von PII oder biometrischen Daten speichern"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-118"
+    zeilen: "669-675"
+    kategorie: "Policy - Non-Custodial Enforcement"
+    beschreibung: "Non-Custodial Enforcement: Nur Hash-basierte Speicherung (SHA3-256), Tenant-spezifische Peppers, Immediate Discard nach Hashing, Static Analysis (Semgrep) blockiert PII-Storage, Runtime PII-Detector blockiert Verstöße"
+    originaltext: "Enforcement: Hash-basiert, Peppers, Discard, Static Analysis, Runtime Detection"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "CLI", "Core", "Test"]
+
+  - regel_id: "SOT-MD-119"
+    zeilen: 676
+    kategorie: "Policy - Non-Custodial Violations"
+    beschreibung: "Non-Custodial Violations = System-Block + Alert an Compliance-Team"
+    originaltext: "**Violations = System-Block + Alert an Compliance-Team**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-120"
+    zeilen: "679-686"
+    kategorie: "Policy - Hash-Only Data"
+    beschreibung: "Hash-Only Data Policy: storage_type: hash_only, hash_algorithm: SHA3-256, pepper_strategy: per_tenant, deterministic: true, raw_data_retention: 0 seconds"
+    originaltext: "data_policy YAML definition"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-121"
+    zeilen: "689-692"
+    kategorie: "Policy - GDPR Compliance"
+    beschreibung: "GDPR Compliance: Right to Erasure (Hash-Rotation), Data Portability (JSON-Export), Purpose Limitation, PII Redaction (automatisch in Logs & Traces)"
+    originaltext: "GDPR: Erasure, Portability, Purpose Limitation, PII Redaction"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-122"
+    zeilen: "694-698"
+    kategorie: "Policy - Bias & Fairness"
+    beschreibung: "Bias & Fairness: Bias Testing Pflicht für alle AI/ML-Modelle, Metrics (Demographic Parity, Equal Opportunity), Quarterly Reports an Ethics Board, Mitigation (Fairness-aware Training, Adversarial Debiasing)"
+    originaltext: "Bias Testing, Metrics, Audit, Mitigation"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core", "Test"]
+
+  - regel_id: "SOT-MD-123"
+    zeilen: "700-705"
+    kategorie: "Policy - Evidence & Audit"
+    beschreibung: "Evidence & Audit: Strategy (Hash-Ledger mit Blockchain-Anchoring), Storage (WORM), Retention (10 Jahre), Chains (Ethereum Mainnet, Polygon), Frequency (Hourly Anchoring)"
+    originaltext: "Strategy, Storage, Retention, Chains, Frequency"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-124"
+    zeilen: "707-711"
+    kategorie: "Policy - Secrets Management"
+    beschreibung: "Secrets Management: Provider (Vault 15_infra/vault), Rotation (90 Tage), Niemals in Git (nur .template-Dateien), Encryption (AES-256-GCM at-rest, TLS 1.3 in-transit)"
+    originaltext: "Provider, Rotation, Git-Policy, Encryption"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-125"
+    zeilen: "713-717"
+    kategorie: "Policy - Versioning & Breaking Changes"
+    beschreibung: "Versioning & Breaking Changes: Semver (MAJOR.MINOR.PATCH), Migration Guide + Compatibility Layer, Deprecations (180 Tage Notice Period), RFC-Prozess für alle MUST-Capability-Änderungen"
+    originaltext: "Semver, Migration, Deprecations, RFC"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Policy", "Documentation"]
+
+  # ===== GOVERNANCE-MODELL =====
+
+  # --- Rollen ---
+  - regel_id: "SOT-MD-126"
+    zeilen: "725-728"
+    kategorie: "Governance - Role Owner"
+    beschreibung: "Owner (Pro Shard): Verantwortlich für Shard-Entwicklung, entscheidet über SHOULD/HAVE-Promotions, koordiniert Implementierungen"
+    originaltext: "Owner (Pro Shard): Verantwortlich für Shard-Entwicklung, Entscheidet über SHOULD/HAVE-Promotions, Koordiniert Implementierungen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Documentation", "Policy"]
+
+  - regel_id: "SOT-MD-127"
+    zeilen: "730-733"
+    kategorie: "Governance - Role Architecture Board"
+    beschreibung: "Architecture Board: Reviewed alle chart.yaml-Änderungen, genehmigt Breaking Changes, definiert Schnittstellen-Standards"
+    originaltext: "Architecture Board: Reviewed alle chart.yaml-Änderungen, Genehmigt Breaking Changes, Definiert Schnittstellen-Standards"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Documentation", "Contract"]
+
+  - regel_id: "SOT-MD-128"
+    zeilen: "735-738"
+    kategorie: "Governance - Role Compliance Team"
+    beschreibung: "Compliance Team: Prüft alle Policies, genehmigt Constraint-Änderungen, Audit-Oversight"
+    originaltext: "Compliance Team: Prüft alle Policies, Genehmigt Constraint-Änderungen, Audit-Oversight"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Documentation"]
+
+  - regel_id: "SOT-MD-129"
+    zeilen: "740-743"
+    kategorie: "Governance - Role Security Team"
+    beschreibung: "Security Team: Threat Modeling, Penetration Testing, Vulnerability Management"
+    originaltext: "Security Team: Threat Modeling, Penetration Testing, Vulnerability Management"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Documentation", "Test"]
+
+  # --- Change-Prozess ---
+  - regel_id: "SOT-MD-130"
+    zeilen: "747-761"
+    kategorie: "Governance - Change Process"
+    beschreibung: "Change-Prozess (7 Schritte): 1. RFC erstellen (für MUST-Changes), 2. Contract-Tests implementieren, 3. Dual Review (Architecture + Compliance), 4. Semver-Bump + Changelog, 5. CI/CD Pipeline (alle Tests grün), 6. Canary Deployment (5% → 25% → 50% → 100%), 7. Monitoring & Alerting (Error Rate < 0.5%)"
+    originaltext: "Change-Prozess with 7 steps from RFC to Monitoring"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "CLI", "Documentation"]
+
+  - regel_id: "SOT-MD-131"
+    zeilen: 748
+    kategorie: "Governance - Change Process Step 1"
+    beschreibung: "Change Process Step 1: RFC erstellen (für MUST-Changes)"
+    originaltext: "1. RFC erstellen (für MUST-Changes)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Documentation", "Policy"]
+
+  - regel_id: "SOT-MD-132"
+    zeilen: 750
+    kategorie: "Governance - Change Process Step 2"
+    beschreibung: "Change Process Step 2: Contract-Tests implementieren"
+    originaltext: "2. Contract-Tests implementieren"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Test", "Contract"]
+
+  - regel_id: "SOT-MD-133"
+    zeilen: 752
+    kategorie: "Governance - Change Process Step 3"
+    beschreibung: "Change Process Step 3: Dual Review (Architecture + Compliance)"
+    originaltext: "3. Dual Review (Architecture + Compliance)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Documentation"]
+
+  - regel_id: "SOT-MD-134"
+    zeilen: 754
+    kategorie: "Governance - Change Process Step 4"
+    beschreibung: "Change Process Step 4: Semver-Bump + Changelog"
+    originaltext: "4. Semver-Bump + Changelog"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Documentation", "Core"]
+
+  - regel_id: "SOT-MD-135"
+    zeilen: 756
+    kategorie: "Governance - Change Process Step 5"
+    beschreibung: "Change Process Step 5: CI/CD Pipeline (alle Tests grün)"
+    originaltext: "5. CI/CD Pipeline (alle Tests grün)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["CLI", "Test"]
+
+  - regel_id: "SOT-MD-136"
+    zeilen: 758
+    kategorie: "Governance - Change Process Step 6"
+    beschreibung: "Change Process Step 6: Canary Deployment (5% → 25% → 50% → 100%)"
+    originaltext: "6. Canary Deployment (5% → 25% → 50% → 100%)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "CLI"]
+
+  - regel_id: "SOT-MD-137"
+    zeilen: 760
+    kategorie: "Governance - Change Process Step 7"
+    beschreibung: "Change Process Step 7: Monitoring & Alerting (Error Rate < 0.5%)"
+    originaltext: "7. Monitoring & Alerting (Error Rate < 0.5%)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  # --- Promotion-Regeln ---
+  - regel_id: "SOT-MD-138"
+    zeilen: "765-771"
+    kategorie: "Governance - Promotion SHOULD to MUST"
+    beschreibung: "SHOULD → MUST Promotion: Bedingungen: In Production für >= 90 Tage, SLA Compliance >= 99.5%, Contract Test Coverage >= 95%. Approver: Architecture Board + Product Owner"
+    originaltext: "SHOULD → MUST Bedingungen + Approver"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Documentation"]
+
+  - regel_id: "SOT-MD-139"
+    zeilen: "773-779"
+    kategorie: "Governance - Promotion HAVE to SHOULD"
+    beschreibung: "HAVE → SHOULD Promotion: Bedingungen: Feature complete, Beta-Testing erfolgreich, Dokumentation vollständig. Approver: Owner + Architecture Board"
+    originaltext: "HAVE → SHOULD Bedingungen + Approver"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Policy", "Documentation"]
+
+  - regel_id: "SOT-MD-140"
+    zeilen: "781-787"
+    kategorie: "Governance - Deprecation MUST to Deprecated"
+    beschreibung: "MUST → Deprecated: Voraussetzungen: Notice Period 180 Tage, Migration Guide vorhanden, Compatibility Layer implementiert. Approver: Architecture Board + alle betroffenen Teams"
+    originaltext: "MUST → Deprecated Voraussetzungen + Approver"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Documentation", "Core"]
+
+  # ===== KERNPRINZIPIEN =====
+
+  - regel_id: "SOT-MD-141"
+    zeilen: "793-800"
+    kategorie: "Principle - Contract-First Development"
+    beschreibung: "Kernprinzip 1 - Contract-First Development: API-Contract (OpenAPI/JSON-Schema) VOR Implementierung. Vorteile: Klare Schnittstellen, Parallele Entwicklung möglich, Automatische Tests (Contract-Tests), Auto-generierte Dokumentation"
+    originaltext: "Contract-First Development Regel + Vorteile"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Policy", "Documentation"]
+
+  - regel_id: "SOT-MD-142"
+    zeilen: "802-811"
+    kategorie: "Principle - Separation of Concerns"
+    beschreibung: "Kernprinzip 2 - Separation of Concerns: SoT (chart.yaml) = WAS soll getan werden (Policies, Constraints, Capabilities, Interfaces). Implementierung (manifest.yaml) = WIE wird es umgesetzt (Tech-Stack, Dateien, Artefakte, Dependencies)"
+    originaltext: "Separation of Concerns: SoT vs. Implementation"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core", "Policy"]
+
+  - regel_id: "SOT-MD-143"
+    zeilen: "813-821"
+    kategorie: "Principle - Multi-Implementation Support"
+    beschreibung: "Kernprinzip 3 - Multi-Implementation Support: Ein Shard, mehrere Implementierungen möglich (z.B. Python-TensorFlow, Rust-Burn, External Service). Vorteil: Technologie-Unabhängigkeit, A/B-Testing, Vendor-Lock-in-Vermeidung"
+    originaltext: "Multi-Implementation Support mit Beispielen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-144"
+    zeilen: "823-830"
+    kategorie: "Principle - Deterministic Architecture"
+    beschreibung: "Kernprinzip 4 - Deterministic Architecture: 24 × 16 = 384 Chart-Dateien, keine Ausnahmen. Vorteile: Eindeutige Adressierung, Automatische Generierung möglich, Konsistente Struktur, Leichte Navigation"
+    originaltext: "Deterministic Architecture: 384 Chart-Dateien fest"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core", "Policy"]
+
+  - regel_id: "SOT-MD-145"
+    zeilen: "832-839"
+    kategorie: "Principle - Evidence-Based Compliance"
+    beschreibung: "Kernprinzip 5 - Evidence-Based Compliance: Alles relevante wird gehasht, geloggt und geanchort. Strategie: Hash-Ledger für alle Operationen, Blockchain-Anchoring (Ethereum, Polygon), WORM-Storage (10 Jahre Retention), Audit-Trails für Compliance-Nachweise"
+    originaltext: "Evidence-Based Compliance mit Hash-Ledger + Blockchain"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-146"
+    zeilen: "841-848"
+    kategorie: "Principle - Zero-Trust Security"
+    beschreibung: "Kernprinzip 6 - Zero-Trust Security: Niemandem vertrauen, alles verifizieren. Umsetzung: mTLS für alle internen Verbindungen, RBAC für alle Zugriffe, PII-Detection zur Laufzeit, Continuous Vulnerability Scanning"
+    originaltext: "Zero-Trust Security mit mTLS, RBAC, PII-Detection"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-147"
+    zeilen: "850-857"
+    kategorie: "Principle - Observability by Design"
+    beschreibung: "Kernprinzip 7 - Observability by Design: Metrics, Tracing, Logging von Anfang an eingebaut. Stack: Metrics (Prometheus), Tracing (Jaeger/OpenTelemetry), Logging (Loki mit JSON-Format, PII-Redaction), Alerting (AlertManager)"
+    originaltext: "Observability Stack: Prometheus, Jaeger, Loki, AlertManager"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-148"
+    zeilen: "859-866"
+    kategorie: "Principle - Bias-Aware AI/ML"
+    beschreibung: "Kernprinzip 8 - Bias-Aware AI/ML: Alle AI/ML-Modelle müssen auf Bias getestet werden. Prozess: Fairness-Metrics (Demographic Parity, Equal Opportunity), Quarterly Bias Audits, Transparent Model Cards, Bias-Mitigation-Strategien verpflichtend"
+    originaltext: "Bias-Aware AI/ML mit Fairness-Metrics + Audits"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy", "Test"]
+
+  - regel_id: "SOT-MD-149"
+    zeilen: "868-875"
+    kategorie: "Principle - Scalability & Performance"
+    beschreibung: "Kernprinzip 9 - Scalability & Performance: Jeder Shard muss skalieren können. Mechanismen: Horizontal Pod Autoscaling (HPA), Load Balancing, Caching-Strategien, Performance-Benchmarks als Gates"
+    originaltext: "Scalability: HPA, Load Balancing, Caching, Benchmarks"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Test"]
+
+  - regel_id: "SOT-MD-150"
+    zeilen: "877-884"
+    kategorie: "Principle - Documentation as Code"
+    beschreibung: "Kernprinzip 10 - Documentation as Code: Dokumentation wird aus Code/Contracts generiert. Tools: OpenAPI → Swagger UI, JSON-Schema → json-schema-for-humans, chart.yaml → Jinja2-Templates → Markdown, Publish to 05_documentation/"
+    originaltext: "Documentation as Code mit auto-generation Tools"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Documentation", "Core"]
+
+  # ===== NÄCHSTE SCHRITTE =====
+
+  - regel_id: "SOT-MD-151"
+    zeilen: "890-896"
+    kategorie: "Roadmap - Phase 1 Foundation Setup"
+    beschreibung: "Phase 1: Foundation Setup (Abgeschlossen): 16 Shards definiert, 24 Roots definiert, Matrix-Architektur (24×16) festgelegt, chart.yaml Struktur für Shard_01 erstellt, manifest.yaml Struktur für Shard_01 erstellt, Master-Dokument erstellt"
+    originaltext: "Phase 1 Foundation Setup - 6 completed tasks"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Documentation", "Contract"]
+
+  - regel_id: "SOT-MD-152"
+    zeilen: "898-904"
+    kategorie: "Roadmap - Phase 2 Shard_01 Implementation"
+    beschreibung: "Phase 2: Shard_01 Vollständig Implementieren: OpenAPI-Contracts erstellen (identity_risk_scoring, biometric_matching), JSON-Schemas erstellen (did_document, identity_evidence), Python-Implementation schreiben (src/, tests/), Contract-Tests implementieren (conformance/), Deployment-Manifeste (k8s/, helm/), Dokumentation (docs/)"
+    originaltext: "Phase 2: Shard_01 Implementierung - 6 tasks"
+    enforcement: "SHOULD"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract", "Core", "Test", "Documentation"]
+
+  - regel_id: "SOT-MD-153"
+    zeilen: "906-910"
+    kategorie: "Roadmap - Phase 3 All Shards for Root 01"
+    beschreibung: "Phase 3: Alle 16 Shards für Root 01 (ai_layer): Shard_02_Dokumente_Nachweise, Shard_03_Zugang_Berechtigungen, Shard_04_Kommunikation_Daten, Shard_05 bis Shard_16"
+    originaltext: "Phase 3: Root 01 - All 16 Shards"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-154"
+    zeilen: "912-915"
+    kategorie: "Roadmap - Phase 4 All Roots"
+    beschreibung: "Phase 4: Alle Roots durcharbeiten: 02_audit_logging (alle 16 Shards), 03_core (alle 16 Shards), 04 bis 24"
+    originaltext: "Phase 4: All 24 Roots with 16 Shards each"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-155"
+    zeilen: "917-920"
+    kategorie: "Roadmap - Phase 5 Cross-Root Orchestration"
+    beschreibung: "Phase 5: Cross-Root Orchestration: 24_meta_orchestration als Service Registry, Workflow-Definitionen (z.B. full_kyc_flow), Saga-Pattern für Multi-Shard-Transaktionen"
+    originaltext: "Phase 5: Cross-Root Orchestration + Meta-Orchestration"
+    enforcement: "SHOULD"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Contract"]
+
+  - regel_id: "SOT-MD-156"
+    zeilen: "922-926"
+    kategorie: "Roadmap - Phase 6 Production Readiness"
+    beschreibung: "Phase 6: Production Readiness: Load Testing (11_test_simulation), Security Audits, Compliance-Zertifizierung (GDPR, eIDAS), Deployment auf Production"
+    originaltext: "Phase 6: Production Readiness - Testing, Audits, Zertifizierung"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Test", "Policy", "Core"]
+
+  # ===== ANHANG =====
+
+  - regel_id: "SOT-MD-157"
+    zeilen: "933-936"
+    kategorie: "Appendix - Important Links"
+    beschreibung: "Wichtige Links: Dokumentation (https://docs.ssid.org/), Repository (https://github.com/ssid/), Issue Tracker (https://github.com/ssid/issues), Slack (#ssid-project)"
+    originaltext: "Links to Documentation, Repository, Issues, Slack"
+    enforcement: "SHOULD"
+    priority: "LOW"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-158"
+    zeilen: "939-946"
+    kategorie: "Appendix - Standards & Specifications"
+    beschreibung: "Standards & Spezifikationen: W3C DID Core 1.0, W3C Verifiable Credentials, OpenAPI 3.1, JSON-Schema Draft 2020-12, ISO/IEC 27001, GDPR (EU 2016/679), eIDAS 2.0, EU AI Act"
+    originaltext: "Standards: W3C DID, VC, OpenAPI, JSON-Schema, ISO27001, GDPR, eIDAS, EU AI Act"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Policy", "Documentation"]
+
+  - regel_id: "SOT-MD-159"
+    zeilen: "948-955"
+    kategorie: "Appendix - Tools & Frameworks"
+    beschreibung: "Tools & Frameworks: Blockchain (Ethereum, Polygon, Hyperledger), ML (TensorFlow, PyTorch, Scikit-Learn), API (gRPC, REST, GraphQL), Observability (Prometheus, Jaeger, Loki), Testing (pytest, schemathesis, locust), CI/CD (GitHub Actions, ArgoCD), IaC (Terraform, Helm)"
+    originaltext: "Tech Stack: Blockchain, ML, API, Observability, Testing, CI/CD, IaC tools"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core", "Documentation"]
+
+  - regel_id: "SOT-MD-160"
+    zeilen: "961-965"
+    kategorie: "Metadata - Document End"
+    beschreibung: "Master-Dokument Ende-Metadata: Version 1.0.0, Letzte Aktualisierung 2025-10-02, Nächste Review 2025-11-02, Kontakt team@ssid.org"
+    originaltext: "Version 1.0.0, Update 2025-10-02, Review 2025-11-02, Contact team@ssid.org"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Documentation"]
+
+  # ===== KONSOLIDIERTE ERGÄNZUNGEN v1.1.1 =====
+
+  - regel_id: "SOT-MD-161"
+    zeilen: "970-972"
+    kategorie: "Amendment v1.1.1 - Header"
+    beschreibung: "Konsolidierte Ergänzungen v1.1.1: Robustheits-Ergänzungen, ab sofort verbindlich"
+    originaltext: "Konsolidierte Ergänzungen v1.1.1 (Konvergenz auf Maximalstand) - Verbindlich"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Contract", "Core"]
+
+  - regel_id: "SOT-MD-162"
+    zeilen: "974-1000"
+    kategorie: "Amendment v1.1.1 - Regulatory Matrix UK/APAC"
+    beschreibung: "Regulatory Matrix – UK/APAC (country_specific): UK (ICO UK GDPR: DPA 2018 Alignment, DPO Contact Records), Singapore (MAS PDPA: Data Breach Notification, Consent Purposes Documented), Japan (JFSA APPI: Cross-Border Transfer Rules), Australia (AU Privacy Act 1988: APP11 Security of Personal Information)"
+    originaltext: "country_specific YAML for UK, Singapore, Japan, Australia with mandatory compliance requirements"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-163"
+    zeilen: "1002-1005"
+    kategorie: "Amendment v1.1.1 - OPA Rules Clarification"
+    beschreibung: "OPA-Regeln Präzisierungen: Substring-Helper umbenannt von 'contains(haystack, needle)' zu 'has_substr(haystack, needle)' (Vermeidung Namenskonflikt mit future.keywords.contains), Fuzzy-Matching aktiviert mit string_similarity(a,b) nutzt Token-Overlap (Casefold, Schnittmenge/Union) für Sanctions-Prüfungen"
+    originaltext: "OPA Helper rename + Fuzzy-Matching for Sanctions"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-164"
+    zeilen: "1007-1020"
+    kategorie: "Amendment v1.1.1 - CI/Workflows Schedules & Artifacts"
+    beschreibung: "CI/Workflows – Schedules & Artifacts: Triggers (push on main/develop, pull_request on main/develop), Schedule (cron '15 3 * * *' für daily sanctions, cron '0 0 1 */3 *' für quarterly audit report), Artifacts (Einheitlich actions/upload-artifact@v4 in allen Workflows)"
+    originaltext: "CI Workflow triggers, schedules, and artifact upload standardization"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["CLI", "Policy"]
+
+  - regel_id: "SOT-MD-165"
+    zeilen: "1022-1045"
+    kategorie: "Amendment v1.1.1 - Sanctions Workflow Entities & Freshness"
+    beschreibung: "Sanctions Workflow – Entities & Freshness: Build-Step vor OPA erzeugt /tmp/entities_to_check.json aus Registry (python 23_compliance/scripts/build_entities_list.py --registry 24_meta_orchestration/registry/endpoints.yaml --out /tmp/entities_to_check.json), Freshness-Quelle 23_compliance/evidence/sanctions/sources.yaml inkl. 24h-Frische (sources: ofac_sdn, eu_consolidated mit URL + SHA256, max_age_hours: 24)"
+    originaltext: "Sanctions workflow build step + freshness policy"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["CLI", "Policy", "Core"]
+
+  - regel_id: "SOT-MD-166"
+    zeilen: "1047-1050"
+    kategorie: "Amendment v1.1.1 - DORA Incident Response"
+    beschreibung: "DORA – Incident Response: Pro Root muss docs/incident_response_plan.md existieren. Vorlage: 05_documentation/templates/TEMPLATE_INCIDENT_RESPONSE.md"
+    originaltext: "DORA Incident Response Plan required per Root"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Documentation", "Policy"]
+
+  - regel_id: "SOT-MD-167"
+    zeilen: "1052-1057"
+    kategorie: "Amendment v1.1.1 - Forbidden File Extensions"
+    beschreibung: "Root-Struktur – Verbotene Dateiendungen (Erweiterung): In Validator/PyTests zusätzlich blockiert: .ipynb, .parquet, .sqlite, .db"
+    originaltext: "Forbidden extensions: .ipynb, .parquet, .sqlite, .db"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Policy", "Test", "CLI"]
+
+  - regel_id: "SOT-MD-168"
+    zeilen: "1059-1061"
+    kategorie: "Amendment v1.1.1 - OPA Inputs Unification"
+    beschreibung: "OPA-Inputs – Vereinheitlichung: OPA-Struktur- und Tiefen-Checks verwenden 24_meta_orchestration/registry/generated/repo_scan.json (kein Mix mit depth_report.json)"
+    originaltext: "OPA uses repo_scan.json (no mix with depth_report.json)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "CLI", "Core"]
+
+# ... EXTRAKTION ABGESCHLOSSEN
+# Fortschritt: 168 von geschätzt 168 Regeln extrahiert (100%)
+# Status: VOLLSTÄNDIG EXTRAHIERT

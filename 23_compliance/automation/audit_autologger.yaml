@@ -1,0 +1,182 @@
+# Forensic Autologging Configuration
+# ====================================
+#
+# Automated audit trail logging for root-write prevention system.
+# Ensures 20-year retention and WORM compliance.
+#
+# Integration Points:
+#   - root_write_prevention_validator.py
+#   - root_write_merkle_lock.py
+#   - OPA policy engine
+#
+# Compliance: DSGVO Art. 30, eIDAS Art. 24, 20-year retention
+
+version: "5.3.0"
+name: "Root-Write Prevention Audit Autologger"
+
+# Source files to monitor
+sources:
+  - path: "02_audit_logging/reports/root_write_prevention_result.json"
+    type: "validation_result"
+    trigger: "on_create"
+    retention_years: 20
+
+  - path: "02_audit_logging/reports/root_writers_analysis.json"
+    type: "scanner_analysis"
+    trigger: "on_create"
+    retention_years: 20
+
+  - path: "02_audit_logging/reports/root_immunity_scan.json"
+    type: "immunity_scan"
+    trigger: "on_create"
+    retention_years: 20
+
+  - path: "02_audit_logging/merkle/root_write_merkle_proofs.json"
+    type: "merkle_proof"
+    trigger: "on_create"
+    retention_years: 20
+
+  - path: "02_audit_logging/merkle/root_write_merkle_certificate.md"
+    type: "merkle_certificate"
+    trigger: "on_create"
+    retention_years: 20
+
+# WORM storage destinations
+destinations:
+  worm_storage:
+    enabled: true
+    engine: "02_audit_logging/worm_storage/worm_storage_engine.py"
+    path: "02_audit_logging/worm_storage/root_write_prevention/"
+    compression: true
+    encryption: true
+    encryption_algorithm: "AES-256-GCM"
+
+  blockchain_anchor:
+    enabled: false  # Enable with --anchor-blockchain flag
+    engine: "23_compliance/wasm/blockchain_anchoring_engine.py"
+    network: "ethereum_sepolia"
+    contract: "0x..."
+
+  audit_log:
+    enabled: true
+    path: "02_audit_logging/logs/root_write_prevention_audit.jsonl"
+    format: "jsonl"
+    max_size_mb: 100
+    rotation: "daily"
+
+# Logging rules
+rules:
+  - name: "Log validation success"
+    condition: "validation_result.passed == true"
+    action: "log"
+    level: "INFO"
+    message: "Root-write validation passed: {files_checked} files clean"
+
+  - name: "Log validation failure"
+    condition: "validation_result.passed == false"
+    action: "log"
+    level: "ERROR"
+    message: "Root-write validation FAILED: {violations_found} violations"
+
+  - name: "Alert on critical violations"
+    condition: "any(violation.severity == 'CRITICAL' for violation in validation_result.violations)"
+    action: "alert"
+    level: "CRITICAL"
+    message: "CRITICAL root-write violation detected"
+    notify:
+      - email: "compliance@ssid.example"
+      - slack: "#security-alerts"
+
+  - name: "Archive to WORM"
+    condition: "always"
+    action: "archive"
+    destination: "worm_storage"
+    compress: true
+    encrypt: true
+
+  - name: "Generate Merkle proof"
+    condition: "validation_result.passed == true"
+    action: "execute"
+    script: "python 23_compliance/merkle/root_write_merkle_lock.py"
+
+  - name: "Update OPA policy state"
+    condition: "always"
+    action: "update_opa_data"
+    path: "data.root_write_prevention.last_validation"
+
+# Retention policy
+retention:
+  default_years: 20
+  compliance_standards:
+    - "DSGVO Art. 30 (Verzeichnis von Verarbeitungstätigkeiten)"
+    - "eIDAS Art. 24 (Technische Anforderungen)"
+    - "BSI IT-Grundschutz (Protokollierung)"
+
+  after_expiry: "archive_to_cold_storage"
+  cold_storage_path: "02_audit_logging/cold_storage/"
+
+# Metadata tagging
+metadata:
+  tags:
+    - "root-write-prevention"
+    - "root-24-lock"
+    - "compliance"
+    - "ci-cd"
+    - "merkle-proof"
+
+  compliance_labels:
+    - "DSGVO-compliant"
+    - "eIDAS-qualified"
+    - "20-year-retention"
+    - "WORM-protected"
+
+# Integration hooks
+hooks:
+  pre_log:
+    - script: "23_compliance/automation/pre_log_validator.py"
+      purpose: "Validate JSON schema before logging"
+
+  post_log:
+    - script: "23_compliance/automation/post_log_notifier.py"
+      purpose: "Send notifications after logging"
+
+  on_violation:
+    - script: "23_compliance/automation/violation_handler.py"
+      purpose: "Handle detected violations"
+    - script: "23_compliance/automation/forensic_snapshot.py"
+      purpose: "Create forensic snapshot of system state"
+
+# Monitoring
+monitoring:
+  health_check:
+    enabled: true
+    interval_minutes: 60
+    endpoint: "/health/audit-autologger"
+
+  metrics:
+    - name: "validations_logged"
+      type: "counter"
+    - name: "violations_detected"
+      type: "counter"
+    - name: "worm_archives_created"
+      type: "counter"
+    - name: "merkle_proofs_generated"
+      type: "counter"
+
+# Emergency procedures
+emergency:
+  on_storage_failure:
+    action: "fallback_to_local"
+    fallback_path: "02_audit_logging/emergency_backup/"
+
+  on_encryption_failure:
+    action: "halt_and_alert"
+    message: "CRITICAL: Encryption failure - halting audit logging"
+
+# Compliance attestation
+attestation:
+  authority: "SSID Compliance System"
+  policy: "ROOT-24-LOCK v5.3"
+  certification: "Root-Immunity Bundle v5.3"
+  valid_until: "2045-12-31T23:59:59Z"
+  epistemic_certainty: 1.0

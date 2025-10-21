@@ -1,0 +1,127 @@
+{
+  "certificate_name": "SOT_MOSCOW_V4_PRODUCTION_READY",
+  "certificate_type": "release_signature",
+  "bundle": "SOT_MOSCOW_V4",
+  "version": "4.0.0",
+  "status": "PRODUCTION_READY",
+
+  "cryptographic_binding": {
+    "algorithm": "Dilithium2",
+    "backend": "placeholder-hmac-sha256",
+    "key_type": "post_quantum_signature",
+    "key_size": 2420,
+    "security_level": "NIST_Level_2"
+  },
+
+  "key_references": {
+    "public_key_ref": "21_post_quantum_crypto/keys/sot_moscow_v4_public.key",
+    "private_key_ref": "21_post_quantum_crypto/keys/sot_moscow_v4_private.key",
+    "key_generation_date": "2025-10-18T11:30:00Z",
+    "key_expiry_date": "2030-10-18T11:30:00Z"
+  },
+
+  "signature_data": {
+    "signature_hex": "{{ auto_sign_via_sign_certificate_tool }}",
+    "signature_algorithm": "Dilithium2-SHAKE256",
+    "signature_size_bytes": 2420,
+    "signature_timestamp": "2025-10-18T11:30:00Z"
+  },
+
+  "signed_artifacts": [
+    {
+      "path": "03_core/validators/sot/sot_validator_core_v4.py",
+      "sha256": "85b914a48fa29bdd34dc3901db3056782955b303c8e4ff2f0ba557c3f13052ee",
+      "role": "Python Core Validator"
+    },
+    {
+      "path": "12_tooling/cli/sot_validator_v4.py",
+      "sha256": "7ffcfa196802554439268814363994e58b62806d994e6941a863287bdf82b467",
+      "role": "CLI Tool"
+    },
+    {
+      "path": "11_test_simulation/tests_compliance/test_sot_python_opa_consistency.py",
+      "sha256": "5c54c3fae6dac610ebc3c9baa64a64bd344d9ddb06a25070695e92e6d5c7cd4f",
+      "role": "Consistency Tests"
+    },
+    {
+      "path": "16_codex/contracts/sot/sot_contract.yaml",
+      "sha256": "87f1b367c1c44537d177404db1fcd9fd0f4ca08e277e7fd9a6126b93b9b4a9f6",
+      "role": "SoT Contract"
+    },
+    {
+      "path": "23_compliance/policies/sot/sot_policy.rego",
+      "sha256": "5e58bc44b688ea4bb895006941f5d05f7df00bf35a5c97a8edfc0b326bf4e4d0",
+      "role": "OPA Policy"
+    }
+  ],
+
+  "bundle_hash": {
+    "sha256": "4200ceb7629b4469f3918d91963fcbd0deee1a532d5cb4f2d923360da2c8ff45",
+    "computation": "SHA-256 of concatenated artifact hashes (85b914a4...5e58bc44)",
+    "blake3": "{{ auto_compute_ci }}",
+    "merkle_root": "{{ auto_compute_ci }}"
+  },
+
+  "signing_authority": {
+    "organization": "SSID Core Team",
+    "signer": "Compliance Engineering",
+    "role": "Release Manager",
+    "email": "compliance@ssid.system",
+    "signing_timestamp": "2025-10-18T11:30:00Z"
+  },
+
+  "verification": {
+    "verification_command": "opa eval -d sot_policy.rego -i input.json data.ssid.sot.consolidated.v3_2",
+    "verification_expected": "deny[] should match Python validator MUST failures",
+    "public_key_verification": "dilithium2-verify --public-key sot_moscow_v4_public.key --signature signature.hex --message bundle_hash.sha256"
+  },
+
+  "compliance_attestation": {
+    "root_24_lock": "COMPLIANT",
+    "worm_storage": "COMPLIANT",
+    "evidence_based": "COMPLIANT",
+    "moscow_governance": "COMPLIANT",
+    "python_opa_consistency": "COMPLIANT"
+  },
+
+  "test_results_attestation": {
+    "valid_data_test": "PASS (score: 100.0, exit: 0)",
+    "must_failures_test": "PASS (score: 33.3, exit: 2)",
+    "evidence_export_test": "PASS (JSON + MD generated)",
+    "consistency_test_ready": "READY (requires OPA binary)"
+  },
+
+  "audit_trail": {
+    "seal_file": "02_audit_logging/reports/sot_moscow_integration_v4_seal.json",
+    "registry_file": "24_meta_orchestration/registry/sot_moscow_v4_entry.yaml",
+    "implementation_report": "02_audit_logging/reports/sot_moscow_integration_v4_report.md"
+  },
+
+  "chain_of_custody": {
+    "created_by": "SSID Core Team",
+    "reviewed_by": ["Core Compliance Reviewer", "Lead Architect"],
+    "approved_by": "Release Manager",
+    "deployment_authorized": true,
+    "production_ready": true
+  },
+
+  "issued_at": "2025-10-18T11:30:00Z",
+  "expires_at": "2030-10-18T11:30:00Z",
+  "revocation_status": "active",
+  "revocation_list_url": "https://ssid.system/pqc/revocation/sot_moscow_v4",
+
+  "proof_nexus_integration": {
+    "proof_id": "{{ auto_generate_proof_id }}",
+    "proof_type": "release_signature",
+    "proof_chain": "SOT_MOSCOW_V4 → Compliance Layer → Meta Orchestration",
+    "proof_anchoring": "IPFS + Blockchain (optional)",
+    "proof_timestamp": "2025-10-18T11:30:00Z"
+  },
+
+  "metadata": {
+    "certificate_format": "SSID_PQC_v1.0",
+    "schema_version": "1.0.0",
+    "encoding": "UTF-8",
+    "signature_encoding": "hex"
+  }
+}

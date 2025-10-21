@@ -1,0 +1,118 @@
+# SSID OPA Policy - 12_tooling (FUNCTIONAL v6.3)
+# Auto-generated from 12_tooling/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.12tooling.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "12_tooling",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "12_tooling_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "12_tooling"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["cli_tools", "automation_scripts", "code_generation", "migration_tools", "debugging_utilities", "performance_profiling"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "12_tooling_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 12_tooling operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "12_tooling_operation"
+  input.request.valid == false
+  msg := "Invalid request for 12_tooling - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "12_tooling_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: script_validation (enforcement: automated, scope: all_scripts)
+deny_scriptvalidation[msg] {
+  input.request.type == "12_tooling_operation"
+  input.policy_check == "script_validation"
+  not input.policy_compliance.scriptvalidation
+  msg := "Policy violation: script_validation (scope: all_scripts)"
+}
+
+# Policy: tool_versioning (enforcement: automated, scope: all_tools)
+deny_toolversioning[msg] {
+  input.request.type == "12_tooling_operation"
+  input.policy_check == "tool_versioning"
+  not input.policy_compliance.toolversioning
+  msg := "Policy violation: tool_versioning (scope: all_tools)"
+}
+
+# Policy: safe_execution (enforcement: automated, scope: all_scripts)
+deny_safeexecution[msg] {
+  input.request.type == "12_tooling_operation"
+  input.policy_check == "safe_execution"
+  not input.policy_compliance.safeexecution
+  msg := "Policy violation: safe_execution (scope: all_scripts)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "12_tooling_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 12_tooling"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "12_tooling_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 12_tooling"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "12_tooling",
+  "capabilities": 6,
+  "policies": 3
+}

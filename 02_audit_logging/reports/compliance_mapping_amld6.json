@@ -1,0 +1,266 @@
+{
+  "timestamp": "2025-10-13T19:43:53.717083Z",
+  "framework": "AMLD6",
+  "source_file": "amld6_mapping.yaml",
+  "data": {
+    "meta": {
+      "framework": "AMLD6",
+      "version": "2025-Q4",
+      "source": "SoT Level3",
+      "last_updated": "2025-10-07T00:00:00Z",
+      "maintainer": "edubrainboost",
+      "status": "draft",
+      "classification": "PUBLIC - Compliance Mapping",
+      "regulatory_basis": "EU 6th Anti-Money Laundering Directive + AMLR (Anti-Money Laundering Regulation)"
+    },
+    "mappings": [
+      {
+        "id": "AMLD6-Art-2",
+        "description": "Geltungsbereich - Verpflichtete Personen",
+        "applies_to": [
+          "07_governance_legal",
+          "14_zero_time_auth",
+          "23_compliance"
+        ],
+        "verification": "manual",
+        "test_reference": "test_obliged_entities.py",
+        "controls": [
+          "Entity classification as obliged entity",
+          "Service scope definition",
+          "Regulatory obligations mapping",
+          "Exemption analysis"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art2_scope.json"
+      },
+      {
+        "id": "AMLD6-Art-8",
+        "description": "Sorgfaltspflichten gegen\u00fcber Kunden (CDD)",
+        "applies_to": [
+          "14_zero_time_auth",
+          "09_meta_identity",
+          "03_core",
+          "23_compliance"
+        ],
+        "verification": "automated",
+        "test_reference": "test_customer_due_diligence.py",
+        "controls": [
+          "Customer identification procedures",
+          "Beneficial ownership verification",
+          "Purpose and nature of business relationship",
+          "Ongoing monitoring of transactions"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art8_cdd.json"
+      },
+      {
+        "id": "AMLD6-Art-13",
+        "description": "Vereinfachte Sorgfaltspflichten",
+        "applies_to": [
+          "14_zero_time_auth",
+          "23_compliance"
+        ],
+        "verification": "manual",
+        "test_reference": "test_simplified_due_diligence.py",
+        "controls": [
+          "Low-risk assessment criteria",
+          "Simplified CDD procedures",
+          "Risk-based approach documentation",
+          "Monitoring of simplified CDD applicability"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art13_simplified_cdd.json"
+      },
+      {
+        "id": "AMLD6-Art-18",
+        "description": "Verst\u00e4rkte Sorgfaltspflichten",
+        "applies_to": [
+          "14_zero_time_auth",
+          "23_compliance",
+          "08_identity_score"
+        ],
+        "verification": "automated",
+        "test_reference": "test_enhanced_due_diligence.py",
+        "controls": [
+          "High-risk customer identification",
+          "Enhanced CDD measures",
+          "PEP screening and monitoring",
+          "Source of wealth verification",
+          "Enhanced ongoing monitoring"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art18_edd.json"
+      },
+      {
+        "id": "AMLD6-Art-30",
+        "description": "Meldung verd\u00e4chtiger Transaktionen",
+        "applies_to": [
+          "02_audit_logging",
+          "23_compliance",
+          "17_observability",
+          "07_governance_legal"
+        ],
+        "verification": "automated",
+        "test_reference": "test_suspicious_transaction_reporting.py",
+        "controls": [
+          "Transaction monitoring systems",
+          "Suspicious activity detection rules",
+          "STR reporting procedures",
+          "FIU reporting mechanisms",
+          "Reporting timelines (immediate)"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art30_str.json"
+      },
+      {
+        "id": "AMLD6-Art-33",
+        "description": "Verbot der Offenlegung (Tipping-off)",
+        "applies_to": [
+          "07_governance_legal",
+          "23_compliance",
+          "13_ui_layer"
+        ],
+        "verification": "manual",
+        "test_reference": "test_tipping_off_prevention.py",
+        "controls": [
+          "Non-disclosure policies",
+          "Staff training on tipping-off prohibition",
+          "System controls to prevent disclosure",
+          "Audit trails for sensitive information access"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art33_tipping_off.json"
+      },
+      {
+        "id": "AMLD6-Art-40",
+        "description": "Aufbewahrung von Unterlagen und Daten",
+        "applies_to": [
+          "02_audit_logging",
+          "18_data_layer",
+          "23_compliance"
+        ],
+        "verification": "automated",
+        "test_reference": "test_record_retention.py",
+        "controls": [
+          "CDD records retention (5 years minimum)",
+          "Transaction records retention (5 years minimum)",
+          "WORM storage implementation",
+          "Secure deletion after retention period"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art40_retention.json"
+      },
+      {
+        "id": "AMLD6-Art-45",
+        "description": "Interne Strategien, Kontrollen und Verfahren",
+        "applies_to": [
+          "07_governance_legal",
+          "23_compliance",
+          "05_documentation"
+        ],
+        "verification": "manual",
+        "test_reference": "test_internal_controls.py",
+        "controls": [
+          "AML/CFT policies and procedures",
+          "Risk assessment methodology",
+          "Internal controls framework",
+          "Independent audit function"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art45_controls.json"
+      },
+      {
+        "id": "AMLD6-Art-46",
+        "description": "Schulung der Mitarbeiter",
+        "applies_to": [
+          "07_governance_legal",
+          "05_documentation"
+        ],
+        "verification": "manual",
+        "test_reference": "test_staff_training.py",
+        "controls": [
+          "AML/CFT training program",
+          "Regular training updates",
+          "Training records maintenance",
+          "Competency assessments"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art46_training.json"
+      },
+      {
+        "id": "AMLD6-Art-48",
+        "description": "Compliance-Beauftragter",
+        "applies_to": [
+          "07_governance_legal",
+          "23_compliance"
+        ],
+        "verification": "manual",
+        "test_reference": "test_compliance_officer.py",
+        "controls": [
+          "MLRO appointment",
+          "MLRO responsibilities definition",
+          "MLRO reporting lines",
+          "MLRO resources and authority"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/art48_mlro.json"
+      },
+      {
+        "id": "AMLR-Art-22",
+        "description": "Travel Rule - Informationen bei Transfers von Krypto-Verm\u00f6genswerten",
+        "applies_to": [
+          "03_core",
+          "10_interoperability",
+          "19_adapters",
+          "23_compliance"
+        ],
+        "verification": "automated",
+        "test_reference": "test_travel_rule.py",
+        "controls": [
+          "Originator information collection",
+          "Beneficiary information collection",
+          "Information transmission with transfers",
+          "IVMS101 standard implementation",
+          "Threshold monitoring (\u20ac1000)"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/amlr_art22_travel_rule.json"
+      },
+      {
+        "id": "AMLR-Art-55",
+        "description": "Risikobewertung",
+        "applies_to": [
+          "07_governance_legal",
+          "23_compliance",
+          "08_identity_score"
+        ],
+        "verification": "manual",
+        "test_reference": "test_risk_assessment.py",
+        "controls": [
+          "Business-wide risk assessment",
+          "Customer risk assessment",
+          "Product/service risk assessment",
+          "Geographic risk assessment",
+          "Risk assessment updates (annual minimum)"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/amld6/amlr_art55_risk.json"
+      }
+    ],
+    "compliance_metrics": {
+      "overall_coverage": "94%",
+      "automated_controls": 5,
+      "manual_controls": 7,
+      "implemented_controls": 12,
+      "pending_controls": 0,
+      "last_audit": "2025-09-15",
+      "next_audit": "2026-03-15"
+    }
+  },
+  "score": {
+    "total_controls": 12,
+    "implemented": 12,
+    "planned": 0,
+    "score": 100.0
+  }
+}

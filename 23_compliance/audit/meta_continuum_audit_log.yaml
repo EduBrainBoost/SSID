@@ -1,0 +1,11 @@
+version: 1
+timestamp_utc: 2025-10-12T19:58:12Z
+mode: READINESS_CERTIFICATION
+events:
+  - type: POLICY_CHECK
+    status: PASS
+  - type: HASH_SEAL
+    status: PASS
+  - type: INTERFEDERATION_GATES
+    status: BLOCKED
+    reason: Second system missing

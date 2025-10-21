@@ -1,0 +1,213 @@
+# SOC2 CC1.1 - Integrity & Ethical Values Contract
+# ==================================================
+#
+# Scientific Basis:
+# AICPA TSC CC1.1 - The entity demonstrates a commitment to integrity and ethical values
+# COSO Internal Control Framework (2013) Principle 1
+#
+# Technical Manifestation:
+# YAML contract defining the enforceable requirements for CC1.1 compliance
+#
+# This contract binds the organization to maintain integrity and ethical standards
+# through documented policies, training, and violation reporting mechanisms.
+#
+# Author: SSID Compliance Team
+# Version: 1.0.0
+# Date: 2025-10-17
+
+version: "1.0.0"
+contract_id: "SOC2_CC1.1"
+contract_name: "Integrity and Ethical Values"
+standard: "SOC2"
+category: "Common Criteria"
+subcategory: "Control Environment"
+effective_date: "2025-10-17"
+review_cycle: "annual"
+owner: "Chief Compliance Officer"
+classification: "CONFIDENTIAL"
+
+scientific_basis:
+  standard: "AICPA Trust Services Criteria"
+  principle: "CC1.1"
+  framework: "COSO Internal Control - Integrated Framework (2013)"
+  coso_principle: "Principle 1 - Demonstrates Commitment to Integrity and Ethical Values"
+  description: |
+    The entity demonstrates a commitment to integrity and ethical values.
+    The board of directors and management, at all levels, demonstrate through
+    their directives, actions, and behavior the importance of integrity and
+    ethical values to support the functioning of the system of internal control.
+
+compliance_requirements:
+  - requirement_id: "CC1.1-R1"
+    description: "Documented Code of Conduct"
+    technical_control: "07_governance_legal/policies/code_of_conduct.md"
+    validation_method: "file_existence_check"
+    minimum_content_size: 1000  # bytes
+    review_frequency: "annual"
+    evidence_required: true
+
+  - requirement_id: "CC1.1-R2"
+    description: "Ethics Policy"
+    technical_control: "07_governance_legal/policies/ethics_policy.md"
+    validation_method: "file_existence_check"
+    minimum_content_size: 500
+    review_frequency: "annual"
+    evidence_required: true
+
+  - requirement_id: "CC1.1-R3"
+    description: "Conflict of Interest Policy"
+    technical_control: "07_governance_legal/policies/conflict_of_interest_policy.md"
+    validation_method: "file_existence_check"
+    minimum_content_size: 500
+    review_frequency: "annual"
+    evidence_required: true
+
+  - requirement_id: "CC1.1-R4"
+    description: "Whistleblower Protection Policy"
+    technical_control: "07_governance_legal/policies/whistleblower_policy.md"
+    validation_method: "file_existence_check"
+    minimum_content_size: 500
+    review_frequency: "annual"
+    evidence_required: true
+
+  - requirement_id: "CC1.1-R5"
+    description: "Annual Ethics Training"
+    technical_control: "07_governance_legal/training/ethics_training_log.json"
+    validation_method: "training_completion_rate"
+    minimum_completion_rate: 0.80  # 80%
+    training_window_days: 365
+    evidence_required: true
+    worm_storage: false
+
+  - requirement_id: "CC1.1-R6"
+    description: "Ethics Violation Reporting Mechanism"
+    technical_control: "02_audit_logging/storage/worm/immutable_store/ethics_violations.jsonl"
+    validation_method: "worm_storage_configured"
+    evidence_required: true
+    worm_storage: true
+    retention_period: "permanent"
+
+  - requirement_id: "CC1.1-R7"
+    description: "Code of Conduct Acknowledgments"
+    technical_control: "07_governance_legal/training/code_conduct_acknowledgments.json"
+    validation_method: "acknowledgment_tracking"
+    minimum_acknowledgments: 1
+    evidence_required: true
+    worm_storage: false
+
+enforcement:
+  python_module: "23_compliance/mappings/soc2/src/cc1_1_integrity_ethics.py"
+  rego_policy: "23_compliance/policies/soc2_cc1_1_integrity_ethics.rego"
+  cli_command: "python 23_compliance/mappings/soc2/src/cc1_1_integrity_ethics.py"
+  opa_enforcement: true
+  ci_gate_enabled: true
+  blocking_severity: "CRITICAL"
+
+validation_schedule:
+  pre_commit: false  # Too heavy for pre-commit
+  ci_pipeline: true
+  nightly_scan: true
+  weekly_report: true
+  monthly_audit: true
+  quarterly_review: true
+  annual_certification: true
+
+evidence_chain:
+  primary_evidence:
+    - "07_governance_legal/policies/*.md"
+    - "07_governance_legal/training/ethics_training_log.json"
+    - "07_governance_legal/training/code_conduct_acknowledgments.json"
+
+  immutable_evidence:
+    - "02_audit_logging/storage/worm/immutable_store/ethics_violations.jsonl"
+
+  audit_trail:
+    - "23_compliance/evidence/soc2/cc1_1_validation_results/"
+
+  blockchain_anchoring: true
+  evidence_retention: "permanent"
+
+remediation:
+  critical_violations:
+    - violation: "Missing code of conduct"
+      action: "Create and approve code of conduct document"
+      owner: "Legal Team + Executive Management"
+      deadline_days: 30
+
+    - violation: "Missing ethics policy"
+      action: "Develop comprehensive ethics policy"
+      owner: "Legal Team"
+      deadline_days: 30
+
+    - violation: "WORM storage not configured"
+      action: "Initialize WORM-compliant violation logging"
+      owner: "IT Security Team"
+      deadline_days: 7
+
+  high_violations:
+    - violation: "Training compliance < 80%"
+      action: "Conduct additional ethics training sessions"
+      owner: "HR + Compliance Team"
+      deadline_days: 60
+
+    - violation: "No acknowledgments tracked"
+      action: "Implement acknowledgment tracking system"
+      owner: "HR Team"
+      deadline_days: 30
+
+reporting:
+  compliance_dashboard: "23_compliance/dashboards/soc2/cc1_1_dashboard.json"
+  executive_summary: true
+  board_reporting: true
+  external_auditor_access: true
+
+  metrics:
+    - "policy_document_completeness"
+    - "training_completion_rate"
+    - "ethics_violations_count"
+    - "acknowledgment_coverage"
+    - "remediation_time_avg"
+
+integration:
+  related_controls:
+    - "CC2.1"  # Monitoring Activities
+    - "CC4.1"  # Information & Communication
+    - "CC5.1"  # Control Activities
+
+  dependencies:
+    - "07_governance_legal (policy repository)"
+    - "02_audit_logging (WORM storage)"
+
+  downstream_impacts:
+    - "All SOC2 controls depend on control environment"
+    - "Affects organizational culture and compliance posture"
+
+compliance_status:
+  current_status: "INITIAL_DEPLOYMENT"
+  target_status: "FULLY_COMPLIANT"
+  estimated_completion: "2025-12-31"
+  last_audit: null
+  next_audit: "2026-01-15"
+  certification_status: "IN_PROGRESS"
+
+metadata:
+  created_by: "SSID Compliance Team"
+  created_date: "2025-10-17"
+  last_modified: "2025-10-17"
+  version_history:
+    - version: "1.0.0"
+      date: "2025-10-17"
+      changes: "Initial contract creation"
+
+  tags:
+    - "soc2"
+    - "control-environment"
+    - "ethics"
+    - "integrity"
+    - "coso"
+    - "governance"
+
+  references:
+    - "AICPA TSC 2017"
+    - "COSO Internal Control Framework 2013"
+    - "SOC 2 Reporting Framework"

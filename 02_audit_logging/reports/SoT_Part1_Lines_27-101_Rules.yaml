@@ -1,0 +1,1123 @@
+# SoT Manual Extraction - Part 1, Lines 27-101 (61 Rules)
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 27-101
+# Sektion: Token Architecture & Legal Safe Harbor (YAML)
+# Anzahl Regeln: 61
+# Datum: 2025-10-18
+# ====================================================================================
+
+rules:
+  # ==========================================================================
+  # Kategorie 1: Metadata (Lines 32-35) - 4 Regeln
+  # ==========================================================================
+
+  - rule_id: SOT-P1-005
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 32
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "metadata"
+    title: "Token Framework Version Pflicht"
+    original_text: 'version: "1.0"'
+    category: "token_framework"
+    priority: "must"
+    description: "Token Framework YAML MUSS version-Feld haben (Semver)"
+    enforcement: "20_foundation/tokenomics/ssid_token_framework.yaml MUSS version enthalten"
+    evidence_schema:
+      type: "yaml_field_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "version"
+      format: "semver"
+
+  - rule_id: SOT-P1-006
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 33
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "metadata"
+    title: "Token Framework Date Pflicht"
+    original_text: 'date: "2025-09-15"'
+    category: "token_framework"
+    priority: "must"
+    description: "Token Framework YAML MUSS date-Feld haben (ISO 8601)"
+    enforcement: "Datums-Feld MUSS im Format YYYY-MM-DD sein"
+    evidence_schema:
+      type: "yaml_field_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "date"
+      format: "ISO_8601_date"
+
+  - rule_id: SOT-P1-007
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 34
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "metadata"
+    title: "Token Framework Deprecation Status Pflicht"
+    original_text: 'deprecated: false'
+    category: "token_framework"
+    priority: "must"
+    description: "Token Framework YAML MUSS deprecated-Feld haben (boolean)"
+    enforcement: "deprecated MUSS explizit true oder false sein"
+    evidence_schema:
+      type: "yaml_field_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "deprecated"
+      format: "boolean"
+
+  - rule_id: SOT-P1-008
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 35
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "metadata"
+    title: "Token Framework Classification Pflicht"
+    original_text: 'classification: "PUBLIC - Token Framework Standards"'
+    category: "token_framework"
+    priority: "must"
+    description: "Token Framework YAML MUSS classification-Feld haben"
+    enforcement: "classification MUSS PUBLIC/CONFIDENTIAL/INTERNAL deklarieren"
+    evidence_schema:
+      type: "yaml_field_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "classification"
+      allowed_values: ["PUBLIC", "CONFIDENTIAL", "INTERNAL"]
+
+  # ==========================================================================
+  # Kategorie 2: token_definition (Lines 37-40) - 4 Regeln
+  # ==========================================================================
+
+  - rule_id: SOT-P1-009
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 38
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "token_definition"
+    title: "Token Purpose Triple Definition"
+    original_text: 'purpose: ["utility", "governance", "reward"]'
+    category: "token_framework"
+    priority: "must"
+    description: "Token MUSS EXAKT 3 Zwecke haben: utility, governance, reward"
+    enforcement: "Keine anderen Zwecke erlaubt, alle 3 MÜSSEN deklariert sein"
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "token_definition.purpose"
+      expected_values: ["utility", "governance", "reward"]
+      validation: "Array MUSS exakt diese 3 Werte enthalten, keine mehr, keine weniger"
+
+  - rule_id: SOT-P1-010
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 39
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "token_definition"
+    title: "Token Explicit Exclusions - Security/Investment/E-Money"
+    original_text: 'explicit_exclusions: ["investment", "security", "e_money", "yield_bearing", "redemption_rights"]'
+    category: "token_framework"
+    priority: "must"
+    description: "Token MUSS explizit ausschließen: investment, security, e_money, yield_bearing, redemption_rights"
+    enforcement: "Diese 5 Ausschlüsse MÜSSEN im Array vorhanden sein - KRITISCH für Legal Safe Harbor"
+    evidence_schema:
+      type: "yaml_array_contains_all"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "token_definition.explicit_exclusions"
+      required_values: ["investment", "security", "e_money", "yield_bearing", "redemption_rights"]
+      validation: "Alle 5 MÜSSEN vorhanden sein"
+
+  - rule_id: SOT-P1-011
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 40
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "token_definition"
+    title: "Token Legal Position Statement"
+    original_text: 'legal_position: "Pure utility token for identity verification services"'
+    category: "token_framework"
+    priority: "must"
+    description: "Token MUSS klare Legal Position haben: Pure utility token"
+    enforcement: "legal_position MUSS explizit 'utility token' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "token_definition.legal_position"
+      contains: "utility token"
+
+  - rule_id: SOT-P1-012
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 37
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "token_definition"
+    title: "token_definition Section Existence"
+    original_text: "token_definition:"
+    category: "token_framework"
+    priority: "must"
+    description: "token_definition Sektion MUSS im YAML existieren"
+    enforcement: "Sektion MUSS vorhanden sein mit allen Sub-Feldern"
+    evidence_schema:
+      type: "yaml_section_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section: "token_definition"
+      required_fields: ["purpose", "explicit_exclusions", "legal_position"]
+
+  # ==========================================================================
+  # Kategorie 3: technical_specification (Lines 42-47) - 6 Regeln
+  # ==========================================================================
+
+  - rule_id: SOT-P1-013
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 43
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "technical_specification"
+    title: "Blockchain Platform Specification"
+    original_text: 'blockchain: "Polygon (EVM Compatible)"'
+    category: "token_framework"
+    priority: "must"
+    description: "Token MUSS auf Polygon (EVM) deployed werden"
+    enforcement: "blockchain MUSS 'Polygon' enthalten"
+    evidence_schema:
+      type: "yaml_field_value"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "technical_specification.blockchain"
+      expected_value: "Polygon (EVM Compatible)"
+
+  - rule_id: SOT-P1-014
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 44
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "technical_specification"
+    title: "Token Standard Specification"
+    original_text: 'standard: "ERC-20 Compatible"'
+    category: "token_framework"
+    priority: "must"
+    description: "Token MUSS ERC-20 kompatibel sein"
+    enforcement: "standard MUSS 'ERC-20' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "technical_specification.standard"
+      contains: "ERC-20"
+
+  - rule_id: SOT-P1-015
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 45
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "technical_specification"
+    title: "Supply Model Specification"
+    original_text: 'supply_model: "Fixed cap with deflationary mechanisms"'
+    category: "token_framework"
+    priority: "must"
+    description: "Token MUSS fixed cap mit deflationären Mechanismen haben"
+    enforcement: "supply_model MUSS 'Fixed cap' UND 'deflationary' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "technical_specification.supply_model"
+      contains_all: ["Fixed cap", "deflationary"]
+
+  - rule_id: SOT-P1-016
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 46
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "technical_specification"
+    title: "Non-Custodial Custody Model"
+    original_text: 'custody_model: "Non-custodial by design"'
+    category: "token_framework"
+    priority: "must"
+    description: "Token MUSS Non-custodial by design sein - KRITISCH"
+    enforcement: "custody_model MUSS 'Non-custodial' enthalten - KEINE Custodial-Option"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "technical_specification.custody_model"
+      contains: "Non-custodial"
+      forbidden_strings: ["custodial", "Custodial"]
+
+  - rule_id: SOT-P1-017
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 47
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "technical_specification"
+    title: "Smart Contract Automation Requirement"
+    original_text: 'smart_contract_automation: "Full autonomous distribution"'
+    category: "token_framework"
+    priority: "must"
+    description: "Token Distribution MUSS vollständig automatisiert sein"
+    enforcement: "smart_contract_automation MUSS 'autonomous' enthalten - keine manuelle Intervention"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "technical_specification.smart_contract_automation"
+      contains: "autonomous"
+
+  - rule_id: SOT-P1-018
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 42
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "technical_specification"
+    title: "technical_specification Section Existence"
+    original_text: "technical_specification:"
+    category: "token_framework"
+    priority: "must"
+    description: "technical_specification Sektion MUSS im YAML existieren"
+    enforcement: "Sektion MUSS vorhanden sein mit allen 5 Sub-Feldern"
+    evidence_schema:
+      type: "yaml_section_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section: "technical_specification"
+      required_fields: ["blockchain", "standard", "supply_model", "custody_model", "smart_contract_automation"]
+
+  # ==========================================================================
+  # Kategorie 4: fee_structure (Lines 49-55) - 7 Regeln
+  # ==========================================================================
+
+  - rule_id: SOT-P1-019
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 50
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "fee_structure"
+    title: "Fee Scope Limitation - Identity Verification Only"
+    original_text: 'scope: "identity_verification_payments_only"'
+    category: "token_framework"
+    priority: "must"
+    description: "Fees MÜSSEN NUR auf identity verification payments beschränkt sein"
+    enforcement: "scope MUSS 'identity_verification' enthalten - KEINE anderen Scopes"
+    evidence_schema:
+      type: "yaml_field_value"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "fee_structure.scope"
+      expected_value: "identity_verification_payments_only"
+
+  - rule_id: SOT-P1-020
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 51
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "fee_structure"
+    title: "Total Fee Rate - 3% Fixed"
+    original_text: 'total_fee: "3% of identity verification transactions"'
+    category: "token_framework"
+    priority: "must"
+    description: "Total Fee MUSS 3% betragen"
+    enforcement: "total_fee MUSS '3%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "fee_structure.total_fee"
+      contains: "3%"
+
+  - rule_id: SOT-P1-021
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 52
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "fee_structure"
+    title: "Fee Allocation - 1% Dev / 2% Treasury"
+    original_text: 'allocation: "1% dev (direct), 2% system treasury"'
+    category: "token_framework"
+    priority: "must"
+    description: "Fee Allocation MUSS 1% dev, 2% treasury sein"
+    enforcement: "allocation MUSS '1% dev' UND '2% system treasury' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "fee_structure.allocation"
+      contains_all: ["1% dev", "2% system treasury"]
+
+  - rule_id: SOT-P1-022
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 53
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "fee_structure"
+    title: "Burn Mechanism - 50% of System Fee"
+    original_text: 'burn_from_system_fee: "50% of 2% with daily/monthly caps"'
+    category: "token_framework"
+    priority: "must"
+    description: "50% des System-Fees (2%) MÜSSEN geburnt werden mit Caps"
+    enforcement: "burn_from_system_fee MUSS '50%' UND 'caps' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "fee_structure.burn_from_system_fee"
+      contains_all: ["50%", "caps"]
+
+  - rule_id: SOT-P1-023
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 54
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "fee_structure"
+    title: "Fee Collection Automation"
+    original_text: 'fee_collection: "Smart contract automated"'
+    category: "token_framework"
+    priority: "must"
+    description: "Fee Collection MUSS Smart Contract automatisiert sein"
+    enforcement: "fee_collection MUSS 'automated' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "fee_structure.fee_collection"
+      contains: "automated"
+
+  - rule_id: SOT-P1-024
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 55
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "fee_structure"
+    title: "No Manual Intervention Policy"
+    original_text: 'no_manual_intervention: true'
+    category: "token_framework"
+    priority: "must"
+    description: "KEINE manuelle Intervention in Fee Collection erlaubt"
+    enforcement: "no_manual_intervention MUSS true sein - KRITISCH für Decentralization"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "fee_structure.no_manual_intervention"
+      expected_value: true
+
+  - rule_id: SOT-P1-025
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 49
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "fee_structure"
+    title: "fee_structure Section Existence"
+    original_text: "fee_structure:"
+    category: "token_framework"
+    priority: "must"
+    description: "fee_structure Sektion MUSS im YAML existieren"
+    enforcement: "Sektion MUSS vorhanden sein mit allen 6 Sub-Feldern"
+    evidence_schema:
+      type: "yaml_section_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section: "fee_structure"
+      required_fields: ["scope", "total_fee", "allocation", "burn_from_system_fee", "fee_collection", "no_manual_intervention"]
+
+  # ==========================================================================
+  # Kategorie 5: legal_safe_harbor (Lines 57-66) - 10 Regeln
+  # ==========================================================================
+
+  - rule_id: SOT-P1-026
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 58
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "NOT a Security Token"
+    original_text: 'security_token: false'
+    category: "token_framework"
+    priority: "must"
+    description: "Token ist KEIN Security Token"
+    enforcement: "security_token MUSS false sein - KRITISCH für Legal Safe Harbor"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "legal_safe_harbor.security_token"
+      expected_value: false
+
+  - rule_id: SOT-P1-027
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 59
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "NOT an E-Money Token"
+    original_text: 'e_money_token: false'
+    category: "token_framework"
+    priority: "must"
+    description: "Token ist KEIN E-Money Token"
+    enforcement: "e_money_token MUSS false sein - KRITISCH für MiCA Compliance"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "legal_safe_harbor.e_money_token"
+      expected_value: false
+
+  - rule_id: SOT-P1-028
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 60
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "NOT a Stablecoin"
+    original_text: 'stablecoin: false'
+    category: "token_framework"
+    priority: "must"
+    description: "Token ist KEIN Stablecoin"
+    enforcement: "stablecoin MUSS false sein"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "legal_safe_harbor.stablecoin"
+      expected_value: false
+
+  - rule_id: SOT-P1-029
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 61
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "NOT Yield-Bearing"
+    original_text: 'yield_bearing: false'
+    category: "token_framework"
+    priority: "must"
+    description: "Token bietet KEIN Yield"
+    enforcement: "yield_bearing MUSS false sein - KRITISCH"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "legal_safe_harbor.yield_bearing"
+      expected_value: false
+
+  - rule_id: SOT-P1-030
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 62
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "NO Redemption Rights"
+    original_text: 'redemption_rights: false'
+    category: "token_framework"
+    priority: "must"
+    description: "Token hat KEINE Redemption Rights"
+    enforcement: "redemption_rights MUSS false sein - KRITISCH"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "legal_safe_harbor.redemption_rights"
+      expected_value: false
+
+  - rule_id: SOT-P1-031
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 63
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "NO Passive Income"
+    original_text: 'passive_income: false'
+    category: "token_framework"
+    priority: "must"
+    description: "Token generiert KEIN Passive Income"
+    enforcement: "passive_income MUSS false sein - KRITISCH für Howey Test"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "legal_safe_harbor.passive_income"
+      expected_value: false
+
+  - rule_id: SOT-P1-032
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 64
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "NOT an Investment Contract"
+    original_text: 'investment_contract: false'
+    category: "token_framework"
+    priority: "must"
+    description: "Token ist KEIN Investment Contract"
+    enforcement: "investment_contract MUSS false sein - KRITISCH für Howey Test"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "legal_safe_harbor.investment_contract"
+      expected_value: false
+
+  - rule_id: SOT-P1-033
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 65
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "NO Privileged Admin Controls"
+    original_text: 'admin_controls: "No privileged admin keys. Proxy owner = DAO Timelock; emergency multisig acts only via time-locked governance paths (no direct overrides)."'
+    category: "token_framework"
+    priority: "must"
+    description: "KEINE privilegierten Admin Keys - DAO Timelock only"
+    enforcement: "admin_controls MUSS 'No privileged admin keys' UND 'DAO Timelock' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "legal_safe_harbor.admin_controls"
+      contains_all: ["No privileged admin keys", "DAO Timelock"]
+      forbidden_strings: ["admin override", "direct control"]
+
+  - rule_id: SOT-P1-034
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 66
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "On-Chain Governance Only Upgrade Mechanism"
+    original_text: 'upgrade_mechanism: "On-chain proposals only via DAO governance"'
+    category: "token_framework"
+    priority: "must"
+    description: "Upgrades NUR via On-Chain DAO Governance"
+    enforcement: "upgrade_mechanism MUSS 'On-chain' UND 'DAO governance' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "legal_safe_harbor.upgrade_mechanism"
+      contains_all: ["On-chain", "DAO governance"]
+
+  - rule_id: SOT-P1-035
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 57
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "legal_safe_harbor"
+    title: "legal_safe_harbor Section Existence"
+    original_text: "legal_safe_harbor:"
+    category: "token_framework"
+    priority: "must"
+    description: "legal_safe_harbor Sektion MUSS im YAML existieren"
+    enforcement: "Sektion MUSS vorhanden sein mit allen 9 Sub-Feldern"
+    evidence_schema:
+      type: "yaml_section_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section: "legal_safe_harbor"
+      required_fields: ["security_token", "e_money_token", "stablecoin", "yield_bearing", "redemption_rights", "passive_income", "investment_contract", "admin_controls", "upgrade_mechanism"]
+
+  # ==========================================================================
+  # Kategorie 6: business_model (Lines 68-73) - 6 Regeln
+  # ==========================================================================
+
+  - rule_id: SOT-P1-036
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 69
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "business_model"
+    title: "Business Role - Technology Publisher"
+    original_text: 'role: "Technology publisher and open source maintainer"'
+    category: "token_framework"
+    priority: "must"
+    description: "Business Role ist Technology Publisher und Open Source Maintainer"
+    enforcement: "role MUSS 'Technology publisher' UND 'open source' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "business_model.role"
+      contains_all: ["Technology publisher", "open source"]
+
+  - rule_id: SOT-P1-037
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 70
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "business_model"
+    title: "Excluded Business Roles"
+    original_text: 'not_role: ["payment_service_provider", "custodian", "operator", "exchange"]'
+    category: "token_framework"
+    priority: "must"
+    description: "Business ist NICHT PSP, Custodian, Operator oder Exchange"
+    enforcement: "not_role MUSS alle 4 Ausschlüsse enthalten - KRITISCH für Legal Safe Harbor"
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "business_model.not_role"
+      expected_values: ["payment_service_provider", "custodian", "operator", "exchange"]
+
+  - rule_id: SOT-P1-038
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 71
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "business_model"
+    title: "User Interaction Model - Peer-to-Peer"
+    original_text: 'user_interactions: "Direct peer-to-peer via smart contracts"'
+    category: "token_framework"
+    priority: "must"
+    description: "User Interactions MÜSSEN direkt peer-to-peer via Smart Contracts sein"
+    enforcement: "user_interactions MUSS 'peer-to-peer' UND 'smart contracts' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "business_model.user_interactions"
+      contains_all: ["peer-to-peer", "smart contracts"]
+
+  - rule_id: SOT-P1-039
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 72
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "business_model"
+    title: "KYC Responsibility - Third-Party Only"
+    original_text: 'kyc_responsibility: "Third-party KYC providers (users pay directly)"'
+    category: "token_framework"
+    priority: "must"
+    description: "KYC ist Third-Party Responsibility - Users zahlen direkt"
+    enforcement: "kyc_responsibility MUSS 'Third-party' enthalten - KEINE eigene KYC"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "business_model.kyc_responsibility"
+      contains: "Third-party"
+
+  - rule_id: SOT-P1-040
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 73
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "business_model"
+    title: "Zero Personal Data On-Chain Policy"
+    original_text: 'data_custody: "Zero personal data on-chain"'
+    category: "token_framework"
+    priority: "must"
+    description: "KEINE Personal Data on-chain - KRITISCH"
+    enforcement: "data_custody MUSS 'Zero personal data' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "business_model.data_custody"
+      contains: "Zero personal data"
+
+  - rule_id: SOT-P1-041
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 68
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "business_model"
+    title: "business_model Section Existence"
+    original_text: "business_model:"
+    category: "token_framework"
+    priority: "must"
+    description: "business_model Sektion MUSS im YAML existieren"
+    enforcement: "Sektion MUSS vorhanden sein mit allen 5 Sub-Feldern"
+    evidence_schema:
+      type: "yaml_section_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section: "business_model"
+      required_fields: ["role", "not_role", "user_interactions", "kyc_responsibility", "data_custody"]
+
+  # ==========================================================================
+  # Kategorie 7: governance_framework (Lines 75-81) - 7 Regeln
+  # ==========================================================================
+
+  - rule_id: SOT-P1-042
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 76
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "governance_framework"
+    title: "DAO-Ready Requirement"
+    original_text: 'dao_ready: true'
+    category: "token_framework"
+    priority: "must"
+    description: "System MUSS DAO-ready sein"
+    enforcement: "dao_ready MUSS true sein"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "governance_framework.dao_ready"
+      expected_value: true
+
+  - rule_id: SOT-P1-043
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 77
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "governance_framework"
+    title: "Token-Weighted Voting Mechanism"
+    original_text: 'voting_mechanism: "Token-weighted governance"'
+    category: "token_framework"
+    priority: "must"
+    description: "Voting MUSS token-weighted sein"
+    enforcement: "voting_mechanism MUSS 'Token-weighted' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "governance_framework.voting_mechanism"
+      contains: "Token-weighted"
+
+  - rule_id: SOT-P1-044
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 78
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "governance_framework"
+    title: "Snapshot + On-Chain Proposal System"
+    original_text: 'proposal_system: "Snapshot + on-chain execution"'
+    category: "token_framework"
+    priority: "must"
+    description: "Proposals via Snapshot + On-Chain Execution"
+    enforcement: "proposal_system MUSS 'Snapshot' UND 'on-chain' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "governance_framework.proposal_system"
+      contains_all: ["Snapshot", "on-chain"]
+
+  - rule_id: SOT-P1-045
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 79
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "governance_framework"
+    title: "DAO-Only Upgrade Authority"
+    original_text: 'upgrade_authority: "DAO only (no admin keys)"'
+    category: "token_framework"
+    priority: "must"
+    description: "Upgrades NUR via DAO - KEINE Admin Keys"
+    enforcement: "upgrade_authority MUSS 'DAO only' UND 'no admin keys' enthalten - KRITISCH"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "governance_framework.upgrade_authority"
+      contains_all: ["DAO only", "no admin keys"]
+
+  - rule_id: SOT-P1-046
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 80
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "governance_framework"
+    title: "Community Multisig Emergency Procedures"
+    original_text: 'emergency_procedures: "Community multisig"'
+    category: "token_framework"
+    priority: "must"
+    description: "Emergency Procedures via Community Multisig"
+    enforcement: "emergency_procedures MUSS 'Community multisig' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "governance_framework.emergency_procedures"
+      contains: "Community multisig"
+
+  - rule_id: SOT-P1-047
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 81
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "governance_framework"
+    title: "Reference to Detailed Governance Parameters"
+    original_text: 'reference: "See detailed governance_parameters section below for quorum, timelock, and voting requirements"'
+    category: "token_framework"
+    priority: "must"
+    description: "Verweis auf detaillierte governance_parameters Sektion"
+    enforcement: "reference MUSS auf 'governance_parameters' verweisen"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "governance_framework.reference"
+      contains: "governance_parameters"
+
+  - rule_id: SOT-P1-048
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 75
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "governance_framework"
+    title: "governance_framework Section Existence"
+    original_text: "governance_framework:"
+    category: "token_framework"
+    priority: "must"
+    description: "governance_framework Sektion MUSS im YAML existieren"
+    enforcement: "Sektion MUSS vorhanden sein mit allen 6 Sub-Feldern"
+    evidence_schema:
+      type: "yaml_section_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section: "governance_framework"
+      required_fields: ["dao_ready", "voting_mechanism", "proposal_system", "upgrade_authority", "emergency_procedures", "reference"]
+
+  # ==========================================================================
+  # Kategorie 8: jurisdictional_compliance (Lines 83-92) - 10 Regeln
+  # ==========================================================================
+
+  - rule_id: SOT-P1-049
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 84
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "Reference to Coverage Matrix"
+    original_text: 'reference: "See 23_compliance/jurisdictions/coverage_matrix.yaml for complete exclusion lists"'
+    category: "token_framework"
+    priority: "must"
+    description: "Verweis auf complete exclusion lists in coverage_matrix.yaml"
+    enforcement: "reference MUSS auf '23_compliance/jurisdictions/coverage_matrix.yaml' verweisen"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "jurisdictional_compliance.reference"
+      contains: "23_compliance/jurisdictions/coverage_matrix.yaml"
+
+  - rule_id: SOT-P1-050
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 85
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "Blacklist Jurisdictions - Sanctioned Countries"
+    original_text: 'blacklist_jurisdictions: ["IR", "KP", "SY", "CU"]'
+    category: "token_framework"
+    priority: "must"
+    description: "Blacklist: Iran, North Korea, Syria, Cuba"
+    enforcement: "blacklist_jurisdictions MUSS ['IR', 'KP', 'SY', 'CU'] enthalten"
+    evidence_schema:
+      type: "yaml_array_contains_all"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "jurisdictional_compliance.blacklist_jurisdictions"
+      required_values: ["IR", "KP", "SY", "CU"]
+
+  - rule_id: SOT-P1-051
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 87
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "Excluded Entity - RU Designated Entities"
+    original_text: '- "RU_designated_entities"'
+    category: "token_framework"
+    priority: "must"
+    description: "RU designated entities sind excluded"
+    enforcement: "excluded_entities MUSS 'RU_designated_entities' enthalten"
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "jurisdictional_compliance.excluded_entities"
+      contains: "RU_designated_entities"
+
+  - rule_id: SOT-P1-052
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 88
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "Excluded Entity - Belarus Designated Entities"
+    original_text: '- "Belarus_designated_entities"'
+    category: "token_framework"
+    priority: "must"
+    description: "Belarus designated entities sind excluded"
+    enforcement: "excluded_entities MUSS 'Belarus_designated_entities' enthalten"
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "jurisdictional_compliance.excluded_entities"
+      contains: "Belarus_designated_entities"
+
+  - rule_id: SOT-P1-053
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 89
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "Excluded Entity - Venezuela Government Entities"
+    original_text: '- "Venezuela_government_entities"'
+    category: "token_framework"
+    priority: "must"
+    description: "Venezuela government entities sind excluded"
+    enforcement: "excluded_entities MUSS 'Venezuela_government_entities' enthalten"
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "jurisdictional_compliance.excluded_entities"
+      contains: "Venezuela_government_entities"
+
+  - rule_id: SOT-P1-054
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 90
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "Excluded Markets - India, Pakistan, Myanmar"
+    original_text: 'excluded_markets: ["India", "Pakistan", "Myanmar"]'
+    category: "token_framework"
+    priority: "must"
+    description: "Excluded Markets: India, Pakistan, Myanmar"
+    enforcement: "excluded_markets MUSS ['India', 'Pakistan', 'Myanmar'] enthalten"
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "jurisdictional_compliance.excluded_markets"
+      expected_values: ["India", "Pakistan", "Myanmar"]
+
+  - rule_id: SOT-P1-055
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 91
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "Compliance Basis - MiCA + Howey Test"
+    original_text: 'compliance_basis: "EU MiCA Article 3 + US Howey Test"'
+    category: "token_framework"
+    priority: "must"
+    description: "Compliance Basis: EU MiCA Article 3 + US Howey Test"
+    enforcement: "compliance_basis MUSS 'MiCA' UND 'Howey Test' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_strings"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "jurisdictional_compliance.compliance_basis"
+      contains_all: ["MiCA", "Howey Test"]
+
+  - rule_id: SOT-P1-056
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 92
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "Regulatory Exemptions - Utility Token"
+    original_text: 'regulatory_exemptions: "Utility token exemption"'
+    category: "token_framework"
+    priority: "must"
+    description: "Regulatory Exemption: Utility token"
+    enforcement: "regulatory_exemptions MUSS 'Utility token' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "jurisdictional_compliance.regulatory_exemptions"
+      contains: "Utility token"
+
+  - rule_id: SOT-P1-057
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 86
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "excluded_entities Array Existence"
+    original_text: "excluded_entities:"
+    category: "token_framework"
+    priority: "must"
+    description: "excluded_entities Array MUSS existieren mit mindestens 3 Einträgen"
+    enforcement: "excluded_entities MUSS Array mit mindestens 3 Werten sein"
+    evidence_schema:
+      type: "yaml_array_min_length"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "jurisdictional_compliance.excluded_entities"
+      min_length: 3
+
+  - rule_id: SOT-P1-058
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 83
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "jurisdictional_compliance"
+    title: "jurisdictional_compliance Section Existence"
+    original_text: "jurisdictional_compliance:"
+    category: "token_framework"
+    priority: "must"
+    description: "jurisdictional_compliance Sektion MUSS im YAML existieren"
+    enforcement: "Sektion MUSS vorhanden sein mit allen Sub-Feldern"
+    evidence_schema:
+      type: "yaml_section_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section: "jurisdictional_compliance"
+      required_fields: ["reference", "blacklist_jurisdictions", "excluded_entities", "excluded_markets", "compliance_basis", "regulatory_exemptions"]
+
+  # ==========================================================================
+  # Kategorie 9: risk_mitigation (Lines 94-100) - 7 Regeln
+  # ==========================================================================
+
+  - rule_id: SOT-P1-059
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 95
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "risk_mitigation"
+    title: "No Fiat Pegging"
+    original_text: 'no_fiat_pegging: true'
+    category: "token_framework"
+    priority: "must"
+    description: "Token ist NICHT an Fiat gekoppelt"
+    enforcement: "no_fiat_pegging MUSS true sein"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "risk_mitigation.no_fiat_pegging"
+      expected_value: true
+
+  - rule_id: SOT-P1-060
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 96
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "risk_mitigation"
+    title: "No Redemption Mechanism"
+    original_text: 'no_redemption_mechanism: true'
+    category: "token_framework"
+    priority: "must"
+    description: "Token hat KEINEN Redemption Mechanism"
+    enforcement: "no_redemption_mechanism MUSS true sein"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "risk_mitigation.no_redemption_mechanism"
+      expected_value: true
+
+  - rule_id: SOT-P1-061
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 97
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "risk_mitigation"
+    title: "No Yield Promises"
+    original_text: 'no_yield_promises: true'
+    category: "token_framework"
+    priority: "must"
+    description: "Token verspricht KEINEN Yield"
+    enforcement: "no_yield_promises MUSS true sein"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "risk_mitigation.no_yield_promises"
+      expected_value: true
+
+  - rule_id: SOT-P1-062
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 98
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "risk_mitigation"
+    title: "No Marketing as Investment"
+    original_text: 'no_marketing_investment: true'
+    category: "token_framework"
+    priority: "must"
+    description: "Token wird NICHT als Investment vermarktet"
+    enforcement: "no_marketing_investment MUSS true sein"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "risk_mitigation.no_marketing_investment"
+      expected_value: true
+
+  - rule_id: SOT-P1-063
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 99
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "risk_mitigation"
+    title: "Clear Utility Purpose Declaration"
+    original_text: 'clear_utility_purpose: true'
+    category: "token_framework"
+    priority: "must"
+    description: "Token hat KLAREN Utility Purpose"
+    enforcement: "clear_utility_purpose MUSS true sein"
+    evidence_schema:
+      type: "yaml_field_boolean"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "risk_mitigation.clear_utility_purpose"
+      expected_value: true
+
+  - rule_id: SOT-P1-064
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 100
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "risk_mitigation"
+    title: "Open Source License - Apache 2.0"
+    original_text: 'open_source_license: "Apache 2.0"'
+    category: "token_framework"
+    priority: "must"
+    description: "Code MUSS Apache 2.0 lizenziert sein"
+    enforcement: "open_source_license MUSS 'Apache 2.0' sein"
+    evidence_schema:
+      type: "yaml_field_value"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field: "risk_mitigation.open_source_license"
+      expected_value: "Apache 2.0"
+
+  - rule_id: SOT-P1-065
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 94
+    section: "Token Architecture & Legal Safe Harbor"
+    subsection: "risk_mitigation"
+    title: "risk_mitigation Section Existence"
+    original_text: "risk_mitigation:"
+    category: "token_framework"
+    priority: "must"
+    description: "risk_mitigation Sektion MUSS im YAML existieren"
+    enforcement: "Sektion MUSS vorhanden sein mit allen 6 Sub-Feldern"
+    evidence_schema:
+      type: "yaml_section_presence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section: "risk_mitigation"
+      required_fields: ["no_fiat_pegging", "no_redemption_mechanism", "no_yield_promises", "no_marketing_investment", "clear_utility_purpose", "open_source_license"]
+
+# ====================================================================================
+# Integration Status
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 61
+  rule_id_range: "SOT-P1-005 to SOT-P1-065"
+  next_step: "Integration in alle 5 SoT-Artefakte"
+  pending_integration:
+    - "16_codex/contracts/sot/sot_contract.yaml"
+    - "03_core/validators/sot/sot_validator_core.py"
+    - "23_compliance/policies/sot/sot_policy.rego"
+    - "12_tooling/cli/sot_validator.py"
+    - "11_test_simulation/tests_compliance/test_sot_validator.py"
+
+# ====================================================================================
+# Summary
+# ====================================================================================
+
+summary:
+  section: "Token Architecture & Legal Safe Harbor (YAML)"
+  total_rules: 61
+  categories:
+    metadata: 4
+    token_definition: 4
+    technical_specification: 6
+    fee_structure: 7
+    legal_safe_harbor: 10
+    business_model: 6
+    governance_framework: 7
+    jurisdictional_compliance: 10
+    risk_mitigation: 7
+  critical_rules: 61  # ALL are critical for Legal Safe Harbor
+  yaml_file: "20_foundation/tokenomics/ssid_token_framework.yaml"

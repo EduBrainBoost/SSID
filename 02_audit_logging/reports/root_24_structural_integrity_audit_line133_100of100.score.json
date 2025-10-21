@@ -1,0 +1,30 @@
+{
+  "id": "a9c96797-a133-4708-87ad-3d193dba9caa",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 100,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/reports/root_24_structural_integrity_audit.md",
+    "hash": "f27c2c063ae731c71d51a996846422632c24c361b3614a43bae98f3ceb643f9372c43c81d00638fad5841d8c1bbf71ebe99e0407588b30baa68f0d8cc58bd8b6",
+    "line": 133,
+    "context": "### ⚠️ Warning Issues\n\n4. **False Certification Metadata**\n   - **Finding:** `24_meta_orchestration/registry/root_24_lock_certification_manifest.yaml` claims 100/100 score\n   - **Reality:** Actual sco"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "54f16073-51f6-41a3-95c8-587444ca7717",
+    "timestamp": "2025-10-16T19:32:36.201973Z"
+  },
+  "worm": {
+    "uuid": "cded8af5-5332-42b8-868f-a3625bddd021",
+    "signature": "cd722c9faa9cc90d1a5fd8268ce159515c942e01ac6e47b403b4dc4b8dc13920c8a7ede4299ef1514062443fae9f03009e19ee2eff3198004b0da630d63ee622",
+    "chain_prev": "1f02ba8d-26c6-449a-a148-fbbf9bbc567c"
+  },
+  "metadata": {
+    "grade": "PLATINUM",
+    "component": "Audit & Compliance"
+  }
+}

@@ -1,0 +1,129 @@
+# SoT Rule Index (Lines 23-88 of SSID_structure_level3_part3_MAX.md)
+# This is the Source-of-Truth index that the audit verifier uses to locate expected artifacts.
+# Each rule must have the 5 pillars: python_module, rego_policy, yaml_contract, cli_command, tests
+meta:
+  version: "1.1.0"
+  generated_at: "2025-10-17T14:00:00Z"
+  root_lock: true
+  total_rules: 17
+  note: "Added 4 property-level validators (SOT-014 through SOT-017)"
+rules:
+  - id: version
+    expected:
+      python_module: "03_core/validators/sot/global_foundations_validators.py"
+      rego_policy: "23_compliance/policies/sot/global_foundations_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/global_foundations.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: date
+    expected:
+      python_module: "03_core/validators/sot/global_foundations_validators.py"
+      rego_policy: "23_compliance/policies/sot/global_foundations_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/global_foundations.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: deprecated
+    expected:
+      python_module: "03_core/validators/sot/global_foundations_validators.py"
+      rego_policy: "23_compliance/policies/sot/global_foundations_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/global_foundations.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: regulatory_basis
+    expected:
+      python_module: "03_core/validators/sot/global_foundations_validators.py"
+      rego_policy: "23_compliance/policies/sot/global_foundations_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/global_foundations.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: classification
+    expected:
+      python_module: "03_core/validators/sot/global_foundations_validators.py"
+      rego_policy: "23_compliance/policies/sot/global_foundations_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/global_foundations.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: ivms101_2023
+    expected:
+      python_module: "03_core/validators/sot/fatf_validators.py"
+      rego_policy: "23_compliance/policies/sot/fatf_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/fatf_travel_rule.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: fatf_rec16_2025_update
+    expected:
+      python_module: "03_core/validators/sot/fatf_validators.py"
+      rego_policy: "23_compliance/policies/sot/fatf_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/fatf_travel_rule.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: xml_schema_2025_07
+    expected:
+      python_module: "03_core/validators/sot/oecd_validators.py"
+      rego_policy: "23_compliance/policies/sot/oecd_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/oecd_carf.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: iso24165_dti
+    expected:
+      python_module: "03_core/validators/sot/iso_validators.py"
+      rego_policy: "23_compliance/policies/sot/iso_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/iso_standards.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: fsb_stablecoins_2023
+    expected:
+      python_module: "03_core/validators/sot/standards_validators.py"
+      rego_policy: "23_compliance/policies/sot/standards_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/global_standards.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: iosco_crypto_markets_2023
+    expected:
+      python_module: "03_core/validators/sot/standards_validators.py"
+      rego_policy: "23_compliance/policies/sot/standards_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/global_standards.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: nist_ai_rmf_1_0
+    expected:
+      python_module: "03_core/validators/sot/standards_validators.py"
+      rego_policy: "23_compliance/policies/sot/standards_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/global_standards.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: deprecated_standards_tracking
+    expected:
+      python_module: "03_core/validators/sot/deprecation_validators.py"
+      rego_policy: "23_compliance/policies/sot/deprecation_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/deprecation_tracking.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_rules.py"
+  - id: property_name
+    expected:
+      python_module: "03_core/validators/sot/property_validators.py"
+      rego_policy: "23_compliance/policies/sot/property_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/property_validation.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_property_rules.py"
+  - id: property_path
+    expected:
+      python_module: "03_core/validators/sot/property_validators.py"
+      rego_policy: "23_compliance/policies/sot/property_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/property_validation.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_property_rules.py"
+  - id: property_deprecated
+    expected:
+      python_module: "03_core/validators/sot/property_validators.py"
+      rego_policy: "23_compliance/policies/sot/property_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/property_validation.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_property_rules.py"
+  - id: property_business_priority
+    expected:
+      python_module: "03_core/validators/sot/property_validators.py"
+      rego_policy: "23_compliance/policies/sot/property_policy.rego"
+      yaml_contract: "16_codex/contracts/sot/property_validation.yaml"
+      cli_command: "12_tooling/cli/sot_validator.py"
+      tests: "11_test_simulation/tests_compliance/test_sot_property_rules.py"

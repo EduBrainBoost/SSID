@@ -152,7 +152,7 @@
           "rc": 2,
           "success": true,
           "duration_s": 0.24,
-          "stdout_sample": "SoT Enforcement: 45/100 (NONE)\n",
+          "stdout_sample": "SoT Enforcement:45/100 <!-- SCORE_REF:reports/sot_enforcement_gold_final_line155_45of100.score.json -->(NONE)\n",
           "stderr_sample": ""
         },
         {
@@ -161,7 +161,7 @@
           "rc": 1,
           "success": true,
           "duration_s": 7.56,
-          "stdout_sample": "SSID Structure Validation (Root-24-LOCK).................................Passed\nSSID Structure Guard (Exit 24 on violation)..............................Passed\nSSID SoT Functional Enforcement (Level 4)................................Failed\n- hook id: ssid-sot-enforcement\n- duration: 0.23s\n- exit code: 2\n\nSoT Enforcement: 45/100 (NONE)\n\nSSID Test Hygiene Certificate Monitoring.................................Failed\n- hook id: ssid-hygiene-enforcement\n- duration: 0.11s\n- exit code: 2\n\nusage: verif",
+          "stdout_sample": "SSID Structure Validation (Root-24-LOCK).................................Passed\nSSID Structure Guard (Exit 24 on violation)..............................Passed\nSSID SoT Functional Enforcement (Level 4)................................Failed\n- hook id: ssid-sot-enforcement\n- duration: 0.23s\n- exit code: 2\n\nSoT Enforcement:45/100 <!-- SCORE_REF:reports/sot_enforcement_gold_final_line164_45of100.score.json -->(NONE)\n\nSSID Test Hygiene Certificate Monitoring.................................Failed\n- hook id: ssid-hygiene-enforcement\n- duration: 0.11s\n- exit code: 2\n\nusage: verif",
           "stderr_sample": ""
         }
       ],

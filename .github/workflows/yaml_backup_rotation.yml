@@ -1,0 +1,280 @@
+name: YAML Backup Rotation
+
+on:
+  schedule:
+    # Run monthly: 1st day of each month at 00:00 UTC
+    - cron: '0 0 1 * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  rotate-backups:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Preflight guard
+        id: preflight
+        run: |
+          # Check git status
+          echo "Checking git status..."
+          git status --porcelain
+
+          # Verify on main branch
+          BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+          echo "Current branch: $BRANCH"
+
+          if [ "$BRANCH" != "main" ]; then
+            echo "ERROR: Not on main branch (current: $BRANCH)"
+            exit 1
+          fi
+
+          # Check for uncommitted changes
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "ERROR: Working tree not clean"
+            git status
+            exit 1
+          fi
+
+          echo "preflight_passed=true" >> $GITHUB_OUTPUT
+          echo "Preflight checks passed"
+
+      - name: Analyze YAML ecology
+        id: analyze
+        run: |
+          echo "Running YAML deduplication analysis..."
+          python 12_tooling/quality/yaml_deduplication_analyzer.py
+
+          # Get latest report
+          REPORT=$(ls -t 12_tooling/quality/reports/yaml_deduplication_analysis_*.json | head -1)
+          echo "report_file=$REPORT" >> $GITHUB_OUTPUT
+
+          # Extract key metrics
+          python -c "
+          import json
+          with open('$REPORT', 'r') as f:
+              data = json.load(f)
+
+          print(f\"Total YAML files: {data['analysis_scope']['total_yaml_files']}\")
+          print(f\"Unique templates: {data['analysis_scope']['unique_templates']}\")
+          print(f\"Deduplication efficiency: {data['analysis_scope']['deduplication_efficiency_pct']}%\")
+          "
+
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
+
+      - name: Prepare OPA input
+        run: |
+          REPORT=$(ls -t 12_tooling/quality/reports/yaml_deduplication_analysis_*.json | head -1)
+
+          # Count backup YAMLs
+          BACKUP_COUNT=$(find 02_audit_logging/backups -name "*.yaml" -o -name "*.yml" 2>/dev/null | wc -l || echo 0)
+
+          python -c "
+          import json
+          import sys
+
+          with open('$REPORT', 'r') as f:
+              data = json.load(f)
+
+          # Add backup count and policy parameters
+          data['backup_yaml_count'] = $BACKUP_COUNT
+          data['retention_limit'] = 3
+          data['shard_count'] = 384
+
+          with open('yaml_governance_input.json', 'w') as f:
+              json.dump(data, f, indent=2)
+
+          print(f\"Backup YAML count: {data['backup_yaml_count']}\")
+          "
+
+      - name: OPA governance gate
+        id: opa
+        run: |
+          echo "Evaluating OPA policy..."
+
+          opa eval -d 23_compliance/policies/opa/yaml_governance.rego \
+                   -i yaml_governance_input.json \
+                   --format pretty \
+                   "data.yaml_governance.policy_decision" > opa_result.json
+
+          cat opa_result.json
+
+          # Extract decision
+          python -c "
+          import json
+          import sys
+
+          with open('opa_result.json', 'r') as f:
+              result = json.load(f)
+
+          # Navigate OPA output structure
+          try:
+              decision = result['result'][0]['expressions'][0]['value']
+          except (KeyError, IndexError):
+              print('ERROR: Unexpected OPA output format')
+              sys.exit(2)
+
+          allow = decision.get('allow', False)
+          deny_reasons = decision.get('deny_reasons', [])
+
+          if not allow:
+              print('OPA DECISION: DENY')
+              print('Deny reasons:')
+              for reason in deny_reasons:
+                  print(f'  - {reason}')
+              sys.exit(2)
+
+          print('OPA DECISION: ALLOW')
+          print('Recommendation:', decision.get('recommendation', 'N/A'))
+          " | tee opa_decision.txt
+
+          if grep -q "DENY" opa_decision.txt; then
+            echo "opa_decision=deny" >> $GITHUB_OUTPUT
+            exit 1
+          else
+            echo "opa_decision=allow" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Rotate backups (policy-driven)
+        if: steps.opa.outputs.opa_decision == 'allow'
+        run: |
+          echo "Executing backup rotation..."
+
+          python 12_tooling/scripts/cleanup_old_backups.py \
+            --policy 24_meta_orchestration/registry/backup_retention_policy.yaml \
+            --execute
+
+          echo "Backup rotation complete"
+
+      - name: Generate rotation report
+        if: always()
+        run: |
+          TIMESTAMP=$(date -u +%Y%m%d_%H%M%S)
+          REPORT_FILE="02_audit_logging/evidence/rotation_${TIMESTAMP}.json"
+
+          python -c "
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          # Load policy
+          import yaml
+          with open('24_meta_orchestration/registry/backup_retention_policy.yaml', 'r') as f:
+              policy = yaml.safe_load(f)
+
+          # Load OPA decision if exists
+          opa_decision = {}
+          if Path('opa_result.json').exists():
+              with open('opa_result.json', 'r') as f:
+                  opa_result = json.load(f)
+                  try:
+                      opa_decision = opa_result['result'][0]['expressions'][0]['value']
+                  except:
+                      pass
+
+          # Create rotation report
+          report = {
+              'timestamp': datetime.now(timezone.utc).isoformat(),
+              'policy_version': policy.get('version', 1),
+              'retention_settings': policy['retention'],
+              'opa_decision': {
+                  'allow': opa_decision.get('allow', False),
+                  'deny_reasons': opa_decision.get('deny_reasons', []),
+                  'recommendation': opa_decision.get('recommendation', 'Unknown')
+              },
+              'execution_status': '${{ steps.opa.outputs.opa_decision }}',
+              'workflow_run_id': '${{ github.run_id }}',
+              'triggered_by': '${{ github.event_name }}'
+          }
+
+          Path('$REPORT_FILE').parent.mkdir(parents=True, exist_ok=True)
+          with open('$REPORT_FILE', 'w') as f:
+              json.dump(report, f, indent=2)
+
+          print(f'Rotation report: $REPORT_FILE')
+          "
+
+      - name: Upload rotation artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yaml-rotation-report
+          path: |
+            12_tooling/quality/reports/yaml_deduplication_analysis_*.json
+            02_audit_logging/evidence/rotation_*.json
+            yaml_governance_input.json
+            opa_result.json
+          retention-days: 365
+
+      - name: Commit rotation changes
+        if: steps.opa.outputs.opa_decision == 'allow'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add backup directory changes
+          git add 02_audit_logging/backups/
+          git add 02_audit_logging/evidence/rotation_*.json
+
+          # Commit if changes exist
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: Monthly backup rotation (keep last 3)
+
+          - Executed backup retention policy
+          - OPA governance gate: ALLOW
+          - Report: 02_audit_logging/evidence/rotation_*.json
+
+          Automated by workflow: ${{ github.run_id }}"
+
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Post summary
+        if: always()
+        run: |
+          echo "## YAML Backup Rotation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Execution Status" >> $GITHUB_STEP_SUMMARY
+          echo "- **OPA Decision**: ${{ steps.opa.outputs.opa_decision }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Preflight**: ${{ steps.preflight.outputs.preflight_passed && 'PASSED' || 'FAILED' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Extract metrics from analysis
+          REPORT=$(ls -t 12_tooling/quality/reports/yaml_deduplication_analysis_*.json | head -1)
+
+          python -c "
+          import json
+          with open('$REPORT', 'r') as f:
+              data = json.load(f)
+
+          scope = data['analysis_scope']
+          print('### YAML Landscape')
+          print(f\"- **Total YAML files**: {scope['total_yaml_files']}\")
+          print(f\"- **Unique templates**: {scope['unique_templates']}\")
+          print(f\"- **Deduplication efficiency**: {scope['deduplication_efficiency_pct']}%\")
+          " >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Run" >> $GITHUB_STEP_SUMMARY
+          echo "Scheduled for 1st day of next month at 00:00 UTC" >> $GITHUB_STEP_SUMMARY

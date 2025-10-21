@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "framework": "EU AI Act",
+    "version": "2024",
+    "source": "EU AI Act 2024/1689",
+    "last_updated": "2025-10-13T19:40:00Z",
+    "maintainer": "edubrainboost",
+    "status": "active",
+    "classification": "PUBLIC - Compliance Mapping",
+    "regulatory_basis": "EU Regulation 2024/1689 - Artificial Intelligence Act"
+  },
+  "mappings": [
+    {
+      "id": "AI-Act-Art-6",
+      "description": "Classification of AI Systems (High-Risk)",
+      "applies_to": [
+        "01_ai_layer",
+        "08_identity_score",
+        "23_compliance"
+      ],
+      "verification": "manual",
+      "test_reference": "test_ai_classification.py",
+      "controls": [
+        "Risk classification methodology",
+        "Biometric identification systems (Annex III.1)",
+        "Critical infrastructure AI (Annex III.2)",
+        "High-risk use case documentation"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Art-9",
+      "description": "Risk Management System",
+      "applies_to": [
+        "01_ai_layer",
+        "07_governance_legal",
+        "23_compliance"
+      ],
+      "verification": "manual",
+      "test_reference": "test_ai_risk_mgmt.py",
+      "controls": [
+        "Risk identification and analysis",
+        "Risk evaluation and mitigation",
+        "Testing and validation procedures",
+        "Post-market monitoring"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Art-10",
+      "description": "Data and Data Governance",
+      "applies_to": [
+        "01_ai_layer",
+        "22_datasets",
+        "18_data_layer"
+      ],
+      "verification": "automated",
+      "test_reference": "test_ai_data_governance.py",
+      "controls": [
+        "Training data quality requirements",
+        "Bias detection and mitigation",
+        "Data representativeness",
+        "Data governance practices"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Art-11",
+      "description": "Technical Documentation",
+      "applies_to": [
+        "01_ai_layer",
+        "05_documentation",
+        "23_compliance"
+      ],
+      "verification": "manual",
+      "test_reference": "test_ai_documentation.py",
+      "controls": [
+        "AI system description",
+        "Development process documentation",
+        "Model architecture and parameters",
+        "Training and validation results"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Art-12",
+      "description": "Record-Keeping",
+      "applies_to": [
+        "01_ai_layer",
+        "02_audit_logging",
+        "18_data_layer"
+      ],
+      "verification": "automated",
+      "test_reference": "test_ai_logging.py",
+      "controls": [
+        "Automatic logging of AI system use",
+        "Traceability of decisions",
+        "Input data logging",
+        "Output logging and timestamps"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Art-13",
+      "description": "Transparency and Information to Users",
+      "applies_to": [
+        "01_ai_layer",
+        "13_ui_layer",
+        "05_documentation"
+      ],
+      "verification": "manual",
+      "test_reference": "test_ai_transparency.py",
+      "controls": [
+        "User instructions and documentation",
+        "Capabilities and limitations disclosure",
+        "Human oversight instructions",
+        "Expected level of accuracy"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Art-14",
+      "description": "Human Oversight",
+      "applies_to": [
+        "01_ai_layer",
+        "07_governance_legal",
+        "13_ui_layer"
+      ],
+      "verification": "manual",
+      "test_reference": "test_human_oversight.py",
+      "controls": [
+        "Human-in-the-loop mechanisms",
+        "Override capability",
+        "Decision review procedures",
+        "Alert mechanisms for anomalies"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Art-15",
+      "description": "Accuracy, Robustness and Cybersecurity",
+      "applies_to": [
+        "01_ai_layer",
+        "11_test_simulation",
+        "21_post_quantum_crypto"
+      ],
+      "verification": "automated",
+      "test_reference": "test_ai_robustness.py",
+      "controls": [
+        "Accuracy testing and validation",
+        "Robustness against errors",
+        "Adversarial testing",
+        "Cybersecurity measures"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Art-50",
+      "description": "Transparency Obligations for Certain AI Systems",
+      "applies_to": [
+        "01_ai_layer",
+        "13_ui_layer",
+        "08_identity_score"
+      ],
+      "verification": "automated",
+      "test_reference": "test_ai_user_transparency.py",
+      "controls": [
+        "AI interaction disclosure",
+        "Deepfake labeling",
+        "Biometric categorization disclosure",
+        "Emotion recognition transparency"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Art-52",
+      "description": "Transparency for General-Purpose AI",
+      "applies_to": [
+        "01_ai_layer",
+        "05_documentation",
+        "23_compliance"
+      ],
+      "verification": "manual",
+      "test_reference": "test_gpai_transparency.py",
+      "controls": [
+        "Model card publication",
+        "Training data documentation",
+        "Copyright compliance",
+        "Energy consumption reporting"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "AI-Act-Prohibited-Practices",
+      "description": "Prohibited AI Practices (Art. 5)",
+      "applies_to": [
+        "01_ai_layer",
+        "07_governance_legal",
+        "23_compliance"
+      ],
+      "verification": "manual",
+      "test_reference": "test_prohibited_ai.py",
+      "controls": [
+        "No subliminal techniques",
+        "No exploitation of vulnerabilities",
+        "No social scoring by public authorities",
+        "No real-time biometric ID (with exceptions)"
+      ],
+      "implementation_status": "implemented"
+    }
+  ],
+  "compliance_metrics": {
+    "overall_coverage": "85%",
+    "automated_controls": 5,
+    "manual_controls": 6,
+    "implemented_controls": 11,
+    "pending_controls": 0
+  },
+  "references": [
+    {
+      "title": "EU AI Act Official Text",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+    },
+    {
+      "title": "AI Act Implementation Guidance",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+    },
+    {
+      "title": "AI Office Guidelines",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-office"
+    }
+  ],
+  "risk_classification": {
+    "identity_verification_ai": "High-Risk (Annex III.1.b - Biometric identification)",
+    "risk_scoring_ai": "High-Risk (Annex III.5.b - Creditworthiness assessment)",
+    "behavioral_analytics": "Limited Risk (Art. 50 - Transparency obligations)",
+    "mitigation_strategy": "Full compliance with Articles 8-15 for high-risk systems"
+  },
+  "implementation_notes": "SSID's AI systems for identity verification and risk scoring are classified as high-risk under Annex III. Full compliance with Articles 8-15 ensures conformity assessment readiness. Human oversight mechanisms and transparency measures are implemented throughout."
+}

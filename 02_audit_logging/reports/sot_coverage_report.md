@@ -1,0 +1,602 @@
+# SoT Coverage Report - Ultra-Granular Rules
+
+**Generated:** 2025-10-18T21:48:04.051445Z
+
+## Summary
+
+- **Total Rules:** 249
+- **Critical Rules:** 64
+- **Rules with Full Coverage:** 0
+- **Rules Missing from ANY Artifact:** 249
+- **Overall Coverage:** 0.0%
+- **Target Coverage:** 100.0%
+
+**STATUS:** ❌ **COVERAGE GAPS DETECTED** (249 rules missing)
+
+## Artifact Coverage
+
+| Artifact | Exists | Coverage | Missing Rules |
+|----------|--------|----------|---------------|
+| SoT Contract YAML | ✅ | 0.0% | 249 |
+| Core Python Validator | ✅ | 0.0% | 249 |
+| OPA Rego Policy | ✅ | 0.0% | 249 |
+| CLI Validator | ✅ | 0.0% | 249 |
+| Pytest Test Suite | ✅ | 0.0% | 249 |
+
+## ⚠️ CRITICAL RULES MISSING
+
+The following CRITICAL rules are missing from one or more artifacts:
+
+- **SOT-MD-206**: Section: primary_language - Existence
+- **SOT-MD-207**: Field: primary_language.language = 'English (en-US)'
+- **SOT-MD-208**: Field: primary_language.scope = 'ALL technical documentation, governance, legal, compliance files'
+- **SOT-MD-228**: CRITICAL - Source of Truth Policy - English Version Verbindlich
+- **SOT-MD-238**: Field: primary_files = 'English versions are source of truth'
+- **SOT-MD-249**: File Existence: language_strategy.yaml MUST exist at canonical path
+- **SOT-UG-001**: Verbindliche Root-Module (24) - Bindende v4.1-Liste
+- **SOT-UG-002**: Root-Level Ausnahmen - Kanonische Definition in root_level_exceptions.yaml
+- **SOT-UG-004**: KRITISCH - structure_exceptions.yaml ist die EINZIGE gültige Struktur-Exception
+- **SOT-UG-009**: Field: purpose = ['utility', 'governance', 'reward']
+- **SOT-UG-010**: Field: explicit_exclusions = ['investment', 'security', 'e_money', 'yield_bearing', 'redemption_rights']
+- **SOT-UG-011**: Field: legal_position = 'Pure utility token for identity verification services'
+- **SOT-UG-012**: Section: token_definition - Section Existence
+- **SOT-UG-015**: Field: supply_model = 'Fixed cap with deflationary mechanisms'
+- **SOT-UG-016**: Field: custody_model = 'Non-custodial by design'
+- **SOT-UG-019**: Field: scope = 'identity_verification_payments_only'
+- **SOT-UG-020**: Field: total_fee = '3% of identity verification transactions'
+- **SOT-UG-024**: Field: no_manual_intervention = true
+- **SOT-UG-026**: Field: security_token = false
+- **SOT-UG-027**: Field: e_money_token = false
+- **SOT-UG-028**: Field: stablecoin = false
+- **SOT-UG-029**: Field: yield_bearing = false
+- **SOT-UG-030**: Field: redemption_rights = false
+- **SOT-UG-031**: Field: passive_income = false
+- **SOT-UG-032**: Field: investment_contract = false
+- **SOT-UG-033**: Field: admin_controls - No Privileged Admin Keys
+- **SOT-UG-034**: Field: upgrade_mechanism = 'On-chain proposals only via DAO governance'
+- **SOT-UG-035**: Section: legal_safe_harbor - Section Existence
+- **SOT-UG-037**: Field: not_role - Forbidden Roles Array
+- **SOT-UG-040**: Field: data_custody = 'Zero personal data on-chain'
+- **SOT-UG-045**: Field: upgrade_authority = 'DAO only (no admin keys)'
+- **SOT-UG-050**: Field: blacklist_jurisdictions = ['IR', 'KP', 'SY', 'CU']
+- **SOT-UG-052**: Array Item: excluded_entities[0] = 'RU_designated_entities'
+- **SOT-UG-053**: Array Item: excluded_entities[1] = 'Belarus_designated_entities'
+- **SOT-UG-054**: Array Item: excluded_entities[2] = 'Venezuela_government_entities'
+- **SOT-UG-056**: Field: compliance_basis = 'EU MiCA Article 3 + US Howey Test'
+- **SOT-UG-057**: Field: regulatory_exemptions = 'Utility token exemption'
+- **SOT-UG-058**: Section: jurisdictional_compliance - Section Existence
+- **SOT-UG-059**: Field: no_fiat_pegging = true
+- **SOT-UG-060**: Field: no_redemption_mechanism = true
+- **SOT-UG-061**: Field: no_yield_promises = true
+- **SOT-UG-062**: Field: no_marketing_investment = true
+- **SOT-UG-063**: Field: clear_utility_purpose = true
+- **SOT-UG-074**: Field: identity_verification.burn_source_note - Treasury-Only Burns
+- **SOT-UG-075**: Field: identity_verification.burn_clarification - No Manual Burns
+- **SOT-UG-086**: Field: staking_utility.staking_rewards = Service fee discounts (NOT yield)
+- **SOT-UG-099**: File Existence: utility_definitions.yaml MUST exist at exact path
+- **SOT-UG-104**: Field: total_supply = 1,000,000,000 SSID
+- **SOT-UG-111**: Verification: initial_distribution MUST sum to 100%
+- **SOT-UG-116**: Field: max_annual_inflation = 0% (Fixed Supply)
+- **SOT-UG-119**: Field: reserve_governance = DAO-controlled release only
+- **SOT-UG-123**: Field: scope = identity_verification_payments_only
+- **SOT-UG-125**: Field: total_fee = 3% of verification transaction value
+- **SOT-UG-129**: Verification: allocation MUST sum to 3%
+- **SOT-UG-131**: Field: policy = 50% of treasury share burned
+- **SOT-UG-136**: Field: oracle_source = on-chain circulating supply oracle (DAO-controlled)
+- **SOT-UG-139**: Field: no_per_transaction_split = true
+- **SOT-UG-142**: Field: proposal_deposits = 100% burned if proposal fails
+- **SOT-UG-145**: Field: authority = DAO_only
+- **SOT-UG-153**: Field: discount_applies_to = user_service_price_only
+- **SOT-UG-154**: Field: system_fee_invariance = true
+- **SOT-UG-195**: File Existence: token_economics.yaml MUST exist at exact path
+- **SOT-UG-197**: Cross-File Consistency: total_fee MUST match across files
+- **SOT-UG-198**: Cross-File Consistency: total_supply MUST match across files
+
+## Missing Rules Details
+
+### Rules Missing from ANY Artifact
+
+- **SOT-MD-200**: File Location - language_strategy.yaml
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-201**: Field: version = '1.0'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-202**: Field: date = '2025-09-15'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-203**: Field: deprecated = false
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-204**: Field: classification = 'PUBLIC - Internationalization Standards'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-205**: Metadata Section Completeness Check
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-206**: Section: primary_language - Existence **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-207**: Field: primary_language.language = 'English (en-US)' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-208**: Field: primary_language.scope = 'ALL technical documentation, governance, legal, compliance files' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-209**: Field: primary_language.standard = 'ISO 639-1'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-210**: Field: primary_language.rationale = 'Global business standard, regulatory harmonization'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-211**: Section: secondary_languages - Array Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-212**: Array Entry: German Language - Entry Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-213**: Field: German language = 'German (de-DE)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-214**: Field: German scope = 'README files, contributor onboarding only'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-215**: Field: German priority = 'High (EU market)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-216**: Array Entry: Chinese Language - Entry Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-217**: Field: Chinese language = 'Chinese Simplified (zh-CN)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-218**: Field: Chinese scope = 'Selected user-facing documentation'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-219**: Field: Chinese priority = 'Medium (APAC expansion)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-220**: Array Entry: Spanish Language - Entry Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-221**: Field: Spanish language = 'Spanish (es-ES)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-222**: Field: Spanish scope = 'Selected user-facing documentation'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-223**: Field: Spanish priority = 'Medium (LatAm expansion)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-224**: Array Entry: French Language - Entry Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-225**: Field: French language = 'French (fr-FR)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-226**: Field: French scope = 'Selected regulatory documentation'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-227**: Field: French priority = 'Low (Francophone markets)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-228**: CRITICAL - Source of Truth Policy - English Version Verbindlich **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-229**: Section: file_naming_convention - Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-230**: Field: pattern = 'filename.{language_tag}.{extension}'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-231**: Field: examples - Array Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-232**: Array Item: examples[0] = 'README.en-US.md'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-233**: Array Item: examples[1] = 'README.de-DE.md'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-234**: Array Item: examples[2] = 'compliance_guide.zh-CN.md'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-235**: Section: distribution_policy - Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-236**: Field: excluded_markets_content_availability = 'docs-only, no product access'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-237**: Section: translation_management - Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-238**: Field: primary_files = 'English versions are source of truth' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-239**: Field: translation_triggers = 'Major releases and compliance updates'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-240**: Field: quality_control = 'Native speaker review required'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-241**: Field: automation = 'Machine translation + human validation'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-242**: Section: cultural_localization - Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-243**: Field: date_formats - Field Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-244**: Field: date_formats Value = ISO 8601 Compliance
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-245**: Field: number_formats - Field Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-246**: Field: regulatory_examples - Field Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-247**: Field: business_context - Field Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-248**: Section Completeness: cultural_localization - All 4 Fields Present
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-MD-249**: File Existence: language_strategy.yaml MUST exist at canonical path **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-001**: Verbindliche Root-Module (24) - Bindende v4.1-Liste **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-002**: Root-Level Ausnahmen - Kanonische Definition in root_level_exceptions.yaml **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-003**: Standard-Ausnahmen - .git/, .github/, LICENSE, README.md
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-004**: KRITISCH - structure_exceptions.yaml ist die EINZIGE gültige Struktur-Exception **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-005**: Field: version = '1.0'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-006**: Field: date = '2025-09-15'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-007**: Field: deprecated = false
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-008**: Field: classification = 'PUBLIC - Token Framework Standards'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-009**: Field: purpose = ['utility', 'governance', 'reward'] **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-010**: Field: explicit_exclusions = ['investment', 'security', 'e_money', 'yield_bearing', 'redemption_rights'] **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-011**: Field: legal_position = 'Pure utility token for identity verification services' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-012**: Section: token_definition - Section Existence **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-013**: Field: blockchain = 'Polygon (EVM Compatible)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-014**: Field: standard = 'ERC-20 Compatible'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-015**: Field: supply_model = 'Fixed cap with deflationary mechanisms' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-016**: Field: custody_model = 'Non-custodial by design' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-017**: Field: smart_contract_automation = 'Full autonomous distribution'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-018**: Section: technical_specification - Section Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-019**: Field: scope = 'identity_verification_payments_only' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-020**: Field: total_fee = '3% of identity verification transactions' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-021**: Field: allocation = '1% dev (direct), 2% system treasury'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-022**: Field: burn_from_system_fee = '50% of 2% with daily/monthly caps'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-023**: Field: fee_collection = 'Smart contract automated'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-024**: Field: no_manual_intervention = true **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-025**: Section: fee_structure - Section Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-026**: Field: security_token = false **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-027**: Field: e_money_token = false **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-028**: Field: stablecoin = false **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-029**: Field: yield_bearing = false **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-030**: Field: redemption_rights = false **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-031**: Field: passive_income = false **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-032**: Field: investment_contract = false **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-033**: Field: admin_controls - No Privileged Admin Keys **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-034**: Field: upgrade_mechanism = 'On-chain proposals only via DAO governance' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-035**: Section: legal_safe_harbor - Section Existence **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-036**: Field: role = 'Technology publisher and open source maintainer'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-037**: Field: not_role - Forbidden Roles Array **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-038**: Field: user_interactions = 'Direct peer-to-peer via smart contracts'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-039**: Field: kyc_responsibility = 'Third-party KYC providers (users pay directly)'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-040**: Field: data_custody = 'Zero personal data on-chain' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-041**: Section: business_model - Section Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-042**: Field: dao_ready = true
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-043**: Field: voting_mechanism = 'Token-weighted governance'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-044**: Field: proposal_system = 'Snapshot + on-chain execution'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-045**: Field: upgrade_authority = 'DAO only (no admin keys)' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-046**: Field: emergency_procedures = 'Community multisig'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-047**: Field: reference - Cross-Reference to governance_parameters
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-048**: Section: governance_framework - Section Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-049**: Field: reference - Cross-Reference to coverage_matrix.yaml
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-050**: Field: blacklist_jurisdictions = ['IR', 'KP', 'SY', 'CU'] **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-051**: Field: excluded_entities - Array Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-052**: Array Item: excluded_entities[0] = 'RU_designated_entities' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-053**: Array Item: excluded_entities[1] = 'Belarus_designated_entities' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-054**: Array Item: excluded_entities[2] = 'Venezuela_government_entities' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-055**: Field: excluded_markets = ['India', 'Pakistan', 'Myanmar']
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-056**: Field: compliance_basis = 'EU MiCA Article 3 + US Howey Test' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-057**: Field: regulatory_exemptions = 'Utility token exemption' **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-058**: Section: jurisdictional_compliance - Section Existence **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-059**: Field: no_fiat_pegging = true **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-060**: Field: no_redemption_mechanism = true **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-061**: Field: no_yield_promises = true **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-062**: Field: no_marketing_investment = true **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-063**: Field: clear_utility_purpose = true **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-064**: Field: open_source_license = 'Apache 2.0'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-065**: Section: risk_mitigation - Section Existence
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-066**: Field: version = '1.0'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-067**: Field: date = '2025-09-15'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-068**: Field: deprecated = false
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-069**: Section: primary_utilities MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-070**: Subsection: identity_verification MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-071**: Field: identity_verification.description
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-072**: Field: identity_verification.smart_contract path
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-073**: Field: identity_verification.fee_burn_mechanism
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-074**: Field: identity_verification.burn_source_note - Treasury-Only Burns **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-075**: Field: identity_verification.burn_clarification - No Manual Burns **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-076**: Subsection: governance_participation MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-077**: Field: governance_participation.description
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-078**: Field: governance_participation.voting_weight = Linear
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-079**: Field: governance_participation.proposal_threshold = 1%
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-080**: Subsection: ecosystem_rewards MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-081**: Field: ecosystem_rewards.description
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-082**: Field: ecosystem_rewards.distribution_method = Merit-based via DAO
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-083**: Field: ecosystem_rewards.reward_pools - Exact Array Match
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-084**: Subsection: staking_utility MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-085**: Field: staking_utility.description
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-086**: Field: staking_utility.staking_rewards = Service fee discounts (NOT yield) **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-087**: Field: staking_utility.slashing_conditions
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-088**: Section Completeness: primary_utilities MUST have all 4 subsections
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-089**: Section: compliance_utilities MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-090**: Field: compliance_utilities.audit_payments
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-091**: Field: compliance_utilities.regulatory_reporting
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-092**: Field: compliance_utilities.legal_attestations
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-093**: Section: secondary_utilities MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-094**: Field: secondary_utilities.marketplace_access
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-095**: Field: secondary_utilities.premium_features
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-096**: Field: secondary_utilities.api_access
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-097**: Field: secondary_utilities.data_portability
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-098**: File Completeness: utility_definitions.yaml MUST have all sections
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-099**: File Existence: utility_definitions.yaml MUST exist at exact path **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-100**: Field: version = '1.0'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-101**: Field: date = '2025-09-21'
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-102**: Field: deprecated = false
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-103**: Section: supply_mechanics MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-104**: Field: total_supply = 1,000,000,000 SSID **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-105**: Subsection: initial_distribution MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-106**: Field: ecosystem_development = 40% (400M tokens)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-107**: Field: community_rewards = 25% (250M tokens)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-108**: Field: team_development = 15% (150M tokens, 4-year vesting)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-109**: Field: partnerships = 10% (100M tokens)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-110**: Field: reserve_fund = 10% (100M tokens)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-111**: Verification: initial_distribution MUST sum to 100% **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-112**: Subsection: deflationary_mechanisms MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-113**: Field: governance_burning - Unsuccessful proposals burn deposit
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-114**: Field: staking_slashing - Penalties for false verification
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-115**: Subsection: circulation_controls MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-116**: Field: max_annual_inflation = 0% (Fixed Supply) **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-117**: Field: team_vesting_schedule = 25% per year over 4 years
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-118**: Field: partnership_unlock = Milestone-based
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-119**: Field: reserve_governance = DAO-controlled release only **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-120**: Section Completeness: supply_mechanics MUST have all subsections
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-121**: Section: fee_routing MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-122**: Subsection: system_fees MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-123**: Field: scope = identity_verification_payments_only **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-124**: Field: note - 3% system fee applies to identity verification only
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-125**: Field: total_fee = 3% of verification transaction value **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-126**: Subsection: allocation MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-127**: Field: dev_fee = 1% direct developer reward
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-128**: Field: system_treasury = 2% system treasury
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-129**: Verification: allocation MUST sum to 3% **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-130**: Subsection: burn_from_system_fee MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-131**: Field: policy = 50% of treasury share burned **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-132**: Field: base = circulating_supply_snapshot
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-133**: Field: snapshot_time_utc = 00:00:00
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-134**: Field: daily_cap_percent_of_circ = 0.5
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-135**: Field: monthly_cap_percent_of_circ = 2.0
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-136**: Field: oracle_source = on-chain circulating supply oracle (DAO-controlled) **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-137**: Subsection: validator_rewards MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-138**: Field: source = Treasury budget (DAO-decided monthly allocation)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-139**: Field: no_per_transaction_split = true **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-140**: Field: note - Old fee split is deprecated
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-141**: Section: governance_fees MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-142**: Field: proposal_deposits = 100% burned if proposal fails **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-143**: Field: voting_gas = Subsidized from treasury fund
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-144**: Section: governance_controls MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-145**: Field: authority = DAO_only **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-146**: Field: reference = 07_governance_legal/governance_defaults.yaml
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-147**: Field: note - All governance parameters centrally defined
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-148**: Section: staking_mechanics MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-149**: Field: minimum_stake = 1000 SSID
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-150**: Field: maximum_discount = 50% fee reduction
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-151**: Field: slashing_penalty = 5% of staked amount
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-152**: Field: unstaking_period = 14 days
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-153**: Field: discount_applies_to = user_service_price_only **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-154**: Field: system_fee_invariance = true **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-155**: Section Completeness: fee_routing and related sections
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-156**: Section: governance_parameters MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-157**: Subsection: proposal_framework MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-158**: Field: proposal_threshold = 1% of total supply (10,000,000 SSID)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-159**: Field: proposal_deposit = 10,000 SSID (burned if proposal fails)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-160**: Field: proposal_types MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-161**: Array Item: Protocol upgrades (requires supermajority)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-162**: Array Item: Parameter changes (requires simple majority)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-163**: Array Item: Treasury allocation (requires quorum + majority)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-164**: Array Item: Emergency proposals (expedited process)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-165**: Subsection: voting_requirements MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-166**: Field: quorum_standard = 4% of circulating supply
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-167**: Field: quorum_protocol_upgrade = 8% of circulating supply
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-168**: Field: quorum_emergency = 2% of circulating supply
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-169**: Field: simple_majority = 50% + 1 of votes cast
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-170**: Field: supermajority = 66.7% of votes cast
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-171**: Field: emergency_supermajority = 75% of votes cast
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-172**: Subsection: timelock_framework MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-173**: Field: standard_proposals = 48 hours minimum execution delay
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-174**: Field: protocol_upgrades = 168 hours (7 days) execution delay
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-175**: Field: parameter_changes = 24 hours execution delay
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-176**: Field: emergency_proposals = 6 hours execution delay (security only)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-177**: Field: treasury_allocations = 72 hours execution delay
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-178**: Subsection: voting_periods MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-179**: Field: standard_voting = 7 days (168 hours)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-180**: Field: protocol_upgrade_voting = 14 days (336 hours)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-181**: Field: emergency_voting = 24 hours (security issues only)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-182**: Field: parameter_voting = 5 days (120 hours)
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-183**: Subsection: delegation_system MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-184**: Field: delegation_enabled = true
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-185**: Field: self_delegation_default = true
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-186**: Field: delegation_changes = Immediate effect
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-187**: Field: vote_weight_calculation = Token balance + delegated tokens
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-188**: Subsection: governance_rewards MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-189**: Field: voter_participation_rewards = 0.1% of treasury per quarter
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-190**: Field: proposal_creator_rewards = 1000 SSID for successful proposals
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-191**: Field: delegate_rewards = Based on participation and performance
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-192**: Field: minimum_participation = 10% of voting power for rewards
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-193**: Section Completeness: governance_parameters MUST have all 6 subsections
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-194**: File Completeness: token_economics.yaml MUST have all top-level sections
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-195**: File Existence: token_economics.yaml MUST exist at exact path **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-196**: Cross-File Consistency: version fields MUST match across tokenomics files
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-197**: Cross-File Consistency: total_fee MUST match across files **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-198**: Cross-File Consistency: total_supply MUST match across files **[CRITICAL]**
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+- **SOT-UG-199**: Cross-File Reference: governance_defaults.yaml MUST exist
+  - Missing from: SoT Contract YAML, Core Python Validator, OPA Rego Policy, CLI Validator, Pytest Test Suite
+
+## Next Steps
+
+- ❌ Implement missing rules in all artifacts
+- ❌ Re-run coverage checker until 100% achieved
+- ❌ Zero tolerance policy NOT satisfied

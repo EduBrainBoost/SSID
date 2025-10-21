@@ -1,0 +1,2778 @@
+# ====================================================================================
+# SoT MASTER-DEFINITION EXTRACTION - PART 1, LINES 145-251 (ULTRA-GRANULAR)
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 145-251 (Token Economics & Distribution)
+# Datum: 2025-10-18
+# Extraktionsmethode: ULTRA-GRANULAR (jedes Feld = separate Regel)
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# ====================================================================================
+
+metadata:
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_ultra_granular_field_by_field"
+  extraction_date: "2025-10-18"
+  line_range: "145-251"
+  section: "Token Economics & Distribution"
+  total_rules_extracted: 100
+  zero_tolerance_policy: true
+  audit_ready: true
+
+# ====================================================================================
+# LINES 148-150: METADATA (3 RULES)
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-UG-100
+    line_number: 148
+    section: "Token Economics & Distribution"
+    subsection: "metadata"
+    field: "version"
+    title: "Field: version = '1.0'"
+
+    original_text: |
+      version: "1.0"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      YAML-Feld version MUSS den Wert "1.0" haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass version in token_economics.yaml exakt "1.0" ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "version"
+      exact_value: "1.0"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-101
+    line_number: 149
+    section: "Token Economics & Distribution"
+    subsection: "metadata"
+    field: "date"
+    title: "Field: date = '2025-09-21'"
+
+    original_text: |
+      date: "2025-09-21"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      YAML-Feld date MUSS den Wert "2025-09-21" haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass date in token_economics.yaml exakt "2025-09-21" ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "date"
+      exact_value: "2025-09-21"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-102
+    line_number: 150
+    section: "Token Economics & Distribution"
+    subsection: "metadata"
+    field: "deprecated"
+    title: "Field: deprecated = false"
+
+    original_text: |
+      deprecated: false
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      YAML-Feld deprecated MUSS den Wert false haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass deprecated = false.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "deprecated"
+      exact_value: false
+      ci_enforcement: true
+      failure_mode: "FAIL wenn true"
+
+# ====================================================================================
+# LINES 152-169: SUPPLY_MECHANICS (18 RULES)
+# ====================================================================================
+
+  - rule_id: SOT-UG-103
+    line_number: 152
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics"
+    field: "supply_mechanics"
+    title: "Section: supply_mechanics MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Section supply_mechanics MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass supply_mechanics als Top-Level Section vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "supply_mechanics"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Section fehlt"
+
+  - rule_id: SOT-UG-104
+    line_number: 153
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics"
+    field: "total_supply"
+    title: "Field: total_supply = 1,000,000,000 SSID"
+
+    original_text: |
+      total_supply: "1,000,000,000 SSID"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: total_supply MUSS exakt 1 Milliarde SSID sein.
+      Fixed supply, keine Inflation.
+
+    enforcement: |
+      CI MUSS prüfen, dass total_supply = "1,000,000,000 SSID".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.total_supply"
+      exact_value: "1,000,000,000 SSID"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei abweichender Supply"
+      criticality: "CRITICAL - Fixed Supply"
+
+  - rule_id: SOT-UG-105
+    line_number: 154
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    field: "initial_distribution"
+    title: "Subsection: initial_distribution MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection initial_distribution MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass initial_distribution vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "supply_mechanics.initial_distribution"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-106
+    line_number: 155
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    field: "ecosystem_development"
+    title: "Field: ecosystem_development = 40% (400M tokens)"
+
+    original_text: |
+      ecosystem_development: "40%" # 400M tokens
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      ecosystem_development MUSS 40% (400M tokens) sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass ecosystem_development = "40%".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.initial_distribution.ecosystem_development"
+      exact_value: "40%"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Prozentsatz"
+
+  - rule_id: SOT-UG-107
+    line_number: 156
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    field: "community_rewards"
+    title: "Field: community_rewards = 25% (250M tokens)"
+
+    original_text: |
+      community_rewards: "25%"    # 250M tokens
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      community_rewards MUSS 25% (250M tokens) sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass community_rewards = "25%".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.initial_distribution.community_rewards"
+      exact_value: "25%"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Prozentsatz"
+
+  - rule_id: SOT-UG-108
+    line_number: 157
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    field: "team_development"
+    title: "Field: team_development = 15% (150M tokens, 4-year vesting)"
+
+    original_text: |
+      team_development: "15%"     # 150M tokens (4-year vesting)
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      team_development MUSS 15% (150M tokens) mit 4-year vesting sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass team_development = "15%".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.initial_distribution.team_development"
+      exact_value: "15%"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Prozentsatz"
+
+  - rule_id: SOT-UG-109
+    line_number: 158
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    field: "partnerships"
+    title: "Field: partnerships = 10% (100M tokens)"
+
+    original_text: |
+      partnerships: "10%"         # 100M tokens
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      partnerships MUSS 10% (100M tokens) sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass partnerships = "10%".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.initial_distribution.partnerships"
+      exact_value: "10%"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Prozentsatz"
+
+  - rule_id: SOT-UG-110
+    line_number: 159
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    field: "reserve_fund"
+    title: "Field: reserve_fund = 10% (100M tokens)"
+
+    original_text: |
+      reserve_fund: "10%"         # 100M tokens
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      reserve_fund MUSS 10% (100M tokens) sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass reserve_fund = "10%".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.initial_distribution.reserve_fund"
+      exact_value: "10%"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Prozentsatz"
+
+  - rule_id: SOT-UG-111
+    line_number: 154
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    field: "distribution_sum_check"
+    title: "Verification: initial_distribution MUST sum to 100%"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Die 5 Distribution-Kategorien MÜSSEN exakt 100% ergeben:
+      40% + 25% + 15% + 10% + 10% = 100%
+
+    enforcement: |
+      CI MUSS prüfen, dass die Summe exakt 100% ist.
+
+    evidence_schema:
+      type: "yaml_section_sum_validation"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "supply_mechanics.initial_distribution"
+      expected_sum: "100%"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn Summe != 100%"
+      criticality: "CRITICAL - Distribution Integrity"
+
+  - rule_id: SOT-UG-112
+    line_number: 161
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.deflationary_mechanisms"
+    field: "deflationary_mechanisms"
+    title: "Subsection: deflationary_mechanisms MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection deflationary_mechanisms MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass deflationary_mechanisms vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "supply_mechanics.deflationary_mechanisms"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-113
+    line_number: 162
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.deflationary_mechanisms"
+    field: "governance_burning"
+    title: "Field: governance_burning - Unsuccessful proposals burn deposit"
+
+    original_text: |
+      governance_burning: "Unsuccessful proposals burn deposit"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      governance_burning MUSS definieren, dass erfolglose Proposals ihren Deposit verbrennen.
+
+    enforcement: |
+      CI MUSS prüfen, dass governance_burning den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.deflationary_mechanisms.governance_burning"
+      exact_value: "Unsuccessful proposals burn deposit"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Text"
+
+  - rule_id: SOT-UG-114
+    line_number: 163
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.deflationary_mechanisms"
+    field: "staking_slashing"
+    title: "Field: staking_slashing - Penalties for false verification"
+
+    original_text: |
+      staking_slashing: "Penalties for false verification or equivocation"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      staking_slashing MUSS Penalties für false verification oder equivocation definieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass staking_slashing den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.deflationary_mechanisms.staking_slashing"
+      exact_value: "Penalties for false verification or equivocation"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Text"
+
+  - rule_id: SOT-UG-115
+    line_number: 165
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.circulation_controls"
+    field: "circulation_controls"
+    title: "Subsection: circulation_controls MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection circulation_controls MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass circulation_controls vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "supply_mechanics.circulation_controls"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-116
+    line_number: 166
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.circulation_controls"
+    field: "max_annual_inflation"
+    title: "Field: max_annual_inflation = 0% (Fixed Supply)"
+
+    original_text: |
+      max_annual_inflation: "0%" # Fixed supply
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: max_annual_inflation MUSS 0% sein.
+      Fixed supply, keine Inflation.
+
+    enforcement: |
+      CI MUSS prüfen, dass max_annual_inflation = "0%".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.circulation_controls.max_annual_inflation"
+      exact_value: "0%"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn > 0%"
+      criticality: "CRITICAL - No Inflation"
+
+  - rule_id: SOT-UG-117
+    line_number: 167
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.circulation_controls"
+    field: "team_vesting_schedule"
+    title: "Field: team_vesting_schedule = 25% per year over 4 years"
+
+    original_text: |
+      team_vesting_schedule: "25% per year over 4 years"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      team_vesting_schedule MUSS 25% pro Jahr über 4 Jahre sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass team_vesting_schedule den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.circulation_controls.team_vesting_schedule"
+      exact_value: "25% per year over 4 years"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Vesting"
+
+  - rule_id: SOT-UG-118
+    line_number: 168
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.circulation_controls"
+    field: "partnership_unlock"
+    title: "Field: partnership_unlock = Milestone-based"
+
+    original_text: |
+      partnership_unlock: "Milestone-based"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      partnership_unlock MUSS "Milestone-based" sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass partnership_unlock den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.circulation_controls.partnership_unlock"
+      exact_value: "Milestone-based"
+      ci_enforcement: true
+      failure_mode: "FAIL bei time-based unlock"
+
+  - rule_id: SOT-UG-119
+    line_number: 169
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.circulation_controls"
+    field: "reserve_governance"
+    title: "Field: reserve_governance = DAO-controlled release only"
+
+    original_text: |
+      reserve_governance: "DAO-controlled release only"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: reserve_governance MUSS "DAO-controlled release only" sein.
+      Keine Admin-Kontrolle über Reserve Fund.
+
+    enforcement: |
+      CI MUSS prüfen, dass reserve_governance DAO-kontrolliert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "supply_mechanics.circulation_controls.reserve_governance"
+      exact_value: "DAO-controlled release only"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Admin-Kontrolle"
+      criticality: "CRITICAL - Decentralization"
+
+  - rule_id: SOT-UG-120
+    line_number: 152
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics"
+    field: "section_completeness"
+    title: "Section Completeness: supply_mechanics MUST have all subsections"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      supply_mechanics MUSS alle Subsections enthalten:
+      - total_supply
+      - initial_distribution
+      - deflationary_mechanisms
+      - circulation_controls
+
+    enforcement: |
+      CI MUSS prüfen, dass alle Subsections vorhanden sind.
+
+    evidence_schema:
+      type: "yaml_section_completeness"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "supply_mechanics"
+      required_keys:
+        - "total_supply"
+        - "initial_distribution"
+        - "deflationary_mechanisms"
+        - "circulation_controls"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn eine Subsection fehlt"
+
+# ====================================================================================
+# LINES 171-207: FEE_ROUTING, GOVERNANCE, STAKING (37 RULES)
+# ====================================================================================
+
+  - rule_id: SOT-UG-121
+    line_number: 171
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing"
+    field: "fee_routing"
+    title: "Section: fee_routing MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Section fee_routing MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass fee_routing als Top-Level Section vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "fee_routing"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Section fehlt"
+
+  - rule_id: SOT-UG-122
+    line_number: 172
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees"
+    field: "system_fees"
+    title: "Subsection: system_fees MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection system_fees MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass system_fees vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "fee_routing.system_fees"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-123
+    line_number: 173
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees"
+    field: "scope"
+    title: "Field: scope = identity_verification_payments_only"
+
+    original_text: |
+      scope: "identity_verification_payments_only"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: System fee scope MUSS auf identity_verification_payments beschränkt sein.
+      KEINE anderen Transaction Types.
+
+    enforcement: |
+      CI MUSS prüfen, dass scope = "identity_verification_payments_only".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.scope"
+      exact_value: "identity_verification_payments_only"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei breiterem Scope"
+      criticality: "CRITICAL - Fee Scope Limitation"
+
+  - rule_id: SOT-UG-124
+    line_number: 174
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees"
+    field: "note"
+    title: "Field: note - 3% system fee applies to identity verification only"
+
+    original_text: |
+      note: "3% system fee applies to identity verification transactions only"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      note MUSS klarstellen, dass 3% fee NUR für identity verification gilt.
+
+    enforcement: |
+      CI MUSS prüfen, dass note den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.note"
+      exact_value: "3% system fee applies to identity verification transactions only"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Text"
+
+  - rule_id: SOT-UG-125
+    line_number: 175
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees"
+    field: "total_fee"
+    title: "Field: total_fee = 3% of verification transaction value"
+
+    original_text: |
+      total_fee: "3% of verification transaction value"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: total_fee MUSS exakt 3% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass total_fee = "3% of verification transaction value".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.total_fee"
+      exact_value: "3% of verification transaction value"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei abweichendem Prozentsatz"
+      criticality: "CRITICAL - Fee Percentage"
+
+  - rule_id: SOT-UG-126
+    line_number: 176
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.allocation"
+    field: "allocation"
+    title: "Subsection: allocation MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection allocation MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass allocation vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "fee_routing.system_fees.allocation"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-127
+    line_number: 177
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.allocation"
+    field: "dev_fee"
+    title: "Field: dev_fee = 1% direct developer reward"
+
+    original_text: |
+      dev_fee: "1% direct developer reward"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      dev_fee MUSS 1% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass dev_fee = "1% direct developer reward".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.allocation.dev_fee"
+      exact_value: "1% direct developer reward"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Prozentsatz"
+
+  - rule_id: SOT-UG-128
+    line_number: 178
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.allocation"
+    field: "system_treasury"
+    title: "Field: system_treasury = 2% system treasury"
+
+    original_text: |
+      system_treasury: "2% system treasury"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      system_treasury MUSS 2% sein.
+      Summe: 1% dev + 2% treasury = 3% total fee.
+
+    enforcement: |
+      CI MUSS prüfen, dass system_treasury = "2% system treasury".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.allocation.system_treasury"
+      exact_value: "2% system treasury"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Prozentsatz"
+
+  - rule_id: SOT-UG-129
+    line_number: 176
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.allocation"
+    field: "allocation_sum_check"
+    title: "Verification: allocation MUST sum to 3%"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: dev_fee + system_treasury MÜSSEN exakt 3% ergeben.
+      1% + 2% = 3%
+
+    enforcement: |
+      CI MUSS prüfen, dass die Summe = total_fee ist.
+
+    evidence_schema:
+      type: "yaml_section_sum_validation"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "fee_routing.system_fees.allocation"
+      expected_sum: "3%"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn Summe != 3%"
+      criticality: "CRITICAL - Fee Split Integrity"
+
+  - rule_id: SOT-UG-130
+    line_number: 179
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    field: "burn_from_system_fee"
+    title: "Subsection: burn_from_system_fee MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection burn_from_system_fee MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass burn_from_system_fee vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "fee_routing.system_fees.burn_from_system_fee"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-131
+    line_number: 180
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    field: "policy"
+    title: "Field: policy = 50% of treasury share burned"
+
+    original_text: |
+      policy: "50% of treasury share burned"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: 50% der treasury share (2%) werden geburnt.
+      Das bedeutet: 1% von 2% = 1% des total fee wird geburnt.
+
+    enforcement: |
+      CI MUSS prüfen, dass policy = "50% of treasury share burned".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.burn_from_system_fee.policy"
+      exact_value: "50% of treasury share burned"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei abweichender Policy"
+      criticality: "CRITICAL - Deflationary Mechanism"
+
+  - rule_id: SOT-UG-132
+    line_number: 181
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    field: "base"
+    title: "Field: base = circulating_supply_snapshot"
+
+    original_text: |
+      base: "circulating_supply_snapshot"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      base MUSS "circulating_supply_snapshot" sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass base = "circulating_supply_snapshot".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.burn_from_system_fee.base"
+      exact_value: "circulating_supply_snapshot"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Base"
+
+  - rule_id: SOT-UG-133
+    line_number: 182
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    field: "snapshot_time_utc"
+    title: "Field: snapshot_time_utc = 00:00:00"
+
+    original_text: |
+      snapshot_time_utc: "00:00:00"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      snapshot_time_utc MUSS "00:00:00" sein (Mitternacht UTC).
+
+    enforcement: |
+      CI MUSS prüfen, dass snapshot_time_utc = "00:00:00".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc"
+      exact_value: "00:00:00"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Zeit"
+
+  - rule_id: SOT-UG-134
+    line_number: 183
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    field: "daily_cap_percent_of_circ"
+    title: "Field: daily_cap_percent_of_circ = 0.5"
+
+    original_text: |
+      daily_cap_percent_of_circ: "0.5"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      daily_cap_percent_of_circ MUSS 0.5% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass daily_cap_percent_of_circ = "0.5".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ"
+      exact_value: "0.5"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Cap"
+
+  - rule_id: SOT-UG-135
+    line_number: 184
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    field: "monthly_cap_percent_of_circ"
+    title: "Field: monthly_cap_percent_of_circ = 2.0"
+
+    original_text: |
+      monthly_cap_percent_of_circ: "2.0"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      monthly_cap_percent_of_circ MUSS 2.0% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass monthly_cap_percent_of_circ = "2.0".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ"
+      exact_value: "2.0"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Cap"
+
+  - rule_id: SOT-UG-136
+    line_number: 185
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    field: "oracle_source"
+    title: "Field: oracle_source = on-chain circulating supply oracle (DAO-controlled)"
+
+    original_text: |
+      oracle_source: "on-chain circulating supply oracle (DAO-controlled)"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: oracle_source MUSS DAO-kontrolliert sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass oracle_source DAO-kontrolliert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.system_fees.burn_from_system_fee.oracle_source"
+      exact_value: "on-chain circulating supply oracle (DAO-controlled)"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei nicht-DAO-Kontrolle"
+      criticality: "CRITICAL - Oracle Decentralization"
+
+  - rule_id: SOT-UG-137
+    line_number: 187
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.validator_rewards"
+    field: "validator_rewards"
+    title: "Subsection: validator_rewards MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection validator_rewards MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass validator_rewards vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "fee_routing.validator_rewards"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-138
+    line_number: 188
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.validator_rewards"
+    field: "source"
+    title: "Field: source = Treasury budget (DAO-decided monthly allocation)"
+
+    original_text: |
+      source: "Treasury budget (DAO-decided monthly allocation)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      source MUSS "Treasury budget (DAO-decided monthly allocation)" sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass source korrekt definiert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.validator_rewards.source"
+      exact_value: "Treasury budget (DAO-decided monthly allocation)"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Source"
+
+  - rule_id: SOT-UG-139
+    line_number: 189
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.validator_rewards"
+    field: "no_per_transaction_split"
+    title: "Field: no_per_transaction_split = true"
+
+    original_text: |
+      no_per_transaction_split: true
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_per_transaction_split MUSS true sein.
+      Validator rewards kommen NICHT aus transaction fees.
+
+    enforcement: |
+      CI MUSS prüfen, dass no_per_transaction_split = true.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.validator_rewards.no_per_transaction_split"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - Fee Structure Integrity"
+
+  - rule_id: SOT-UG-140
+    line_number: 190
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.validator_rewards"
+    field: "note"
+    title: "Field: note - Old fee split is deprecated"
+
+    original_text: |
+      note: "Old fee split (50/25/15/10) is deprecated and replaced by fixed 3% system fee."
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      note MUSS klarstellen, dass old fee split deprecated ist.
+
+    enforcement: |
+      CI MUSS prüfen, dass note den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "fee_routing.validator_rewards.note"
+      exact_value: "Old fee split (50/25/15/10) is deprecated and replaced by fixed 3% system fee."
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Text"
+
+  - rule_id: SOT-UG-141
+    line_number: 192
+    section: "Token Economics & Distribution"
+    subsection: "governance_fees"
+    field: "governance_fees"
+    title: "Section: governance_fees MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Section governance_fees MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass governance_fees als Top-Level Section vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_fees"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Section fehlt"
+
+  - rule_id: SOT-UG-142
+    line_number: 193
+    section: "Token Economics & Distribution"
+    subsection: "governance_fees"
+    field: "proposal_deposits"
+    title: "Field: proposal_deposits = 100% burned if proposal fails"
+
+    original_text: |
+      proposal_deposits: "100% burned if proposal fails"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: proposal_deposits MÜSSEN 100% geburnt werden wenn Proposal fails.
+
+    enforcement: |
+      CI MUSS prüfen, dass proposal_deposits = "100% burned if proposal fails".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_fees.proposal_deposits"
+      exact_value: "100% burned if proposal fails"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei partial burn"
+      criticality: "CRITICAL - Anti-Spam Mechanism"
+
+  - rule_id: SOT-UG-143
+    line_number: 194
+    section: "Token Economics & Distribution"
+    subsection: "governance_fees"
+    field: "voting_gas"
+    title: "Field: voting_gas = Subsidized from treasury fund"
+
+    original_text: |
+      voting_gas: "Subsidized from treasury fund"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      voting_gas MUSS "Subsidized from treasury fund" sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass voting_gas den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_fees.voting_gas"
+      exact_value: "Subsidized from treasury fund"
+      ci_enforcement: true
+      failure_mode: "FAIL bei user-paid gas"
+
+  - rule_id: SOT-UG-144
+    line_number: 196
+    section: "Token Economics & Distribution"
+    subsection: "governance_controls"
+    field: "governance_controls"
+    title: "Section: governance_controls MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Section governance_controls MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass governance_controls als Top-Level Section vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_controls"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Section fehlt"
+
+  - rule_id: SOT-UG-145
+    line_number: 197
+    section: "Token Economics & Distribution"
+    subsection: "governance_controls"
+    field: "authority"
+    title: "Field: authority = DAO_only"
+
+    original_text: |
+      authority: "DAO_only"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: authority MUSS "DAO_only" sein.
+      Keine Admin-Kontrolle über Governance.
+
+    enforcement: |
+      CI MUSS prüfen, dass authority = "DAO_only".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_controls.authority"
+      exact_value: "DAO_only"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Admin-Kontrolle"
+      criticality: "CRITICAL - Decentralization"
+
+  - rule_id: SOT-UG-146
+    line_number: 198
+    section: "Token Economics & Distribution"
+    subsection: "governance_controls"
+    field: "reference"
+    title: "Field: reference = 07_governance_legal/governance_defaults.yaml"
+
+    original_text: |
+      reference: "07_governance_legal/governance_defaults.yaml"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      reference MUSS auf governance_defaults.yaml verweisen.
+
+    enforcement: |
+      CI MUSS prüfen, dass reference den korrekten Pfad hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_controls.reference"
+      exact_value: "07_governance_legal/governance_defaults.yaml"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Pfad"
+
+  - rule_id: SOT-UG-147
+    line_number: 199
+    section: "Token Economics & Distribution"
+    subsection: "governance_controls"
+    field: "note"
+    title: "Field: note - All governance parameters centrally defined"
+
+    original_text: |
+      note: "All governance parameters centrally defined - see governance_parameters section"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      note MUSS klarstellen, dass alle Governance-Parameter zentral definiert sind.
+
+    enforcement: |
+      CI MUSS prüfen, dass note den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_controls.note"
+      exact_value: "All governance parameters centrally defined - see governance_parameters section"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Text"
+
+  - rule_id: SOT-UG-148
+    line_number: 201
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    field: "staking_mechanics"
+    title: "Section: staking_mechanics MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Section staking_mechanics MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass staking_mechanics als Top-Level Section vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "staking_mechanics"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Section fehlt"
+
+  - rule_id: SOT-UG-149
+    line_number: 202
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    field: "minimum_stake"
+    title: "Field: minimum_stake = 1000 SSID"
+
+    original_text: |
+      minimum_stake: "1000 SSID"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      minimum_stake MUSS 1000 SSID sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass minimum_stake = "1000 SSID".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "staking_mechanics.minimum_stake"
+      exact_value: "1000 SSID"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-150
+    line_number: 203
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    field: "maximum_discount"
+    title: "Field: maximum_discount = 50% fee reduction"
+
+    original_text: |
+      maximum_discount: "50% fee reduction"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      maximum_discount MUSS 50% fee reduction sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass maximum_discount = "50% fee reduction".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "staking_mechanics.maximum_discount"
+      exact_value: "50% fee reduction"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Discount"
+
+  - rule_id: SOT-UG-151
+    line_number: 204
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    field: "slashing_penalty"
+    title: "Field: slashing_penalty = 5% of staked amount"
+
+    original_text: |
+      slashing_penalty: "5% of staked amount"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      slashing_penalty MUSS 5% of staked amount sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass slashing_penalty = "5% of staked amount".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "staking_mechanics.slashing_penalty"
+      exact_value: "5% of staked amount"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Penalty"
+
+  - rule_id: SOT-UG-152
+    line_number: 205
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    field: "unstaking_period"
+    title: "Field: unstaking_period = 14 days"
+
+    original_text: |
+      unstaking_period: "14 days"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      unstaking_period MUSS 14 days sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass unstaking_period = "14 days".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "staking_mechanics.unstaking_period"
+      exact_value: "14 days"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Period"
+
+  - rule_id: SOT-UG-153
+    line_number: 206
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    field: "discount_applies_to"
+    title: "Field: discount_applies_to = user_service_price_only"
+
+    original_text: |
+      discount_applies_to: "user_service_price_only"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: discount_applies_to MUSS "user_service_price_only" sein.
+      System fee wird NICHT reduced.
+
+    enforcement: |
+      CI MUSS prüfen, dass discount_applies_to = "user_service_price_only".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "staking_mechanics.discount_applies_to"
+      exact_value: "user_service_price_only"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei system fee discount"
+      criticality: "CRITICAL - Fee Integrity"
+
+  - rule_id: SOT-UG-154
+    line_number: 207
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    field: "system_fee_invariance"
+    title: "Field: system_fee_invariance = true"
+
+    original_text: |
+      system_fee_invariance: true
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: system_fee_invariance MUSS true sein.
+      System fee bleibt IMMER 3%, unabhängig von Staking.
+
+    enforcement: |
+      CI MUSS prüfen, dass system_fee_invariance = true.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "staking_mechanics.system_fee_invariance"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - Fee Invariance"
+
+  - rule_id: SOT-UG-155
+    line_number: 171
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing"
+    field: "section_completeness"
+    title: "Section Completeness: fee_routing and related sections"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Alle fee-routing related Sections MÜSSEN vorhanden sein:
+      - fee_routing (system_fees, validator_rewards)
+      - governance_fees
+      - governance_controls
+      - staking_mechanics
+
+    enforcement: |
+      CI MUSS prüfen, dass alle Sections vorhanden sind.
+
+    evidence_schema:
+      type: "yaml_section_completeness"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "."
+      required_keys:
+        - "fee_routing"
+        - "governance_fees"
+        - "governance_controls"
+        - "staking_mechanics"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn eine Section fehlt"
+
+# ====================================================================================
+# LINES 209-250: GOVERNANCE_PARAMETERS (42 RULES)
+# ====================================================================================
+
+  - rule_id: SOT-UG-156
+    line_number: 209
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters"
+    field: "governance_parameters"
+    title: "Section: governance_parameters MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Section governance_parameters MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass governance_parameters als Top-Level Section vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_parameters"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Section fehlt"
+
+  # --- proposal_framework (Lines 210-217: 8 rules) ---
+
+  - rule_id: SOT-UG-157
+    line_number: 210
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework"
+    field: "proposal_framework"
+    title: "Subsection: proposal_framework MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection proposal_framework MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass proposal_framework vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_parameters.proposal_framework"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-158
+    line_number: 211
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework"
+    field: "proposal_threshold"
+    title: "Field: proposal_threshold = 1% of total supply (10,000,000 SSID)"
+
+    original_text: |
+      proposal_threshold: "1% of total supply (10,000,000 SSID)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      proposal_threshold MUSS 1% (10M SSID) sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass proposal_threshold korrekt ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.proposal_framework.proposal_threshold"
+      exact_value: "1% of total supply (10,000,000 SSID)"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Threshold"
+
+  - rule_id: SOT-UG-159
+    line_number: 212
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework"
+    field: "proposal_deposit"
+    title: "Field: proposal_deposit = 10,000 SSID (burned if proposal fails)"
+
+    original_text: |
+      proposal_deposit: "10,000 SSID (burned if proposal fails)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      proposal_deposit MUSS 10,000 SSID sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass proposal_deposit korrekt ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.proposal_framework.proposal_deposit"
+      exact_value: "10,000 SSID (burned if proposal fails)"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Deposit"
+
+  - rule_id: SOT-UG-160
+    line_number: 213
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework"
+    field: "proposal_types"
+    title: "Field: proposal_types MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      proposal_types Array MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass proposal_types vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.proposal_framework.proposal_types"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Feld fehlt"
+
+  - rule_id: SOT-UG-161
+    line_number: 214
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework.proposal_types"
+    field: "protocol_upgrades"
+    title: "Array Item: Protocol upgrades (requires supermajority)"
+
+    original_text: |
+      - "Protocol upgrades (requires supermajority)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      proposal_types MUSS "Protocol upgrades (requires supermajority)" enthalten.
+
+    enforcement: |
+      CI MUSS prüfen, dass Array Item vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.proposal_framework.proposal_types"
+      expected_item: "Protocol upgrades (requires supermajority)"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Item fehlt"
+
+  - rule_id: SOT-UG-162
+    line_number: 215
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework.proposal_types"
+    field: "parameter_changes"
+    title: "Array Item: Parameter changes (requires simple majority)"
+
+    original_text: |
+      - "Parameter changes (requires simple majority)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      proposal_types MUSS "Parameter changes (requires simple majority)" enthalten.
+
+    enforcement: |
+      CI MUSS prüfen, dass Array Item vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.proposal_framework.proposal_types"
+      expected_item: "Parameter changes (requires simple majority)"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Item fehlt"
+
+  - rule_id: SOT-UG-163
+    line_number: 216
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework.proposal_types"
+    field: "treasury_allocation"
+    title: "Array Item: Treasury allocation (requires quorum + majority)"
+
+    original_text: |
+      - "Treasury allocation (requires quorum + majority)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      proposal_types MUSS "Treasury allocation (requires quorum + majority)" enthalten.
+
+    enforcement: |
+      CI MUSS prüfen, dass Array Item vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.proposal_framework.proposal_types"
+      expected_item: "Treasury allocation (requires quorum + majority)"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Item fehlt"
+
+  - rule_id: SOT-UG-164
+    line_number: 217
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework.proposal_types"
+    field: "emergency_proposals"
+    title: "Array Item: Emergency proposals (expedited process)"
+
+    original_text: |
+      - "Emergency proposals (expedited process)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      proposal_types MUSS "Emergency proposals (expedited process)" enthalten.
+
+    enforcement: |
+      CI MUSS prüfen, dass Array Item vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.proposal_framework.proposal_types"
+      expected_item: "Emergency proposals (expedited process)"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Item fehlt"
+
+  # --- voting_requirements (Lines 219-225: 7 rules) ---
+
+  - rule_id: SOT-UG-165
+    line_number: 219
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    field: "voting_requirements"
+    title: "Subsection: voting_requirements MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection voting_requirements MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass voting_requirements vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_parameters.voting_requirements"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-166
+    line_number: 220
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    field: "quorum_standard"
+    title: "Field: quorum_standard = 4% of circulating supply"
+
+    original_text: |
+      quorum_standard: "4% of circulating supply"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      quorum_standard MUSS 4% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass quorum_standard = "4% of circulating supply".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_requirements.quorum_standard"
+      exact_value: "4% of circulating supply"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Quorum"
+
+  - rule_id: SOT-UG-167
+    line_number: 221
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    field: "quorum_protocol_upgrade"
+    title: "Field: quorum_protocol_upgrade = 8% of circulating supply"
+
+    original_text: |
+      quorum_protocol_upgrade: "8% of circulating supply"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      quorum_protocol_upgrade MUSS 8% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass quorum_protocol_upgrade = "8% of circulating supply".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_requirements.quorum_protocol_upgrade"
+      exact_value: "8% of circulating supply"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Quorum"
+
+  - rule_id: SOT-UG-168
+    line_number: 222
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    field: "quorum_emergency"
+    title: "Field: quorum_emergency = 2% of circulating supply"
+
+    original_text: |
+      quorum_emergency: "2% of circulating supply"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      quorum_emergency MUSS 2% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass quorum_emergency = "2% of circulating supply".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_requirements.quorum_emergency"
+      exact_value: "2% of circulating supply"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Quorum"
+
+  - rule_id: SOT-UG-169
+    line_number: 223
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    field: "simple_majority"
+    title: "Field: simple_majority = 50% + 1 of votes cast"
+
+    original_text: |
+      simple_majority: "50% + 1 of votes cast"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      simple_majority MUSS 50% + 1 sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass simple_majority = "50% + 1 of votes cast".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_requirements.simple_majority"
+      exact_value: "50% + 1 of votes cast"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Majority"
+
+  - rule_id: SOT-UG-170
+    line_number: 224
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    field: "supermajority"
+    title: "Field: supermajority = 66.7% of votes cast"
+
+    original_text: |
+      supermajority: "66.7% of votes cast"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      supermajority MUSS 66.7% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass supermajority = "66.7% of votes cast".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_requirements.supermajority"
+      exact_value: "66.7% of votes cast"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Supermajority"
+
+  - rule_id: SOT-UG-171
+    line_number: 225
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    field: "emergency_supermajority"
+    title: "Field: emergency_supermajority = 75% of votes cast"
+
+    original_text: |
+      emergency_supermajority: "75% of votes cast"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      emergency_supermajority MUSS 75% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass emergency_supermajority = "75% of votes cast".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_requirements.emergency_supermajority"
+      exact_value: "75% of votes cast"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Supermajority"
+
+  # --- timelock_framework (Lines 227-232: 6 rules) ---
+
+  - rule_id: SOT-UG-172
+    line_number: 227
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    field: "timelock_framework"
+    title: "Subsection: timelock_framework MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection timelock_framework MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass timelock_framework vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_parameters.timelock_framework"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-173
+    line_number: 228
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    field: "standard_proposals"
+    title: "Field: standard_proposals = 48 hours minimum execution delay"
+
+    original_text: |
+      standard_proposals: "48 hours minimum execution delay"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      standard_proposals MUSS 48 hours timelock haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass standard_proposals = "48 hours minimum execution delay".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.timelock_framework.standard_proposals"
+      exact_value: "48 hours minimum execution delay"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Timelock"
+
+  - rule_id: SOT-UG-174
+    line_number: 229
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    field: "protocol_upgrades"
+    title: "Field: protocol_upgrades = 168 hours (7 days) execution delay"
+
+    original_text: |
+      protocol_upgrades: "168 hours (7 days) execution delay"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      protocol_upgrades MUSS 168 hours (7 days) timelock haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass protocol_upgrades = "168 hours (7 days) execution delay".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.timelock_framework.protocol_upgrades"
+      exact_value: "168 hours (7 days) execution delay"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Timelock"
+
+  - rule_id: SOT-UG-175
+    line_number: 230
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    field: "parameter_changes"
+    title: "Field: parameter_changes = 24 hours execution delay"
+
+    original_text: |
+      parameter_changes: "24 hours execution delay"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      parameter_changes MUSS 24 hours timelock haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass parameter_changes = "24 hours execution delay".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.timelock_framework.parameter_changes"
+      exact_value: "24 hours execution delay"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Timelock"
+
+  - rule_id: SOT-UG-176
+    line_number: 231
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    field: "emergency_proposals"
+    title: "Field: emergency_proposals = 6 hours execution delay (security only)"
+
+    original_text: |
+      emergency_proposals: "6 hours execution delay (security only)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      emergency_proposals MUSS 6 hours timelock haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass emergency_proposals = "6 hours execution delay (security only)".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.timelock_framework.emergency_proposals"
+      exact_value: "6 hours execution delay (security only)"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Timelock"
+
+  - rule_id: SOT-UG-177
+    line_number: 232
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    field: "treasury_allocations"
+    title: "Field: treasury_allocations = 72 hours execution delay"
+
+    original_text: |
+      treasury_allocations: "72 hours execution delay"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      treasury_allocations MUSS 72 hours timelock haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass treasury_allocations = "72 hours execution delay".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.timelock_framework.treasury_allocations"
+      exact_value: "72 hours execution delay"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Timelock"
+
+  # --- voting_periods (Lines 234-238: 5 rules) ---
+
+  - rule_id: SOT-UG-178
+    line_number: 234
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_periods"
+    field: "voting_periods"
+    title: "Subsection: voting_periods MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection voting_periods MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass voting_periods vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_parameters.voting_periods"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-179
+    line_number: 235
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_periods"
+    field: "standard_voting"
+    title: "Field: standard_voting = 7 days (168 hours)"
+
+    original_text: |
+      standard_voting: "7 days (168 hours)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      standard_voting MUSS 7 days sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass standard_voting = "7 days (168 hours)".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_periods.standard_voting"
+      exact_value: "7 days (168 hours)"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Period"
+
+  - rule_id: SOT-UG-180
+    line_number: 236
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_periods"
+    field: "protocol_upgrade_voting"
+    title: "Field: protocol_upgrade_voting = 14 days (336 hours)"
+
+    original_text: |
+      protocol_upgrade_voting: "14 days (336 hours)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      protocol_upgrade_voting MUSS 14 days sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass protocol_upgrade_voting = "14 days (336 hours)".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_periods.protocol_upgrade_voting"
+      exact_value: "14 days (336 hours)"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Period"
+
+  - rule_id: SOT-UG-181
+    line_number: 237
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_periods"
+    field: "emergency_voting"
+    title: "Field: emergency_voting = 24 hours (security issues only)"
+
+    original_text: |
+      emergency_voting: "24 hours (security issues only)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      emergency_voting MUSS 24 hours sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass emergency_voting = "24 hours (security issues only)".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_periods.emergency_voting"
+      exact_value: "24 hours (security issues only)"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Period"
+
+  - rule_id: SOT-UG-182
+    line_number: 238
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_periods"
+    field: "parameter_voting"
+    title: "Field: parameter_voting = 5 days (120 hours)"
+
+    original_text: |
+      parameter_voting: "5 days (120 hours)"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      parameter_voting MUSS 5 days sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass parameter_voting = "5 days (120 hours)".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.voting_periods.parameter_voting"
+      exact_value: "5 days (120 hours)"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Period"
+
+  # --- delegation_system (Lines 240-244: 5 rules) ---
+
+  - rule_id: SOT-UG-183
+    line_number: 240
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.delegation_system"
+    field: "delegation_system"
+    title: "Subsection: delegation_system MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection delegation_system MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass delegation_system vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_parameters.delegation_system"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-184
+    line_number: 241
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.delegation_system"
+    field: "delegation_enabled"
+    title: "Field: delegation_enabled = true"
+
+    original_text: |
+      delegation_enabled: true
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      delegation_enabled MUSS true sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass delegation_enabled = true.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.delegation_system.delegation_enabled"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "FAIL wenn false"
+
+  - rule_id: SOT-UG-185
+    line_number: 242
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.delegation_system"
+    field: "self_delegation_default"
+    title: "Field: self_delegation_default = true"
+
+    original_text: |
+      self_delegation_default: true
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      self_delegation_default MUSS true sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass self_delegation_default = true.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.delegation_system.self_delegation_default"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "FAIL wenn false"
+
+  - rule_id: SOT-UG-186
+    line_number: 243
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.delegation_system"
+    field: "delegation_changes"
+    title: "Field: delegation_changes = Immediate effect"
+
+    original_text: |
+      delegation_changes: "Immediate effect"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      delegation_changes MUSS "Immediate effect" haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass delegation_changes = "Immediate effect".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.delegation_system.delegation_changes"
+      exact_value: "Immediate effect"
+      ci_enforcement: true
+      failure_mode: "FAIL bei Delay"
+
+  - rule_id: SOT-UG-187
+    line_number: 244
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.delegation_system"
+    field: "vote_weight_calculation"
+    title: "Field: vote_weight_calculation = Token balance + delegated tokens"
+
+    original_text: |
+      vote_weight_calculation: "Token balance + delegated tokens"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      vote_weight_calculation MUSS korrekt definiert sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass vote_weight_calculation = "Token balance + delegated tokens".
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.delegation_system.vote_weight_calculation"
+      exact_value: "Token balance + delegated tokens"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Calculation"
+
+  # --- governance_rewards (Lines 246-250: 5 rules) ---
+
+  - rule_id: SOT-UG-188
+    line_number: 246
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.governance_rewards"
+    field: "governance_rewards"
+    title: "Subsection: governance_rewards MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Subsection governance_rewards MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass governance_rewards vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_parameters.governance_rewards"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-189
+    line_number: 247
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.governance_rewards"
+    field: "voter_participation_rewards"
+    title: "Field: voter_participation_rewards = 0.1% of treasury per quarter"
+
+    original_text: |
+      voter_participation_rewards: "0.1% of treasury per quarter"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      voter_participation_rewards MUSS 0.1% of treasury per quarter sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass voter_participation_rewards korrekt ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.governance_rewards.voter_participation_rewards"
+      exact_value: "0.1% of treasury per quarter"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichenden Rewards"
+
+  - rule_id: SOT-UG-190
+    line_number: 248
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.governance_rewards"
+    field: "proposal_creator_rewards"
+    title: "Field: proposal_creator_rewards = 1000 SSID for successful proposals"
+
+    original_text: |
+      proposal_creator_rewards: "1000 SSID for successful proposals"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      proposal_creator_rewards MUSS 1000 SSID sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass proposal_creator_rewards korrekt ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.governance_rewards.proposal_creator_rewards"
+      exact_value: "1000 SSID for successful proposals"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichenden Rewards"
+
+  - rule_id: SOT-UG-191
+    line_number: 249
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.governance_rewards"
+    field: "delegate_rewards"
+    title: "Field: delegate_rewards = Based on participation and performance"
+
+    original_text: |
+      delegate_rewards: "Based on participation and performance"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      delegate_rewards MUSS performance-basiert sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass delegate_rewards korrekt ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.governance_rewards.delegate_rewards"
+      exact_value: "Based on participation and performance"
+      ci_enforcement: true
+      failure_mode: "FAIL bei fixen Rewards"
+
+  - rule_id: SOT-UG-192
+    line_number: 250
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.governance_rewards"
+    field: "minimum_participation"
+    title: "Field: minimum_participation = 10% of voting power for rewards"
+
+    original_text: |
+      minimum_participation: "10% of voting power for rewards"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      minimum_participation MUSS 10% sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass minimum_participation korrekt ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field_path: "governance_parameters.governance_rewards.minimum_participation"
+      exact_value: "10% of voting power for rewards"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichender Participation"
+
+  # --- governance_parameters completeness ---
+
+  - rule_id: SOT-UG-193
+    line_number: 209
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters"
+    field: "section_completeness"
+    title: "Section Completeness: governance_parameters MUST have all 6 subsections"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      governance_parameters MUSS alle 6 Subsections enthalten:
+      - proposal_framework
+      - voting_requirements
+      - timelock_framework
+      - voting_periods
+      - delegation_system
+      - governance_rewards
+
+    enforcement: |
+      CI MUSS prüfen, dass alle 6 Subsections vorhanden sind.
+
+    evidence_schema:
+      type: "yaml_section_completeness"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      section_path: "governance_parameters"
+      required_keys:
+        - "proposal_framework"
+        - "voting_requirements"
+        - "timelock_framework"
+        - "voting_periods"
+        - "delegation_system"
+        - "governance_rewards"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn eine Subsection fehlt"
+
+# ====================================================================================
+# FILE-LEVEL CHECKS (7 RULES)
+# ====================================================================================
+
+  - rule_id: SOT-UG-194
+    line_number: 147
+    section: "Token Economics & Distribution"
+    subsection: "file_structure"
+    field: "file_completeness"
+    title: "File Completeness: token_economics.yaml MUST have all top-level sections"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Die Datei token_economics.yaml MUSS alle Top-Level Sections enthalten:
+      - version, date, deprecated
+      - supply_mechanics
+      - fee_routing
+      - governance_fees
+      - governance_controls
+      - staking_mechanics
+      - governance_parameters
+
+    enforcement: |
+      CI MUSS prüfen, dass alle Top-Level Sections vorhanden sind.
+
+    evidence_schema:
+      type: "yaml_file_completeness"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      required_top_level_keys:
+        - "version"
+        - "date"
+        - "deprecated"
+        - "supply_mechanics"
+        - "fee_routing"
+        - "governance_fees"
+        - "governance_controls"
+        - "staking_mechanics"
+        - "governance_parameters"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn eine Top-Level Section fehlt"
+
+  - rule_id: SOT-UG-195
+    line_number: 147
+    section: "Token Economics & Distribution"
+    subsection: "file_location"
+    field: "file_path"
+    title: "File Existence: token_economics.yaml MUST exist at exact path"
+
+    original_text: |
+      # 20_foundation/tokenomics/token_economics.yaml
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Die Datei token_economics.yaml MUSS an genau diesem Pfad existieren:
+      20_foundation/tokenomics/token_economics.yaml
+
+    enforcement: |
+      CI MUSS prüfen:
+      1. Datei existiert an genau diesem Pfad
+      2. Datei ist gültiges YAML
+      3. KEINE Kopien an anderen Pfaden
+
+    evidence_schema:
+      type: "file_existence_enforcement"
+      canonical_file: "20_foundation/tokenomics/token_economics.yaml"
+      file_type: "yaml"
+      validation_rules:
+        - "MUSS existieren"
+        - "MUSS valid YAML sein"
+        - "KEINE Duplikate erlaubt"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn fehlend oder dupliziert"
+      criticality: "CRITICAL - Single Source of Truth"
+
+  - rule_id: SOT-UG-196
+    line_number: 148
+    section: "Token Economics & Distribution"
+    subsection: "cross_file_consistency"
+    field: "version_match_with_framework"
+    title: "Cross-File Consistency: version fields MUST match across tokenomics files"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Die version fields in token_economics.yaml und ssid_token_framework.yaml
+      MÜSSEN konsistent sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass Versionen synchronized sind.
+
+    evidence_schema:
+      type: "cross_file_field_match"
+      files:
+        - "20_foundation/tokenomics/token_economics.yaml"
+        - "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "version"
+      ci_enforcement: true
+      failure_mode: "FAIL bei Version Mismatch"
+
+  - rule_id: SOT-UG-197
+    line_number: 175
+    section: "Token Economics & Distribution"
+    subsection: "cross_file_consistency"
+    field: "total_fee_match"
+    title: "Cross-File Consistency: total_fee MUST match across files"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Das total_fee Field (3%) MUSS konsistent sein zwischen:
+      - token_economics.yaml
+      - utility_definitions.yaml
+      - governance_defaults.yaml
+
+    enforcement: |
+      CI MUSS prüfen, dass total_fee = 3% in allen Dateien.
+
+    evidence_schema:
+      type: "cross_file_field_match"
+      files:
+        - "20_foundation/tokenomics/token_economics.yaml"
+        - "20_foundation/tokenomics/utility_definitions.yaml"
+        - "07_governance_legal/governance_defaults.yaml"
+      field_path: "fee_routing.system_fees.total_fee"
+      expected_value: "3% of verification transaction value"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Mismatch"
+      criticality: "CRITICAL - Fee Consistency"
+
+  - rule_id: SOT-UG-198
+    line_number: 153
+    section: "Token Economics & Distribution"
+    subsection: "cross_file_consistency"
+    field: "total_supply_match"
+    title: "Cross-File Consistency: total_supply MUST match across files"
+
+    category: "token_economics"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Das total_supply Field (1B SSID) MUSS konsistent sein zwischen:
+      - token_economics.yaml
+      - ssid_token_framework.yaml
+
+    enforcement: |
+      CI MUSS prüfen, dass total_supply = 1B in allen Dateien.
+
+    evidence_schema:
+      type: "cross_file_field_match"
+      files:
+        - "20_foundation/tokenomics/token_economics.yaml"
+        - "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "supply_mechanics.total_supply"
+      expected_value: "1,000,000,000 SSID"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Mismatch"
+      criticality: "CRITICAL - Supply Consistency"
+
+  - rule_id: SOT-UG-199
+    line_number: 197
+    section: "Token Economics & Distribution"
+    subsection: "cross_file_consistency"
+    field: "governance_reference_exists"
+    title: "Cross-File Reference: governance_defaults.yaml MUST exist"
+
+    category: "token_economics"
+    priority: "must"
+
+    description: |
+      Die referenzierte Datei 07_governance_legal/governance_defaults.yaml
+      MUSS existieren und valid sein.
+
+    enforcement: |
+      CI MUSS prüfen, dass referenzierte Datei existiert.
+
+    evidence_schema:
+      type: "cross_file_reference_validation"
+      source_file: "20_foundation/tokenomics/token_economics.yaml"
+      source_field: "governance_controls.reference"
+      referenced_file: "07_governance_legal/governance_defaults.yaml"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Referenz broken ist"
+
+# ====================================================================================
+# INTEGRATION STATUS
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 100
+  line_range: "145-251"
+  section: "Token Economics & Distribution"
+  audit_ready: true
+
+# ====================================================================================
+# RULE COUNT VERIFICATION
+# ====================================================================================
+
+rule_count_verification:
+  lines_148_150_metadata: 3
+  lines_152_169_supply_mechanics: 18
+  lines_171_207_fee_routing_governance_staking: 37
+  lines_209_250_governance_parameters: 42
+  total: 100
+  verified: true
+  rule_id_range: "SOT-UG-100 to SOT-UG-199"

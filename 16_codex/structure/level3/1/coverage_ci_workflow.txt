@@ -1,0 +1,250 @@
+# .github/workflows/master-rules-coverage.yml
+# SSID Master Rules Coverage Check - CI/CD Integration
+# Prüft bei jedem Commit/PR, ob alle Master-Regeln in allen 5 SoT-Artefakten implementiert sind
+
+name: Master Rules Coverage Check
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Täglich um 02:00 UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  coverage-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Vollständige Historie für Diff-Analyse
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install Dependencies
+        run: |
+          pip install pyyaml
+      
+      - name: Validate Master Rules File
+        run: |
+          if [ ! -f "master_rules.yaml" ]; then
+            echo "❌ Error: master_rules.yaml not found"
+            exit 2
+          fi
+          
+          # YAML-Syntax prüfen
+          python -c "import yaml; yaml.safe_load(open('master_rules.yaml'))"
+          echo "✅ master_rules.yaml is valid YAML"
+      
+      - name: Run Coverage Checker
+        id: coverage
+        run: |
+          python coverage_checker.py \
+            --rules master_rules.yaml \
+            --repo . \
+            --output coverage_report.json \
+            --fail-under 100.0
+        continue-on-error: true
+      
+      - name: Generate Coverage Badge
+        if: always()
+        run: |
+          # Coverage-Prozentsatz aus JSON extrahieren
+          COVERAGE=$(python -c "import json; print(json.load(open('coverage_report.json'))['summary']['overall_percentage'])")
+          
+          # Badge-Color basierend auf Coverage
+          if (( $(echo "$COVERAGE >= 100" | bc -l) )); then
+            COLOR="brightgreen"
+          elif (( $(echo "$COVERAGE >= 80" | bc -l) )); then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+          
+          # Badge erstellen (shields.io-Format)
+          echo "COVERAGE=$COVERAGE" >> $GITHUB_ENV
+          echo "BADGE_COLOR=$COLOR" >> $GITHUB_ENV
+          
+          # Badge als Artifact speichern
+          echo "{\"schemaVersion\": 1, \"label\": \"coverage\", \"message\": \"${COVERAGE}%\", \"color\": \"${COLOR}\"}" > coverage-badge.json
+      
+      - name: Upload Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            coverage_report.json
+            coverage_report.json.sha256
+            coverage-badge.json
+          retention-days: 90
+      
+      - name: Archive to Audit Logging
+        if: always()
+        run: |
+          # Report in Audit-Ordner kopieren
+          mkdir -p 02_audit_logging/reports/master_rules_coverage/
+          
+          TIMESTAMP=$(date -u +"%Y%m%d_%H%M%S")
+          cp coverage_report.json "02_audit_logging/reports/master_rules_coverage/coverage_${TIMESTAMP}.json"
+          cp coverage_report.json.sha256 "02_audit_logging/reports/master_rules_coverage/coverage_${TIMESTAMP}.json.sha256"
+          
+          # Git commit (nur wenn neue Lücken)
+          if [ "${{ steps.coverage.outcome }}" == "failure" ]; then
+            git config user.name "SSID Coverage Bot"
+            git config user.email "coverage-bot@ssid.org"
+            git add 02_audit_logging/reports/master_rules_coverage/
+            git commit -m "audit: Coverage Report ${TIMESTAMP} - Coverage: ${COVERAGE}%"
+            git push origin HEAD:main
+          fi
+      
+      - name: Comment on PR (if applicable)
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('coverage_report.json', 'utf8'));
+            
+            const summary = report.summary;
+            const emoji = summary.overall_percentage >= 100 ? '✅' : '❌';
+            
+            let body = `## ${emoji} Master Rules Coverage Report\n\n`;
+            body += `**Overall Coverage:** ${summary.overall_percentage.toFixed(1)}%\n\n`;
+            body += `| Status | Count | Percentage |\n`;
+            body += `|--------|-------|------------|\n`;
+            body += `| ✅ Full Coverage | ${summary.full_coverage} | ${(summary.full_coverage/summary.total_rules*100).toFixed(1)}% |\n`;
+            body += `| ⚠️ Partial Coverage | ${summary.partial_coverage} | ${(summary.partial_coverage/summary.total_rules*100).toFixed(1)}% |\n`;
+            body += `| ❌ No Coverage | ${summary.no_coverage} | ${(summary.no_coverage/summary.total_rules*100).toFixed(1)}% |\n`;
+            body += `\n**Total Rules:** ${summary.total_rules}\n\n`;
+            
+            if (summary.overall_percentage < 100) {
+              body += `### ⚠️ Coverage Gaps Found\n\n`;
+              body += `This PR introduces or exposes coverage gaps. Please ensure all Master Rules are implemented in all 5 SoT artifacts:\n\n`;
+              body += `1. Contract Definitions (OpenAPI/JSON-Schema)\n`;
+              body += `2. Core Logic (Python/Rust)\n`;
+              body += `3. Policy Enforcement (OPA/Semgrep)\n`;
+              body += `4. CLI Validation\n`;
+              body += `5. Test Suites\n\n`;
+              body += `See full report in workflow artifacts.\n`;
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+      
+      - name: Fail if Coverage Below Threshold
+        if: steps.coverage.outcome == 'failure'
+        run: |
+          echo "❌ Coverage check failed - not all Master Rules are implemented in all 5 SoT artifacts"
+          exit 1
+      
+      - name: Success Notification
+        if: steps.coverage.outcome == 'success'
+        run: |
+          echo "✅ All Master Rules are fully implemented across all 5 SoT artifacts"
+          echo "📊 100% Coverage achieved - System is compliant with Master Definition"
+
+  update-badge:
+    needs: coverage-check
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Download Coverage Report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+      
+      - name: Update README Badge
+        run: |
+          # Badge-URL generieren
+          COVERAGE=$(python -c "import json; print(json.load(open('coverage_report.json'))['summary']['overall_percentage'])")
+          
+          # Farbe basierend auf Coverage
+          if (( $(echo "$COVERAGE >= 100" | bc -l) )); then
+            COLOR="brightgreen"
+          elif (( $(echo "$COVERAGE >= 80" | bc -l) )); then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+          
+          BADGE_URL="https://img.shields.io/badge/Master%20Rules%20Coverage-${COVERAGE}%25-${COLOR}"
+          
+          # README.md updaten (wenn Badge-Marker existiert)
+          if grep -q "<!-- COVERAGE_BADGE -->" README.md; then
+            sed -i "s|<!-- COVERAGE_BADGE -->.*|<!-- COVERAGE_BADGE --> ![Coverage](${BADGE_URL})|" README.md
+            
+            git config user.name "SSID Coverage Bot"
+            git config user.email "coverage-bot@ssid.org"
+            git add README.md
+            git commit -m "docs: Update coverage badge to ${COVERAGE}%"
+            git push
+          fi
+
+  # Pre-Commit Hook Alternative (für lokale Entwicklung)
+  generate-pre-commit-hook:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Generate Pre-Commit Hook
+        run: |
+          cat > .git/hooks/pre-commit << 'EOF'
+          #!/bin/bash
+          # SSID Master Rules Coverage - Pre-Commit Hook
+          
+          echo "🔍 Running Master Rules Coverage Check..."
+          
+          python coverage_checker.py \
+            --rules master_rules.yaml \
+            --repo . \
+            --output /tmp/coverage_report.json \
+            --fail-under 100.0
+          
+          if [ $? -ne 0 ]; then
+            echo "❌ Coverage check failed - commit blocked"
+            echo "📄 See /tmp/coverage_report.json for details"
+            exit 1
+          fi
+          
+          echo "✅ Coverage check passed"
+          EOF
+          
+          chmod +x .git/hooks/pre-commit
+          echo "✅ Pre-commit hook installed"
+      
+      - name: Commit Hook to Repo
+        run: |
+          mkdir -p .githooks
+          cp .git/hooks/pre-commit .githooks/pre-commit
+          
+          git config user.name "SSID Coverage Bot"
+          git config user.email "coverage-bot@ssid.org"
+          git add .githooks/pre-commit
+          git commit -m "chore: Add pre-commit hook for coverage checks"
+          git push

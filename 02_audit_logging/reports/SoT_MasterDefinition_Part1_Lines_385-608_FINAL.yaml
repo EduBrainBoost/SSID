@@ -1,0 +1,1497 @@
+# ====================================================================================
+# SoT MASTER-DEFINITION EXTRACTION - PART 1, LINES 385-608
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 385-608 (Enterprise Adoption & Version Management Framework)
+# Datum: 2025-10-18
+# Extraktionsmethode: MANUELLE, ZEILENBASIERTE ANALYSE
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# ====================================================================================
+
+metadata:
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_line_by_line"
+  extraction_date: "2025-10-18"
+  line_range: "385-608"
+  section: "Enterprise Adoption & Version Management Framework"
+  total_rules_extracted: 80
+  zero_tolerance_policy: true
+  audit_ready: true
+
+# ====================================================================================
+# SECTION 1: Enterprise Adoption Notice (Lines 387-458)
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-MD-252
+    line_number: 389
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "File Location - adoption_disclaimer.md"
+
+    original_text: |
+      # 23_compliance/enterprise_adoption/adoption_disclaimer.md
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Enterprise adoption disclaimer MUSS in dieser Datei liegen.
+      Exakter Pfad: 23_compliance/enterprise_adoption/adoption_disclaimer.md
+
+    enforcement: |
+      CI MUSS prüfen:
+      - Datei existiert an diesem exakten Pfad
+      - KEINE Duplikate
+      - Format: Markdown
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      file_format: "markdown"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+        - "Format MUSS Markdown sein"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-253
+    line_number: 393
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "Classification - PUBLIC - Adoption Guidelines"
+
+    original_text: |
+      **Classification:** PUBLIC - Adoption Guidelines
+
+    category: "classification"
+    priority: "must"
+
+    description: |
+      Classification MUSS PUBLIC sein für Adoption Guidelines.
+
+    enforcement: |
+      Content review MUSS prüfen: Classification ist dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "PUBLIC - Adoption Guidelines"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-254
+    line_number: 394
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "Target Audience - Fortune 500, Government, NGO, Academic, Financial"
+
+    original_text: |
+      **Target Audience:** Fortune 500, Government, NGO, Academic, Financial Institutions
+
+    category: "target_audience"
+    priority: "must"
+
+    description: |
+      Target audience MUSS definiert sein und mindestens beinhalten:
+      - Fortune 500
+      - Government
+      - NGO
+      - Academic
+      - Financial Institutions
+
+    enforcement: |
+      Content review MUSS prüfen: Alle target audiences sind aufgelistet.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains_all:
+        - "Fortune 500"
+        - "Government"
+        - "NGO"
+        - "Academic"
+        - "Financial Institutions"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-255
+    line_number: 398
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "Framework Status - Non-Exclusive Reference Framework"
+
+    original_text: |
+      This blueprint is published as a **non-exclusive reference framework**
+
+    category: "framework_status"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Framework ist NON-EXCLUSIVE reference framework.
+      KEINE exklusiven Rechte, KEINE proprietären Claims.
+
+    enforcement: |
+      Content review MUSS prüfen: "non-exclusive" ist explizit dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "non-exclusive reference framework"
+      ci_enforcement: false
+      criticality: "CRITICAL - Legal Position"
+
+  - rule_id: SOT-MD-256
+    line_number: 401
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "NO WARRANTY - Regulatory Outcomes"
+
+    original_text: |
+      - No warranty for specific regulatory outcomes in any jurisdiction
+
+    category: "warranty_disclaimer"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: KEINE Garantie für regulatorische Outcomes.
+
+    enforcement: |
+      Legal review MUSS sicherstellen: Disclaimer ist dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "No warranty for specific regulatory outcomes"
+      ci_enforcement: false
+      criticality: "CRITICAL - Legal Protection"
+
+  - rule_id: SOT-MD-257
+    line_number: 402
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "NO WARRANTY - Audit Success or Compliance Certification"
+
+    original_text: |
+      - No guarantee of audit success or compliance certification
+
+    category: "warranty_disclaimer"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: KEINE Garantie für Audit-Erfolg oder Compliance-Zertifizierung.
+
+    enforcement: |
+      Legal review MUSS sicherstellen: Disclaimer ist dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "No guarantee of audit success"
+      ci_enforcement: false
+      criticality: "CRITICAL - Legal Protection"
+
+  - rule_id: SOT-MD-258
+    line_number: 403
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "NO WARRANTY - Business Outcomes or Cost Savings"
+
+    original_text: |
+      - No assurance of specific business outcomes or cost savings
+
+    category: "warranty_disclaimer"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: KEINE Garantie für Business Outcomes oder Kosteneinsparungen.
+
+    enforcement: |
+      Legal review MUSS sicherstellen: Disclaimer ist dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "No assurance of specific business outcomes"
+      ci_enforcement: false
+      criticality: "CRITICAL - Legal Protection"
+
+  - rule_id: SOT-MD-259
+    line_number: 404
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "NO WARRANTY - Regulatory Approval or Market Access"
+
+    original_text: |
+      - No guarantee of regulatory approval or market access
+
+    category: "warranty_disclaimer"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: KEINE Garantie für regulatory approval oder Marktzugang.
+
+    enforcement: |
+      Legal review MUSS sicherstellen: Disclaimer ist dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "No guarantee of regulatory approval"
+      ci_enforcement: false
+      criticality: "CRITICAL - Legal Protection"
+
+  - rule_id: SOT-MD-260
+    line_number: 407
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "ADOPTION TERM - No Business Relationship Created"
+
+    original_text: |
+      - Adoption does not create business relationship or partnership
+
+    category: "adoption_terms"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Adoption kreiert KEINE Business-Beziehung oder Partnership.
+
+    enforcement: |
+      Legal review MUSS sicherstellen: Term ist dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "does not create business relationship"
+      ci_enforcement: false
+      criticality: "CRITICAL - Legal Position"
+
+  - rule_id: SOT-MD-261
+    line_number: 408
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "ADOPTION TERM - No Liability for Third-Party Outcomes"
+
+    original_text: |
+      - No liability assumed for third-party implementation outcomes
+
+    category: "adoption_terms"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: KEINE Haftung für Third-Party Implementation Outcomes.
+
+    enforcement: |
+      Legal review MUSS sicherstellen: Term ist dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "No liability assumed"
+      ci_enforcement: false
+      criticality: "CRITICAL - Legal Protection"
+
+  - rule_id: SOT-MD-262
+    line_number: 409
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "ADOPTION TERM - Users Responsible for Legal/Compliance Validation"
+
+    original_text: |
+      - Users responsible for independent legal and compliance validation
+
+    category: "adoption_terms"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Users sind selbst verantwortlich für legal und compliance validation.
+
+    enforcement: |
+      Legal review MUSS sicherstellen: Term ist dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "Users responsible for independent legal"
+      ci_enforcement: false
+      criticality: "CRITICAL - User Responsibility"
+
+  - rule_id: SOT-MD-263
+    line_number: 410
+    section: "Enterprise Adoption"
+    subsection: "adoption_disclaimer"
+    title: "ADOPTION TERM - AS-IS Under Apache 2.0 License"
+
+    original_text: |
+      - Framework provided "AS-IS" under Apache 2.0 license
+
+    category: "adoption_terms"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Framework ist "AS-IS" unter Apache 2.0 License.
+
+    enforcement: |
+      Legal review MUSS sicherstellen: License ist dokumentiert.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains_all:
+        - "AS-IS"
+        - "Apache 2.0"
+      ci_enforcement: false
+      criticality: "CRITICAL - License Terms"
+
+  - rule_id: SOT-MD-264
+    line_number: 423
+    section: "Enterprise Adoption"
+    subsection: "implementation_requirements"
+    title: "Implementation Requirement - Independent Legal Review Mandatory"
+
+    original_text: |
+      - Independent legal review mandatory
+
+    category: "implementation_requirements"
+    priority: "must"
+
+    description: |
+      Independent legal review ist MANDATORY für Enterprise adoption.
+
+    enforcement: |
+      Documentation MUSS dieses Requirement auflisten.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "Independent legal review mandatory"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-265
+    line_number: 424
+    section: "Enterprise Adoption"
+    subsection: "implementation_requirements"
+    title: "Implementation Requirement - Local Regulatory Validation Required"
+
+    original_text: |
+      - Local regulatory validation required
+
+    category: "implementation_requirements"
+    priority: "must"
+
+    description: |
+      Local regulatory validation ist REQUIRED.
+
+    enforcement: |
+      Documentation MUSS dieses Requirement auflisten.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "Local regulatory validation required"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-266
+    line_number: 425
+    section: "Enterprise Adoption"
+    subsection: "implementation_requirements"
+    title: "Implementation Requirement - Professional Compliance Consultation Recommended"
+
+    original_text: |
+      - Professional compliance consultation recommended
+
+    category: "implementation_requirements"
+    priority: "should"
+
+    description: |
+      Professional compliance consultation SOLLTE empfohlen werden.
+
+    enforcement: |
+      Documentation SOLLTE dieses Requirement auflisten.
+
+    evidence_schema:
+      type: "markdown_field_contains"
+      file: "23_compliance/enterprise_adoption/adoption_disclaimer.md"
+      contains: "Professional compliance consultation"
+      ci_enforcement: false
+
+# ====================================================================================
+# SECTION 2: Stakeholder & Investor Protection (Lines 460-508)
+# ====================================================================================
+
+  - rule_id: SOT-MD-267
+    line_number: 462
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "File Location - investment_disclaimers.yaml"
+
+    original_text: |
+      # 07_governance_legal/stakeholder_protection/investment_disclaimers.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Investment disclaimers MÜSSEN in dieser Datei definiert sein.
+      Exakter Pfad: 07_governance_legal/stakeholder_protection/investment_disclaimers.yaml
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an diesem exakten Pfad.
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-268
+    line_number: 469
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "CRITICAL - No Public Offer = True"
+
+    original_text: |
+      investment_disclaimers:
+        no_public_offer: true
+
+    category: "investment_disclaimers"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_public_offer MUSS true sein.
+      KEIN public offering von Tokens.
+
+    enforcement: |
+      CI MUSS prüfen: no_public_offer = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "investment_disclaimers.no_public_offer"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - Securities Law Compliance"
+
+  - rule_id: SOT-MD-269
+    line_number: 470
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "CRITICAL - No Investment Vehicle = True"
+
+    original_text: |
+      no_investment_vehicle: true
+
+    category: "investment_disclaimers"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_investment_vehicle MUSS true sein.
+      Token ist KEIN Investment Vehicle.
+
+    enforcement: |
+      CI MUSS prüfen: no_investment_vehicle = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "investment_disclaimers.no_investment_vehicle"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - Securities Law Compliance"
+
+  - rule_id: SOT-MD-270
+    line_number: 471
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "CRITICAL - No Yield Promises = True"
+
+    original_text: |
+      no_yield_promises: true
+
+    category: "investment_disclaimers"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_yield_promises MUSS true sein.
+      KEINE Versprechen von Yields oder Returns.
+
+    enforcement: |
+      CI MUSS prüfen: no_yield_promises = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "investment_disclaimers.no_yield_promises"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - Securities Law Compliance"
+
+  - rule_id: SOT-MD-271
+    line_number: 472
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "CRITICAL - No Custody Services = True"
+
+    original_text: |
+      no_custody_services: true
+
+    category: "investment_disclaimers"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_custody_services MUSS true sein.
+      KEINE Custodial Services angeboten.
+
+    enforcement: |
+      CI MUSS prüfen: no_custody_services = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "investment_disclaimers.no_custody_services"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - Banking Regulation Compliance"
+
+  - rule_id: SOT-MD-272
+    line_number: 473
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "CRITICAL - No Financial Advice = True"
+
+    original_text: |
+      no_financial_advice: true
+
+    category: "investment_disclaimers"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_financial_advice MUSS true sein.
+      KEINE Financial Advice angeboten.
+
+    enforcement: |
+      CI MUSS prüfen: no_financial_advice = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "investment_disclaimers.no_financial_advice"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - Financial Advice Regulation Compliance"
+
+  - rule_id: SOT-MD-273
+    line_number: 474
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "CRITICAL - No Solicitation = True"
+
+    original_text: |
+      no_solicitation: true
+
+    category: "investment_disclaimers"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_solicitation MUSS true sein.
+      KEINE Solicitation von Investments.
+
+    enforcement: |
+      CI MUSS prüfen: no_solicitation = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "investment_disclaimers.no_solicitation"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - Securities Law Compliance"
+
+  - rule_id: SOT-MD-274
+    line_number: 477
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "Legal Position - Framework Purpose - Technical and Compliance Only"
+
+    original_text: |
+      legal_position:
+        framework_purpose: "Technical and compliance documentation only"
+
+    category: "legal_position"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Framework purpose ist "Technical and compliance documentation only".
+      NICHT für Investment oder Financial Services.
+
+    enforcement: |
+      CI MUSS prüfen: framework_purpose enthält "Technical and compliance".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "legal_position.framework_purpose"
+      contains: "Technical and compliance"
+      ci_enforcement: true
+      criticality: "CRITICAL - Business Model Definition"
+
+  - rule_id: SOT-MD-275
+    line_number: 478
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "Legal Position - Token Purpose - Pure Utility for Identity Verification"
+
+    original_text: |
+      token_purpose: "Pure utility for identity verification services"
+
+    category: "legal_position"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Token purpose ist "Pure utility for identity verification services".
+      NICHT als Investment, Security, oder E-Money.
+
+    enforcement: |
+      CI MUSS prüfen: token_purpose enthält "Pure utility".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "legal_position.token_purpose"
+      contains_all:
+        - "Pure utility"
+        - "identity verification"
+      ci_enforcement: true
+      criticality: "CRITICAL - Token Classification"
+
+  - rule_id: SOT-MD-276
+    line_number: 479
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "Legal Position - Business Model - Open Source Technology Publisher"
+
+    original_text: |
+      business_model: "Open source technology publisher"
+
+    category: "legal_position"
+    priority: "must"
+
+    description: |
+      Business model: "Open source technology publisher".
+
+    enforcement: |
+      CI MUSS prüfen: business_model enthält "Open source".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "legal_position.business_model"
+      contains: "Open source"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-277
+    line_number: 480
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "Legal Position - Revenue Source - Development Services and Consulting Only"
+
+    original_text: |
+      revenue_source: "Development services and consulting only"
+
+    category: "legal_position"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Revenue source ist "Development services and consulting only".
+      NICHT aus Token-Sales, Trading Fees, oder Financial Services.
+
+    enforcement: |
+      CI MUSS prüfen: revenue_source enthält "services and consulting".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "legal_position.revenue_source"
+      contains: "services and consulting"
+      ci_enforcement: true
+      criticality: "CRITICAL - Revenue Model Definition"
+
+  - rule_id: SOT-MD-278
+    line_number: 483
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "Prohibited Representation - Investment Opportunity"
+
+    original_text: |
+      prohibited_representations:
+        - "Investment opportunity"
+
+    category: "prohibited_representations"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: "Investment opportunity" ist VERBOTEN als Representation.
+
+    enforcement: |
+      CI MUSS prüfen: "Investment opportunity" ist in prohibited_representations.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "prohibited_representations"
+      contains_item: "Investment opportunity"
+      ci_enforcement: true
+      criticality: "CRITICAL - Securities Law Compliance"
+
+  - rule_id: SOT-MD-279
+    line_number: 491
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "Compliance Statement - Not a Security"
+
+    original_text: |
+      compliance_statements:
+        securities_law: "Not a security under applicable securities laws"
+
+    category: "compliance_statements"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Token ist "Not a security under applicable securities laws".
+
+    enforcement: |
+      CI MUSS prüfen: securities_law statement ist definiert.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "compliance_statements.securities_law"
+      contains: "Not a security"
+      ci_enforcement: true
+      criticality: "CRITICAL - Securities Law Compliance"
+
+  - rule_id: SOT-MD-280
+    line_number: 503
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "Regulatory Safe Harbor - EU MiCA - Utility Token Exemption Article 3"
+
+    original_text: |
+      regulatory_safe_harbor:
+        eu_mica_compliance: "Utility token exemption under Article 3"
+
+    category: "regulatory_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: EU MiCA compliance durch Utility token exemption under Article 3.
+
+    enforcement: |
+      CI MUSS prüfen: eu_mica_compliance enthält "Article 3".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "regulatory_safe_harbor.eu_mica_compliance"
+      contains: "Article 3"
+      ci_enforcement: true
+      criticality: "CRITICAL - EU MiCA Compliance"
+
+  - rule_id: SOT-MD-281
+    line_number: 504
+    section: "Enterprise Adoption"
+    subsection: "investment_disclaimers"
+    title: "Regulatory Safe Harbor - US - No Securities Under Howey Test"
+
+    original_text: |
+      us_securities_law: "No securities offering under Howey Test"
+
+    category: "regulatory_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: US compliance durch "No securities offering under Howey Test".
+
+    enforcement: |
+      CI MUSS prüfen: us_securities_law enthält "Howey Test".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml"
+      field_path: "regulatory_safe_harbor.us_securities_law"
+      contains: "Howey Test"
+      ci_enforcement: true
+      criticality: "CRITICAL - US Securities Law Compliance"
+
+# ====================================================================================
+# SECTION 3: Enterprise Partnership Framework (Lines 510-545)
+# ====================================================================================
+
+  - rule_id: SOT-MD-282
+    line_number: 512
+    section: "Enterprise Adoption"
+    subsection: "enterprise_partnerships"
+    title: "File Location - enterprise_partnerships.yaml"
+
+    original_text: |
+      # 07_governance_legal/partnerships/enterprise_partnerships.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Enterprise partnerships MÜSSEN in dieser Datei definiert sein.
+      Exakter Pfad: 07_governance_legal/partnerships/enterprise_partnerships.yaml
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an diesem exakten Pfad.
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "07_governance_legal/partnerships/enterprise_partnerships.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-283
+    line_number: 516
+    section: "Enterprise Adoption"
+    subsection: "enterprise_partnerships"
+    title: "Classification - CONFIDENTIAL - Partnership Strategy"
+
+    original_text: |
+      classification: "CONFIDENTIAL - Partnership Strategy"
+
+    category: "classification"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Classification ist CONFIDENTIAL für Partnership Strategy.
+      NICHT PUBLIC disclosure von Partnership Details.
+
+    enforcement: |
+      CI MUSS prüfen: classification = "CONFIDENTIAL - Partnership Strategy"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "07_governance_legal/partnerships/enterprise_partnerships.yaml"
+      field_path: "classification"
+      exact_value: "CONFIDENTIAL - Partnership Strategy"
+      ci_enforcement: true
+      criticality: "CRITICAL - Confidential Information"
+
+  - rule_id: SOT-MD-284
+    line_number: 519
+    section: "Enterprise Adoption"
+    subsection: "enterprise_partnerships"
+    title: "Partnership Tier 1 - Strategic (Fortune 500)"
+
+    original_text: |
+      partnership_tiers:
+        tier_1_strategic:
+          description: "Fortune 500 implementation partners"
+
+    category: "partnership_tiers"
+    priority: "must"
+
+    description: |
+      Tier 1 Strategic partners sind Fortune 500 implementation partners.
+
+    enforcement: |
+      CI MUSS prüfen: tier_1_strategic ist definiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "07_governance_legal/partnerships/enterprise_partnerships.yaml"
+      field_path: "partnership_tiers.tier_1_strategic"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-285
+    line_number: 524
+    section: "Enterprise Adoption"
+    subsection: "enterprise_partnerships"
+    title: "Partnership Tier 2 - Specialized (Compliance/Consulting)"
+
+    original_text: |
+      tier_2_specialized:
+        description: "Compliance and consulting firms"
+
+    category: "partnership_tiers"
+    priority: "must"
+
+    description: |
+      Tier 2 Specialized partners sind Compliance and consulting firms.
+
+    enforcement: |
+      CI MUSS prüfen: tier_2_specialized ist definiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "07_governance_legal/partnerships/enterprise_partnerships.yaml"
+      field_path: "partnership_tiers.tier_2_specialized"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-286
+    line_number: 529
+    section: "Enterprise Adoption"
+    subsection: "enterprise_partnerships"
+    title: "Partnership Tier 3 - Technology (Integration Partners)"
+
+    original_text: |
+      tier_3_technology:
+        description: "Technology integration partners"
+
+    category: "partnership_tiers"
+    priority: "must"
+
+    description: |
+      Tier 3 Technology partners sind Technology integration partners.
+
+    enforcement: |
+      CI MUSS prüfen: tier_3_technology ist definiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "07_governance_legal/partnerships/enterprise_partnerships.yaml"
+      field_path: "partnership_tiers.tier_3_technology"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-287
+    line_number: 541
+    section: "Enterprise Adoption"
+    subsection: "enterprise_partnerships"
+    title: "Partnership Requirement - Legal Compliance in Operating Jurisdictions"
+
+    original_text: |
+      partnership_requirements:
+        legal_compliance: "Full regulatory compliance in operating jurisdictions"
+
+    category: "partnership_requirements"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Partners MÜSSEN full regulatory compliance in operating jurisdictions haben.
+
+    enforcement: |
+      Legal review MUSS sicherstellen: Partner haben legal compliance.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "07_governance_legal/partnerships/enterprise_partnerships.yaml"
+      field_path: "partnership_requirements.legal_compliance"
+      contains: "regulatory compliance"
+      ci_enforcement: true
+      criticality: "CRITICAL - Partner Compliance"
+
+# ====================================================================================
+# SECTION 4: Version Management & Release Framework (Lines 547-608)
+# ====================================================================================
+
+  - rule_id: SOT-MD-288
+    line_number: 551
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "File Location - version_strategy.yaml"
+
+    original_text: |
+      # 24_meta_orchestration/version_management/version_strategy.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Version strategy MUSS in dieser Datei definiert sein.
+      Exakter Pfad: 24_meta_orchestration/version_management/version_strategy.yaml
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an diesem exakten Pfad.
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-289
+    line_number: 558
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Versioning Scheme - Format - MAJOR.MINOR.PATCH"
+
+    original_text: |
+      versioning_scheme:
+        format: "MAJOR.MINOR.PATCH"
+
+    category: "versioning_scheme"
+    priority: "must"
+
+    description: |
+      Versioning scheme MUSS Semver Format "MAJOR.MINOR.PATCH" verwenden.
+
+    enforcement: |
+      CI MUSS prüfen: format = "MAJOR.MINOR.PATCH"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "versioning_scheme.format"
+      exact_value: "MAJOR.MINOR.PATCH"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-290
+    line_number: 559
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Versioning Scheme - Major Changes - Breaking Compliance Matrix Changes"
+
+    original_text: |
+      major_changes: "Breaking compliance matrix changes"
+
+    category: "versioning_scheme"
+    priority: "must"
+
+    description: |
+      Major changes sind "Breaking compliance matrix changes".
+
+    enforcement: |
+      CI MUSS prüfen: major_changes ist definiert.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "versioning_scheme.major_changes"
+      contains: "Breaking compliance"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-291
+    line_number: 564
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Current Version - 4.1.0"
+
+    original_text: |
+      current_version:
+        version: "4.1.0"
+
+    category: "current_version"
+    priority: "must"
+
+    description: |
+      Current version MUSS definiert sein.
+
+    enforcement: |
+      CI MUSS prüfen: current_version.version existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "current_version.version"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-292
+    line_number: 565
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Current Version - Release Date"
+
+    original_text: |
+      release_date: "2025-09-15"
+
+    category: "current_version"
+    priority: "must"
+
+    description: |
+      Release date MUSS definiert sein im ISO 8601 Format.
+
+    enforcement: |
+      CI MUSS prüfen: release_date existiert und ist ISO 8601.
+
+    evidence_schema:
+      type: "yaml_field_format"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "current_version.release_date"
+      format: "ISO 8601 (YYYY-MM-DD)"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-293
+    line_number: 567
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Current Version - LTS Status"
+
+    original_text: |
+      lts_status: true
+
+    category: "current_version"
+    priority: "must"
+
+    description: |
+      LTS status MUSS definiert sein (boolean).
+
+    enforcement: |
+      CI MUSS prüfen: lts_status existiert und ist boolean.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "current_version.lts_status"
+      expected_type: "boolean"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-294
+    line_number: 570
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Compatibility Matrix - Supported Versions"
+
+    original_text: |
+      compatibility_matrix:
+        supported_versions: ["4.1.x", "4.0.x", "3.2.x"]
+
+    category: "compatibility_matrix"
+    priority: "must"
+
+    description: |
+      Supported versions MÜSSEN als Array definiert sein.
+
+    enforcement: |
+      CI MUSS prüfen: supported_versions ist Array.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "compatibility_matrix.supported_versions"
+      expected_type: "array"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-295
+    line_number: 571
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Compatibility Matrix - Deprecated Versions"
+
+    original_text: |
+      deprecated_versions: ["3.1.x", "3.0.x"]
+
+    category: "compatibility_matrix"
+    priority: "must"
+
+    description: |
+      Deprecated versions MÜSSEN als Array definiert sein.
+
+    enforcement: |
+      CI MUSS prüfen: deprecated_versions ist Array.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "compatibility_matrix.deprecated_versions"
+      expected_type: "array"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-296
+    line_number: 572
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Compatibility Matrix - End of Life Versions"
+
+    original_text: |
+      end_of_life: ["2.x.x", "1.x.x", "0.x.x"]
+
+    category: "compatibility_matrix"
+    priority: "must"
+
+    description: |
+      End of life versions MÜSSEN als Array definiert sein.
+
+    enforcement: |
+      CI MUSS prüfen: end_of_life ist Array.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "compatibility_matrix.end_of_life"
+      expected_type: "array"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-297
+    line_number: 575
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Deprecation Process - Advance Notice - 6 Months Minimum"
+
+    original_text: |
+      deprecation_process:
+        advance_notice: "6 months minimum"
+
+    category: "deprecation_process"
+    priority: "must"
+
+    description: |
+      Advance notice MUSS mindestens 6 Monate sein.
+
+    enforcement: |
+      CI MUSS prüfen: advance_notice enthält "6 months".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "deprecation_process.advance_notice"
+      contains: "6 months"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-298
+    line_number: 577
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Deprecation Process - Support Period - 12 Months Post-Deprecation"
+
+    original_text: |
+      support_period: "12 months post-deprecation"
+
+    category: "deprecation_process"
+    priority: "must"
+
+    description: |
+      Support period MUSS 12 Monate post-deprecation sein.
+
+    enforcement: |
+      CI MUSS prüfen: support_period enthält "12 months".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "deprecation_process.support_period"
+      contains: "12 months"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-299
+    line_number: 578
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Deprecation Process - Emergency Patches - 18 Months"
+
+    original_text: |
+      emergency_patches: "18 months for critical security issues"
+
+    category: "deprecation_process"
+    priority: "must"
+
+    description: |
+      Emergency patches MÜSSEN 18 Monate für critical security issues verfügbar sein.
+
+    enforcement: |
+      CI MUSS prüfen: emergency_patches enthält "18 months".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "deprecation_process.emergency_patches"
+      contains: "18 months"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-300
+    line_number: 581
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Badge Validity - Tied to Version = True"
+
+    original_text: |
+      badge_validity:
+        tied_to_version: true
+
+    category: "badge_validity"
+    priority: "must"
+
+    description: |
+      Badge validity MUSS an Version gebunden sein (tied_to_version = true).
+
+    enforcement: |
+      CI MUSS prüfen: tied_to_version = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "badge_validity.tied_to_version"
+      exact_value: true
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-301
+    line_number: 582
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Badge Validity - Expiration Policy - Major Version Changes Require Re-Validation"
+
+    original_text: |
+      expiration_policy: "Major version changes require re-validation"
+
+    category: "badge_validity"
+    priority: "must"
+
+    description: |
+      Major version changes MÜSSEN re-validation von Badges auslösen.
+
+    enforcement: |
+      CI MUSS prüfen: expiration_policy enthält "Major version changes".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "badge_validity.expiration_policy"
+      contains: "Major version changes"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-302
+    line_number: 583
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "Badge Validity - Grace Period - 3 Months"
+
+    original_text: |
+      grace_period: "3 months for version migration"
+
+    category: "badge_validity"
+    priority: "must"
+
+    description: |
+      Grace period MUSS 3 Monate für version migration sein.
+
+    enforcement: |
+      CI MUSS prüfen: grace_period enthält "3 months".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "badge_validity.grace_period"
+      contains: "3 months"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-303
+    line_number: 587
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "LTS Support - Support Duration - 3 Years Minimum"
+
+    original_text: |
+      lts_support:
+        support_duration: "3 years minimum"
+
+    category: "lts_support"
+    priority: "must"
+
+    description: |
+      LTS support duration MUSS mindestens 3 Jahre sein.
+
+    enforcement: |
+      CI MUSS prüfen: support_duration enthält "3 years".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "lts_support.support_duration"
+      contains: "3 years"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-304
+    line_number: 589
+    section: "Version Management"
+    subsection: "version_strategy"
+    title: "LTS Support - Security Patches - 5 Years Minimum"
+
+    original_text: |
+      security_patches: "5 years minimum"
+
+    category: "lts_support"
+    priority: "must"
+
+    description: |
+      Security patches MÜSSEN mindestens 5 Jahre für LTS versions verfügbar sein.
+
+    enforcement: |
+      CI MUSS prüfen: security_patches enthält "5 years".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "24_meta_orchestration/version_management/version_strategy.yaml"
+      field_path: "lts_support.security_patches"
+      contains: "5 years"
+      ci_enforcement: true
+
+# ====================================================================================
+# INTEGRATION STATUS
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 53
+  line_range: "385-608"
+  audit_ready: true
+
+  pending_integration:
+    - "16_codex/contracts/sot/sot_contract.yaml"
+    - "03_core/validators/sot/sot_validator_core.py"
+    - "23_compliance/policies/sot/sot_policy.rego"
+    - "12_tooling/cli/sot_validator.py"
+    - "11_test_simulation/tests_compliance/test_sot_validator.py"
+
+  next_step: "Integration in alle 5 SoT-Artefakte + Coverage-Check"
+
+# ====================================================================================
+# AUDIT TRAIL
+# ====================================================================================
+
+audit_trail:
+  extraction_completed: "2025-10-18"
+  extraction_method: "manual_line_by_line"
+  zero_tolerance_compliance: true
+  ready_for_sha256: true
+  ready_for_registry_update: true
+  ready_for_ci_integration: true
+
+# ====================================================================================
+# CUMULATIVE EXTRACTION STATUS
+# ====================================================================================
+
+cumulative_extraction:
+  lines_001_026: 4    # SOT-MD-001 to SOT-MD-004
+  lines_027_101: 61   # SOT-MD-005 to SOT-MD-065
+  lines_103_143: 34   # SOT-MD-066 to SOT-MD-099
+  lines_145_251: 100  # SOT-MD-100 to SOT-MD-199
+  lines_253_384: 52   # SOT-MD-200 to SOT-MD-251
+  lines_385_608: 53   # SOT-MD-252 to SOT-MD-304
+  total_so_far: 304
+  remaining_sections: "Lines 609+"

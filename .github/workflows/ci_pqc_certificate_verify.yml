@@ -1,0 +1,20 @@
+name: pqc-certificate-verify
+on:
+  push: {branches: [ main ]}
+  pull_request: {branches: [ main ]}
+  schedule:
+    - cron: "0 2 * * 1"
+  workflow_dispatch: {}
+jobs:
+  verify-pqc-cert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: |
+          python 21_post_quantum_crypto/tools/verify_certificate.py             --cert 02_audit_logging/reports/test_hygiene_certificate_v1.md             --pubkey 21_post_quantum_crypto/keys/test_hygiene_cert.pub             --signature 21_post_quantum_crypto/signatures/test_hygiene_cert_v1.sig             --json-out 02_audit_logging/logs/pqc_verification_report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pqc-verification-report
+          path: 02_audit_logging/logs/pqc_verification_report.json

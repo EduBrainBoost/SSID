@@ -15,7 +15,6 @@ import hashlib
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 sys.path.insert(0, PROJECT_ROOT)
 
-
 def load_module_from_path(module_name, file_path):
     """Dynamically load a module from a file path."""
     spec = importlib.util.spec_from_file_location(module_name, file_path)
@@ -24,7 +23,6 @@ def load_module_from_path(module_name, file_path):
         spec.loader.exec_module(module)
         return module
     raise NotImplementedError("TODO: Implement this function")
-
 
 def test_bridge(bridge_name, bridge_path, test_func):
     """Test a single bridge."""
@@ -50,7 +48,6 @@ def test_bridge(bridge_name, bridge_path, test_func):
         print(f"  [ERROR] {bridge_name}: {str(e)}")
         return False
 
-
 def test_core_foundation(module):
     """Test 03_core -> 20_foundation bridge."""
     info = module.get_token_info()
@@ -59,7 +56,6 @@ def test_core_foundation(module):
     assert module.validate_token_operation("transfer", 1000) is True
     assert module.validate_token_operation("invalid", 1000) is False
     return True
-
 
 def test_foundation_meta(module):
     """Test 20_foundation -> 24_meta_orchestration bridge."""
@@ -79,7 +75,6 @@ def test_foundation_meta(module):
 
     return True
 
-
 def test_ai_compliance(module):
     """Test 01_ai_layer -> 23_compliance bridge."""
     decision = {
@@ -97,7 +92,6 @@ def test_ai_compliance(module):
 
     return True
 
-
 def test_audit_compliance(module):
     """Test 02_audit_logging -> 23_compliance bridge."""
     entry = module.create_audit_entry("test", {"data": "value"})
@@ -105,7 +99,6 @@ def test_audit_compliance(module):
     assert "hash" in entry
 
     return True
-
 
 def test_interop_identity(module):
     """Test 10_interoperability -> 09_meta_identity bridge."""
@@ -118,7 +111,6 @@ def test_interop_identity(module):
     assert validation["valid"] is True
 
     return True
-
 
 def test_auth_identity(module):
     """Test 14_zero_time_auth -> 08_identity_score bridge."""
@@ -140,7 +132,6 @@ def test_auth_identity(module):
     assert risk in ["low", "medium", "high", "critical"]
 
     return True
-
 
 def main():
     """Run all bridge tests."""
@@ -185,7 +176,6 @@ def main():
         print("\n[FAILURE] Some bridges failed validation")
         return 1
 
-
 def generate_evidence(bridges_verified):
     """Generate evidence log."""
     evidence_dir = os.path.join(PROJECT_ROOT, "24_meta_orchestration/registry/logs")
@@ -212,7 +202,6 @@ def generate_evidence(bridges_verified):
 
     print(f"\nEvidence logged to: {log_file}")
     print(json.dumps(evidence, indent=2))
-
 
 if __name__ == "__main__":
     sys.exit(main())

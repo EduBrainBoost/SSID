@@ -1,0 +1,29 @@
+name: ssid-ci-extended (Compile YAML→JSON + OPA Gate + Artifact)
+on: { push: { branches: [ main ] }, pull_request: { branches: [ main ] } }
+jobs:
+  build-compile-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Root Integrity Check
+        run: python 11_test_simulation/tools/root_integrity_validator.py --repo . --fail_on_violation
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - run: pip install pyyaml
+      - name: Compile YAML → JSON
+        run: python 12_tooling/ci/compile_pricing.py --in 07_governance_legal/docs/pricing/enterprise_subscription_model_v5.yaml --out 07_governance_legal/docs/pricing/enterprise_subscription_model_v5.json
+      - name: Cache OPA
+        id: cache-opa
+        uses: actions/cache@v4
+        with: { path: ~/.opa, key: opa-0.64.0 }
+      - name: Download OPA
+        if: steps.cache-opa.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.opa
+          curl -L -o ~/.opa/opa https://openpolicyagent.org/downloads/v0.64.0/opa_linux_amd64_static
+          chmod +x ~/.opa/opa
+      - name: Run OPA Gate
+        env: { OPA_BIN: ~/.opa/opa }
+        run: ./23_compliance/ci/opa_gate.sh 07_governance_legal/docs/pricing/enterprise_subscription_model_v5.json
+      - uses: actions/upload-artifact@v4
+        with: { name: ssid-pricing-compiled, path: 07_governance_legal/docs/pricing/enterprise_subscription_model_v5.json, if-no-files-found: error }

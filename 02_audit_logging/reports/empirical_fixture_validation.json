@@ -1,0 +1,559 @@
+{
+  "total_fixtures": 72,
+  "valid_fixtures": 48,
+  "invalid_fixtures": 24,
+  "validations": [
+    {
+      "fixture": "11_test_simulation\\testdata\\01_ai_layer\\v6_0\\happy.jsonl",
+      "root": "01_ai_layer",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\01_ai_layer\\v6_0\\boundary.jsonl",
+      "root": "01_ai_layer",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\01_ai_layer\\v6_0\\negative.jsonl",
+      "root": "01_ai_layer",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: INVALID_SHORT_SIG..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\02_audit_logging\\v6_0\\happy.jsonl",
+      "root": "02_audit_logging",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\02_audit_logging\\v6_0\\boundary.jsonl",
+      "root": "02_audit_logging",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\02_audit_logging\\v6_0\\negative.jsonl",
+      "root": "02_audit_logging",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: BAD_SIG..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\03_core\\v6_0\\happy.jsonl",
+      "root": "03_core",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\03_core\\v6_0\\boundary.jsonl",
+      "root": "03_core",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\03_core\\v6_0\\negative.jsonl",
+      "root": "03_core",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Missing @context in DID document"
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\04_deployment\\v6_0\\happy.jsonl",
+      "root": "04_deployment",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\04_deployment\\v6_0\\boundary.jsonl",
+      "root": "04_deployment",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\04_deployment\\v6_0\\negative.jsonl",
+      "root": "04_deployment",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\05_documentation\\v6_0\\happy.jsonl",
+      "root": "05_documentation",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\05_documentation\\v6_0\\boundary.jsonl",
+      "root": "05_documentation",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\05_documentation\\v6_0\\negative.jsonl",
+      "root": "05_documentation",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\06_data_pipeline\\v6_0\\happy.jsonl",
+      "root": "06_data_pipeline",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\06_data_pipeline\\v6_0\\boundary.jsonl",
+      "root": "06_data_pipeline",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\06_data_pipeline\\v6_0\\negative.jsonl",
+      "root": "06_data_pipeline",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\07_governance_legal\\v6_0\\happy.jsonl",
+      "root": "07_governance_legal",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\07_governance_legal\\v6_0\\boundary.jsonl",
+      "root": "07_governance_legal",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\07_governance_legal\\v6_0\\negative.jsonl",
+      "root": "07_governance_legal",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\08_identity_score\\v6_0\\happy.jsonl",
+      "root": "08_identity_score",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\08_identity_score\\v6_0\\boundary.jsonl",
+      "root": "08_identity_score",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\08_identity_score\\v6_0\\negative.jsonl",
+      "root": "08_identity_score",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\09_meta_identity\\v6_0\\happy.jsonl",
+      "root": "09_meta_identity",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\09_meta_identity\\v6_0\\boundary.jsonl",
+      "root": "09_meta_identity",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\09_meta_identity\\v6_0\\negative.jsonl",
+      "root": "09_meta_identity",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: INVALID..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\10_interoperability\\v6_0\\happy.jsonl",
+      "root": "10_interoperability",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\10_interoperability\\v6_0\\boundary.jsonl",
+      "root": "10_interoperability",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\10_interoperability\\v6_0\\negative.jsonl",
+      "root": "10_interoperability",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\11_test_simulation\\v6_0\\happy.jsonl",
+      "root": "11_test_simulation",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\11_test_simulation\\v6_0\\boundary.jsonl",
+      "root": "11_test_simulation",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\11_test_simulation\\v6_0\\negative.jsonl",
+      "root": "11_test_simulation",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\12_tooling\\v6_0\\happy.jsonl",
+      "root": "12_tooling",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\12_tooling\\v6_0\\boundary.jsonl",
+      "root": "12_tooling",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\12_tooling\\v6_0\\negative.jsonl",
+      "root": "12_tooling",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\13_ui_layer\\v6_0\\happy.jsonl",
+      "root": "13_ui_layer",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\13_ui_layer\\v6_0\\boundary.jsonl",
+      "root": "13_ui_layer",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\13_ui_layer\\v6_0\\negative.jsonl",
+      "root": "13_ui_layer",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\14_zero_time_auth\\v6_0\\happy.jsonl",
+      "root": "14_zero_time_auth",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\14_zero_time_auth\\v6_0\\boundary.jsonl",
+      "root": "14_zero_time_auth",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\14_zero_time_auth\\v6_0\\negative.jsonl",
+      "root": "14_zero_time_auth",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\15_infra\\v6_0\\happy.jsonl",
+      "root": "15_infra",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\15_infra\\v6_0\\boundary.jsonl",
+      "root": "15_infra",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\15_infra\\v6_0\\negative.jsonl",
+      "root": "15_infra",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\16_codex\\v6_0\\happy.jsonl",
+      "root": "16_codex",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\16_codex\\v6_0\\boundary.jsonl",
+      "root": "16_codex",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\16_codex\\v6_0\\negative.jsonl",
+      "root": "16_codex",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\17_observability\\v6_0\\happy.jsonl",
+      "root": "17_observability",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\17_observability\\v6_0\\boundary.jsonl",
+      "root": "17_observability",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\17_observability\\v6_0\\negative.jsonl",
+      "root": "17_observability",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\18_data_layer\\v6_0\\happy.jsonl",
+      "root": "18_data_layer",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\18_data_layer\\v6_0\\boundary.jsonl",
+      "root": "18_data_layer",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\18_data_layer\\v6_0\\negative.jsonl",
+      "root": "18_data_layer",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\19_adapters\\v6_0\\happy.jsonl",
+      "root": "19_adapters",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\19_adapters\\v6_0\\boundary.jsonl",
+      "root": "19_adapters",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\19_adapters\\v6_0\\negative.jsonl",
+      "root": "19_adapters",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\20_foundation\\v6_0\\happy.jsonl",
+      "root": "20_foundation",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\20_foundation\\v6_0\\boundary.jsonl",
+      "root": "20_foundation",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\20_foundation\\v6_0\\negative.jsonl",
+      "root": "20_foundation",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\21_post_quantum_crypto\\v6_0\\happy.jsonl",
+      "root": "21_post_quantum_crypto",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\21_post_quantum_crypto\\v6_0\\boundary.jsonl",
+      "root": "21_post_quantum_crypto",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\21_post_quantum_crypto\\v6_0\\negative.jsonl",
+      "root": "21_post_quantum_crypto",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: FAIL..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\22_datasets\\v6_0\\happy.jsonl",
+      "root": "22_datasets",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\22_datasets\\v6_0\\boundary.jsonl",
+      "root": "22_datasets",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\22_datasets\\v6_0\\negative.jsonl",
+      "root": "22_datasets",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\23_compliance\\v6_0\\happy.jsonl",
+      "root": "23_compliance",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\23_compliance\\v6_0\\boundary.jsonl",
+      "root": "23_compliance",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\23_compliance\\v6_0\\negative.jsonl",
+      "root": "23_compliance",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\24_meta_orchestration\\v6_0\\happy.jsonl",
+      "root": "24_meta_orchestration",
+      "type": "happy",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\24_meta_orchestration\\v6_0\\boundary.jsonl",
+      "root": "24_meta_orchestration",
+      "type": "boundary",
+      "status": "valid",
+      "errors": []
+    },
+    {
+      "fixture": "11_test_simulation\\testdata\\24_meta_orchestration\\v6_0\\negative.jsonl",
+      "root": "24_meta_orchestration",
+      "type": "negative",
+      "status": "invalid",
+      "errors": [
+        "Invalid signature format: tooshort..."
+      ]
+    }
+  ]
+}

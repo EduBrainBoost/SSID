@@ -1,0 +1,121 @@
+proposal_id: LINEAGE-UPDATE-20251017-102944
+title: 'Registry Lineage Update - Entry #2'
+type: lineage_update
+created_utc: '2025-10-17T10:54:04.473268+00:00'
+governance:
+  quorum: 0.67
+  approval_threshold: 0.67
+  execution_delay_hours: 24
+  voting_period_hours: 72
+  immutability: true
+proposed_entry:
+  entry_id: 2
+  timestamp: '2025-10-17T10:29:44.428625+00:00'
+  registry_version: 1.0.0
+  global_merkle_root: b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c
+  compliance_score: 0.0
+  total_rules: 19
+  total_manifestations: 76
+  standard_merkle_roots:
+    soc2: c88323ada6a0b163d19275f2b344d66e69bc6e34c23e50acc86a7183abcef8af
+    gaia_x: da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851
+    etsi_en_319_421: da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851
+  pqc_signature:
+    algorithm: Dilithium2
+    backend: placeholder-hmac-sha256
+    signature_hash: 628b28ba8f1cd11e9103e36edab71e5496b10f2747619f5ae0b48ae154602bdd
+  changes:
+    type: no_change
+    description: Registry unchanged (re-signature)
+  chain:
+    previous_entry_id: 1
+    previous_merkle_root: b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c
+    entry_hash: 789e4dad5e9e1db9f84bf3820e256b19a011a87c7a524a1080cda87de6feac5d
+  dao_approval:
+    proposal_id: LINEAGE-UPDATE-20251017-102944
+    approved_at: '2025-10-17T10:55:23.657973+00:00'
+    approval_ratio: 1.0
+    quorum: 3
+    governance_locked: true
+evidence:
+  compliance_registry:
+    path: 23_compliance/registry/compliance_registry.json
+    version: 1.0.0
+    generated_at: '2025-10-17T10:14:06.150634Z'
+  pqc_signature:
+    path: 23_compliance/registry/compliance_registry_signature.json
+    algorithm: Dilithium2
+    backend: placeholder-hmac-sha256
+    signature_hash: 628b28ba8f1cd11e9103e36edab71e5496b10f2747619f5ae0b48ae154602bdd
+    signed_at: '2025-10-17T10:29:44.428625+00:00'
+  worm_snapshot:
+    path: 02_audit_logging/storage/worm/immutable_store/compliance_signature_20251017T102944Z_5155a29ce1c2488a.json
+    immutable: true
+  current_lineage:
+    path: 23_compliance/registry/registry_lineage.yaml
+    total_entries: 1
+    last_entry: '2025-10-17T10:29:44.428625Z'
+change_summary:
+  type: no_change
+  description: Registry unchanged (re-signature)
+  global_merkle_root: b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c
+  compliance_score_delta: 0.0
+  rules_delta: 0
+verification:
+  entry_hash: 789e4dad5e9e1db9f84bf3820e256b19a011a87c7a524a1080cda87de6feac5d
+  previous_entry_id: 1
+  previous_merkle_root: b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c
+  chain_valid: true
+  pqc_signature_valid: true
+  merkle_tree_verified: true
+compliance:
+  total_rules: 19
+  total_manifestations: 76
+  compliance_score: 0.0
+  standards:
+  - soc2
+  - gaia_x
+  - etsi_en_319_421
+voting:
+  status: COMPLETED
+  start_time: '2025-10-17T10:54:56.583481+00:00'
+  end_time: '2025-10-20T10:54:56.583481+00:00'
+  votes:
+    'yes': 3.0
+    'no': 0
+    abstain: 0
+  validators:
+  - validator_id: validator-1
+    validator_name: Primary Validator
+    vote: 'yes'
+    voting_power: 1.0
+    timestamp: '2025-10-17T10:55:04.827853+00:00'
+  - validator_id: validator-2
+    validator_name: Secondary Validator
+    vote: 'yes'
+    voting_power: 1.0
+    timestamp: '2025-10-17T10:55:14.071197+00:00'
+  - validator_id: validator-3
+    validator_name: Tertiary Validator
+    vote: 'yes'
+    voting_power: 1.0
+    timestamp: '2025-10-17T10:55:14.230590+00:00'
+  tallied_at: '2025-10-17T10:55:23.670370+00:00'
+  result:
+    total_voting_power: 3.0
+    total_votes_cast: 3.0
+    participation: 1.0
+    quorum_required: 0.67
+    quorum_reached: true
+    yes_votes: 3.0
+    no_votes: 0
+    abstain_votes: 0
+    approval_ratio: 1.0
+    approval_threshold: 0.67
+    approved: true
+    outcome: APPROVED
+execution:
+  status: EXECUTED
+  executed_at: '2025-10-17T10:55:23.670370+00:00'
+  executed_by: DAO Consensus
+  result: 'Lineage updated: Entry #2 added (backup: registry_lineage_backup_20251017_105523.yaml)'

@@ -1,0 +1,205 @@
+# Adaptive Trust Monitor - Δ|V| CI Integration
+#
+# This workflow runs after every build and:
+# 1. Executes entropy linker to strengthen cross-references
+# 2. Runs truth vector monitor daemon with adaptive thresholds
+# 3. Logs results to WORM storage
+# 4. Gates deployment based on Δ|V| governance decision
+#
+# Exit codes:
+# 0 = APPROVE (deploy)
+# 1 = INVESTIGATE (warn but allow)
+# 2 = BLOCK (prevent deployment)
+
+name: Adaptive Trust Monitor
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  adaptive-trust-monitoring:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for baseline comparison
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # No external dependencies needed - all tools use stdlib only
+
+      - name: Run Entropy Linker
+        id: entropy-linker
+        run: |
+          echo "::group::Entropy Linker - UUID Cross-Referencing"
+          python 02_audit_logging/tools/entropy_linker.py
+          echo "::endgroup::"
+        continue-on-error: true
+
+      - name: Rebuild Cross-Evidence Graph
+        id: cross-evidence
+        run: |
+          echo "::group::Cross-Evidence Graph Builder"
+          python 02_audit_logging/tools/cross_evidence_graph_builder.py
+          echo "::endgroup::"
+        continue-on-error: false
+
+      - name: Auto-Entropy Relinker (Self-Healing)
+        id: auto-relinker
+        run: |
+          echo "::group::Auto-Entropy Relinker - Autonomous Healing"
+          python 02_audit_logging/tools/auto_entropy_relinker.py
+          echo "::endgroup::"
+        continue-on-error: false
+
+      - name: Rebuild Graph After Healing
+        id: cross-evidence-post-healing
+        run: |
+          echo "::group::Cross-Evidence Graph Builder (Post-Healing)"
+          python 02_audit_logging/tools/cross_evidence_graph_builder.py
+          echo "::endgroup::"
+        continue-on-error: false
+
+      - name: Entropy Autotuner (PID Regulation)
+        id: entropy-autotuner
+        run: |
+          echo "::group::Entropy Autotuner - Cybernetic Self-Regulation"
+          python 02_audit_logging/tools/entropy_autotuner.py
+          echo "::endgroup::"
+        continue-on-error: false
+
+      - name: Run Forensic Aggregator
+        id: forensic-aggregator
+        run: |
+          echo "::group::Forensic Aggregator"
+          python 02_audit_logging/tools/forensic_aggregator.py
+          AGGREGATOR_EXIT=$?
+          echo "exit_code=$AGGREGATOR_EXIT" >> $GITHUB_OUTPUT
+          echo "::endgroup::"
+        continue-on-error: false
+
+      - name: Run Truth Vector Monitor Daemon
+        id: truth-vector-monitor
+        run: |
+          echo "::group::Truth Vector Monitor Daemon"
+          python 02_audit_logging/tools/truth_vector_monitor_daemon.py
+          MONITOR_EXIT=$?
+          echo "exit_code=$MONITOR_EXIT" >> $GITHUB_OUTPUT
+          echo "::endgroup::"
+
+          # Return exit code for governance decision
+          exit $MONITOR_EXIT
+
+      - name: Upload WORM Evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: worm-evidence-${{ github.run_id }}
+          path: |
+            02_audit_logging/worm_storage/
+            02_audit_logging/reports/truth_vector_*.json
+            02_audit_logging/reports/forensic_integrity_matrix.json
+            02_audit_logging/reports/cross_evidence_graph.json
+          retention-days: 730  # 2 years (PLATINUM retention)
+
+      - name: Create Status Badge
+        if: always()
+        run: |
+          EXIT_CODE=${{ steps.truth-vector-monitor.outputs.exit_code }}
+
+          if [ "$EXIT_CODE" == "0" ]; then
+            echo "TRUST_STATUS=✅ APPROVED" >> $GITHUB_ENV
+            echo "TRUST_COLOR=success" >> $GITHUB_ENV
+          elif [ "$EXIT_CODE" == "1" ]; then
+            echo "TRUST_STATUS=⚠️ INVESTIGATE" >> $GITHUB_ENV
+            echo "TRUST_COLOR=warning" >> $GITHUB_ENV
+          else
+            echo "TRUST_STATUS=🛑 BLOCKED" >> $GITHUB_ENV
+            echo "TRUST_COLOR=critical" >> $GITHUB_ENV
+          fi
+
+      - name: Comment PR with Results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Read forensic matrix
+            const matrixPath = '02_audit_logging/reports/forensic_integrity_matrix.json';
+            let matrix = {};
+            try {
+              matrix = JSON.parse(fs.readFileSync(matrixPath, 'utf8'));
+            } catch (e) {
+              console.log('Could not read forensic matrix');
+            }
+
+            // Read monitor state
+            const monitorPath = '02_audit_logging/reports/truth_vector_monitor_state.json';
+            let monitor = {};
+            try {
+              monitor = JSON.parse(fs.readFileSync(monitorPath, 'utf8'));
+            } catch (e) {
+              console.log('Could not read monitor state');
+            }
+
+            const masterScore = matrix.master_integrity_score || 0;
+            const grade = matrix.integrity_grade || 'Unknown';
+            const exitCode = '${{ steps.truth-vector-monitor.outputs.exit_code }}';
+
+            let decision = '❓ Unknown';
+            if (exitCode === '0') decision = '✅ APPROVED';
+            else if (exitCode === '1') decision = '⚠️ INVESTIGATE';
+            else if (exitCode === '2') decision = '🛑 BLOCKED';
+
+            const comment = `## Adaptive Trust Monitor Results
+
+            **Governance Decision:** ${decision}
+            **Master Integrity Score:** ${masterScore.toFixed(4)} / 1.000
+            **Integrity Grade:** ${grade}
+
+            ### Dimension Scores
+
+            | Dimension | Score | Status |
+            |-----------|-------|--------|
+            | Structural Integrity | ${matrix.forensic_dimensions?.structural_integrity?.score.toFixed(4) || 'N/A'} | ${matrix.forensic_dimensions?.structural_integrity?.status || 'N/A'} |
+            | Content Integrity | ${matrix.forensic_dimensions?.content_integrity?.score.toFixed(4) || 'N/A'} | ${matrix.forensic_dimensions?.content_integrity?.status || 'N/A'} |
+            | Entropy Resilience | ${matrix.forensic_dimensions?.entropy_resilience?.score.toFixed(4) || 'N/A'} | ${matrix.forensic_dimensions?.entropy_resilience?.status || 'N/A'} |
+            | Truth Vector | ${matrix.forensic_dimensions?.truth_vector?.score.toFixed(4) || 'N/A'} | ${matrix.forensic_dimensions?.truth_vector?.status || 'N/A'} |
+
+            ### Adaptive Control
+
+            - **Samples:** ${monitor.controller_stats?.sample_count || 0}
+            - **Mean Δ|V|:** ${monitor.controller_stats?.mean?.toFixed(6) || 'N/A'}
+            - **Std Dev:** ${monitor.controller_stats?.std_dev?.toFixed(6) || 'N/A'}
+
+            ---
+
+            *Monitoring powered by: Entropy Linker + Truth Vector Daemon + Forensic Aggregator*
+            *WORM Evidence: Artifacts uploaded with 730-day retention*
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Fail if Blocked
+        if: steps.truth-vector-monitor.outputs.exit_code == '2'
+        run: |
+          echo "::error::Truth vector integrity critically degraded - deployment BLOCKED"
+          exit 2

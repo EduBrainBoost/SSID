@@ -21,11 +21,9 @@ module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 verify_badges = module.verify_badges
 
-
 def _sha256_text_local(t: str) -> str:
     """Local helper for generating test signatures."""
     return hashlib.sha256(t.encode('utf-8')).hexdigest()
-
 
 def test_all_valid_badges():
     """Test with all valid badge signatures."""
@@ -37,7 +35,6 @@ def test_all_valid_badges():
     invalid = verify_badges(recs)
     assert len(invalid) == 0
     assert invalid == []
-
 
 def test_mixed_valid_and_invalid():
     """Test with mix of valid and invalid signatures."""
@@ -55,7 +52,6 @@ def test_mixed_valid_and_invalid():
     assert invalid[1]["id"] == "4"
     assert invalid[1]["error"] == "invalid-signature"
 
-
 def test_empty_payload():
     """Test badge with empty payload."""
     recs = [
@@ -63,7 +59,6 @@ def test_empty_payload():
     ]
     invalid = verify_badges(recs)
     assert len(invalid) == 0
-
 
 def test_missing_fields():
     """Test badges with missing required fields."""
@@ -76,7 +71,6 @@ def test_missing_fields():
 
     # All should be flagged as invalid (empty sig/payload don't match expected)
     assert len(invalid) == 3
-
 
 def test_non_dict_records():
     """Test with non-dictionary records."""
@@ -92,12 +86,10 @@ def test_non_dict_records():
     assert len(invalid) >= 3
     assert any("not-a-dict" in str(inv.get("error", "")) for inv in invalid)
 
-
 def test_empty_record_list():
     """Test with empty list of records."""
     invalid = verify_badges([])
     assert invalid == []
-
 
 def test_unicode_payloads():
     """Test with unicode content in payloads."""
@@ -108,7 +100,6 @@ def test_unicode_payloads():
     invalid = verify_badges(recs)
     assert len(invalid) == 0
 
-
 def test_large_payload():
     """Test with large payload content."""
     large_payload = "x" * 10000  # 10KB payload
@@ -117,7 +108,6 @@ def test_large_payload():
     ]
     invalid = verify_badges(recs)
     assert len(invalid) == 0
-
 
 def test_signature_case_sensitivity():
     """Test that signature comparison is case-sensitive."""
@@ -132,7 +122,6 @@ def test_signature_case_sensitivity():
 
     # Should be invalid because of case mismatch
     assert len(invalid) == 1
-
 
 def test_whitespace_in_payload():
     """Test payload with various whitespace characters."""
@@ -151,7 +140,6 @@ def test_whitespace_in_payload():
     invalid = verify_badges(recs)
     assert len(invalid) == 0
 
-
 def test_generator_input():
     """Test with generator/iterator input."""
     def badge_generator():
@@ -162,7 +150,6 @@ def test_generator_input():
     invalid = verify_badges(badge_generator())
     assert len(invalid) == 1
     assert invalid[0]["id"] == "gen_2"
-
 
 def test_realistic_batch():
     """Test realistic batch of 100 badges with 5% error rate."""
@@ -176,7 +163,6 @@ def test_realistic_batch():
     invalid = verify_badges(recs)
     assert len(invalid) == 5  # 100 / 20 = 5 invalid badges
 
-
 def test_json_payload():
     """Test with JSON-like payload content."""
     import json
@@ -189,7 +175,6 @@ def test_json_payload():
 
     invalid = verify_badges(recs)
     assert len(invalid) == 0
-
 
 def test_special_characters_in_id():
     """Test badges with special characters in ID field."""

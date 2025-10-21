@@ -1,0 +1,78 @@
+name: OPA Policy Evaluation (Docker)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '23_compliance/policies/opa/**'
+      - '.github/workflows/opa_eval.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - '23_compliance/policies/opa/**'
+
+jobs:
+  opa-eval:
+    name: Evaluate OPA Policies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create test input if missing
+        run: |
+          if [ ! -f 23_compliance/policies/opa/test_input.json ]; then
+            echo '{"test": "system_validation", "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'", "components": {"audit": true, "compliance": true}}' > 23_compliance/policies/opa/test_input.json
+          fi
+
+      - name: Run OPA Evaluation (Docker)
+        run: |
+          docker run --rm \
+            -v "$PWD:/w" \
+            -w /w \
+            openpolicyagent/opa:latest \
+            eval \
+            -f pretty \
+            -d 23_compliance/policies/opa/ \
+            -i 23_compliance/policies/opa/test_input.json \
+            "data"
+
+      - name: Test Root Immunity Policy
+        run: |
+          docker run --rm \
+            -v "$PWD:/w" \
+            -w /w \
+            openpolicyagent/opa:latest \
+            test \
+            23_compliance/policies/opa/root_immunity.rego \
+            -v
+
+      - name: Validate Policy Syntax
+        run: |
+          docker run --rm \
+            -v "$PWD:/w" \
+            -w /w \
+            openpolicyagent/opa:latest \
+            check \
+            23_compliance/policies/opa/*.rego
+
+      - name: Generate Policy Coverage Report
+        run: |
+          docker run --rm \
+            -v "$PWD:/w" \
+            -w /w \
+            openpolicyagent/opa:latest \
+            test \
+            23_compliance/policies/opa/ \
+            --coverage \
+            --format=json \
+            > 23_compliance/evidence/opa_coverage.json || true
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-coverage
+          path: 23_compliance/evidence/opa_coverage.json
+          if-no-files-found: warn

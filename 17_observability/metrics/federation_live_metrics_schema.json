@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Federation Live Metrics",
+  "type": "object",
+  "properties": {
+    "proof_rate_per_sec": {"type": "number", "minimum": 0},
+    "consensus_agree_ratio": {"type": "number", "minimum": 0, "maximum": 1},
+    "p95_latency_ms": {"type": "number", "minimum": 0},
+    "queue_depth": {"type": "integer", "minimum": 0},
+    "dissent_nodes": {"type": "integer", "minimum": 0}
+  },
+  "required": ["proof_rate_per_sec","consensus_agree_ratio","p95_latency_ms"]
+}

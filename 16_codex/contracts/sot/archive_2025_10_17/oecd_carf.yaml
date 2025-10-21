@@ -1,0 +1,33 @@
+# OECD CARF SoT Contract (Rule 8)
+# =================================
+sot_contract_metadata:
+  contract_id: "SOT-OECD-CARF-003"
+  version: "1.0.0"
+  date: "2025-10-17"
+  classification: "CONFIDENTIAL"
+  enforcement_level: "HIGH"
+
+sot_rule_008_xml_schema_2025_07:
+  rule_id: "SOT-008"
+  rule_name: "OECD CARF XML Schema 2025-07"
+  scientific_foundation:
+    standard: "OECD Common Reporting Framework for Crypto-Assets (CARF)"
+    reference: "https://www.oecd.org/tax/exchange-of-tax-information/carf/"
+    principle: "Crypto-asset reporting standard compliance"
+  technical_manifestation:
+    validator: "03_core/validators/sot/oecd_validators.py::validate_xml_schema_2025_07"
+    opa_policy: "23_compliance/policies/sot/oecd_policy.rego"
+    cli_command: "python 12_tooling/cli/sot_validator.py --rule oecd-carf-xml"
+    test_path: "11_test_simulation/tests_compliance/test_sot_rules.py::test_oecd_carf"
+  enforcement:
+    expected_values:
+      name: "User Guide + Feldprüfung, Testfälle"
+      path: "23_compliance/global/oecd_carf/xml_schema_2025_07/"
+      deprecated: false
+      business_priority: "HIGH"
+
+evidence:
+  python_modules: ["03_core/validators/sot/oecd_validators.py"]
+  rego_policies: ["23_compliance/policies/sot/oecd_policy.rego"]
+  yaml_contracts: ["16_codex/contracts/sot/oecd_carf.yaml"]
+  cli_commands: ["python 12_tooling/cli/sot_validator.py --rule oecd-carf-xml"]

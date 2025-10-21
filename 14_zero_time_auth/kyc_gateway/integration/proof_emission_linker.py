@@ -24,11 +24,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 class ProofEmissionError(Exception):
     """Base exception for proof emission errors"""
     pass
-
 
 class ProofEmissionLinker:
     """
@@ -192,7 +190,7 @@ class ProofEmissionLinker:
 
         Note: Mock implementation - real version calls Layer 9 function
         """
-        # Mock Layer 9 response
+        
         layer9_proof_id = f"l9-{hashlib.sha256(payload['digest'].encode()).hexdigest()[:16]}"
 
         logger.info(f"Forwarded to Layer 9: {layer9_proof_id}")
@@ -225,7 +223,7 @@ class ProofEmissionLinker:
         if not self.config.get("on_chain", {}).get("enabled", False):
             return None
 
-        # Mock on-chain anchor
+        
         mock_tx_hash = f"0x{hashlib.sha256(f'{proof_id}:{digest}'.encode()).hexdigest()}"
 
         logger.info(f"On-chain anchor: {mock_tx_hash}")
@@ -257,7 +255,6 @@ class ProofEmissionLinker:
 
         logger.info(json.dumps(log_entry))
 
-
 def main():
     """CLI entry point"""
     import argparse
@@ -288,7 +285,6 @@ def main():
     except Exception as e:
         print(json.dumps({"status": "FAILED", "error": str(e)}, indent=2))
         exit(1)
-
 
 if __name__ == "__main__":
     main()

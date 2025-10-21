@@ -7,6 +7,42 @@ meta:
   last_updated: '2025-10-07T08:00:00Z'
   maintainer: edubrainboost
   classification: OPERATIONAL - Consortium Governance
+members:
+- org_id: ORG-A
+  name: Alpha Identity GmbH
+  tier: founding
+  did: did:ssid:alpha123
+  pubkey: bls12-381:ALPHA...
+  status: active
+  weight: 3
+- org_id: ORG-B
+  name: Beta Trust AG
+  tier: full
+  did: did:ssid:beta456
+  pubkey: bls12-381:BETA...
+  status: active
+  weight: 2
+- org_id: ORG-C
+  name: Gamma Secure Ltd.
+  tier: full
+  did: did:ssid:gamma789
+  pubkey: bls12-381:GAMMA...
+  status: active
+  weight: 2
+- org_id: ORG-D
+  name: Delta Risk S.A.
+  tier: associate
+  did: did:ssid:delta111
+  pubkey: bls12-381:DELTA...
+  status: active
+  weight: 1
+- org_id: ORG-E
+  name: Epsilon Verify BV
+  tier: observer
+  did: did:ssid:eps999
+  pubkey: bls12-381:EPS...
+  status: active
+  weight: 3
 organizations:
 - org_id: ORG-A
   name: Alpha Identity GmbH
@@ -45,13 +81,11 @@ audit:
   append_only: true
 description: 'SSID Consortium Registry - Distributed Audit Ledger
 
-
   Links federated evidence nodes into a consortium ledger where each organization
 
   cross-signs foreign anchors. Creates a distributed audit network without central
 
   oversight authority.
-
 
   Key Features:
 

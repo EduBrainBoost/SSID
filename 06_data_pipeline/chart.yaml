@@ -1,0 +1,68 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: data_pipeline
+  version: "0.1.0"
+  description: "Data ingestion, transformation, validation, and ETL workflows with privacy-preserving processing"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - data_ingestion
+    - etl_workflows
+    - data_validation
+    - privacy_preserving_transformation
+    - batch_processing
+    - stream_processing
+
+  interfaces:
+    - name: data_ingestion_api
+      type: rest_api
+      authentication: required
+
+    - name: stream_processor
+      type: kafka
+      authentication: required
+
+    - name: batch_jobs
+      type: airflow
+      authentication: internal
+
+  policies:
+    - name: pii_detection
+      enforcement: automated
+      scope: all_data
+      action: hash_or_block
+
+    - name: data_quality
+      enforcement: automated
+      scope: all_pipelines
+
+    - name: data_lineage
+      enforcement: automated
+      scope: all_transformations
+
+  dependencies:
+    internal:
+      - 09_meta_identity  # Identity hashing
+      - 02_audit_logging  # Pipeline logging
+      - 22_datasets  # Dataset storage
+    external:
+      - apache_kafka: ">=3.5"
+      - apache_airflow: ">=2.7"
+      - python: ">=3.11"
+
+  governance:
+    maintainer: "Data Engineering Team"
+    reviewers:
+      - data_governance_team
+      - security_team
+    approval_required: true
+    data_classification: confidential
+
+  compliance:
+    dsgvo:
+      - article_5  # Data minimization
+      - article_25  # Privacy by design
+      - article_32  # Security of processing

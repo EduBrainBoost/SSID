@@ -1,0 +1,243 @@
+# SoT Coverage Gate - Pre-Commit Enforcement
+# ============================================
+# Ensures 100% coverage of ALL Master-Rules in ALL 5 SoT artifacts
+# Zero-Tolerance: Blocks merge if coverage < 100% or if Ghost/Shadow rules detected
+#
+# Author: Claude Code AI
+# Date: 2025-10-19
+# Version: 1.0.0
+
+name: SoT Coverage Gate
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Daily check at 03:00 UTC
+    - cron: '0 3 * * *'
+
+jobs:
+  sot-coverage-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for Git operations
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Verify Master-Rule-List Exists
+        run: |
+          MASTERLIST="02_audit_logging/reports/SoT_Manual_Coverage_Masterlist_*.yaml"
+          if ! ls $MASTERLIST 1> /dev/null 2>&1; then
+            echo "ERROR: Master-Rule-List not found!"
+            echo "Expected path: $MASTERLIST"
+            exit 24
+          fi
+          echo "✓ Master-Rule-List found"
+
+      - name: Verify SoT Contract SHA256 Integrity
+        run: |
+          REGISTRY_CHECKSUMS="24_meta_orchestration/registry/manifests/integrity_checksums.json"
+
+          if [ ! -f "$REGISTRY_CHECKSUMS" ]; then
+            echo "ERROR: integrity_checksums.json not found!"
+            exit 24
+          fi
+
+          # Verify Level A: sot_contract.yaml
+          SOT_CONTRACT="16_codex/contracts/sot/sot_contract.yaml"
+          if [ ! -f "$SOT_CONTRACT" ]; then
+            echo "ERROR: sot_contract.yaml not found!"
+            exit 24
+          fi
+
+          CURRENT_HASH_A=$(sha256sum "$SOT_CONTRACT" | awk '{print $1}')
+          REGISTERED_HASH_A=$(python3 -c "
+import json
+with open('$REGISTRY_CHECKSUMS') as f:
+    data = json.load(f)
+for artifact in data.get('sha256', []):
+    if artifact.get('artifact', '') == '16_codex/contracts/sot/sot_contract.yaml':
+        print(artifact['hash'])
+        break
+          ")
+
+          if [ "$CURRENT_HASH_A" != "$REGISTERED_HASH_A" ]; then
+            echo "ERROR: sot_contract.yaml SHA256 mismatch!"
+            echo "  Current:    $CURRENT_HASH_A"
+            echo "  Registered: $REGISTERED_HASH_A"
+            exit 24
+          fi
+
+          echo "OK Level A (Semantic) integrity verified"
+
+          # Verify Level B: sot_contract_expanded.yaml
+          SOT_EXPANDED="16_codex/contracts/sot/sot_contract_expanded.yaml"
+          if [ ! -f "$SOT_EXPANDED" ]; then
+            echo "ERROR: sot_contract_expanded.yaml not found!"
+            exit 24
+          fi
+
+          CURRENT_HASH_B=$(sha256sum "$SOT_EXPANDED" | awk '{print $1}')
+          REGISTERED_HASH_B=$(python3 -c "
+import json
+with open('$REGISTRY_CHECKSUMS') as f:
+    data = json.load(f)
+for artifact in data.get('sha256', []):
+    if artifact.get('artifact', '') == '16_codex/contracts/sot/sot_contract_expanded.yaml':
+        print(artifact['hash'])
+        break
+          ")
+
+          if [ "$CURRENT_HASH_B" != "$REGISTERED_HASH_B" ]; then
+            echo "ERROR: sot_contract_expanded.yaml SHA256 mismatch!"
+            echo "  Current:    $CURRENT_HASH_B"
+            echo "  Registered: $REGISTERED_HASH_B"
+            exit 24
+          fi
+
+          echo "OK Level B (Machine) integrity verified"
+
+      - name: Run SoT Coverage Checker
+        id: coverage
+        run: |
+          python 02_audit_logging/tools/sot_coverage_checker.py
+        continue-on-error: true  # Don't fail the job yet, we want to see the report
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sot-coverage-report
+          path: 02_audit_logging/reports/SoT_Coverage_Report_*.yaml
+          retention-days: 90
+
+      - name: Check Coverage Gate
+        run: |
+          REPORT=$(ls 02_audit_logging/reports/SoT_Coverage_Report_*.yaml)
+
+          if [ ! -f "$REPORT" ]; then
+            echo "ERROR: Coverage report not generated!"
+            exit 24
+          fi
+
+          # Extract coverage and violations from YAML
+          VIOLATIONS=$(python3 -c "
+import yaml
+with open('$REPORT') as f:
+    data = yaml.safe_load(f)
+print(data['metadata']['zero_tolerance_violated'])
+          ")
+
+          if [ "$VIOLATIONS" = "True" ] || [ "$VIOLATIONS" = "true" ]; then
+            echo "=========================================="
+            echo "FAIL: SoT Coverage Gate BLOCKED"
+            echo "=========================================="
+            echo ""
+            echo "Zero-Tolerance Policy Violated!"
+            echo ""
+            echo "Coverage report: $REPORT"
+            echo ""
+            echo "Action Required:"
+            echo "  1. Review coverage report"
+            echo "  2. Add missing rules to ALL 5 SoT artifacts"
+            echo "  3. Remove Ghost Rules (SOT-MD-* in code but not in Master-List)"
+            echo "  4. Implement Shadow Rules (in Master-List but not in code)"
+            echo ""
+            exit 24
+          fi
+
+          echo "✓ SoT Coverage Gate PASSED - 100% Coverage Achieved"
+
+      - name: Comment PR with Coverage Report
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const yaml = require('js-yaml');
+
+            // Find coverage report
+            const reportFiles = fs.readdirSync('02_audit_logging/reports')
+              .filter(f => f.startsWith('SoT_Coverage_Report_'));
+
+            if (reportFiles.length === 0) {
+              console.log('No coverage report found');
+              return;
+            }
+
+            const reportPath = `02_audit_logging/reports/${reportFiles[0]}`;
+            const report = yaml.load(fs.readFileSync(reportPath, 'utf8'));
+
+            // Build PR comment
+            const coverage = report.coverage;
+            const violations = report.violations;
+            const status = report.metadata.zero_tolerance_violated ? '❌ FAIL' : '✅ PASS';
+
+            const comment = `
+## SoT Coverage Gate Report ${status}
+
+**Average Coverage:** ${coverage.average}
+
+### Per-Artifact Coverage
+- **Contract (OpenAPI/JSON-Schema):** ${coverage.contract}
+- **Core (Core Logic):** ${coverage.core}
+- **Policy (Compliance/Governance):** ${coverage.policy}
+- **CLI (Command-Line Interface):** ${coverage.cli}
+- **Test (Test Suites):** ${coverage.test}
+
+### Zero-Tolerance Violations
+- **Ghost Rules:** ${violations.ghost_rules.length}
+- **Shadow Rules:** ${violations.shadow_rules.length}
+
+${violations.ghost_rules.length > 0 ? `
+**Ghost Rules (in code, not in Master-List):**
+${violations.ghost_rules.map(r => `- \`${r}\``).join('\n')}
+` : ''}
+
+${violations.shadow_rules.length > 0 ? `
+**Shadow Rules (in Master-List, not in code):**
+${violations.shadow_rules.slice(0, 10).map(r => `- \`${r}\``).join('\n')}
+${violations.shadow_rules.length > 10 ? `\n... and ${violations.shadow_rules.length - 10} more` : ''}
+` : ''}
+
+---
+📊 Full report: [SoT_Coverage_Report_${report.metadata.timestamp}.yaml](./02_audit_logging/reports/${reportFiles[0]})
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.name,
+              body: comment
+            });
+
+      - name: Final Gate Decision
+        if: steps.coverage.outcome == 'failure'
+        run: |
+          echo "=========================================="
+          echo "SoT Coverage Gate: BLOCKED"
+          echo "=========================================="
+          exit 24
+
+# Enforcement Policy:
+# -------------------
+# - This workflow MUST pass before any PR can be merged
+# - Exit code 24 = ROOT-24-LOCK failure (critical)
+# - Branch protection rules MUST enforce this workflow
+# - No exceptions, no overrides (except emergency security patches with governance approval)

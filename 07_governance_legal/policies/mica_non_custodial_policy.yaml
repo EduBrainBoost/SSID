@@ -1,0 +1,11 @@
+version: 1.0
+scope: hash_only_anchor
+rules:
+  - id: MICA-NC-001
+    must: "Keine Speicherung von Beträgen, Balances oder Zahlungsreferenzen im Smart Contract."
+  - id: MICA-NC-002
+    must: "Nur Hashes/Proof-IDs auf-chain; KYC/Personendaten off-chain beim Anbieter."
+  - id: MICA-NC-003
+    must: "Keine Funktionen, die Token-Transfers auslösen oder Gelder annehmen."
+  - id: MICA-NC-004
+    must: "Events dienen ausschließlich der Beweisverankerung (Utility/Reward off-chain im Credit-System)."

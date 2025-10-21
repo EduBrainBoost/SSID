@@ -1,0 +1,257 @@
+name: Monitoring Dashboard Auto-Update
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+
+  workflow_dispatch:  # Allow manual trigger
+    inputs:
+      force_update:
+        description: 'Force update even if no changes'
+        required: false
+        default: 'false'
+
+  push:
+    branches: [main]
+    paths:
+      - '02_audit_logging/archives/qa_master_suite/**'
+      - '02_audit_logging/logs/**'
+      - '02_audit_logging/reports/**'
+      - '24_meta_orchestration/registry/**'
+      - 'tools/update_monitoring_dashboard.py'
+
+env:
+  MONITORING_FILE: '02_audit_logging/archives/qa_master_suite/MONITORING.md'
+
+jobs:
+  update-dashboard:
+    name: Update Monitoring Dashboard
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for commit counting
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+
+      - name: Run dashboard update script
+        run: |
+          python tools/update_monitoring_dashboard.py
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet ${{ env.MONITORING_FILE }}; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in monitoring dashboard"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in monitoring dashboard"
+          fi
+
+      - name: Show dashboard diff
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          echo "### Monitoring Dashboard Changes"
+          git diff ${{ env.MONITORING_FILE }}
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changes == 'true' || github.event.inputs.force_update == 'true'
+        run: |
+          git config user.name "SSID Monitoring Bot"
+          git config user.email "monitoring-bot@ssid-project.internal"
+
+          git add ${{ env.MONITORING_FILE }}
+
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+          git commit -m "chore: Auto-update monitoring dashboard [$TIMESTAMP]" -m "$(cat <<'EOF'
+          Automated monitoring dashboard update:
+          - QA Archive metrics
+          - Policy violations
+          - Test coverage
+          - WORM storage status
+          - Blockchain anchoring status
+
+          🤖 Generated with [SSID Monitoring Bot](https://github.com/ssid-project/monitoring)
+          EOF
+          )"
+
+          git push
+
+      - name: Create job summary
+        if: always()
+        run: |
+          echo "## 📊 Monitoring Dashboard Update" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.check_changes.outputs.changes }}" = "true" ]; then
+            echo "**Status:** ✅ Dashboard updated" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            # Extract key metrics from dashboard
+            if [ -f "${{ env.MONITORING_FILE }}" ]; then
+              echo "### Key Metrics" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+
+              # QA Archive Size
+              QA_SIZE=$(grep "QA Archive" ${{ env.MONITORING_FILE }} | grep -oP '\d+\.\d+ MB' | head -1 || echo "N/A")
+              echo "- **QA Archive:** $QA_SIZE" >> $GITHUB_STEP_SUMMARY
+
+              # Violations
+              VIOLATIONS=$(grep "Policy Violations (30d)" ${{ env.MONITORING_FILE }} | grep -oP '\d+' | tail -1 || echo "N/A")
+              echo "- **Violations (30d):** $VIOLATIONS" >> $GITHUB_STEP_SUMMARY
+
+              # Coverage
+              COVERAGE=$(grep "Test Coverage" ${{ env.MONITORING_FILE }} | grep -oP '\d+\.\d+%' | head -1 || echo "N/A")
+              echo "- **Test Coverage:** $COVERAGE" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "**Status:** ℹ️ No changes (dashboard is current)" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Dashboard:** [\`${{ env.MONITORING_FILE }}\`](${{ github.server_url }}/${{ github.repository }}/blob/main/${{ env.MONITORING_FILE }})" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload dashboard artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoring-dashboard
+          path: ${{ env.MONITORING_FILE }}
+          retention-days: 90
+
+  alert-on-violations:
+    name: Alert on Policy Violations
+    runs-on: ubuntu-latest
+    needs: update-dashboard
+    if: always()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for violations
+        id: check_violations
+        run: |
+          # Check monitoring dashboard for violations
+          if [ -f "${{ env.MONITORING_FILE }}" ]; then
+            VIOLATIONS=$(grep "Policy Violations (30d)" ${{ env.MONITORING_FILE }} | grep -oP '\d+' | tail -1 || echo "0")
+
+            echo "violations=$VIOLATIONS" >> $GITHUB_OUTPUT
+
+            if [ "$VIOLATIONS" -gt 0 ]; then
+              echo "⚠️ WARNING: $VIOLATIONS policy violations detected in last 30 days"
+              echo "alert=true" >> $GITHUB_OUTPUT
+            else
+              echo "✅ No policy violations in last 30 days"
+              echo "alert=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "alert=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create violation alert issue
+        if: steps.check_violations.outputs.alert == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const violations = ${{ steps.check_violations.outputs.violations }};
+
+            const title = `⚠️ QA Policy Violations Detected (${violations} violations)`;
+
+            const body = `## Policy Violations Alert
+
+            **Violations Detected:** ${violations} in last 30 days
+
+            ### Action Required
+
+            1. Review violation logs: \`02_audit_logging/logs/qa_policy_enforcement.jsonl\`
+            2. Identify root causes
+            3. Remediate violations
+            4. Update team on policy requirements
+
+            ### Resources
+
+            - **Policy:** [\`02_audit_logging/archives/qa_master_suite/README.md\`](${context.payload.repository.html_url}/blob/main/02_audit_logging/archives/qa_master_suite/README.md)
+            - **Monitoring:** [\`${{ env.MONITORING_FILE }}\`](${context.payload.repository.html_url}/blob/main/${{ env.MONITORING_FILE }})
+            - **OPA Policy:** [\`23_compliance/policies/qa/qa_policy_enforcer.rego\`](${context.payload.repository.html_url}/blob/main/23_compliance/policies/qa/qa_policy_enforcer.rego)
+
+            ### Assignees
+
+            Please assign this to the Compliance Team for review.
+
+            ---
+
+            🤖 Auto-generated by [Monitoring Dashboard Update](${context.payload.repository.html_url}/actions/workflows/monitoring_dashboard_update.yml)
+            `;
+
+            // Check if issue already exists
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'qa-policy-violation'
+            });
+
+            const hasOpenIssue = existingIssues.data.some(issue =>
+              issue.title.includes('QA Policy Violations Detected')
+            );
+
+            if (!hasOpenIssue) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['qa-policy-violation', 'compliance', 'priority:high']
+              });
+
+              console.log('✅ Violation alert issue created');
+            } else {
+              console.log('ℹ️ Violation issue already exists - skipping creation');
+            }
+
+  coverage-check:
+    name: Check Test Coverage Trends
+    runs-on: ubuntu-latest
+    needs: update-dashboard
+    if: always()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check coverage status
+        run: |
+          if [ -f "${{ env.MONITORING_FILE }}" ]; then
+            COVERAGE=$(grep "Test Coverage" ${{ env.MONITORING_FILE }} | grep -oP '\d+\.\d+%' | head -1 || echo "0")
+
+            # Remove % sign for comparison
+            COVERAGE_NUM=$(echo "$COVERAGE" | sed 's/%//')
+
+            echo "## 🧪 Coverage Check" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Current Coverage:** $COVERAGE" >> $GITHUB_STEP_SUMMARY
+            echo "**Target:** ≥75%" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if (( $(echo "$COVERAGE_NUM >= 75" | bc -l) )); then
+              echo "**Status:** ✅ PASSING" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "**Status:** ⚠️ BELOW TARGET" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "### Action Required" >> $GITHUB_STEP_SUMMARY
+              echo "Coverage is below 75% target. Please improve test coverage." >> $GITHUB_STEP_SUMMARY
+            fi
+          fi

@@ -37,10 +37,8 @@ sys.path.insert(0, str(repo_root))
 
 from _03_evidence_system.blockchain.proof_emitter import ProofEmitter, ProofType
 
-
 # Initialize proof emitter (shared across all tests)
 _proof_emitter = None
-
 
 def get_proof_emitter():
     """Get or create proof emitter instance"""
@@ -55,7 +53,6 @@ def get_proof_emitter():
         _proof_emitter = ProofEmitter(repo_root, enable_blockchain=enable_blockchain)
 
     return _proof_emitter
-
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
@@ -136,7 +133,6 @@ def pytest_runtest_makereport(item, call):
     except Exception as e:
         print(f"\n⚠️  Warning: Failed to emit proof for {item.nodeid}: {e}")
 
-
 @pytest.fixture(scope="session")
 def proof_emitter():
     """
@@ -152,7 +148,6 @@ def proof_emitter():
             )
     """
     return get_proof_emitter()
-
 
 @pytest.fixture(scope="session", autouse=True)
 def print_proof_summary(request):
@@ -205,7 +200,6 @@ def print_proof_summary(request):
     except Exception as e:
         print(f"\n⚠️  Warning: Failed to generate proof summary: {e}")
 
-
 def pytest_configure(config):
     """
     Pytest hook: Configure proof emission system.
@@ -239,7 +233,6 @@ def pytest_configure(config):
         print(f"Verbose proof output: {'✅ ENABLED' if verbose_proofs else '❌ DISABLED'}")
         print("=" * 70 + "\n")
 
-
 # Optional: Custom assertion hook for proof emission
 def pytest_assertrepr_compare(op, left, right):
     """
@@ -248,7 +241,6 @@ def pytest_assertrepr_compare(op, left, right):
     This can be extended to emit proofs on specific assertion failures.
     """
     raise NotImplementedError("TODO: Implement this block")
-
 
 # Optional: Add proof emission to xfail/skip
 @pytest.hookimpl(hookwrapper=True)
@@ -260,7 +252,6 @@ def pytest_runtest_call(item):
     """
     outcome = yield
     # Add custom logic if needed
-
 
 # Environment variable documentation
 """

@@ -1,0 +1,39 @@
+{
+  "timestamp_utc": "2025-10-12T19:50:15Z",
+  "type": "READINESS_SINGLE_SYSTEM_SPEC_ONLY",
+  "categories": {
+    "policies_guards": {
+      "weight": 25,
+      "score": 25,
+      "status": "PASS"
+    },
+    "schemas_config": {
+      "weight": 20,
+      "score": 20,
+      "status": "PASS"
+    },
+    "hash_merkle": {
+      "weight": 20,
+      "score": 20,
+      "status": "PASS"
+    },
+    "tests_ci": {
+      "weight": 20,
+      "score": 20,
+      "status": "PASS"
+    },
+    "compliance_legal": {
+      "weight": 15,
+      "score": 15,
+      "status": "PASS"
+    }
+  },
+  "gates": {
+    "G1_SINGLE_SYSTEM_SCOPE": "PASS",
+    "G2_NO_BIDIRECTIONAL_CLAIMS": "PASS",
+    "G3_DETERMINISTIC_HASHING": "PASS",
+    "G4_CI_CLEAN_EXIT": "PASS",
+    "G5_EVIDENCE_COMPLETENESS": "PASS"
+  },
+  "total": 100
+}

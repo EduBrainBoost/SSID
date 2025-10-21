@@ -1,0 +1,73 @@
+{
+  "version": "11.0.0",
+  "oracle_type": "BIDIRECTIONAL_CO_TRUTH",
+  "generation_date": "2025-10-12T18:24:47.332762+00:00",
+  "cryptographic_framework": "SHA-512 + CRYSTALS-Dilithium3 + Kyber768",
+  "oracles": {
+    "SSID_to_OpenCore": {
+      "direction": "SSID \u2192 OpenCore",
+      "proof_hash": "058ec80848348f50413cd2c376856a652f83e4cb0f6464be6da60f4e8599df357ee6fb2a950d9885844aba0036dda28a8a8af2aa648fcfc8c48ff691c85778c3",
+      "trust_score": 0.95,
+      "validation_method": "Mutual merkle root verification",
+      "semantic_alignment": 95.0,
+      "ontology_mapping": "COMPLETE",
+      "bidirectional_proof": true
+    },
+    "OpenCore_to_SSID": {
+      "direction": "OpenCore \u2192 SSID",
+      "proof_hash": "3cb9a0d5839922b5f34e27c36fe08b989942578fcca270933e2868ae2f6c36c828ed57ef6b9b87eca4c23b8d510930741f3a218d0175cd4e3c5c794cb1b8ad71",
+      "trust_score": 0.95,
+      "validation_method": "Mutual merkle root verification",
+      "semantic_alignment": 95.0,
+      "ontology_mapping": "COMPLETE",
+      "bidirectional_proof": true
+    },
+    "SSID_to_GovChain": {
+      "direction": "SSID \u2192 GovChain",
+      "proof_hash": "cef4605364ff26086e2f79c3c6e460be8d305121bbe44bd0342a5b3c88261c3eb719962c335febdf5046c4f422b69c62b25947276c8aa3ed43f84e2d5cdb923a",
+      "trust_score": 0.92,
+      "validation_method": "Regulatory compliance cross-check",
+      "semantic_alignment": 92.0,
+      "ontology_mapping": "COMPLETE",
+      "bidirectional_proof": true
+    },
+    "GovChain_to_SSID": {
+      "direction": "GovChain \u2192 SSID",
+      "proof_hash": "1a27391c7b9fa62b3e130409439b8d2c970e8743fee83770de73daa9dec02c606fc950f5ddf38dedf795c43c5c99d59915c18a0a911bdd2fbd3c10816e3404e8",
+      "trust_score": 0.92,
+      "validation_method": "Regulatory compliance cross-check",
+      "semantic_alignment": 92.0,
+      "ontology_mapping": "COMPLETE",
+      "bidirectional_proof": true
+    },
+    "SSID_to_TrustNet": {
+      "direction": "SSID \u2192 TrustNet",
+      "proof_hash": "1ac06b3b335029ab7b12398e08e806c84dd953bd704ec2d80dcf85d4d1072d7fe44e78816d13b16e5af9a85ae6bcc830580e498aee84a8859a6f37eda36c3b4e",
+      "trust_score": 0.97,
+      "validation_method": "Trust score synchronization",
+      "semantic_alignment": 97.0,
+      "ontology_mapping": "COMPLETE",
+      "bidirectional_proof": true
+    },
+    "TrustNet_to_SSID": {
+      "direction": "TrustNet \u2192 SSID",
+      "proof_hash": "e2817a0e380d6fa3c3b28a481939d656f169235df3767314ff7d4946056178b56d8b17108d20191db58888e71069217e32ef6e8927959755814e2d6a66c1995a",
+      "trust_score": 0.97,
+      "validation_method": "Trust score synchronization",
+      "semantic_alignment": 97.0,
+      "ontology_mapping": "COMPLETE",
+      "bidirectional_proof": true
+    }
+  },
+  "pqc_signatures": {
+    "dilithium3_seed": "f2574fd9c31a84dc6b66035bef07a3407799e8c6beca9263f73d4b48340b4c82",
+    "kyber768_seed": "14076c1c4268cf37483319c3697740af8c12c78795116b85586e622c97ab60f6",
+    "signature_mode": "SIMULATED"
+  },
+  "reflexive_symmetry": {
+    "enabled": true,
+    "symmetry_score": 0.948,
+    "validation": "PASSED"
+  },
+  "oracle_status": "ACTIVE"
+}

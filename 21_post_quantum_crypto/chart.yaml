@@ -1,0 +1,75 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: post_quantum_crypto
+  version: "0.1.0"
+  description: "Post-quantum cryptography implementations, PQC key management, and quantum-resistant signatures"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - pqc_key_generation
+    - quantum_resistant_signatures
+    - lattice_based_encryption
+    - hash_based_signatures
+    - pqc_key_exchange
+    - hybrid_crypto_schemes
+
+  interfaces:
+    - name: crypto_api
+      type: rest_api
+      authentication: required
+
+    - name: key_management_service
+      type: grpc
+      authentication: required
+      encryption: e2e
+
+    - name: signing_service
+      type: grpc
+      authentication: required
+
+  policies:
+    - name: nist_pqc_only
+      enforcement: automated
+      scope: all_operations
+      algorithms:
+        - crystals_dilithium
+        - crystals_kyber
+        - sphincs_plus
+
+    - name: key_rotation
+      enforcement: automated
+      scope: all_keys
+      frequency_days: 90
+
+    - name: quantum_safe_storage
+      enforcement: automated
+      scope: all_keys
+
+  dependencies:
+    internal:
+      - 09_meta_identity  # Identity encryption
+      - 02_audit_logging  # Crypto operations log
+      - 03_core  # Cryptographic operations
+    external:
+      - liboqs: ">=0.9"
+      - pqcrypto: ">=0.18"
+
+  governance:
+    maintainer: "Cryptography Team"
+    reviewers:
+      - security_team
+      - research_team
+    approval_required: true
+    data_classification: highly_confidential
+
+  compliance:
+    eidas:
+      - regulation_910_2014
+      - qualified_signatures
+    nist:
+      - pqc_standardization_round_3
+    iso:
+      - iso_iec_23837

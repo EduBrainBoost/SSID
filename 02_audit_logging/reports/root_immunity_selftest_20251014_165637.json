@@ -1,0 +1,187 @@
+{
+  "version": "1.0",
+  "test_type": "ROOT_IMMUNITY_SELFTEST",
+  "timestamp": "2025-10-14T16:56:37.954797+00:00",
+  "immunity_scale": 100.0,
+  "status": "IMMUNE",
+  "attacks_launched": 5,
+  "attacks_blocked": 5,
+  "attacks_failed": 0,
+  "attacks": [
+    {
+      "attack_id": "0GA8XQ73",
+      "type": "INVALID_PATHS",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T16:56:37.836288+00:00",
+      "description": "Created files outside allowed 24 roots",
+      "techniques": [
+        {
+          "technique": "Root-level file outside allowed roots",
+          "file": "INVALID_ROOT_FILE.txt",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        },
+        {
+          "technique": "Invalid root directory (25_invalid_root)",
+          "directory": "25_invalid_root/",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        },
+        {
+          "technique": "Nested invalid directory structure",
+          "directory": "random_folder/nested/",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        }
+      ],
+      "techniques_passed": 3,
+      "techniques_total": 3,
+      "success_rate": 1.0
+    },
+    {
+      "attack_id": "MG131005",
+      "type": "WHITELIST_MANIPULATION",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T16:56:37.858025+00:00",
+      "description": "Attempted to manipulate exception policy",
+      "techniques": [
+        {
+          "technique": "Inject fake exception into policy",
+          "exception": "MALICIOUS_FILE.exe",
+          "expected": "DETECTED",
+          "actual": "DETECTED",
+          "passed": true
+        },
+        {
+          "technique": "Modify .claude allowed_roots",
+          "modification": "Added 03_core to .claude whitelist",
+          "expected": "STILL_BLOCKED",
+          "actual": "STILL_BLOCKED",
+          "passed": true
+        }
+      ],
+      "techniques_passed": 2,
+      "techniques_total": 2,
+      "success_rate": 1.0
+    },
+    {
+      "attack_id": "XY0IO5JP",
+      "type": "CLAUDE_UNAUTHORIZED",
+      "severity": "HIGH",
+      "timestamp": "2025-10-14T16:56:37.889526+00:00",
+      "description": "Created .claude directories outside allowed roots",
+      "techniques": [
+        {
+          "technique": ".claude in 03_core",
+          "location": "03_core/.claude/",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        },
+        {
+          "technique": ".claude in 08_identity_score",
+          "location": "08_identity_score/.claude/",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        },
+        {
+          "technique": ".claude in 11_test_simulation",
+          "location": "11_test_simulation/.claude/",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        },
+        {
+          "technique": ".claude in 15_infra",
+          "location": "15_infra/.claude/",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        }
+      ],
+      "techniques_passed": 4,
+      "techniques_total": 4,
+      "success_rate": 1.0
+    },
+    {
+      "attack_id": "XYYLRUTR",
+      "type": "MANIFEST_TAMPERING",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T16:56:37.894529+00:00",
+      "description": "Attempted to tamper with root structure manifest",
+      "techniques": [
+        {
+          "technique": "Add 25th root to manifest",
+          "modification": "allowed_roots: 25, count: 25",
+          "expected": "DETECTED",
+          "actual": "DETECTED",
+          "passed": true
+        },
+        {
+          "technique": "Modify ROOT-LOCK identifier",
+          "modification": "root_lock: ROOT-25-LOCK",
+          "expected": "DETECTED",
+          "actual": "DETECTED",
+          "passed": true
+        }
+      ],
+      "techniques_passed": 2,
+      "techniques_total": 2,
+      "success_rate": 1.0
+    },
+    {
+      "attack_id": "SSNNM8TM",
+      "type": "HIDDEN_PATH_INJECTION",
+      "severity": "MEDIUM",
+      "timestamp": "2025-10-14T16:56:37.912530+00:00",
+      "description": "Created hidden paths not in exception policy",
+      "techniques": [
+        {
+          "technique": "Hidden file: .hidden_config",
+          "path": ".hidden_config",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        },
+        {
+          "technique": "Hidden file: .secrets",
+          "path": ".secrets",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        },
+        {
+          "technique": "Hidden file: .malicious_cache",
+          "path": ".malicious_cache",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        },
+        {
+          "technique": "Hidden file: .backdoor",
+          "path": ".backdoor",
+          "expected": "BLOCKED",
+          "actual": "BLOCKED",
+          "passed": true
+        }
+      ],
+      "techniques_passed": 4,
+      "techniques_total": 4,
+      "success_rate": 1.0
+    }
+  ],
+  "opa_evaluation": {
+    "evaluated": false,
+    "reason": "OPA not installed",
+    "immunity_scale": 100.0
+  },
+  "daemon_failures": [],
+  "recommendations": [
+    "✅ Immunity scale healthy (≥95%)",
+    "Continue monthly self-tests to maintain immunity"
+  ]
+}

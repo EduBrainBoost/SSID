@@ -1,0 +1,71 @@
+# Coverage Configuration for SoT Validator
+# ==========================================
+
+[run]
+# Source code to measure
+source =
+    ../sot_validator_core.py
+    ../cached_validator.py
+    ../cached_filesystem.py
+
+# Files to omit from coverage
+omit =
+    */tests/*
+    */test_*.py
+    */__pycache__/*
+    */venv/*
+    */virtualenv/*
+    setup.py
+
+# Branch coverage (condition/decision coverage)
+branch = True
+
+# Parallel execution support
+parallel = False
+
+# Data file location
+data_file = .coverage
+
+[report]
+# Reporting options
+precision = 2
+show_missing = True
+skip_covered = False
+skip_empty = True
+
+# Output formatting
+exclude_lines =
+    # Standard exclusions
+    pragma: no cover
+    def __repr__
+    def __str__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    @abstractmethod
+    @abc.abstractmethod
+
+    # Debug/Demo code
+    if __name__ == "__main__":
+    if sys.argv
+    # Demo / Testing
+    # DEMO
+    print\(.*\)
+
+# Target coverage percentages
+fail_under = 80.0
+
+[html]
+# HTML report configuration
+directory = htmlcov
+title = SoT Validator Coverage Report
+
+[xml]
+# XML report for CI/CD
+output = coverage.xml
+
+[json]
+# JSON report for tooling
+output = coverage.json
+pretty_print = True

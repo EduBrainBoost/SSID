@@ -1,0 +1,93 @@
+# SSID Privacy Policy
+# ===================
+# Zero-PII compliance framework for SSID system
+
+version: "1.0.0"
+status: ACTIVE
+effective_date: 2025-10-12
+framework: "GDPR + eIDAS 2.0 + CCPA"
+
+# Core Privacy Principles
+principles:
+  zero_pii: true
+  non_custodial: true
+  user_sovereignty: true
+  data_minimization: true
+  purpose_limitation: true
+
+# Data Classification
+data_classification:
+  no_personal_data:
+    - System logs (anonymized)
+    - Cryptographic hashes
+    - Public blockchain data
+    - Aggregated statistics
+
+  excluded_from_system:
+    - Names
+    - Email addresses
+    - Phone numbers
+    - Physical addresses
+    - Government IDs
+    - Biometric data
+    - Financial account numbers
+    - Health information
+
+# Privacy by Design
+privacy_by_design:
+  architecture:
+    - Hash-based identity (no PII stored)
+    - Non-custodial wallets (user controls keys)
+    - Zero-knowledge proofs (verify without revealing)
+    - Decentralized storage (IPFS, no central database)
+
+  implementation:
+    - No user registration forms
+    - No email collection
+    - No tracking cookies
+    - No analytics with PII
+
+# Compliance Framework
+compliance:
+  gdpr:
+    lawful_basis: "Legitimate interest (no personal data processing)"
+    data_controller: "User (self-sovereign)"
+    data_processor: "None (non-custodial)"
+    right_to_erasure: "Not applicable (no data stored)"
+
+  eidas_2_0:
+    identity_verification: "Hash-based, no PII"
+    credential_storage: "User-controlled wallets"
+    audit_trail: "Blockchain anchors (hashes only)"
+
+  ccpa:
+    data_sale: "No data collected or sold"
+    opt_out: "Not applicable (no data)"
+    deletion_requests: "Not applicable (no data)"
+
+# Audit & Verification
+audit:
+  pii_scan_frequency: "Every release"
+  tools:
+    - "grep -r for PII patterns"
+    - "Static code analysis"
+    - "Manual review"
+
+  verification:
+    - "No database with PII fields"
+    - "No API endpoints accepting PII"
+    - "No forms collecting PII"
+
+# Policy Enforcement
+enforcement:
+  automated_checks: true
+  ci_cd_integration: true
+  pre_commit_hooks: true
+  violation_handling: "Block deployment"
+
+# Contact (No PII)
+contact:
+  method: "GitHub issues only"
+  no_email: true
+  no_phone: true
+  communication: "Public forum discussion"

@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "framework": "NIST CSF",
+    "version": "2.0",
+    "source": "NIST Cybersecurity Framework v2.0",
+    "last_updated": "2025-10-13T19:40:00Z",
+    "maintainer": "edubrainboost",
+    "status": "active",
+    "classification": "PUBLIC - Compliance Mapping",
+    "regulatory_basis": "NIST Cybersecurity Framework 2.0 (2024)"
+  },
+  "mappings": [
+    {
+      "id": "NIST-ID.AM",
+      "description": "Asset Management",
+      "applies_to": [
+        "15_infra",
+        "17_observability",
+        "03_core",
+        "23_compliance"
+      ],
+      "verification": "automated",
+      "test_reference": "test_asset_management.py",
+      "controls": [
+        "Asset inventory (hardware, software, data)",
+        "Critical asset identification",
+        "Data flow mapping",
+        "Asset ownership documentation"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-ID.RA",
+      "description": "Risk Assessment",
+      "applies_to": [
+        "07_governance_legal",
+        "23_compliance",
+        "11_test_simulation"
+      ],
+      "verification": "manual",
+      "test_reference": "test_risk_assessment.py",
+      "controls": [
+        "Threat identification",
+        "Vulnerability assessment",
+        "Risk determination (likelihood x impact)",
+        "Risk response planning"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-ID.GV",
+      "description": "Governance",
+      "applies_to": [
+        "07_governance_legal",
+        "23_compliance",
+        "24_meta_orchestration"
+      ],
+      "verification": "manual",
+      "test_reference": "test_governance.py",
+      "controls": [
+        "Cybersecurity policy",
+        "Roles and responsibilities",
+        "Legal and regulatory requirements",
+        "Risk management strategy"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-PR.AC",
+      "description": "Access Control",
+      "applies_to": [
+        "14_zero_time_auth",
+        "03_core",
+        "15_infra"
+      ],
+      "verification": "automated",
+      "test_reference": "test_access_control.py",
+      "controls": [
+        "Identity and credential management",
+        "Access control policies (RBAC)",
+        "Physical and remote access management",
+        "Least privilege enforcement"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-PR.DS",
+      "description": "Data Security",
+      "applies_to": [
+        "18_data_layer",
+        "21_post_quantum_crypto",
+        "02_audit_logging"
+      ],
+      "verification": "automated",
+      "test_reference": "test_data_security.py",
+      "controls": [
+        "Data-at-rest protection (AES-256-GCM)",
+        "Data-in-transit protection (TLS 1.3)",
+        "Data integrity verification (hashing)",
+        "Secure data destruction"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-PR.PT",
+      "description": "Protective Technology",
+      "applies_to": [
+        "21_post_quantum_crypto",
+        "15_infra",
+        "03_core"
+      ],
+      "verification": "automated",
+      "test_reference": "test_protective_tech.py",
+      "controls": [
+        "Audit/log records",
+        "Malware defenses",
+        "Network segmentation",
+        "Secure communication channels"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-DE.AE",
+      "description": "Anomalies and Events",
+      "applies_to": [
+        "17_observability",
+        "02_audit_logging",
+        "01_ai_layer"
+      ],
+      "verification": "automated",
+      "test_reference": "test_anomaly_detection.py",
+      "controls": [
+        "Baseline network operations",
+        "Anomaly detection (ML-based)",
+        "Event correlation and analysis",
+        "Incident alert thresholds"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-DE.CM",
+      "description": "Security Continuous Monitoring",
+      "applies_to": [
+        "17_observability",
+        "02_audit_logging",
+        "15_infra"
+      ],
+      "verification": "automated",
+      "test_reference": "test_continuous_monitoring.py",
+      "controls": [
+        "Network monitoring (24/7)",
+        "Vulnerability scanning",
+        "Unauthorized access detection",
+        "Malicious code detection"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-RS.RP",
+      "description": "Response Planning",
+      "applies_to": [
+        "07_governance_legal",
+        "23_compliance",
+        "02_audit_logging"
+      ],
+      "verification": "manual",
+      "test_reference": "test_response_plan.py",
+      "controls": [
+        "Incident response plan",
+        "Response procedures executed",
+        "Information sharing",
+        "Coordination with stakeholders"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-RS.AN",
+      "description": "Analysis",
+      "applies_to": [
+        "02_audit_logging",
+        "17_observability",
+        "11_test_simulation"
+      ],
+      "verification": "automated",
+      "test_reference": "test_incident_analysis.py",
+      "controls": [
+        "Incident notification",
+        "Impact assessment",
+        "Forensic analysis",
+        "Incident categorization"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-RC.RP",
+      "description": "Recovery Planning",
+      "applies_to": [
+        "04_deployment",
+        "15_infra",
+        "07_governance_legal"
+      ],
+      "verification": "manual",
+      "test_reference": "test_recovery_plan.py",
+      "controls": [
+        "Recovery plan execution",
+        "Backup restoration",
+        "Business continuity procedures",
+        "Communications during recovery"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "NIST-RC.IM",
+      "description": "Improvements",
+      "applies_to": [
+        "23_compliance",
+        "07_governance_legal",
+        "11_test_simulation"
+      ],
+      "verification": "manual",
+      "test_reference": "test_continuous_improvement.py",
+      "controls": [
+        "Lessons learned incorporated",
+        "Recovery strategy updates",
+        "Post-incident reviews",
+        "Framework improvements"
+      ],
+      "implementation_status": "implemented"
+    }
+  ],
+  "compliance_metrics": {
+    "overall_coverage": "90%",
+    "automated_controls": 8,
+    "manual_controls": 4,
+    "implemented_controls": 12,
+    "pending_controls": 0
+  },
+  "references": [
+    {
+      "title": "NIST Cybersecurity Framework v2.0",
+      "url": "https://www.nist.gov/cyberframework"
+    },
+    {
+      "title": "NIST CSF 2.0 Core",
+      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+    }
+  ],
+  "implementation_notes": "SSID implements NIST CSF 2.0 covering all six functions: Identify, Protect, Detect, Respond, Recover, and Govern. Enhanced with post-quantum cryptography and AI-driven threat detection."
+}

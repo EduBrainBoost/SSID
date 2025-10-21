@@ -87,9 +87,8 @@ fi
 
 # Write audit log
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-cat >> "$LOG_PATH" <<EOF
-{"component":"anti_gaming","check":"badge_integrity","failed":[],"status":"$STATUS","ts":"$TIMESTAMP","verified":$(printf '%s\n' "${VERIFIED[@]}" | jq -R . | jq -s .)}
-EOF
+VERIFIED_JSON=$(printf '%s\n' "${VERIFIED[@]}" | jq -R . | jq -s -c .)
+echo "{\"component\":\"anti_gaming\",\"check\":\"badge_integrity\",\"failed\":[],\"status\":\"$STATUS\",\"ts\":\"$TIMESTAMP\",\"verified\":$VERIFIED_JSON}" >> "$LOG_PATH"
 
 echo
 echo "============================================================"

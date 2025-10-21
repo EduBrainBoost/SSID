@@ -36,7 +36,6 @@ except ImportError:
     except Exception as e:
         raise ImportError(f"Could not load did_resolver: {e}")
 
-
 def resolve_external_did(did: str) -> Dict[str, Any]:
     """
     Resolve DID using internal resolver and return metadata.
@@ -48,7 +47,6 @@ def resolve_external_did(did: str) -> Dict[str, Any]:
         DID Document dict
     """
     return resolve_did(did)
-
 
 def verify_external_did_signature(did: str, message: str, signature: str) -> bool:
     """
@@ -64,7 +62,6 @@ def verify_external_did_signature(did: str, message: str, signature: str) -> boo
     """
     return verify_did_signature(did, message, signature)
 
-
 def get_external_did_info(did: str) -> Dict[str, Any]:
     """
     Get information about an external DID.
@@ -76,7 +73,6 @@ def get_external_did_info(did: str) -> Dict[str, Any]:
         Dict with DID metadata
     """
     return get_did_metadata(did)
-
 
 def resolve_did_batch(dids: List[str]) -> Dict[str, Dict[str, Any]]:
     """
@@ -92,7 +88,6 @@ def resolve_did_batch(dids: List[str]) -> Dict[str, Dict[str, Any]]:
     for did in dids:
         results[did] = resolve_external_did(did)
     return results
-
 
 def validate_did_format(did: str) -> Dict[str, Any]:
     """
@@ -124,7 +119,6 @@ def validate_did_format(did: str) -> Dict[str, Any]:
         "did": did,
         "errors": errors,
     }
-
 
 if __name__ == "__main__":
     # Self-test

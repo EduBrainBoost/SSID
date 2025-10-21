@@ -1,0 +1,47 @@
+# Deprecation Tracking SoT Contract (Rule 13)
+# =============================================
+sot_contract_metadata:
+  contract_id: "SOT-DEPRECATION-TRACKING-006"
+  version: "1.0.0"
+  date: "2025-10-17"
+  classification: "CONFIDENTIAL"
+  enforcement_level: "CRITICAL"
+
+sot_rule_013_deprecated_standards:
+  rule_id: "SOT-013"
+  rule_name: "Deprecated Standards Tracking"
+  scientific_foundation:
+    standard: "Software Lifecycle Management + Regulatory Migration Tracking"
+    reference: "ISO/IEC 25010:2011 Software Quality"
+    principle: "Systematic deprecation and migration management"
+  technical_manifestation:
+    validator: "03_core/validators/sot/deprecation_validators.py::validate_deprecated_standards_tracking"
+    opa_policy: "23_compliance/policies/sot/deprecation_policy.rego"
+    cli_command: "python 12_tooling/cli/sot_validator.py --rule deprecated-standards"
+    test_path: "11_test_simulation/tests_compliance/test_sot_rules.py::test_deprecated_standards"
+  enforcement:
+    required_fields:
+      - id
+      - status
+      - deprecated
+      - replaced_by
+      - deprecation_date
+      - migration_deadline
+      - notes
+    date_format: "YYYY-MM-DD"
+    deadline_validation: "migration_deadline > deprecation_date"
+    overdue_check: true
+
+evidence:
+  python_modules: ["03_core/validators/sot/deprecation_validators.py"]
+  rego_policies: ["23_compliance/policies/sot/deprecation_policy.rego"]
+  yaml_contracts: ["16_codex/contracts/sot/deprecation_tracking.yaml"]
+  cli_commands: ["python 12_tooling/cli/sot_validator.py --rule deprecated-standards"]
+
+audit_trail:
+  created_date: "2025-10-17"
+  created_by: "SSID Core Team"
+  reviewed_by: "Compliance Officer"
+  next_review_date: "2026-01-17"
+  review_frequency: "monthly"
+  critical_monitoring: "Overdue migrations trigger CRITICAL alerts"

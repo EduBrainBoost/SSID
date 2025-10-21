@@ -1,0 +1,350 @@
+{
+  "result": {
+    "metadata": {
+      "ci_correlation": {
+        "commit_sha": "a6e6d2a4",
+        "run_id": "gold_final_003"
+      },
+      "generated_at": "2025-10-16T17:00:41.550464+00:00",
+      "purpose": "SoT Functional Enforcement Verification (Level 3 \u2192 Level 4)",
+      "report_version": "2.0.0",
+      "tool": "verify_sot_enforcement_v2.py"
+    },
+    "phase1_static_analysis": {
+      "description": "CI/Test/Hook file reference verification",
+      "results": {
+        "pre_commit_hooks": {
+          "ci_references": {
+            ".github/workflows/ci_enforcement_gate.yml": false,
+            ".github/workflows/pre-commit.yml": true
+          },
+          "description": "Pre-commit structure validation hooks",
+          "max_score": 15,
+          "refs_found": 1,
+          "refs_total": 2,
+          "score": 9.0,
+          "tool_exists": true,
+          "tool_path": "12_tooling\\hooks\\pre_commit\\config.yaml"
+        },
+        "pytest_structure_tests": {
+          "ci_references": {
+            ".github/workflows/ci_enforcement_gate.yml": true,
+            ".github/workflows/ci_pytest_compliance.yml": false,
+            "pytest.ini": false
+          },
+          "description": "Pytest structure policy unit tests",
+          "max_score": 10,
+          "refs_found": 1,
+          "refs_total": 3,
+          "score": 4.7,
+          "tool_exists": true,
+          "tool_path": "23_compliance\\tests\\unit\\test_structure_policy_vs_md.py"
+        },
+        "root_exceptions": {
+          "ci_references": {
+            "12_tooling/scripts/structure_guard.sh": true,
+            "24_meta_orchestration/triggers/ci/gates/structure_lock_l3.py": true
+          },
+          "description": "Root-level exceptions registry",
+          "max_score": 10,
+          "refs_found": 2,
+          "refs_total": 2,
+          "score": 10.0,
+          "tool_exists": true,
+          "tool_path": "23_compliance\\exceptions\\root_level_exceptions.yaml"
+        },
+        "structure_guard": {
+          "ci_references": {
+            ".github/workflows/ci_enforcement_gate.yml": true,
+            ".github/workflows/ci_structure_guard.yml": true
+          },
+          "description": "Root-24-LOCK structure validator",
+          "max_score": 20,
+          "refs_found": 2,
+          "refs_total": 2,
+          "score": 20.0,
+          "tool_exists": true,
+          "tool_path": "12_tooling\\scripts\\structure_guard.sh"
+        },
+        "structure_lock_gate": {
+          "ci_references": {
+            ".github/workflows/ci_enforcement_gate.yml": true,
+            ".github/workflows/ci_structure_guard.yml": false,
+            "12_tooling/hooks/pre_commit/config.yaml": false
+          },
+          "description": "Structure lock CI gate (exit 24 on violation)",
+          "max_score": 20,
+          "refs_found": 1,
+          "refs_total": 3,
+          "score": 9.3,
+          "tool_exists": true,
+          "tool_path": "24_meta_orchestration\\triggers\\ci\\gates\\structure_lock_l3.py"
+        },
+        "structure_policy_opa": {
+          "ci_references": {
+            ".github/workflows/ci_enforcement_gate.yml": true,
+            ".github/workflows/ci_opa_structure.yml": false,
+            "23_compliance/tests/integration/test_opa_structure.py": false
+          },
+          "description": "OPA-based structure policy enforcement",
+          "max_score": 15,
+          "refs_found": 1,
+          "refs_total": 3,
+          "score": 7.0,
+          "tool_exists": true,
+          "tool_path": "23_compliance\\policies\\structure_policy.yaml"
+        },
+        "worm_audit_logging": {
+          "ci_references": {
+            "02_audit_logging/evidence_trails/integrated_audit_trail.py": false,
+            "11_test_simulation/tests/unit/test_registry_logic.py": false
+          },
+          "description": "WORM immutable audit logging",
+          "max_score": 10,
+          "refs_found": 0,
+          "refs_total": 2,
+          "score": 2.0,
+          "tool_exists": true,
+          "tool_path": "02_audit_logging\\worm_storage\\worm_storage_engine.py"
+        }
+      },
+      "score": 62,
+      "weight": "35%"
+    },
+    "phase2_dynamic_execution": {
+      "description": "Tool execution and exit code verification",
+      "results": {
+        "note": "Dynamic execution disabled (use --execute to enable)",
+        "planned_checks": [
+          "structure_guard.sh execution",
+          "OPA policy evaluation",
+          "Self-verification (dry run)",
+          "Pre-commit hook simulation"
+        ]
+      },
+      "score": 0,
+      "weight": "40%"
+    },
+    "phase3_audit_proof": {
+      "description": "WORM log and evidence trail verification",
+      "results": {
+        "anti_gaming_logs": {
+          "evidence_count": 16,
+          "evidence_found": [
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_anomaly_rate.jsonl",
+              "pattern": "anti_gaming"
+            },
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_badge_integrity.jsonl",
+              "pattern": "anti_gaming"
+            },
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_circular_deps.jsonl",
+              "pattern": "anti_gaming"
+            },
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_circular_deps.jsonl",
+              "pattern": "circular.*dep"
+            },
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_compliance_1.jsonl",
+              "pattern": "anti_gaming"
+            },
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_compliance_2.jsonl",
+              "pattern": "anti_gaming"
+            },
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_compliance_3.jsonl",
+              "pattern": "anti_gaming"
+            },
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_compliance_4.jsonl",
+              "pattern": "anti_gaming"
+            },
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_compliance_5.jsonl",
+              "pattern": "anti_gaming"
+            },
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_dependency_graph.jsonl",
+              "pattern": "anti_gaming"
+            }
+          ],
+          "max_score": 20,
+          "paths_checked": [
+            "02_audit_logging\\logs"
+          ],
+          "patterns_required": 3,
+          "score": 19.2,
+          "status": "PASS"
+        },
+        "evidence_trails": {
+          "evidence_count": 14,
+          "evidence_found": [
+            {
+              "file": "02_audit_logging\\logs\\anti_gaming_badge_integrity.jsonl",
+              "pattern": "enforcement"
+            },
+            {
+              "file": "02_audit_logging\\logs\\backup_purge_summary.json",
+              "pattern": "structure.*validation"
+            },
+            {
+              "file": "02_audit_logging\\logs\\test_inventory_audit.json",
+              "pattern": "structure.*validation"
+            },
+            {
+              "file": "02_audit_logging\\logs\\test_inventory_audit.json",
+              "pattern": "enforcement"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\continuum_proof_chain_v10.json",
+              "pattern": "structure.*validation"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\continuum_proof_chain_v10.json",
+              "pattern": "enforcement"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\meta_interfederation_proof_chain.json",
+              "pattern": "compliance.*check"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\deps\\dependency_graph.json",
+              "pattern": "structure.*validation"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\deps\\dependency_graph.json",
+              "pattern": "compliance.*check"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\deps\\dependency_graph.json",
+              "pattern": "enforcement"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\import_resolution\\canonical_edges_20251014_111202.json",
+              "pattern": "structure.*validation"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\import_resolution\\canonical_edges_20251014_111202.json",
+              "pattern": "compliance.*check"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\import_resolution\\resolved_edges_20251014_111202.json",
+              "pattern": "structure.*validation"
+            },
+            {
+              "file": "02_audit_logging\\evidence\\import_resolution\\resolved_edges_20251014_111202.json",
+              "pattern": "compliance.*check"
+            }
+          ],
+          "max_score": 30,
+          "paths_checked": [
+            "02_audit_logging\\logs",
+            "02_audit_logging\\evidence"
+          ],
+          "patterns_required": 3,
+          "score": 28,
+          "status": "PASS"
+        },
+        "hygiene_certificate": {
+          "evidence_count": 6,
+          "evidence_found": [
+            {
+              "file": "02_audit_logging\\reports\\test_hygiene_certificate_v1.md",
+              "pattern": "CERTIFIED"
+            },
+            {
+              "file": "02_audit_logging\\reports\\test_hygiene_certificate_v1.md",
+              "pattern": "LOCK"
+            },
+            {
+              "file": "02_audit_logging\\reports\\test_hygiene_certificate_v1.md",
+              "pattern": "score.*100"
+            },
+            {
+              "file": "24_meta_orchestration\\registry\\test_hygiene_certificate.yaml",
+              "pattern": "CERTIFIED"
+            },
+            {
+              "file": "24_meta_orchestration\\registry\\test_hygiene_certificate.yaml",
+              "pattern": "LOCK"
+            },
+            {
+              "file": "24_meta_orchestration\\registry\\test_hygiene_certificate.yaml",
+              "pattern": "score.*100"
+            }
+          ],
+          "max_score": 20,
+          "paths_checked": [
+            "02_audit_logging\\reports\\test_hygiene_certificate_v1.md",
+            "24_meta_orchestration\\registry\\test_hygiene_certificate.yaml"
+          ],
+          "patterns_required": 3,
+          "score": 19.8,
+          "status": "PASS"
+        },
+        "worm_storage_integrity": {
+          "evidence_count": 5,
+          "evidence_found": [
+            "02_audit_logging\\storage\\worm\\immutable_store\\sot_enforcement_v2_20251015T190404145015Z_a75d61ef-1237-4b6f-b574-256ff1545439.json",
+            "02_audit_logging\\storage\\worm\\immutable_store\\sot_enforcement_v2_20251015T190944680936Z_6f7fb1de-da4c-4af8-9ad8-52dbbc564fc5.json",
+            "02_audit_logging\\storage\\worm\\immutable_store\\sot_enforcement_v2_20251015T191038478151Z_6e6677aa-92e7-429e-bfd4-a771dd3b7e28.json",
+            "02_audit_logging\\storage\\worm\\immutable_store\\sot_enforcement_v2_20251015T191050314921Z_dd5bcd03-4ed5-4783-90e5-63e4da7d477e.json",
+            "02_audit_logging\\storage\\worm\\immutable_store\\sot_enforcement_v2_20251015T191714499618Z_fbfaebe9-7d9b-42ac-a8c3-cc24f56c58c9.json"
+          ],
+          "max_score": 30,
+          "paths_checked": [
+            "02_audit_logging\\worm_storage\\immutable_store",
+            "02_audit_logging\\storage\\worm"
+          ],
+          "patterns_required": 4,
+          "score": 30,
+          "status": "PASS"
+        }
+      },
+      "score": 97,
+      "weight": "25%"
+    },
+    "recommendations": [
+      "CRITICAL: Overall enforcement score below 50% - immediate remediation required",
+      "HIGH: Integrate structure_policy_opa into CI/test workflows (1/3 refs found)",
+      "HIGH: Integrate structure_lock_gate into CI/test workflows (1/3 refs found)",
+      "HIGH: Integrate pre_commit_hooks into CI/test workflows (1/2 refs found)",
+      "HIGH: Integrate pytest_structure_tests into CI/test workflows (1/3 refs found)",
+      "HIGH: Integrate worm_audit_logging into CI/test workflows (0/2 refs found)",
+      "MEDIUM: Dynamic execution phase not implemented - consider adding tool execution verification"
+    ],
+    "summary": {
+      "certification_level": "NONE",
+      "certification_status": "INSUFFICIENT_ENFORCEMENT",
+      "overall_score": 45,
+      "phase_scores": {
+        "audit_proof": 97,
+        "dynamic_execution": 0,
+        "static_analysis": 62
+      }
+    }
+  },
+  "worm_signature": {
+    "algorithm": "Dilithium2(placeholder)-HMAC-SHA256",
+    "blake2b": "377ddf1c35382d892bae00916349b620ff170317439ed2a3d473369f9fc840d8",
+    "certification_level": "NONE",
+    "certification_status": "INSUFFICIENT_ENFORCEMENT",
+    "ci_context": {
+      "commit_sha": "a6e6d2a48f92b1c3e5d7f9a2b4c6d8e0f1a3b5c7",
+      "commit_sha_short": "a6e6d2a4",
+      "correlation_key": "a6e6d2a4_gold_final_003",
+      "event_name": "push",
+      "run_id": "gold_final_003",
+      "run_number": "42"
+    },
+    "kind": "sot_enforcement_verification_v2",
+    "overall_score": 45,
+    "sha512": "f7b7cea6ae16fbec9666c27f8f2a753eb1f0e9c4e375942e8d15c0a482eedc6b134cb8f11d14dcaddcf2b466e7b279c984edbedb519c0001cc7a97339842dcca",
+    "timestamp": "2025-10-16T17:00:41.550464+00:00",
+    "uuid": "013c14f1-4c3f-4960-ad28-31eadd3a649e"
+  }
+}

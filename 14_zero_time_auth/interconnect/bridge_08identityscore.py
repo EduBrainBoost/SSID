@@ -3,7 +3,6 @@
 
 from typing import Dict
 
-
 def get_auth_trust_level(profile: Dict) -> int:
     """
     Compute authentication trust level (0-100) based on identity score.
@@ -41,7 +40,6 @@ def get_auth_trust_level(profile: Dict) -> int:
 
     return max(0, min(100, int(trust_score)))
 
-
 def require_minimum_trust(min_trust: int = 50) -> callable:
     """Decorator to enforce minimum trust level for auth operations"""
     def decorator(func):
@@ -52,7 +50,6 @@ def require_minimum_trust(min_trust: int = 50) -> callable:
             return func(profile, *args, **kwargs)
         return wrapper
     return decorator
-
 
 if __name__ == "__main__":
     test_profile = {

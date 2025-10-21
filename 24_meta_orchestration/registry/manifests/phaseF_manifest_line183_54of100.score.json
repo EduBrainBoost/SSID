@@ -1,0 +1,29 @@
+{
+  "id": "3fd0c36a-9be5-4081-9ac5-666920161d25",
+  "kind": "phase",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 54,
+  "status": "actual",
+  "source": {
+    "file": "24_meta_orchestration/registry/manifests/phaseF_manifest.yaml",
+    "hash": "ef034a9d51a76a7ad23616f42dd17c38ba02c3c57319d0089aebd305c2900601a9e2e4404daba45e67195c5f0e63424cc65c0b4e9a4ece95d55abb4b698a2e56",
+    "line": 183,
+    "context": "\nproduction_readiness:\n  status: \"READY_FOR_PRODUCTION\"\n  reason: \"Score exceeds 90.0 threshold (90.54/100)\"\n  phase_f02_validation: \"PASS\"\n  achievements:\n    coverage:"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "63b3b0df-cabe-488b-8f59-9cce33da52a7",
+    "timestamp": "2025-10-16T19:32:44.466067Z"
+  },
+  "worm": {
+    "uuid": "94e8dbb5-352a-47e1-b8d4-46bc12d77adc",
+    "signature": "cf30ba0f108c50801345c0276155490014b3129844642942978940275781bf1a9a556628c3260805bffad4425f4fc62f6efa630786ed8128113a17732aad2832",
+    "chain_prev": "2a22b619-65d3-4e37-b21d-e59955096122"
+  },
+  "metadata": {
+    "component": "Meta Orchestration"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "cae1ba61-65e8-4c6b-8377-a3a1bbd480cb",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 91,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/reports/PHASE_2_GOLD_STATUS.md",
+    "hash": "36fd2e859dc89e4c92c6e93f9fac25dc4ddf703f3466335e3b0b263d2f949ac9250a6456906887264644fe1de17a72b882abd7acea054993364a3dc0177eb95b",
+    "line": 23,
+    "context": "|-------|-------|--------|--------------|\n| **Phase 1: Static Analysis** | 52/100 | 35% | 18.2 pts |\n| **Phase 2: Dynamic Execution** | 100/100 | 40% | 40.0 pts ⭐ |\n| **Phase 3: Audit Proof** | 91/100"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "593e05be-97b0-4caa-96fc-21039661bd8f",
+    "timestamp": "2025-10-16T19:32:02.820958Z"
+  },
+  "worm": {
+    "uuid": "82fe8cb3-4205-4d8d-899b-2625a02aa6bc",
+    "signature": "f5616c3fbfa425062ad12807144170145ae52f9dc4555f1da69d236e4e02f3219ada42e4870d4d722cf5d43450951a4c2e82251296883f6ab13dca8dc3cd1413",
+    "chain_prev": "829e3956-fbe7-48f2-8f5d-7e3297257421"
+  },
+  "metadata": {
+    "grade": "GOLD",
+    "component": "Audit & Compliance"
+  }
+}

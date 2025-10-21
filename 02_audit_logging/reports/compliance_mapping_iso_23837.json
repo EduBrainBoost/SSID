@@ -1,0 +1,304 @@
+{
+  "timestamp": "2025-10-13T19:43:53.712397Z",
+  "framework": "ISO_23837",
+  "source_file": "iso_23837_mapping.json",
+  "data": {
+    "meta": {
+      "framework": "ISO 23837",
+      "version": "2021",
+      "source": "ISO/IEC TS 23837:2021",
+      "last_updated": "2025-10-13T19:40:00Z",
+      "maintainer": "edubrainboost",
+      "status": "active",
+      "classification": "PUBLIC - Compliance Mapping",
+      "regulatory_basis": "ISO/IEC TS 23837:2021 - Security and Privacy in Digital Identity Management"
+    },
+    "mappings": [
+      {
+        "id": "ISO-23837-5.1",
+        "description": "Identity Proofing",
+        "applies_to": [
+          "09_meta_identity",
+          "14_zero_time_auth",
+          "08_identity_score"
+        ],
+        "verification": "automated",
+        "test_reference": "test_identity_proofing.py",
+        "controls": [
+          "Identity evidence collection",
+          "Evidence validation procedures",
+          "Identity verification methods",
+          "Assurance level determination"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-5.2",
+        "description": "Authentication",
+        "applies_to": [
+          "14_zero_time_auth",
+          "09_meta_identity",
+          "21_post_quantum_crypto"
+        ],
+        "verification": "automated",
+        "test_reference": "test_authentication.py",
+        "controls": [
+          "Multi-factor authentication",
+          "Authenticator assurance levels",
+          "Biometric authentication",
+          "Password-less authentication"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-5.3",
+        "description": "Lifecycle Management",
+        "applies_to": [
+          "09_meta_identity",
+          "03_core",
+          "18_data_layer"
+        ],
+        "verification": "automated",
+        "test_reference": "test_identity_lifecycle.py",
+        "controls": [
+          "Identity creation procedures",
+          "Identity update mechanisms",
+          "Identity suspension/revocation",
+          "Identity deletion (right to erasure)"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-5.4",
+        "description": "Federation and Interoperability",
+        "applies_to": [
+          "10_interoperability",
+          "09_meta_identity",
+          "19_adapters"
+        ],
+        "verification": "automated",
+        "test_reference": "test_federation.py",
+        "controls": [
+          "Trust framework establishment",
+          "Cross-domain authentication",
+          "Attribute exchange protocols",
+          "Federation metadata management"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-6.1",
+        "description": "Privacy by Design",
+        "applies_to": [
+          "09_meta_identity",
+          "18_data_layer",
+          "03_core"
+        ],
+        "verification": "automated",
+        "test_reference": "test_privacy_by_design.py",
+        "controls": [
+          "Data minimization",
+          "Purpose limitation",
+          "Storage limitation",
+          "Pseudonymization by default"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-6.2",
+        "description": "Consent Management",
+        "applies_to": [
+          "09_meta_identity",
+          "13_ui_layer",
+          "07_governance_legal"
+        ],
+        "verification": "automated",
+        "test_reference": "test_consent_mgmt.py",
+        "controls": [
+          "Consent capture mechanisms",
+          "Consent withdrawal procedures",
+          "Granular consent controls",
+          "Consent audit trail"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-6.3",
+        "description": "Attribute Release",
+        "applies_to": [
+          "09_meta_identity",
+          "08_identity_score",
+          "10_interoperability"
+        ],
+        "verification": "automated",
+        "test_reference": "test_attribute_release.py",
+        "controls": [
+          "Selective disclosure",
+          "Attribute minimization",
+          "User control over attributes",
+          "Attribute verification"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-7.1",
+        "description": "Cryptographic Protection",
+        "applies_to": [
+          "21_post_quantum_crypto",
+          "03_core",
+          "18_data_layer"
+        ],
+        "verification": "automated",
+        "test_reference": "test_crypto_protection.py",
+        "controls": [
+          "End-to-end encryption",
+          "At-rest encryption (AES-256-GCM)",
+          "In-transit encryption (TLS 1.3)",
+          "Post-quantum cryptography"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-7.2",
+        "description": "Key Management",
+        "applies_to": [
+          "21_post_quantum_crypto",
+          "09_meta_identity",
+          "20_foundation"
+        ],
+        "verification": "automated",
+        "test_reference": "test_key_management.py",
+        "controls": [
+          "Key generation (secure random)",
+          "Key storage (HSM/secure enclave)",
+          "Key rotation procedures",
+          "Key destruction"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-7.3",
+        "description": "Digital Signatures",
+        "applies_to": [
+          "21_post_quantum_crypto",
+          "09_meta_identity",
+          "02_audit_logging"
+        ],
+        "verification": "automated",
+        "test_reference": "test_digital_signatures.py",
+        "controls": [
+          "Signature creation",
+          "Signature verification",
+          "Non-repudiation guarantees",
+          "Post-quantum signature schemes"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-8.1",
+        "description": "Access Control",
+        "applies_to": [
+          "14_zero_time_auth",
+          "03_core",
+          "18_data_layer"
+        ],
+        "verification": "automated",
+        "test_reference": "test_access_control_idm.py",
+        "controls": [
+          "Attribute-based access control (ABAC)",
+          "Role-based access control (RBAC)",
+          "Policy-based access control",
+          "Dynamic access decisions"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-8.2",
+        "description": "Audit and Logging",
+        "applies_to": [
+          "02_audit_logging",
+          "17_observability",
+          "23_compliance"
+        ],
+        "verification": "automated",
+        "test_reference": "test_audit_logging_idm.py",
+        "controls": [
+          "Comprehensive audit trails",
+          "Tamper-evident logging (WORM)",
+          "Log retention policies",
+          "Audit log analysis"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-9.1",
+        "description": "Self-Sovereign Identity",
+        "applies_to": [
+          "09_meta_identity",
+          "20_foundation",
+          "03_core"
+        ],
+        "verification": "automated",
+        "test_reference": "test_ssi.py",
+        "controls": [
+          "User control of identity data",
+          "Decentralized identifier (DID) support",
+          "Verifiable credentials",
+          "Non-custodial architecture"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-23837-9.2",
+        "description": "Decentralized Identity Management",
+        "applies_to": [
+          "09_meta_identity",
+          "10_interoperability",
+          "20_foundation"
+        ],
+        "verification": "automated",
+        "test_reference": "test_decentralized_idm.py",
+        "controls": [
+          "Blockchain/DLT integration",
+          "Distributed trust model",
+          "Peer-to-peer verification",
+          "Cross-ledger interoperability"
+        ],
+        "implementation_status": "implemented"
+      }
+    ],
+    "compliance_metrics": {
+      "overall_coverage": "94%",
+      "automated_controls": 13,
+      "manual_controls": 1,
+      "implemented_controls": 14,
+      "pending_controls": 0
+    },
+    "references": [
+      {
+        "title": "ISO/IEC TS 23837:2021",
+        "url": "https://www.iso.org/standard/77136.html"
+      },
+      {
+        "title": "Digital Identity Guidelines (NIST SP 800-63-3)",
+        "url": "https://pages.nist.gov/800-63-3/"
+      },
+      {
+        "title": "W3C Decentralized Identifiers",
+        "url": "https://www.w3.org/TR/did-core/"
+      }
+    ],
+    "assurance_levels": {
+      "identity_assurance_level": "IAL3 (High)",
+      "authenticator_assurance_level": "AAL3 (Multi-factor with hardware)",
+      "federation_assurance_level": "FAL3 (Encrypted assertion)"
+    },
+    "implementation_notes": "SSID implements ISO 23837 with full support for self-sovereign identity (SSI), W3C DIDs, and verifiable credentials. Post-quantum cryptography ensures long-term security. Non-custodial architecture gives users complete control over identity data."
+  },
+  "score": {
+    "total_controls": 14,
+    "implemented": 14,
+    "planned": 0,
+    "score": 100.0
+  }
+}

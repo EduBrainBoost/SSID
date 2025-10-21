@@ -1,0 +1,98 @@
+name: pricing-policy-ci
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  policy-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x ./opa
+          sudo mv ./opa /usr/local/bin/opa
+          opa version
+
+      - name: Eval pricing policy with fixtures
+        run: |
+          echo '{
+            "tier": {"id":"global_proof_suite"},
+            "base_price_eur": 2000,
+            "active_regions": ["US-CAN"],
+            "addons": ["private_pqc_node","sla_247"],
+            "bundles": ["global_bundle"],
+            "term_months": 24,
+            "token_lock_proof": true
+          }' > payload.json
+          opa eval --format=json --data 23_compliance/policies/pricing_enforcement.rego             'data.ssid.pricing.computed_price_eur' -I payload.json | jq -r '.result[0].expressions[0].value' > price.txt
+          echo "Computed price: $(cat price.txt)"
+          test "$(cat price.txt)" -eq 15840
+
+      - name: Python mirror test
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: python - <<'PY'
+import json
+def region_percent(r): return {"DACH":0,"EN-EU":5,"US-CAN":10,"LATAM":7,"APAC-EN":5,"MENA":10,"AFRICA-EN":5}[r]
+def addon_price(a): return {"compliance_mesh":5000,"private_pqc_node":10000,"sla_247":3000,"dao_seat":7000,"govchain_bridge":8000}[a]
+def bundle_price(b): return {"eu_bundle":300,"global_bundle":1000}[b]
+def discount(term): return {0:0,12:5,24:10,36:15}[term]
+payload = {
+  "tier":{"id":"global_proof_suite"},
+  "base_price_eur":2000,
+  "active_regions":["US-CAN"],
+  "addons":["private_pqc_node","sla_247"],
+  "bundles":["global_bundle"],
+  "term_months":24,
+  "token_lock_proof":True
+}
+base = payload["base_price_eur"]
+add_total = sum(map(addon_price,payload["addons"]))
+bun_total = sum(map(bundle_price,payload["bundles"]))
+surcharge = sum(map(region_percent,payload["active_regions"])) / 100.0
+disc = discount(payload["term_months"])
+total = round((base + add_total + bun_total) * (1+surcharge) * (1 - disc/100.0))
+assert total == 15840, total
+print("mirror ok:", total)
+PY
+
+  build-wasm:
+    runs-on: ubuntu-latest
+    needs: policy-tests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x ./opa
+          sudo mv ./opa /usr/local/bin/opa
+          opa version
+
+      - name: Build pricing policy to WASM
+        run: |
+          mkdir -p build
+          opa build -t wasm -e data.ssid.pricing.computed_price_eur -o build/pricing_enforcement.wasm 23_compliance/policies/
+
+      - name: Compute SHA-256 and move artifact
+        run: |
+          sha256sum build/pricing_enforcement.wasm | awk '{print $1}' > build/pricing_enforcement.sha256
+          mkdir -p 23_compliance/policies
+          mv build/pricing_enforcement.wasm 23_compliance/policies/pricing_enforcement.wasm
+          mv build/pricing_enforcement.sha256 23_compliance/policies/pricing_enforcement.sha256
+
+      - name: Upload WASM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pricing_enforcement_wasm
+          path: |
+            23_compliance/policies/pricing_enforcement.wasm
+            23_compliance/policies/pricing_enforcement.sha256

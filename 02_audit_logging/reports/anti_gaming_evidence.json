@@ -1,0 +1,147 @@
+{
+  "anomaly_detection": {
+    "anomalies": [],
+    "anomalies_found": 0,
+    "severity_breakdown": {
+      "critical": 0,
+      "high": 0,
+      "low": 0,
+      "medium": 0
+    }
+  },
+  "anti_gaming_evidence": {
+    "log_files_found": 8,
+    "logs": [
+      {
+        "entries": 30,
+        "file": "anti_gaming_anomaly_rate.jsonl",
+        "modified": "2025-10-16T15:35:42.773492+00:00",
+        "path": "logs\\anti_gaming_anomaly_rate.jsonl",
+        "size_bytes": 8880
+      },
+      {
+        "entries": 59,
+        "file": "anti_gaming_badge_integrity.jsonl",
+        "modified": "2025-10-16T15:35:43.452527+00:00",
+        "path": "logs\\anti_gaming_badge_integrity.jsonl",
+        "size_bytes": 5856
+      },
+      {
+        "entries": 35,
+        "file": "anti_gaming_circular_deps.jsonl",
+        "modified": "2025-10-16T15:35:34.124931+00:00",
+        "path": "logs\\anti_gaming_circular_deps.jsonl",
+        "size_bytes": 7315
+      },
+      {
+        "entries": 37,
+        "file": "anti_gaming_dependency_graph.jsonl",
+        "modified": "2025-10-16T15:35:41.865756+00:00",
+        "path": "logs\\anti_gaming_dependency_graph.jsonl",
+        "size_bytes": 11836
+      },
+      {
+        "entries": 11,
+        "file": "anti_gaming_duplicate_hashes.jsonl",
+        "modified": "2025-10-07T11:43:10.980392+00:00",
+        "path": "logs\\anti_gaming_duplicate_hashes.jsonl",
+        "size_bytes": 1870
+      },
+      {
+        "entries": 33,
+        "file": "anti_gaming_overfitting.jsonl",
+        "modified": "2025-10-16T15:35:42.044398+00:00",
+        "path": "logs\\anti_gaming_overfitting.jsonl",
+        "size_bytes": 8943
+      },
+      {
+        "entries": 25,
+        "file": "anti_gaming_replay.jsonl",
+        "modified": "2025-10-16T15:35:42.204958+00:00",
+        "path": "logs\\anti_gaming_replay.jsonl",
+        "size_bytes": 4825
+      },
+      {
+        "entries": 26,
+        "file": "anti_gaming_time_skew.jsonl",
+        "modified": "2025-10-16T15:35:42.629704+00:00",
+        "path": "logs\\anti_gaming_time_skew.jsonl",
+        "size_bytes": 75920
+      }
+    ],
+    "total_entries": 256
+  },
+  "ci_context": {
+    "commit_sha": "test123abc",
+    "run_id": "12345",
+    "timestamp": "2025-10-16T16:40:08.074383+00:00"
+  },
+  "correlation": {
+    "anti_gaming_logs_to_worm_ratio": 10.24,
+    "evidence_coverage_score": 100
+  },
+  "metadata": {
+    "generated_at": "2025-10-16T16:40:08.074383+00:00",
+    "purpose": "Anti-Gaming Evidence Snapshot for CI Correlation",
+    "report_version": "1.0.0",
+    "tool": "anti_gaming_evidence.py"
+  },
+  "signature": {
+    "algorithm": "SHA-512 + BLAKE2b",
+    "blake2b": "54a599a192df7fbf92171fed8c656f1ba4020e2558a6df4245da2abcb48e27b542794382f27be3ee178cb52cc09f4ab5e621d2d2ea453b5b770b68fc770e76b0",
+    "sha512": "285e34ad904e568f7eb835bcb38774d0216573f8075c12d79ec2be8850e090faafa63cd49f93ad8e3d048617e520f029c53855eb921f2e8cfcb32ddb4402ff5d"
+  },
+  "summary": {
+    "anti_gaming_coverage": "72%",
+    "status": "OPERATIONAL",
+    "worm_integrity": "VERIFIED"
+  },
+  "worm_chain_status": {
+    "chain_intact": true,
+    "entries": [
+      {
+        "certification": "NONE",
+        "file": "sot_enforcement_v2_20251016T161412565138Z_2f84a6c0-4735-407d-83bf-627989fd711b.json",
+        "score": 0,
+        "timestamp": "unknown",
+        "uuid": "unknown"
+      },
+      {
+        "certification": "NONE",
+        "file": "sot_enforcement_v2_20251016T161430930275Z_6ae4d54c-dec9-435a-b3d3-eb5bfd8561a2.json",
+        "score": 0,
+        "timestamp": "unknown",
+        "uuid": "unknown"
+      },
+      {
+        "certification": "NONE",
+        "file": "sot_enforcement_v2_20251016T161512054826Z_6e4f78d2-cfac-4ef3-87df-cb34388741a2.json",
+        "score": 0,
+        "timestamp": "unknown",
+        "uuid": "unknown"
+      },
+      {
+        "certification": "NONE",
+        "file": "sot_enforcement_v2_20251016T161514682170Z_a9dfb98e-f213-431b-a927-a6aadfa5c1e8.json",
+        "score": 0,
+        "timestamp": "unknown",
+        "uuid": "unknown"
+      },
+      {
+        "certification": "NONE",
+        "file": "sot_enforcement_v2_20251016T163136253725Z_7a87340f-2029-4cae-9220-d34f66d66ee4.json",
+        "score": 0,
+        "timestamp": "unknown",
+        "uuid": "unknown"
+      }
+    ],
+    "entries_found": 25,
+    "latest_entry": {
+      "certification": "NONE",
+      "file": "sot_enforcement_v2_20251015T190404145015Z_a75d61ef-1237-4b6f-b574-256ff1545439.json",
+      "score": 0,
+      "timestamp": "unknown",
+      "uuid": "unknown"
+    }
+  }
+}

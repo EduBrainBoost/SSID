@@ -21,7 +21,6 @@ spec.loader.exec_module(module)
 detect_cycles = module.detect_cycles
 Edge = module.Edge
 
-
 def test_simple_cycle():
     """Test simple 3-node cycle."""
     edges = [("A", "B"), ("B", "C"), ("C", "A")]
@@ -31,13 +30,11 @@ def test_simple_cycle():
     assert "B" in cycles[0]
     assert "C" in cycles[0]
 
-
 def test_no_cycle():
     """Test acyclic graph."""
     edges = [("A", "B"), ("B", "C")]
     cycles = detect_cycles(edges)
     assert cycles == []
-
 
 def test_self_loop():
     """Test node pointing to itself."""
@@ -47,14 +44,12 @@ def test_self_loop():
     # Self-loop should be detected as a cycle
     assert "A" in cycles[0]
 
-
 def test_two_node_cycle():
     """Test minimal cycle with 2 nodes."""
     edges = [("A", "B"), ("B", "A")]
     cycles = detect_cycles(edges)
     assert len(cycles) == 1
     assert set(cycles[0][:2]) == {"A", "B"}
-
 
 def test_multiple_independent_cycles():
     """Test graph with multiple independent cycles."""
@@ -66,7 +61,6 @@ def test_multiple_independent_cycles():
     ]
     cycles = detect_cycles(edges)
     assert len(cycles) >= 2  # Should detect at least 2 cycles
-
 
 def test_nested_cycles():
     """Test graph with nested/overlapping cycles."""
@@ -81,7 +75,6 @@ def test_nested_cycles():
     # Should detect both cycles
     assert len(cycles) >= 2
 
-
 def test_large_cycle():
     """Test cycle with many nodes."""
     # Create a cycle: 0 -> 1 -> 2 -> ... -> 99 -> 0
@@ -90,20 +83,17 @@ def test_large_cycle():
     assert len(cycles) == 1
     assert len(cycles[0]) >= 100  # Should include all nodes in cycle
 
-
 def test_empty_graph():
     """Test with no edges."""
     edges = []
     cycles = detect_cycles(edges)
     assert cycles == []
 
-
 def test_single_edge():
     """Test with single edge (no cycle)."""
     edges = [("A", "B")]
     cycles = detect_cycles(edges)
     assert cycles == []
-
 
 def test_disconnected_components():
     """Test graph with disconnected components."""
@@ -116,7 +106,6 @@ def test_disconnected_components():
     cycles = detect_cycles(edges)
     # Should detect the X-Y cycle
     assert len(cycles) >= 1
-
 
 def test_complex_graph():
     """Test realistic complex dependency graph."""
@@ -136,7 +125,6 @@ def test_complex_graph():
     assert "foundation" in cycle_nodes
     assert "meta" in cycle_nodes
 
-
 def test_diamond_pattern_no_cycle():
     """Test diamond dependency pattern (no cycle)."""
     edges = [
@@ -148,7 +136,6 @@ def test_diamond_pattern_no_cycle():
     cycles = detect_cycles(edges)
     assert cycles == []
 
-
 def test_multiple_edges_same_nodes():
     """Test duplicate edges (should handle gracefully)."""
     edges = [
@@ -159,7 +146,6 @@ def test_multiple_edges_same_nodes():
     cycles = detect_cycles(edges)
     # Should still detect the A-B cycle
     assert len(cycles) >= 1
-
 
 def test_cycle_with_tail():
     """Test cycle with non-cyclic tail."""
@@ -178,7 +164,6 @@ def test_cycle_with_tail():
     # "Start" should not be in the cycle
     assert "Start" not in cycle_nodes or cycle_nodes.count("Start") <= 1
 
-
 def test_numeric_node_ids():
     """Test with numeric node identifiers."""
     edges = [
@@ -191,7 +176,6 @@ def test_numeric_node_ids():
     cycles = detect_cycles(edges_str)
     assert len(cycles) == 1
 
-
 def test_special_characters_in_nodes():
     """Test with special characters in node names."""
     edges = [
@@ -201,7 +185,6 @@ def test_special_characters_in_nodes():
     ]
     cycles = detect_cycles(edges)
     assert len(cycles) == 1
-
 
 def test_long_path_to_cycle():
     """Test long acyclic path leading to a cycle."""
@@ -224,7 +207,6 @@ def test_long_path_to_cycle():
     assert "F" in cycle_nodes
     assert "G" in cycle_nodes
 
-
 def test_bidirectional_edges():
     """Test graph with bidirectional edges."""
     edges = [
@@ -237,7 +219,6 @@ def test_bidirectional_edges():
     # Should detect A-B and B-C cycles
     assert len(cycles) >= 2
 
-
 def test_star_topology_no_cycle():
     """Test star topology (central node with spokes, no cycle)."""
     edges = [
@@ -248,7 +229,6 @@ def test_star_topology_no_cycle():
     ]
     cycles = detect_cycles(edges)
     assert cycles == []
-
 
 def test_complete_graph_small():
     """Test small complete graph (all nodes connected to all)."""
@@ -262,7 +242,6 @@ def test_complete_graph_small():
     # Should detect multiple cycles
     assert len(cycles) >= 1
 
-
 def test_cycle_normalization():
     """Test that functionally identical cycles are detected correctly."""
     # Same cycle but starting from different points
@@ -275,7 +254,6 @@ def test_cycle_normalization():
     # Both should detect the same cycle
     assert len(cycles1) == len(cycles2) == 1
 
-
 def test_sink_nodes():
     """Test graph with sink nodes (nodes with no outgoing edges)."""
     edges = [
@@ -286,7 +264,6 @@ def test_sink_nodes():
     ]
     cycles = detect_cycles(edges)
     assert cycles == []
-
 
 def test_source_nodes():
     """Test graph with source nodes (nodes with no incoming edges)."""
@@ -302,7 +279,6 @@ def test_source_nodes():
     cycle_nodes = set(cycles[0])
     assert "A" in cycle_nodes
     assert "B" in cycle_nodes
-
 
 def test_realistic_module_dependencies():
     """Test realistic software module dependency scenario."""

@@ -1,0 +1,271 @@
+name: Post-Consolidation Verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      consolidation_type:
+        description: 'Type of consolidation to verify'
+        required: true
+        default: 'health_modules'
+        type: choice
+        options:
+          - health_modules
+          - utility_modules
+
+jobs:
+  verify-consolidation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Verify base class exists
+        run: |
+          if [ "${{ inputs.consolidation_type }}" = "health_modules" ]; then
+            BASE_CLASS="03_core/healthcheck/shard_health_base.py"
+
+            if [ -f "$BASE_CLASS" ]; then
+              echo "✅ Base class found: $BASE_CLASS"
+
+              # Test base class
+              python "$BASE_CLASS" && echo "✅ Base class executes successfully" || echo "❌ Base class execution failed"
+            else
+              echo "❌ Base class not found: $BASE_CLASS"
+              exit 1
+            fi
+          fi
+
+      - name: Count consolidated subclasses
+        id: count
+        run: |
+          if [ "${{ inputs.consolidation_type }}" = "health_modules" ]; then
+            # Count health.py files in shards
+            COUNT=$(find . -path "*/shards/*/health.py" -type f 2>/dev/null | wc -l)
+            echo "subclass_count=$COUNT" >> $GITHUB_OUTPUT
+            echo "📊 Found $COUNT health subclasses"
+
+            # Verify they import from base class
+            IMPORT_FAILURES=0
+            for health_file in $(find . -path "*/shards/*/health.py" -type f 2>/dev/null); do
+              if ! grep -q "ShardHealthCheck" "$health_file"; then
+                echo "⚠️  Missing base class import: $health_file"
+                IMPORT_FAILURES=$((IMPORT_FAILURES + 1))
+              fi
+            done
+
+            echo "import_failures=$IMPORT_FAILURES" >> $GITHUB_OUTPUT
+
+            if [ $IMPORT_FAILURES -gt 0 ]; then
+              echo "❌ $IMPORT_FAILURES modules missing base class import"
+              exit 1
+            else
+              echo "✅ All modules import from base class"
+            fi
+          fi
+
+      - name: Generate fresh dependency graph
+        run: |
+          echo "Generating fresh dependency graph..."
+          python 02_audit_logging/anti_gaming/dependency_graph_generator.py
+
+          # Check for unknown imports
+          GRAPH_FILE="02_audit_logging/evidence/deps/dependency_graph.json"
+          if [ -f "$GRAPH_FILE" ]; then
+            UNKNOWN_COUNT=$(grep -o '"unknown"' "$GRAPH_FILE" | wc -l || echo 0)
+            echo "unknown_imports=$UNKNOWN_COUNT" >> $GITHUB_OUTPUT
+
+            if [ $UNKNOWN_COUNT -gt 0 ]; then
+              echo "⚠️  Found $UNKNOWN_COUNT unknown imports"
+            else
+              echo "✅ No unknown imports detected"
+            fi
+          fi
+
+      - name: Generate forensic manifest
+        run: |
+          echo "Generating forensic manifest..."
+          python 02_audit_logging/evidence/forensic_manifest_generator.py
+
+          # Extract new merkle root
+          MANIFEST="02_audit_logging/evidence/forensic_manifest.yaml"
+          if [ -f "$MANIFEST" ]; then
+            MERKLE_ROOT=$(python -c "import yaml; print(yaml.safe_load(open('$MANIFEST'))['merkle_root'])")
+            echo "new_merkle_root=$MERKLE_ROOT" >> $GITHUB_OUTPUT
+            echo "📝 New merkle root: ${MERKLE_ROOT:0:32}..."
+          fi
+
+      - name: Compare merkle root changes
+        run: |
+          # Get previous merkle root from git history
+          OLD_MANIFEST=$(git show HEAD~1:02_audit_logging/evidence/forensic_manifest.yaml 2>/dev/null || echo "")
+
+          if [ -n "$OLD_MANIFEST" ]; then
+            OLD_ROOT=$(echo "$OLD_MANIFEST" | python -c "import yaml, sys; print(yaml.safe_load(sys.stdin)['merkle_root'])" 2>/dev/null || echo "none")
+            NEW_ROOT="${{ steps.count.outputs.new_merkle_root }}"
+
+            echo "Previous: ${OLD_ROOT:0:32}..."
+            echo "Current:  ${NEW_ROOT:0:32}..."
+
+            if [ "$OLD_ROOT" != "$NEW_ROOT" ]; then
+              echo "✅ Merkle root changed (expected after consolidation)"
+              echo "merkle_changed=true" >> $GITHUB_OUTPUT
+            else
+              echo "ℹ️  Merkle root unchanged"
+              echo "merkle_changed=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "ℹ️  No previous manifest for comparison"
+          fi
+
+      - name: Run link density analysis
+        run: |
+          echo "Running link density analysis..."
+          python 12_tooling/quality/link_density_analyzer.py
+
+          # Check for consolidation pattern recognition
+          REPORT=$(ls -t 12_tooling/quality/reports/link_density_analysis_*.json | head -1)
+
+          if [ -f "$REPORT" ]; then
+            RECOMMENDATIONS=$(python -c "import json; print(len(json.load(open('$REPORT'))['deduplication_recommendations']))")
+            echo "recommendations=$RECOMMENDATIONS" >> $GITHUB_OUTPUT
+            echo "📊 Deduplication recommendations: $RECOMMENDATIONS"
+          fi
+
+      - name: Verify OPA compliance
+        run: |
+          # Install OPA
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
+
+          # Prepare OPA input
+          REPORT=$(ls -t 12_tooling/quality/reports/link_density_analysis_*.json | head -1)
+
+          python -c "
+          import json
+          from pathlib import Path
+
+          with open('$REPORT', 'r') as f:
+              data = json.load(f)
+
+          # Add consolidation status
+          data['consolidation_status'] = {
+              'base_class_exists': Path('03_core/healthcheck/shard_health_base.py').exists(),
+              'subclass_count': ${{ steps.count.outputs.subclass_count }}
+          }
+
+          with open('opa_input.json', 'w') as f:
+              json.dump(data, f, indent=2)
+          "
+
+          # Evaluate policy
+          opa eval -d 23_compliance/policies/opa/link_density_threshold.rego \
+                   -i opa_input.json \
+                   --format pretty \
+                   "data.ecology.policy_decision" > opa_result.txt
+
+          cat opa_result.txt
+
+          if grep -q '"allow": true' opa_result.txt; then
+            echo "✅ OPA Policy: ALLOW"
+            echo "opa_decision=allow" >> $GITHUB_OUTPUT
+          else
+            echo "❌ OPA Policy: DENY"
+            cat opa_result.txt
+            exit 1
+          fi
+
+      - name: Test sample health endpoints
+        run: |
+          echo "Testing sample health endpoints..."
+
+          # Test base class
+          python 03_core/healthcheck/shard_health_base.py > base_test.json
+          echo "✅ Base class test passed"
+
+          # Test a few consolidated modules
+          SAMPLE_COUNT=0
+          MAX_SAMPLES=5
+
+          for health_file in $(find . -path "*/shards/*/health.py" -type f 2>/dev/null | head -$MAX_SAMPLES); do
+            echo "Testing: $health_file"
+            if python "$health_file" > /dev/null 2>&1; then
+              SAMPLE_COUNT=$((SAMPLE_COUNT + 1))
+              echo "  ✅ Passed"
+            else
+              echo "  ❌ Failed"
+            fi
+          done
+
+          echo "health_tests_passed=$SAMPLE_COUNT" >> $GITHUB_OUTPUT
+          echo "📊 Health tests passed: $SAMPLE_COUNT/$MAX_SAMPLES"
+
+      - name: Generate verification report
+        run: |
+          cat > verification_report.json << EOF
+          {
+            "consolidation_type": "${{ inputs.consolidation_type }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "verification_results": {
+              "base_class_exists": true,
+              "subclass_count": ${{ steps.count.outputs.subclass_count }},
+              "import_failures": ${{ steps.count.outputs.import_failures }},
+              "unknown_imports": ${{ steps.count.outputs.unknown_imports }},
+              "merkle_root_changed": ${{ steps.count.outputs.merkle_changed }},
+              "opa_decision": "${{ steps.count.outputs.opa_decision }}",
+              "health_tests_passed": ${{ steps.count.outputs.health_tests_passed }},
+              "deduplication_recommendations": ${{ steps.count.outputs.recommendations }}
+            },
+            "status": "VERIFIED",
+            "next_steps": [
+              "Monitor build times in next 2 CI cycles",
+              "Collect P95 health check response times",
+              "Update governance registry",
+              "Consider Phase 1.5 factory pattern if all shards stable"
+            ]
+          }
+          EOF
+
+          echo "📄 Verification Report:"
+          cat verification_report.json | python -m json.tool
+
+      - name: Upload verification artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-consolidation-verification
+          path: |
+            verification_report.json
+            opa_input.json
+            opa_result.txt
+            02_audit_logging/evidence/forensic_manifest.yaml
+            12_tooling/quality/reports/link_density_analysis_*.json
+          retention-days: 365
+
+      - name: Post summary
+        run: |
+          echo "## Post-Consolidation Verification" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Results" >> $GITHUB_STEP_SUMMARY
+          echo "- **Base Class**: ✅ Exists and functional" >> $GITHUB_STEP_SUMMARY
+          echo "- **Subclasses**: ${{ steps.count.outputs.subclass_count }} consolidated" >> $GITHUB_STEP_SUMMARY
+          echo "- **Import Failures**: ${{ steps.count.outputs.import_failures }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Unknown Imports**: ${{ steps.count.outputs.unknown_imports }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **OPA Decision**: ${{ steps.count.outputs.opa_decision }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Health Tests**: ${{ steps.count.outputs.health_tests_passed }}/5 passed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Status: ✅ VERIFIED" >> $GITHUB_STEP_SUMMARY

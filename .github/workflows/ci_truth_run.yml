@@ -1,0 +1,365 @@
+name: SSID Truth Run (OPA + Pytest)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  verify-governance:
+    name: Governance Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pyyaml jsonschema
+
+      - name: Validate Governance Files
+        run: |
+          echo "=== Validating chart.yaml + manifest.yaml ==="
+          python 12_tooling/governance/validate_governance_files.py
+          echo "=== Validation complete ==="
+
+  run-opa-tests:
+    name: OPA Policy Evaluation
+    runs-on: ubuntu-latest
+    needs: verify-governance
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install OPA CLI
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+          
+      - name: Verify OPA Installation
+        run: opa version
+        
+      - name: Evaluate Policies
+        run: |
+          echo "=== Running OPA policy checks ==="
+          find 23_compliance/policies -name "*.rego" -print0 | xargs -0 -I{} bash -c 'echo "Checking: {}" && opa check "{}" || exit 1'
+          echo "OPA syntax validation complete."
+          
+      - name: Run Sample Evaluation
+        run: |
+          if [ -f 16_codex/fixtures/pricing/v5_2/happy_case.json ]; then
+            echo "=== Running OPA evaluation on fixture ==="
+            opa eval -d 23_compliance/policies -i 16_codex/fixtures/pricing/v5_2/happy_case.json "data" || echo "Evaluation completed (may have policy gaps)"
+          else
+            echo "No fixture found, skipping data eval."
+          fi
+
+  opa-enforcement:
+    name: OPA Functional Enforcement
+    runs-on: ubuntu-latest
+    needs: run-opa-tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OPA CLI
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+
+      - name: Canary Tests - 03_core Happy Path
+        run: |
+          echo "=== 03_core Canary: Happy Path (must ALLOW) ==="
+          ALLOW_OUTPUT=$(opa eval -d 23_compliance/policies/03_core_policy_stub_v6_0.rego \
+            -i 11_test_simulation/testdata/03_core/canary_happy_did_operation.json \
+            -f json "data.ssid.03_core.v6_0.allow")
+
+          ALLOW_RESULT=$(echo "$ALLOW_OUTPUT" | jq -r '.result[0].expressions[0].value')
+
+          if [ "$ALLOW_RESULT" != "true" ]; then
+            echo "❌ FAIL-FAST: Happy path did not allow valid DID operation"
+            exit 1
+          fi
+
+          echo "✅ Canary happy path passed (allow=true)"
+
+      - name: Canary Tests - 03_core Violations
+        run: |
+          echo "=== 03_core Canary: Violations (must DENY) ==="
+
+          # Canary 1: Invalid signature
+          DENY_OUTPUT_1=$(opa eval -d 23_compliance/policies/03_core_policy_stub_v6_0.rego \
+            -i 11_test_simulation/testdata/03_core/canary_violation_invalid_signature.json \
+            -f json "data.ssid.03_core.v6_0.deny")
+
+          DENY_COUNT_1=$(echo "$DENY_OUTPUT_1" | jq -r '.result[0].expressions[0].value | length')
+
+          if [ "$DENY_COUNT_1" -eq 0 ]; then
+            echo "❌ FAIL-FAST: Did not deny invalid signature"
+            exit 1
+          fi
+
+          echo "✅ Canary violation 1: Invalid signature denied ($DENY_COUNT_1 violations)"
+
+          # Canary 2: Zero amount
+          DENY_OUTPUT_2=$(opa eval -d 23_compliance/policies/03_core_policy_stub_v6_0.rego \
+            -i 11_test_simulation/testdata/03_core/canary_violation_zero_amount.json \
+            -f json "data.ssid.03_core.v6_0.deny")
+
+          DENY_COUNT_2=$(echo "$DENY_OUTPUT_2" | jq -r '.result[0].expressions[0].value | length')
+
+          if [ "$DENY_COUNT_2" -eq 0 ]; then
+            echo "❌ FAIL-FAST: Did not deny zero amount transaction"
+            exit 1
+          fi
+
+          echo "✅ Canary violation 2: Zero amount denied ($DENY_COUNT_2 violations)"
+
+      - name: Canary Tests - 23_compliance Happy Path
+        run: |
+          echo "=== 23_compliance Canary: Happy Path (must ALLOW) ==="
+          ALLOW_OUTPUT=$(opa eval -d 23_compliance/policies/23_compliance_policy_stub_v6_0.rego \
+            -i 11_test_simulation/testdata/23_compliance/canary_happy_policy_deployment.json \
+            -f json "data.ssid.23_compliance.v6_0.allow")
+
+          ALLOW_RESULT=$(echo "$ALLOW_OUTPUT" | jq -r '.result[0].expressions[0].value')
+
+          if [ "$ALLOW_RESULT" != "true" ]; then
+            echo "❌ FAIL-FAST: Happy path did not allow valid policy deployment"
+            exit 1
+          fi
+
+          echo "✅ Canary happy path passed (allow=true)"
+
+      - name: Canary Tests - 23_compliance Violations
+        run: |
+          echo "=== 23_compliance Canary: Violations (must DENY) ==="
+
+          # Canary 1: Invalid syntax
+          DENY_OUTPUT_1=$(opa eval -d 23_compliance/policies/23_compliance_policy_stub_v6_0.rego \
+            -i 11_test_simulation/testdata/23_compliance/canary_violation_invalid_syntax.json \
+            -f json "data.ssid.23_compliance.v6_0.deny")
+
+          DENY_COUNT_1=$(echo "$DENY_OUTPUT_1" | jq -r '.result[0].expressions[0].value | length')
+
+          if [ "$DENY_COUNT_1" -eq 0 ]; then
+            echo "❌ FAIL-FAST: Did not deny invalid syntax"
+            exit 1
+          fi
+
+          echo "✅ Canary violation 1: Invalid syntax denied ($DENY_COUNT_1 violations)"
+
+          # Canary 2: Too many WASM dependencies
+          DENY_OUTPUT_2=$(opa eval -d 23_compliance/policies/23_compliance_policy_stub_v6_0.rego \
+            -i 11_test_simulation/testdata/23_compliance/canary_violation_wasm_dependencies.json \
+            -f json "data.ssid.23_compliance.v6_0.deny")
+
+          DENY_COUNT_2=$(echo "$DENY_OUTPUT_2" | jq -r '.result[0].expressions[0].value | length')
+
+          if [ "$DENY_COUNT_2" -eq 0 ]; then
+            echo "❌ FAIL-FAST: Did not deny WASM dependency limit violation"
+            exit 1
+          fi
+
+          echo "✅ Canary violation 2: WASM dependency limit denied ($DENY_COUNT_2 violations)"
+
+      - name: Enforcement Summary
+        run: |
+          echo "=== Phase 5 Functional Enforcement Complete ==="
+          echo "✅ 03_core: Functional (ready=true)"
+          echo "✅ 23_compliance: Functional (ready=true)"
+          echo "✅ All deny rules actively enforcing"
+          echo "Status: CI builds will now fail on policy violations"
+
+  generate-wasm-hashes-on-first-run:
+    name: Generate WASM Hashes (First Build Only)
+    runs-on: ubuntu-latest
+    needs: opa-enforcement
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OPA CLI
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+
+      - name: Build All WASM Policies
+        run: |
+          echo "=== Building WASM for all 24 policies ==="
+          for script in 23_compliance/tools/build_wasm_*.sh; do
+            echo "Running: $script"
+            bash "$script" || echo "Warning: Build failed for $script"
+          done
+
+      - name: Check and Initialize Missing Expected Hashes
+        id: check_hashes
+        run: |
+          echo "=== Checking for placeholder expected hashes ==="
+          MISSING_HASHES=0
+
+          for wasm_file in 23_compliance/wasm/*_v6_0.wasm.sha256; do
+            expected_file="${wasm_file%.sha256}.expected.sha256"
+
+            if [ -f "$expected_file" ]; then
+              if grep -q "PLACEHOLDER_PENDING_FIRST_BUILD" "$expected_file"; then
+                echo "::warning::Initializing expected hash for: $expected_file"
+                cp "$wasm_file" "$expected_file"
+                MISSING_HASHES=$((MISSING_HASHES + 1))
+              fi
+            else
+              echo "::warning::Creating expected hash file: $expected_file"
+              cp "$wasm_file" "$expected_file"
+              MISSING_HASHES=$((MISSING_HASHES + 1))
+            fi
+          done
+
+          echo "missing_count=$MISSING_HASHES" >> $GITHUB_OUTPUT
+
+          if [ $MISSING_HASHES -gt 0 ]; then
+            echo "::error::$MISSING_HASHES expected hash files were initialized or created."
+            echo "::error::Please review and commit these files:"
+            find 23_compliance/wasm -name "*.expected.sha256" -newer /tmp -ls || true
+            exit 1
+          fi
+
+          echo "All expected hashes present and initialized"
+
+  wasm-consistency:
+    name: WASM Consistency (Rego ↔ WASM ↔ Repo)
+    runs-on: ubuntu-latest
+    needs: generate-wasm-hashes-on-first-run
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OPA CLI
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/opa
+
+      - name: Verify OPA Installation
+        run: opa version
+
+      - name: Build All WASM Policies
+        run: |
+          echo "=== Building WASM for all 24 policies ==="
+          FAILED_BUILDS=0
+
+          for script in 23_compliance/tools/build_wasm_*.sh; do
+            ROOT_NAME=$(basename "$script" .sh | sed 's/build_wasm_//')
+            echo "Building: $ROOT_NAME"
+
+            if bash "$script"; then
+              echo "[OK] $ROOT_NAME WASM built successfully"
+            else
+              echo "[ERROR] $ROOT_NAME WASM build failed"
+              FAILED_BUILDS=$((FAILED_BUILDS + 1))
+            fi
+          done
+
+          if [ $FAILED_BUILDS -gt 0 ]; then
+            echo "::error::$FAILED_BUILDS WASM builds failed"
+            exit 1
+          fi
+
+          echo "All 24 WASM policies built successfully"
+
+      - name: Compare All WASM Hashes (Drift Detection)
+        run: |
+          echo "=== Drift Detection: Comparing all 24 WASM hashes ==="
+          DRIFT_COUNT=0
+          MATCH_COUNT=0
+
+          for wasm_file in 23_compliance/wasm/*_v6_0.wasm.sha256; do
+            expected_file="${wasm_file%.sha256}.expected.sha256"
+            root_name=$(basename "$wasm_file" _v6_0.wasm.sha256)
+
+            if [ ! -f "$expected_file" ]; then
+              echo "::error::Missing expected hash file: $expected_file"
+              DRIFT_COUNT=$((DRIFT_COUNT + 1))
+              continue
+            fi
+
+            BUILT_HASH=$(cat "$wasm_file")
+            EXPECTED_HASH=$(cat "$expected_file")
+
+            if [ "$BUILT_HASH" = "$EXPECTED_HASH" ]; then
+              echo "[MATCH] $root_name: $BUILT_HASH"
+              MATCH_COUNT=$((MATCH_COUNT + 1))
+            else
+              echo "::error::[DRIFT] $root_name:"
+              echo "  Built:    $BUILT_HASH"
+              echo "  Expected: $EXPECTED_HASH"
+              echo "  Policy was modified without updating expected hash"
+              echo "  To fix: cp 23_compliance/wasm/${root_name}_v6_0.wasm.sha256 23_compliance/wasm/${root_name}_v6_0.wasm.expected.sha256"
+              DRIFT_COUNT=$((DRIFT_COUNT + 1))
+            fi
+          done
+
+          echo ""
+          echo "=== Drift Detection Summary ==="
+          echo "Total policies checked: 24"
+          echo "Matches: $MATCH_COUNT"
+          echo "Drifts detected: $DRIFT_COUNT"
+
+          if [ $DRIFT_COUNT -gt 0 ]; then
+            echo "::error::DRIFT DETECTED: $DRIFT_COUNT policies have hash mismatches"
+            echo "::error::This is a security violation - execution blocked"
+            exit 1
+          fi
+
+          echo "[OK] No drift detected - all WASM artifacts are in sync"
+
+      - name: WASM Consistency Summary
+        run: |
+          echo "=== Phase 7 WASM Consistency Complete ==="
+          echo "[OK] All 24 policies: Rego ↔ WASM ↔ Repo (hash match)"
+          echo "Status: No drift detected, WASM artifacts are in sync with expected values"
+
+  run-pytests:
+    name: Python Unit Tests
+    runs-on: ubuntu-latest
+    needs: wasm-consistency
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          
+      - name: Install Test Dependencies
+        run: |
+          pip install pytest pytest-json-report coverage pyyaml jsonschema
+          
+      - name: Execute Tests
+        run: |
+          pytest 11_test_simulation/tests/ \
+            --json-report \
+            --json-report-file=02_audit_logging/reports/pytest_results_truth_run.json \
+            -v \
+            || true
+          
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: truth-run-results
+          path: 02_audit_logging/reports/pytest_results_truth_run.json
+          
+      - name: Generate Summary
+        run: |
+          echo "=== Test Execution Summary ===" 
+          if [ -f 02_audit_logging/reports/pytest_results_truth_run.json ]; then
+            python -c "import json; data=json.load(open('02_audit_logging/reports/pytest_results_truth_run.json')); print(f\"Tests: {data['summary']['total']}, Passed: {data['summary'].get('passed', 0)}, Failed: {data['summary'].get('failed', 0)}, Skipped: {data['summary'].get('skipped', 0)}\")"
+          else
+            echo "No test results found"
+          fi

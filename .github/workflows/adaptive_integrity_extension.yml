@@ -1,0 +1,271 @@
+name: Adaptive Integrity Extension - Digital Fever
+
+on:
+  # Monthly execution (every 30 days on 1st of month at 03:00 UTC)
+  schedule:
+    - cron: '0 3 1 * *'
+
+  # Manual workflow dispatch
+  workflow_dispatch:
+    inputs:
+      test_mode:
+        description: 'Run in test mode (simulate without actual daemon calls)'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  digital-fever:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Install OPA (optional)
+        run: |
+          # Try to install OPA for policy evaluation
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 || true
+          chmod +x opa || true
+          sudo mv opa /usr/local/bin/ || true
+
+      - name: Execute Adaptive Integrity Extension
+        id: selftest
+        run: |
+          echo "==================== ADAPTIVE INTEGRITY EXTENSION ===================="
+
+          # Determine test mode
+          TEST_MODE_FLAG=""
+          if [ "${{ github.event.inputs.test_mode }}" == "true" ]; then
+            TEST_MODE_FLAG="--test-mode"
+            echo "Running in TEST MODE (simulated)"
+          else
+            echo "Running in PRODUCTION MODE (actual daemon calls)"
+          fi
+
+          python 23_compliance/guards/adaptive_integrity_extension.py $TEST_MODE_FLAG
+          EXIT_CODE=$?
+
+          echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
+
+          if [ $EXIT_CODE -ne 0 ]; then
+            echo "::error::ROOT-IMMUNITY system compromised"
+          fi
+
+          exit $EXIT_CODE
+        continue-on-error: true
+
+      - name: Extract Immunity Scale
+        id: metrics
+        if: always()
+        run: |
+          # Find latest selftest report
+          LATEST_REPORT=$(ls -t 02_audit_logging/reports/root_immunity_selftest_*.json 2>/dev/null | head -1)
+
+          if [ -f "$LATEST_REPORT" ]; then
+            IMMUNITY_SCALE=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(data['immunity_scale'])")
+            STATUS=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(data['status'])")
+            ATTACKS_FAILED=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(data['attacks_failed'])")
+
+            echo "immunity_scale=$IMMUNITY_SCALE" >> $GITHUB_OUTPUT
+            echo "status=$STATUS" >> $GITHUB_OUTPUT
+            echo "attacks_failed=$ATTACKS_FAILED" >> $GITHUB_OUTPUT
+            echo "report_file=$LATEST_REPORT" >> $GITHUB_OUTPUT
+          else
+            echo "immunity_scale=0" >> $GITHUB_OUTPUT
+            echo "status=UNKNOWN" >> $GITHUB_OUTPUT
+            echo "attacks_failed=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload Self-Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-immunity-selftest-report
+          path: 02_audit_logging/reports/root_immunity_selftest_*.json
+          if-no-files-found: ignore
+
+      - name: Upload Event Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-immunity-selftest-eventlog
+          path: 02_audit_logging/reports/root_immunity_selftest.jsonl
+          if-no-files-found: ignore
+
+      - name: Upload Registry
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-immunity-selftest-registry
+          path: 24_meta_orchestration/registry/root_immunity_selftest_registry.yaml
+          if-no-files-found: ignore
+
+      - name: Commit Registry Updates
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add registry file if it exists
+          if [ -f "24_meta_orchestration/registry/root_immunity_selftest_registry.yaml" ]; then
+            git add 24_meta_orchestration/registry/root_immunity_selftest_registry.yaml
+          fi
+
+          # Add event log if it exists
+          if [ -f "02_audit_logging/reports/root_immunity_selftest.jsonl" ]; then
+            git add 02_audit_logging/reports/root_immunity_selftest.jsonl
+          fi
+
+          # Commit if changes exist
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: Update ROOT-IMMUNITY self-test registry - Immunity Scale: ${{ steps.metrics.outputs.immunity_scale }}%"
+            git push
+          fi
+
+      - name: Create Issue on Compromise
+        if: failure() && steps.selftest.outputs.exit_code != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const immunityScale = '${{ steps.metrics.outputs.immunity_scale }}';
+            const attacksFailed = '${{ steps.metrics.outputs.attacks_failed }}';
+            const reportFile = '${{ steps.metrics.outputs.report_file }}';
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 ROOT-IMMUNITY System Compromised - Immunity Scale: ${immunityScale}%`,
+              body: `## 🔥 Digital Fever Alert: ROOT-IMMUNITY Compromise Detected
+
+            The Adaptive Integrity Extension (Digital Fever) has detected a compromise in the ROOT-IMMUNITY system.
+
+            ### Metrics
+            - **Immunity Scale:** ${immunityScale}% (threshold: 95%)
+            - **Status:** ⚠️ COMPROMISED
+            - **Attacks Failed to Block:** ${attacksFailed}
+            - **Timestamp:** ${new Date().toISOString()}
+
+            ### What This Means
+
+            The ROOT-IMMUNITY daemon failed to block one or more adversarial attacks during the monthly self-test. This indicates a degradation in the system's ability to enforce ROOT-24-LOCK constraints.
+
+            ### Immediate Actions Required
+
+            1. **Review Event Log:** Download \`root-immunity-selftest-eventlog\` artifact
+            2. **Analyze Failures:** Check which attack techniques were not blocked
+            3. **Inspect Daemon Logic:** Review \`23_compliance/guards/root_immunity_daemon.py\`
+            4. **Verify Exception Policy:** Check \`24_meta_orchestration/registry/root_exception_policy.yaml\`
+            5. **Test Manually:** Run \`python 23_compliance/guards/adaptive_integrity_extension.py --test-mode\`
+
+            ### Attack Categories Tested
+
+            1. Invalid path creation (outside 24 roots)
+            2. Exception policy manipulation
+            3. .claude directories in unauthorized roots
+            4. Manifest tampering
+            5. Hidden path injection
+
+            ### Artifacts
+
+            - Self-Test Report: \`${reportFile}\`
+            - Event Log: \`02_audit_logging/reports/root_immunity_selftest.jsonl\`
+            - Registry: \`24_meta_orchestration/registry/root_immunity_selftest_registry.yaml\`
+
+            ### Next Steps
+
+            1. Fix identified vulnerabilities
+            2. Re-run self-test: \`python 23_compliance/guards/adaptive_integrity_extension.py\`
+            3. Verify immunity scale returns to ≥95%
+            4. Close this issue with remediation summary
+
+            ---
+
+            **Priority:** 🔴 CRITICAL
+            **Component:** ROOT-IMMUNITY ENGINE
+            **Type:** Self-Test Failure
+
+            🤖 Generated with [Claude Code](https://claude.com/claude-code)
+            `,
+              labels: ['security', 'root-immunity', 'critical', 'digital-fever']
+            });
+
+            console.log(`Created issue #${issue.data.number}`);
+
+      - name: Update Job Summary
+        if: always()
+        run: |
+          echo "## 🔥 Adaptive Integrity Extension - Digital Fever" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date -u +%Y-%m-%d\ %H:%M:%S) UTC" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.selftest.outputs.exit_code }}" == "0" ]; then
+            echo "### ✅ Status: IMMUNE" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Immunity Scale:** ${{ steps.metrics.outputs.immunity_scale }}%" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "The ROOT-IMMUNITY system successfully blocked all adversarial attacks." >> $GITHUB_STEP_SUMMARY
+            echo "Digital fever test passed - immune system is healthy." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ❌ Status: COMPROMISED" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Immunity Scale:** ${{ steps.metrics.outputs.immunity_scale }}% (threshold: 95%)" >> $GITHUB_STEP_SUMMARY
+            echo "**Attacks Failed to Block:** ${{ steps.metrics.outputs.attacks_failed }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ The ROOT-IMMUNITY daemon failed to block adversarial attacks." >> $GITHUB_STEP_SUMMARY
+            echo "Immediate investigation required." >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "- Self-Test Report: \`${{ steps.metrics.outputs.report_file }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Event Log: \`02_audit_logging/reports/root_immunity_selftest.jsonl\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Registry: \`24_meta_orchestration/registry/root_immunity_selftest_registry.yaml\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Success Message
+        if: steps.selftest.outputs.exit_code == '0'
+        run: |
+          echo "============================================================"
+          echo "✅ ADAPTIVE INTEGRITY EXTENSION: IMMUNE"
+          echo "============================================================"
+          echo ""
+          echo "Immunity Scale: ${{ steps.metrics.outputs.immunity_scale }}%"
+          echo "Status: HEALTHY"
+          echo ""
+          echo "The ROOT-IMMUNITY system is functioning correctly."
+          echo "Digital fever test passed."
+          echo ""
+
+      - name: Failure Message
+        if: steps.selftest.outputs.exit_code != '0'
+        run: |
+          echo "============================================================"
+          echo "❌ ADAPTIVE INTEGRITY EXTENSION: COMPROMISED"
+          echo "============================================================"
+          echo ""
+          echo "Immunity Scale: ${{ steps.metrics.outputs.immunity_scale }}%"
+          echo "Threshold: 95%"
+          echo ""
+          echo "The ROOT-IMMUNITY system has been compromised."
+          echo "Review artifacts and investigate daemon failures."
+          echo ""
+          exit 1

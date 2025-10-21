@@ -1,0 +1,47 @@
+name: CI Stabilization v12.3.2
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa && sudo mv opa /usr/local/bin/opa && opa version
+      - name: Structure Guard
+        run: |
+          python 12_tooling/structure/structure_guard.py --policy 23_compliance/config/root_24_lock_policy.yaml --report 02_audit_logging/reports/structure_guard_report.json --emit-opa-input 02_audit_logging/reports/structure_guard_input.json
+      - name: Enforce Root-24 via OPA
+        run: |
+          opa eval -I -d 23_compliance/policies/root_24_lock_enforcer.rego -i 02_audit_logging/reports/structure_guard_input.json 'data.ssid.guard.allow'
+      - name: Prepare SAFE-FIX input
+        run: |
+          python - << 'PY'
+          import json, pathlib, hashlib
+          wasm_dir = pathlib.Path("23_compliance/wasm")
+          items = []
+          if wasm_dir.exists():
+            for p in wasm_dir.glob("*.wasm"):
+              h = hashlib.sha256(p.read_bytes()).hexdigest()
+              expf = p.with_suffix(p.suffix + ".expected.sha256")
+              exp = expf.read_text().strip() if expf.exists() else ""
+              items.append({"path": p.as_posix(), "hash": h, "expected": exp})
+          out = {"wasm": items}
+          pathlib.Path("02_audit_logging/reports/safe_fix_input.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
+          PY
+      - name: Enforce SAFE-FIX via OPA
+        run: |
+          opa eval -I -d 23_compliance/policies/safe_fix_enforcer.rego -i 02_audit_logging/reports/safe_fix_input.json 'data.ssid.safefix.allow'
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: stabilization-reports-v12_3_2
+          path: |
+            02_audit_logging/reports/*.json
+            02_audit_logging/reports/*.md

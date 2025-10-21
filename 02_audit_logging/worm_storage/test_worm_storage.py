@@ -15,7 +15,6 @@ import shutil
 from pathlib import Path
 from worm_storage_engine import WORMStorageEngine, WORMViolationError
 
-
 @pytest.fixture
 def temp_worm_storage():
     """Create temporary WORM storage for testing."""
@@ -34,7 +33,6 @@ def temp_worm_storage():
     make_writable(temp_dir)
     shutil.rmtree(temp_dir)
 
-
 def test_write_evidence_success(temp_worm_storage):
     """Test writing evidence to WORM storage."""
     evidence_id = "test_001"
@@ -46,7 +44,6 @@ def test_write_evidence_success(temp_worm_storage):
     assert "content_hash" in result
     assert result["status"] == "IMMUTABLE"
     assert result["worm_guaranteed"] is True
-
 
 def test_write_once_enforcement(temp_worm_storage):
     """Test WORM write-once enforcement."""
@@ -60,7 +57,6 @@ def test_write_once_enforcement(temp_worm_storage):
     with pytest.raises(WORMViolationError):
         temp_worm_storage.write_evidence(evidence_id, {"event": "second_write"})
 
-
 def test_read_evidence_success(temp_worm_storage):
     """Test reading evidence from WORM storage."""
     evidence_id = "test_003"
@@ -73,7 +69,6 @@ def test_read_evidence_success(temp_worm_storage):
     assert result["evidence_data"] == evidence_data
     assert result["integrity_verified"] is True
 
-
 def test_integrity_verification(temp_worm_storage):
     """Test cryptographic integrity verification."""
     evidence_id = "test_004"
@@ -84,7 +79,6 @@ def test_integrity_verification(temp_worm_storage):
 
     assert write_result["content_hash"] == read_result["content_hash"]
 
-
 def test_list_evidence(temp_worm_storage):
     """Test listing evidence files."""
     # Write multiple evidence files
@@ -94,7 +88,6 @@ def test_list_evidence(temp_worm_storage):
     evidence_list = temp_worm_storage.list_evidence()
     assert len(evidence_list) >= 3
 
-
 def test_category_filtering(temp_worm_storage):
     """Test evidence categorization."""
     temp_worm_storage.write_evidence("cat_001", {"data": 1}, category="category_a")
@@ -103,7 +96,6 @@ def test_category_filtering(temp_worm_storage):
     cat_a_list = temp_worm_storage.list_evidence(category="category_a")
     assert len(cat_a_list) == 1
     assert cat_a_list[0]["category"] == "category_a"
-
 
 def test_verify_all_integrity(temp_worm_storage):
     """Test bulk integrity verification."""
@@ -117,7 +109,6 @@ def test_verify_all_integrity(temp_worm_storage):
     assert verification["verified"] >= 3
     assert verification["failed"] == 0
 
-
 def test_access_log(temp_worm_storage):
     """Test access logging."""
     evidence_id = "test_log_001"
@@ -129,7 +120,6 @@ def test_access_log(temp_worm_storage):
     assert len(access_log) >= 2
     assert any(entry["event_type"] == "write" for entry in access_log)
     assert any(entry["event_type"] == "read" for entry in access_log)
-
 
 def test_readonly_file_protection(temp_worm_storage):
     """Test that written files are read-only."""
@@ -146,7 +136,6 @@ def test_readonly_file_protection(temp_worm_storage):
     assert not (file_stat.st_mode & stat.S_IWGRP)
     assert not (file_stat.st_mode & stat.S_IWOTH)
 
-
 def test_metadata_immutability(temp_worm_storage):
     """Test that WORM metadata is correctly set."""
     evidence_id = "test_metadata"
@@ -159,7 +148,6 @@ def test_metadata_immutability(temp_worm_storage):
     assert metadata["immutable"] is True
     assert metadata["deletable"] is False
     assert metadata["retention_years"] == 10
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

@@ -1,0 +1,20 @@
+
+name: Intent Coverage Gate
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  intent-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run Intent Tracker
+        run: python 12_tooling/tools/intent_coverage_tracker.py --fail-on-missing
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: intent-coverage-report
+          path: |
+            02_audit_logging/reports/intent_coverage_report.json
+            02_audit_logging/reports/intent_coverage_report.md

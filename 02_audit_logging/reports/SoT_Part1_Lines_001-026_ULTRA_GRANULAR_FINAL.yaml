@@ -1,0 +1,242 @@
+# ====================================================================================
+# SoT MASTER-DEFINITION EXTRACTION - PART 1, LINES 1-26 (ULTRA-GRANULAR)
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 1-26 (Grundprinzipien)
+# Datum: 2025-10-18
+# Extraktionsmethode: ULTRA-GRANULAR (jedes Feld = separate Regel)
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# ====================================================================================
+
+metadata:
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_ultra_granular_field_by_field"
+  extraction_date: "2025-10-18"
+  line_range: "1-26"
+  section: "Grundprinzipien"
+  total_rules_extracted: 4
+  zero_tolerance_policy: true
+  audit_ready: true
+
+# ====================================================================================
+# ZEILE 20: VERBINDLICHE ROOT-MODULE (24) - BINDEND (1 REGEL)
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-UG-001
+    line_number: 20
+    section: "Grundprinzipien"
+    subsection: "root_structure"
+    title: "Verbindliche Root-Module (24) - Bindende v4.1-Liste"
+
+    original_text: |
+      **Verbindliche Root-Module (24):** Die obige v4.1-Liste ist bindend.
+      Abweichende historische Namen sind ungültig und führen zu FAIL.
+
+    category: "root_structure"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Die 24 Root-Module aus der v4.1-Liste sind BINDEND und UNVERÄNDERLICH.
+      Jede Abweichung von den exakten Namen führt zu einem FAIL im CI/CD.
+
+    enforcement: |
+      CI MUSS exakte Übereinstimmung mit der v4.1-Liste prüfen.
+      KEIN Root-Ordner darf abweichende Namen haben.
+
+    evidence_schema:
+      type: "directory_existence_check"
+      validation_method: "exact_match_with_v4.1_list"
+      expected_roots:
+        - "01_ai_layer"
+        - "02_audit_logging"
+        - "03_core"
+        - "04_deployment"
+        - "05_documentation"
+        - "06_data_pipeline"
+        - "07_governance_legal"
+        - "08_identity_score"
+        - "09_meta_identity"
+        - "10_interoperability"
+        - "11_test_simulation"
+        - "12_tooling"
+        - "13_ui_layer"
+        - "14_zero_time_auth"
+        - "15_infra"
+        - "16_codex"
+        - "17_observability"
+        - "18_data_layer"
+        - "19_adapters"
+        - "20_foundation"
+        - "21_post_quantum_crypto"
+        - "22_datasets"
+        - "23_compliance"
+        - "24_meta_orchestration"
+      validation_rules:
+        - "Alle 24 MÜSSEN existieren"
+        - "Namen MÜSSEN exakt sein (case-sensitive)"
+        - "Keine historischen Varianten erlaubt"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Abweichung"
+      criticality: "CRITICAL - Root Structure Foundation"
+
+# ====================================================================================
+# ZEILE 22: ROOT-LEVEL AUSNAHMEN (1 REGEL)
+# ====================================================================================
+
+  - rule_id: SOT-UG-002
+    line_number: 22
+    section: "Grundprinzipien"
+    subsection: "root_structure"
+    title: "Root-Level Ausnahmen - Kanonische Definition in root_level_exceptions.yaml"
+
+    original_text: |
+      **Root-Level Ausnahmen:** Siehe kanonische Definition in
+      `23_compliance/exceptions/root_level_exceptions.yaml` (CI-Guard-Enforcement)
+
+    category: "root_structure"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Root-Level Ausnahmen sind AUSSCHLIESSLICH in der Datei
+      23_compliance/exceptions/root_level_exceptions.yaml definiert.
+      Diese Datei ist die EINZIGE gültige Quelle.
+
+    enforcement: |
+      CI MUSS root_level_exceptions.yaml als einzige Quelle verwenden.
+      KEINE anderen Dateien dürfen Root-Level Ausnahmen definieren.
+
+    evidence_schema:
+      type: "file_existence_and_authority"
+      canonical_file: "23_compliance/exceptions/root_level_exceptions.yaml"
+      validation_rules:
+        - "Diese Datei ist die EINZIGE gültige Quelle"
+        - "KEINE Duplikate erlaubt"
+        - "CI MUSS diese Datei beim Root-Check einlesen"
+      ci_enforcement: true
+      ci_guard: "CI-Guard-Enforcement aktiv"
+      failure_mode: "FAIL bei fehlender Datei oder Duplikaten"
+      criticality: "CRITICAL - Exception Authority"
+
+# ====================================================================================
+# ZEILE 24: AUSNAHMEN (.git, .github, LICENSE, README.md) (1 REGEL)
+# ====================================================================================
+
+  - rule_id: SOT-UG-003
+    line_number: 24
+    section: "Grundprinzipien"
+    subsection: "root_structure"
+    title: "Standard-Ausnahmen - .git/, .github/, LICENSE, README.md"
+
+    original_text: |
+      **Ausnahmen:** .git/, .github/, LICENSE, README.md
+
+    category: "root_structure"
+    priority: "must"
+
+    description: |
+      Standard-Ausnahmen im Root-Level:
+      - .git/ (Git repository metadata)
+      - .github/ (GitHub workflows und configs)
+      - LICENSE (Lizenz-Datei)
+      - README.md (Root-README)
+
+      Diese 4 Items sind IMMER erlaubt im Root, ohne weitere Prüfung.
+
+    enforcement: |
+      Diese Dateien/Ordner sind IMMER erlaubt im Root.
+      CI DARF diese Items NICHT als Struktur-Violations melden.
+
+    evidence_schema:
+      type: "exception_whitelist"
+      allowed_items:
+        - ".git/"
+        - ".github/"
+        - "LICENSE"
+        - "README.md"
+      validation_rules:
+        - "Diese Items blockieren NICHT die Root-Struktur-Validierung"
+        - "CI MUSS diese Items ignorieren bei Root-Check"
+      ci_enforcement: true
+      failure_mode: "KEIN FAIL - immer erlaubt"
+
+# ====================================================================================
+# ZEILE 25: KRITISCH - structure_exceptions.yaml (1 REGEL)
+# ====================================================================================
+
+  - rule_id: SOT-UG-004
+    line_number: 25
+    section: "Grundprinzipien"
+    subsection: "root_structure"
+    title: "KRITISCH - structure_exceptions.yaml ist die EINZIGE gültige Struktur-Exception"
+
+    original_text: |
+      **KRITISCH:** `23_compliance/exceptions/structure_exceptions.yaml` ist die
+      einzige gültige Struktur-Exception. Keine Kopie im Root oder modulnah.
+
+    category: "root_structure"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCHE REGEL:
+      NUR 23_compliance/exceptions/structure_exceptions.yaml ist die gültige
+      Struktur-Exception-Quelle.
+
+      VERBOTEN:
+      - Kopien dieser Datei im Root-Level
+      - Kopien dieser Datei modulnah (in einzelnen Root-Ordnern)
+      - Alternative structure_exceptions.yaml Dateien
+
+      Es darf EXAKT 1 Datei mit diesem Namen existieren, an genau diesem Pfad.
+
+    enforcement: |
+      CI MUSS prüfen:
+      1. structure_exceptions.yaml existiert an 23_compliance/exceptions/
+      2. KEINE Kopien von structure_exceptions.yaml in Root
+      3. KEINE Kopien von structure_exceptions.yaml in modulnahen Ordnern
+
+      FAIL bei:
+      - Duplikaten
+      - Falscher Location
+      - Fehlender Datei
+
+    evidence_schema:
+      type: "singleton_file_enforcement"
+      canonical_file: "23_compliance/exceptions/structure_exceptions.yaml"
+      forbidden_duplicates:
+        - "structure_exceptions.yaml"
+        - "*/structure_exceptions.yaml"
+        - "**/structure_exceptions.yaml"
+      validation_rules:
+        - "EXAKT 1 Datei mit diesem Namen MUSS existieren"
+        - "MUSS an genau diesem Pfad liegen: 23_compliance/exceptions/"
+        - "KEINE Kopien erlaubt (weder Root noch modulnah)"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Duplikat oder falscher Location"
+      criticality: "CRITICAL - Zero Tolerance"
+
+# ====================================================================================
+# INTEGRATION STATUS
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 4
+  line_range: "1-26"
+  audit_ready: true
+
+# ====================================================================================
+# RULE COUNT VERIFICATION
+# ====================================================================================
+
+rule_count_verification:
+  line_20: 1  # Verbindliche Root-Module
+  line_22: 1  # Root-Level Ausnahmen
+  line_24: 1  # Standard-Ausnahmen
+  line_25: 1  # KRITISCH structure_exceptions.yaml
+  total: 4
+  verified: true

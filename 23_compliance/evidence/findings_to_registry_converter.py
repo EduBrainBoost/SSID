@@ -35,7 +35,6 @@ from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
 from enum import Enum
 
-
 class FindingSeverity(Enum):
     """Severity levels matching CI/CD outputs"""
     CRITICAL = "critical"
@@ -43,7 +42,6 @@ class FindingSeverity(Enum):
     MEDIUM = "medium"
     LOW = "low"
     INFO = "info"
-
 
 class FindingStatus(Enum):
     """Finding lifecycle states"""
@@ -53,7 +51,6 @@ class FindingStatus(Enum):
     ACCEPTED = "accepted"  # Accepted risk
     WONT_FIX = "wont_fix"
 
-
 class RegulationMapping(Enum):
     """EU regulatory frameworks"""
     GDPR = "GDPR"
@@ -61,7 +58,6 @@ class RegulationMapping(Enum):
     MICA = "MiCA"
     AMLD6 = "AMLD6"
     AIACT = "AI-Act"
-
 
 @dataclass
 class Finding:
@@ -102,7 +98,6 @@ class Finding:
         """Export as YAML for human review"""
         return yaml.dump(self.to_dict(), default_flow_style=False, sort_keys=False)
 
-
 @dataclass
 class IssueRegistry:
     """
@@ -129,7 +124,6 @@ class IssueRegistry:
 
     def to_yaml(self) -> str:
         return yaml.dump(self.to_dict(), default_flow_style=False, sort_keys=False)
-
 
 class FindingsToRegistryConverter:
     """
@@ -457,7 +451,6 @@ class FindingsToRegistryConverter:
 
         return registry
 
-
 def main():
     """CLI entry point"""
     repo_root = Path(__file__).resolve().parents[2]
@@ -474,7 +467,6 @@ def main():
     print(f"High: {registry.statistics['high']}")
     print(f"Medium: {registry.statistics['medium']}")
     print(f"Low: {registry.statistics['low']}")
-
 
 if __name__ == "__main__":
     main()

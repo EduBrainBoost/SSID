@@ -1,0 +1,162 @@
+{
+  "_comment": "SSID Pricing v5.2 Regional Test Fixtures",
+  "_version": "v5.2.0",
+  "_created": "2025-10-13",
+  "_purpose": "Test 10 regions with 0-15% surcharges",
+  "test_cases": [
+    {
+      "name": "EU_CENTRAL (0% surcharge)",
+      "region_id": "EU_CENTRAL",
+      "surcharge_percentage": 0,
+      "jurisdiction": "EU-GDPR",
+      "data_residency_enforced": true,
+      "expected_result": "allow"
+    },
+    {
+      "name": "EU_WEST (0% surcharge)",
+      "region_id": "EU_WEST",
+      "surcharge_percentage": 0,
+      "jurisdiction": "EU-GDPR",
+      "data_residency_enforced": true,
+      "expected_result": "allow"
+    },
+    {
+      "name": "EU_EAST (5% surcharge)",
+      "region_id": "EU_EAST",
+      "surcharge_percentage": 5,
+      "jurisdiction": "EU-GDPR",
+      "data_residency_enforced": true,
+      "expected_result": "allow"
+    },
+    {
+      "name": "US_EAST (0% surcharge)",
+      "region_id": "US_EAST",
+      "surcharge_percentage": 0,
+      "jurisdiction": "US-CCPA",
+      "data_residency_enforced": false,
+      "expected_result": "allow"
+    },
+    {
+      "name": "US_WEST (0% surcharge)",
+      "region_id": "US_WEST",
+      "surcharge_percentage": 0,
+      "jurisdiction": "US-CCPA",
+      "data_residency_enforced": false,
+      "expected_result": "allow"
+    },
+    {
+      "name": "UK (3% surcharge)",
+      "region_id": "UK",
+      "surcharge_percentage": 3,
+      "jurisdiction": "UK-GDPR",
+      "data_residency_enforced": true,
+      "expected_result": "allow"
+    },
+    {
+      "name": "APAC (8% surcharge)",
+      "region_id": "APAC",
+      "surcharge_percentage": 8,
+      "jurisdiction": "APAC-MULTI",
+      "data_residency_enforced": true,
+      "expected_result": "allow"
+    },
+    {
+      "name": "APAC_EXT (12% surcharge)",
+      "region_id": "APAC_EXT",
+      "surcharge_percentage": 12,
+      "jurisdiction": "APAC-MULTI",
+      "data_residency_enforced": true,
+      "expected_result": "allow"
+    },
+    {
+      "name": "LATAM_BR (10% surcharge)",
+      "region_id": "LATAM_BR",
+      "surcharge_percentage": 10,
+      "jurisdiction": "LGPD",
+      "data_residency_enforced": true,
+      "expected_result": "allow"
+    },
+    {
+      "name": "ME_UAE (15% surcharge - maximum)",
+      "region_id": "ME_UAE",
+      "surcharge_percentage": 15,
+      "jurisdiction": "UAE-DIFC",
+      "data_residency_enforced": true,
+      "expected_result": "allow"
+    },
+    {
+      "name": "Invalid region with 20% surcharge",
+      "region_id": "INVALID_REGION",
+      "surcharge_percentage": 20,
+      "jurisdiction": "UNKNOWN",
+      "data_residency_enforced": false,
+      "expected_result": "deny",
+      "expected_error": "Region surcharge exceeds maximum"
+    },
+    {
+      "name": "Invalid region with negative surcharge",
+      "region_id": "INVALID_REGION_NEG",
+      "surcharge_percentage": -5,
+      "jurisdiction": "UNKNOWN",
+      "data_residency_enforced": false,
+      "expected_result": "deny",
+      "expected_error": "Region surcharge below minimum"
+    },
+    {
+      "name": "Enterprise subscription in EU_CENTRAL",
+      "description": "Full pricing calculation with 0% surcharge",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {
+          "EU_CENTRAL": {"surcharge_percentage": 0}
+        }
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "tenants": 5,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "calculated_price": {
+        "base": 4990,
+        "surcharge_amount": 0,
+        "total": 4990
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Enterprise subscription in ME_UAE",
+      "description": "Full pricing calculation with 15% surcharge",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {
+          "ME_UAE": {"surcharge_percentage": 15}
+        }
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "tenants": 5,
+        "region": {"id": "ME_UAE"}
+      },
+      "calculated_price": {
+        "base": 4990,
+        "surcharge_amount": 748.5,
+        "total": 5738.5
+      },
+      "expected_result": "allow"
+    }
+  ]
+}

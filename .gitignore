@@ -1,0 +1,87 @@
+
+# Root-24-LOCK Auto-Fix - Added patterns
+.claude/
+.pytest_cache/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Coverage files
+.coverage
+*.coverage
+
+# Certification bundles
+*_certification_bundle.zip
+root24_*.zip
+
+# Test artifacts (MUST NOT be in repo root)
+test_results.log
+test_results*.log
+*.log
+SYSTEM_HEALTH_REPORT_*.md
+*_REPORT_*.md
+pytest_*.xml
+pytest_*.html
+
+# Backup test files - ENFORCED by backup_purge_tool.py
+# All backup tests must be archived in 02_audit_logging/worm/archives/
+# DO NOT commit test files in these directories:
+**/backups/**/test_*.py
+**/backups/**/*_test.py
+**/backup/**/test_*.py
+**/backup/**/*_test.py
+**/archives/**/test_*.py
+**/archives/**/*_test.py
+**/archive/**/test_*.py
+**/archive/**/*_test.py
+**/deprecated/**/test_*.py
+**/deprecated/**/*_test.py
+**/legacy/**/test_*.py
+**/legacy/**/*_test.py
+**/old/**/test_*.py
+**/old/**/*_test.py
+**/*_backup.py
+**/*_old.py
+
+# Cleanup archives - 2025-10-17 cleanup operation
+02_audit_logging/archives/cleanup_2025_10_17/
+
+# Temporary reports (must go to designated directories)
+*_report_*.json
+*_summary_*.json
+*_analysis_*.json
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+02_audit_logging/archives/

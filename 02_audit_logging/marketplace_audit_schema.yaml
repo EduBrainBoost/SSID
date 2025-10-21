@@ -1,0 +1,7 @@
+version: 1.0.0
+events:
+  - offer_listed: { required: [asset_id, seller_did, price, event_hash, ts] }
+  - trade_settled: { required: [offer, buyer_did, attestation, event_hash, ts] }
+sinks:
+  - file: logs/marketplace_events.jsonl
+  - on_chain: 24_meta_orchestration/workflow_proof_anchor.sol

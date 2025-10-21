@@ -1,0 +1,653 @@
+# ====================================================================================
+# SoT MASTER-DEFINITION EXTRACTION - PART 1, LINES 103-143
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 103-143 (Token Utility Framework)
+# Datum: 2025-10-18
+# Extraktionsmethode: MANUELLE, ZEILENBASIERTE ANALYSE
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# ====================================================================================
+
+metadata:
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_line_by_line"
+  extraction_date: "2025-10-18"
+  line_range: "103-143"
+  section: "Token Utility Framework"
+  total_rules_extracted: 34
+  zero_tolerance_policy: true
+  audit_ready: true
+
+# ====================================================================================
+# METADATA SECTION (Lines 106-108): 3 REGELN
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-MD-066
+    line_number: 106
+    section: "Token Utility Framework"
+    subsection: "metadata"
+    title: "Utility Definitions Version Pflicht"
+    original_text: 'version: "1.0"'
+    category: "token_framework"
+    priority: "must"
+    description: "utility_definitions.yaml MUSS version-Feld mit Semver haben"
+    enforcement: "CI MUSS prüfen: version field MUSS vorhanden und Semver-konform sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "version"
+      format: "Semver (x.y.z oder x.y)"
+
+  - rule_id: SOT-MD-067
+    line_number: 107
+    section: "Token Utility Framework"
+    subsection: "metadata"
+    title: "Utility Definitions Datum Pflicht"
+    original_text: 'date: "2025-09-15"'
+    category: "token_framework"
+    priority: "must"
+    description: "utility_definitions.yaml MUSS date-Feld mit ISO 8601 Datum haben"
+    enforcement: "CI MUSS prüfen: date field MUSS ISO 8601 format (YYYY-MM-DD) haben"
+    evidence_schema:
+      type: "yaml_field_format"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "date"
+      format: "YYYY-MM-DD"
+
+  - rule_id: SOT-MD-068
+    line_number: 108
+    section: "Token Utility Framework"
+    subsection: "metadata"
+    title: "Utility Definitions Deprecated Flag"
+    original_text: 'deprecated: false'
+    category: "token_framework"
+    priority: "must"
+    description: "utility_definitions.yaml MUSS deprecated boolean-Feld haben"
+    enforcement: "CI MUSS prüfen: deprecated MUSS boolean sein (true/false)"
+    evidence_schema:
+      type: "yaml_field_type"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "deprecated"
+      expected_type: "boolean"
+
+# ====================================================================================
+# PRIMARY_UTILITIES SECTION (Lines 110-131): 22 REGELN
+# ====================================================================================
+
+# --- identity_verification (Lines 111-116): 6 Regeln ---
+
+  - rule_id: SOT-MD-069
+    line_number: 111
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    title: "identity_verification Subsection MUSS existieren"
+    original_text: "identity_verification:"
+    category: "token_framework"
+    priority: "must"
+    description: "primary_utilities.identity_verification subsection MUSS existieren"
+    enforcement: "CI MUSS prüfen: primary_utilities.identity_verification MUSS vorhanden sein"
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section: "primary_utilities.identity_verification"
+
+  - rule_id: SOT-MD-070
+    line_number: 112
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    title: "Identity Verification Description"
+    original_text: 'description: "Pay for identity score calculations and verifications"'
+    category: "token_framework"
+    priority: "must"
+    description: "identity_verification MUSS description field haben"
+    enforcement: "CI MUSS prüfen: description MUSS 'identity score' und 'verifications' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.identity_verification.description"
+      contains_all: ["identity score", "verifications"]
+
+  - rule_id: SOT-MD-071
+    line_number: 113
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    title: "Smart Contract Reference Path"
+    original_text: 'smart_contract: "20_foundation/tokenomics/contracts/verification_payment.sol"'
+    category: "token_framework"
+    priority: "must"
+    description: "smart_contract MUSS auf verification_payment.sol verweisen"
+    enforcement: "CI MUSS prüfen: smart_contract path MUSS auf .sol Datei verweisen"
+    evidence_schema:
+      type: "yaml_field_path_reference"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.identity_verification.smart_contract"
+      referenced_file: "20_foundation/tokenomics/contracts/verification_payment.sol"
+
+  - rule_id: SOT-MD-072
+    line_number: 114
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    title: "Fee Burn Mechanism - Deflationary Token Economics"
+    original_text: 'fee_burn_mechanism: "Deflationary token economics"'
+    category: "token_framework"
+    priority: "must"
+    description: "fee_burn_mechanism MUSS Deflationary token economics sein"
+    enforcement: "CI MUSS prüfen: fee_burn_mechanism MUSS 'Deflationary' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.identity_verification.fee_burn_mechanism"
+      contains: "Deflationary"
+
+  - rule_id: SOT-MD-073
+    line_number: 115
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    title: "Burn Source Note - Treasury Portion Only"
+    original_text: 'burn_source_note: "Burns originate exclusively from treasury portion of 3% system fee (no direct verification fee split)"'
+    category: "token_framework"
+    priority: "must"
+    criticality: "CRITICAL"
+    description: "burn_source_note MUSS klarstellen: Burns NUR aus treasury portion"
+    enforcement: "CI MUSS prüfen: burn_source_note MUSS 'exclusively from treasury' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.identity_verification.burn_source_note"
+      contains: "exclusively from treasury"
+      criticality: "CRITICAL - Legal Safe Harbor"
+
+  - rule_id: SOT-MD-074
+    line_number: 116
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    title: "Burn Clarification - No Manual/Admin Burns"
+    original_text: 'burn_clarification: "No manual/admin burns. Programmatic burns allowed only from the treasury portion of the 3% system fee and failed proposal deposits, as defined in token_economics."'
+    category: "token_framework"
+    priority: "must"
+    criticality: "CRITICAL"
+    description: "burn_clarification MUSS klarstellen: KEINE manuellen/admin burns"
+    enforcement: "CI MUSS prüfen: burn_clarification MUSS 'No manual/admin burns' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.identity_verification.burn_clarification"
+      contains: "No manual/admin burns"
+      forbidden_strings: ["manual burn allowed", "admin burn allowed"]
+      criticality: "CRITICAL - Decentralization Requirement"
+
+# --- governance_participation (Lines 118-121): 4 Regeln ---
+
+  - rule_id: SOT-MD-075
+    line_number: 118
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.governance_participation"
+    title: "governance_participation Subsection MUSS existieren"
+    original_text: "governance_participation:"
+    category: "token_framework"
+    priority: "must"
+    description: "primary_utilities.governance_participation subsection MUSS existieren"
+    enforcement: "CI MUSS prüfen: primary_utilities.governance_participation MUSS vorhanden sein"
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section: "primary_utilities.governance_participation"
+
+  - rule_id: SOT-MD-076
+    line_number: 119
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.governance_participation"
+    title: "Governance Participation Description"
+    original_text: 'description: "Vote on protocol upgrades and parameter changes"'
+    category: "token_framework"
+    priority: "must"
+    description: "governance_participation MUSS description field haben"
+    enforcement: "CI MUSS prüfen: description MUSS 'protocol upgrades' und 'parameter changes' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.governance_participation.description"
+      contains_all: ["protocol upgrades", "parameter changes"]
+
+  - rule_id: SOT-MD-077
+    line_number: 120
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.governance_participation"
+    title: "Voting Weight - Linear Token Holdings"
+    original_text: 'voting_weight: "Linear token holdings"'
+    category: "token_framework"
+    priority: "must"
+    description: "voting_weight MUSS Linear token holdings sein"
+    enforcement: "CI MUSS prüfen: voting_weight MUSS 'Linear' enthalten - KEINE quadratische/logarithmische Gewichtung"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.governance_participation.voting_weight"
+      contains: "Linear"
+      forbidden_strings: ["quadratic", "logarithmic"]
+
+  - rule_id: SOT-MD-078
+    line_number: 121
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.governance_participation"
+    title: "Proposal Threshold - 1% of Total Supply"
+    original_text: 'proposal_threshold: "1% of total supply to propose"'
+    category: "token_framework"
+    priority: "must"
+    description: "proposal_threshold MUSS 1% of total supply sein"
+    enforcement: "CI MUSS prüfen: proposal_threshold MUSS '1%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.governance_participation.proposal_threshold"
+      contains: "1%"
+
+# --- ecosystem_rewards (Lines 123-126): 4 Regeln ---
+
+  - rule_id: SOT-MD-079
+    line_number: 123
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.ecosystem_rewards"
+    title: "ecosystem_rewards Subsection MUSS existieren"
+    original_text: "ecosystem_rewards:"
+    category: "token_framework"
+    priority: "must"
+    description: "primary_utilities.ecosystem_rewards subsection MUSS existieren"
+    enforcement: "CI MUSS prüfen: primary_utilities.ecosystem_rewards MUSS vorhanden sein"
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section: "primary_utilities.ecosystem_rewards"
+
+  - rule_id: SOT-MD-080
+    line_number: 124
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.ecosystem_rewards"
+    title: "Ecosystem Rewards Description"
+    original_text: 'description: "Reward validators, contributors, and ecosystem participants"'
+    category: "token_framework"
+    priority: "must"
+    description: "ecosystem_rewards MUSS description field haben"
+    enforcement: "CI MUSS prüfen: description MUSS 'validators', 'contributors', 'ecosystem participants' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.ecosystem_rewards.description"
+      contains_all: ["validators", "contributors", "ecosystem participants"]
+
+  - rule_id: SOT-MD-081
+    line_number: 125
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.ecosystem_rewards"
+    title: "Distribution Method - Merit-Based via DAO"
+    original_text: 'distribution_method: "Merit-based allocation via DAO"'
+    category: "token_framework"
+    priority: "must"
+    description: "distribution_method MUSS Merit-based allocation via DAO sein"
+    enforcement: "CI MUSS prüfen: distribution_method MUSS 'Merit-based' und 'DAO' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.ecosystem_rewards.distribution_method"
+      contains_all: ["Merit-based", "DAO"]
+
+  - rule_id: SOT-MD-082
+    line_number: 126
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.ecosystem_rewards"
+    title: "Reward Pools - Validation, Development, Community"
+    original_text: 'reward_pools: ["validation", "development", "community"]'
+    category: "token_framework"
+    priority: "must"
+    description: "reward_pools MUSS EXAKT 3 Pools haben: validation, development, community"
+    enforcement: "CI MUSS prüfen: reward_pools array MUSS genau diese 3 items enthalten"
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.ecosystem_rewards.reward_pools"
+      expected_items: ["validation", "development", "community"]
+
+# --- staking_utility (Lines 128-131): 4 Regeln ---
+
+  - rule_id: SOT-MD-083
+    line_number: 128
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.staking_utility"
+    title: "staking_utility Subsection MUSS existieren"
+    original_text: "staking_utility:"
+    category: "token_framework"
+    priority: "must"
+    description: "primary_utilities.staking_utility subsection MUSS existieren"
+    enforcement: "CI MUSS prüfen: primary_utilities.staking_utility MUSS vorhanden sein"
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section: "primary_utilities.staking_utility"
+
+  - rule_id: SOT-MD-084
+    line_number: 129
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.staking_utility"
+    title: "Staking Utility Description"
+    original_text: 'description: "Stake tokens for enhanced verification services"'
+    category: "token_framework"
+    priority: "must"
+    description: "staking_utility MUSS description field haben"
+    enforcement: "CI MUSS prüfen: description MUSS 'Stake tokens' und 'enhanced verification' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.staking_utility.description"
+      contains_all: ["Stake tokens", "enhanced verification"]
+
+  - rule_id: SOT-MD-085
+    line_number: 130
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.staking_utility"
+    title: "Staking Rewards - Service Fee Discounts (NOT Yield)"
+    original_text: 'staking_rewards: "Service fee discounts (not yield)"'
+    category: "token_framework"
+    priority: "must"
+    criticality: "CRITICAL"
+    description: "staking_rewards MÜSSEN als fee discounts definiert sein - NICHT als yield"
+    enforcement: "CI MUSS prüfen: staking_rewards MUSS 'discounts' und 'not yield' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.staking_utility.staking_rewards"
+      contains_all: ["discounts", "not yield"]
+      forbidden_strings: ["guaranteed yield", "APY", "interest rate"]
+      criticality: "CRITICAL - Legal Safe Harbor"
+
+  - rule_id: SOT-MD-086
+    line_number: 131
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.staking_utility"
+    title: "Slashing Conditions - False Verification Penalties"
+    original_text: 'slashing_conditions: "False verification penalties"'
+    category: "token_framework"
+    priority: "must"
+    description: "slashing_conditions MUSS für false verification definiert sein"
+    enforcement: "CI MUSS prüfen: slashing_conditions MUSS 'False verification' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "primary_utilities.staking_utility.slashing_conditions"
+      contains: "False verification"
+
+# --- primary_utilities Section (Line 110): 1 Regel ---
+
+  - rule_id: SOT-MD-087
+    line_number: 110
+    section: "Token Utility Framework"
+    subsection: "primary_utilities"
+    title: "primary_utilities Top-Level Section MUSS existieren"
+    original_text: "primary_utilities:"
+    category: "token_framework"
+    priority: "must"
+    description: "primary_utilities top-level section MUSS in YAML vorhanden sein"
+    enforcement: "CI MUSS prüfen: primary_utilities section MUSS existieren mit 4 subsections"
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section: "primary_utilities"
+      required_subsections:
+        - "identity_verification"
+        - "governance_participation"
+        - "ecosystem_rewards"
+        - "staking_utility"
+
+# --- File Location (Line 105): 1 Regel ---
+
+  - rule_id: SOT-MD-088
+    line_number: 105
+    section: "Token Utility Framework"
+    subsection: "file_location"
+    title: "Utility Definitions File Location Enforcement"
+    original_text: "# 20_foundation/tokenomics/utility_definitions.yaml"
+    category: "token_framework"
+    priority: "must"
+    description: "utility_definitions.yaml MUSS exakt unter 20_foundation/tokenomics/ liegen"
+    enforcement: "CI MUSS prüfen: Datei MUSS an EXAKT diesem Pfad existieren"
+    evidence_schema:
+      type: "file_location_enforcement"
+      exact_path: "20_foundation/tokenomics/utility_definitions.yaml"
+      forbidden_locations:
+        - "20_foundation/utility_definitions.yaml"
+        - "tokenomics/utility_definitions.yaml"
+        - "*/tokenomics/utility_definitions.yaml"
+
+# --- Section Header (Line 103): 1 Regel ---
+
+  - rule_id: SOT-MD-089
+    line_number: 103
+    section: "Token Utility Framework"
+    subsection: "documentation"
+    title: "Token Utility Framework Section Header MUSS existieren"
+    original_text: "### Token Utility Framework"
+    category: "token_framework"
+    priority: "must"
+    description: "Token Utility Framework section header MUSS in Documentation vorhanden sein"
+    enforcement: "CI MUSS prüfen: Section header '### Token Utility Framework' MUSS existieren"
+    evidence_schema:
+      type: "markdown_section_header"
+      file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+      header: "Token Utility Framework"
+      level: 3
+
+# --- Completeness Check: 1 Regel ---
+
+  - rule_id: SOT-MD-090
+    line_number: [110, 131]
+    section: "Token Utility Framework"
+    subsection: "completeness"
+    title: "Primary Utilities Vollständigkeits-Check"
+    original_text: "primary_utilities: [identity_verification, governance_participation, ecosystem_rewards, staking_utility]"
+    category: "token_framework"
+    priority: "must"
+    description: "ALLE 4 primary_utilities MÜSSEN implementiert sein"
+    enforcement: "CI MUSS prüfen: EXAKT 4 primary utilities MÜSSEN vorhanden sein"
+    evidence_schema:
+      type: "structural_completeness"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      required_sections:
+        - "primary_utilities.identity_verification"
+        - "primary_utilities.governance_participation"
+        - "primary_utilities.ecosystem_rewards"
+        - "primary_utilities.staking_utility"
+      validation: "ALLE 4 sections MÜSSEN vorhanden sein"
+
+# ====================================================================================
+# COMPLIANCE_UTILITIES SECTION (Lines 133-136): 4 REGELN
+# ====================================================================================
+
+  - rule_id: SOT-MD-091
+    line_number: 134
+    section: "Token Utility Framework"
+    subsection: "compliance_utilities"
+    title: "Audit Payments Utility"
+    original_text: 'audit_payments: "Pay for compliance audit services"'
+    category: "token_framework"
+    priority: "must"
+    description: "compliance_utilities.audit_payments MUSS definiert sein"
+    enforcement: "CI MUSS prüfen: audit_payments field MUSS vorhanden sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "compliance_utilities.audit_payments"
+
+  - rule_id: SOT-MD-092
+    line_number: 135
+    section: "Token Utility Framework"
+    subsection: "compliance_utilities"
+    title: "Regulatory Reporting Utility"
+    original_text: 'regulatory_reporting: "Submit regulatory reports with token fees"'
+    category: "token_framework"
+    priority: "must"
+    description: "compliance_utilities.regulatory_reporting MUSS definiert sein"
+    enforcement: "CI MUSS prüfen: regulatory_reporting field MUSS vorhanden sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "compliance_utilities.regulatory_reporting"
+
+  - rule_id: SOT-MD-093
+    line_number: 136
+    section: "Token Utility Framework"
+    subsection: "compliance_utilities"
+    title: "Legal Attestations Utility"
+    original_text: 'legal_attestations: "Create verifiable compliance attestations"'
+    category: "token_framework"
+    priority: "must"
+    description: "compliance_utilities.legal_attestations MUSS definiert sein"
+    enforcement: "CI MUSS prüfen: legal_attestations field MUSS vorhanden sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "compliance_utilities.legal_attestations"
+
+  - rule_id: SOT-MD-094
+    line_number: 133
+    section: "Token Utility Framework"
+    subsection: "compliance_utilities"
+    title: "compliance_utilities Top-Level Section MUSS existieren"
+    original_text: "compliance_utilities:"
+    category: "token_framework"
+    priority: "must"
+    description: "compliance_utilities top-level section MUSS in YAML vorhanden sein"
+    enforcement: "CI MUSS prüfen: compliance_utilities section MUSS existieren mit 3 fields"
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section: "compliance_utilities"
+      required_fields:
+        - "audit_payments"
+        - "regulatory_reporting"
+        - "legal_attestations"
+
+# ====================================================================================
+# SECONDARY_UTILITIES SECTION (Lines 138-142): 5 REGELN
+# ====================================================================================
+
+  - rule_id: SOT-MD-095
+    line_number: 139
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    title: "Marketplace Access Utility"
+    original_text: 'marketplace_access: "Access to identity verification marketplace"'
+    category: "token_framework"
+    priority: "should"
+    description: "secondary_utilities.marketplace_access SOLLTE definiert sein"
+    enforcement: "CI SOLLTE prüfen: marketplace_access field SOLLTE vorhanden sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "secondary_utilities.marketplace_access"
+
+  - rule_id: SOT-MD-096
+    line_number: 140
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    title: "Premium Features Utility"
+    original_text: 'premium_features: "Enhanced verification algorithms"'
+    category: "token_framework"
+    priority: "should"
+    description: "secondary_utilities.premium_features SOLLTE definiert sein"
+    enforcement: "CI SOLLTE prüfen: premium_features field SOLLTE vorhanden sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "secondary_utilities.premium_features"
+
+  - rule_id: SOT-MD-097
+    line_number: 141
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    title: "API Access Utility"
+    original_text: 'api_access: "Developer API rate limiting and access control"'
+    category: "token_framework"
+    priority: "should"
+    description: "secondary_utilities.api_access SOLLTE definiert sein"
+    enforcement: "CI SOLLTE prüfen: api_access field SOLLTE vorhanden sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "secondary_utilities.api_access"
+
+  - rule_id: SOT-MD-098
+    line_number: 142
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    title: "Data Portability Utility"
+    original_text: 'data_portability: "Export/import verification data"'
+    category: "token_framework"
+    priority: "should"
+    description: "secondary_utilities.data_portability SOLLTE definiert sein"
+    enforcement: "CI SOLLTE prüfen: data_portability field SOLLTE vorhanden sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field: "secondary_utilities.data_portability"
+
+  - rule_id: SOT-MD-099
+    line_number: 138
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    title: "secondary_utilities Top-Level Section SOLLTE existieren"
+    original_text: "secondary_utilities:"
+    category: "token_framework"
+    priority: "should"
+    description: "secondary_utilities top-level section SOLLTE in YAML vorhanden sein"
+    enforcement: "CI SOLLTE prüfen: secondary_utilities section SOLLTE existieren mit 4 fields"
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section: "secondary_utilities"
+      recommended_fields:
+        - "marketplace_access"
+        - "premium_features"
+        - "api_access"
+        - "data_portability"
+
+# ====================================================================================
+# INTEGRATION STATUS
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 34
+  audit_ready: true
+
+  pending_integration:
+    - "16_codex/contracts/sot/sot_contract.yaml"
+    - "03_core/validators/sot/sot_validator_core.py"
+    - "23_compliance/policies/sot/sot_policy.rego"
+    - "12_tooling/cli/sot_validator.py"
+    - "11_test_simulation/tests_compliance/test_sot_validator.py"
+
+  next_step: "Integration in alle 5 SoT-Artefakte + Coverage-Check"
+
+# ====================================================================================
+# AUDIT TRAIL
+# ====================================================================================
+
+audit_trail:
+  extraction_completed: "2025-10-18"
+  extraction_method: "manual_line_by_line"
+  zero_tolerance_compliance: true
+  ready_for_sha256: true
+  ready_for_registry_update: true
+  ready_for_ci_integration: true
+
+# ====================================================================================
+# CUMULATIVE RULE COUNT
+# ====================================================================================
+
+cumulative_extraction:
+  lines_001_026: 4   # SOT-MD-001 to SOT-MD-004
+  lines_027_101: 61  # SOT-MD-005 to SOT-MD-065
+  lines_103_143: 34  # SOT-MD-066 to SOT-MD-099
+  total_so_far: 99
+  remaining_sections: "Lines 145+"

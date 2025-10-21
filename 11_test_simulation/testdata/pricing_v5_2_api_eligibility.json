@@ -1,0 +1,232 @@
+{
+  "_comment": "SSID Pricing v5.2 API Eligibility Test Fixtures",
+  "_version": "v5.2.0",
+  "_created": "2025-10-13",
+  "_purpose": "Test API tier eligibility (interfederation = ENTERPRISE_PLUS only)",
+  "test_cases": [
+    {
+      "name": "Enterprise Plus with interfederation API (ALLOWED)",
+      "description": "Enterprise Plus tier can access interfederation API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise_plus": {"price_eur": 14990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4B_ENTERPRISE_PLUS",
+        "requested_api": "interfederation",
+        "tenants": 10,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Sovereign with interfederation API (ALLOWED)",
+      "description": "Sovereign tier can access interfederation API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "sovereign": {"price_eur": 40000}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T5_SOVEREIGN",
+        "requested_api": "interfederation",
+        "tenants": 1,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Enterprise with interfederation API (DENIED)",
+      "description": "Enterprise tier CANNOT access interfederation API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "requested_api": "interfederation",
+        "tenants": 5,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Interfederation API requires ENTERPRISE_PLUS"
+    },
+    {
+      "name": "Professional with interfederation API (DENIED)",
+      "description": "Professional tier CANNOT access interfederation API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "professional": {"price_eur": 499}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T2_PROFESSIONAL",
+        "requested_api": "interfederation",
+        "tenants": 2,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Interfederation API requires ENTERPRISE_PLUS"
+    },
+    {
+      "name": "Enterprise with proof_nexus API (ALLOWED)",
+      "description": "Enterprise tier CAN access proof_nexus API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "requested_api": "proof_nexus",
+        "tenants": 5,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Enterprise Plus with proof_nexus API (ALLOWED)",
+      "description": "Enterprise Plus tier CAN access proof_nexus API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise_plus": {"price_eur": 14990}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4B_ENTERPRISE_PLUS",
+        "requested_api": "proof_nexus",
+        "tenants": 10,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Professional with governance API (DENIED)",
+      "description": "Professional tier CANNOT access governance API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "professional": {"price_eur": 499}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T2_PROFESSIONAL",
+        "requested_api": "governance",
+        "tenants": 2,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Tier.*not eligible for API"
+    },
+    {
+      "name": "Professional with identity_ops API (ALLOWED)",
+      "description": "Professional tier CAN access identity_ops API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "professional": {"price_eur": 499}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T2_PROFESSIONAL",
+        "requested_api": "identity_ops",
+        "tenants": 2,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Starter with read_only API (ALLOWED)",
+      "description": "Starter tier CAN access read_only API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "starter": {"price_eur": 99}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T1_STARTER",
+        "requested_api": "read_only",
+        "tenants": 1,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Starter with write_basic API (DENIED)",
+      "description": "Starter tier CANNOT access write_basic API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "starter": {"price_eur": 99}
+        },
+        "multi_tenancy": {"enabled": true},
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T1_STARTER",
+        "requested_api": "write_basic",
+        "tenants": 1,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Tier.*not eligible for API"
+    }
+  ]
+}

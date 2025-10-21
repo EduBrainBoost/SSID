@@ -1,0 +1,377 @@
+{
+  "report_metadata": {
+    "version": "2.0.0",
+    "mode": "FORENSIC",
+    "generated_at": "2025-10-12T16:45:47.830954Z",
+    "policy_framework": "Root-24-LOCK v1.0",
+    "audit_tool": "root_forensic_audit.py v2.0.0",
+    "hash_algorithm": "SHA-256",
+    "cost_usd": 0,
+    "reproducible": true
+  },
+  "overall_score": 30.0,
+  "target_score": 100.0,
+  "compliance_status": "FAIL",
+  "score_breakdown": {
+    "architecture": {
+      "score": 0,
+      "weight": 0.30,
+      "weighted_score": 0.0,
+      "status": "FAIL",
+      "reason": "Critical violations present (unauthorized root directories)"
+    },
+    "security": {
+      "score": 50,
+      "weight": 0.25,
+      "weighted_score": 12.5,
+      "status": "WARNING",
+      "reason": "Partial enforcement (policies exist but violations present)"
+    },
+    "policy": {
+      "score": 100,
+      "weight": 0.25,
+      "weighted_score": 25.0,
+      "status": "PASS",
+      "reason": "OPA policies active and operational"
+    },
+    "testing": {
+      "score": 100,
+      "weight": 0.10,
+      "weighted_score": 10.0,
+      "status": "PASS",
+      "reason": "Forensic audit tests exist and passing"
+    },
+    "documentation": {
+      "score": 100,
+      "weight": 0.10,
+      "weighted_score": 10.0,
+      "status": "PASS",
+      "reason": "Complete documentation and forensic reports"
+    }
+  },
+  "scoring_formula": "(Architecture × 0.30) + (Security × 0.25) + (Policy × 0.25) + (Testing × 0.10) + (Documentation × 0.10)",
+  "calculated_score": 57.5,
+  "adjusted_score": 30.0,
+  "adjustment_reason": "Deductions for critical and warning violations",
+  "deductions": {
+    "critical_violations": {
+      "count": 3,
+      "deduction_per_violation": -20,
+      "total_deduction": -60,
+      "items": [
+        ".claude",
+        ".github",
+        ".pytest_cache"
+      ]
+    },
+    "warning_violations": {
+      "count": 6,
+      "deduction_per_violation": -5,
+      "total_deduction": -30,
+      "items": [
+        "DEPLOYMENT_v5.2.md",
+        "DEPLOYMENT_v5.4_Federation.md",
+        "DEPLOYMENT_v6.0_Planetary_Continuum.md",
+        "DEPLOYMENT_v8.0_Continuum_Ignition.md",
+        "TRANSITION_v6_to_v7_DORMANT.md",
+        "ROOT_24_LOCK_COMPLIANCE_SUMMARY.md"
+      ]
+    },
+    "total_deductions": -90
+  },
+  "forensic_statistics": {
+    "total_root_items": 38,
+    "authorized_roots": 24,
+    "authorized_exceptions": 5,
+    "unauthorized_items": 9,
+    "files_scanned": 10,
+    "directories_scanned": 28,
+    "total_size_bytes": 88794,
+    "total_size_kb": 86.71,
+    "sha256_fingerprints_captured": 9
+  },
+  "violation_summary": {
+    "critical": {
+      "count": 3,
+      "severity": "CRITICAL",
+      "impact": "Immediate remediation required",
+      "violations": [
+        {
+          "path": ".claude",
+          "type": "Unauthorized Root Directory",
+          "recommendation": "Remove (IDE artifact, not for version control)",
+          "action": "DELETE",
+          "score_impact": -20
+        },
+        {
+          "path": ".github",
+          "type": "Unauthorized Root Directory",
+          "recommendation": "Add to exceptions OR migrate to 04_deployment/ci/",
+          "action": "EVALUATE",
+          "score_impact": -20
+        },
+        {
+          "path": ".pytest_cache",
+          "type": "Unauthorized Root Directory",
+          "recommendation": "Remove (test cache, not for version control)",
+          "action": "DELETE",
+          "score_impact": -20
+        }
+      ]
+    },
+    "warnings": {
+      "count": 6,
+      "severity": "WARNING",
+      "impact": "High priority migration needed",
+      "violations": [
+        {
+          "path": "DEPLOYMENT_v5.2.md",
+          "type": "Root File - Should Migrate",
+          "target": "05_documentation/deployment/DEPLOYMENT_v5.2.md",
+          "sha256": "1d46df201e4a1da8f9c6ccfa78980293fc3c6c10bd65704f70e60b4abd477945",
+          "size_bytes": 10379,
+          "action": "MOVE",
+          "score_impact": -5
+        },
+        {
+          "path": "DEPLOYMENT_v5.4_Federation.md",
+          "type": "Root File - Should Migrate",
+          "target": "05_documentation/deployment/DEPLOYMENT_v5.4_Federation.md",
+          "sha256": "02da6105b1dbe10e049537f2afdeafe134e2a524d42e8290b7e79822f5b4ced2",
+          "size_bytes": 3082,
+          "action": "MOVE",
+          "score_impact": -5
+        },
+        {
+          "path": "DEPLOYMENT_v6.0_Planetary_Continuum.md",
+          "type": "Root File - Should Migrate",
+          "target": "05_documentation/deployment/DEPLOYMENT_v6.0_Planetary_Continuum.md",
+          "sha256": "36be330cc44abd42dd30df618e8e3402e3d2070f2b6c46cc2a19a4b503a73e77",
+          "size_bytes": 14385,
+          "action": "MOVE",
+          "score_impact": -5
+        },
+        {
+          "path": "DEPLOYMENT_v8.0_Continuum_Ignition.md",
+          "type": "Root File - Should Migrate",
+          "target": "05_documentation/deployment/DEPLOYMENT_v8.0_Continuum_Ignition.md",
+          "sha256": "8ac9de5648dbd2bd4943e0407004d9566868b0d5a3ff3c49badf6685dc6db1c2",
+          "size_bytes": 11355,
+          "action": "MOVE",
+          "score_impact": -5
+        },
+        {
+          "path": "TRANSITION_v6_to_v7_DORMANT.md",
+          "type": "Root File - Should Migrate",
+          "target": "05_documentation/transitions/TRANSITION_v6_to_v7_DORMANT.md",
+          "sha256": "06913ccde36fcf6ac63dfb9a14171c5e874561740139ef67408638a1b786f365",
+          "size_bytes": 22551,
+          "action": "MOVE",
+          "score_impact": -5
+        },
+        {
+          "path": "ROOT_24_LOCK_COMPLIANCE_SUMMARY.md",
+          "type": "Root File - Should Migrate",
+          "target": "05_documentation/compliance/ROOT_24_LOCK_COMPLIANCE_SUMMARY.md",
+          "sha256": "cee8b64de63b7ea04b93c64a78ee88e2cc4a14d52ee160c5a2eb7d29e83537e8",
+          "size_bytes": 13680,
+          "action": "MOVE",
+          "score_impact": -5
+        }
+      ]
+    },
+    "info": {
+      "count": 5,
+      "severity": "INFO",
+      "impact": "No action required",
+      "items": [
+        ".git",
+        "README.md",
+        "LICENSE",
+        ".pre-commit-config.yaml",
+        "pytest.ini"
+      ]
+    }
+  },
+  "sha256_registry": {
+    "authorized_files": {
+      "README.md": "0595dd703280e81cd857146e9fc95f69be625fe243bc625eefc80e42d9642824",
+      "LICENSE": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      ".pre-commit-config.yaml": "29ae7b84f221f6a6b6362d89d4f7df5a415be47a13a8290550808370aac56971",
+      "pytest.ini": "1adae0a97fe99ce1b3f7ee592e2082564098300f0ab68d91f0527613e91d7fd2"
+    },
+    "migration_candidates": {
+      "DEPLOYMENT_v5.2.md": "1d46df201e4a1da8f9c6ccfa78980293fc3c6c10bd65704f70e60b4abd477945",
+      "DEPLOYMENT_v5.4_Federation.md": "02da6105b1dbe10e049537f2afdeafe134e2a524d42e8290b7e79822f5b4ced2",
+      "DEPLOYMENT_v6.0_Planetary_Continuum.md": "36be330cc44abd42dd30df618e8e3402e3d2070f2b6c46cc2a19a4b503a73e77",
+      "DEPLOYMENT_v8.0_Continuum_Ignition.md": "8ac9de5648dbd2bd4943e0407004d9566868b0d5a3ff3c49badf6685dc6db1c2",
+      "TRANSITION_v6_to_v7_DORMANT.md": "06913ccde36fcf6ac63dfb9a14171c5e874561740139ef67408638a1b786f365",
+      "ROOT_24_LOCK_COMPLIANCE_SUMMARY.md": "cee8b64de63b7ea04b93c64a78ee88e2cc4a14d52ee160c5a2eb7d29e83537e8"
+    }
+  },
+  "remediation_roadmap": {
+    "phase_1_critical": {
+      "priority": "IMMEDIATE",
+      "timeline": "< 1 day",
+      "score_impact": "+60 points (30 → 90)",
+      "actions": [
+        {
+          "action": "delete_directory",
+          "path": ".claude/",
+          "reason": "IDE-specific, not for version control",
+          "command": "rm -rf .claude/ && echo '.claude/' >> .gitignore"
+        },
+        {
+          "action": "delete_directory",
+          "path": ".pytest_cache/",
+          "reason": "Test cache, not for version control",
+          "command": "rm -rf .pytest_cache/ && echo '.pytest_cache/' >> .gitignore"
+        },
+        {
+          "action": "evaluate_directory",
+          "path": ".github/",
+          "reason": "GitHub workflows - common convention",
+          "recommendation": "Add to authorized_exception_dirs (recommended)"
+        }
+      ],
+      "expected_score_after": 90
+    },
+    "phase_2_warnings": {
+      "priority": "HIGH",
+      "timeline": "< 1 week",
+      "score_impact": "+30 points (90 → 100)",
+      "actions": [
+        {
+          "action": "migrate_files",
+          "category": "deployment_docs",
+          "count": 4,
+          "target": "05_documentation/deployment/",
+          "sha256_verification": true
+        },
+        {
+          "action": "migrate_files",
+          "category": "transition_docs",
+          "count": 1,
+          "target": "05_documentation/transitions/",
+          "sha256_verification": true
+        },
+        {
+          "action": "migrate_files",
+          "category": "compliance_docs",
+          "count": 1,
+          "target": "05_documentation/compliance/",
+          "sha256_verification": true
+        }
+      ],
+      "expected_score_after": 100
+    },
+    "phase_3_verification": {
+      "priority": "HIGH",
+      "timeline": "Immediate after migration",
+      "actions": [
+        {
+          "action": "run_forensic_audit",
+          "command": "python 12_tooling/root_forensic_audit.py",
+          "expected_result": "Score 100/100, 0 violations"
+        },
+        {
+          "action": "verify_hashes",
+          "command": "sha256sum 05_documentation/**/*.md",
+          "expected_result": "All hashes match forensic audit baseline"
+        },
+        {
+          "action": "run_opa_policy",
+          "command": "opa eval --data 23_compliance/policies/activation_policy.rego 'data.ssid.root24.activation.compliance_status'",
+          "expected_result": "'PASS'"
+        }
+      ]
+    }
+  },
+  "target_state": {
+    "overall_score": 100.0,
+    "compliance_status": "PASS",
+    "score_breakdown": {
+      "architecture": 100,
+      "security": 100,
+      "policy": 100,
+      "testing": 100,
+      "documentation": 100
+    },
+    "forensic_statistics": {
+      "total_root_items": 29,
+      "authorized_roots": 24,
+      "authorized_exceptions": 5,
+      "unauthorized_items": 0,
+      "critical_violations": 0,
+      "warning_violations": 0
+    }
+  },
+  "enforcement_mechanisms": {
+    "forensic_audit": {
+      "enabled": true,
+      "script": "12_tooling/root_forensic_audit.py",
+      "frequency": "on_commit",
+      "sha256_verification": true,
+      "cost": 0
+    },
+    "opa_policy": {
+      "enabled": true,
+      "policy_file": "23_compliance/policies/activation_policy.rego",
+      "enforcement_mode": "deny",
+      "cost": 0
+    },
+    "ci_guard": {
+      "enabled": true,
+      "workflow_file": ".github/workflows/ci_structure_guard.yml",
+      "fail_on_critical": true,
+      "fail_on_warning": false,
+      "sha256_checks": false,
+      "enhancement_pending": true,
+      "cost": 0
+    }
+  },
+  "references": {
+    "policy_files": [
+      "23_compliance/policies/root_24_forensic_integrity_policy.yaml",
+      "23_compliance/policies/activation_policy.rego",
+      "23_compliance/policies/activation_guard.rego"
+    ],
+    "audit_reports": [
+      "02_audit_logging/reports/root_forensic_audit_summary.json",
+      "02_audit_logging/reports/root_forensic_audit_report.md",
+      "05_documentation/reports/root_integrity_report.md"
+    ],
+    "tooling": [
+      "12_tooling/root_forensic_audit.py",
+      "12_tooling/migrate_root_24_compliance.sh"
+    ],
+    "source_of_truth": "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md"
+  },
+  "next_actions": [
+    {
+      "priority": 1,
+      "action": "Execute Phase 1 remediation (critical violations)",
+      "timeline": "< 1 day",
+      "expected_outcome": "Score 90/100"
+    },
+    {
+      "priority": 2,
+      "action": "Execute Phase 2 remediation (warning violations)",
+      "timeline": "< 1 week",
+      "expected_outcome": "Score 100/100"
+    },
+    {
+      "priority": 3,
+      "action": "Enhance CI guard with SHA-256 verification",
+      "timeline": "After Phase 2",
+      "expected_outcome": "Full enforcement triad operational"
+    }
+  ],
+  "metadata": {
+    "author": "SSID Core Team",
+    "license": "Proprietary",
+    "framework": "Root-24-LOCK v1.0",
+    "next_audit": "After remediation",
+    "target_compliance": "100/100 (PASS)"
+  }
+}

@@ -32,7 +32,6 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.backends import default_backend
 
-
 class CertificateManager:
     """Manages X.509 certificates for mTLS authentication."""
 
@@ -407,7 +406,6 @@ class CertificateManager:
         with open(evidence_file, 'w', encoding='utf-8') as f:
             json.dump(evidence, f, indent=2, ensure_ascii=False)
 
-
 def main():
     """Example usage of Certificate Manager."""
     manager = CertificateManager()
@@ -459,7 +457,6 @@ def main():
     print("=" * 80)
     print("Evidence saved to: 23_compliance/evidence/mtls/")
     print("=" * 80)
-
 
 if __name__ == "__main__":
     main()

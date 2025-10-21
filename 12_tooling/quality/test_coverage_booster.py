@@ -19,11 +19,9 @@ from datetime import datetime
 from typing import Dict, List, Any, Set
 from dataclasses import dataclass, asdict
 
-
 ROOT = Path(__file__).resolve().parents[2]
 TEST_DIR = ROOT / "11_test_simulation"
 REPORT_DIR = ROOT / "02_audit_logging" / "reports"
-
 
 # Roots to scan for production code
 PRODUCTION_ROOTS = [
@@ -39,7 +37,6 @@ PRODUCTION_ROOTS = [
     "24_meta_orchestration",
 ]
 
-
 @dataclass
 class ModuleInfo:
     """Production module information."""
@@ -49,7 +46,6 @@ class ModuleInfo:
     has_test: bool
     test_paths: List[str]
     line_count: int
-
 
 class CoverageAnalyzer:
     """Analyzes test coverage heuristically."""
@@ -178,7 +174,6 @@ class CoverageAnalyzer:
 
         return pytest_result
 
-
 def generate_report(analyzer: CoverageAnalyzer, pytest_result: Dict[str, Any]) -> Dict[str, Any]:
     """Generate coverage analysis report."""
     untested_modules = [m for m in analyzer.production_modules if not m.has_test]
@@ -231,7 +226,6 @@ def generate_report(analyzer: CoverageAnalyzer, pytest_result: Dict[str, Any]) -
 
     return report
 
-
 def save_report(report: Dict[str, Any], emit_json: bool) -> Path:
     """Save report to evidence directory."""
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
@@ -251,7 +245,6 @@ def save_report(report: Dict[str, Any], emit_json: bool) -> Path:
         print(json.dumps(report, indent=2))
 
     return report_path
-
 
 def main() -> int:
     """Main execution."""
@@ -323,7 +316,6 @@ def main() -> int:
         print("Status: PASS (advisory only)")
 
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

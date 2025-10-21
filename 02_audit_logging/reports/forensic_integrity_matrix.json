@@ -1,0 +1,35 @@
+{
+  "aggregation_id": "0e9a5543-4666-4a27-804c-c78291f62180",
+  "timestamp": "2025-10-16T22:55:06.531425Z",
+  "master_score": 1.0,
+  "grade": "PLATINUM-Forensic",
+  "capped": true,
+  "metrics": {
+    "structural_integrity": 1.0,
+    "content_integrity_y": 1.0,
+    "temporal_coherence_z": 1.0,
+    "vector_magnitude": 1.0,
+    "authenticity_rate": 1.0,
+    "resilience": 1.0
+  },
+  "cap_conditions": {
+    "all_met": true,
+    "conditions": {
+      "structural_integrity": true,
+      "authenticity_rate": true,
+      "resilience": true,
+      "vector_magnitude": true
+    },
+    "thresholds": {
+      "structural_integrity": 0.99,
+      "authenticity_rate": 0.99,
+      "resilience": 0.7,
+      "vector_magnitude": 0.9
+    }
+  },
+  "certification": {
+    "level": "PLATINUM-Forensic",
+    "score": "100/100",
+    "status": "PASS"
+  }
+}

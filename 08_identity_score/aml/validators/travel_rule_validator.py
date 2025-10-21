@@ -27,7 +27,6 @@ from typing import Dict, List, Any, Optional
 from datetime import datetime
 from decimal import Decimal
 
-
 class TravelRuleValidator:
     """Validates crypto transfers against Travel Rule requirements."""
 
@@ -56,7 +55,7 @@ class TravelRuleValidator:
 
     def _load_exchange_rates(self) -> None:
         """Load ECB exchange rates for currency conversion."""
-        # Mock exchange rates for demonstration
+        
         # Production: Fetch from ECB API https://www.ecb.europa.eu/stats/policy_and_exchange_rates/
         self.exchange_rates = {
             "EUR": Decimal("1.00"),
@@ -377,7 +376,6 @@ class TravelRuleValidator:
         with open(evidence_file, 'w', encoding='utf-8') as f:
             json.dump(evidence, f, indent=2, ensure_ascii=False)
 
-
 def main():
     """Example usage of Travel Rule Validator."""
     validator = TravelRuleValidator()
@@ -451,7 +449,6 @@ def main():
     print(f"\nDecision: {result3['compliance_decision']}")
     print(f"EUR Equivalent: {result3['transaction']['eur_equivalent']} EUR")
     print(f"Travel Rule Required: {result3['travel_rule_required']}")
-
 
 if __name__ == "__main__":
     main()

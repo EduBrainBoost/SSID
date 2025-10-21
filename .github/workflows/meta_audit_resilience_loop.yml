@@ -1,0 +1,339 @@
+name: Meta-Audit Resilience Loop v3.0
+
+on:
+  # Monthly execution (1st of each month at 04:00 UTC)
+  schedule:
+    - cron: '0 4 1 * *'
+
+  # Manual workflow dispatch
+  workflow_dispatch:
+
+jobs:
+  resilience-cycle:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Execute Adversarial Testing
+        id: adversary
+        run: |
+          echo "==================== PHASE 1: ADVERSARIAL TESTING ===================="
+          python 02_audit_logging/forensics/meta_audit_adversary.py --no-cleanup
+          EXIT_CODE=$?
+
+          echo "adversary_exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
+
+          # Continue even if adversary fails (we want to analyze)
+          exit 0
+
+      - name: Execute Resilience Daemon
+        id: resilience
+        run: |
+          echo "==================== PHASE 2: RESILIENCE ANALYSIS ===================="
+          python 02_audit_logging/forensics/meta_audit_resilience_daemon.py
+          EXIT_CODE=$?
+
+          echo "resilience_exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
+
+          exit 0
+
+      - name: Extract Metrics
+        id: metrics
+        if: always()
+        run: |
+          # Get latest resilience report
+          LATEST_REPORT=$(ls -t 02_audit_logging/reports/meta_audit_resilience_*.json 2>/dev/null | head -1)
+
+          if [ -f "$LATEST_REPORT" ]; then
+            HEALTH=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(data['health_status'])")
+            TREND=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(data['trend_analysis']['trend'])")
+            DETECTION_RATE=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(data['trend_analysis']['current_rate'])")
+            ADAPTATIONS=$(python -c "import json; data=json.load(open('$LATEST_REPORT')); print(len(data['adaptations_applied']))")
+
+            echo "health=$HEALTH" >> $GITHUB_OUTPUT
+            echo "trend=$TREND" >> $GITHUB_OUTPUT
+            echo "detection_rate=$DETECTION_RATE" >> $GITHUB_OUTPUT
+            echo "adaptations=$ADAPTATIONS" >> $GITHUB_OUTPUT
+          else
+            echo "health=UNKNOWN" >> $GITHUB_OUTPUT
+            echo "trend=UNKNOWN" >> $GITHUB_OUTPUT
+            echo "detection_rate=0.0" >> $GITHUB_OUTPUT
+            echo "adaptations=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload Adversarial Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adversarial-report
+          path: 02_audit_logging/forensics/adversarial_tests/adversarial_report_*.json
+          if-no-files-found: ignore
+
+      - name: Upload Resilience Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resilience-report
+          path: 02_audit_logging/reports/meta_audit_resilience_*.json
+          if-no-files-found: ignore
+
+      - name: Upload Performance Registry
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-registry
+          path: 24_meta_orchestration/registry/adversary_performance_registry.yaml
+          if-no-files-found: ignore
+
+      - name: Commit Registry Updates
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add performance registry
+          if [ -f "24_meta_orchestration/registry/adversary_performance_registry.yaml" ]; then
+            git add 24_meta_orchestration/registry/adversary_performance_registry.yaml
+          fi
+
+          # Commit if changes exist
+          if git diff --staged --quiet; then
+            echo "No registry changes to commit"
+          else
+            git commit -m "chore: Update adversary performance registry - Detection: ${{ steps.metrics.outputs.detection_rate }}, Health: ${{ steps.metrics.outputs.health }}"
+            git push
+          fi
+
+      - name: Create Issue on Critical Health
+        if: always() && steps.metrics.outputs.health == 'CRITICAL'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const health = '${{ steps.metrics.outputs.health }}';
+            const detectionRate = '${{ steps.metrics.outputs.detection_rate }}';
+            const trend = '${{ steps.metrics.outputs.trend }}';
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 Meta-Audit System Health: CRITICAL - Detection Rate: ${(detectionRate * 100).toFixed(1)}%`,
+              body: `## 🔴 Meta-Audit Resilience Loop: CRITICAL HEALTH ALERT
+
+            The kybernetischer Feedback-Loop has detected critical system health degradation.
+
+            ### Metrics
+            - **Health Status:** 🔴 ${health}
+            - **Detection Rate:** ${(detectionRate * 100).toFixed(1)}%
+            - **Trend:** ${trend}
+            - **Timestamp:** ${new Date().toISOString()}
+
+            ### What This Means
+
+            The meta-audit system's detection capabilities have degraded below acceptable thresholds. Adversarial attacks are not being detected at the required 98% rate.
+
+            ### Immediate Actions Required
+
+            1. **Review Resilience Report:** Download \`resilience-report\` artifact
+            2. **Analyze Failed Detections:** Check which attack types are being missed
+            3. **Review Detection Logic:** Inspect \`02_audit_logging/forensics/fake_integrity_guard.py\`
+            4. **Apply Policy Reinforcement:** Follow recommendations in resilience report
+            5. **Re-run Adversarial Test:** Validate improvements
+
+            ### Attack Categories
+
+            The following attack categories are tested:
+            - Hash Chain Manipulation (CRITICAL)
+            - Fake Score Injection (CRITICAL)
+            - WORM Deletion (CRITICAL)
+            - Timestamp Manipulation (HIGH)
+            - Policy Bypass (HIGH)
+
+            ### Artifacts
+
+            - Adversarial Report: Download from workflow artifacts
+            - Resilience Report: Download from workflow artifacts
+            - Performance Registry: \`24_meta_orchestration/registry/adversary_performance_registry.yaml\`
+
+            ### Kybernetischer Kreislauf
+
+            This is part of the adaptive feedback loop:
+            **Angriff → Erkennung → Anpassung → erneuter Angriff**
+
+            The system will automatically apply adaptations and re-test in the next cycle.
+
+            ---
+
+            **Priority:** 🔴 CRITICAL
+            **Component:** Meta-Audit Resilience Loop
+            **Type:** Detection Degradation
+
+            🤖 Generated with [Claude Code](https://claude.com/claude-code)
+            `,
+              labels: ['security', 'meta-audit', 'critical', 'resilience-loop']
+            });
+
+            console.log(\`Created issue #\${issue.data.number}\`);
+
+      - name: Create Issue on Perfect Stable (Needs Challenge)
+        if: always() && steps.metrics.outputs.health == 'EXCELLENT_NEEDS_CHALLENGE'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const health = '${{ steps.metrics.outputs.health }}';
+            const detectionRate = '${{ steps.metrics.outputs.detection_rate }}';
+            const adaptations = '${{ steps.metrics.outputs.adaptations }}';
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🎯 Meta-Audit System: Perfect Detection - Increase Fuzzing Diversity`,
+              body: `## 🟢 Meta-Audit Resilience Loop: Perfect Detection Maintained
+
+            The kybernetischer Feedback-Loop has detected perfect detection rate stability.
+
+            ### Metrics
+            - **Health Status:** 🟢 ${health}
+            - **Detection Rate:** ${(detectionRate * 100).toFixed(1)}%
+            - **Adaptations Applied:** ${adaptations}
+            - **Risk:** System may "einrosten" (stagnate) without new challenges
+
+            ### What This Means
+
+            The meta-audit system is detecting 100% of all adversarial attacks. While this is excellent, it indicates the need to increase attack diversity to prevent stagnation.
+
+            ### Actions Recommended
+
+            1. **Implement New Attack Patterns:**
+               - Multi-stage attacks (combine techniques)
+               - Obfuscated attacks (base64, compression)
+               - Race condition attacks (concurrent modifications)
+               - Timing attacks (exploit validation gaps)
+               - Symlink attacks (bypass path checks)
+
+            2. **Increase Attack Sophistication:**
+               - Larger data payloads
+               - More complex manipulation patterns
+               - Combined attack vectors
+
+            3. **Add Edge Cases:**
+               - Unicode path exploits
+               - Zero-byte file attacks
+               - Malformed JSON/YAML
+               - Encoding attacks
+
+            ### Kybernetischer Kreislauf
+
+            The adaptive feedback loop has identified:
+            **Perfect detection → Risk of stagnation → Increase diversity → Maintain resilience**
+
+            ### Next Steps
+
+            1. Review suggested attack patterns in resilience report
+            2. Implement 2-3 new attack techniques
+            3. Re-run adversarial test to validate new patterns
+            4. Monitor detection rate for maintained 98%+ performance
+
+            ---
+
+            **Priority:** 🟡 MEDIUM
+            **Component:** Meta-Audit Resilience Loop
+            **Type:** Fuzzing Diversity Enhancement
+
+            🤖 Generated with [Claude Code](https://claude.com/claude-code)
+            `,
+              labels: ['security', 'meta-audit', 'enhancement', 'resilience-loop']
+            });
+
+            console.log(\`Created issue #\${issue.data.number}\`);
+
+      - name: Update Job Summary
+        if: always()
+        run: |
+          echo "## 🔄 Meta-Audit Resilience Loop v3.0" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date -u +%Y-%m-%d\ %H:%M:%S) UTC" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          HEALTH="${{ steps.metrics.outputs.health }}"
+          DETECTION_RATE="${{ steps.metrics.outputs.detection_rate }}"
+
+          if [ "$HEALTH" == "EXCELLENT_NEEDS_CHALLENGE" ]; then
+            echo "### ✅ Status: EXCELLENT (Needs Challenge)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Detection Rate:** ${DETECTION_RATE} (100%)" >> $GITHUB_STEP_SUMMARY
+            echo "**Health:** 🟢 Perfect detection maintained" >> $GITHUB_STEP_SUMMARY
+            echo "**Action:** Increase fuzzing diversity to prevent stagnation" >> $GITHUB_STEP_SUMMARY
+          elif [ "$HEALTH" == "HEALTHY" ]; then
+            echo "### ✅ Status: HEALTHY" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Detection Rate:** ${DETECTION_RATE}" >> $GITHUB_STEP_SUMMARY
+            echo "**Health:** 🟢 System performing optimally" >> $GITHUB_STEP_SUMMARY
+          elif [ "$HEALTH" == "DEGRADED" ]; then
+            echo "### ⚠️ Status: DEGRADED" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Detection Rate:** ${DETECTION_RATE}" >> $GITHUB_STEP_SUMMARY
+            echo "**Health:** 🟡 System needs attention" >> $GITHUB_STEP_SUMMARY
+            echo "**Action:** Policy review recommended" >> $GITHUB_STEP_SUMMARY
+          elif [ "$HEALTH" == "CRITICAL" ]; then
+            echo "### ❌ Status: CRITICAL" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Detection Rate:** ${DETECTION_RATE}" >> $GITHUB_STEP_SUMMARY
+            echo "**Health:** 🔴 IMMEDIATE ACTION REQUIRED" >> $GITHUB_STEP_SUMMARY
+            echo "**Action:** Policy reinforcement needed" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Kybernetischer Kreislauf" >> $GITHUB_STEP_SUMMARY
+          echo "Angriff → Erkennung → Anpassung → erneuter Angriff" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Trend:** ${{ steps.metrics.outputs.trend }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Adaptations Applied:** ${{ steps.metrics.outputs.adaptations }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "- Adversarial Report (JSON)" >> $GITHUB_STEP_SUMMARY
+          echo "- Resilience Report (JSON)" >> $GITHUB_STEP_SUMMARY
+          echo "- Performance Registry (YAML)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Success Message
+        if: steps.metrics.outputs.health == 'HEALTHY' || steps.metrics.outputs.health == 'EXCELLENT_NEEDS_CHALLENGE'
+        run: |
+          echo "============================================================"
+          echo "✅ META-AUDIT RESILIENCE LOOP: OPERATIONAL"
+          echo "============================================================"
+          echo ""
+          echo "Health: ${{ steps.metrics.outputs.health }}"
+          echo "Detection Rate: ${{ steps.metrics.outputs.detection_rate }}"
+          echo ""
+          echo "Kybernetischer Kreislauf erfolgreich abgeschlossen"
+          echo ""
+
+      - name: Failure Message
+        if: steps.metrics.outputs.health == 'CRITICAL' || steps.metrics.outputs.health == 'DEGRADED'
+        run: |
+          echo "============================================================"
+          echo "⚠️  META-AUDIT RESILIENCE LOOP: NEEDS ATTENTION"
+          echo "============================================================"
+          echo ""
+          echo "Health: ${{ steps.metrics.outputs.health }}"
+          echo "Detection Rate: ${{ steps.metrics.outputs.detection_rate }}"
+          echo ""
+          echo "Review resilience report for recommended actions"
+          echo ""

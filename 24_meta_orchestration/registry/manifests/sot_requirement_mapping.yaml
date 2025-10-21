@@ -1,8 +1,32 @@
 version: 1.0.0
-timestamp: '2025-10-10T12:47:49.958900Z'
+timestamp: '2025-10-15T09:47:55.658842Z'
 tool: sot_requirement_mapper
 requirements:
 - req_id: SOT-M001
+  req_type: MUST
+  description: be bidirectional)
+  source_file: 16_codex\structure\interfederation_spec_v11.md
+  source_line: 31
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M002
+  req_type: MUST
+  description: validate each other
+  source_file: 16_codex\structure\interfederation_spec_v11.md
+  source_line: 211
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M003
+  req_type: MUST
+  description: expose private data during interfederation
+  source_file: 16_codex\structure\interfederation_spec_v11.md
+  source_line: 220
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M004
   req_type: MUST
   description: "\u2192 Deprecated"
   source_file: 16_codex\structure\ssid_master_definition_corrected_v1.1.1.md
@@ -10,7 +34,63 @@ requirements:
   target_paths: []
   satisfied: false
   found_artifacts: []
-- req_id: SOT-M002
+- req_id: SOT-M005
+  req_type: MUST
+  description: directory verification |
+  source_file: 16_codex\structure\blueprint_v4.2\ssid_master_definition_v4.2.md
+  source_line: 20
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M006
+  req_type: MUST
+  description: "\u2192 Deprecated"
+  source_file: 16_codex\structure\blueprint_v4.2\ssid_master_definition_v4.2.md
+  source_line: 892
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M007
+  req_type: MUST
+  description: assess own risk tolerance"
+  source_file: 16_codex\structure\blueprint_v4.2\SSID_structure_level3_part1_MAX.md
+  source_line: 500
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M008
+  req_type: MUST
+  description: (Alle 24 Module)
+  source_file: 16_codex\structure\blueprint_v4.2\SSID_structure_level3_part1_MAX.md
+  source_line: 1181
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M009
+  req_type: MUST
+  description: be explicitly listed"
+  source_file: 16_codex\structure\blueprint_v4.2\SSID_structure_level3_part2_MAX.md
+  source_line: 110
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M010
+  req_type: MUST
+  description: vorhanden |
+  source_file: 16_codex\structure\blueprint_v4.2\SSID_structure_level3_part2_MAX.md
+  source_line: 801
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M011
+  req_type: MUST
+  description: je Modul (Ebene 2)
+  source_file: 16_codex\structure\blueprint_v4.2\SSID_structure_level3_part2_MAX.md
+  source_line: 1175
+  target_paths: []
+  satisfied: false
+  found_artifacts: []
+- req_id: SOT-M012
   req_type: MUST
   description: assess own risk tolerance"
   source_file: 16_codex\structure\level3\SSID_structure_level3_part1_MAX.md
@@ -18,7 +98,7 @@ requirements:
   target_paths: []
   satisfied: false
   found_artifacts: []
-- req_id: SOT-M003
+- req_id: SOT-M013
   req_type: MUST
   description: (Alle 24 Module)
   source_file: 16_codex\structure\level3\SSID_structure_level3_part1_MAX.md
@@ -26,7 +106,7 @@ requirements:
   target_paths: []
   satisfied: false
   found_artifacts: []
-- req_id: SOT-M004
+- req_id: SOT-M014
   req_type: MUST
   description: be explicitly listed"
   source_file: 16_codex\structure\level3\SSID_structure_level3_part2_MAX.md
@@ -34,7 +114,7 @@ requirements:
   target_paths: []
   satisfied: false
   found_artifacts: []
-- req_id: SOT-M005
+- req_id: SOT-M015
   req_type: MUST
   description: vorhanden |
   source_file: 16_codex\structure\level3\SSID_structure_level3_part2_MAX.md
@@ -42,7 +122,7 @@ requirements:
   target_paths: []
   satisfied: false
   found_artifacts: []
-- req_id: SOT-M006
+- req_id: SOT-M016
   req_type: MUST
   description: je Modul (Ebene 2)
   source_file: 16_codex\structure\level3\SSID_structure_level3_part2_MAX.md

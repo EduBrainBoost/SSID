@@ -1,0 +1,237 @@
+# SoT Auto-Fixable Rules Catalog
+# ================================
+# Specifies which rules can be automatically fixed by Self-Healing Engine
+#
+# Version: 1.0.0
+# Date: 2025-10-17
+# Self-Healing Engine: v1.0.0
+
+metadata:
+  catalog_id: "SOT-AUTO-FIXABLE-V1.0"
+  version: "1.0.0"
+  timestamp: "2025-10-17T16:04:00Z"
+  total_sot_rules: 69
+  auto_fixable_rules: 4
+  coverage_rate: 5.8%  # 4/69
+  self_healing_engine_version: "1.0.0"
+
+# =============================================================================
+# AUTO-FIXABLE RULES (FALLBACK MODE)
+# =============================================================================
+# These rules have hardcoded suggestions and work without LLM API
+
+auto_fixable_rules:
+  - rule_id: "SOT-018"
+    priority: "should"
+    rule_name: "YAML Block Marker Validation"
+    auto_fixable: true
+    remediation:
+      method: "fallback"
+      confidence: 0.95
+      effort: "10 seconds"
+      patch_example:
+        op: "replace"
+        path: "/yaml_block_marker"
+        value: "```yaml"
+      cli_hint: 'yq -i ''.yaml_block_marker = "```yaml"'' config.yaml'
+      explanation: "YAML block markers should use '```yaml' not '```yml' for consistency per SOT-018 specification."
+      test_status: "✅ TESTED"
+      implementation_file: "01_ai_layer/remediation/self_healing_engine.py:294"
+
+  - rule_id: "SOT-019"
+    priority: "should"
+    rule_name: "YAML Comment Line Validation"
+    auto_fixable: true
+    remediation:
+      method: "fallback"
+      confidence: 0.90
+      effort: "30 seconds"
+      patch_example:
+        op: "replace"
+        path: "/version_badge"
+        value: "![Version](https://img.shields.io/badge/version-3.2.0-blue)"
+      cli_hint: 'yq -i ''.version_badge = "![Version](https://img.shields.io/badge/version-3.2.0-blue)"'' config.yaml'
+      explanation: "Version badges should follow shields.io format for consistency per SOT-019 specification."
+      test_status: "🟡 IMPLEMENTED (not yet tested)"
+      implementation_file: "01_ai_layer/remediation/self_healing_engine.py:302"
+
+  - rule_id: "SOT-025"
+    priority: "should"
+    rule_name: "Business Priority Field Validation"
+    auto_fixable: true
+    remediation:
+      method: "fallback"
+      confidence: 0.85
+      effort: "30 seconds"
+      patch_example:
+        op: "add"
+        path: "/instances/0/business_priority"
+        value: "medium"
+      cli_hint: 'yq -i ''.instances[0].business_priority = "medium"'' config.yaml'
+      explanation: "Adding business_priority field with default 'medium' value. Adjust to 'high' or 'low' based on business criticality per ISO 31000:2018 risk assessment."
+      test_status: "✅ TESTED"
+      implementation_file: "01_ai_layer/remediation/self_healing_engine.py:310"
+
+  - rule_id: "SOT-030"
+    priority: "should"
+    rule_name: "Deprecated Business Priority Validation"
+    auto_fixable: true
+    remediation:
+      method: "fallback"
+      confidence: 0.80
+      effort: "30 seconds"
+      patch_example:
+        op: "add"
+        path: "/deprecated_list/0/business_priority"
+        value: "low"
+      cli_hint: 'yq -i ''.deprecated_list[0].business_priority = "low"'' config.yaml'
+      explanation: "Deprecated items typically have low business priority. Adjust if needed."
+      test_status: "✅ TESTED"
+      implementation_file: "01_ai_layer/remediation/self_healing_engine.py:316"
+
+# =============================================================================
+# LLM-CAPABLE RULES (REQUIRES API KEY)
+# =============================================================================
+# These rules can be auto-fixed with LLM but not in fallback mode
+
+llm_capable_rules:
+  - rule_id: "SOT-071"
+    priority: "should"
+    rule_name: "SOC2 Business Priority Property"
+    auto_fixable: true
+    remediation:
+      method: "llm"  # Requires Claude or GPT-4 API
+      confidence: null  # LLM-dependent
+      effort: "30 seconds"
+      cli_hint: 'yq -i ''.soc2.business_priority = "HIGH"'' config.yaml'
+      explanation: "SOC2 compliance typically requires HIGH business priority."
+      test_status: "🔵 UNTESTED (requires API key)"
+      requires_api_key: true
+
+  - rule_id: "SOT-081"
+    priority: "should"
+    rule_name: "ETSI EN 319 421 Business Priority Property"
+    auto_fixable: true
+    remediation:
+      method: "llm"
+      confidence: null
+      effort: "30 seconds"
+      cli_hint: 'yq -i ''.etsi_en_319_421.business_priority = "MEDIUM"'' config.yaml'
+      explanation: "ETSI standards typically require MEDIUM business priority."
+      test_status: "🔵 UNTESTED (requires API key)"
+      requires_api_key: true
+
+# =============================================================================
+# NON-AUTO-FIXABLE RULES
+# =============================================================================
+# These rules cannot be automatically fixed
+
+non_auto_fixable_rules:
+  must_rules:
+    count: 48
+    reason: "Too critical for automation - require manual review"
+    examples:
+      - "SOT-001": "Version Format - Requires semantic versioning understanding"
+      - "SOT-002": "Date Format - Context-dependent (current vs. historical)"
+      - "SOT-004": "Regulatory Basis - Requires regulatory knowledge"
+      - "SOT-005": "Security Classification - Requires data classification expertise"
+
+  complex_should_rules:
+    count: 9  # 15 total SHOULD - 4 auto-fixable - 2 LLM-capable = 9
+    reason: "Require contextual understanding or complex transformations"
+    examples:
+      - "SOT-061": "Deprecated List Status - Requires business context"
+      - "SOT-063": "Deprecated List Replaced By - Requires knowing replacement"
+      - "SOT-066": "Deprecated List Notes - Requires descriptive text"
+
+  have_rules:
+    count: 4  # 6 total - 2 potentially LLM-capable = 4
+    reason: "Optional rules with low priority"
+    examples:
+      - "SOT-064": "Deprecation Date - Requires historical knowledge"
+      - "SOT-065": "Migration Deadline - Requires project planning"
+
+# =============================================================================
+# USAGE GUIDANCE
+# =============================================================================
+
+usage:
+  cli_command: |
+    # Generate suggestions for auto-fixable rules only
+    python sot_validator.py --scorecard --input config.yaml --suggest-fixes
+
+  filtering_logic: |
+    # Self-Healing Engine automatically filters:
+    # 1. Only SHOULD/HAVE rules (skips MUST for safety)
+    # 2. Only rules in auto_fixable_rules list
+    # 3. Fallback mode: Only rules with method="fallback"
+    # 4. LLM mode: All auto_fixable rules (if API key available)
+
+  prefiltering_example: |
+    # In sot_validator.py suggest_fixes() function:
+    AUTO_FIXABLE_RULES = ["SOT-018", "SOT-019", "SOT-025", "SOT-030"]
+
+    for rule_id, result in results.items():
+        if result["priority"] not in ["should", "have"]:
+            continue  # Skip MUST rules
+        if rule_id not in AUTO_FIXABLE_RULES:
+            continue  # Skip non-auto-fixable rules
+        # Generate suggestion...
+
+# =============================================================================
+# ROADMAP
+# =============================================================================
+
+roadmap:
+  immediate:
+    - "Deploy auto_fixable flags to production SoT Contract"
+    - "Test SOT-019 (version badge validation)"
+    - "Expand fallback rules coverage to 10+ rules"
+
+  short_term:
+    - "Add SOT-071 and SOT-081 LLM mode testing"
+    - "Implement batch fix application"
+    - "Add confidence threshold filtering (e.g., only apply fixes with confidence > 0.85)"
+
+  long_term:
+    - "Use LLM to generate fixes for complex SHOULD rules"
+    - "Implement multi-model consensus (Claude + GPT-4 + Gemini)"
+    - "Add user feedback loop to improve confidence scoring"
+
+# =============================================================================
+# COMPLIANCE & AUDIT
+# =============================================================================
+
+compliance:
+  root24_compliant: true
+  evidence_chain: true
+  audit_trail: "02_audit_logging/logs/self_healing_<timestamp>.jsonl"
+  worm_storage: "02_audit_logging/storage/worm/immutable_store/"
+  blockchain_anchor: true
+
+certification:
+  badge: "REMEDIATION-READY"
+  issued: "2025-10-17"
+  valid_until: "2026-01-17"
+  coverage_target: "20% of SHOULD rules by Q2 2026"  # 3/15 → 12/15
+
+# =============================================================================
+# REFERENCES
+# =============================================================================
+
+references:
+  self_healing_engine: "01_ai_layer/remediation/self_healing_engine.py"
+  audit_report: "01_ai_layer/remediation/README_SELF_HEALING_ENGINE.md"
+  test_results: "01_ai_layer/remediation/self_healing_test_results.json"
+  evidence_log: "01_ai_layer/remediation/evidence_log_sha256.yaml"
+  sot_contract: "16_codex/contracts/sot/sot_contract.yaml"
+  cli_tool: "12_tooling/cli/sot_validator.py"
+
+---
+
+# Metadata
+
+maintained_by: "SSID AI/ML Team"
+last_updated: "2025-10-17T16:04:00Z"
+next_review: "2026-01-17"
+version: "1.0.0"

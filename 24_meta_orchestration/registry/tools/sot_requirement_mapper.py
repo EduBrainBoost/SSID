@@ -20,13 +20,11 @@ from datetime import datetime
 from typing import Dict, List, Any, Set
 from dataclasses import dataclass, asdict
 
-
 ROOT = Path(__file__).resolve().parents[3]
 SOT_DIR = ROOT / "16_codex" / "structure"
 MANIFEST_DIR = ROOT / "24_meta_orchestration" / "registry" / "manifests"
 SCORE_DIR = ROOT / "02_audit_logging" / "scores"
 REPORT_DIR = ROOT / "02_audit_logging" / "reports"
-
 
 @dataclass
 class Requirement:
@@ -39,7 +37,6 @@ class Requirement:
     target_paths: List[str]  # Heuristic target paths
     satisfied: bool
     found_artifacts: List[str]
-
 
 class SoTParser:
     """Parses Source of Truth markdown for requirements."""
@@ -126,7 +123,6 @@ class SoTParser:
             except Exception as e:
                 print(f"WARNING: Could not parse {md_file}: {e}")
 
-
 class FilesystemMapper:
     """Maps requirements to actual filesystem artifacts."""
 
@@ -167,7 +163,6 @@ class FilesystemMapper:
             req.satisfied = True
             req.found_artifacts = list(set(found))  # Remove duplicates
 
-
 def calculate_score(requirements: List[Requirement]) -> Dict[str, Any]:
     """Calculate compliance score."""
     total = len(requirements)
@@ -203,7 +198,6 @@ def calculate_score(requirements: List[Requirement]) -> Dict[str, Any]:
         }
     }
 
-
 def generate_manifest(requirements: List[Requirement]) -> Dict[str, Any]:
     """Generate requirement mapping manifest."""
     manifest = {
@@ -214,7 +208,6 @@ def generate_manifest(requirements: List[Requirement]) -> Dict[str, Any]:
     }
     return manifest
 
-
 def generate_score_report(score: Dict[str, Any]) -> Dict[str, Any]:
     """Generate score report."""
     report = {
@@ -223,7 +216,6 @@ def generate_score_report(score: Dict[str, Any]) -> Dict[str, Any]:
         "score": score
     }
     return report
-
 
 def generate_markdown_report(requirements: List[Requirement], score: Dict[str, Any]) -> str:
     """Generate human-readable markdown report."""
@@ -265,7 +257,6 @@ def generate_markdown_report(requirements: List[Requirement], score: Dict[str, A
 
     return "\n".join(report_lines)
 
-
 def save_outputs(manifest: Dict[str, Any], score_report: Dict[str, Any], md_report: str) -> Dict[str, Path]:
     """Save all output files."""
     # Create directories
@@ -293,7 +284,6 @@ def save_outputs(manifest: Dict[str, Any], score_report: Dict[str, Any], md_repo
         "score": score_path,
         "report": report_path
     }
-
 
 def main() -> int:
     """Main execution."""
@@ -349,7 +339,6 @@ def main() -> int:
     print("Status: PASS")
 
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

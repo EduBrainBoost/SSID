@@ -1,0 +1,12 @@
+version: 1.0.0
+gdpr: { no_pii_in_motion: true }
+mica: { tokenized_fees_declared: true }
+dora: { operational_resilience_required: true }
+amld6: { kyc_gate_required: true }
+rules:
+  - id: CMP-MKT-001
+    desc: Offers dürfen keine PII enthalten
+    assert: no_pii_in_motion == true
+  - id: CMP-MKT-002
+    desc: KYC Gate über 19_adapters vorgeschaltet
+    assert: kyc_gate_required == true

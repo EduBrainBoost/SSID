@@ -1,0 +1,70 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: ui_layer
+  version: "0.1.0"
+  description: "Frontend components, user interfaces, React applications, and WASM policy evaluation"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - web_ui_components
+    - mobile_responsive_design
+    - wasm_policy_evaluation
+    - real_time_updates
+    - accessibility_compliance
+    - i18n_localization
+
+  interfaces:
+    - name: web_app
+      type: react
+      authentication: session_based
+
+    - name: opa_wasm_eval
+      type: wasm
+      authentication: client_side
+
+    - name: websocket_updates
+      type: websocket
+      authentication: token_based
+
+  policies:
+    - name: safe_fix_only
+      enforcement: automated
+      scope: policy_evaluation
+      mechanism: wasm_no_js_fallback
+
+    - name: accessibility_wcag
+      enforcement: automated
+      scope: all_components
+      level: aa
+
+    - name: csp_enforcement
+      enforcement: automated
+      scope: all_pages
+
+  dependencies:
+    internal:
+      - 03_core  # Backend API
+      - 14_zero_time_auth  # User authentication
+      - 23_compliance  # WASM policies
+    external:
+      - react: ">=18.2"
+      - opa_wasm: ">=0.64"
+      - typescript: ">=5.2"
+
+  governance:
+    maintainer: "Frontend Team"
+    reviewers:
+      - ux_team
+      - accessibility_team
+    approval_required: false
+    data_classification: public
+
+  compliance:
+    dsgvo:
+      - article_13  # Information to data subjects
+      - article_25  # Privacy by design
+    wcag:
+      - version_2_1: level_aa

@@ -1,0 +1,39 @@
+{
+  "category": "03_core_healthcheck",
+  "content_hash": "41a40b9794e589f4b9bd80ab00c7991dd377ef558a405e8ce7b9195ea1dc607d",
+  "evidence_data": {
+    "correlation_id": null,
+    "data": {
+      "component": "api_gateway",
+      "details": {
+        "response_time_ms": 45,
+        "success_rate": 100.0
+      },
+      "failed": 0,
+      "services_checked": 20
+    },
+    "event_id": "phase1_workflow_1760436339520",
+    "event_type": "health_check",
+    "requires_blockchain": false,
+    "requires_federation_sync": false,
+    "requires_worm": true,
+    "schema_version": "1.0",
+    "severity": "INFO",
+    "source_module": "03_core/healthcheck",
+    "tags": {},
+    "timestamp": "2025-10-14T10:05:39.520229"
+  },
+  "evidence_id": "phase1_workflow_1760436339520",
+  "timestamp": "2025-10-14T10:05:39.521223+00:00",
+  "worm_metadata": {
+    "compliance": [
+      "MUST-007-WORM-STORAGE",
+      "GDPR-Art5",
+      "MiCA-Art74"
+    ],
+    "deletable": false,
+    "immutable": true,
+    "retention_years": 10,
+    "write_once": true
+  }
+}

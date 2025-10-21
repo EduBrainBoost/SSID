@@ -33,7 +33,6 @@ except ImportError:
     except Exception as e:
         raise ImportError(f"Could not load identity_score_calculator: {e}")
 
-
 def auth_trust_level(profile: Dict[str, Any], config_path: str = None) -> int:
     """
     Compute trust level (0-100) for authentication flow.
@@ -52,7 +51,6 @@ def auth_trust_level(profile: Dict[str, Any], config_path: str = None) -> int:
         )
 
     return compute_identity_score(profile, config_path)
-
 
 def check_auth_threshold(profile: Dict[str, Any], threshold: int = 70) -> Dict[str, Any]:
     """
@@ -74,7 +72,6 @@ def check_auth_threshold(profile: Dict[str, Any], threshold: int = 70) -> Dict[s
         "margin": score - threshold,
     }
 
-
 def classify_auth_risk(profile: Dict[str, Any]) -> str:
     """
     Classify authentication risk level based on identity score.
@@ -95,7 +92,6 @@ def classify_auth_risk(profile: Dict[str, Any]) -> str:
         return "high"
     else:
         return "critical"
-
 
 def recommend_auth_method(profile: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -139,7 +135,6 @@ def recommend_auth_method(profile: Dict[str, Any]) -> Dict[str, Any]:
     result["risk_level"] = risk
 
     return result
-
 
 if __name__ == "__main__":
     # Self-test

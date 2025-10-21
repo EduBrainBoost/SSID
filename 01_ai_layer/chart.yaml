@@ -1,0 +1,68 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: ai_layer
+  version: "0.1.0"
+  description: "AI/ML services for identity verification, risk scoring, and behavioral analytics"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - identity_verification_ml
+    - risk_pattern_detection
+    - behavioral_analytics
+    - fraud_detection_models
+    - synthetic_data_generation
+
+  interfaces:
+    - name: model_inference
+      type: rest_api
+      authentication: required
+
+    - name: training_pipeline
+      type: internal
+      authentication: required
+
+    - name: monitoring_metrics
+      type: prometheus
+      authentication: internal
+
+  policies:
+    - name: ai_ethics
+      enforcement: manual_review
+      scope: all_models
+
+    - name: data_minimization
+      enforcement: automated
+      scope: training_data
+
+    - name: model_versioning
+      enforcement: automated
+      scope: deployments
+
+  dependencies:
+    internal:
+      - 09_meta_identity  # Identity data for training
+      - 08_identity_score  # Risk scoring integration
+      - 02_audit_logging  # Model decision logging
+    external:
+      - python: ">=3.11"
+      - tensorflow: ">=2.14"
+      - pytorch: ">=2.0"
+
+  governance:
+    maintainer: "AI Team"
+    reviewers:
+      - compliance_team
+      - security_team
+    approval_required: true
+    data_classification: confidential
+
+  compliance:
+    gdpr:
+      - article_22  # Automated decision-making
+      - article_35  # DPIA required for AI
+    ai_act:
+      - risk_category: limited
+      - transparency_required: true

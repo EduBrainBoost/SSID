@@ -1,0 +1,30 @@
+{
+  "id": "562d0140-bd3b-4855-9662-d88c6cf849a3",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 97,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/reports/GOLD_CERTIFICATION_v1.md",
+    "hash": "ef4c89588cc05061cac1f257a4280d9151c32207ee34ec0c05df0e3827ed67b72a0034a4c210d5b9b40a10aa745f3bb1eca733c11f0aa243b203d06039335363",
+    "line": 27,
+    "context": "|-------|--------|-------|--------|\n| Static Analysis (CI/Test Integration) | 35% | 62/100 | PASS |\n| Dynamic Execution (Tool Invocation) | 40% | 100/100 | PASS |\n| Audit Proof (WORM Evidence) | 25% |"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "99dda10e-b622-4ca5-afee-b73091b413fc",
+    "timestamp": "2025-10-16T19:31:27.423103Z"
+  },
+  "worm": {
+    "uuid": "9b2b1997-527c-413a-8e14-40bbd8ac1c41",
+    "signature": "3bca9d9e7a6612618e0c91d7b008382b74d666b5c22bc2bcfb501679afca4e3381b7f5f8497204005e8fef55d87d86254c31ba59f41145aa9ce740a8806ddd6a",
+    "chain_prev": "f322c902-2ac0-46b0-ba8c-328a252c7210"
+  },
+  "metadata": {
+    "grade": "PLATINUM",
+    "component": "Audit & Compliance"
+  }
+}

@@ -1,0 +1,63 @@
+version: '1.2'
+generated: '2025-10-14T17:00:00+00:00'
+description: Exception policy for special paths - STRICT 4-FILE-LOCK
+
+exceptions:
+  # Root-level files (4-FILE-LOCK)
+  - path: LICENSE
+    reason: Repository license file
+    allow_in_roots: []
+
+  - path: README.md
+    reason: Repository documentation
+    allow_in_roots: []
+
+  - path: .gitignore
+    reason: Git ignore rules
+    allow_in_roots: []
+
+  - path: .github/
+    reason: GitHub Actions workflows
+    allow_in_roots: []
+
+  # Version control system (internal)
+  - path: .git/
+    reason: Version control system (internal only, never committed)
+    allow_in_roots: []
+
+  # AI context store (scoped to specific roots)
+  - path: .claude/
+    reason: AI context store (non-deployable, scoped)
+    allow_in_roots:
+      - 16_codex
+      - 20_foundation
+
+  # Testing artifacts (temporary, should be in .gitignore)
+  - path: .pytest_cache
+    reason: Pytest cache directory (testing artifacts, temporary)
+    allow_in_roots: []
+
+  - path: __pycache__
+    reason: Python bytecode cache (temporary)
+    allow_in_roots: []
+
+  # Configuration files (root-level only)
+  - path: pytest.ini
+    reason: Pytest configuration file
+    allow_in_roots: []
+
+  - path: .pre-commit-config.yaml
+    reason: Pre-commit hooks configuration (active CI/dev workflow)
+    allow_in_roots: []
+
+notes: |
+  All other root-level files MUST be moved to appropriate root directories.
+  This is the STRICT 4-FILE-LOCK policy: only LICENSE, README.md, .gitignore, and .github/ are allowed at root.
+
+  Migration required for:
+    - MINIMAL_SURFACE_GUARD_SUMMARY.md → 24_meta_orchestration/docs/
+    - PHASE_3_DEPLOYMENT_SUMMARY.md → 04_deployment/docs/
+    - PHASE_3_READINESS_SUMMARY.md → 04_deployment/docs/
+    - ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md → 24_meta_orchestration/docs/
+    - ssid_root24lock_certification_badge_pack_v5_3.zip → 24_meta_orchestration/artifacts/
+    - Any test artifacts → proper directories or .gitignore

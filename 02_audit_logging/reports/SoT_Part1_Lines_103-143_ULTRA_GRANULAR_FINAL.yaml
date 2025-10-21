@@ -1,0 +1,1034 @@
+# ====================================================================================
+# SoT MASTER-DEFINITION EXTRACTION - PART 1, LINES 103-143 (ULTRA-GRANULAR)
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 103-143 (Token Utility Framework)
+# Datum: 2025-10-18
+# Extraktionsmethode: ULTRA-GRANULAR (jedes Feld = separate Regel)
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# ====================================================================================
+
+metadata:
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_ultra_granular_field_by_field"
+  extraction_date: "2025-10-18"
+  line_range: "103-143"
+  section: "Token Utility Framework"
+  total_rules_extracted: 34
+  zero_tolerance_policy: true
+  audit_ready: true
+
+# ====================================================================================
+# LINES 106-108: METADATA (3 RULES)
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-UG-066
+    line_number: 106
+    section: "Token Utility Framework"
+    subsection: "metadata"
+    field: "version"
+    title: "Field: version = '1.0'"
+
+    original_text: |
+      version: "1.0"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      YAML-Feld version MUSS den Wert "1.0" haben.
+      Dieses Feld definiert die Version des Utility-Framework-Schemas.
+
+    enforcement: |
+      CI MUSS prüfen, dass das Feld version in utility_definitions.yaml
+      den exakten Wert "1.0" hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "version"
+      exact_value: "1.0"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-067
+    line_number: 107
+    section: "Token Utility Framework"
+    subsection: "metadata"
+    field: "date"
+    title: "Field: date = '2025-09-15'"
+
+    original_text: |
+      date: "2025-09-15"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      YAML-Feld date MUSS den Wert "2025-09-15" haben.
+      Dieses Feld definiert das Veröffentlichungsdatum des Utility-Frameworks.
+
+    enforcement: |
+      CI MUSS prüfen, dass das Feld date in utility_definitions.yaml
+      den exakten Wert "2025-09-15" hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "date"
+      exact_value: "2025-09-15"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-068
+    line_number: 108
+    section: "Token Utility Framework"
+    subsection: "metadata"
+    field: "deprecated"
+    title: "Field: deprecated = false"
+
+    original_text: |
+      deprecated: false
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      YAML-Feld deprecated MUSS den Wert false haben.
+      Dieses Framework ist NICHT deprecated und ist produktiv.
+
+    enforcement: |
+      CI MUSS prüfen, dass das Feld deprecated in utility_definitions.yaml
+      den Wert false hat (NICHT true).
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "deprecated"
+      exact_value: false
+      ci_enforcement: true
+      failure_mode: "FAIL wenn true"
+
+# ====================================================================================
+# LINES 110-131: PRIMARY_UTILITIES (22 RULES)
+# ====================================================================================
+
+  - rule_id: SOT-UG-069
+    line_number: 110
+    section: "Token Utility Framework"
+    subsection: "primary_utilities"
+    field: "primary_utilities"
+    title: "Section: primary_utilities MUST exist"
+
+    original_text: |
+      primary_utilities:
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Section primary_utilities MUSS in utility_definitions.yaml existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass die Section primary_utilities vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section_path: "primary_utilities"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Section fehlt"
+
+  # --- identity_verification (Lines 111-116: 6 rules) ---
+
+  - rule_id: SOT-UG-070
+    line_number: 111
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    field: "identity_verification"
+    title: "Subsection: identity_verification MUST exist"
+
+    original_text: |
+      identity_verification:
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Subsection identity_verification MUSS unter primary_utilities existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass identity_verification als Key vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section_path: "primary_utilities.identity_verification"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-071
+    line_number: 112
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    field: "description"
+    title: "Field: identity_verification.description"
+
+    original_text: |
+      description: "Pay for identity score calculations and verifications"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld description MUSS die korrekte Beschreibung enthalten.
+
+    enforcement: |
+      CI MUSS prüfen, dass description den exakten Text enthält.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.identity_verification.description"
+      exact_value: "Pay for identity score calculations and verifications"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Text"
+
+  - rule_id: SOT-UG-072
+    line_number: 113
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    field: "smart_contract"
+    title: "Field: identity_verification.smart_contract path"
+
+    original_text: |
+      smart_contract: "20_foundation/tokenomics/contracts/verification_payment.sol"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld smart_contract MUSS den korrekten Pfad enthalten.
+
+    enforcement: |
+      CI MUSS prüfen, dass der Smart Contract Pfad korrekt ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.identity_verification.smart_contract"
+      exact_value: "20_foundation/tokenomics/contracts/verification_payment.sol"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Pfad"
+
+  - rule_id: SOT-UG-073
+    line_number: 114
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    field: "fee_burn_mechanism"
+    title: "Field: identity_verification.fee_burn_mechanism"
+
+    original_text: |
+      fee_burn_mechanism: "Deflationary token economics"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld fee_burn_mechanism MUSS die Deflationary-Strategie dokumentieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass fee_burn_mechanism den exakten Wert hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.identity_verification.fee_burn_mechanism"
+      exact_value: "Deflationary token economics"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-074
+    line_number: 115
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    field: "burn_source_note"
+    title: "Field: identity_verification.burn_source_note - Treasury-Only Burns"
+
+    original_text: |
+      burn_source_note: "Burns originate exclusively from treasury portion of 3% system fee (no direct verification fee split)"
+
+    category: "token_utility"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Burns dürfen NUR aus der Treasury-Portion der 3% System Fee kommen,
+      NICHT aus direkten Verification Fees.
+
+    enforcement: |
+      CI MUSS prüfen, dass burn_source_note die exakte Beschränkung dokumentiert.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.identity_verification.burn_source_note"
+      exact_value: "Burns originate exclusively from treasury portion of 3% system fee (no direct verification fee split)"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Abweichung"
+      criticality: "CRITICAL - Legal Compliance"
+
+  - rule_id: SOT-UG-075
+    line_number: 116
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.identity_verification"
+    field: "burn_clarification"
+    title: "Field: identity_verification.burn_clarification - No Manual Burns"
+
+    original_text: |
+      burn_clarification: "No manual/admin burns. Programmatic burns allowed only from the treasury portion of the 3% system fee and failed proposal deposits, as defined in token_economics."
+
+    category: "token_utility"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Keine manuellen/Admin-Burns erlaubt.
+      Programmatische Burns NUR aus Treasury-Portion der 3% Fee und failed proposal deposits.
+
+    enforcement: |
+      CI MUSS prüfen, dass burn_clarification die exakte Anti-Manipulation-Regel enthält.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.identity_verification.burn_clarification"
+      exact_value: "No manual/admin burns. Programmatic burns allowed only from the treasury portion of the 3% system fee and failed proposal deposits, as defined in token_economics."
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Abweichung"
+      criticality: "CRITICAL - Anti-Manipulation"
+
+  # --- governance_participation (Lines 118-121: 4 rules) ---
+
+  - rule_id: SOT-UG-076
+    line_number: 118
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.governance_participation"
+    field: "governance_participation"
+    title: "Subsection: governance_participation MUST exist"
+
+    original_text: |
+      governance_participation:
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Subsection governance_participation MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass governance_participation als Key vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section_path: "primary_utilities.governance_participation"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-077
+    line_number: 119
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.governance_participation"
+    field: "description"
+    title: "Field: governance_participation.description"
+
+    original_text: |
+      description: "Vote on protocol upgrades and parameter changes"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld description MUSS die Governance-Funktion beschreiben.
+
+    enforcement: |
+      CI MUSS prüfen, dass description den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.governance_participation.description"
+      exact_value: "Vote on protocol upgrades and parameter changes"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Text"
+
+  - rule_id: SOT-UG-078
+    line_number: 120
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.governance_participation"
+    field: "voting_weight"
+    title: "Field: governance_participation.voting_weight = Linear"
+
+    original_text: |
+      voting_weight: "Linear token holdings"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld voting_weight MUSS "Linear token holdings" sein.
+      Dies bedeutet: 1 Token = 1 Vote (keine quadratische oder andere Gewichtung).
+
+    enforcement: |
+      CI MUSS prüfen, dass voting_weight linear ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.governance_participation.voting_weight"
+      exact_value: "Linear token holdings"
+      ci_enforcement: true
+      failure_mode: "FAIL bei nicht-linearem Voting"
+
+  - rule_id: SOT-UG-079
+    line_number: 121
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.governance_participation"
+    field: "proposal_threshold"
+    title: "Field: governance_participation.proposal_threshold = 1%"
+
+    original_text: |
+      proposal_threshold: "1% of total supply to propose"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld proposal_threshold MUSS "1% of total supply to propose" sein.
+      Um einen Governance-Vorschlag einzureichen, benötigt man 1% des Total Supply.
+
+    enforcement: |
+      CI MUSS prüfen, dass proposal_threshold exakt 1% ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.governance_participation.proposal_threshold"
+      exact_value: "1% of total supply to propose"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Threshold"
+
+  # --- ecosystem_rewards (Lines 123-126: 4 rules) ---
+
+  - rule_id: SOT-UG-080
+    line_number: 123
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.ecosystem_rewards"
+    field: "ecosystem_rewards"
+    title: "Subsection: ecosystem_rewards MUST exist"
+
+    original_text: |
+      ecosystem_rewards:
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Subsection ecosystem_rewards MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass ecosystem_rewards als Key vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section_path: "primary_utilities.ecosystem_rewards"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-081
+    line_number: 124
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.ecosystem_rewards"
+    field: "description"
+    title: "Field: ecosystem_rewards.description"
+
+    original_text: |
+      description: "Reward validators, contributors, and ecosystem participants"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld description MUSS die Reward-Zielgruppen definieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass description den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.ecosystem_rewards.description"
+      exact_value: "Reward validators, contributors, and ecosystem participants"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Text"
+
+  - rule_id: SOT-UG-082
+    line_number: 125
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.ecosystem_rewards"
+    field: "distribution_method"
+    title: "Field: ecosystem_rewards.distribution_method = Merit-based via DAO"
+
+    original_text: |
+      distribution_method: "Merit-based allocation via DAO"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld distribution_method MUSS "Merit-based allocation via DAO" sein.
+      Rewards werden merit-basiert durch die DAO verteilt, NICHT willkürlich.
+
+    enforcement: |
+      CI MUSS prüfen, dass distribution_method merit-basiert und DAO-gesteuert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.ecosystem_rewards.distribution_method"
+      exact_value: "Merit-based allocation via DAO"
+      ci_enforcement: true
+      failure_mode: "FAIL bei nicht-merit-basierter Verteilung"
+
+  - rule_id: SOT-UG-083
+    line_number: 126
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.ecosystem_rewards"
+    field: "reward_pools"
+    title: "Field: ecosystem_rewards.reward_pools - Exact Array Match"
+
+    original_text: |
+      reward_pools: ["validation", "development", "community"]
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld reward_pools MUSS exakt diese 3 Werte enthalten:
+      ["validation", "development", "community"]
+
+    enforcement: |
+      CI MUSS prüfen, dass reward_pools ein Array mit exakt diesen 3 Items ist.
+
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.ecosystem_rewards.reward_pools"
+      expected_array: ["validation", "development", "community"]
+      order_matters: false
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichenden Pool-Namen"
+
+  # --- staking_utility (Lines 128-131: 4 rules) ---
+
+  - rule_id: SOT-UG-084
+    line_number: 128
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.staking_utility"
+    field: "staking_utility"
+    title: "Subsection: staking_utility MUST exist"
+
+    original_text: |
+      staking_utility:
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Subsection staking_utility MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass staking_utility als Key vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section_path: "primary_utilities.staking_utility"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Subsection fehlt"
+
+  - rule_id: SOT-UG-085
+    line_number: 129
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.staking_utility"
+    field: "description"
+    title: "Field: staking_utility.description"
+
+    original_text: |
+      description: "Stake tokens for enhanced verification services"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld description MUSS die Staking-Funktion beschreiben.
+
+    enforcement: |
+      CI MUSS prüfen, dass description den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.staking_utility.description"
+      exact_value: "Stake tokens for enhanced verification services"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Text"
+
+  - rule_id: SOT-UG-086
+    line_number: 130
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.staking_utility"
+    field: "staking_rewards"
+    title: "Field: staking_utility.staking_rewards = Service fee discounts (NOT yield)"
+
+    original_text: |
+      staking_rewards: "Service fee discounts (not yield)"
+
+    category: "token_utility"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: staking_rewards MUSS "Service fee discounts (not yield)" sein.
+      Dies ist wichtig für Legal Compliance - KEINE Yield-Versprechen (würde Security Token implizieren).
+
+    enforcement: |
+      CI MUSS prüfen, dass staking_rewards explizit NICHT yield ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.staking_utility.staking_rewards"
+      exact_value: "Service fee discounts (not yield)"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn 'yield' erwähnt wird"
+      criticality: "CRITICAL - Securities Law Compliance"
+
+  - rule_id: SOT-UG-087
+    line_number: 131
+    section: "Token Utility Framework"
+    subsection: "primary_utilities.staking_utility"
+    field: "slashing_conditions"
+    title: "Field: staking_utility.slashing_conditions"
+
+    original_text: |
+      slashing_conditions: "False verification penalties"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld slashing_conditions MUSS "False verification penalties" sein.
+      Slashing erfolgt NUR bei falschen Verifikationen.
+
+    enforcement: |
+      CI MUSS prüfen, dass slashing_conditions den exakten Text hat.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "primary_utilities.staking_utility.slashing_conditions"
+      exact_value: "False verification penalties"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichenden Slashing-Bedingungen"
+
+  # --- primary_utilities section completeness ---
+
+  - rule_id: SOT-UG-088
+    line_number: 110
+    section: "Token Utility Framework"
+    subsection: "primary_utilities"
+    field: "section_completeness"
+    title: "Section Completeness: primary_utilities MUST have all 4 subsections"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Die Section primary_utilities MUSS alle 4 Subsections enthalten:
+      - identity_verification
+      - governance_participation
+      - ecosystem_rewards
+      - staking_utility
+
+    enforcement: |
+      CI MUSS prüfen, dass alle 4 Subsections vorhanden sind.
+
+    evidence_schema:
+      type: "yaml_section_completeness"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section_path: "primary_utilities"
+      required_keys:
+        - "identity_verification"
+        - "governance_participation"
+        - "ecosystem_rewards"
+        - "staking_utility"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn eine Subsection fehlt"
+
+# ====================================================================================
+# LINES 133-136: COMPLIANCE_UTILITIES (4 RULES)
+# ====================================================================================
+
+  - rule_id: SOT-UG-089
+    line_number: 133
+    section: "Token Utility Framework"
+    subsection: "compliance_utilities"
+    field: "compliance_utilities"
+    title: "Section: compliance_utilities MUST exist"
+
+    original_text: |
+      compliance_utilities:
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Section compliance_utilities MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass compliance_utilities als Top-Level Section vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section_path: "compliance_utilities"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Section fehlt"
+
+  - rule_id: SOT-UG-090
+    line_number: 134
+    section: "Token Utility Framework"
+    subsection: "compliance_utilities"
+    field: "audit_payments"
+    title: "Field: compliance_utilities.audit_payments"
+
+    original_text: |
+      audit_payments: "Pay for compliance audit services"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld audit_payments MUSS den exakten Wert haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass audit_payments korrekt definiert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "compliance_utilities.audit_payments"
+      exact_value: "Pay for compliance audit services"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-091
+    line_number: 135
+    section: "Token Utility Framework"
+    subsection: "compliance_utilities"
+    field: "regulatory_reporting"
+    title: "Field: compliance_utilities.regulatory_reporting"
+
+    original_text: |
+      regulatory_reporting: "Submit regulatory reports with token fees"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld regulatory_reporting MUSS den exakten Wert haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass regulatory_reporting korrekt definiert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "compliance_utilities.regulatory_reporting"
+      exact_value: "Submit regulatory reports with token fees"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-092
+    line_number: 136
+    section: "Token Utility Framework"
+    subsection: "compliance_utilities"
+    field: "legal_attestations"
+    title: "Field: compliance_utilities.legal_attestations"
+
+    original_text: |
+      legal_attestations: "Create verifiable compliance attestations"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld legal_attestations MUSS den exakten Wert haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass legal_attestations korrekt definiert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "compliance_utilities.legal_attestations"
+      exact_value: "Create verifiable compliance attestations"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+# ====================================================================================
+# LINES 138-142: SECONDARY_UTILITIES (5 RULES)
+# ====================================================================================
+
+  - rule_id: SOT-UG-093
+    line_number: 138
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    field: "secondary_utilities"
+    title: "Section: secondary_utilities MUST exist"
+
+    original_text: |
+      secondary_utilities:
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Section secondary_utilities MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen, dass secondary_utilities als Top-Level Section vorhanden ist.
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      section_path: "secondary_utilities"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn Section fehlt"
+
+  - rule_id: SOT-UG-094
+    line_number: 139
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    field: "marketplace_access"
+    title: "Field: secondary_utilities.marketplace_access"
+
+    original_text: |
+      marketplace_access: "Access to identity verification marketplace"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld marketplace_access MUSS den exakten Wert haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass marketplace_access korrekt definiert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "secondary_utilities.marketplace_access"
+      exact_value: "Access to identity verification marketplace"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-095
+    line_number: 140
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    field: "premium_features"
+    title: "Field: secondary_utilities.premium_features"
+
+    original_text: |
+      premium_features: "Enhanced verification algorithms"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld premium_features MUSS den exakten Wert haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass premium_features korrekt definiert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "secondary_utilities.premium_features"
+      exact_value: "Enhanced verification algorithms"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-096
+    line_number: 141
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    field: "api_access"
+    title: "Field: secondary_utilities.api_access"
+
+    original_text: |
+      api_access: "Developer API rate limiting and access control"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld api_access MUSS den exakten Wert haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass api_access korrekt definiert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "secondary_utilities.api_access"
+      exact_value: "Developer API rate limiting and access control"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+  - rule_id: SOT-UG-097
+    line_number: 142
+    section: "Token Utility Framework"
+    subsection: "secondary_utilities"
+    field: "data_portability"
+    title: "Field: secondary_utilities.data_portability"
+
+    original_text: |
+      data_portability: "Export/import verification data"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Das Feld data_portability MUSS den exakten Wert haben.
+
+    enforcement: |
+      CI MUSS prüfen, dass data_portability korrekt definiert ist.
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      field_path: "secondary_utilities.data_portability"
+      exact_value: "Export/import verification data"
+      ci_enforcement: true
+      failure_mode: "FAIL bei abweichendem Wert"
+
+# ====================================================================================
+# FILE-LEVEL COMPLETENESS CHECK (1 RULE)
+# ====================================================================================
+
+  - rule_id: SOT-UG-098
+    line_number: 105
+    section: "Token Utility Framework"
+    subsection: "file_structure"
+    field: "file_completeness"
+    title: "File Completeness: utility_definitions.yaml MUST have all sections"
+
+    category: "token_utility"
+    priority: "must"
+
+    description: |
+      Die Datei utility_definitions.yaml MUSS alle Top-Level Sections enthalten:
+      - version, date, deprecated (metadata)
+      - primary_utilities
+      - compliance_utilities
+      - secondary_utilities
+
+    enforcement: |
+      CI MUSS prüfen, dass alle Top-Level Sections vorhanden sind.
+
+    evidence_schema:
+      type: "yaml_file_completeness"
+      file: "20_foundation/tokenomics/utility_definitions.yaml"
+      required_top_level_keys:
+        - "version"
+        - "date"
+        - "deprecated"
+        - "primary_utilities"
+        - "compliance_utilities"
+        - "secondary_utilities"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn eine Top-Level Section fehlt"
+
+# ====================================================================================
+# FILE EXISTENCE CHECK (1 RULE)
+# ====================================================================================
+
+  - rule_id: SOT-UG-099
+    line_number: 105
+    section: "Token Utility Framework"
+    subsection: "file_location"
+    field: "file_path"
+    title: "File Existence: utility_definitions.yaml MUST exist at exact path"
+
+    original_text: |
+      # 20_foundation/tokenomics/utility_definitions.yaml
+
+    category: "token_utility"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Die Datei utility_definitions.yaml MUSS an genau diesem Pfad existieren:
+      20_foundation/tokenomics/utility_definitions.yaml
+
+      KEINE alternativen Pfade erlaubt.
+
+    enforcement: |
+      CI MUSS prüfen:
+      1. Datei existiert an genau diesem Pfad
+      2. Datei ist gültiges YAML
+      3. KEINE Kopien an anderen Pfaden
+
+    evidence_schema:
+      type: "file_existence_enforcement"
+      canonical_file: "20_foundation/tokenomics/utility_definitions.yaml"
+      file_type: "yaml"
+      validation_rules:
+        - "MUSS existieren"
+        - "MUSS valid YAML sein"
+        - "KEINE Duplikate erlaubt"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn fehlend oder dupliziert"
+      criticality: "CRITICAL - Single Source of Truth"
+
+# ====================================================================================
+# INTEGRATION STATUS
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 34
+  line_range: "103-143"
+  section: "Token Utility Framework"
+  audit_ready: true
+
+# ====================================================================================
+# RULE COUNT VERIFICATION
+# ====================================================================================
+
+rule_count_verification:
+  lines_106_108_metadata: 3  # version, date, deprecated
+  lines_110_131_primary_utilities: 22  # 4 subsections with completeness check
+  lines_133_136_compliance_utilities: 4  # audit_payments, regulatory_reporting, legal_attestations, section_existence
+  lines_138_142_secondary_utilities: 5  # marketplace_access, premium_features, api_access, data_portability, section_existence
+  file_level_checks: 2  # file_completeness, file_existence
+  total: 34
+  verified: true
+  rule_id_range: "SOT-UG-066 to SOT-UG-099"

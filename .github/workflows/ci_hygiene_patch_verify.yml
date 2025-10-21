@@ -1,0 +1,21 @@
+name: test-hygiene-patch-verify
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  verify-patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install --upgrade pip && pip install pyyaml pytest
+      - name: Run verification tests
+        run: pytest -q 11_test_simulation/tests/test_certificate_patch.py

@@ -1,0 +1,204 @@
+{
+  "test_cases": [
+    {
+      "name": "S2' Revenue Threshold Violation",
+      "description": "S2' tier with annual revenue below 2M EUR threshold",
+      "input": {
+        "model": {
+          "tier_id": "S2_PRIME",
+          "base_price_eur": 2000,
+          "active_regions": ["DACH"],
+          "addons": [],
+          "term_months": 12,
+          "annual_revenue_eur": 1800000
+        },
+        "sla": {
+          "tier": "standard",
+          "uptime_guarantee": 99.9
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "revenue_threshold_not_met",
+        "minimum_required_eur": 2000000,
+        "actual_revenue_eur": 1800000
+      }
+    },
+    {
+      "name": "S3' Revenue Threshold Violation",
+      "description": "S3' tier with annual revenue below 5M EUR threshold",
+      "input": {
+        "model": {
+          "tier_id": "S3_PRIME",
+          "base_price_eur": 5000,
+          "active_regions": ["DACH", "EN-EU"],
+          "addons": ["compliance_mesh"],
+          "term_months": 24,
+          "annual_revenue_eur": 4500000
+        },
+        "sla": {
+          "tier": "premium",
+          "uptime_guarantee": 99.99
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "revenue_threshold_not_met",
+        "minimum_required_eur": 5000000,
+        "actual_revenue_eur": 4500000
+      }
+    },
+    {
+      "name": "Enterprise E6 - Multi-Tenancy Limit Exceeded",
+      "description": "E6 tier attempting to exceed maximum tenant limit",
+      "input": {
+        "model": {
+          "tier_id": "E6",
+          "base_price_eur": 250000,
+          "multi_tenancy_enabled": true,
+          "max_tenants": 500,
+          "requested_tenants": 600
+        },
+        "context": {
+          "current_tenant_count": 600
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "max_tenants_exceeded",
+        "max_allowed": 500,
+        "requested": 600
+      }
+    },
+    {
+      "name": "Missing Overage Pricing in Rate Limit",
+      "description": "E5 tier without required overage pricing configuration",
+      "input": {
+        "model": {
+          "tier_id": "E5",
+          "base_price_eur": 500000
+        },
+        "rate_limit": {
+          "tier": "E5",
+          "requests_per_minute": 200000
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "overage_pricing_required",
+        "tier": "E5"
+      }
+    },
+    {
+      "name": "Partner Discount Eligibility Violation",
+      "description": "Partner tier bronze attempting to claim gold discount",
+      "input": {
+        "model": {
+          "tier_id": "E2",
+          "base_price_eur": 50000,
+          "term_months": 12
+        },
+        "context": {
+          "partner_tier": "bronze",
+          "requested_discount_percent": 15
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "partner_discount_mismatch",
+        "actual_tier": "bronze",
+        "max_discount_percent": 3,
+        "requested_discount_percent": 15
+      }
+    },
+    {
+      "name": "API Tier Eligibility Violation",
+      "description": "S1 tier attempting to access enterprise API features",
+      "input": {
+        "model": {
+          "tier_id": "S1",
+          "base_price_eur": 500,
+          "api_access_level": "enterprise"
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "api_tier_not_eligible",
+        "tier": "S1",
+        "minimum_required_tier": "E2"
+      }
+    },
+    {
+      "name": "Token Lock Proof Missing for Discount",
+      "description": "36-month term without token lock proof attempting to claim discount",
+      "input": {
+        "model": {
+          "tier_id": "E3",
+          "base_price_eur": 150000,
+          "term_months": 36,
+          "token_lock_proof": false
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "token_lock_required_for_discount",
+        "term_months": 36,
+        "token_lock_proof": false
+      }
+    },
+    {
+      "name": "Invalid Region Code",
+      "description": "Subscription with unsupported region code",
+      "input": {
+        "model": {
+          "tier_id": "E2",
+          "base_price_eur": 50000,
+          "active_regions": ["INVALID_REGION", "DACH"]
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "invalid_region_code",
+        "invalid_region": "INVALID_REGION",
+        "supported_regions": ["DACH", "EN-EU", "US-CAN", "LATAM", "APAC-EN", "MENA", "AFRICA-EN"]
+      }
+    },
+    {
+      "name": "Zero or Negative Base Price",
+      "description": "Subscription model with invalid base price",
+      "input": {
+        "model": {
+          "tier_id": "S2",
+          "base_price_eur": 0,
+          "active_regions": ["DACH"]
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "invalid_base_price",
+        "base_price_eur": 0
+      }
+    },
+    {
+      "name": "SLA Guarantee Exceeds Tier Capability",
+      "description": "S1 tier claiming 99.9999% uptime SLA",
+      "input": {
+        "model": {
+          "tier_id": "S1",
+          "base_price_eur": 500
+        },
+        "sla": {
+          "tier": "standard",
+          "uptime_guarantee": 99.9999
+        }
+      },
+      "expected": {
+        "allow": false,
+        "violation": "sla_uptime_not_achievable",
+        "tier": "S1",
+        "requested_uptime": 99.9999,
+        "max_uptime_for_tier": 99.9
+      }
+    }
+  ]
+}

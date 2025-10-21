@@ -1,0 +1,24 @@
+billing_adapter:
+  currency: EUR
+  provider: internal
+  type: none
+entitlements:
+- feature: basic_access
+  limits:
+    rpm: 120
+  scope: read
+governance:
+  change_control: MR + 2 approvals
+  retention: permanent
+plans:
+- billing_adapter: none
+  entitlements:
+  - read
+  id: basic
+- billing_adapter: stripe
+  entitlements:
+  - read
+  - write
+  - audit
+  id: pro
+version: 1

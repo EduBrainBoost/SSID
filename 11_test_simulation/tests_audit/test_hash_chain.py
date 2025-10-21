@@ -27,7 +27,6 @@ def test_hash_chain_invalid_prev():
     res = validate_hash_chain(chain)
     assert res["valid"] is False and any("prev-mismatch" in e for e in res["errors"])
 
-
 # ============================================================================
 # Phase 1 Quick Wins: Edge Cases for 100% Coverage
 # ============================================================================
@@ -48,7 +47,6 @@ def test_hash_chain_bad_genesis():
     assert res["valid"] is False, "Chain with bad genesis should fail"
     assert any("bad-genesis-prev" in e for e in res["errors"]), \
         "Should report bad genesis prev_hash"
-
 
 def test_hash_chain_hash_mismatch():
     """Test detection of tampered hash (doesn't match computed hash)"""
@@ -72,7 +70,6 @@ def test_hash_chain_hash_mismatch():
     assert any("hash-mismatch" in e for e in res["errors"]), \
         "Should report hash mismatch"
 
-
 def test_hash_chain_multiple_errors():
     """Test chain with multiple errors (bad genesis + hash mismatch)"""
     chain = [
@@ -91,7 +88,6 @@ def test_hash_chain_multiple_errors():
     errors_str = " ".join(res["errors"])
     assert "bad-genesis-prev" in errors_str
     assert "hash-mismatch" in errors_str
-
 
 def test_hash_chain_with_fixture(sample_hash_chain):
     """Test hash chain validation using conftest.py fixture"""

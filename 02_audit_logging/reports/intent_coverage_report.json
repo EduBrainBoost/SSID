@@ -1,0 +1,228 @@
+{
+  "summary": {
+    "ts": "2025-10-15T09:45:52Z",
+    "required_total": 30,
+    "required_present": 30,
+    "required_missing": 0
+  },
+  "coverage": [
+    {
+      "id": "ART-0001",
+      "path": "24_meta_orchestration/registry/subscriptions_registry.yaml",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0002",
+      "path": "24_meta_orchestration/registry/roadmap_manifest.yaml",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0003",
+      "path": "24_meta_orchestration/registry/artifact_index.json",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0004",
+      "path": "02_audit_logging/reports/intent_coverage_report.json",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0004a",
+      "path": "02_audit_logging/reports/intent_coverage_report.md",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0004b",
+      "path": "02_audit_logging/reports/ROOT_IMMUNITY_CERT_AUDIT_REPORT.md",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0005",
+      "path": "23_compliance/policies/opa/intent_coverage.rego",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0005a",
+      "path": "23_compliance/policies/root_write_prevention.rego",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0006",
+      "path": ".github/workflows/intent_coverage_gate.yml",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0006a",
+      "path": ".github/workflows/ci_root_immunity.yml",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0007",
+      "path": "23_compliance/guards/precommit_intent_guard.py",
+      "required": false,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0008",
+      "path": "12_tooling/tools/intent_coverage_tracker.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0009",
+      "path": "11_test_simulation/tests_governance/test_intent_coverage.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0009a",
+      "path": "11_test_simulation/tests/test_root_immunity_ci.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0101",
+      "path": "01_ai_layer/interconnect/bridge_compliance.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0102",
+      "path": "01_ai_layer/xai/explainability_report.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0201",
+      "path": "02_audit_logging/worm_storage/worm_storage_engine.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0202",
+      "path": "02_audit_logging/blockchain_anchor/blockchain_anchoring_engine.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0203",
+      "path": "02_audit_logging/anti_gaming/overfitting_detector.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0301",
+      "path": "03_core/healthcheck/health_check_core.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0302",
+      "path": "03_core/interconnect/bridge_foundation.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0303",
+      "path": "03_core/interfaces/kyc_proof_interface.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0801",
+      "path": "08_identity_score/src/identity_score_calculator.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0802",
+      "path": "08_identity_score/aml/validators/travel_rule_validator.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-0901",
+      "path": "09_meta_identity/src/did_resolver.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-1101",
+      "path": "11_test_simulation/conftest.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-1201",
+      "path": "12_tooling/placeholder_guard/placeholder_scan_v2.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-1401",
+      "path": "14_zero_time_auth/kyc_gateway/proof_verifier.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-1402",
+      "path": "14_zero_time_auth/interconnect/bridge_identity_score.py",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-2301",
+      "path": "23_compliance/merkle/root_write_merkle_proofs.json",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    },
+    {
+      "id": "ART-2401",
+      "path": "24_meta_orchestration/registry/root_immunity_registry.yaml",
+      "required": true,
+      "status": "present",
+      "reason": "ok"
+    }
+  ],
+  "gaps": []
+}

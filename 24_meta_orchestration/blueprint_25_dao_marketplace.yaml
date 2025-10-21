@@ -1,0 +1,13 @@
+version: 1.0.0
+generated_at_utc: 2025-10-14T17:55:41Z
+title: SSID Marketplace Framework (Meta-Integration, kein neuer Root)
+moscow:
+  must: [registry_discovery, escrowless_settlement, licensing_royalties, compliance_gate, reputation_bridge, audit_observability_hooks]
+  should: [analytics_insights, dao_dispute_resolution]
+  could: [curation_rewards, dataset_tokenization]
+  wont: [custody_wallets]
+security_invariants: [no_pii_in_motion, hash_only_artifacts, zk_or_signature_proofs_required]
+fee_model:
+  system_fee_percent: 3.0
+  split: {"dao_system": 2.0, "developer_reward": 1.0}
+  micro_licenses_percent_range: [0.05, 0.2]

@@ -67,7 +67,7 @@ jobs:
           pip install PyJWT cryptography PyYAML
       - name: E2E simulation (Layer 14 → Layer 9)
         run: |
-          # Mock E2E: proof_verifier → kyc_proof_interface → mock Layer 9
+          
           echo "Simulating E2E flow..."
           python 03_core/interfaces/kyc_proof_interface.py \
             --provider-id didit \

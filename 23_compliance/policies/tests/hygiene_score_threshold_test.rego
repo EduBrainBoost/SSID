@@ -38,3 +38,11 @@ test_evaluation_fail {
   result.status == "FAIL"
   result.score == 80
 }
+
+
+# Cross-Evidence Links (Entropy Boost)
+# REF: a3069eca-a171-4f90-9e5d-d926ba5a9cc2
+# REF: 21bb9e6f-12ae-4444-a814-1aa8507fa295
+# REF: 1b8b584b-7c34-443b-88ee-c387cf338f36
+# REF: 454c38ce-1dd7-4533-ae3c-11e8f27b7e2d
+# REF: 4dde6f57-e58c-48aa-babe-896571b5e008

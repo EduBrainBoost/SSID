@@ -1,0 +1,205 @@
+# root_immunity.rego
+# ROOT-IMMUNITY ENGINE - OPA Policy Enforcement
+# CI-side formal enforcement of ROOT-24-LOCK
+#
+# Purpose: Block merges that violate ROOT-24-LOCK architecture constraints
+# Evaluation: opa eval -d root_immunity.rego -i input.json "data.root_immunity.allow"
+
+package root_immunity
+
+import future.keywords.if
+import future.keywords.in
+
+# Default deny - must explicitly allow
+default allow = false
+
+# Load registry data from input
+registry := input.registry
+
+# Configuration
+root_24_lock_enabled := true
+strict_mode := input.strict_mode if { input.strict_mode } else := true
+
+# HARD REJECTION: Allow ONLY if ZERO violations
+allow if {
+    root_24_lock_enabled
+    not any_violations
+}
+
+# Check: Any violations exist (hard rejection mode)
+any_violations if {
+    count(all_violations) > 0
+}
+
+# Aggregate all violations
+all_violations := root_level_violations | exception_violations | claude_violations
+
+# Check: No root-level violations
+no_root_violations if {
+    count(root_level_violations) == 0
+}
+
+# Detect root-level violations
+root_level_violations[violation] if {
+    some file in input.new_files
+    not file_in_allowed_roots(file.path)
+    not file_in_exceptions(file.path)
+
+    violation := {
+        "type": "ROOT-24-LOCK-VIOLATION",
+        "file": file.path,
+        "reason": sprintf("File '%s' not in allowed roots", [file.path])
+    }
+}
+
+# Check: File is in allowed roots
+file_in_allowed_roots(path) if {
+    some root in registry.allowed_roots
+    startswith(path, root)
+}
+
+# Check: File is in exception list
+file_in_exceptions(path) if {
+    some exception in registry.exceptions
+    exception_path := exception.path
+
+    # Check if path matches exception
+    matches_exception(path, exception_path)
+
+    # Check if exception allows root-level placement
+    count(exception.allow_in_roots) == 0
+}
+
+# Check: File is exception within allowed root
+file_in_exceptions(path) if {
+    some exception in registry.exceptions
+    exception_path := exception.path
+
+    # Check if path contains exception
+    contains(path, exception_path)
+
+    # Extract parent root
+    path_parts := split(path, "/")
+    parent_root := path_parts[0]
+
+    # Check if parent root is allowed for this exception
+    parent_root in exception.allow_in_roots
+}
+
+# Helper: Check if path matches exception pattern
+matches_exception(path, exception_path) if {
+    # Exact match
+    path == exception_path
+}
+
+matches_exception(path, exception_path) if {
+    # Prefix match for directories
+    startswith(path, exception_path)
+}
+
+# Check: No exception policy violations
+no_exception_violations if {
+    count(exception_violations) == 0
+}
+
+# Detect exception violations
+exception_violations[violation] if {
+    some file in input.new_files
+    some exception in registry.exceptions
+
+    # File matches exception path
+    contains(file.path, exception.path)
+
+    # But not in allowed location
+    not exception_allowed_location(file.path, exception)
+
+    violation := {
+        "type": "EXCEPTION-VIOLATION",
+        "file": file.path,
+        "exception": exception.path,
+        "reason": sprintf("'%s' not allowed in this location", [exception.path])
+    }
+}
+
+# Check: Exception is in allowed location
+exception_allowed_location(path, exception) if {
+    # Root-level only exceptions
+    count(exception.allow_in_roots) == 0
+    path_parts := split(path, "/")
+    count(path_parts) == 1
+}
+
+exception_allowed_location(path, exception) if {
+    # Exceptions allowed in specific roots
+    count(exception.allow_in_roots) > 0
+    path_parts := split(path, "/")
+    parent_root := path_parts[0]
+    parent_root in exception.allow_in_roots
+}
+
+# Check: No .claude violations
+no_claude_violations if {
+    count(claude_violations) == 0
+}
+
+# Detect .claude folder violations
+claude_violations[violation] if {
+    some file in input.new_files
+    contains(file.path, ".claude")
+
+    # Get exception config for .claude
+    some exception in registry.exceptions
+    exception.path == ".claude/"
+
+    # Check if .claude is in allowed location
+    not exception_allowed_location(file.path, exception)
+
+    violation := {
+        "type": "CLAUDE-FOLDER-VIOLATION",
+        "file": file.path,
+        "reason": sprintf(".claude folder only allowed in: %v", [exception.allow_in_roots])
+    }
+}
+
+# Deny rules with specific messages
+deny[msg] if {
+    some violation in root_level_violations
+    msg := sprintf("[ROOT-24-LOCK] %s: %s", [violation.file, violation.reason])
+}
+
+deny[msg] if {
+    some violation in exception_violations
+    msg := sprintf("[EXCEPTION] %s: %s", [violation.file, violation.reason])
+}
+
+deny[msg] if {
+    some violation in claude_violations
+    msg := sprintf("[CLAUDE] %s: %s", [violation.file, violation.reason])
+}
+
+# Summary report
+compliance_report := {
+    "root_24_lock_enabled": root_24_lock_enabled,
+    "strict_mode": strict_mode,
+    "allowed_roots_count": count(registry.allowed_roots),
+    "exception_count": count(registry.exceptions),
+    "files_checked": count(input.new_files),
+    "violations": {
+        "root_level": root_level_violations,
+        "exceptions": exception_violations,
+        "claude": claude_violations,
+        "total": count(root_level_violations) + count(exception_violations) + count(claude_violations)
+    },
+    "compliant": allow,
+    "deny_reasons": deny
+}
+
+# Audit trail
+audit_trail := {
+    "timestamp": time.now_ns(),
+    "policy": "root_immunity.rego",
+    "version": "1.0",
+    "decision": "ALLOW" if allow else "DENY",
+    "violations_detected": count(root_level_violations) + count(exception_violations) + count(claude_violations),
+    "files_evaluated": count(input.new_files)
+}

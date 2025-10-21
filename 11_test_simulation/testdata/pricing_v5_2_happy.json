@@ -1,0 +1,236 @@
+{
+  "_comment": "SSID Pricing v5.2 Happy Path Test Fixtures",
+  "_version": "v5.2.0",
+  "_created": "2025-10-13",
+  "_purpose": "Valid scenarios that should PASS all OPA rules",
+  "test_cases": [
+    {
+      "name": "Enterprise subscription with valid S3' threshold",
+      "description": "Enterprise tier at €6.67M S3' gate",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {
+            "price_eur": 4990
+          },
+          "enterprise_plus": {
+            "price_eur": 14990
+          }
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {
+            "T4_ENTERPRISE": 10,
+            "T4B_ENTERPRISE_PLUS": 100
+          }
+        },
+        "regions": {
+          "EU_CENTRAL": {
+            "surcharge_percentage": 0
+          }
+        },
+        "partner_program": {
+          "tiers": {
+            "BRONZE": {
+              "discount_percent": 5,
+              "min_tenants": 2
+            }
+          }
+        }
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "tenants": 5,
+        "region": {
+          "id": "EU_CENTRAL"
+        }
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Enterprise Plus with interfederation API",
+      "description": "Enterprise Plus tier accessing interfederation API",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise_plus": {
+            "price_eur": 14990
+          }
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {
+            "T4B_ENTERPRISE_PLUS": 100
+          }
+        },
+        "regions": {
+          "EU_CENTRAL": {
+            "surcharge_percentage": 0
+          }
+        }
+      },
+      "context": {
+        "tier": "T4B_ENTERPRISE_PLUS",
+        "requested_api": "interfederation",
+        "tenants": 50,
+        "region": {
+          "id": "EU_CENTRAL"
+        }
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Add-on within 80% cap",
+      "description": "Enterprise with add-ons totaling 75% of base price",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {
+            "price_eur": 4990
+          }
+        },
+        "multi_tenancy": {
+          "enabled": true
+        },
+        "regions": {
+          "EU_CENTRAL": {
+            "surcharge_percentage": 0
+          }
+        }
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "subscription": {
+          "tier_id": "enterprise",
+          "add_ons": [
+            {"name": "audit_feed", "price_eur": 990},
+            {"name": "dedicated_line", "price_eur": 1490},
+            {"name": "advanced_analytics", "price_eur": 1290}
+          ]
+        },
+        "tenants": 5,
+        "region": {
+          "id": "EU_CENTRAL"
+        }
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Region with valid surcharge",
+      "description": "ME_UAE region with 15% surcharge",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {
+            "price_eur": 4990
+          }
+        },
+        "multi_tenancy": {
+          "enabled": true
+        },
+        "regions": {
+          "ME_UAE": {
+            "surcharge_percentage": 15
+          }
+        }
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "tenants": 3,
+        "region": {
+          "id": "ME_UAE"
+        }
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Gold partner with 10 tenants",
+      "description": "Gold partner tier with minimum tenant requirement met",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise_plus": {
+            "price_eur": 14990
+          }
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {
+            "T4B_ENTERPRISE_PLUS": 100
+          }
+        },
+        "partner_program": {
+          "tiers": {
+            "GOLD": {
+              "discount_percent": 15,
+              "min_tenants": 10
+            }
+          }
+        },
+        "regions": {
+          "EU_CENTRAL": {
+            "surcharge_percentage": 0
+          }
+        }
+      },
+      "context": {
+        "tier": "T4B_ENTERPRISE_PLUS",
+        "partner_tier": "GOLD",
+        "tenants": 15,
+        "region": {
+          "id": "EU_CENTRAL"
+        }
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Sovereign tier at floor price",
+      "description": "Sovereign tier at exactly €40,000",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "sovereign": {
+            "price_eur": 40000
+          }
+        },
+        "multi_tenancy": {
+          "enabled": true
+        },
+        "regions": {
+          "EU_CENTRAL": {
+            "surcharge_percentage": 0
+          }
+        }
+      },
+      "context": {
+        "tier": "T5_SOVEREIGN",
+        "subscription": {
+          "total_price_eur": 40000
+        },
+        "tenants": 1,
+        "region": {
+          "id": "EU_CENTRAL"
+        }
+      },
+      "expected_result": "allow"
+    }
+  ]
+}

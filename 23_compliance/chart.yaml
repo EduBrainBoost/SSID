@@ -1,0 +1,79 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: compliance
+  version: "0.1.0"
+  description: "Compliance policies, OPA enforcement, regulatory mappings, and audit frameworks"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - opa_policy_management
+    - regulatory_compliance_mapping
+    - compliance_testing
+    - evidence_collection
+    - audit_trail_management
+    - anti_gaming_controls
+
+  interfaces:
+    - name: opa_policy_api
+      type: rest_api
+      authentication: required
+
+    - name: compliance_dashboard
+      type: web
+      authentication: required
+
+    - name: evidence_vault
+      type: worm_storage
+      authentication: internal
+
+  policies:
+    - name: policy_as_code
+      enforcement: automated
+      scope: all_policies
+      language: rego
+
+    - name: wasm_compilation
+      enforcement: automated
+      scope: production_policies
+
+    - name: quarterly_review
+      enforcement: manual
+      scope: all_frameworks
+      frequency: quarterly
+
+  dependencies:
+    internal:
+      - 02_audit_logging  # Evidence storage
+      - 07_governance_legal  # Legal framework
+      - 11_test_simulation  # Policy testing
+    external:
+      - opa: ">=0.64"
+      - rego: ">=1.0"
+
+  governance:
+    maintainer: "Compliance Team"
+    reviewers:
+      - legal_team
+      - audit_team
+    approval_required: true
+    data_classification: confidential
+
+  compliance:
+    dsgvo:
+      - article_5  # All principles
+      - article_25  # Privacy by design
+      - article_32  # Security
+      - article_35  # DPIA
+    dora:
+      - article_6  # ICT risk management
+      - article_10  # Detection
+      - article_21  # Testing
+    mica:
+      - article_57  # CASP requirements
+      - article_74  # Record keeping
+    amld6:
+      - article_8  # CDD
+      - article_30  # Suspicious reports

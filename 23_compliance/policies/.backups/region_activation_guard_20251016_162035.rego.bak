@@ -1,0 +1,286 @@
+# SSID Region Activation Guard v5.2 (RAT)
+# ROOT-24-LOCK compliant | SAFE-FIX enforced
+# Policy for tier-based region enforcement, jurisdiction validation, and expiry proof
+
+package ssid.region.activation.v5_2
+
+import future.keywords.if
+import future.keywords.in
+
+# Default deny
+default allow = false
+default rat_eligible = false
+default jurisdiction_compliant = false
+default expiry_valid = false
+
+# Region definitions (10 global regions)
+regions := {
+    "DACH": {
+        "name": "DACH (Germany, Austria, Switzerland)",
+        "jurisdiction": "EU_GDPR_PRIMARY",
+        "frameworks": ["GDPR", "eIDAS", "DSA"],
+        "min_tier": "S1"
+    },
+    "EN-EU": {
+        "name": "English-speaking EU (Ireland, Netherlands, Malta)",
+        "jurisdiction": "EU_GDPR_SECONDARY",
+        "frameworks": ["GDPR", "eIDAS", "DSA"],
+        "min_tier": "S1"
+    },
+    "UK": {
+        "name": "United Kingdom",
+        "jurisdiction": "UK_GDPR",
+        "frameworks": ["UK_GDPR", "Data_Protection_Act_2018"],
+        "min_tier": "S2"
+    },
+    "US-CAN": {
+        "name": "United States & Canada",
+        "jurisdiction": "NORTH_AMERICA",
+        "frameworks": ["CCPA", "PIPEDA", "State_Privacy_Laws"],
+        "min_tier": "S2"
+    },
+    "LATAM": {
+        "name": "Latin America",
+        "jurisdiction": "LATAM_REGIONAL",
+        "frameworks": ["LGPD", "LFPDPPP", "Regional_Laws"],
+        "min_tier": "S2"
+    },
+    "APAC-EN": {
+        "name": "APAC English-speaking (Singapore, Australia, NZ)",
+        "jurisdiction": "APAC_COMMON_LAW",
+        "frameworks": ["PDPA", "Privacy_Act_1988", "Privacy_Act_2020"],
+        "min_tier": "S3"
+    },
+    "APAC-EXT": {
+        "name": "APAC Extended (Japan, Korea, SEA)",
+        "jurisdiction": "APAC_EXTENDED",
+        "frameworks": ["APPI", "PIPA", "PDPA_Thailand"],
+        "min_tier": "E2"
+    },
+    "MENA": {
+        "name": "Middle East & North Africa",
+        "jurisdiction": "MENA_ISLAMIC",
+        "frameworks": ["PDPL_Saudi", "DIFC_Data_Protection", "Sharia_Compliance"],
+        "min_tier": "E2"
+    },
+    "AFRICA-EN": {
+        "name": "English-speaking Africa (South Africa, Nigeria, Kenya)",
+        "jurisdiction": "AFRICA_COMMON_LAW",
+        "frameworks": ["POPIA", "NDPR", "DPA_Kenya"],
+        "min_tier": "E3"
+    },
+    "SOVEREIGN": {
+        "name": "Sovereign Infrastructure (China, Russia, India custom)",
+        "jurisdiction": "SOVEREIGN_CUSTOM",
+        "frameworks": ["PIPL", "Federal_Law_152_FZ", "IT_Act_2000"],
+        "min_tier": "E5"
+    },
+    "GLOBAL": {
+        "name": "Global Multi-Region Bundle",
+        "jurisdiction": "MULTI_JURISDICTIONAL",
+        "frameworks": ["ALL_ABOVE"],
+        "min_tier": "E3"
+    }
+}
+
+# Tier hierarchy for eligibility checks
+tier_hierarchy := {
+    "S1": 1,
+    "S2": 2,
+    "S3": 3,
+    "E2": 4,
+    "E3": 5,
+    "E5": 6,
+    "E6": 7
+}
+
+# RAT Eligibility - Check if tier meets minimum region requirement
+rat_eligible if {
+    region := input.request.region
+    tier := input.subscription.tier_id
+
+    regions[region]
+    required_tier := regions[region].min_tier
+
+    tier_hierarchy[tier] >= tier_hierarchy[required_tier]
+}
+
+# Jurisdiction Compliance - Validate legal framework requirements
+jurisdiction_compliant if {
+    region := input.request.region
+    jurisdiction := regions[region].jurisdiction
+
+    # Check if subscription includes jurisdiction compliance package
+    some compliance_package in input.subscription.compliance_packages
+    compliance_package.jurisdiction == jurisdiction
+    compliance_package.verified == true
+}
+
+# Alternative: Jurisdiction auto-compliant for EU regions with GDPR
+jurisdiction_compliant if {
+    region := input.request.region
+    jurisdiction := regions[region].jurisdiction
+
+    startswith(jurisdiction, "EU_GDPR")
+    input.subscription.gdpr_compliant == true
+}
+
+# Alternative: Sovereign regions require explicit approval
+jurisdiction_compliant if {
+    region := input.request.region
+    regions[region].jurisdiction == "SOVEREIGN_CUSTOM"
+
+    input.subscription.sovereign_approval == true
+    input.subscription.sovereign_approval_authority != ""
+}
+
+# Expiry Validation - Check RAT token expiry timestamp
+expiry_valid if {
+    rat_token := input.rat_token
+
+    rat_token.expiry_timestamp > 0
+    rat_token.expiry_timestamp > time.now_ns()
+}
+
+# Alternative: No expiry for perpetual licenses
+expiry_valid if {
+    input.subscription.license_type == "perpetual"
+}
+
+# Region Activation Logic - Validate on-chain proof
+region_activation_valid if {
+    rat_token := input.rat_token
+    region := input.request.region
+
+    # RAT token must be for requested region
+    rat_token.region == region
+
+    # On-chain proof must exist
+    rat_token.blockchain_proof != ""
+
+    # Proof must be recent (within 24h for mutable regions)
+    proof_age_hours := (time.now_ns() - rat_token.proof_timestamp) / 3600000000000
+    proof_age_hours < 24
+}
+
+# Alternative: Immutable regions have longer proof validity
+region_activation_valid if {
+    rat_token := input.rat_token
+    region := input.request.region
+
+    rat_token.region == region
+    rat_token.blockchain_proof != ""
+    rat_token.immutable == true
+
+    # Immutable proofs valid for 30 days
+    proof_age_hours := (time.now_ns() - rat_token.proof_timestamp) / 3600000000000
+    proof_age_hours < 720  # 30 days
+}
+
+# Multi-Region Bundle Validation
+multi_region_valid if {
+    input.request.multi_region == true
+    input.subscription.tier_id == "GLOBAL"
+
+    # All requested regions must be activated
+    requested := {r | r := input.request.regions[_]}
+    activated := {r | r := input.rat_tokens[_].region}
+
+    requested == activated
+}
+
+# Tier-Region Binding - Ensure tier cannot exceed region entitlement
+tier_binding_valid if {
+    tier := input.subscription.tier_id
+    region := input.request.region
+
+    required_tier := regions[region].min_tier
+    tier_hierarchy[tier] >= tier_hierarchy[required_tier]
+
+    # Tier must not be artificially inflated
+    input.subscription.tier_verified == true
+}
+
+# Framework Compliance Check
+framework_compliant if {
+    region := input.request.region
+    required_frameworks := regions[region].frameworks
+
+    # Check if all required frameworks are satisfied
+    count({fw |
+        fw := required_frameworks[_]
+        input.subscription.framework_compliance[fw] == true
+    }) == count(required_frameworks)
+}
+
+# Main allow rule - All conditions must pass
+allow if {
+    rat_eligible
+    jurisdiction_compliant
+    expiry_valid
+    region_activation_valid
+    tier_binding_valid
+    framework_compliant
+}
+
+# Alternative allow for multi-region bundles
+allow if {
+    multi_region_valid
+    jurisdiction_compliant
+    expiry_valid
+}
+
+# Violation reporting
+violations[msg] {
+    not rat_eligible
+    region := input.request.region
+    tier := input.subscription.tier_id
+    required := regions[region].min_tier
+    msg := sprintf("RAT Eligibility Failed: Tier %s insufficient for region %s (requires %s)", [tier, region, required])
+}
+
+violations[msg] {
+    not jurisdiction_compliant
+    region := input.request.region
+    jurisdiction := regions[region].jurisdiction
+    msg := sprintf("Jurisdiction Compliance Failed: %s requirements not met for region %s", [jurisdiction, region])
+}
+
+violations[msg] {
+    not expiry_valid
+    expiry := input.rat_token.expiry_timestamp
+    now := time.now_ns()
+    msg := sprintf("RAT Token Expired: Token expiry %d < current time %d", [expiry, now])
+}
+
+violations[msg] {
+    not region_activation_valid
+    msg := "Region Activation Failed: On-chain proof missing or stale"
+}
+
+violations[msg] {
+    not tier_binding_valid
+    msg := "Tier Binding Failed: Tier verification missing or tier artificially inflated"
+}
+
+violations[msg] {
+    not framework_compliant
+    region := input.request.region
+    frameworks := regions[region].frameworks
+    msg := sprintf("Framework Compliance Failed: Not all frameworks satisfied for %s (requires: %v)", [region, frameworks])
+}
+
+# Audit trail data
+audit_data := {
+    "timestamp": time.now_ns(),
+    "region_requested": input.request.region,
+    "tier": input.subscription.tier_id,
+    "rat_eligible": rat_eligible,
+    "jurisdiction_compliant": jurisdiction_compliant,
+    "expiry_valid": expiry_valid,
+    "region_activation_valid": region_activation_valid,
+    "tier_binding_valid": tier_binding_valid,
+    "framework_compliant": framework_compliant,
+    "allow": allow,
+    "violations": violations
+}

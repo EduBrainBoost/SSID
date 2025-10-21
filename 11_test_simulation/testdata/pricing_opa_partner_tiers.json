@@ -1,0 +1,160 @@
+{
+  "description": "Partner Tier Eligibility and Discount Validation (E4)",
+  "partner_tier_matrix": {
+    "bronze": {"discount_percent": 3, "min_annual_revenue": 100000},
+    "silver": {"discount_percent": 5, "min_annual_revenue": 500000},
+    "gold": {"discount_percent": 10, "min_annual_revenue": 2000000},
+    "platinum": {"discount_percent": 15, "min_annual_revenue": 10000000}
+  },
+  "test_scenarios": [
+    {
+      "name": "Bronze Partner - Valid Discount",
+      "input": {
+        "model": {
+          "tier_id": "E2",
+          "base_price_eur": 50000,
+          "term_months": 12
+        },
+        "context": {
+          "partner_tier": "bronze",
+          "partner_discount_percent": 3,
+          "partner_annual_revenue": 150000
+        }
+      },
+      "expected_allow": true,
+      "expected_result": {
+        "partner_discount_eligible": true,
+        "applied_discount_percent": 3,
+        "revenue_requirement_met": true
+      }
+    },
+    {
+      "name": "Silver Partner - Valid Discount",
+      "input": {
+        "model": {
+          "tier_id": "E3",
+          "base_price_eur": 150000,
+          "term_months": 24
+        },
+        "context": {
+          "partner_tier": "silver",
+          "partner_discount_percent": 5,
+          "partner_annual_revenue": 750000
+        }
+      },
+      "expected_allow": true,
+      "expected_result": {
+        "partner_discount_eligible": true,
+        "applied_discount_percent": 5,
+        "revenue_requirement_met": true
+      }
+    },
+    {
+      "name": "Gold Partner - Valid Discount",
+      "input": {
+        "model": {
+          "tier_id": "E5",
+          "base_price_eur": 500000,
+          "term_months": 36
+        },
+        "context": {
+          "partner_tier": "gold",
+          "partner_discount_percent": 10,
+          "partner_annual_revenue": 3500000
+        }
+      },
+      "expected_allow": true,
+      "expected_result": {
+        "partner_discount_eligible": true,
+        "applied_discount_percent": 10,
+        "revenue_requirement_met": true
+      }
+    },
+    {
+      "name": "Platinum Partner - Valid Discount",
+      "input": {
+        "model": {
+          "tier_id": "E5",
+          "base_price_eur": 500000,
+          "term_months": 36
+        },
+        "context": {
+          "partner_tier": "platinum",
+          "partner_discount_percent": 15,
+          "partner_annual_revenue": 15000000
+        }
+      },
+      "expected_allow": true,
+      "expected_result": {
+        "partner_discount_eligible": true,
+        "applied_discount_percent": 15,
+        "revenue_requirement_met": true
+      }
+    },
+    {
+      "name": "Bronze Partner - Insufficient Revenue",
+      "input": {
+        "model": {
+          "tier_id": "E2",
+          "base_price_eur": 50000,
+          "term_months": 12
+        },
+        "context": {
+          "partner_tier": "bronze",
+          "partner_discount_percent": 3,
+          "partner_annual_revenue": 80000
+        }
+      },
+      "expected_allow": false,
+      "expected_result": {
+        "partner_discount_eligible": false,
+        "violation": "partner_revenue_requirement_not_met",
+        "required_revenue": 100000,
+        "actual_revenue": 80000
+      }
+    },
+    {
+      "name": "Silver Partner - Claiming Gold Discount (Fraud Attempt)",
+      "input": {
+        "model": {
+          "tier_id": "E3",
+          "base_price_eur": 150000,
+          "term_months": 24
+        },
+        "context": {
+          "partner_tier": "silver",
+          "partner_discount_percent": 10,
+          "partner_annual_revenue": 750000
+        }
+      },
+      "expected_allow": false,
+      "expected_result": {
+        "partner_discount_eligible": false,
+        "violation": "partner_discount_mismatch",
+        "actual_tier": "silver",
+        "max_discount_percent": 5,
+        "requested_discount_percent": 10
+      }
+    },
+    {
+      "name": "No Partner Tier - Attempting Discount",
+      "input": {
+        "model": {
+          "tier_id": "E2",
+          "base_price_eur": 50000,
+          "term_months": 12
+        },
+        "context": {
+          "partner_tier": null,
+          "partner_discount_percent": 5
+        }
+      },
+      "expected_allow": false,
+      "expected_result": {
+        "partner_discount_eligible": false,
+        "violation": "no_partner_tier_assigned",
+        "requested_discount_percent": 5
+      }
+    }
+  ]
+}

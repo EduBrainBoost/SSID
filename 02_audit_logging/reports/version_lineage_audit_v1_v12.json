@@ -1,0 +1,56 @@
+{
+  "tool": "version_lineage_audit",
+  "version": "1.0.0",
+  "execution_date": "2025-10-12T19:02:15.713606+00:00",
+  "scope": "v1.0 - v12.0",
+  "focus": "v9.0 - v12.0 (Root-24 Certification Lineage)",
+  "versions_detected": [
+    {
+      "version": "v9.0",
+      "name": "Root-24 Final Certification",
+      "expected_score": 100,
+      "artifacts_found": 4,
+      "artifacts_missing": [],
+      "bundle_present": true,
+      "bundle_name": "root_24_certification_bundle_v9.zip",
+      "status": "COMPLETE"
+    },
+    {
+      "version": "v10.0",
+      "name": "Continuum Transition",
+      "expected_score": 100,
+      "artifacts_found": 3,
+      "artifacts_missing": [],
+      "bundle_present": true,
+      "bundle_name": "root_24_continuum_transition_bundle_v10.zip",
+      "status": "COMPLETE"
+    },
+    {
+      "version": "v11.0",
+      "name": "Meta-Continuum Interfederation",
+      "expected_score": 100,
+      "artifacts_found": 4,
+      "artifacts_missing": [],
+      "bundle_present": false,
+      "bundle_name": "ssid_v11_dual_axis_certification_bundle.zip",
+      "status": "PARTIAL"
+    },
+    {
+      "version": "v12.0",
+      "name": "Interfederated Proof Nexus",
+      "expected_score": 100,
+      "artifacts_found": 3,
+      "artifacts_missing": [],
+      "bundle_present": true,
+      "bundle_name": "interfederated_proof_nexus_bundle_v12.zip",
+      "status": "COMPLETE"
+    }
+  ],
+  "certification_artifacts": [],
+  "integrity_status": {
+    "complete_versions": 3,
+    "total_versions": 4,
+    "integrity_percentage": 75.0,
+    "overall_status": "PARTIAL"
+  }
+}

@@ -1,0 +1,1054 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "generated_at": "2025-10-17T10:14:06.150634Z",
+    "generated_by": "generate_compliance_registry.py",
+    "total_rules": 19,
+    "total_manifestations": 76,
+    "compliance_score": 0.0,
+    "last_verified": "2025-10-17T10:14:06.150634Z"
+  },
+  "standards": {
+    "soc2": {
+      "name": "SOC 2 (Trust Services Criteria)",
+      "version": "2017",
+      "rules": {
+        "CC1.1": {
+          "rule_id": "CC1.1",
+          "name": "Integrity & Ethical Values",
+          "manifestations": {
+            "python": {
+              "path": "23_compliance\\mappings\\soc2\\src\\cc1_1_integrity_ethics.py",
+              "hash": "3c85e528d54c58ab7eaebacb1fd150e15d4d9a2668edd6bc64c039364d98c681",
+              "size": 12666,
+              "exists": true,
+              "last_modified": "2025-10-17T11:58:31.099698",
+              "validation_status": "valid"
+            },
+            "rego": {
+              "path": "soc2_cc1_1.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "16_codex\\contracts\\soc2\\cc1_1_integrity_ethics.yaml",
+              "hash": "84697af1491244fdfec23da4155628e33d86bbd61adc61ff13020ba10ac236fc",
+              "size": 7059,
+              "exists": true,
+              "last_modified": "2025-10-17T11:59:59.502918",
+              "validation_status": "valid"
+            },
+            "cli": {
+              "path": "12_tooling\\scripts\\compliance\\check_soc2_cc1_1.py",
+              "hash": "1239248533088d4b5a8eeed47c66172239a9040c12fc8fc4e1ef6b840d93c975",
+              "size": 6441,
+              "exists": true,
+              "last_modified": "2025-10-17T12:00:32.747148",
+              "validation_status": "valid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "3c85e528d54c58ab7eaebacb1fd150e15d4d9a2668edd6bc64c039364d98c681",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "84697af1491244fdfec23da4155628e33d86bbd61adc61ff13020ba10ac236fc",
+              "1239248533088d4b5a8eeed47c66172239a9040c12fc8fc4e1ef6b840d93c975"
+            ],
+            "intermediate_hashes": [
+              "09711f1280a60473d2c6712497357a568d6fd8a382684d754f0aa6fb42341621",
+              "629abe40ee04d5475745bdb12d04be876decc64aef1acc2e83c79b4f875420d5"
+            ],
+            "root_hash": "7afd4b6de3e7e76633a1e3a62bb70060a1eb6babedfbf2b51b2435caa3b072ba"
+          },
+          "status": "partial",
+          "last_modified": "2025-10-17T12:00:32.747148"
+        },
+        "CC2.1": {
+          "rule_id": "CC2.1",
+          "name": "Monitoring Activities",
+          "manifestations": {
+            "python": {
+              "path": "cc2_1_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "soc2_cc2_1.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "cc2_1_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_soc2_cc2_1.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "CC3.1": {
+          "rule_id": "CC3.1",
+          "name": "Risk Assessment",
+          "manifestations": {
+            "python": {
+              "path": "cc3_1_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "soc2_cc3_1.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "cc3_1_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_soc2_cc3_1.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "CC4.1": {
+          "rule_id": "CC4.1",
+          "name": "Information & Communication",
+          "manifestations": {
+            "python": {
+              "path": "cc4_1_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "soc2_cc4_1.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "cc4_1_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_soc2_cc4_1.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "CC5.1": {
+          "rule_id": "CC5.1",
+          "name": "Control Activities",
+          "manifestations": {
+            "python": {
+              "path": "cc5_1_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "soc2_cc5_1.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "cc5_1_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_soc2_cc5_1.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "CC6.1": {
+          "rule_id": "CC6.1",
+          "name": "Logical Access Controls",
+          "manifestations": {
+            "python": {
+              "path": "cc6_1_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "soc2_cc6_1.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "cc6_1_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_soc2_cc6_1.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "CC7.1": {
+          "rule_id": "CC7.1",
+          "name": "System Operations",
+          "manifestations": {
+            "python": {
+              "path": "cc7_1_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "soc2_cc7_1.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "cc7_1_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_soc2_cc7_1.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        }
+      },
+      "merkle_root": "c88323ada6a0b163d19275f2b344d66e69bc6e34c23e50acc86a7183abcef8af",
+      "compliance_score": 0.0
+    },
+    "gaia_x": {
+      "name": "Gaia-X Trust Framework",
+      "version": "22.10",
+      "rules": {
+        "GAIA-X-01": {
+          "rule_id": "GAIA-X-01",
+          "name": "Data Sovereignty",
+          "manifestations": {
+            "python": {
+              "path": "gaia_x_01_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "gaia_x_gaia_x_01.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "gaia_x_01_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_gaia_x_gaia_x_01.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "GAIA-X-02": {
+          "rule_id": "GAIA-X-02",
+          "name": "Transparency and Trust",
+          "manifestations": {
+            "python": {
+              "path": "gaia_x_02_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "gaia_x_gaia_x_02.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "gaia_x_02_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_gaia_x_gaia_x_02.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "GAIA-X-03": {
+          "rule_id": "GAIA-X-03",
+          "name": "Interoperability",
+          "manifestations": {
+            "python": {
+              "path": "gaia_x_03_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "gaia_x_gaia_x_03.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "gaia_x_03_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_gaia_x_gaia_x_03.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "GAIA-X-04": {
+          "rule_id": "GAIA-X-04",
+          "name": "Portability",
+          "manifestations": {
+            "python": {
+              "path": "gaia_x_04_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "gaia_x_gaia_x_04.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "gaia_x_04_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_gaia_x_gaia_x_04.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "GAIA-X-05": {
+          "rule_id": "GAIA-X-05",
+          "name": "Security by Design",
+          "manifestations": {
+            "python": {
+              "path": "gaia_x_05_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "gaia_x_gaia_x_05.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "gaia_x_05_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_gaia_x_gaia_x_05.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "GAIA-X-06": {
+          "rule_id": "GAIA-X-06",
+          "name": "Federated Services",
+          "manifestations": {
+            "python": {
+              "path": "gaia_x_06_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "gaia_x_gaia_x_06.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "gaia_x_06_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_gaia_x_gaia_x_06.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        }
+      },
+      "merkle_root": "da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851",
+      "compliance_score": 0.0
+    },
+    "etsi_en_319_421": {
+      "name": "ETSI EN 319 421",
+      "version": "1.1.1",
+      "rules": {
+        "ETSI-421-01": {
+          "rule_id": "ETSI-421-01",
+          "name": "Certificate Policy Requirements",
+          "manifestations": {
+            "python": {
+              "path": "etsi_421_01_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "etsi_en_319_421_etsi_421_01.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "etsi_421_01_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_etsi_en_319_421_etsi_421_01.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "ETSI-421-02": {
+          "rule_id": "ETSI-421-02",
+          "name": "Certificate Lifecycle Management",
+          "manifestations": {
+            "python": {
+              "path": "etsi_421_02_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "etsi_en_319_421_etsi_421_02.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "etsi_421_02_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_etsi_en_319_421_etsi_421_02.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "ETSI-421-03": {
+          "rule_id": "ETSI-421-03",
+          "name": "QTSP Requirements",
+          "manifestations": {
+            "python": {
+              "path": "etsi_421_03_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "etsi_en_319_421_etsi_421_03.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "etsi_421_03_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_etsi_en_319_421_etsi_421_03.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "ETSI-421-04": {
+          "rule_id": "ETSI-421-04",
+          "name": "Cryptographic Controls",
+          "manifestations": {
+            "python": {
+              "path": "etsi_421_04_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "etsi_en_319_421_etsi_421_04.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "etsi_421_04_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_etsi_en_319_421_etsi_421_04.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "ETSI-421-05": {
+          "rule_id": "ETSI-421-05",
+          "name": "Time-Stamping Services",
+          "manifestations": {
+            "python": {
+              "path": "etsi_421_05_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "etsi_en_319_421_etsi_421_05.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "etsi_421_05_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_etsi_en_319_421_etsi_421_05.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        },
+        "ETSI-421-06": {
+          "rule_id": "ETSI-421-06",
+          "name": "Trust Service Status List",
+          "manifestations": {
+            "python": {
+              "path": "etsi_421_06_MISSING.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "rego": {
+              "path": "etsi_en_319_421_etsi_421_06.rego",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "yaml": {
+              "path": "etsi_421_06_MISSING.yaml",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            },
+            "cli": {
+              "path": "check_etsi_en_319_421_etsi_421_06.py",
+              "hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 0,
+              "exists": false,
+              "last_modified": null,
+              "validation_status": "invalid"
+            }
+          },
+          "merkle_tree": {
+            "leaf_hashes": [
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "intermediate_hashes": [
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d",
+              "45725791c47b32618cc57b88343e2bceec3b0a01b83bc97d144a2cbc11a20c3d"
+            ],
+            "root_hash": "39d9d59e0f99712ae74d2440fd055937b200949b9073d3f6bc490d5090cf60d0"
+          },
+          "status": "missing",
+          "last_modified": null
+        }
+      },
+      "merkle_root": "da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851",
+      "compliance_score": 0.0
+    }
+  },
+  "merkle_roots": {
+    "soc2": "c88323ada6a0b163d19275f2b344d66e69bc6e34c23e50acc86a7183abcef8af",
+    "gaia_x": "da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851",
+    "etsi_en_319_421": "da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851"
+  },
+  "verification": {
+    "global_merkle_root": "b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c",
+    "signature": null,
+    "verification_history": []
+  }
+}

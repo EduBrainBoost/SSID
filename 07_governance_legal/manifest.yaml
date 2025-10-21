@@ -1,0 +1,66 @@
+apiVersion: ssid/implementation/v1
+kind: Manifest
+metadata:
+  name: 07-governance-legal
+  version: "0.1.0"
+  description: "Implementation manifest for 07 Governance Legal"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  maintainer: "Legal Team"
+
+  entry_points:
+    primary: "compliance_check.py"
+    secondary:  []
+
+  dependencies:
+    runtime:
+      python: ">=3.11"
+
+    build:
+      - setuptools
+      - wheel
+
+    test:
+      - pytest
+      - pytest-cov
+
+  build:
+    command: "python -m pip install -e ."
+    artifacts:
+      - dist/
+      - build/
+
+  test:
+    command: "pytest tests/ --cov=governance"
+    coverage_threshold: 80
+
+  deployment:
+    environments:
+      - dev
+      - stage
+      - prod
+
+    health_check:
+      enabled: true
+      endpoint: "/health"
+      interval_seconds: 30
+
+  observability:
+    metrics:
+      enabled: true
+      port: 9090
+
+    logging:
+      level: INFO
+      format: json
+
+    tracing:
+      enabled: true
+      sample_rate: 0.1
+
+  compliance:
+    safe_fix: true
+    root_24_lock: enforced
+    pii_policy: hash_only

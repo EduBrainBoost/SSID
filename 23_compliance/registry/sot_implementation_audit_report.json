@@ -1,0 +1,1453 @@
+{
+  "timestamp": "2025-10-17T13:19:02.626429Z",
+  "overall_score": 100.0,
+  "verdict": "PASS",
+  "enhanced_mode": true,
+  "rules": {
+    "version": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/global_foundations_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 175,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3017b3c73191c36894e23e1929982571148ededfcafd2c4a25a50d5cdacaa80b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/global_foundations_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 97,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "58015fe12ea36b345927cbef194d961b3a9bc39bfe797b24933d594ff69573bd"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_foundations.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 174,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1b72d2e97d9d1791568d80d56919c6c7924373f1b80924a395dbb62c77a7db4c"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "date": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/global_foundations_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 175,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3017b3c73191c36894e23e1929982571148ededfcafd2c4a25a50d5cdacaa80b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/global_foundations_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 97,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "58015fe12ea36b345927cbef194d961b3a9bc39bfe797b24933d594ff69573bd"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_foundations.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 174,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1b72d2e97d9d1791568d80d56919c6c7924373f1b80924a395dbb62c77a7db4c"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "deprecated": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/global_foundations_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 175,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3017b3c73191c36894e23e1929982571148ededfcafd2c4a25a50d5cdacaa80b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/global_foundations_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 97,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "58015fe12ea36b345927cbef194d961b3a9bc39bfe797b24933d594ff69573bd"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_foundations.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 174,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1b72d2e97d9d1791568d80d56919c6c7924373f1b80924a395dbb62c77a7db4c"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "regulatory_basis": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/global_foundations_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 175,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3017b3c73191c36894e23e1929982571148ededfcafd2c4a25a50d5cdacaa80b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/global_foundations_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 97,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "58015fe12ea36b345927cbef194d961b3a9bc39bfe797b24933d594ff69573bd"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_foundations.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 174,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1b72d2e97d9d1791568d80d56919c6c7924373f1b80924a395dbb62c77a7db4c"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "classification": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/global_foundations_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 175,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3017b3c73191c36894e23e1929982571148ededfcafd2c4a25a50d5cdacaa80b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/global_foundations_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 97,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "58015fe12ea36b345927cbef194d961b3a9bc39bfe797b24933d594ff69573bd"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_foundations.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 174,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1b72d2e97d9d1791568d80d56919c6c7924373f1b80924a395dbb62c77a7db4c"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "ivms101_2023": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/fatf_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 135,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3246b9fef6861de61fbc32c694894d8ae785de49365e4247e241427463779893"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/fatf_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 75,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "d0c6e00edece1730a30451669aa37aea8ae19f0a5ef78d0f075ad68315531596"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/fatf_travel_rule.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "2beb0173796caa67ca6e0c4659ce42f1abf2ada9efb085bfb5a4bc1b16f574e6"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "fatf_rec16_2025_update": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/fatf_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 135,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3246b9fef6861de61fbc32c694894d8ae785de49365e4247e241427463779893"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/fatf_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 75,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "d0c6e00edece1730a30451669aa37aea8ae19f0a5ef78d0f075ad68315531596"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/fatf_travel_rule.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "2beb0173796caa67ca6e0c4659ce42f1abf2ada9efb085bfb5a4bc1b16f574e6"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "xml_schema_2025_07": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/oecd_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 89,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "5cdc4382b66ab231ab94ef8aae73523f023d0958c897ecc861916dae8b69c281"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/oecd_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 44,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "d9f3c2cfc866be4f136011e623294b8258902874e403f264834022db79cd69ec"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/oecd_carf.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 33,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "5a0f3db932a556e3ba9602c01a45f9cd4ee050037955c8bd72e16dfbf059d439"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "iso24165_dti": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/iso_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 89,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "c6974e6b050eca1da653143d4860dd90fe5979cc9ca89fe575b4f98cfd4fd42d"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/iso_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 44,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "f864e4d9335fe1140e35608e3749f665cb0792a33a1dd1809abea795460fb26a"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/iso_standards.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 33,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "9a30abf1f69f2d467efacb066e458f3c462a22f24aa5e333ab5fcef0fd35e3c6"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "fsb_stablecoins_2023": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/standards_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 197,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "f7346e9e0bcb80642a1ed2a865d396e76f2316b92c29b61e78175bb15e0ac2d8"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/standards_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "9b0a525354dbfa4a52c4da9ab226b9ab8c746c6231cbbc751367fddfe82b3410"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_standards.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 56,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e557498b23c1f1214f983bdbf7e2e038e13b90233c88cb7d9635331e238d8819"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "iosco_crypto_markets_2023": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/standards_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 197,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "f7346e9e0bcb80642a1ed2a865d396e76f2316b92c29b61e78175bb15e0ac2d8"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/standards_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "9b0a525354dbfa4a52c4da9ab226b9ab8c746c6231cbbc751367fddfe82b3410"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_standards.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 56,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e557498b23c1f1214f983bdbf7e2e038e13b90233c88cb7d9635331e238d8819"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "nist_ai_rmf_1_0": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/standards_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 197,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "f7346e9e0bcb80642a1ed2a865d396e76f2316b92c29b61e78175bb15e0ac2d8"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/standards_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "9b0a525354dbfa4a52c4da9ab226b9ab8c746c6231cbbc751367fddfe82b3410"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_standards.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 56,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e557498b23c1f1214f983bdbf7e2e038e13b90233c88cb7d9635331e238d8819"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "deprecated_standards_tracking": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/deprecation_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 133,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "2b1b05f1752d5d7d3682bdfd7f8fbffb17fb813197882dc7c90ef7a082f8d6ad"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/deprecation_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 91,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1064b09a3e99fe894f6dd8a4a011be09cda04eb9598ae1e213c8e4a23bbe5acf"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/deprecation_tracking.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 47,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ab60b1930a75bc450b8b62f0afbdd534d6c22acbae864e49648f4c2db550eac0"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 757,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "514d634e74adee0e837ddfb537805297690538408e7b602a100ff7301559f396"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "property_name": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/property_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 193,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "0186e2e323a8a780e74eaaf925a922af9c46f93bcdcfe5e9360588872ec6af9b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/property_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 90,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "c18665154dca911c67ff98951ee143f53ae567073150779c3df1f68b65d65b53"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/property_validation.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 105,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "6fcb87518a0708e26d73622000819c18c1e04623e3a23bb1a2847fe3521ee12f"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_property_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 205,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e576eca638dda16e33b010a14363ea1218f09bd91d28fc175bb1b8ea661cd9d0"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "property_path": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/property_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 193,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "0186e2e323a8a780e74eaaf925a922af9c46f93bcdcfe5e9360588872ec6af9b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/property_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 90,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "c18665154dca911c67ff98951ee143f53ae567073150779c3df1f68b65d65b53"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/property_validation.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 105,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "6fcb87518a0708e26d73622000819c18c1e04623e3a23bb1a2847fe3521ee12f"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_property_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 205,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e576eca638dda16e33b010a14363ea1218f09bd91d28fc175bb1b8ea661cd9d0"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "property_deprecated": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/property_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 193,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "0186e2e323a8a780e74eaaf925a922af9c46f93bcdcfe5e9360588872ec6af9b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/property_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 90,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "c18665154dca911c67ff98951ee143f53ae567073150779c3df1f68b65d65b53"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/property_validation.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 105,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "6fcb87518a0708e26d73622000819c18c1e04623e3a23bb1a2847fe3521ee12f"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_property_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 205,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e576eca638dda16e33b010a14363ea1218f09bd91d28fc175bb1b8ea661cd9d0"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    },
+    "property_business_priority": {
+      "score": 100.0,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/property_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 193,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "0186e2e323a8a780e74eaaf925a922af9c46f93bcdcfe5e9360588872ec6af9b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/property_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 90,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "c18665154dca911c67ff98951ee143f53ae567073150779c3df1f68b65d65b53"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/property_validation.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 105,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "6fcb87518a0708e26d73622000819c18c1e04623e3a23bb1a2847fe3521ee12f"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 425,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ef6c06bce1653bd3324a358fd64d8893748b8171294ee3770be18c0c07fb6c5b"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_property_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 205,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e576eca638dda16e33b010a14363ea1218f09bd91d28fc175bb1b8ea661cd9d0"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": true,
+          "has_package": true,
+          "has_rules": false,
+          "error": null
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": true,
+          "error": null
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": true,
+          "cli_has_command": true,
+          "integration_valid": true,
+          "error": null
+        }
+      }
+    }
+  }
+}

@@ -20,12 +20,10 @@ from datetime import datetime, timedelta
 from typing import Dict, List
 from collections import defaultdict
 
-
 ROOT = Path(__file__).resolve().parents[2]
 POLICY_PATH = ROOT / "23_compliance" / "policies" / "anti_gaming_policy.yaml"
 EVENTS_PATH = ROOT / "02_audit_logging" / "evidence" / "identity_events.jsonl"
 LOG_PATH = ROOT / "02_audit_logging" / "logs" / "anti_gaming_anomaly_rate.jsonl"
-
 
 def load_policy() -> Dict:
     """Load anti-gaming policy configuration."""
@@ -46,7 +44,6 @@ def load_policy() -> Dict:
     with open(POLICY_PATH, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
-
 def load_identity_events() -> List[Dict]:
     """Load identity events from JSONL."""
     if not EVENTS_PATH.exists():
@@ -62,7 +59,6 @@ def load_identity_events() -> List[Dict]:
                     raise NotImplementedError("TODO: Implement this block")
 
     return events
-
 
 def detect_rate_violations(
     events: List[Dict],
@@ -144,7 +140,6 @@ def detect_rate_violations(
 
     return violations
 
-
 def write_audit_log(
     status: str,
     offenders: List[Dict],
@@ -167,7 +162,6 @@ def write_audit_log(
 
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, sort_keys=True) + "\n")
-
 
 def main() -> int:
     """Main execution."""
@@ -241,7 +235,6 @@ def main() -> int:
     print(f"Audit log: {LOG_PATH}")
 
     return 0 if status == "PASS" else 2
-
 
 if __name__ == "__main__":
     sys.exit(main())

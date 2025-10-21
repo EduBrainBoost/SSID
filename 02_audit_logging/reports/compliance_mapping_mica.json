@@ -1,0 +1,259 @@
+{
+  "timestamp": "2025-10-13T19:43:53.722306Z",
+  "framework": "MICA",
+  "source_file": "mica_mapping.yaml",
+  "data": {
+    "meta": {
+      "framework": "MiCA",
+      "version": "2025-Q4",
+      "source": "SoT Level3",
+      "last_updated": "2025-10-07T00:00:00Z",
+      "maintainer": "edubrainboost",
+      "status": "draft",
+      "classification": "PUBLIC - Compliance Mapping",
+      "regulatory_basis": "EU 2023/1114 - Markets in Crypto-Assets Regulation"
+    },
+    "mappings": [
+      {
+        "id": "MiCA-Art-3",
+        "description": "Begriffsbestimmungen - Token-Klassifizierung",
+        "applies_to": [
+          "20_foundation",
+          "07_governance_legal",
+          "23_compliance"
+        ],
+        "verification": "manual",
+        "test_reference": "test_token_classification.py",
+        "controls": [
+          "Token utility definition",
+          "Exclusion of security token characteristics",
+          "Exclusion of e-money token characteristics",
+          "Pure utility token classification"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art3_classification.json"
+      },
+      {
+        "id": "MiCA-Art-16",
+        "description": "Verbot missbr\u00e4uchlicher Marktpraktiken",
+        "applies_to": [
+          "08_identity_score",
+          "23_compliance",
+          "17_observability"
+        ],
+        "verification": "automated",
+        "test_reference": "test_market_abuse_prevention.py",
+        "controls": [
+          "Market manipulation detection",
+          "Insider trading prevention",
+          "Unlawful disclosure controls",
+          "Transaction monitoring"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art16_market_abuse.json"
+      },
+      {
+        "id": "MiCA-Art-35",
+        "description": "Beschwerdeverfahren",
+        "applies_to": [
+          "13_ui_layer",
+          "07_governance_legal",
+          "03_core"
+        ],
+        "verification": "manual",
+        "test_reference": "test_complaints_procedure.py",
+        "controls": [
+          "Complaint submission mechanism",
+          "Complaint handling procedures",
+          "Response time commitments",
+          "Escalation pathways"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art35_complaints.json"
+      },
+      {
+        "id": "MiCA-Art-57",
+        "description": "Anforderungen an CASPs - Betriebliche Anforderungen",
+        "applies_to": [
+          "03_core",
+          "15_infra",
+          "07_governance_legal"
+        ],
+        "verification": "manual",
+        "test_reference": "test_operational_requirements.py",
+        "controls": [
+          "Organizational structure",
+          "Business continuity arrangements",
+          "IT systems resilience",
+          "Record-keeping obligations"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art57_operations.json"
+      },
+      {
+        "id": "MiCA-Art-59",
+        "description": "Eigenmittel",
+        "applies_to": [
+          "20_foundation",
+          "07_governance_legal"
+        ],
+        "verification": "manual",
+        "test_reference": "test_own_funds.py",
+        "controls": [
+          "Minimum capital requirements",
+          "Own funds calculation",
+          "Professional indemnity insurance",
+          "Financial reporting"
+        ],
+        "implementation_status": "planned",
+        "evidence_path": "23_compliance/evidence/mica/art59_capital.json"
+      },
+      {
+        "id": "MiCA-Art-60",
+        "description": "Schutz von Verm\u00f6genswerten und Geldern der Kunden",
+        "applies_to": [
+          "03_core",
+          "20_foundation",
+          "21_post_quantum_crypto"
+        ],
+        "verification": "automated",
+        "test_reference": "test_asset_protection.py",
+        "controls": [
+          "Non-custodial architecture",
+          "User key control",
+          "No commingling of funds",
+          "Segregation of assets"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art60_custody.json"
+      },
+      {
+        "id": "MiCA-Art-66",
+        "description": "Ausf\u00fchrungspolitik",
+        "applies_to": [
+          "03_core",
+          "07_governance_legal"
+        ],
+        "verification": "manual",
+        "test_reference": "test_execution_policy.py",
+        "controls": [
+          "Best execution policy",
+          "Execution quality monitoring",
+          "Order handling procedures",
+          "Client order priority"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art66_execution.json"
+      },
+      {
+        "id": "MiCA-Art-67",
+        "description": "Transparenz und Auftragsabwicklung",
+        "applies_to": [
+          "13_ui_layer",
+          "03_core",
+          "02_audit_logging"
+        ],
+        "verification": "automated",
+        "test_reference": "test_transparency.py",
+        "controls": [
+          "Price disclosure",
+          "Fee transparency",
+          "Transaction confirmation",
+          "Audit trail maintenance"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art67_transparency.json"
+      },
+      {
+        "id": "MiCA-Art-68",
+        "description": "Interessenkonflikte",
+        "applies_to": [
+          "07_governance_legal",
+          "23_compliance"
+        ],
+        "verification": "manual",
+        "test_reference": "test_conflicts_of_interest.py",
+        "controls": [
+          "Conflict identification procedures",
+          "Conflict management policies",
+          "Disclosure requirements",
+          "Organizational safeguards"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art68_conflicts.json"
+      },
+      {
+        "id": "MiCA-Art-69",
+        "description": "Auslagerung",
+        "applies_to": [
+          "07_governance_legal",
+          "19_adapters",
+          "10_interoperability"
+        ],
+        "verification": "manual",
+        "test_reference": "test_outsourcing.py",
+        "controls": [
+          "Outsourcing policy",
+          "Due diligence on service providers",
+          "Contractual arrangements",
+          "Monitoring of outsourced services"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art69_outsourcing.json"
+      },
+      {
+        "id": "MiCA-Art-71",
+        "description": "Informationspflichten gegen\u00fcber Kunden",
+        "applies_to": [
+          "13_ui_layer",
+          "05_documentation",
+          "07_governance_legal"
+        ],
+        "verification": "manual",
+        "test_reference": "test_customer_information.py",
+        "controls": [
+          "Pre-contractual information",
+          "Risk warnings",
+          "Service descriptions",
+          "Cost and charges disclosure"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art71_disclosure.json"
+      },
+      {
+        "id": "MiCA-Art-74",
+        "description": "Aufzeichnungs- und Aufbewahrungspflichten",
+        "applies_to": [
+          "02_audit_logging",
+          "18_data_layer",
+          "23_compliance"
+        ],
+        "verification": "automated",
+        "test_reference": "test_record_keeping.py",
+        "controls": [
+          "Transaction records (5 years minimum)",
+          "Order records",
+          "Audit trail completeness",
+          "WORM storage implementation"
+        ],
+        "implementation_status": "implemented",
+        "evidence_path": "23_compliance/evidence/mica/art74_records.json"
+      }
+    ],
+    "compliance_metrics": {
+      "overall_coverage": "88%",
+      "automated_controls": 4,
+      "manual_controls": 8,
+      "implemented_controls": 11,
+      "planned_controls": 1,
+      "last_audit": "2025-09-15",
+      "next_audit": "2026-03-15"
+    }
+  },
+  "score": {
+    "total_controls": 12,
+    "implemented": 11,
+    "planned": 1,
+    "score": 95.83
+  }
+}

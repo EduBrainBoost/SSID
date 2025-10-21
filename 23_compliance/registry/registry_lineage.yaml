@@ -1,0 +1,76 @@
+metadata:
+  version: 1.0.0
+  created_at: '2025-10-17T10:35:00.000000Z'
+  description: Chronological ledger of compliance registry evolution
+  purpose: Cryptographic audit trail for compliance state changes
+  chain_hash_algorithm: SHA-256
+  signature_algorithm: Dilithium2
+  total_entries: 2
+  first_entry: '2025-10-17T10:29:44.428625Z'
+  last_entry: '2025-10-17T10:29:44.428625+00:00'
+entries:
+- entry_id: 1
+  timestamp: '2025-10-17T10:29:44.428625Z'
+  registry_version: 1.0.0
+  global_merkle_root: b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c
+  compliance_score: 0.0
+  total_rules: 19
+  total_manifestations: 76
+  standard_merkle_roots:
+    soc2: c88323ada6a0b163e899edb84f5ee86d58e9da71f80dce1f6ad6f20d7f98a9cb
+    gaia_x: da520a02b84e3feeb9086240a42c63fa1e21dc9bb3b83fe10b8c87c2e59da00a
+    etsi_en_319_421: da520a02b84e3feeb9086240a42c63fa1e21dc9bb3b83fe10b8c87c2e59da00a
+  pqc_signature:
+    algorithm: Dilithium2
+    backend: placeholder-hmac-sha256
+    signature_file: 23_compliance/registry/compliance_registry_signature.json
+    signature_hash: 628b28ba8f1cd11e9103e36edab71e5496b10f2747619f5ae0b48ae154602bdd
+    worm_snapshot: 02_audit_logging/storage/worm/immutable_store/compliance_signature_20251017T102944Z_5155a29ce1c2488a.json
+  changes:
+    type: initial
+    description: Initial compliance registry with 19 rules (SOC2, Gaia-X, ETSI EN
+      319 421)
+    files_added: 76
+    files_modified: 0
+    files_removed: 0
+    rules_added: 19
+    rules_modified: 0
+    rules_removed: 0
+  attribution:
+    actor: SSID Compliance Team
+    event: Initial registry creation
+    commit_sha: null
+  chain:
+    previous_entry_id: null
+    previous_merkle_root: null
+    entry_hash: 23ad0053d7eb993f8ca13b93a46e6baef531ea91fd5b0791431d100c8b8cfb99
+    chain_valid: true
+- entry_id: 2
+  timestamp: '2025-10-17T10:29:44.428625+00:00'
+  registry_version: 1.0.0
+  global_merkle_root: b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c
+  compliance_score: 0.0
+  total_rules: 19
+  total_manifestations: 76
+  standard_merkle_roots:
+    soc2: c88323ada6a0b163d19275f2b344d66e69bc6e34c23e50acc86a7183abcef8af
+    gaia_x: da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851
+    etsi_en_319_421: da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851
+  pqc_signature:
+    algorithm: Dilithium2
+    backend: placeholder-hmac-sha256
+    signature_hash: 628b28ba8f1cd11e9103e36edab71e5496b10f2747619f5ae0b48ae154602bdd
+  changes:
+    type: no_change
+    description: Registry unchanged (re-signature)
+  chain:
+    previous_entry_id: 1
+    previous_merkle_root: b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c
+    entry_hash: d2aa07e1910eb418f6ca0c984b02d0619a17149b55809268376754ce6a3fa196
+  dao_approval:
+    proposal_id: LINEAGE-UPDATE-20251017-102944
+    approved_at: '2025-10-17T10:55:23.657973+00:00'
+    approval_ratio: 1.0
+    quorum: 3
+    governance_locked: true
+schema_version: 1.0.0

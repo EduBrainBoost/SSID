@@ -1,0 +1,106 @@
+{
+  "root_lock_enabled": true,
+  "violations": [
+    {
+      "type": "ROOT-24-LOCK-VIOLATION",
+      "path": ".coverage",
+      "reason": "Hidden path '.coverage' not in exception policy",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T17:28:36.690002+00:00"
+    },
+    {
+      "type": "ROOT-24-LOCK-VIOLATION",
+      "path": ".pre-commit-config.yaml",
+      "reason": "Hidden path '.pre-commit-config.yaml' not in exception policy",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T17:28:36.690002+00:00"
+    },
+    {
+      "type": "ROOT-24-LOCK-VIOLATION",
+      "path": "MINIMAL_SURFACE_GUARD_SUMMARY.md",
+      "reason": "Path 'minimal_surface_guard_summary.md' not in allowed roots (ROOT-24-LOCK violation)",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T17:28:36.691996+00:00"
+    },
+    {
+      "type": "ROOT-24-LOCK-VIOLATION",
+      "path": "PHASE_3_DEPLOYMENT_SUMMARY.md",
+      "reason": "Path 'phase_3_deployment_summary.md' not in allowed roots (ROOT-24-LOCK violation)",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T17:28:36.691996+00:00"
+    },
+    {
+      "type": "ROOT-24-LOCK-VIOLATION",
+      "path": "PHASE_3_READINESS_SUMMARY.md",
+      "reason": "Path 'phase_3_readiness_summary.md' not in allowed roots (ROOT-24-LOCK violation)",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T17:28:36.691996+00:00"
+    },
+    {
+      "type": "ROOT-24-LOCK-VIOLATION",
+      "path": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+      "reason": "Path 'root_24_lock_v5_3_bundle_final.md' not in allowed roots (ROOT-24-LOCK violation)",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T17:28:36.693005+00:00"
+    },
+    {
+      "type": "ROOT-24-LOCK-VIOLATION",
+      "path": "ssid_root24lock_certification_badge_pack_v5_3.zip",
+      "reason": "Path 'ssid_root24lock_certification_badge_pack_v5_3.zip' not in allowed roots (ROOT-24-LOCK violation)",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T17:28:36.693005+00:00"
+    },
+    {
+      "type": "ROOT-24-LOCK-VIOLATION",
+      "path": "SYSTEM_HEALTH_REPORT_20251014.md",
+      "reason": "Path 'system_health_report_20251014.md' not in allowed roots (ROOT-24-LOCK violation)",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T17:28:36.693005+00:00"
+    },
+    {
+      "type": "ROOT-24-LOCK-VIOLATION",
+      "path": "test_results.log",
+      "reason": "Path 'test_results.log' not in allowed roots (ROOT-24-LOCK violation)",
+      "severity": "CRITICAL",
+      "timestamp": "2025-10-14T17:28:36.693005+00:00"
+    }
+  ],
+  "exception_paths": [
+    "LICENSE",
+    "README.md",
+    ".gitignore",
+    ".github/",
+    ".git/",
+    ".claude/",
+    ".pytest_cache",
+    "__pycache__",
+    "pytest.ini"
+  ],
+  "allowed_roots": [
+    "01_ai_layer",
+    "02_audit_logging",
+    "03_core",
+    "04_deployment",
+    "05_documentation",
+    "06_data_pipeline",
+    "07_governance_legal",
+    "08_identity_score",
+    "09_meta_identity",
+    "10_interoperability",
+    "11_test_simulation",
+    "12_tooling",
+    "13_ui_layer",
+    "14_zero_time_auth",
+    "15_infra",
+    "16_codex",
+    "17_observability",
+    "18_data_layer",
+    "19_adapters",
+    "20_foundation",
+    "21_post_quantum_crypto",
+    "22_datasets",
+    "23_compliance",
+    "24_meta_orchestration",
+    "25_malicious_root"
+  ]
+}

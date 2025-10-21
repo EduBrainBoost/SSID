@@ -1,0 +1,21 @@
+apiVersion: ssid/v1
+kind: HygienePatch
+metadata:
+  name: apply_hygiene_patch
+  version: v1.0.0
+  labels:
+    scope: quality
+    lock: root-24
+spec:
+  tool: 12_tooling/maintenance/apply_hygiene_patch.py
+  targets:
+    - 02_audit_logging/reports/test_hygiene_certificate_v1.md
+    - 24_meta_orchestration/registry/test_hygiene_certificate.yaml
+    - 13_ui_layer/assets/badges/test_hygiene_badge.svg
+    - 02_audit_logging/logs/test_hygiene_score_log.json
+  output:
+    diff: 02_audit_logging/logs/hygiene_patch_diff.json
+status:
+  state: ACTIVE
+  score: 100
+  last_update: 2025-10-15T12:00:30Z

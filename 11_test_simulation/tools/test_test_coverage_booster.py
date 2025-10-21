@@ -14,12 +14,10 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-
 def test_coverage_booster_exists():
     """Test that coverage booster tool exists."""
     tool_path = Path(__file__).parents[2] / "12_tooling" / "quality" / "test_coverage_booster.py"
     assert tool_path.exists(), f"Tool not found: {tool_path}"
-
 
 def test_coverage_booster_executes():
     """Test that coverage booster executes successfully."""
@@ -37,7 +35,6 @@ def test_coverage_booster_executes():
     # Advisory tool always returns 0
     assert result.returncode == 0, f"Unexpected exit code: {result.returncode}"
     assert "SSID Test Coverage Booster" in result.stdout
-
 
 def test_coverage_booster_json_output():
     """Test that JSON output mode works."""
@@ -63,7 +60,6 @@ def test_coverage_booster_json_output():
     assert "summary" in report
     assert "recommendations" in report
 
-
 def test_coverage_report_structure():
     """Test coverage report has expected structure."""
     import subprocess
@@ -88,7 +84,6 @@ def test_coverage_report_structure():
     # Check recommendations
     assert "priority_modules" in report["recommendations"]
     assert isinstance(report["recommendations"]["priority_modules"], list)
-
 
 def test_coverage_report_saved():
     """Test that report is saved to file."""
@@ -117,7 +112,6 @@ def test_coverage_report_saved():
 
     assert report["tool"] == "test_coverage_booster"
 
-
 def test_coverage_booster_pytest_mode():
     """Test coverage booster with pytest collection."""
     import subprocess
@@ -138,7 +132,6 @@ def test_coverage_booster_pytest_mode():
     # Pytest info should be present
     assert "pytest_info" in report
     assert report["pytest_info"]["executed"] is True
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

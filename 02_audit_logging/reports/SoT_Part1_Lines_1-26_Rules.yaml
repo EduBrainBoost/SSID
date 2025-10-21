@@ -1,0 +1,119 @@
+# SoT Manual Extraction - Part 1, Lines 1-26 (4 Rules)
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 1-26
+# Sektion: Grundprinzipien
+# Anzahl Regeln: 4
+# Datum: 2025-10-18
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-P1-001
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 20
+    section: "Grundprinzipien"
+    title: "Verbindliche Root-Module (24) - Bindende Liste"
+    original_text: "**Verbindliche Root-Module (24):** Die obige v4.1-Liste ist bindend. Abweichende historische Namen sind ungültig und führen zu FAIL."
+    category: "root_structure"
+    priority: "must"
+    description: "Die 24 Root-Module aus v4.1-Liste sind BINDEND. Abweichende Namen = FAIL"
+    enforcement: "CI MUSS exakte Übereinstimmung mit v4.1-Liste prüfen"
+    evidence_schema:
+      type: "directory_existence_check"
+      expected_roots:
+        - "01_ai_layer"
+        - "02_audit_logging"
+        - "03_core"
+        - "04_deployment"
+        - "05_documentation"
+        - "06_data_pipeline"
+        - "07_governance_legal"
+        - "08_identity_score"
+        - "09_meta_identity"
+        - "10_interoperability"
+        - "11_test_simulation"
+        - "12_tooling"
+        - "13_ui_layer"
+        - "14_zero_time_auth"
+        - "15_infra"
+        - "16_codex"
+        - "17_observability"
+        - "18_data_layer"
+        - "19_adapters"
+        - "20_foundation"
+        - "21_post_quantum_crypto"
+        - "22_datasets"
+        - "23_compliance"
+        - "24_meta_orchestration"
+      validation: "Alle 24 MÜSSEN existieren, Namen MÜSSEN exakt sein, keine historischen Varianten"
+
+  - rule_id: SOT-P1-002
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 22
+    section: "Grundprinzipien"
+    title: "Root-Level Ausnahmen - Kanonische Definition"
+    original_text: "**Root-Level Ausnahmen:** Siehe kanonische Definition in `23_compliance/exceptions/root_level_exceptions.yaml` (CI-Guard-Enforcement)"
+    category: "root_structure"
+    priority: "must"
+    description: "Root-Level Ausnahmen sind NUR in 23_compliance/exceptions/root_level_exceptions.yaml definiert"
+    enforcement: "CI MUSS root_level_exceptions.yaml als einzige Quelle verwenden"
+    evidence_schema:
+      type: "file_existence_and_authority"
+      canonical_file: "23_compliance/exceptions/root_level_exceptions.yaml"
+      validation: "Diese Datei ist die EINZIGE gültige Quelle für Root-Level Ausnahmen"
+      ci_enforcement: true
+
+  - rule_id: SOT-P1-003
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 24
+    section: "Grundprinzipien"
+    title: "Standard-Ausnahmen - Git und Basisdateien"
+    original_text: "**Ausnahmen:** .git/, .github/, LICENSE, README.md"
+    category: "root_structure"
+    priority: "must"
+    description: "Standard-Ausnahmen im Root-Level: .git/, .github/, LICENSE, README.md"
+    enforcement: "Diese Dateien/Ordner sind IMMER erlaubt im Root, ohne weitere Prüfung"
+    evidence_schema:
+      type: "exception_whitelist"
+      allowed_items:
+        - ".git/"
+        - ".github/"
+        - "LICENSE"
+        - "README.md"
+      validation: "Diese Items blockieren NICHT die Root-Struktur-Validierung"
+
+  - rule_id: SOT-P1-004
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 25
+    section: "Grundprinzipien"
+    title: "KRITISCH - Einzige gültige Struktur-Exception Datei"
+    original_text: "**KRITISCH:** `23_compliance/exceptions/structure_exceptions.yaml` ist die einzige gültige Struktur-Exception. Keine Kopie im Root oder modulnah."
+    category: "root_structure"
+    priority: "must"
+    description: "NUR 23_compliance/exceptions/structure_exceptions.yaml ist gültige Struktur-Exception-Quelle. KEINE Kopien erlaubt"
+    enforcement: "CI MUSS prüfen: Keine Kopien von structure_exceptions.yaml in Root oder modulnah. FAIL bei Duplikaten"
+    evidence_schema:
+      type: "singleton_file_enforcement"
+      canonical_file: "23_compliance/exceptions/structure_exceptions.yaml"
+      forbidden_duplicates:
+        - "*/structure_exceptions.yaml"
+        - "structure_exceptions.yaml"
+      validation: "EXAKT 1 Datei mit diesem Namen MUSS existieren, an genau diesem Pfad"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Duplikat oder falscher Location"
+
+# ====================================================================================
+# Integration Status
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 4
+  next_step: "Integration in alle 5 SoT-Artefakte"
+  pending_integration:
+    - "16_codex/contracts/sot/sot_contract.yaml"
+    - "03_core/validators/sot/sot_validator_core.py"
+    - "23_compliance/policies/sot/sot_policy.rego"
+    - "12_tooling/cli/sot_validator.py"
+    - "11_test_simulation/tests_compliance/test_sot_validator.py"

@@ -1,0 +1,68 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: data_layer
+  version: "0.1.0"
+  description: "Data models, ORM mappings, database migrations, and data access layer"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - data_modeling
+    - orm_management
+    - database_migrations
+    - query_optimization
+    - connection_pooling
+    - transaction_management
+
+  interfaces:
+    - name: orm_api
+      type: sqlalchemy
+      authentication: internal
+
+    - name: migration_tool
+      type: alembic
+      authentication: developer
+
+    - name: query_builder
+      type: internal
+      authentication: required
+
+  policies:
+    - name: migration_review
+      enforcement: manual
+      scope: all_migrations
+      approvers_required: 1
+
+    - name: query_timeout
+      enforcement: automated
+      scope: all_queries
+      max_seconds: 30
+
+    - name: connection_limit
+      enforcement: automated
+      scope: all_pools
+      max_connections: 100
+
+  dependencies:
+    internal:
+      - 15_infra  # Database infrastructure
+      - 02_audit_logging  # Query logging
+    external:
+      - sqlalchemy: ">=2.0"
+      - alembic: ">=1.12"
+      - postgresql: ">=14"
+
+  governance:
+    maintainer: "Data Team"
+    reviewers:
+      - dba_team
+      - backend_team
+    approval_required: true
+    data_classification: confidential
+
+  compliance:
+    dsgvo:
+      - article_5  # Data minimization
+      - article_32  # Security of processing

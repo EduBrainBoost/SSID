@@ -1,0 +1,29 @@
+# SSID Fee Allocation Policy (v5.4.3)
+# EXACT, normalized from user-provided 7-säulen weights to sum to 2% of total amount.
+transaction_fee:
+  total_percent: 0.03         # 3% of total amount
+  developer_share: 0.01       # 1% of total amount (exact)
+  system_pool: 0.02           # 2% of total amount (exact)
+
+system_pool_distribution:     # each value is a fraction of TOTAL amount, not of the 2%
+  legal_compliance: 0.003888888888888888888888888888888888888888
+  audit_security: 0.003333333333333333333333333333333333333334
+  technical_maintenance: 0.003333333333333333333333333333333333333334
+  dao_treasury: 0.002777777777777777777777777777777777777778
+  community_bonus: 0.002222222222222222222222222222222222222222
+  liquidity_reserve: 0.002222222222222222222222222222222222222222
+  marketing_partnerships: 0.002222222222222222222222222222222222222222
+
+subscription_revenue:         # second source (firms / licenses)
+  allocation_relative:
+    system_operational: 0.50
+    dao_treasury: 0.30
+    developer_core: 0.10
+    incentive_reserve: 0.10
+
+governance_control:
+  adjustable_ranges:
+    dao_treasury_relative: [0.20, 0.35]
+    audit_security_absolute_percent_of_amount: [0.0020, 0.0040]  # 0.20% .. 0.40%
+  approval_required: true
+  voting_quorum: 0.67

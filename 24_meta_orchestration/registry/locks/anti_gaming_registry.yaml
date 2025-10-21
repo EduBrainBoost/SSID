@@ -92,7 +92,7 @@ metrics:
 
 integration:
   ci_cd:
-    enabled: false  # TODO: Integrate into .github/workflows/
+    enabled: false
     workflow_file: ".github/workflows/anti_gaming_checks.yml"
     on_events: ["push", "pull_request", "schedule"]
 
@@ -213,7 +213,7 @@ testing:
     - test_quarantine_execution
     - test_threshold_enforcement
 
-  ci_integration: false  # TODO: Enable
+  ci_integration: false
 
 # ============================================================================
 # OPERATIONAL STATUS

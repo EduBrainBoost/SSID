@@ -1,0 +1,14 @@
+[pytest]
+addopts = -q --cache-clear --tb=short --maxfail=1
+          --disable-warnings
+          -p no:stepwise
+          -p no:lfplugin
+          -p no:cacheprovider
+          --assert=plain
+          --strict-markers
+          --strict-config
+testpaths =
+    11_test_simulation
+python_files =
+    test_*.py
+norecursedirs = .git node_modules venv __pycache__

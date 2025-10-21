@@ -1,0 +1,1958 @@
+{
+  "timestamp": "2025-10-20T21:04:16.904070",
+  "total_rules": 384,
+  "overall_percentage": 80.88541666666666,
+  "all_complete": false,
+  "artefacts": [
+    {
+      "name": "Python Core Validator",
+      "total_expected": 384,
+      "total_found": 211,
+      "percentage": 54.947916666666664,
+      "complete": false,
+      "categories": [
+        {
+          "category": "AR",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "CP",
+          "expected": 12,
+          "found": 12,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "JURIS_BL",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "VG",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "SOT-V2",
+          "expected": 189,
+          "found": 7,
+          "missing": 182,
+          "complete": false,
+          "percentage": 3.7037037037037033,
+          "evidence": [
+            "def validate_sot_v2(self, num: int)"
+          ]
+        },
+        {
+          "category": "PROP_TYPE",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "def validate_prop_type(self, num: int)"
+          ]
+        },
+        {
+          "category": "JURIS_T1",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "def validate_tier1_mkt(self, num: int)"
+          ]
+        },
+        {
+          "category": "REWARD_POOL",
+          "expected": 5,
+          "found": 7,
+          "missing": -2,
+          "complete": true,
+          "percentage": 140.0,
+          "evidence": [
+            "def validate_reward_pool(self, num: int)"
+          ]
+        },
+        {
+          "category": "NETWORK",
+          "expected": 6,
+          "found": 7,
+          "missing": -1,
+          "complete": true,
+          "percentage": 116.66666666666667,
+          "evidence": [
+            "def validate_network(self, num: int)"
+          ]
+        },
+        {
+          "category": "AUTH_METHOD",
+          "expected": 6,
+          "found": 7,
+          "missing": -1,
+          "complete": true,
+          "percentage": 116.66666666666667,
+          "evidence": [
+            "def validate_auth_method(self, num: int)"
+          ]
+        },
+        {
+          "category": "PII_CAT",
+          "expected": 10,
+          "found": 7,
+          "missing": 3,
+          "complete": false,
+          "percentage": 70.0,
+          "evidence": [
+            "def validate_pii_cat(self, num: int)"
+          ]
+        },
+        {
+          "category": "HASH_ALG",
+          "expected": 4,
+          "found": 7,
+          "missing": -3,
+          "complete": true,
+          "percentage": 175.0,
+          "evidence": [
+            "def validate_hash_alg(self, num: int)"
+          ]
+        },
+        {
+          "category": "RETENTION",
+          "expected": 5,
+          "found": 7,
+          "missing": -2,
+          "complete": true,
+          "percentage": 140.0,
+          "evidence": [
+            "def validate_retention(self, num: int)"
+          ]
+        },
+        {
+          "category": "DID_METHOD",
+          "expected": 4,
+          "found": 7,
+          "missing": -3,
+          "complete": true,
+          "percentage": 175.0,
+          "evidence": [
+            "def validate_did_method(self, num: int)"
+          ]
+        },
+        {
+          "category": "CS",
+          "expected": 11,
+          "found": 11,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "MS",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "KP",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "CE",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "TS",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "DC",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "MR",
+          "expected": 3,
+          "found": 3,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003"
+          ]
+        },
+        {
+          "category": "MD-STRUCT",
+          "expected": 2,
+          "found": 2,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "009",
+            "010"
+          ]
+        },
+        {
+          "category": "MD-CHART",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "024",
+            "029",
+            "045",
+            "048",
+            "050"
+          ]
+        },
+        {
+          "category": "MD-MANIFEST",
+          "expected": 28,
+          "found": 28,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "004",
+            "009",
+            "012",
+            "013",
+            "014"
+          ]
+        },
+        {
+          "category": "MD-POLICY",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "009",
+            "012",
+            "023",
+            "027",
+            "028"
+          ]
+        },
+        {
+          "category": "MD-PRINC",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "007",
+            "009",
+            "013",
+            "018",
+            "019"
+          ]
+        },
+        {
+          "category": "MD-GOV",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "005",
+            "006",
+            "007",
+            "008",
+            "009"
+          ]
+        },
+        {
+          "category": "MD-EXT",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "012",
+            "014",
+            "015",
+            "018"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "OPA Policy",
+      "total_expected": 384,
+      "total_found": 190,
+      "percentage": 49.47916666666667,
+      "complete": false,
+      "categories": [
+        {
+          "category": "AR",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "CP",
+          "expected": 12,
+          "found": 12,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "JURIS_BL",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "VG",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "SOT-V2",
+          "expected": 189,
+          "found": 0,
+          "missing": 189,
+          "complete": false,
+          "percentage": 0.0,
+          "evidence": []
+        },
+        {
+          "category": "PROP_TYPE",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "JURIS_T1",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "REWARD_POOL",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "NETWORK",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "AUTH_METHOD",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "PII_CAT",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "HASH_ALG",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "RETENTION",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "DID_METHOD",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "CS",
+          "expected": 11,
+          "found": 11,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "MS",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "KP",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "CE",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "TS",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "DC",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "MR",
+          "expected": 3,
+          "found": 3,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003"
+          ]
+        },
+        {
+          "category": "MD-STRUCT",
+          "expected": 2,
+          "found": 2,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "009",
+            "010"
+          ]
+        },
+        {
+          "category": "MD-CHART",
+          "expected": 5,
+          "found": 3,
+          "missing": 2,
+          "complete": false,
+          "percentage": 60.0,
+          "evidence": [
+            "024",
+            "045",
+            "048"
+          ]
+        },
+        {
+          "category": "MD-MANIFEST",
+          "expected": 28,
+          "found": 26,
+          "missing": 2,
+          "complete": false,
+          "percentage": 92.85714285714286,
+          "evidence": [
+            "004",
+            "009",
+            "012",
+            "015",
+            "016"
+          ]
+        },
+        {
+          "category": "MD-POLICY",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "009",
+            "012",
+            "023",
+            "027",
+            "028"
+          ]
+        },
+        {
+          "category": "MD-PRINC",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "007",
+            "009",
+            "013",
+            "018",
+            "019"
+          ]
+        },
+        {
+          "category": "MD-GOV",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "005",
+            "006",
+            "007",
+            "008",
+            "009"
+          ]
+        },
+        {
+          "category": "MD-EXT",
+          "expected": 4,
+          "found": 3,
+          "missing": 1,
+          "complete": false,
+          "percentage": 75.0,
+          "evidence": [
+            "014",
+            "015",
+            "018"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Contract YAML",
+      "total_expected": 384,
+      "total_found": 384,
+      "percentage": 100.0,
+      "complete": true,
+      "categories": [
+        {
+          "category": "AR",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "CP",
+          "expected": 12,
+          "found": 12,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "JURIS_BL",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "VG",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "SOT-V2",
+          "expected": 189,
+          "found": 189,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "0001",
+            "0003",
+            "0004",
+            "0005",
+            "0006"
+          ]
+        },
+        {
+          "category": "PROP_TYPE",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "JURIS_T1",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "REWARD_POOL",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "NETWORK",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "AUTH_METHOD",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "PII_CAT",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "HASH_ALG",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "RETENTION",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "DID_METHOD",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "CS",
+          "expected": 11,
+          "found": 11,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "MS",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "KP",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "CE",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "TS",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "DC",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "MR",
+          "expected": 3,
+          "found": 3,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003"
+          ]
+        },
+        {
+          "category": "MD-STRUCT",
+          "expected": 2,
+          "found": 2,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "009",
+            "010"
+          ]
+        },
+        {
+          "category": "MD-CHART",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "024",
+            "029",
+            "045",
+            "048",
+            "050"
+          ]
+        },
+        {
+          "category": "MD-MANIFEST",
+          "expected": 28,
+          "found": 28,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "004",
+            "009",
+            "012",
+            "013",
+            "014"
+          ]
+        },
+        {
+          "category": "MD-POLICY",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "009",
+            "012",
+            "023",
+            "027",
+            "028"
+          ]
+        },
+        {
+          "category": "MD-PRINC",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "007",
+            "009",
+            "013",
+            "018",
+            "019"
+          ]
+        },
+        {
+          "category": "MD-GOV",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "005",
+            "006",
+            "007",
+            "008",
+            "009"
+          ]
+        },
+        {
+          "category": "MD-EXT",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "012",
+            "014",
+            "015",
+            "018"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Test Suite",
+      "total_expected": 384,
+      "total_found": 384,
+      "percentage": 100.0,
+      "complete": true,
+      "categories": [
+        {
+          "category": "AR",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "CP",
+          "expected": 12,
+          "found": 12,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "JURIS_BL",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "VG",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "SOT-V2",
+          "expected": 189,
+          "found": 189,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "0001",
+            "0002",
+            "0003",
+            "0004",
+            "0005"
+          ]
+        },
+        {
+          "category": "PROP_TYPE",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "JURIS_T1",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "REWARD_POOL",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "NETWORK",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "AUTH_METHOD",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "PII_CAT",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "HASH_ALG",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "RETENTION",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "DID_METHOD",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "CS",
+          "expected": 11,
+          "found": 11,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "MS",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "KP",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "CE",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "TS",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004",
+            "005"
+          ]
+        },
+        {
+          "category": "DC",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "category": "MR",
+          "expected": 3,
+          "found": 3,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "001",
+            "002",
+            "003"
+          ]
+        },
+        {
+          "category": "MD-STRUCT",
+          "expected": 2,
+          "found": 2,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "009",
+            "010"
+          ]
+        },
+        {
+          "category": "MD-CHART",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "024",
+            "029",
+            "045",
+            "048",
+            "050"
+          ]
+        },
+        {
+          "category": "MD-MANIFEST",
+          "expected": 28,
+          "found": 28,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "004",
+            "009",
+            "012",
+            "013",
+            "014"
+          ]
+        },
+        {
+          "category": "MD-POLICY",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "009",
+            "012",
+            "023",
+            "027",
+            "028"
+          ]
+        },
+        {
+          "category": "MD-PRINC",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "007",
+            "009",
+            "013",
+            "018",
+            "019"
+          ]
+        },
+        {
+          "category": "MD-GOV",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "005",
+            "006",
+            "007",
+            "008",
+            "009"
+          ]
+        },
+        {
+          "category": "MD-EXT",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "012",
+            "014",
+            "015",
+            "018"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CLI Tool",
+      "total_expected": 384,
+      "total_found": 384,
+      "percentage": 100.0,
+      "complete": true,
+      "categories": [
+        {
+          "category": "AR",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "CP",
+          "expected": 12,
+          "found": 12,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "JURIS_BL",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "VG",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "SOT-V2",
+          "expected": 189,
+          "found": 189,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "PROP_TYPE",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "JURIS_T1",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "REWARD_POOL",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "NETWORK",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "AUTH_METHOD",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "PII_CAT",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "HASH_ALG",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "RETENTION",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "DID_METHOD",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "CS",
+          "expected": 11,
+          "found": 11,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "MS",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "KP",
+          "expected": 10,
+          "found": 10,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "CE",
+          "expected": 8,
+          "found": 8,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "TS",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "DC",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "MR",
+          "expected": 3,
+          "found": 3,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "MD-STRUCT",
+          "expected": 2,
+          "found": 2,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "MD-CHART",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "MD-MANIFEST",
+          "expected": 28,
+          "found": 28,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "MD-POLICY",
+          "expected": 5,
+          "found": 5,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "MD-PRINC",
+          "expected": 6,
+          "found": 6,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "MD-GOV",
+          "expected": 7,
+          "found": 7,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        },
+        {
+          "category": "MD-EXT",
+          "expected": 4,
+          "found": 4,
+          "missing": 0,
+          "complete": true,
+          "percentage": 100.0,
+          "evidence": [
+            "CLI integrates with Python validator via validate_all()"
+          ]
+        }
+      ]
+    }
+  ]
+}

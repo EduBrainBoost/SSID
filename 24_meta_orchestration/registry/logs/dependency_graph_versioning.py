@@ -33,7 +33,6 @@ from typing import Dict, List, Optional, Tuple
 from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
 
-
 @dataclass
 class GraphVersion:
     """
@@ -61,7 +60,6 @@ class GraphVersion:
     def to_dict(self) -> Dict:
         return asdict(self)
 
-
 @dataclass
 class GraphChange:
     """
@@ -86,7 +84,6 @@ class GraphChange:
 
     def to_dict(self) -> Dict:
         return asdict(self)
-
 
 class DependencyGraphVersioning:
     """
@@ -347,7 +344,6 @@ class DependencyGraphVersioning:
 
         return changelog
 
-
 def main():
     """CLI entry point for testing"""
     repo_root = Path(__file__).resolve().parents[3]
@@ -375,7 +371,6 @@ def main():
     print(json.dumps(version.to_dict(), indent=2))
     print(f"\nVersion created: {version.version_id}")
     print(f"Version index: {versioning.version_index_file}")
-
 
 if __name__ == "__main__":
     main()

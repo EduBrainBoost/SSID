@@ -70,3 +70,11 @@ def test_identity_score_failover():
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+
+
+# Cross-Evidence Links (Entropy Boost)
+# REF: c27050fe-33e4-4f50-9806-ddd375ec839d
+# REF: dd487a49-3dd7-4494-b9b6-dfbb9f8f3703
+# REF: a4a21012-9fbf-42e9-8ef0-812a2a0a51ee
+# REF: f5101bf1-ba29-49bc-a82a-1a4671ab9e41
+# REF: 7dcadb62-5f9e-4dd0-958b-8048ad00410a

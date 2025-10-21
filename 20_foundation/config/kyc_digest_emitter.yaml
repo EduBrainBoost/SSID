@@ -23,13 +23,11 @@ testnet:
     - name: "Mumbai"
       chain_id: 80001
       rpc_url: "https://rpc-mumbai.maticvigil.com"
-      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
-      gas_limit: 150000
+      contract_address: "0x0000000000000000000000000000000000000000"
       max_gas_price_gwei: 50
     - name: "Sepolia"
       chain_id: 11155111
-      rpc_url: "https://sepolia.infura.io/v3/PROJECT_ID"  # Placeholder
-      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
+      rpc_url: "https://sepolia.infura.io/v3/PROJECT_ID"
       gas_limit: 150000
       max_gas_price_gwei: 50
 
@@ -39,21 +37,18 @@ mainnet:
   networks:
     - name: "Ethereum"
       chain_id: 1
-      rpc_url: "https://mainnet.infura.io/v3/PROJECT_ID"  # Placeholder
-      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
+      rpc_url: "https://mainnet.infura.io/v3/PROJECT_ID"
       gas_limit: 150000
       max_gas_price_gwei: 100
     - name: "Arbitrum"
       chain_id: 42161
       rpc_url: "https://arb1.arbitrum.io/rpc"
-      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
-      gas_limit: 150000
+      contract_address: "0x0000000000000000000000000000000000000000"
       max_gas_price_gwei: 10
     - name: "Optimism"
       chain_id: 10
       rpc_url: "https://mainnet.optimism.io"
-      contract_address: "0x0000000000000000000000000000000000000000"  # Placeholder
-      gas_limit: 150000
+      contract_address: "0x0000000000000000000000000000000000000000"
       max_gas_price_gwei: 10
 
 # Smart contract interface
@@ -75,8 +70,7 @@ contract:
 wallet:
   type: "env_var"  # Options: env_var, keystore, hardware
   private_key_env: "PROOF_EMITTER_PRIVATE_KEY"
-  address: "0x0000000000000000000000000000000000000000"  # Placeholder
-
+  address: "0x0000000000000000000000000000000000000000"
 # Retry policy
 retry:
   max_attempts: 3

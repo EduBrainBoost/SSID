@@ -1,0 +1,632 @@
+{
+  "verification_id": "sot-policy-alignment",
+  "timestamp": "2025-10-16T19:50:00Z",
+  "coverage_percent": 100.0,
+  "total_rules": 24,
+  "covered_rules": 24,
+  "missing_rules": 0,
+  "results": {
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:3": {
+      "rule": "This document defines the fundamental security rules for the SSID system.",
+      "tokens": [
+        "define",
+        "document",
+        "for",
+        "fundamental",
+        "rule",
+        "security",
+        "ssid",
+        "system",
+        "the",
+        "thi"
+      ],
+      "matched_tokens": [
+        "define",
+        "document",
+        "for",
+        "rule",
+        "security",
+        "ssid",
+        "system",
+        "the",
+        "thi"
+      ],
+      "coverage_ratio": 0.9,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:4": {
+      "rule": "Every rule must be enforced through corresponding OPA policies.",
+      "tokens": [
+        "correspond",
+        "enforc",
+        "every",
+        "must",
+        "opa",
+        "policie",
+        "rule",
+        "through"
+      ],
+      "matched_tokens": [
+        "correspond",
+        "enforc",
+        "every",
+        "must",
+        "opa",
+        "policie",
+        "rule"
+      ],
+      "coverage_ratio": 0.875,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:10": {
+      "rule": "All user authentication must use multi-factor authentication.",
+      "tokens": [
+        "2fa",
+        "all",
+        "auth",
+        "authentica",
+        "authentication",
+        "factor",
+        "mfa",
+        "multi",
+        "multifactor",
+        "must",
+        "use",
+        "user"
+      ],
+      "matched_tokens": [
+        "2fa",
+        "all",
+        "auth",
+        "authentica",
+        "authentication",
+        "factor",
+        "mfa",
+        "multi",
+        "multifactor",
+        "must",
+        "use",
+        "user"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:11": {
+      "rule": "Authorization decisions must be logged in immutable audit trails.",
+      "tokens": [
+        "audit",
+        "authoriza",
+        "decision",
+        "evidence",
+        "immut",
+        "immutable",
+        "log",
+        "logg",
+        "must",
+        "readonly",
+        "record",
+        "tamperproof",
+        "trail",
+        "worm"
+      ],
+      "matched_tokens": [
+        "audit",
+        "authoriza",
+        "decision",
+        "evidence",
+        "immut",
+        "immutable",
+        "log",
+        "logg",
+        "must",
+        "readonly",
+        "record",
+        "tamperproof",
+        "trail",
+        "worm"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:12": {
+      "rule": "Session tokens must expire after 30 minutes of inactivity.",
+      "tokens": [
+        "after",
+        "expire",
+        "inactivity",
+        "minute",
+        "must",
+        "session",
+        "token"
+      ],
+      "matched_tokens": [
+        "after",
+        "minute",
+        "must",
+        "session",
+        "token"
+      ],
+      "coverage_ratio": 0.7143,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:13": {
+      "rule": "Role-based access control must be enforced at all API endpoints.",
+      "tokens": [
+        "acces",
+        "all",
+        "api",
+        "bas",
+        "control",
+        "endpoint",
+        "enforc",
+        "must",
+        "role"
+      ],
+      "matched_tokens": [
+        "acces",
+        "all",
+        "api",
+        "bas",
+        "control",
+        "endpoint",
+        "enforc",
+        "must",
+        "role"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:17": {
+      "rule": "Personal data must be encrypted at rest using AES-256.",
+      "tokens": [
+        "256",
+        "aes",
+        "cipher",
+        "cryptograph",
+        "data",
+        "encrypt",
+        "must",
+        "personal",
+        "rest",
+        "rsa",
+        "using"
+      ],
+      "matched_tokens": [
+        "256",
+        "aes",
+        "cipher",
+        "cryptograph",
+        "data",
+        "encrypt",
+        "must",
+        "rest",
+        "rsa",
+        "using"
+      ],
+      "coverage_ratio": 0.9091,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:18": {
+      "rule": "All network communication must use TLS 1.3 or higher.",
+      "tokens": [
+        "all",
+        "communica",
+        "higher",
+        "must",
+        "network",
+        "tls",
+        "use"
+      ],
+      "matched_tokens": [
+        "all",
+        "communica",
+        "higher",
+        "must",
+        "network",
+        "use"
+      ],
+      "coverage_ratio": 0.8571,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:19": {
+      "rule": "Data retention policies must comply with GDPR requirements.",
+      "tokens": [
+        "comply",
+        "data",
+        "gdpr",
+        "must",
+        "policie",
+        "requirement",
+        "reten",
+        "with"
+      ],
+      "matched_tokens": [
+        "data",
+        "gdpr",
+        "must",
+        "policie",
+        "requirement",
+        "reten",
+        "with"
+      ],
+      "coverage_ratio": 0.875,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:20": {
+      "rule": "User data must never be shared without explicit consent.",
+      "tokens": [
+        "consent",
+        "data",
+        "explicit",
+        "must",
+        "never",
+        "shar",
+        "user",
+        "without"
+      ],
+      "matched_tokens": [
+        "data",
+        "explicit",
+        "must",
+        "never",
+        "shar",
+        "user",
+        "without"
+      ],
+      "coverage_ratio": 0.875,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:24": {
+      "rule": "All security events must be logged to WORM storage.",
+      "tokens": [
+        "all",
+        "event",
+        "immutable",
+        "logg",
+        "must",
+        "readonly",
+        "security",
+        "storage",
+        "tamperproof",
+        "worm"
+      ],
+      "matched_tokens": [
+        "all",
+        "event",
+        "immutable",
+        "logg",
+        "must",
+        "readonly",
+        "security",
+        "storage",
+        "tamperproof",
+        "worm"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:25": {
+      "rule": "Audit logs must be retained for minimum 12 months.",
+      "tokens": [
+        "audit",
+        "evidence",
+        "for",
+        "log",
+        "minimum",
+        "month",
+        "must",
+        "record",
+        "retain",
+        "trail"
+      ],
+      "matched_tokens": [
+        "audit",
+        "evidence",
+        "for",
+        "log",
+        "minimum",
+        "month",
+        "must",
+        "record",
+        "trail"
+      ],
+      "coverage_ratio": 0.9,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:26": {
+      "rule": "Compliance checks must run before every deployment.",
+      "tokens": [
+        "before",
+        "check",
+        "compliance",
+        "deployment",
+        "every",
+        "must",
+        "run"
+      ],
+      "matched_tokens": [
+        "before",
+        "check",
+        "compliance",
+        "deployment",
+        "every",
+        "must"
+      ],
+      "coverage_ratio": 0.8571,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:27": {
+      "rule": "Policy violations must trigger immediate alerts.",
+      "tokens": [
+        "alert",
+        "immediate",
+        "must",
+        "policy",
+        "trigger",
+        "violation"
+      ],
+      "matched_tokens": [
+        "alert",
+        "immediate",
+        "must",
+        "policy",
+        "trigger",
+        "violation"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:31": {
+      "rule": "The 24-layer structure must be validated before commits.",
+      "tokens": [
+        "before",
+        "commit",
+        "layer",
+        "must",
+        "structure",
+        "the",
+        "validat"
+      ],
+      "matched_tokens": [
+        "before",
+        "commit",
+        "layer",
+        "must",
+        "structure",
+        "the",
+        "validat"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:32": {
+      "rule": "Cross-layer dependencies must follow the approved hierarchy.",
+      "tokens": [
+        "approv",
+        "cros",
+        "dependencie",
+        "follow",
+        "hierarchy",
+        "layer",
+        "must",
+        "the"
+      ],
+      "matched_tokens": [
+        "approv",
+        "cros",
+        "dependencie",
+        "follow",
+        "hierarchy",
+        "layer",
+        "must",
+        "the"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:33": {
+      "rule": "No circular dependencies are allowed between layers.",
+      "tokens": [
+        "allow",
+        "are",
+        "between",
+        "circular",
+        "dependencie",
+        "layer"
+      ],
+      "matched_tokens": [
+        "allow",
+        "are",
+        "between",
+        "circular",
+        "dependencie",
+        "layer"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:34": {
+      "rule": "Structure violations must block CI/CD pipeline execution.",
+      "tokens": [
+        "block",
+        "execu",
+        "must",
+        "pipeline",
+        "structure",
+        "violation"
+      ],
+      "matched_tokens": [
+        "block",
+        "execu",
+        "must",
+        "pipeline",
+        "structure",
+        "violation"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:38": {
+      "rule": "All cryptographic hashes must use SHA-512 or BLAKE2b.",
+      "tokens": [
+        "512",
+        "all",
+        "blake2b",
+        "checksum",
+        "cryptographic",
+        "digest",
+        "hash",
+        "hashe",
+        "must",
+        "sha",
+        "sha512",
+        "use"
+      ],
+      "matched_tokens": [
+        "512",
+        "all",
+        "blake2b",
+        "checksum",
+        "cryptographic",
+        "digest",
+        "hash",
+        "hashe",
+        "must",
+        "sha",
+        "sha512",
+        "use"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:39": {
+      "rule": "Digital signatures must use Ed25519 or stronger algorithms.",
+      "tokens": [
+        "algorithm",
+        "digital",
+        "dilithium",
+        "ecdsa",
+        "ed25519",
+        "must",
+        "sign",
+        "signature",
+        "stronger",
+        "use",
+        "verify"
+      ],
+      "matched_tokens": [
+        "algorithm",
+        "digital",
+        "dilithium",
+        "ecdsa",
+        "must",
+        "sign",
+        "signature",
+        "use",
+        "verify"
+      ],
+      "coverage_ratio": 0.8182,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:40": {
+      "rule": "Random number generation must use cryptographically secure sources.",
+      "tokens": [
+        "cryptographically",
+        "genera",
+        "must",
+        "number",
+        "random",
+        "secure",
+        "source",
+        "use"
+      ],
+      "matched_tokens": [
+        "genera",
+        "must",
+        "number",
+        "secure",
+        "source",
+        "use"
+      ],
+      "coverage_ratio": 0.75,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:41": {
+      "rule": "Key rotation must occur every 90 days for production systems.",
+      "tokens": [
+        "day",
+        "every",
+        "for",
+        "key",
+        "must",
+        "occur",
+        "produc",
+        "rota",
+        "system"
+      ],
+      "matched_tokens": [
+        "day",
+        "every",
+        "for",
+        "key",
+        "must",
+        "produc",
+        "rota",
+        "system"
+      ],
+      "coverage_ratio": 0.8889,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:45": {
+      "rule": "*This document represents binding rules for SSID compliance.*",
+      "tokens": [
+        "bind",
+        "compliance",
+        "document",
+        "for",
+        "represent",
+        "rule",
+        "ssid",
+        "thi"
+      ],
+      "matched_tokens": [
+        "bind",
+        "compliance",
+        "document",
+        "for",
+        "rule",
+        "ssid",
+        "thi"
+      ],
+      "coverage_ratio": 0.875,
+      "covered": true
+    },
+    "16_codex\\sot_definitions\\sot_security_fundamentals.md:46": {
+      "rule": "*Every rule must have corresponding enforcement in 23_compliance/policies/*",
+      "tokens": [
+        "compliance",
+        "correspond",
+        "enforcement",
+        "every",
+        "have",
+        "must",
+        "policie",
+        "rule"
+      ],
+      "matched_tokens": [
+        "compliance",
+        "correspond",
+        "enforcement",
+        "every",
+        "have",
+        "must",
+        "policie",
+        "rule"
+      ],
+      "coverage_ratio": 1.0,
+      "covered": true
+    }
+  },
+  "policy_recommendations": [],
+  "status": "PASS"
+}

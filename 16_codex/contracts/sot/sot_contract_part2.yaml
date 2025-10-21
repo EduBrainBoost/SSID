@@ -1,0 +1,2108 @@
+metadata:
+  version: 3.0.0-PART2-FINAL
+  level: A_SEMANTIC
+  part: 2
+  generated: '2025-10-19T14:17:18.417450'
+  source: SoT_Semantic_Core_Part2_256_20251019.yaml
+  extraction_method: POLICY_DEPTH_FILTERING_FROM_COMPLETE_EXTRACTION_PART2
+  total_rules: 256
+  target_rules: 256
+  severity_distribution:
+    CRITICAL: 7
+    HIGH: 42
+    LOW: 192
+    MEDIUM: 8
+    INFO: 7
+  usage: Python- und Rego-Validatoren, SoT-Audits, MiCA/eIDAS-Zertifizierung (Part2)
+rules:
+- rule_id: SOT-PART2-SEM-001
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Guard/Enforcement
+  severity: CRITICAL
+  enforcement: MUST
+  description: 'root_level_exceptions.enforcement: CI-Guard mit Exit Code 24 bei Violation'
+  field: root_level_exceptions.enforcement
+  value: CI-Guard mit Exit Code 24 bei Violation
+- rule_id: SOT-PART2-SEM-002
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Guard/Enforcement
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'guard_enforcement.enforcement_level: STRICT - Zero tolerance for unlisted
+    items'
+  field: guard_enforcement.enforcement_level
+  value: STRICT - Zero tolerance for unlisted items
+- rule_id: SOT-PART2-SEM-003
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Guard/Enforcement
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'integration_points.structure_guard: 12_tooling/scripts/structure_guard.sh'
+  field: integration_points.structure_guard
+  value: 12_tooling/scripts/structure_guard.sh
+- rule_id: SOT-PART2-SEM-004
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Compliance
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'integration_points.compliance_policies: 23_compliance/policies/structure_policy.yaml'
+  field: integration_points.compliance_policies
+  value: 23_compliance/policies/structure_policy.yaml
+- rule_id: SOT-PART2-SEM-005
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'cross_sector_features.compliance_gap_analysis: automated'
+  field: cross_sector_features.compliance_gap_analysis
+  value: automated
+- rule_id: SOT-PART2-SEM-006
+  source: SSID_structure_level3_part2_MAX.md:806
+  category: Compliance
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'thresholds.test_coverage.tiered_requirements.compliance_modules: >=
+    99%'
+  field: thresholds.test_coverage.tiered_requirements.compliance_modules
+  value: '>= 99%'
+- rule_id: SOT-PART2-SEM-007
+  source: SSID_structure_level3_part2_MAX.md:806
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'thresholds.test_coverage.tiered_requirements.business_critical: >=
+    95%'
+  field: thresholds.test_coverage.tiered_requirements.business_critical
+  value: '>= 95%'
+- rule_id: SOT-PART2-SEM-008
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Guard/Enforcement
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'guard_enforcement.validation_function: validate_root_exceptions'
+  field: guard_enforcement.validation_function
+  value: validate_root_exceptions
+- rule_id: SOT-PART2-SEM-009
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Guard/Enforcement
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'controls.enterprise_badge_validation.source_validation: True'
+  field: controls.enterprise_badge_validation.source_validation
+  value: 'True'
+- rule_id: SOT-PART2-SEM-010
+  source: SSID_structure_level3_part2_MAX.md:139
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: local ALLOWED_DIRS=$(yq -r ''.root_level_exceptions.allowed_directories.*[]''
+    "$EX'
+  originaltext: local ALLOWED_DIRS=$(yq -r '.root_level_exceptions.allowed_directories.*[]'
+    "$EXCEPTIONS_FILE" 2>/dev/null || echo "")
+- rule_id: SOT-PART2-SEM-011
+  source: SSID_structure_level3_part2_MAX.md:140
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: local ALLOWED_FILES=$(yq -r ''.root_level_exceptions.allowed_files.*[]''
+    "$EXCEPTI'
+  originaltext: local ALLOWED_FILES=$(yq -r '.root_level_exceptions.allowed_files.*[]'
+    "$EXCEPTIONS_FILE" 2>/dev/null || echo "")
+- rule_id: SOT-PART2-SEM-012
+  source: SSID_structure_level3_part2_MAX.md:145
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: if [ "$MODULE_COUNT" -ne 24 ]; then'
+  originaltext: if [ "$MODULE_COUNT" -ne 24 ]; then
+- rule_id: SOT-PART2-SEM-013
+  source: SSID_structure_level3_part2_MAX.md:146
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: echo "ERROR: Expected exactly 24 modules, found $MODULE_COUNT"'
+  originaltext: 'echo "ERROR: Expected exactly 24 modules, found $MODULE_COUNT"'
+- rule_id: SOT-PART2-SEM-014
+  source: SSID_structure_level3_part2_MAX.md:147
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: exit 24'
+  originaltext: exit 24
+- rule_id: SOT-PART2-SEM-015
+  source: SSID_structure_level3_part2_MAX.md:148
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: fi'
+  originaltext: fi
+- rule_id: SOT-PART2-SEM-016
+  source: SSID_structure_level3_part2_MAX.md:153
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: if [[ "$item" =~ ^[0-9]{2}_.+$ ]]; then'
+  originaltext: if [[ "$item" =~ ^[0-9]{2}_.+$ ]]; then
+- rule_id: SOT-PART2-SEM-017
+  source: SSID_structure_level3_part2_MAX.md:155
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: fi'
+  originaltext: fi
+- rule_id: SOT-PART2-SEM-018
+  source: SSID_structure_level3_part2_MAX.md:158
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: if [[ "$item" == .* ]] && ! echo "$ALLOWED_ITEMS" | grep
+    -qx "$item"; then'
+  originaltext: if [[ "$item" == .* ]] && ! echo "$ALLOWED_ITEMS" | grep -qx "$item";
+    then
+- rule_id: SOT-PART2-SEM-019
+  source: SSID_structure_level3_part2_MAX.md:159
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: echo "VIOLATION: Hidden item ''$item'' not allowed"'
+  originaltext: 'echo "VIOLATION: Hidden item ''$item'' not allowed"'
+- rule_id: SOT-PART2-SEM-020
+  source: SSID_structure_level3_part2_MAX.md:160
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: exit 24'
+  originaltext: exit 24
+- rule_id: SOT-PART2-SEM-021
+  source: SSID_structure_level3_part2_MAX.md:161
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: fi'
+  originaltext: fi
+- rule_id: SOT-PART2-SEM-022
+  source: SSID_structure_level3_part2_MAX.md:164
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: if [ -L "$item" ]; then'
+  originaltext: if [ -L "$item" ]; then
+- rule_id: SOT-PART2-SEM-023
+  source: SSID_structure_level3_part2_MAX.md:165
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: echo "VIOLATION: Symlink ''$item'' not allowed"'
+  originaltext: 'echo "VIOLATION: Symlink ''$item'' not allowed"'
+- rule_id: SOT-PART2-SEM-024
+  source: SSID_structure_level3_part2_MAX.md:166
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: exit 24'
+  originaltext: exit 24
+- rule_id: SOT-PART2-SEM-025
+  source: SSID_structure_level3_part2_MAX.md:167
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: fi'
+  originaltext: fi
+- rule_id: SOT-PART2-SEM-026
+  source: SSID_structure_level3_part2_MAX.md:170
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: if ! echo "$ALLOWED_ITEMS" | grep -qx "$item"; then'
+  originaltext: if ! echo "$ALLOWED_ITEMS" | grep -qx "$item"; then
+- rule_id: SOT-PART2-SEM-027
+  source: SSID_structure_level3_part2_MAX.md:171
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: echo "VIOLATION: Unauthorized root-level item ''$item''
+    - not in canonical excepti'
+  originaltext: 'echo "VIOLATION: Unauthorized root-level item ''$item'' - not in
+    canonical exceptions list"'
+- rule_id: SOT-PART2-SEM-028
+  source: SSID_structure_level3_part2_MAX.md:172
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: echo "Triggering quarantine for: $item"'
+  originaltext: 'echo "Triggering quarantine for: $item"'
+- rule_id: SOT-PART2-SEM-029
+  source: SSID_structure_level3_part2_MAX.md:178
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: exit 24'
+  originaltext: exit 24
+- rule_id: SOT-PART2-SEM-030
+  source: SSID_structure_level3_part2_MAX.md:179
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: fi'
+  originaltext: fi
+- rule_id: SOT-PART2-SEM-031
+  source: SSID_structure_level3_part2_MAX.md:182
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: echo "✅ Root-level exceptions validation PASSED"'
+  originaltext: echo "✅ Root-level exceptions validation PASSED"
+- rule_id: SOT-PART2-SEM-032
+  source: SSID_structure_level3_part2_MAX.md:221
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: 23_compliance/anti_gaming/overfitting_detector.py'
+  originaltext: 23_compliance/anti_gaming/overfitting_detector.py
+- rule_id: SOT-PART2-SEM-033
+  source: SSID_structure_level3_part2_MAX.md:231
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: 20_foundation/tokenomics/utility_definitions.yaml'
+  originaltext: 20_foundation/tokenomics/utility_definitions.yaml
+- rule_id: SOT-PART2-SEM-034
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'dao_governance_compatibility.governance_models: List container'
+  field: dao_governance_compatibility.governance_models
+  value: List with 8 items
+- rule_id: SOT-PART2-SEM-035
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'dao_governance_compatibility.governance_models item 0: Traditional
+    Corporate'
+  field: dao_governance_compatibility.governance_models[0]
+  value: Traditional Corporate
+- rule_id: SOT-PART2-SEM-036
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'dao_governance_compatibility.governance_models item 1: DAO (Decentralized
+    Autonomous Organization)'
+  field: dao_governance_compatibility.governance_models[1]
+  value: DAO (Decentralized Autonomous Organization)
+- rule_id: SOT-PART2-SEM-037
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'dao_governance_compatibility.governance_models item 2: Hybrid (Corporate
+    + DAO)'
+  field: dao_governance_compatibility.governance_models[2]
+  value: Hybrid (Corporate + DAO)
+- rule_id: SOT-PART2-SEM-038
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'dao_governance_compatibility.governance_models item 3: NGO/Non-Profit'
+  field: dao_governance_compatibility.governance_models[3]
+  value: NGO/Non-Profit
+- rule_id: SOT-PART2-SEM-039
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'dao_governance_compatibility.governance_models item 4: Government/Public
+    Sector'
+  field: dao_governance_compatibility.governance_models[4]
+  value: Government/Public Sector
+- rule_id: SOT-PART2-SEM-040
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'dao_governance_compatibility.governance_models item 5: Academic Institution'
+  field: dao_governance_compatibility.governance_models[5]
+  value: Academic Institution
+- rule_id: SOT-PART2-SEM-041
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'dao_governance_compatibility.governance_models item 6: Community Cooperative'
+  field: dao_governance_compatibility.governance_models[6]
+  value: Community Cooperative
+- rule_id: SOT-PART2-SEM-042
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'dao_governance_compatibility.governance_models item 7: Enterprise
+    Consortium'
+  field: dao_governance_compatibility.governance_models[7]
+  value: Enterprise Consortium
+- rule_id: SOT-PART2-SEM-043
+  source: SSID_structure_level3_part2_MAX.md:1288
+  category: Governance
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'shard_profile_default.S12_governance: DAO/Stakeholder/Prozesse'
+  field: shard_profile_default.S12_governance
+  value: DAO/Stakeholder/Prozesse
+- rule_id: SOT-PART2-SEM-044
+  source: SSID_structure_level3_part2_MAX.md:1288
+  category: Registry
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'shard_profile_default.S04_registry: Registries/Indizes (nur zentral
+    erlaubt)'
+  field: shard_profile_default.S04_registry
+  value: Registries/Indizes (nur zentral erlaubt)
+- rule_id: SOT-PART2-SEM-045
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Structure
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'allowed_directories.git_infrastructure: List container'
+  field: allowed_directories.git_infrastructure
+  value: List with 3 items
+- rule_id: SOT-PART2-SEM-046
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Structure
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'allowed_directories.git_infrastructure item 0: .git'
+  field: allowed_directories.git_infrastructure[0]
+  value: .git
+- rule_id: SOT-PART2-SEM-047
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Structure
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'allowed_directories.git_infrastructure item 1: .github'
+  field: allowed_directories.git_infrastructure[1]
+  value: .github
+- rule_id: SOT-PART2-SEM-048
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Structure
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'allowed_directories.git_infrastructure item 2: .githooks'
+  field: allowed_directories.git_infrastructure[2]
+  value: .githooks
+- rule_id: SOT-PART2-SEM-049
+  source: SSID_structure_level3_part2_MAX.md:806
+  category: Structure
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'thresholds.test_coverage.tiered_requirements.security_modules: >=
+    98%'
+  field: thresholds.test_coverage.tiered_requirements.security_modules
+  value: '>= 98%'
+- rule_id: SOT-PART2-SEM-050
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.financial_services.regulations: List container'
+  field: sector_support.financial_services.regulations
+  value: List with 6 items
+- rule_id: SOT-PART2-SEM-051
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.financial_services.regulations item 0: MiCA'
+  field: sector_support.financial_services.regulations[0]
+  value: MiCA
+- rule_id: SOT-PART2-SEM-052
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.financial_services.regulations item 1: PSD2'
+  field: sector_support.financial_services.regulations[1]
+  value: PSD2
+- rule_id: SOT-PART2-SEM-053
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.financial_services.regulations item 2: Basel III'
+  field: sector_support.financial_services.regulations[2]
+  value: Basel III
+- rule_id: SOT-PART2-SEM-054
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.financial_services.regulations item 3: SOX'
+  field: sector_support.financial_services.regulations[3]
+  value: SOX
+- rule_id: SOT-PART2-SEM-055
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.financial_services.regulations item 4: FINMA'
+  field: sector_support.financial_services.regulations[4]
+  value: FINMA
+- rule_id: SOT-PART2-SEM-056
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.financial_services.regulations item 5: BaFin'
+  field: sector_support.financial_services.regulations[5]
+  value: BaFin
+- rule_id: SOT-PART2-SEM-057
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.healthcare.regulations: List container'
+  field: sector_support.healthcare.regulations
+  value: List with 5 items
+- rule_id: SOT-PART2-SEM-058
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.healthcare.regulations item 0: HIPAA'
+  field: sector_support.healthcare.regulations[0]
+  value: HIPAA
+- rule_id: SOT-PART2-SEM-059
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.healthcare.regulations item 1: GDPR'
+  field: sector_support.healthcare.regulations[1]
+  value: GDPR
+- rule_id: SOT-PART2-SEM-060
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.healthcare.regulations item 2: FDA 21 CFR Part 11'
+  field: sector_support.healthcare.regulations[2]
+  value: FDA 21 CFR Part 11
+- rule_id: SOT-PART2-SEM-061
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.healthcare.regulations item 3: ISO 13485'
+  field: sector_support.healthcare.regulations[3]
+  value: ISO 13485
+- rule_id: SOT-PART2-SEM-062
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.healthcare.regulations item 4: MDR'
+  field: sector_support.healthcare.regulations[4]
+  value: MDR
+- rule_id: SOT-PART2-SEM-063
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.government_public_sector.regulations: List container'
+  field: sector_support.government_public_sector.regulations
+  value: List with 4 items
+- rule_id: SOT-PART2-SEM-064
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.government_public_sector.regulations item 0: FedRAMP'
+  field: sector_support.government_public_sector.regulations[0]
+  value: FedRAMP
+- rule_id: SOT-PART2-SEM-065
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.government_public_sector.regulations item 1: Authority
+    to Operate'
+  field: sector_support.government_public_sector.regulations[1]
+  value: Authority to Operate
+- rule_id: SOT-PART2-SEM-066
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.government_public_sector.regulations item 2: NIST 800-53'
+  field: sector_support.government_public_sector.regulations[2]
+  value: NIST 800-53
+- rule_id: SOT-PART2-SEM-067
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.government_public_sector.regulations item 3: ISO 27001'
+  field: sector_support.government_public_sector.regulations[3]
+  value: ISO 27001
+- rule_id: SOT-PART2-SEM-068
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.education.regulations: List container'
+  field: sector_support.education.regulations
+  value: List with 4 items
+- rule_id: SOT-PART2-SEM-069
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.education.regulations item 0: FERPA'
+  field: sector_support.education.regulations[0]
+  value: FERPA
+- rule_id: SOT-PART2-SEM-070
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.education.regulations item 1: COPPA'
+  field: sector_support.education.regulations[1]
+  value: COPPA
+- rule_id: SOT-PART2-SEM-071
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.education.regulations item 2: GDPR'
+  field: sector_support.education.regulations[2]
+  value: GDPR
+- rule_id: SOT-PART2-SEM-072
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.education.regulations item 3: Accessibility Standards'
+  field: sector_support.education.regulations[3]
+  value: Accessibility Standards
+- rule_id: SOT-PART2-SEM-073
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.gaming_entertainment.regulations: List container'
+  field: sector_support.gaming_entertainment.regulations
+  value: List with 4 items
+- rule_id: SOT-PART2-SEM-074
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.gaming_entertainment.regulations item 0: ESRB'
+  field: sector_support.gaming_entertainment.regulations[0]
+  value: ESRB
+- rule_id: SOT-PART2-SEM-075
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.gaming_entertainment.regulations item 1: Age Rating'
+  field: sector_support.gaming_entertainment.regulations[1]
+  value: Age Rating
+- rule_id: SOT-PART2-SEM-076
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.gaming_entertainment.regulations item 2: Gambling Regulations'
+  field: sector_support.gaming_entertainment.regulations[2]
+  value: Gambling Regulations
+- rule_id: SOT-PART2-SEM-077
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.gaming_entertainment.regulations item 3: Consumer Protection'
+  field: sector_support.gaming_entertainment.regulations[3]
+  value: Consumer Protection
+- rule_id: SOT-PART2-SEM-078
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.iot_manufacturing.regulations: List container'
+  field: sector_support.iot_manufacturing.regulations
+  value: List with 4 items
+- rule_id: SOT-PART2-SEM-079
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.iot_manufacturing.regulations item 0: CE Marking'
+  field: sector_support.iot_manufacturing.regulations[0]
+  value: CE Marking
+- rule_id: SOT-PART2-SEM-080
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.iot_manufacturing.regulations item 1: FCC'
+  field: sector_support.iot_manufacturing.regulations[1]
+  value: FCC
+- rule_id: SOT-PART2-SEM-081
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.iot_manufacturing.regulations item 2: Cybersecurity
+    Act'
+  field: sector_support.iot_manufacturing.regulations[2]
+  value: Cybersecurity Act
+- rule_id: SOT-PART2-SEM-082
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Compliance
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.iot_manufacturing.regulations item 3: Product Safety'
+  field: sector_support.iot_manufacturing.regulations[3]
+  value: Product Safety
+- rule_id: SOT-PART2-SEM-083
+  source: SSID_structure_level3_part2_MAX.md:444
+  category: ESG/Diversity
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'social_responsibility.social_impact_metrics.contributor_diversity:
+    measure_report'
+  field: social_responsibility.social_impact_metrics.contributor_diversity
+  value: measure_report
+- rule_id: SOT-PART2-SEM-084
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Multi-Sector
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'cross_sector_features.sector_specific_templates: True'
+  field: cross_sector_features.sector_specific_templates
+  value: 'True'
+- rule_id: SOT-PART2-SEM-085
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'root_level_exceptions.description: EINMALIGE, autoritäre Liste aller
+    erlaubten Root-Level Items außerhalb der 24 Module'
+  field: root_level_exceptions.description
+  value: EINMALIGE, autoritäre Liste aller erlaubten Root-Level Items außerhalb der
+    24 Module
+- rule_id: SOT-PART2-SEM-086
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'accessibility_compliance.wcag_aaa_note: AAA compliance on selected
+    critical flows only'
+  field: accessibility_compliance.wcag_aaa_note
+  value: AAA compliance on selected critical flows only
+- rule_id: SOT-PART2-SEM-087
+  source: SSID_structure_level3_part2_MAX.md:806
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'thresholds.structure_compliance.internal_note: Höhere Standards als
+    Public-Version für interne Qualität'
+  field: thresholds.structure_compliance.internal_note
+  value: Höhere Standards als Public-Version für interne Qualität
+- rule_id: SOT-PART2-SEM-088
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'controls.circular_dependency_check.description: Enterprise-Grade Validation
+    gegen zirkuläre Referenzen'
+  field: controls.circular_dependency_check.description
+  value: Enterprise-Grade Validation gegen zirkuläre Referenzen
+- rule_id: SOT-PART2-SEM-089
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'controls.business_logic_overfitting.description: Validierung gegen
+    Business-Gaming und Metric-Optimierung'
+  field: controls.business_logic_overfitting.description
+  value: Validierung gegen Business-Gaming und Metric-Optimierung
+- rule_id: SOT-PART2-SEM-090
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'controls.enterprise_badge_validation.description: Enterprise Badge-Berechnungen
+    gegen dokumentierte Formeln'
+  field: controls.enterprise_badge_validation.description
+  value: Enterprise Badge-Berechnungen gegen dokumentierte Formeln
+- rule_id: SOT-PART2-SEM-091
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: PUBLIC - CI Guard Enforcement'
+  field: classification
+  value: PUBLIC - CI Guard Enforcement
+- rule_id: SOT-PART2-SEM-092
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'audit_requirements.review_cycle: Quarterly review of exceptions list'
+  field: audit_requirements.review_cycle
+  value: Quarterly review of exceptions list
+- rule_id: SOT-PART2-SEM-093
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL - Internal Use Only'
+  field: classification
+  value: CONFIDENTIAL - Internal Use Only
+- rule_id: SOT-PART2-SEM-094
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.internal_review_maintainers.monthly_reviewer:
+    Compliance Team Lead'
+  field: maintainer_structure.internal_review_maintainers.monthly_reviewer
+  value: Compliance Team Lead
+- rule_id: SOT-PART2-SEM-095
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.internal_review_maintainers.quarterly_reviewer:
+    Senior Compliance Officer + Legal'
+  field: maintainer_structure.internal_review_maintainers.quarterly_reviewer
+  value: Senior Compliance Officer + Legal
+- rule_id: SOT-PART2-SEM-096
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.internal_review_maintainers.semi_annual_reviewer:
+    Executive Compliance Committee'
+  field: maintainer_structure.internal_review_maintainers.semi_annual_reviewer
+  value: Executive Compliance Committee
+- rule_id: SOT-PART2-SEM-097
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.external_reviewer_pool: List container'
+  field: maintainer_structure.external_reviewer_pool
+  value: List with 3 items
+- rule_id: SOT-PART2-SEM-098
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.external_reviewer_pool item 0: Dr. Sarah Miller,
+    Compliance Consulting LLC'
+  field: maintainer_structure.external_reviewer_pool[0]
+  value: Dr. Sarah Miller, Compliance Consulting LLC
+- rule_id: SOT-PART2-SEM-099
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.external_reviewer_pool item 1: Michael Brown,
+    CPA, Audit Partners'
+  field: maintainer_structure.external_reviewer_pool[1]
+  value: Michael Brown, CPA, Audit Partners
+- rule_id: SOT-PART2-SEM-100
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.external_reviewer_pool item 2: Prof. Dr. Klaus
+    Weber, Regulatory Consulting GmbH'
+  field: maintainer_structure.external_reviewer_pool[2]
+  value: Prof. Dr. Klaus Weber, Regulatory Consulting GmbH
+- rule_id: SOT-PART2-SEM-101
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.review_coordinator: Maria Schmidt'
+  field: maintainer_structure.review_coordinator
+  value: Maria Schmidt
+- rule_id: SOT-PART2-SEM-102
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL - Enterprise Social Responsibility'
+  field: classification
+  value: CONFIDENTIAL - Enterprise Social Responsibility
+- rule_id: SOT-PART2-SEM-103
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'community_participation.accessibility_review: required'
+  field: community_participation.accessibility_review
+  value: required
+- rule_id: SOT-PART2-SEM-104
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'community_participation.diverse_reviewer_pool: True'
+  field: community_participation.diverse_reviewer_pool
+  value: 'True'
+- rule_id: SOT-PART2-SEM-105
+  source: SSID_structure_level3_part2_MAX.md:444
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL - Enterprise ESG Strategy'
+  field: classification
+  value: CONFIDENTIAL - Enterprise ESG Strategy
+- rule_id: SOT-PART2-SEM-106
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL - Enterprise Market Analysis'
+  field: classification
+  value: CONFIDENTIAL - Enterprise Market Analysis
+- rule_id: SOT-PART2-SEM-107
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.financial_services.audit_frequency: annual'
+  field: sector_support.financial_services.audit_frequency
+  value: annual
+- rule_id: SOT-PART2-SEM-108
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.healthcare.audit_frequency: biannual'
+  field: sector_support.healthcare.audit_frequency
+  value: biannual
+- rule_id: SOT-PART2-SEM-109
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.government_public_sector.audit_frequency: annual'
+  field: sector_support.government_public_sector.audit_frequency
+  value: annual
+- rule_id: SOT-PART2-SEM-110
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.education.audit_frequency: annual'
+  field: sector_support.education.audit_frequency
+  value: annual
+- rule_id: SOT-PART2-SEM-111
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.gaming_entertainment.audit_frequency: annual'
+  field: sector_support.gaming_entertainment.audit_frequency
+  value: annual
+- rule_id: SOT-PART2-SEM-112
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'sector_support.iot_manufacturing.audit_frequency: per_product'
+  field: sector_support.iot_manufacturing.audit_frequency
+  value: per_product
+- rule_id: SOT-PART2-SEM-113
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'cross_sector_features.audit_preparation: 23_compliance/sector_audits/'
+  field: cross_sector_features.audit_preparation
+  value: 23_compliance/sector_audits/
+- rule_id: SOT-PART2-SEM-114
+  source: SSID_structure_level3_part2_MAX.md:806
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL - Internal Standards'
+  field: classification
+  value: CONFIDENTIAL - Internal Standards
+- rule_id: SOT-PART2-SEM-115
+  source: SSID_structure_level3_part2_MAX.md:806
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'last_review: 2025-09-15'
+  field: last_review
+  value: '2025-09-15'
+- rule_id: SOT-PART2-SEM-116
+  source: SSID_structure_level3_part2_MAX.md:806
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'next_review: 2026-03-15'
+  field: next_review
+  value: '2026-03-15'
+- rule_id: SOT-PART2-SEM-117
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL - Enterprise Controls'
+  field: classification
+  value: CONFIDENTIAL - Enterprise Controls
+- rule_id: SOT-PART2-SEM-118
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'controls.business_logic_overfitting.reviewer_required: True'
+  field: controls.business_logic_overfitting.reviewer_required
+  value: 'True'
+- rule_id: SOT-PART2-SEM-119
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'controls.business_logic_overfitting.internal_audit: Quarterly by compliance
+    team'
+  field: controls.business_logic_overfitting.internal_audit
+  value: Quarterly by compliance team
+- rule_id: SOT-PART2-SEM-120
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'controls.enterprise_badge_validation.business_review: Quarterly threshold
+    review'
+  field: controls.enterprise_badge_validation.business_review
+  value: Quarterly threshold review
+- rule_id: SOT-PART2-SEM-121
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'dependency_graph_generation.classification: CONFIDENTIAL'
+  field: dependency_graph_generation.classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART2-SEM-122
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.last_review: 2025-09-15'
+  field: external_review_cycle.last_review
+  value: '2025-09-15'
+- rule_id: SOT-PART2-SEM-123
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.next_review: 2026-03-15'
+  field: external_review_cycle.next_review
+  value: '2026-03-15'
+- rule_id: SOT-PART2-SEM-124
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.internal_review: Every 3 months (zusätzlich)'
+  field: external_review_cycle.internal_review
+  value: Every 3 months (zusätzlich)
+- rule_id: SOT-PART2-SEM-125
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.reviewer_requirements: List container'
+  field: external_review_cycle.reviewer_requirements
+  value: List with 5 items
+- rule_id: SOT-PART2-SEM-126
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.reviewer_requirements item 0: External: Independent
+    third party (nicht Projekt-Maintainer)'
+  field: external_review_cycle.reviewer_requirements[0]
+  value: 'External: Independent third party (nicht Projekt-Maintainer)'
+- rule_id: SOT-PART2-SEM-127
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.reviewer_requirements item 1: Internal: Senior
+    Compliance Officer + Legal Review'
+  field: external_review_cycle.reviewer_requirements[1]
+  value: 'Internal: Senior Compliance Officer + Legal Review'
+- rule_id: SOT-PART2-SEM-128
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.reviewer_requirements item 2: Credentials: Compliance/Audit
+    background erforderlich'
+  field: external_review_cycle.reviewer_requirements[2]
+  value: 'Credentials: Compliance/Audit background erforderlich'
+- rule_id: SOT-PART2-SEM-129
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.reviewer_requirements item 3: Clearance: Access
+    to confidential compliance mappings'
+  field: external_review_cycle.reviewer_requirements[3]
+  value: 'Clearance: Access to confidential compliance mappings'
+- rule_id: SOT-PART2-SEM-130
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.reviewer_requirements item 4: Documentation:
+    23_compliance/reviews/ + internal audit trail'
+  field: external_review_cycle.reviewer_requirements[4]
+  value: 'Documentation: 23_compliance/reviews/ + internal audit trail'
+- rule_id: SOT-PART2-SEM-131
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.review_scope: List container'
+  field: external_review_cycle.review_scope
+  value: List with 8 items
+- rule_id: SOT-PART2-SEM-132
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.review_scope item 0: Badge calculation logic
+    verification'
+  field: external_review_cycle.review_scope[0]
+  value: Badge calculation logic verification
+- rule_id: SOT-PART2-SEM-133
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.review_scope item 1: Circular dependency analysis'
+  field: external_review_cycle.review_scope[1]
+  value: Circular dependency analysis
+- rule_id: SOT-PART2-SEM-134
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.review_scope item 2: Business compliance matrix
+    accuracy check'
+  field: external_review_cycle.review_scope[2]
+  value: Business compliance matrix accuracy check
+- rule_id: SOT-PART2-SEM-135
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.review_scope item 3: Anti-gaming control effectiveness'
+  field: external_review_cycle.review_scope[3]
+  value: Anti-gaming control effectiveness
+- rule_id: SOT-PART2-SEM-136
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.review_scope item 4: Internal audit trail validation'
+  field: external_review_cycle.review_scope[4]
+  value: Internal audit trail validation
+- rule_id: SOT-PART2-SEM-137
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.review_scope item 5: Regulatory mapping completeness'
+  field: external_review_cycle.review_scope[5]
+  value: Regulatory mapping completeness
+- rule_id: SOT-PART2-SEM-138
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.review_scope item 6: Dependency graph validation
+    (confidential)'
+  field: external_review_cycle.review_scope[6]
+  value: Dependency graph validation (confidential)
+- rule_id: SOT-PART2-SEM-139
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Review/Audit
+  severity: LOW
+  enforcement: SHOULD
+  description: 'external_review_cycle.review_scope item 7: Business logic gaming assessment'
+  field: external_review_cycle.review_scope[7]
+  value: Business logic gaming assessment
+- rule_id: SOT-PART2-SEM-140
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: ESG/Diversity
+  severity: LOW
+  enforcement: SHOULD
+  description: 'unbanked_community_support.enterprise_financial_inclusion: market_expansion_strategy'
+  field: unbanked_community_support.enterprise_financial_inclusion
+  value: market_expansion_strategy
+- rule_id: SOT-PART2-SEM-141
+  source: SSID_structure_level3_part2_MAX.md:444
+  category: ESG/Diversity
+  severity: LOW
+  enforcement: SHOULD
+  description: 'social_responsibility.social_impact_metrics.inclusion_index: track'
+  field: social_responsibility.social_impact_metrics.inclusion_index
+  value: track
+- rule_id: SOT-PART2-SEM-142
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART2-SEM-143
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART2-SEM-144
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART2-SEM-145
+  source: SSID_structure_level3_part2_MAX.md:444
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART2-SEM-146
+  source: SSID_structure_level3_part2_MAX.md:511
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART2-SEM-147
+  source: SSID_structure_level3_part2_MAX.md:806
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.1'
+  field: version
+  value: '1.1'
+- rule_id: SOT-PART2-SEM-148
+  source: SSID_structure_level3_part2_MAX.md:864
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART2-SEM-149
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'root_level_exceptions.modification_policy: Nur durch Compliance Committee
+    + Technical Lead Approval'
+  field: root_level_exceptions.modification_policy
+  value: Nur durch Compliance Committee + Technical Lead Approval
+- rule_id: SOT-PART2-SEM-150
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_directories.development_environment: List container'
+  field: allowed_directories.development_environment
+  value: List with 2 items
+- rule_id: SOT-PART2-SEM-151
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_directories.development_environment item 0: .venv'
+  field: allowed_directories.development_environment[0]
+  value: .venv
+- rule_id: SOT-PART2-SEM-152
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_directories.development_environment item 1: .continue'
+  field: allowed_directories.development_environment[1]
+  value: .continue
+- rule_id: SOT-PART2-SEM-153
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_directories.testing_artifacts: List container'
+  field: allowed_directories.testing_artifacts
+  value: List with 1 items
+- rule_id: SOT-PART2-SEM-154
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_directories.testing_artifacts item 0: .pytest_cache'
+  field: allowed_directories.testing_artifacts[0]
+  value: .pytest_cache
+- rule_id: SOT-PART2-SEM-155
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_directories.excluded_directories: List container'
+  field: allowed_directories.excluded_directories
+  value: List with 0 items
+- rule_id: SOT-PART2-SEM-156
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.version_control: List container'
+  field: allowed_files.version_control
+  value: List with 3 items
+- rule_id: SOT-PART2-SEM-157
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.version_control item 0: .gitattributes'
+  field: allowed_files.version_control[0]
+  value: .gitattributes
+- rule_id: SOT-PART2-SEM-158
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.version_control item 1: .gitignore'
+  field: allowed_files.version_control[1]
+  value: .gitignore
+- rule_id: SOT-PART2-SEM-159
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.version_control item 2: .gitmodules'
+  field: allowed_files.version_control[2]
+  value: .gitmodules
+- rule_id: SOT-PART2-SEM-160
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.project_metadata: List container'
+  field: allowed_files.project_metadata
+  value: List with 2 items
+- rule_id: SOT-PART2-SEM-161
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.project_metadata item 0: LICENSE'
+  field: allowed_files.project_metadata[0]
+  value: LICENSE
+- rule_id: SOT-PART2-SEM-162
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.project_metadata item 1: README.md'
+  field: allowed_files.project_metadata[1]
+  value: README.md
+- rule_id: SOT-PART2-SEM-163
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.testing_configuration: List container'
+  field: allowed_files.testing_configuration
+  value: List with 1 items
+- rule_id: SOT-PART2-SEM-164
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.testing_configuration item 0: pytest.ini'
+  field: allowed_files.testing_configuration[0]
+  value: pytest.ini
+- rule_id: SOT-PART2-SEM-165
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'allowed_files.excluded_files: List container'
+  field: allowed_files.excluded_files
+  value: List with 0 items
+- rule_id: SOT-PART2-SEM-166
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_enforcement.ci_script: 12_tooling/scripts/structure_guard.sh'
+  field: guard_enforcement.ci_script
+  value: 12_tooling/scripts/structure_guard.sh
+- rule_id: SOT-PART2-SEM-167
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_enforcement.bypass_mechanism: NONE - No override capability'
+  field: guard_enforcement.bypass_mechanism
+  value: NONE - No override capability
+- rule_id: SOT-PART2-SEM-168
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_enforcement.violation_handling.immediate_failure: True'
+  field: guard_enforcement.violation_handling.immediate_failure
+  value: 'True'
+- rule_id: SOT-PART2-SEM-169
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_enforcement.violation_handling.exit_code: 24'
+  field: guard_enforcement.violation_handling.exit_code
+  value: '24'
+- rule_id: SOT-PART2-SEM-170
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_enforcement.violation_handling.quarantine_trigger: True'
+  field: guard_enforcement.violation_handling.quarantine_trigger
+  value: 'True'
+- rule_id: SOT-PART2-SEM-171
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_enforcement.violation_handling.escalation: Compliance Committee
+    notification'
+  field: guard_enforcement.violation_handling.escalation
+  value: Compliance Committee notification
+- rule_id: SOT-PART2-SEM-172
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_algorithm.step_1: Scan root directory for all items'
+  field: guard_algorithm.step_1
+  value: Scan root directory for all items
+- rule_id: SOT-PART2-SEM-173
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_algorithm.step_2: Compare against allowed_directories + allowed_files'
+  field: guard_algorithm.step_2
+  value: Compare against allowed_directories + allowed_files
+- rule_id: SOT-PART2-SEM-174
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_algorithm.step_3: Verify 24 module directories present'
+  field: guard_algorithm.step_3
+  value: Verify 24 module directories present
+- rule_id: SOT-PART2-SEM-175
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_algorithm.step_4: FAIL if any unlisted item found'
+  field: guard_algorithm.step_4
+  value: FAIL if any unlisted item found
+- rule_id: SOT-PART2-SEM-176
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'guard_algorithm.step_5: Generate violation report for quarantine system'
+  field: guard_algorithm.step_5
+  value: Generate violation report for quarantine system
+- rule_id: SOT-PART2-SEM-177
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.approval_required: List container'
+  field: modification_process.approval_required
+  value: List with 3 items
+- rule_id: SOT-PART2-SEM-178
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.approval_required item 0: Senior Compliance Officer'
+  field: modification_process.approval_required[0]
+  value: Senior Compliance Officer
+- rule_id: SOT-PART2-SEM-179
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.approval_required item 1: Technical Lead'
+  field: modification_process.approval_required[1]
+  value: Technical Lead
+- rule_id: SOT-PART2-SEM-180
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.approval_required item 2: Legal Review (for licensing
+    implications)'
+  field: modification_process.approval_required[2]
+  value: Legal Review (for licensing implications)
+- rule_id: SOT-PART2-SEM-181
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.documentation_required: List container'
+  field: modification_process.documentation_required
+  value: List with 4 items
+- rule_id: SOT-PART2-SEM-182
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.documentation_required item 0: Business justification'
+  field: modification_process.documentation_required[0]
+  value: Business justification
+- rule_id: SOT-PART2-SEM-183
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.documentation_required item 1: Security impact
+    assessment'
+  field: modification_process.documentation_required[1]
+  value: Security impact assessment
+- rule_id: SOT-PART2-SEM-184
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.documentation_required item 2: CI/CD impact analysis'
+  field: modification_process.documentation_required[2]
+  value: CI/CD impact analysis
+- rule_id: SOT-PART2-SEM-185
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.documentation_required item 3: Audit trail documentation'
+  field: modification_process.documentation_required[3]
+  value: Audit trail documentation
+- rule_id: SOT-PART2-SEM-186
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.change_procedure.step_1: RFC (Request for Change)
+    submission'
+  field: modification_process.change_procedure.step_1
+  value: RFC (Request for Change) submission
+- rule_id: SOT-PART2-SEM-187
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.change_procedure.step_2: Multi-stakeholder review
+    (5 business days)'
+  field: modification_process.change_procedure.step_2
+  value: Multi-stakeholder review (5 business days)
+- rule_id: SOT-PART2-SEM-188
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.change_procedure.step_3: Approval/rejection decision'
+  field: modification_process.change_procedure.step_3
+  value: Approval/rejection decision
+- rule_id: SOT-PART2-SEM-189
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.change_procedure.step_4: If approved: Update
+    YAML + CI tests'
+  field: modification_process.change_procedure.step_4
+  value: 'If approved: Update YAML + CI tests'
+- rule_id: SOT-PART2-SEM-190
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'modification_process.change_procedure.step_5: Evidence logging in
+    audit trail'
+  field: modification_process.change_procedure.step_5
+  value: Evidence logging in audit trail
+- rule_id: SOT-PART2-SEM-191
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'anti_gaming_measures.no_wildcards: No wildcard patterns allowed'
+  field: anti_gaming_measures.no_wildcards
+  value: No wildcard patterns allowed
+- rule_id: SOT-PART2-SEM-192
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'anti_gaming_measures.no_regex: No regex patterns allowed'
+  field: anti_gaming_measures.no_regex
+  value: No regex patterns allowed
+- rule_id: SOT-PART2-SEM-193
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'anti_gaming_measures.explicit_enumeration: Every allowed item must
+    be explicitly listed'
+  field: anti_gaming_measures.explicit_enumeration
+  value: Every allowed item must be explicitly listed
+- rule_id: SOT-PART2-SEM-194
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'anti_gaming_measures.case_sensitive: Exact case matching required'
+  field: anti_gaming_measures.case_sensitive
+  value: Exact case matching required
+- rule_id: SOT-PART2-SEM-195
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'anti_gaming_measures.no_symlinks: Symbolic links not allowed'
+  field: anti_gaming_measures.no_symlinks
+  value: Symbolic links not allowed
+- rule_id: SOT-PART2-SEM-196
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'anti_gaming_measures.no_hidden_directories: Only explicitly listed
+    hidden directories allowed'
+  field: anti_gaming_measures.no_hidden_directories
+  value: Only explicitly listed hidden directories allowed
+- rule_id: SOT-PART2-SEM-197
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'integration_points.ci_gates: 24_meta_orchestration/triggers/ci/gates/structure_lock_l3.py'
+  field: integration_points.ci_gates
+  value: 24_meta_orchestration/triggers/ci/gates/structure_lock_l3.py
+- rule_id: SOT-PART2-SEM-198
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'integration_points.quarantine_system: 02_audit_logging/quarantine/singleton/quarantine_store/'
+  field: integration_points.quarantine_system
+  value: 02_audit_logging/quarantine/singleton/quarantine_store/
+- rule_id: SOT-PART2-SEM-199
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'audit_requirements.change_log: All modifications logged in 02_audit_logging/storage/worm/immutable_store/'
+  field: audit_requirements.change_log
+  value: All modifications logged in 02_audit_logging/storage/worm/immutable_store/
+- rule_id: SOT-PART2-SEM-200
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'audit_requirements.justification_retention: 7 years minimum'
+  field: audit_requirements.justification_retention
+  value: 7 years minimum
+- rule_id: SOT-PART2-SEM-201
+  source: SSID_structure_level3_part2_MAX.md:27
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'audit_requirements.approval_trail: Immutable approval documentation
+    required'
+  field: audit_requirements.approval_trail
+  value: Immutable approval documentation required
+- rule_id: SOT-PART2-SEM-202
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers: List container'
+  field: maintainer_structure.primary_maintainers
+  value: List with 2 items
+- rule_id: SOT-PART2-SEM-203
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[0].name: Hans Müller'
+  field: maintainer_structure.primary_maintainers[0].name
+  value: Hans Müller
+- rule_id: SOT-PART2-SEM-204
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[0].role: Lead Compliance
+    Officer'
+  field: maintainer_structure.primary_maintainers[0].role
+  value: Lead Compliance Officer
+- rule_id: SOT-PART2-SEM-205
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[0].email: hans.mueller@ssid.company'
+  field: maintainer_structure.primary_maintainers[0].email
+  value: hans.mueller@ssid.company
+- rule_id: SOT-PART2-SEM-206
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[0].backup: Maria Schmidt'
+  field: maintainer_structure.primary_maintainers[0].backup
+  value: Maria Schmidt
+- rule_id: SOT-PART2-SEM-207
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[0].areas: List container'
+  field: maintainer_structure.primary_maintainers[0].areas
+  value: List with 3 items
+- rule_id: SOT-PART2-SEM-208
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[0].areas item 0: compliance_matrices'
+  field: maintainer_structure.primary_maintainers[0].areas[0]
+  value: compliance_matrices
+- rule_id: SOT-PART2-SEM-209
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[0].areas item 1: regulatory_updates'
+  field: maintainer_structure.primary_maintainers[0].areas[1]
+  value: regulatory_updates
+- rule_id: SOT-PART2-SEM-210
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[0].areas item 2: eu_mappings'
+  field: maintainer_structure.primary_maintainers[0].areas[2]
+  value: eu_mappings
+- rule_id: SOT-PART2-SEM-211
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[0].clearance_level: CONFIDENTIAL'
+  field: maintainer_structure.primary_maintainers[0].clearance_level
+  value: CONFIDENTIAL
+- rule_id: SOT-PART2-SEM-212
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[1].name: Anna Weber'
+  field: maintainer_structure.primary_maintainers[1].name
+  value: Anna Weber
+- rule_id: SOT-PART2-SEM-213
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[1].role: Technical Lead'
+  field: maintainer_structure.primary_maintainers[1].role
+  value: Technical Lead
+- rule_id: SOT-PART2-SEM-214
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[1].email: anna.weber@ssid.company'
+  field: maintainer_structure.primary_maintainers[1].email
+  value: anna.weber@ssid.company
+- rule_id: SOT-PART2-SEM-215
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[1].backup: Thomas Klein'
+  field: maintainer_structure.primary_maintainers[1].backup
+  value: Thomas Klein
+- rule_id: SOT-PART2-SEM-216
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[1].areas: List container'
+  field: maintainer_structure.primary_maintainers[1].areas
+  value: List with 3 items
+- rule_id: SOT-PART2-SEM-217
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[1].areas item 0: badge_logic'
+  field: maintainer_structure.primary_maintainers[1].areas[0]
+  value: badge_logic
+- rule_id: SOT-PART2-SEM-218
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[1].areas item 1: anti_gaming_controls'
+  field: maintainer_structure.primary_maintainers[1].areas[1]
+  value: anti_gaming_controls
+- rule_id: SOT-PART2-SEM-219
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[1].areas item 2: internal_audits'
+  field: maintainer_structure.primary_maintainers[1].areas[2]
+  value: internal_audits
+- rule_id: SOT-PART2-SEM-220
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.primary_maintainers[1].clearance_level: CONFIDENTIAL'
+  field: maintainer_structure.primary_maintainers[1].clearance_level
+  value: CONFIDENTIAL
+- rule_id: SOT-PART2-SEM-221
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.backup_escalation.level_1: Security Team Lead'
+  field: maintainer_structure.backup_escalation.level_1
+  value: Security Team Lead
+- rule_id: SOT-PART2-SEM-222
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.backup_escalation.level_2: CTO'
+  field: maintainer_structure.backup_escalation.level_2
+  value: CTO
+- rule_id: SOT-PART2-SEM-223
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.backup_escalation.level_3: CEO'
+  field: maintainer_structure.backup_escalation.level_3
+  value: CEO
+- rule_id: SOT-PART2-SEM-224
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.backup_escalation.level_4: Board Compliance Committee'
+  field: maintainer_structure.backup_escalation.level_4
+  value: Board Compliance Committee
+- rule_id: SOT-PART2-SEM-225
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.backup_escalation.emergency_contact: legal@ssid.company'
+  field: maintainer_structure.backup_escalation.emergency_contact
+  value: legal@ssid.company
+- rule_id: SOT-PART2-SEM-226
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.backup_escalation.external_counsel: compliance-emergency@lawfirm.com'
+  field: maintainer_structure.backup_escalation.external_counsel
+  value: compliance-emergency@lawfirm.com
+- rule_id: SOT-PART2-SEM-227
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.backup_coordinator: Thomas Klein'
+  field: maintainer_structure.backup_coordinator
+  value: Thomas Klein
+- rule_id: SOT-PART2-SEM-228
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.vacation_coverage.minimum_coverage: 2'
+  field: maintainer_structure.vacation_coverage.minimum_coverage
+  value: '2'
+- rule_id: SOT-PART2-SEM-229
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.vacation_coverage.notification_period: 2 weeks'
+  field: maintainer_structure.vacation_coverage.notification_period
+  value: 2 weeks
+- rule_id: SOT-PART2-SEM-230
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.vacation_coverage.handover_required: True'
+  field: maintainer_structure.vacation_coverage.handover_required
+  value: 'True'
+- rule_id: SOT-PART2-SEM-231
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.vacation_coverage.documentation: 23_compliance/governance/handover_template.md'
+  field: maintainer_structure.vacation_coverage.documentation
+  value: 23_compliance/governance/handover_template.md
+- rule_id: SOT-PART2-SEM-232
+  source: SSID_structure_level3_part2_MAX.md:249
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'maintainer_structure.vacation_coverage.business_continuity: Critical
+    for regulatory deadlines'
+  field: maintainer_structure.vacation_coverage.business_continuity
+  value: Critical for regulatory deadlines
+- rule_id: SOT-PART2-SEM-233
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage: List container'
+  field: international_standards.geographic_coverage
+  value: List with 5 items
+- rule_id: SOT-PART2-SEM-234
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[0].region: European Union'
+  field: international_standards.geographic_coverage[0].region
+  value: European Union
+- rule_id: SOT-PART2-SEM-235
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[0].standards: List container'
+  field: international_standards.geographic_coverage[0].standards
+  value: List with 5 items
+- rule_id: SOT-PART2-SEM-236
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[0].standards item 0: GDPR'
+  field: international_standards.geographic_coverage[0].standards[0]
+  value: GDPR
+- rule_id: SOT-PART2-SEM-237
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[0].standards item 1: AI
+    Act'
+  field: international_standards.geographic_coverage[0].standards[1]
+  value: AI Act
+- rule_id: SOT-PART2-SEM-238
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[0].standards item 2: eIDAS
+    2.0'
+  field: international_standards.geographic_coverage[0].standards[2]
+  value: eIDAS 2.0
+- rule_id: SOT-PART2-SEM-239
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[0].standards item 3: MiCA'
+  field: international_standards.geographic_coverage[0].standards[3]
+  value: MiCA
+- rule_id: SOT-PART2-SEM-240
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[0].standards item 4: DORA'
+  field: international_standards.geographic_coverage[0].standards[4]
+  value: DORA
+- rule_id: SOT-PART2-SEM-241
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[0].localization: 23_compliance/regional/eu/'
+  field: international_standards.geographic_coverage[0].localization
+  value: 23_compliance/regional/eu/
+- rule_id: SOT-PART2-SEM-242
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[0].business_priority:
+    CRITICAL'
+  field: international_standards.geographic_coverage[0].business_priority
+  value: CRITICAL
+- rule_id: SOT-PART2-SEM-243
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[1].region: United States'
+  field: international_standards.geographic_coverage[1].region
+  value: United States
+- rule_id: SOT-PART2-SEM-244
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[1].standards: List container'
+  field: international_standards.geographic_coverage[1].standards
+  value: List with 4 items
+- rule_id: SOT-PART2-SEM-245
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[1].standards item 0: SOC2'
+  field: international_standards.geographic_coverage[1].standards[0]
+  value: SOC2
+- rule_id: SOT-PART2-SEM-246
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[1].standards item 1: CCPA'
+  field: international_standards.geographic_coverage[1].standards[1]
+  value: CCPA
+- rule_id: SOT-PART2-SEM-247
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[1].standards item 2: FTC
+    Guidelines'
+  field: international_standards.geographic_coverage[1].standards[2]
+  value: FTC Guidelines
+- rule_id: SOT-PART2-SEM-248
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[1].standards item 3: SEC
+    Regulations'
+  field: international_standards.geographic_coverage[1].standards[3]
+  value: SEC Regulations
+- rule_id: SOT-PART2-SEM-249
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[1].localization: 23_compliance/regional/us/'
+  field: international_standards.geographic_coverage[1].localization
+  value: 23_compliance/regional/us/
+- rule_id: SOT-PART2-SEM-250
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[1].business_priority:
+    HIGH'
+  field: international_standards.geographic_coverage[1].business_priority
+  value: HIGH
+- rule_id: SOT-PART2-SEM-251
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[2].region: Asia Pacific'
+  field: international_standards.geographic_coverage[2].region
+  value: Asia Pacific
+- rule_id: SOT-PART2-SEM-252
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[2].standards: List container'
+  field: international_standards.geographic_coverage[2].standards
+  value: List with 4 items
+- rule_id: SOT-PART2-SEM-253
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[2].standards item 0: Singapore
+    MAS'
+  field: international_standards.geographic_coverage[2].standards[0]
+  value: Singapore MAS
+- rule_id: SOT-PART2-SEM-254
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[2].standards item 1: Japan
+    JVCEA'
+  field: international_standards.geographic_coverage[2].standards[1]
+  value: Japan JVCEA
+- rule_id: SOT-PART2-SEM-255
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[2].standards item 2: Hong
+    Kong SFC'
+  field: international_standards.geographic_coverage[2].standards[2]
+  value: Hong Kong SFC
+- rule_id: SOT-PART2-SEM-256
+  source: SSID_structure_level3_part2_MAX.md:339
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'international_standards.geographic_coverage[2].standards item 3: Australia
+    ASIC'
+  field: international_standards.geographic_coverage[2].standards[3]
+  value: Australia ASIC

@@ -1,0 +1,70 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: infra
+  version: "0.1.0"
+  description: "Infrastructure services including databases, caching, messaging, and storage"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - database_management
+    - caching_layer
+    - message_queuing
+    - object_storage
+    - cdn_services
+    - backup_recovery
+
+  interfaces:
+    - name: database_cluster
+      type: postgresql
+      authentication: password
+      encryption: tls
+
+    - name: cache_cluster
+      type: redis
+      authentication: password
+
+    - name: message_broker
+      type: kafka
+      authentication: sasl
+
+  policies:
+    - name: encryption_at_rest
+      enforcement: automated
+      scope: all_storage
+
+    - name: encryption_in_transit
+      enforcement: automated
+      scope: all_connections
+
+    - name: backup_retention
+      enforcement: automated
+      scope: all_data
+      duration_days: 90
+
+  dependencies:
+    internal:
+      - 04_deployment  # Infrastructure deployment
+      - 02_audit_logging  # Infra logging
+    external:
+      - postgresql: ">=14"
+      - redis: ">=7.0"
+      - kafka: ">=3.5"
+      - minio: ">=2023"
+
+  governance:
+    maintainer: "Infrastructure Team"
+    reviewers:
+      - sre_team
+      - security_team
+    approval_required: true
+    data_classification: confidential
+
+  compliance:
+    dora:
+      - article_9  # Protection and prevention
+    iso_27001:
+      - control_a12_3_1  # Backup
+      - control_a18_1_3  # Protection of records

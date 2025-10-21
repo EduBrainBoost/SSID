@@ -155,7 +155,7 @@ def validate_findings(d: Dict[str,Any], penalties: List[str]):
     # Escalation muss CRITICAL abdecken
     if d.get("meta",{}).get("requires_escalation_for_critical", True) and not has_critical:
         # kein Fehler, nur Hinweis – CRITICAL kann 0 sein
-        raise NotImplementedError("TODO: Implement this block")
+        pass  # No CRITICAL findings is acceptable
 
 def write_jsonl(entry: Dict[str,Any]):
     R_LOGS.mkdir(parents=True, exist_ok=True)

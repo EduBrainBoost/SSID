@@ -1,0 +1,367 @@
+# ====================================================================================
+# SoT MASTER DEFINITION - ULTRA-GRANULAR CONSOLIDATED v1.0
+# ====================================================================================
+# Konsolidierte Master-Definition aller SoT-Regeln
+# Datum: 2025-10-18
+# Extraktionsmethode: ULTRA-GRANULAR (jedes YAML-Feld = separate Regel)
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# Total Rules: 249
+# ====================================================================================
+
+metadata:
+  consolidation_version: "1.0"
+  consolidation_date: "2025-10-18"
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_ultra_granular_field_by_field"
+  total_rules: 249
+  zero_tolerance_policy: true
+  audit_ready: true
+  sha256_ready: true
+
+  source_extractions:
+    - file: "SoT_Part1_Lines_001-026_ULTRA_GRANULAR_FINAL.yaml"
+      rules: 4
+      range: "SOT-UG-001 to SOT-UG-004"
+      line_range: "1-26"
+      section: "Grundprinzipien"
+
+    - file: "SoT_Part1_Lines_027-101_ULTRA_GRANULAR_FINAL.yaml"
+      rules: 61
+      range: "SOT-UG-005 to SOT-UG-065"
+      line_range: "27-101"
+      section: "Token Architecture & Legal Safe Harbor"
+
+    - file: "SoT_Part1_Lines_103-143_ULTRA_GRANULAR_FINAL.yaml"
+      rules: 34
+      range: "SOT-UG-066 to SOT-UG-099"
+      line_range: "103-143"
+      section: "Token Utility Framework"
+
+    - file: "SoT_Part1_Lines_145-251_ULTRA_GRANULAR_FINAL.yaml"
+      rules: 100
+      range: "SOT-UG-100 to SOT-UG-199"
+      line_range: "145-251"
+      section: "Token Economics & Distribution"
+
+    - file: "SoT_MasterDefinition_Part1_Lines_253-309_ULTRA_GRANULAR.yaml"
+      rules: 50
+      range: "SOT-MD-200 to SOT-MD-249"
+      line_range: "253-309"
+      section: "Language Strategy"
+
+  integration_targets:
+    - "16_codex/contracts/sot/sot_contract.yaml"
+    - "03_core/validators/sot/sot_validator_core.py"
+    - "23_compliance/policies/sot/sot_policy.rego"
+    - "12_tooling/cli/sot_validator.py"
+    - "11_test_simulation/tests_compliance/test_sot_validator.py"
+
+# ====================================================================================
+# CONSOLIDATED RULES INDEX
+# ====================================================================================
+
+rules_index:
+
+  # Lines 1-26: Grundprinzipien (4 rules)
+  grundprinzipien:
+    line_range: "1-26"
+    total_rules: 4
+    source_file: "SoT_Part1_Lines_001-026_ULTRA_GRANULAR_FINAL.yaml"
+    rule_ids: ["SOT-UG-001", "SOT-UG-002", "SOT-UG-003", "SOT-UG-004"]
+    critical_count: 3
+
+  # Lines 27-101: Token Architecture & Legal Safe Harbor (61 rules)
+  token_architecture:
+    line_range: "27-101"
+    total_rules: 61
+    source_file: "SoT_Part1_Lines_027-101_ULTRA_GRANULAR_FINAL.yaml"
+    rule_range: "SOT-UG-005 to SOT-UG-065"
+    critical_count: 7
+    critical_note: "Legal Safe Harbor - All security/e-money/stablecoin flags MUST be false"
+
+  # Lines 103-143: Token Utility Framework (34 rules)
+  token_utility:
+    line_range: "103-143"
+    total_rules: 34
+    source_file: "SoT_Part1_Lines_103-143_ULTRA_GRANULAR_FINAL.yaml"
+    rule_range: "SOT-UG-066 to SOT-UG-099"
+    critical_count: 4
+    critical_note: "Burn mechanisms and staking rewards validation"
+
+  # Lines 145-251: Token Economics & Distribution (100 rules)
+  token_economics:
+    line_range: "145-251"
+    total_rules: 100
+    source_file: "SoT_Part1_Lines_145-251_ULTRA_GRANULAR_FINAL.yaml"
+    rule_range: "SOT-UG-100 to SOT-UG-199"
+    critical_count: 17
+    critical_note: "Fixed supply, 3% fee invariance, DAO-only governance"
+
+  # Lines 253-309: Language Strategy (50 rules)
+  language_strategy:
+    line_range: "253-309"
+    total_rules: 50
+    source_file: "SoT_MasterDefinition_Part1_Lines_253-309_ULTRA_GRANULAR.yaml"
+    rule_range: "SOT-MD-200 to SOT-MD-249"
+    critical_count: 2
+    critical_note: "English version is binding Source of Truth"
+
+# ====================================================================================
+# SUMMARY STATISTICS
+# ====================================================================================
+
+summary:
+  total_rules: 249
+  total_critical_rules: 33
+  critical_percentage: "13.3%"
+
+  by_section:
+    grundprinzipien:
+      rules: 4
+      critical: 3
+      percentage: "1.6%"
+
+    token_architecture:
+      rules: 61
+      critical: 7
+      percentage: "24.5%"
+
+    token_utility:
+      rules: 34
+      critical: 4
+      percentage: "13.7%"
+
+    token_economics:
+      rules: 100
+      critical: 17
+      percentage: "40.2%"
+
+    language_strategy:
+      rules: 50
+      critical: 2
+      percentage: "20.1%"
+
+  evidence_schema_types:
+    - yaml_field_exact
+    - yaml_field_existence
+    - yaml_field_contains
+    - yaml_array_exact_match
+    - yaml_array_contains
+    - yaml_section_existence
+    - yaml_section_completeness
+    - yaml_section_sum_validation
+    - yaml_file_completeness
+    - file_existence_enforcement
+    - file_location_enforcement
+    - cross_file_field_match
+    - cross_file_reference_validation
+    - singleton_file_enforcement
+    - directory_existence_check
+
+  priority_distribution:
+    must: 249
+    should: 0
+    could: 0
+
+  category_distribution:
+    root_structure: 4
+    token_framework: 61
+    token_utility: 34
+    token_economics: 100
+    language_policy: 50
+
+# ====================================================================================
+# CRITICAL RULES SUMMARY
+# ====================================================================================
+
+critical_rules:
+  total: 33
+
+  root_structure:
+    - SOT-UG-001: "Verbindliche Root-Module (24) - MUST match v4.1 list exactly"
+    - SOT-UG-002: "Root-Level Exceptions - MUST use canonical file"
+    - SOT-UG-004: "structure_exceptions.yaml MUST be singleton"
+
+  legal_safe_harbor:
+    - SOT-UG-026: "security_token = false (NOT a security)"
+    - SOT-UG-027: "e_money_token = false (NOT e-money)"
+    - SOT-UG-028: "stablecoin = false (NOT a stablecoin)"
+    - SOT-UG-029: "promises_profit = false (NO profit promises)"
+    - SOT-UG-030: "investment_expectation = false (NOT an investment)"
+    - SOT-UG-031: "common_enterprise = false (NO common enterprise)"
+    - SOT-UG-032: "solely_from_efforts_of_others = false (NO passive income)"
+
+  token_utility:
+    - SOT-UG-074: "Burns ONLY from treasury portion of 3% fee"
+    - SOT-UG-075: "NO manual/admin burns allowed"
+    - SOT-UG-086: "Staking rewards = fee discounts (NOT yield)"
+    - SOT-UG-099: "utility_definitions.yaml MUST exist at canonical path"
+
+  token_economics:
+    - SOT-UG-104: "total_supply = 1,000,000,000 SSID (FIXED)"
+    - SOT-UG-111: "Distribution MUST sum to 100%"
+    - SOT-UG-116: "max_annual_inflation = 0% (NO inflation)"
+    - SOT-UG-119: "Reserve governance = DAO-controlled ONLY"
+    - SOT-UG-123: "Fee scope = identity_verification_payments_only"
+    - SOT-UG-125: "total_fee = 3% (FIXED)"
+    - SOT-UG-129: "Fee allocation MUST sum to 3%"
+    - SOT-UG-131: "Burn policy = 50% of treasury share"
+    - SOT-UG-136: "Oracle = DAO-controlled"
+    - SOT-UG-139: "NO per-transaction validator splits"
+    - SOT-UG-142: "Failed proposals = 100% deposit burned"
+    - SOT-UG-145: "Governance authority = DAO_only"
+    - SOT-UG-153: "Staking discount applies to user price ONLY"
+    - SOT-UG-154: "System fee invariance = true (3% NEVER changes)"
+    - SOT-UG-195: "token_economics.yaml MUST exist at canonical path"
+    - SOT-UG-197: "total_fee MUST be consistent across all files"
+    - SOT-UG-198: "total_supply MUST be consistent across all files"
+
+  language_strategy:
+    - SOT-MD-228: "English version is binding (Source of Truth)"
+    - SOT-MD-249: "language_strategy.yaml MUST exist at canonical path"
+
+# ====================================================================================
+# CI/CD INTEGRATION GUIDE
+# ====================================================================================
+
+ci_integration:
+  status: "READY FOR IMPLEMENTATION"
+
+  step_1_coverage_checker:
+    script: "12_tooling/cli/sot_coverage_checker.py"
+    description: "Verify all 249 rules are implemented in all 5 SoT artifacts"
+    exit_code: "0 = 100% coverage, 1 = gaps detected"
+
+  step_2_integration:
+    targets:
+      - file: "16_codex/contracts/sot/sot_contract.yaml"
+        action: "Add all 249 rules with evidence schemas"
+
+      - file: "03_core/validators/sot/sot_validator_core.py"
+        action: "Implement Python validation logic"
+
+      - file: "23_compliance/policies/sot/sot_policy.rego"
+        action: "Implement OPA Rego policies"
+
+      - file: "12_tooling/cli/sot_validator.py"
+        action: "Implement CLI validation"
+
+      - file: "11_test_simulation/tests_compliance/test_sot_validator.py"
+        action: "Create pytest tests"
+
+  step_3_pre_commit_hooks:
+    hooks:
+      - sot-validation
+      - sot-coverage-check
+    fail_fast: true
+
+  step_4_github_workflows:
+    workflows:
+      - .github/workflows/sot_enforcement_gate.yml
+      - .github/workflows/ci_enforcement_gate.yml
+    enforcement: "Block PR merge if validation fails"
+
+# ====================================================================================
+# AUDIT TRAIL
+# ====================================================================================
+
+audit_trail:
+  consolidation_completed: "2025-10-18"
+  consolidation_method: "manual_merge_of_5_ultra_granular_extractions"
+  zero_tolerance_compliance: true
+  ready_for_sha256: true
+  ready_for_registry_update: true
+  ready_for_ci_integration: true
+
+  quality_gates:
+    rule_count_verification: "PASS (249 rules)"
+    rule_id_continuity: "PASS (SOT-UG-001 to 199, SOT-MD-200 to 249)"
+    critical_rules_tagged: "PASS (33 critical)"
+    evidence_schemas_complete: "PASS (all rules have schemas)"
+    source_file_references: "PASS (all traceable)"
+
+# ====================================================================================
+# USAGE INSTRUCTIONS
+# ====================================================================================
+
+usage:
+  for_ci_cd:
+    description: "Use source extraction files for validation"
+    files_to_parse:
+      - "02_audit_logging/reports/SoT_Part1_Lines_001-026_ULTRA_GRANULAR_FINAL.yaml"
+      - "02_audit_logging/reports/SoT_Part1_Lines_027-101_ULTRA_GRANULAR_FINAL.yaml"
+      - "02_audit_logging/reports/SoT_Part1_Lines_103-143_ULTRA_GRANULAR_FINAL.yaml"
+      - "02_audit_logging/reports/SoT_Part1_Lines_145-251_ULTRA_GRANULAR_FINAL.yaml"
+      - "02_audit_logging/reports/SoT_MasterDefinition_Part1_Lines_253-309_ULTRA_GRANULAR.yaml"
+
+  for_auditing:
+    description: "Use this consolidated file for overview and tracking"
+    provides:
+      - "Complete rule index"
+      - "Critical rules summary"
+      - "Statistics and metrics"
+      - "Integration status"
+
+  for_coverage_checking:
+    description: "Coverage checker reads all 5 source files"
+    verification:
+      - "Each rule has unique ID"
+      - "Each rule has evidence schema"
+      - "Each rule implemented in all 5 artifacts"
+      - "No gaps, no duplicates"
+
+# ====================================================================================
+# NEXT STEPS
+# ====================================================================================
+
+next_steps:
+  priority_critical:
+    - action: "Implement Coverage Checker (sot_coverage_checker.py)"
+      owner: "Tooling Team"
+      estimated_hours: 4
+
+    - action: "Integrate all 249 rules into 5 SoT artifacts"
+      owner: "Integration Team"
+      estimated_hours: 16
+
+  priority_high:
+    - action: "Generate SHA256 hash of all extraction files"
+      owner: "Audit Team"
+      estimated_hours: 1
+
+    - action: "Update SoT Registry"
+      owner: "Compliance Team"
+      estimated_hours: 2
+
+    - action: "Create comprehensive pytest test suite"
+      owner: "QA Team"
+      estimated_hours: 8
+
+  priority_medium:
+    - action: "Update pre-commit hooks"
+      owner: "DevOps Team"
+      estimated_hours: 2
+
+    - action: "Update GitHub workflows"
+      owner: "DevOps Team"
+      estimated_hours: 2
+
+# ====================================================================================
+# VERSION HISTORY
+# ====================================================================================
+
+version_history:
+  v1.0:
+    date: "2025-10-18"
+    changes:
+      - "Initial consolidation of 5 ultra-granular extraction files"
+      - "Total 249 rules (4 + 61 + 34 + 100 + 50)"
+      - "33 critical rules identified and tagged"
+      - "Complete evidence schemas for all rules"
+      - "Ready for CI/CD integration"
+    author: "SoT Extraction Team"
+    status: "PRODUCTION-READY"
+
+# ====================================================================================
+# END OF CONSOLIDATED MASTER DEFINITION
+# ====================================================================================

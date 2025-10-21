@@ -1,0 +1,30 @@
+{
+  "id": "3070310f-64df-4f0b-b5b2-aa37b6833a8f",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 70,
+  "status": "actual",
+  "source": {
+    "file": "24_meta_orchestration/registry/manifests/placeholder_coverage_remediation_manifest.yaml",
+    "hash": "177f87c747c683213100007e756c129d6f42ea86f4352c1be569cb1674d1392cfff6c4a38cd92acbe126abf737ca72c3a23afc63a448a18a36419f78745eb54b",
+    "line": 193,
+    "context": "    - \"ci_workflows\"\n\nnotes: |\n  This remediation bundle brings the SSID project from 45/100 to 70/100\n  compliance score by eliminating technical debt (placeholders) and\n  enforcing quality gates (co"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "952c05ec-fa38-48de-83de-f96a2e3d88fa",
+    "timestamp": "2025-10-16T19:32:44.513895Z"
+  },
+  "worm": {
+    "uuid": "84e8c9af-60a4-4552-89d9-14304d98f6c7",
+    "signature": "c6428ba05e54a306b07c1b67aacda7393fcfc47a2ef255c41d96667ad98744490d7b692da61c766dba30077b54b244012a9f694330678823565a6821ffb6a8c5",
+    "chain_prev": "46b72315-07fb-4e58-a120-fbe207467be5"
+  },
+  "metadata": {
+    "grade": "BRONZE",
+    "component": "Meta Orchestration"
+  }
+}

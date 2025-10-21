@@ -1,0 +1,118 @@
+{
+  "audit_date": "2025-10-12T18:56:10.788246",
+  "project_root": "C:\\Users\\bibel\\Documents\\Github\\SSID",
+  "policy_version": "Root-24-LOCK v1.0",
+  "audit_mode": "FORENSIC",
+  "statistics": {
+    "critical_violations": 0,
+    "warnings": 0,
+    "info": 0,
+    "total_root_items": 31,
+    "authorized_roots": 24,
+    "authorized_exceptions": 7,
+    "unauthorized_items": 0,
+    "total_size_bytes": 13414,
+    "files_scanned": 4
+  },
+  "compliance_status": "PASS",
+  "violations": [
+    {
+      "path": ".claude",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true,
+      "fingerprint": null
+    },
+    {
+      "path": ".git",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true,
+      "fingerprint": null
+    },
+    {
+      "path": ".github",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true,
+      "fingerprint": null
+    },
+    {
+      "path": ".gitignore",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true,
+      "fingerprint": {
+        "size_bytes": 113,
+        "sha256": "5fcbae72d7b825d88692806c6fe947c77e2f72eb5962246b984a1fadaf0259f5",
+        "last_modified": 1760281469.1361177
+      }
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true,
+      "fingerprint": {
+        "size_bytes": 450,
+        "sha256": "29ae7b84f221f6a6b6362d89d4f7df5a415be47a13a8290550808370aac56971",
+        "last_modified": 1760190895.0747445
+      }
+    },
+    {
+      "path": "LICENSE",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true,
+      "fingerprint": {
+        "size_bytes": 11558,
+        "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+        "last_modified": 1760193959.5017352
+      }
+    },
+    {
+      "path": "README.md",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true,
+      "fingerprint": {
+        "size_bytes": 1293,
+        "sha256": "0595dd703280e81cd857146e9fc95f69be625fe243bc625eefc80e42d9642824",
+        "last_modified": 1760257780.0
+      }
+    }
+  ],
+  "file_fingerprints": {
+    ".gitignore": {
+      "path": ".gitignore",
+      "size_bytes": 113,
+      "sha256": "5fcbae72d7b825d88692806c6fe947c77e2f72eb5962246b984a1fadaf0259f5",
+      "last_modified": 1760281469.1361177
+    },
+    ".pre-commit-config.yaml": {
+      "path": ".pre-commit-config.yaml",
+      "size_bytes": 450,
+      "sha256": "29ae7b84f221f6a6b6362d89d4f7df5a415be47a13a8290550808370aac56971",
+      "last_modified": 1760190895.0747445
+    },
+    "LICENSE": {
+      "path": "LICENSE",
+      "size_bytes": 11558,
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "last_modified": 1760193959.5017352
+    },
+    "README.md": {
+      "path": "README.md",
+      "size_bytes": 1293,
+      "sha256": "0595dd703280e81cd857146e9fc95f69be625fe243bc625eefc80e42d9642824",
+      "last_modified": 1760257780.0
+    }
+  }
+}

@@ -18,18 +18,15 @@ from pathlib import Path
 from typing import Dict, List, Any
 from datetime import datetime
 
-
 def load_sot_index() -> Dict:
     """Load SoT requirements index."""
     with open('23_compliance/sot_index.json') as f:
         return json.load(f)
 
-
 def load_mapping_matrix() -> Dict:
     """Load current implementation mapping."""
     with open('23_compliance/mappings/sot_to_repo_matrix.yaml') as f:
         return yaml.safe_load(f)
-
 
 def analyze_gaps(sot: Dict, matrix: Dict) -> Dict[str, List[Dict]]:
     """Analyze gaps between requirements and implementation."""
@@ -57,7 +54,6 @@ def analyze_gaps(sot: Dict, matrix: Dict) -> Dict[str, List[Dict]]:
 
     return gaps
 
-
 def estimate_effort(req: Dict) -> str:
     """Estimate implementation effort in person-days."""
     # Simple heuristic based on requirement type
@@ -67,7 +63,6 @@ def estimate_effort(req: Dict) -> str:
         return "2-5 days"
     else:
         return "0 days"
-
 
 def generate_gap_report(gaps: Dict, output_format: str = 'yaml') -> str:
     """Generate formatted gap report."""
@@ -113,7 +108,6 @@ def generate_gap_report(gaps: Dict, output_format: str = 'yaml') -> str:
     else:
         return format_human_readable(report)
 
-
 def calculate_total_effort(gaps: Dict) -> str:
     """Calculate total estimated effort."""
     total_days = 0
@@ -128,7 +122,6 @@ def calculate_total_effort(gaps: Dict) -> str:
                 total_days += avg_days
 
     return f"{int(total_days)} person-days ({int(total_days / 5)} person-weeks)"
-
 
 def format_human_readable(report: Dict) -> str:
     """Format report for human reading."""
@@ -175,7 +168,6 @@ def format_human_readable(report: Dict) -> str:
 
     return "\n".join(lines)
 
-
 def save_report(report: str, filename: str):
     """Save report to file."""
     output_path = Path('23_compliance/reports') / filename
@@ -185,7 +177,6 @@ def save_report(report: str, filename: str):
         f.write(report)
 
     print(f"[OK] Gap report saved to: {output_path}")
-
 
 def main():
     """Main entry point."""
@@ -244,7 +235,6 @@ def main():
         import traceback
         traceback.print_exc(file=sys.stderr)
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,2357 @@
+version: 2.0.0
+extraction_date: '2025-10-20T20:29:18.785411'
+total_rules: 384
+matrix_alignment: 24x16 = 384
+rules:
+- rule_id: AR001
+  category: ARCHITECTURE
+  severity: CRITICAL
+  type: MUST
+  rule: Das System MUSS aus exakt 24 Root-Ordnern bestehen
+  source: master_rules_combined.yaml
+- rule_id: AR002
+  category: ARCHITECTURE
+  severity: CRITICAL
+  type: MUST
+  rule: Jeder Root-Ordner MUSS exakt 16 Shards enthalten
+  source: master_rules_combined.yaml
+- rule_id: AR003
+  category: ARCHITECTURE
+  severity: CRITICAL
+  type: MUST
+  rule: Es MÜSSEN exakt 384 Chart-Dateien existieren (24×16)
+  source: master_rules_combined.yaml
+- rule_id: AR004
+  category: ARCHITECTURE
+  severity: HIGH
+  type: MUST
+  rule: Root-Ordner MÜSSEN Format '{NR}_{NAME}' haben (z.B. 01_ai_layer)
+  source: master_rules_combined.yaml
+- rule_id: AR005
+  category: ARCHITECTURE
+  severity: HIGH
+  type: MUST
+  rule: Shards MÜSSEN Format 'Shard_{NR}_{NAME}' haben
+  source: master_rules_combined.yaml
+- rule_id: AR006
+  category: ARCHITECTURE
+  severity: CRITICAL
+  type: MUST
+  rule: Jeder Shard MUSS eine chart.yaml (SoT) enthalten
+  source: master_rules_combined.yaml
+- rule_id: AR007
+  category: ARCHITECTURE
+  severity: HIGH
+  type: MUST
+  rule: Jede Implementierung MUSS eine manifest.yaml enthalten
+  source: master_rules_combined.yaml
+- rule_id: AR008
+  category: ARCHITECTURE
+  severity: HIGH
+  type: MUST
+  rule: 'Pfadstruktur MUSS sein: {ROOT}/shards/{SHARD}/chart.yaml'
+  source: master_rules_combined.yaml
+- rule_id: AR009
+  category: ARCHITECTURE
+  severity: HIGH
+  type: MUST
+  rule: Implementierungen MÜSSEN unter implementations/{IMPL_ID}/ liegen
+  source: master_rules_combined.yaml
+- rule_id: AR010
+  category: ARCHITECTURE
+  severity: HIGH
+  type: MUST
+  rule: Contracts MÜSSEN in contracts/-Ordner mit OpenAPI/JSON-Schema liegen
+  source: master_rules_combined.yaml
+- rule_id: CP001
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  type: NIEMALS
+  rule: NIEMALS Rohdaten von PII oder biometrischen Daten speichern
+  source: master_rules_combined.yaml
+- rule_id: CP002
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  type: MUST
+  rule: Alle Daten MÜSSEN als SHA3-256 Hashes gespeichert werden
+  source: master_rules_combined.yaml
+- rule_id: CP003
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  type: MUST
+  rule: Tenant-spezifische Peppers MÜSSEN verwendet werden
+  source: master_rules_combined.yaml
+- rule_id: CP004
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  type: MUST
+  rule: Raw Data Retention MUSS '0 seconds' sein (Immediate Discard)
+  source: master_rules_combined.yaml
+- rule_id: CP005
+  category: CRITICAL_POLICIES
+  severity: HIGH
+  type: MUST
+  rule: Right to Erasure MUSS via Hash-Rotation implementiert sein
+  source: master_rules_combined.yaml
+- rule_id: CP006
+  category: CRITICAL_POLICIES
+  severity: HIGH
+  type: MUST
+  rule: Data Portability MUSS JSON-Export aller Hashes + Metadaten bieten
+  source: master_rules_combined.yaml
+- rule_id: CP007
+  category: CRITICAL_POLICIES
+  severity: HIGH
+  type: MUST
+  rule: PII Redaction MUSS automatisch in Logs & Traces erfolgen
+  source: master_rules_combined.yaml
+- rule_id: CP008
+  category: CRITICAL_POLICIES
+  severity: HIGH
+  type: MUST
+  rule: Alle AI/ML-Modelle MÜSSEN auf Bias getestet werden
+  source: master_rules_combined.yaml
+- rule_id: CP009
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  type: MUST
+  rule: Hash-Ledger mit Blockchain-Anchoring MUSS verwendet werden
+  source: master_rules_combined.yaml
+- rule_id: CP010
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  type: MUST
+  rule: WORM-Storage mit 10 Jahren Retention MUSS verwendet werden
+  source: master_rules_combined.yaml
+- rule_id: CP011
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  type: NIEMALS
+  rule: NIEMALS Secrets in Git committen
+  source: master_rules_combined.yaml
+- rule_id: CP012
+  category: CRITICAL_POLICIES
+  severity: HIGH
+  type: MUST
+  rule: Secrets MÜSSEN alle 90 Tage rotiert werden
+  source: master_rules_combined.yaml
+- rule_id: VG001
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: Alle Versionen MÜSSEN Semver (MAJOR.MINOR.PATCH) verwenden
+  source: master_rules_combined.yaml
+- rule_id: VG002
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: Breaking Changes MÜSSEN Migration Guide + Compatibility Layer haben
+  source: master_rules_combined.yaml
+- rule_id: VG003
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: Deprecations MÜSSEN 180 Tage Notice Period haben
+  source: master_rules_combined.yaml
+- rule_id: VG004
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: Alle MUST-Capability-Änderungen MÜSSEN RFC-Prozess durchlaufen
+  source: master_rules_combined.yaml
+- rule_id: VG005
+  category: VERSIONING_GOVERNANCE
+  severity: MEDIUM
+  type: MUST
+  rule: Jeder Shard MUSS einen Owner haben
+  source: master_rules_combined.yaml
+- rule_id: VG006
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: Architecture Board MUSS alle chart.yaml-Änderungen reviewen
+  source: master_rules_combined.yaml
+- rule_id: VG007
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: Change-Prozess MUSS 7 Stufen durchlaufen (RFC bis Monitoring)
+  source: master_rules_combined.yaml
+- rule_id: VG008
+  category: VERSIONING_GOVERNANCE
+  severity: MEDIUM
+  type: MUST
+  rule: SHOULD→MUST Promotion MUSS 90 Tage Production + 99.5% SLA erfüllen
+  source: master_rules_combined.yaml
+- rule_id: JURIS_BL_001
+  category: Sanctions Compliance
+  severity: CRITICAL
+  type: MUST
+  rule: 'System MUSS Transaktionen aus Iran (IR) blockieren. Grund: OFAC Comprehensive
+    Sanctions'
+  source: master_rules_combined.yaml
+- rule_id: JURIS_BL_002
+  category: Sanctions Compliance
+  severity: CRITICAL
+  type: MUST
+  rule: 'System MUSS Transaktionen aus North Korea (KP) blockieren. Grund: OFAC Comprehensive
+    Sanctions'
+  source: master_rules_combined.yaml
+- rule_id: JURIS_BL_003
+  category: Sanctions Compliance
+  severity: CRITICAL
+  type: MUST
+  rule: 'System MUSS Transaktionen aus Syria (SY) blockieren. Grund: OFAC Comprehensive
+    Sanctions'
+  source: master_rules_combined.yaml
+- rule_id: JURIS_BL_004
+  category: Sanctions Compliance
+  severity: HIGH
+  type: MUST
+  rule: 'System MUSS Transaktionen aus Cuba (CU) blockieren. Grund: OFAC Sanctions
+    (Limited)'
+  source: master_rules_combined.yaml
+- rule_id: JURIS_BL_005
+  category: Sanctions Compliance
+  severity: HIGH
+  type: MUST
+  rule: 'System MUSS Transaktionen aus Sudan (SD) blockieren. Grund: OFAC Sanctions
+    (Regional)'
+  source: master_rules_combined.yaml
+- rule_id: JURIS_BL_006
+  category: Sanctions Compliance
+  severity: HIGH
+  type: MUST
+  rule: 'System MUSS Transaktionen aus Belarus (BY) blockieren. Grund: EU Sanctions'
+  source: master_rules_combined.yaml
+- rule_id: JURIS_BL_007
+  category: Sanctions Compliance
+  severity: MEDIUM
+  type: MUST
+  rule: 'System MUSS Transaktionen aus Venezuela (VE) blockieren. Grund: OFAC Sectoral
+    Sanctions'
+  source: master_rules_combined.yaml
+- rule_id: PROP_TYPE_001
+  category: DAO Governance
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Proposal-Typ 'System Parameter Change' (parameter_change) unterstützen
+    mit Quorum 10% und Threshold 66%
+  source: master_rules_combined.yaml
+- rule_id: PROP_TYPE_002
+  category: DAO Governance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS Proposal-Typ 'Treasury Fund Allocation' (treasury_allocation)
+    unterstützen mit Quorum 15% und Threshold 75%
+  source: master_rules_combined.yaml
+- rule_id: PROP_TYPE_003
+  category: DAO Governance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS Proposal-Typ 'Smart Contract Upgrade' (contract_upgrade) unterstützen
+    mit Quorum 20% und Threshold 80%
+  source: master_rules_combined.yaml
+- rule_id: PROP_TYPE_004
+  category: DAO Governance
+  severity: MEDIUM
+  type: MUST
+  rule: System MUSS Proposal-Typ 'Community Grant Program' (grant_program) unterstützen
+    mit Quorum 5% und Threshold 50%
+  source: master_rules_combined.yaml
+- rule_id: PROP_TYPE_005
+  category: DAO Governance
+  severity: MEDIUM
+  type: MUST
+  rule: System MUSS Proposal-Typ 'Strategic Partnership' (partnership) unterstützen
+    mit Quorum 10% und Threshold 66%
+  source: master_rules_combined.yaml
+- rule_id: PROP_TYPE_006
+  category: DAO Governance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS Proposal-Typ 'Emergency Protocol Action' (emergency_action) unterstützen
+    mit Quorum 30% und Threshold 90%
+  source: master_rules_combined.yaml
+- rule_id: PROP_TYPE_007
+  category: DAO Governance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS Proposal-Typ 'Token Minting (Inflation)' (token_mint) unterstützen
+    mit Quorum 25% und Threshold 85%
+  source: master_rules_combined.yaml
+- rule_id: JURIS_T1_001
+  category: Market Coverage
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Germany (DE) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: JURIS_T1_002
+  category: Market Coverage
+  severity: HIGH
+  type: MUST
+  rule: System MUSS France (FR) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: JURIS_T1_003
+  category: Market Coverage
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Netherlands (NL) als Tier 1 Market mit eIDAS-Level 'substantial'
+    unterstützen
+  source: master_rules_combined.yaml
+- rule_id: JURIS_T1_004
+  category: Market Coverage
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Switzerland (CH) als Tier 1 Market mit eIDAS-Level 'high' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: JURIS_T1_005
+  category: Market Coverage
+  severity: HIGH
+  type: MUST
+  rule: System MUSS United Kingdom (UK) als Tier 1 Market mit eIDAS-Level 'substantial'
+    unterstützen
+  source: master_rules_combined.yaml
+- rule_id: JURIS_T1_006
+  category: Market Coverage
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Singapore (SG) als Tier 1 Market mit eIDAS-Level 'substantial'
+    unterstützen
+  source: master_rules_combined.yaml
+- rule_id: JURIS_T1_007
+  category: Market Coverage
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Japan (JP) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: REWARD_POOL_001
+  category: Tokenomics
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Reward Pool 'Staking Rewards Pool' (staking_rewards) mit 30% Allocation
+    und Vesting 'none' verwalten
+  source: master_rules_combined.yaml
+- rule_id: REWARD_POOL_002
+  category: Tokenomics
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Reward Pool 'Liquidity Mining Pool' (liquidity_mining) mit 20%
+    Allocation und Vesting 'linear_12m' verwalten
+  source: master_rules_combined.yaml
+- rule_id: REWARD_POOL_003
+  category: Tokenomics
+  severity: MEDIUM
+  type: MUST
+  rule: System MUSS Reward Pool 'Ecosystem Development Grants' (ecosystem_grants)
+    mit 15% Allocation und Vesting 'milestone_based' verwalten
+  source: master_rules_combined.yaml
+- rule_id: REWARD_POOL_004
+  category: Tokenomics
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS Reward Pool 'Team & Advisors Vesting' (team_vesting) mit 20% Allocation
+    und Vesting 'linear_48m_cliff_12m' verwalten
+  source: master_rules_combined.yaml
+- rule_id: REWARD_POOL_005
+  category: Tokenomics
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS Reward Pool 'DAO Treasury Reserve' (treasury_reserve) mit 15%
+    Allocation und Vesting 'dao_controlled' verwalten
+  source: master_rules_combined.yaml
+- rule_id: NETWORK_001
+  category: Blockchain Integration
+  severity: CRITICAL
+  type: MUST
+  rule: 'System MUSS Blockchain-Netzwerk Ethereum Mainnet (Chain ID: 1) unterstützen'
+  source: master_rules_combined.yaml
+- rule_id: NETWORK_002
+  category: Blockchain Integration
+  severity: CRITICAL
+  type: MUST
+  rule: 'System MUSS Blockchain-Netzwerk Polygon Mainnet (Chain ID: 137) unterstützen'
+  source: master_rules_combined.yaml
+- rule_id: NETWORK_003
+  category: Blockchain Integration
+  severity: HIGH
+  type: MUST
+  rule: 'System MUSS Blockchain-Netzwerk Arbitrum One (Chain ID: 42161) unterstützen'
+  source: master_rules_combined.yaml
+- rule_id: NETWORK_004
+  category: Blockchain Integration
+  severity: HIGH
+  type: MUST
+  rule: 'System MUSS Blockchain-Netzwerk Optimism Mainnet (Chain ID: 10) unterstützen'
+  source: master_rules_combined.yaml
+- rule_id: NETWORK_005
+  category: Blockchain Integration
+  severity: MEDIUM
+  type: MUST
+  rule: 'System MUSS Blockchain-Netzwerk Base Mainnet (Chain ID: 8453) unterstützen'
+  source: master_rules_combined.yaml
+- rule_id: NETWORK_006
+  category: Blockchain Integration
+  severity: MEDIUM
+  type: MUST
+  rule: 'System MUSS Blockchain-Netzwerk Avalanche C-Chain (Chain ID: 43114) unterstützen'
+  source: master_rules_combined.yaml
+- rule_id: AUTH_METHOD_001
+  category: Authentication
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS Authentifizierungsmethode 'DID-based Authentication' (did_auth)
+    mit eIDAS-Level 'high' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: AUTH_METHOD_002
+  category: Authentication
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS Authentifizierungsmethode 'Biometric Authentication (Face/Fingerprint)'
+    (biometric) mit eIDAS-Level 'high' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: AUTH_METHOD_003
+  category: Authentication
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Authentifizierungsmethode 'Hardware Security Key (FIDO2)' (hardware_token)
+    mit eIDAS-Level 'high' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: AUTH_METHOD_004
+  category: Authentication
+  severity: MEDIUM
+  type: MUST
+  rule: System MUSS Authentifizierungsmethode 'Time-based OTP (TOTP)' (totp) mit eIDAS-Level
+    'substantial' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: AUTH_METHOD_005
+  category: Authentication
+  severity: LOW
+  type: MUST
+  rule: System MUSS Authentifizierungsmethode 'SMS-based OTP' (sms_otp) mit eIDAS-Level
+    'low' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: AUTH_METHOD_006
+  category: Authentication
+  severity: LOW
+  type: MUST
+  rule: System MUSS Authentifizierungsmethode 'Email Magic Link' (email_magic_link)
+    mit eIDAS-Level 'low' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_001
+  category: GDPR Compliance
+  severity: HIGH
+  type: MUST
+  rule: System MUSS PII-Kategorie 'Name (First, Last, Full)' (name) gemäß Art. 4(1)
+    behandeln
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_002
+  category: GDPR Compliance
+  severity: HIGH
+  type: MUST
+  rule: System MUSS PII-Kategorie 'Email Address' (email) gemäß Art. 4(1) behandeln
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_003
+  category: GDPR Compliance
+  severity: HIGH
+  type: MUST
+  rule: System MUSS PII-Kategorie 'Phone Number' (phone) gemäß Art. 4(1) behandeln
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_004
+  category: GDPR Compliance
+  severity: HIGH
+  type: MUST
+  rule: System MUSS PII-Kategorie 'Physical Address' (address) gemäß Art. 4(1) behandeln
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_005
+  category: GDPR Compliance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS PII-Kategorie 'National ID / SSN' (national_id) gemäß Art. 4(1)
+    behandeln
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_006
+  category: GDPR Compliance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS PII-Kategorie 'Biometric Data' (biometric) gemäß Art. 9(1) behandeln
+    (GDPR Special Category)
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_007
+  category: GDPR Compliance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS PII-Kategorie 'Health Data' (health) gemäß Art. 9(1) behandeln
+    (GDPR Special Category)
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_008
+  category: GDPR Compliance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS PII-Kategorie 'Genetic Data' (genetic) gemäß Art. 9(1) behandeln
+    (GDPR Special Category)
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_009
+  category: GDPR Compliance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS PII-Kategorie 'Religious Beliefs' (religion) gemäß Art. 9(1) behandeln
+    (GDPR Special Category)
+  source: master_rules_combined.yaml
+- rule_id: PII_CAT_010
+  category: GDPR Compliance
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS PII-Kategorie 'Political Opinions' (political) gemäß Art. 9(1)
+    behandeln (GDPR Special Category)
+  source: master_rules_combined.yaml
+- rule_id: HASH_ALG_001
+  category: Cryptography
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS Hash-Algorithmus SHA3-256 (256 bits) als 'primary' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: HASH_ALG_002
+  category: Cryptography
+  severity: HIGH
+  type: MUST
+  rule: System MUSS Hash-Algorithmus SHA3-512 (512 bits) als 'approved' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: HASH_ALG_003
+  category: Cryptography
+  severity: MEDIUM
+  type: MUST
+  rule: System MUSS Hash-Algorithmus BLAKE3 (256 bits) als 'approved' unterstützen
+  source: master_rules_combined.yaml
+- rule_id: HASH_ALG_004
+  category: Cryptography
+  severity: LOW
+  type: MUST
+  rule: System MUSS Hash-Algorithmus SPHINCS+ (256 bits) als 'future' (Quantum-Safe)
+    unterstützen
+  source: master_rules_combined.yaml
+- rule_id: RETENTION_001
+  category: GDPR Retention
+  severity: CRITICAL
+  type: MUST
+  rule: 'System MUSS Retention Period für ''transaction_hashes'' auf 3650 Tage setzen.
+    Grund: Legal requirement (10 years)'
+  source: master_rules_combined.yaml
+- rule_id: RETENTION_002
+  category: GDPR Retention
+  severity: CRITICAL
+  type: MUST
+  rule: 'System MUSS Retention Period für ''audit_logs'' auf 3650 Tage setzen. Grund:
+    Compliance (10 years)'
+  source: master_rules_combined.yaml
+- rule_id: RETENTION_003
+  category: GDPR Retention
+  severity: HIGH
+  type: MUST
+  rule: 'System MUSS Retention Period für ''session_tokens'' auf 1 Tage setzen. Grund:
+    Security best practice'
+  source: master_rules_combined.yaml
+- rule_id: RETENTION_004
+  category: GDPR Retention
+  severity: MEDIUM
+  type: MUST
+  rule: 'System MUSS Retention Period für ''email_verification'' auf 30 Tage setzen.
+    Grund: User onboarding'
+  source: master_rules_combined.yaml
+- rule_id: RETENTION_005
+  category: GDPR Retention
+  severity: LOW
+  type: MUST
+  rule: 'System MUSS Retention Period für ''analytics_aggregated'' auf 730 Tage setzen.
+    Grund: Business intelligence (2 years)'
+  source: master_rules_combined.yaml
+- rule_id: DID_METHOD_001
+  category: Identity Standards
+  severity: CRITICAL
+  type: MUST
+  rule: System MUSS DID-Methode did:ethr (Ethereum DID Method) gemäß Spec https://github.com/decentralized-identity/ethr-did-resolver
+    unterstützen
+  source: master_rules_combined.yaml
+- rule_id: DID_METHOD_002
+  category: Identity Standards
+  severity: HIGH
+  type: MUST
+  rule: System MUSS DID-Methode did:key (Key-based DID Method) gemäß Spec https://w3c-ccg.github.io/did-method-key/
+    unterstützen
+  source: master_rules_combined.yaml
+- rule_id: DID_METHOD_003
+  category: Identity Standards
+  severity: MEDIUM
+  type: MUST
+  rule: System MUSS DID-Methode did:web (Web DID Method) gemäß Spec https://w3c-ccg.github.io/did-method-web/
+    unterstützen
+  source: master_rules_combined.yaml
+- rule_id: DID_METHOD_004
+  category: Identity Standards
+  severity: MEDIUM
+  type: MUST
+  rule: System MUSS DID-Methode did:ion (ION DID Method (Sidetree)) gemäß Spec https://identity.foundation/ion/
+    unterstützen
+  source: master_rules_combined.yaml
+- rule_id: SOT-V2-0001
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'business_model'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0002
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'business_model.data_custody'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0003
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'business_model.kyc_responsibility'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0004
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'business_model.not_role'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0005
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'business_model.role'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0006
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'business_model.user_interactions'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0007
+  category: SOT_V2
+  severity: INFO
+  type: MUST
+  rule: Semantic rule for 'classification'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0008
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'compliance_utilities'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0009
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'compliance_utilities.audit_payments'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0010
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'compliance_utilities.legal_attestations'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0011
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'compliance_utilities.regulatory_reporting'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0012
+  category: SOT_V2
+  severity: INFO
+  type: MUST
+  rule: Semantic rule for 'date'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0013
+  category: SOT_V2
+  severity: INFO
+  type: MUST
+  rule: Semantic rule for 'deprecated'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0014
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0015
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0016
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.allocation'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0017
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.allocation.dev_fee'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0018
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.allocation.system_treasury'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0019
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0020
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.base'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0021
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0022
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0023
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.oracle_source'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0024
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.policy'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0025
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0026
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.note'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0027
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.scope'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0028
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.system_fees.total_fee'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0029
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.validator_rewards'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0030
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.validator_rewards.no_per_transaction_split'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0031
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.validator_rewards.note'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0032
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_routing.validator_rewards.source'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0033
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_structure'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0034
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_structure.allocation'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0035
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_structure.burn_from_system_fee'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0036
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_structure.fee_collection'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0037
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_structure.no_manual_intervention'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0038
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_structure.scope'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0039
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'fee_structure.total_fee'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0040
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_controls'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0041
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_controls.authority'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0042
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_controls.note'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0043
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_controls.reference'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0044
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_fees'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0045
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_fees.proposal_deposits'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0046
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_fees.voting_gas'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0047
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_framework'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0048
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_framework.dao_ready'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0049
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_framework.emergency_procedures'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0050
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_framework.proposal_system'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0051
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_framework.reference'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0052
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_framework.upgrade_authority'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0053
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_framework.voting_mechanism'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0054
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0055
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.delegation_system'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0056
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.delegation_system.delegation_changes'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0057
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.delegation_system.delegation_enabled'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0058
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.delegation_system.self_delegation_default'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0059
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.delegation_system.vote_weight_calculation'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0060
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.governance_rewards'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0061
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.governance_rewards.delegate_rewards'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0062
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.governance_rewards.minimum_participation'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0063
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.governance_rewards.proposal_creator_rewards'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0064
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.governance_rewards.voter_participation_rewards'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0065
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.proposal_framework'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0066
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.proposal_framework.proposal_deposit'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0067
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.proposal_framework.proposal_threshold'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0068
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.proposal_framework.proposal_types'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0069
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Emergency
+    proposals (expedited process)'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0070
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Parameter
+    changes (requires simple majority)'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0071
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Protocol
+    upgrades (requires supermajority)'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0072
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Treasury
+    allocation (requires quorum + majority)'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0073
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.timelock_framework'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0074
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.timelock_framework.emergency_proposals'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0075
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.timelock_framework.parameter_changes'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0076
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.timelock_framework.protocol_upgrades'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0077
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.timelock_framework.standard_proposals'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0078
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.timelock_framework.treasury_allocations'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0079
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_periods'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0080
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_periods.emergency_voting'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0081
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_periods.parameter_voting'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0082
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_periods.protocol_upgrade_voting'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0083
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_periods.standard_voting'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0084
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_requirements'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0085
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_requirements.emergency_supermajority'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0086
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_requirements.quorum_emergency'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0087
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_requirements.quorum_protocol_upgrade'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0088
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_requirements.quorum_standard'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0089
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_requirements.simple_majority'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0090
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'governance_parameters.voting_requirements.supermajority'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0091
+  category: SOT_V2
+  severity: CRITICAL
+  type: MUST
+  rule: Semantic rule for 'grundprinzipien.ausnahmen.allowed_root_files'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0092
+  category: SOT_V2
+  severity: CRITICAL
+  type: MUST
+  rule: Semantic rule for 'grundprinzipien.critical.structure_exceptions_yaml'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0093
+  category: SOT_V2
+  severity: CRITICAL
+  type: MUST
+  rule: Semantic rule for 'grundprinzipien.root_level_ausnahmen'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0094
+  category: SOT_V2
+  severity: CRITICAL
+  type: MUST
+  rule: Semantic rule for 'grundprinzipien.verbindliche_root_module'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0095
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0096
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0097
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::CU'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0098
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::IR'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0099
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::KP'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0100
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::SY'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0101
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.compliance_basis'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0102
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.excluded_entities'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0103
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.excluded_entities::Belarus_designated_entities'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0104
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.excluded_entities::RU_designated_entities'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0105
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.excluded_entities::Venezuela_government_entities'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0106
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.excluded_markets'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0107
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.excluded_markets::India'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0108
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.excluded_markets::Myanmar'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0109
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.excluded_markets::Pakistan'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0110
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.reference'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0111
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'jurisdictional_compliance.regulatory_exemptions'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0112
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0113
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor.admin_controls'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0114
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor.e_money_token'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0115
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor.investment_contract'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0116
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor.passive_income'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0117
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor.redemption_rights'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0118
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor.security_token'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0119
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor.stablecoin'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0120
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor.upgrade_mechanism'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0121
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'legal_safe_harbor.yield_bearing'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0122
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0123
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.ecosystem_rewards'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0124
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.ecosystem_rewards.description'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0125
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.ecosystem_rewards.distribution_method'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0126
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0127
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools::community'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0128
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools::development'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0129
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools::validation'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0130
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.governance_participation'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0131
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.governance_participation.description'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0132
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.governance_participation.proposal_threshold'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0133
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.governance_participation.voting_weight'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0134
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.identity_verification'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0135
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.identity_verification.burn_clarification'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0136
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.identity_verification.burn_source_note'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0137
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.identity_verification.description'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0138
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.identity_verification.fee_burn_mechanism'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0139
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.identity_verification.smart_contract'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0140
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.staking_utility'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0141
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.staking_utility.description'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0142
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.staking_utility.slashing_conditions'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0143
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'primary_utilities.staking_utility.staking_rewards'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0144
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'risk_mitigation'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0145
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'risk_mitigation.clear_utility_purpose'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0146
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'risk_mitigation.no_fiat_pegging'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0147
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'risk_mitigation.no_marketing_investment'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0148
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'risk_mitigation.no_redemption_mechanism'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0149
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'risk_mitigation.no_yield_promises'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0150
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'risk_mitigation.open_source_license'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0151
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'secondary_utilities'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0152
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'secondary_utilities.api_access'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0153
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'secondary_utilities.data_portability'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0154
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'secondary_utilities.marketplace_access'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0155
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'secondary_utilities.premium_features'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0156
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'staking_mechanics'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0157
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'staking_mechanics.discount_applies_to'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0158
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'staking_mechanics.maximum_discount'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0159
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'staking_mechanics.minimum_stake'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0160
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'staking_mechanics.slashing_penalty'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0161
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'staking_mechanics.system_fee_invariance'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0162
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'staking_mechanics.unstaking_period'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0163
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0164
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.circulation_controls'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0165
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.circulation_controls.max_annual_inflation'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0166
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.circulation_controls.partnership_unlock'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0167
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.circulation_controls.reserve_governance'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0168
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.circulation_controls.team_vesting_schedule'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0169
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.deflationary_mechanisms'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0170
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.deflationary_mechanisms.governance_burning'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0171
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.deflationary_mechanisms.staking_slashing'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0172
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.initial_distribution'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0173
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.initial_distribution.community_rewards'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0174
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.initial_distribution.ecosystem_development'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0175
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.initial_distribution.partnerships'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0176
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.initial_distribution.reserve_fund'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0177
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.initial_distribution.team_development'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0178
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'supply_mechanics.total_supply'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0179
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'technical_specification'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0180
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'technical_specification.blockchain'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0181
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'technical_specification.custody_model'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0182
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'technical_specification.smart_contract_automation'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0183
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'technical_specification.standard'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0184
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'technical_specification.supply_model'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0185
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'token_definition'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0186
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'token_definition.explicit_exclusions'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0187
+  category: SOT_V2
+  severity: HIGH
+  type: MUST
+  rule: Semantic rule for 'token_definition.legal_position'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0188
+  category: SOT_V2
+  severity: MEDIUM
+  type: MUST
+  rule: Semantic rule for 'token_definition.purpose'.
+  source: sot_contract_v2.yaml
+- rule_id: SOT-V2-0189
+  category: SOT_V2
+  severity: INFO
+  type: MUST
+  rule: Semantic rule for 'version'.
+  source: sot_contract_v2.yaml
+- rule_id: CS001
+  category: CHART_STRUCTURE
+  severity: CRITICAL
+  type: MUST
+  rule: chart.yaml MUSS metadata Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: CS002
+  category: CHART_STRUCTURE
+  severity: CRITICAL
+  type: MUST
+  rule: chart.yaml MUSS governance Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: CS003
+  category: CHART_STRUCTURE
+  severity: CRITICAL
+  type: MUST
+  rule: chart.yaml MUSS capabilities Sektion enthalten mit MUST/SHOULD/HAVE
+  source: master_definition_v1.1.1
+- rule_id: CS004
+  category: CHART_STRUCTURE
+  severity: HIGH
+  type: MUST
+  rule: chart.yaml MUSS constraints Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: CS005
+  category: CHART_STRUCTURE
+  severity: HIGH
+  type: MUST
+  rule: chart.yaml MUSS enforcement Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: CS006
+  category: CHART_STRUCTURE
+  severity: HIGH
+  type: MUST
+  rule: chart.yaml MUSS interfaces Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: CS007
+  category: CHART_STRUCTURE
+  severity: MEDIUM
+  type: MUST
+  rule: chart.yaml MUSS dependencies Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: CS008
+  category: CHART_STRUCTURE
+  severity: HIGH
+  type: MUST
+  rule: chart.yaml MUSS compatibility Sektion enthalten mit semver
+  source: master_definition_v1.1.1
+- rule_id: CS009
+  category: CHART_STRUCTURE
+  severity: HIGH
+  type: MUST
+  rule: chart.yaml MUSS implementations Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: CS010
+  category: CHART_STRUCTURE
+  severity: MEDIUM
+  type: MUST
+  rule: chart.yaml MUSS observability Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: CS011
+  category: CHART_STRUCTURE
+  severity: CRITICAL
+  type: MUST
+  rule: chart.yaml MUSS security Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: MS001
+  category: MANIFEST_STRUCTURE
+  severity: CRITICAL
+  type: MUST
+  rule: manifest.yaml MUSS metadata mit implementation_id enthalten
+  source: master_definition_v1.1.1
+- rule_id: MS002
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS technology_stack Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: MS003
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS artifacts Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: MS004
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS dependencies Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: MS005
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS testing Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: MS006
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS observability Sektion enthalten
+  source: master_definition_v1.1.1
+- rule_id: KP001
+  category: CORE_PRINCIPLES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Contract-First Development: API-Contract VOR Implementierung'
+  source: master_definition_v1.1.1
+- rule_id: KP002
+  category: CORE_PRINCIPLES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Separation of Concerns: SoT (chart.yaml) vs Implementation (manifest.yaml)'
+  source: master_definition_v1.1.1
+- rule_id: KP003
+  category: CORE_PRINCIPLES
+  severity: HIGH
+  type: MUST
+  rule: 'Multi-Implementation Support: Ein Shard, mehrere Implementierungen möglich'
+  source: master_definition_v1.1.1
+- rule_id: KP004
+  category: CORE_PRINCIPLES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Deterministic Architecture: 24 × 16 = 384 Chart-Dateien, keine Ausnahmen'
+  source: master_definition_v1.1.1
+- rule_id: KP005
+  category: CORE_PRINCIPLES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Evidence-Based Compliance: Alles relevant wird gehasht, geloggt, geanchort'
+  source: master_definition_v1.1.1
+- rule_id: KP006
+  category: CORE_PRINCIPLES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Zero-Trust Security: Niemandem vertrauen, alles verifizieren'
+  source: master_definition_v1.1.1
+- rule_id: KP007
+  category: CORE_PRINCIPLES
+  severity: HIGH
+  type: MUST
+  rule: 'Observability by Design: Metrics, Tracing, Logging von Anfang an'
+  source: master_definition_v1.1.1
+- rule_id: KP008
+  category: CORE_PRINCIPLES
+  severity: HIGH
+  type: MUST
+  rule: 'Bias-Aware AI/ML: Alle AI/ML-Modelle müssen auf Bias getestet werden'
+  source: master_definition_v1.1.1
+- rule_id: KP009
+  category: CORE_PRINCIPLES
+  severity: HIGH
+  type: MUST
+  rule: 'Scalability & Performance: Jeder Shard muss skalieren können'
+  source: master_definition_v1.1.1
+- rule_id: KP010
+  category: CORE_PRINCIPLES
+  severity: MEDIUM
+  type: MUST
+  rule: 'Documentation as Code: Dokumentation aus Code/Contracts generiert'
+  source: master_definition_v1.1.1
+- rule_id: CE001
+  category: CONSOLIDATED_EXTENSIONS
+  severity: HIGH
+  type: MUST
+  rule: 'Regulatory Matrix: UK ICO/GDPR alignment mandatory'
+  source: master_definition_v1.1.1
+- rule_id: CE002
+  category: CONSOLIDATED_EXTENSIONS
+  severity: HIGH
+  type: MUST
+  rule: 'Regulatory Matrix: Singapore MAS/PDPA mandatory'
+  source: master_definition_v1.1.1
+- rule_id: CE003
+  category: CONSOLIDATED_EXTENSIONS
+  severity: HIGH
+  type: MUST
+  rule: 'Regulatory Matrix: Japan JFSA/APPI mandatory'
+  source: master_definition_v1.1.1
+- rule_id: CE004
+  category: CONSOLIDATED_EXTENSIONS
+  severity: HIGH
+  type: MUST
+  rule: 'Regulatory Matrix: Australia Privacy Act 1988 mandatory'
+  source: master_definition_v1.1.1
+- rule_id: CE005
+  category: CONSOLIDATED_EXTENSIONS
+  severity: MEDIUM
+  type: MUST
+  rule: 'OPA Substring-Helper renamed: has_substr() statt contains()'
+  source: master_definition_v1.1.1
+- rule_id: CE006
+  category: CONSOLIDATED_EXTENSIONS
+  severity: HIGH
+  type: MUST
+  rule: Fuzzy-Matching aktiviert für Sanctions-Prüfungen
+  source: master_definition_v1.1.1
+- rule_id: CE007
+  category: CONSOLIDATED_EXTENSIONS
+  severity: HIGH
+  type: MUST
+  rule: CI Workflows MÜSSEN daily sanctions schedule haben
+  source: master_definition_v1.1.1
+- rule_id: CE008
+  category: CONSOLIDATED_EXTENSIONS
+  severity: CRITICAL
+  type: MUST
+  rule: 'DORA: Pro Root MUSS incident_response_plan.md existieren'
+  source: master_definition_v1.1.1
+- rule_id: TS001
+  category: TECHNOLOGY_STANDARDS
+  severity: CRITICAL
+  type: MUST
+  rule: W3C DID Core 1.0 compliance mandatory
+  source: master_definition_v1.1.1
+- rule_id: TS002
+  category: TECHNOLOGY_STANDARDS
+  severity: CRITICAL
+  type: MUST
+  rule: OpenAPI 3.1 für alle Contracts mandatory
+  source: master_definition_v1.1.1
+- rule_id: TS003
+  category: TECHNOLOGY_STANDARDS
+  severity: HIGH
+  type: MUST
+  rule: JSON-Schema Draft 2020-12 für alle Schemas
+  source: master_definition_v1.1.1
+- rule_id: TS004
+  category: TECHNOLOGY_STANDARDS
+  severity: HIGH
+  type: MUST
+  rule: ISO/IEC 27001 compliance für Security
+  source: master_definition_v1.1.1
+- rule_id: TS005
+  category: TECHNOLOGY_STANDARDS
+  severity: CRITICAL
+  type: MUST
+  rule: eIDAS 2.0 compliance für Identity
+  source: master_definition_v1.1.1
+- rule_id: DC001
+  category: DEPLOYMENT_CICD
+  severity: HIGH
+  type: MUST
+  rule: CI/CD MUSS auf push/pull_request triggern
+  source: master_definition_v1.1.1
+- rule_id: DC002
+  category: DEPLOYMENT_CICD
+  severity: HIGH
+  type: MUST
+  rule: CI/CD MUSS scheduled runs für sanctions/audit haben
+  source: master_definition_v1.1.1
+- rule_id: DC003
+  category: DEPLOYMENT_CICD
+  severity: MEDIUM
+  type: MUST
+  rule: Artifacts upload MUSS actions/upload-artifact@v4 nutzen
+  source: master_definition_v1.1.1
+- rule_id: DC004
+  category: DEPLOYMENT_CICD
+  severity: HIGH
+  type: MUST
+  rule: Deployment strategy MUSS blue-green oder canary sein
+  source: master_definition_v1.1.1
+- rule_id: MR001
+  category: MATRIX_REGISTRY
+  severity: CRITICAL
+  type: MUST
+  rule: 24 Root-Ordner MÜSSEN exakt vorhanden sein
+  source: master_definition_v1.1.1
+- rule_id: MR002
+  category: MATRIX_REGISTRY
+  severity: CRITICAL
+  type: MUST
+  rule: Jeder Root MUSS exakt 16 Shards enthalten
+  source: master_definition_v1.1.1
+- rule_id: MR003
+  category: MATRIX_REGISTRY
+  severity: HIGH
+  type: MUST
+  rule: Registry MUSS repo_scan.json für OPA-Checks generieren
+  source: master_definition_v1.1.1
+- rule_id: MD-STRUCT-009
+  category: MASTER_DEF_STRUCTURE
+  severity: CRITICAL
+  type: MUST
+  rule: '{ROOT}/shards/{SHARD}/chart.yaml Pfad MUSS existieren'
+  source: master_definition_v1.1.1
+- rule_id: MD-STRUCT-010
+  category: MASTER_DEF_STRUCTURE
+  severity: CRITICAL
+  type: MUST
+  rule: '{ROOT}/shards/{SHARD}/implementations/{IMPL}/manifest.yaml MUSS existieren'
+  source: master_definition_v1.1.1
+- rule_id: MD-CHART-024
+  category: MASTER_DEF_CHART
+  severity: CRITICAL
+  type: MUST
+  rule: chart.yaml MUSS shard_id Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-CHART-029
+  category: MASTER_DEF_CHART
+  severity: CRITICAL
+  type: MUST
+  rule: chart.yaml MUSS version Field mit semver haben
+  source: master_definition_v1.1.1
+- rule_id: MD-CHART-045
+  category: MASTER_DEF_CHART
+  severity: HIGH
+  type: MUST
+  rule: chart.yaml MUSS owner Field in governance haben
+  source: master_definition_v1.1.1
+- rule_id: MD-CHART-048
+  category: MASTER_DEF_CHART
+  severity: HIGH
+  type: MUST
+  rule: chart.yaml MUSS reviewers Field in governance haben
+  source: master_definition_v1.1.1
+- rule_id: MD-CHART-050
+  category: MASTER_DEF_CHART
+  severity: HIGH
+  type: MUST
+  rule: chart.yaml MUSS change_process Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-002
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS implementation_id Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-004
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS implementation_version Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-006
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS chart_version Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-008
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS maturity Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-010
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS language Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-012
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS frameworks Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-014
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS testing Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-016
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS linting_formatting Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-018
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS source_code Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-020
+  category: MASTER_DEF_MANIFEST
+  severity: HIGH
+  type: MUST
+  rule: manifest.yaml MUSS configuration Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-022
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS models Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-024
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS protocols Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-026
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS tests Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-028
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS documentation Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-030
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS scripts Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-032
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS docker Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-034
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS python_packages Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-036
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS development_packages Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-038
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS system_dependencies Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-040
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS external_services Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-042
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS build_commands Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-044
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS kubernetes Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-046
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS helm Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-048
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS environment_variables Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-050
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS unit_tests Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-052
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS metrics Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-054
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS tracing Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-MANIFEST-056
+  category: MASTER_DEF_MANIFEST
+  severity: MEDIUM
+  type: MUST
+  rule: manifest.yaml MUSS health_checks Field haben
+  source: master_definition_v1.1.1
+- rule_id: MD-POLICY-009
+  category: MASTER_DEF_POLICIES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Non-Custodial: NIEMALS Rohdaten von PII speichern'
+  source: master_definition_v1.1.1
+- rule_id: MD-POLICY-012
+  category: MASTER_DEF_POLICIES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Hash-Only: Nur SHA3-256 Hashes speichern'
+  source: master_definition_v1.1.1
+- rule_id: MD-POLICY-023
+  category: MASTER_DEF_POLICIES
+  severity: CRITICAL
+  type: MUST
+  rule: 'GDPR: Right to Erasure via Hash-Rotation'
+  source: master_definition_v1.1.1
+- rule_id: MD-POLICY-027
+  category: MASTER_DEF_POLICIES
+  severity: HIGH
+  type: MUST
+  rule: 'Bias Testing: Pflicht für alle AI/ML-Modelle'
+  source: master_definition_v1.1.1
+- rule_id: MD-POLICY-028
+  category: MASTER_DEF_POLICIES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Evidence: Hash-Ledger mit Blockchain-Anchoring'
+  source: master_definition_v1.1.1
+- rule_id: MD-PRINC-007
+  category: MASTER_DEF_PRINCIPLES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Contract-First: OpenAPI VOR Code'
+  source: master_definition_v1.1.1
+- rule_id: MD-PRINC-009
+  category: MASTER_DEF_PRINCIPLES
+  severity: CRITICAL
+  type: MUST
+  rule: 'SoT Separation: chart.yaml (WAS) vs manifest.yaml (WIE)'
+  source: master_definition_v1.1.1
+- rule_id: MD-PRINC-013
+  category: MASTER_DEF_PRINCIPLES
+  severity: HIGH
+  type: MUST
+  rule: 'Multi-Impl: >= 1 Implementation pro Shard'
+  source: master_definition_v1.1.1
+- rule_id: MD-PRINC-018
+  category: MASTER_DEF_PRINCIPLES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Deterministic: Keine Matrix-Abweichungen'
+  source: master_definition_v1.1.1
+- rule_id: MD-PRINC-019
+  category: MASTER_DEF_PRINCIPLES
+  severity: HIGH
+  type: MUST
+  rule: 'Evidence-First: Logging vor Business-Logic'
+  source: master_definition_v1.1.1
+- rule_id: MD-PRINC-020
+  category: MASTER_DEF_PRINCIPLES
+  severity: CRITICAL
+  type: MUST
+  rule: 'Zero-Trust: mTLS für alle internen Calls'
+  source: master_definition_v1.1.1
+- rule_id: MD-GOV-005
+  category: MASTER_DEF_GOVERNANCE
+  severity: CRITICAL
+  type: MUST
+  rule: 'Owner: Jeder Shard MUSS Owner haben'
+  source: master_definition_v1.1.1
+- rule_id: MD-GOV-006
+  category: MASTER_DEF_GOVERNANCE
+  severity: CRITICAL
+  type: MUST
+  rule: 'Architecture Board: chart.yaml Changes MÜSSEN reviewed werden'
+  source: master_definition_v1.1.1
+- rule_id: MD-GOV-007
+  category: MASTER_DEF_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: 'Change Process: 7 Stufen MÜSSEN durchlaufen werden'
+  source: master_definition_v1.1.1
+- rule_id: MD-GOV-008
+  category: MASTER_DEF_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: 'SHOULD→MUST: >= 90 Tage Production + >= 99.5% SLA'
+  source: master_definition_v1.1.1
+- rule_id: MD-GOV-009
+  category: MASTER_DEF_GOVERNANCE
+  severity: CRITICAL
+  type: MUST
+  rule: 'Breaking Changes: 180 Tage Notice + Migration Guide'
+  source: master_definition_v1.1.1
+- rule_id: MD-GOV-010
+  category: MASTER_DEF_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: 'RFC-Prozess: Für alle MUST-Capability-Änderungen'
+  source: master_definition_v1.1.1
+- rule_id: MD-GOV-011
+  category: MASTER_DEF_GOVERNANCE
+  severity: HIGH
+  type: MUST
+  rule: 'Semver: MAJOR.MINOR.PATCH für chart.yaml'
+  source: master_definition_v1.1.1
+- rule_id: MD-EXT-012
+  category: MASTER_DEF_EXTENSIONS
+  severity: HIGH
+  type: MUST
+  rule: 'Sanctions: entities_to_check.json MUSS vor OPA-Check gebaut werden'
+  source: master_definition_v1.1.1
+- rule_id: MD-EXT-014
+  category: MASTER_DEF_EXTENSIONS
+  severity: HIGH
+  type: MUST
+  rule: 'Freshness: sources.yaml MUSS max_age_hours: 24 haben'
+  source: master_definition_v1.1.1
+- rule_id: MD-EXT-015
+  category: MASTER_DEF_EXTENSIONS
+  severity: MEDIUM
+  type: MUST
+  rule: 'OPA-Input: repo_scan.json MUSS für Struktur-Checks verwendet werden'
+  source: master_definition_v1.1.1
+- rule_id: MD-EXT-018
+  category: MASTER_DEF_EXTENSIONS
+  severity: HIGH
+  type: MUST
+  rule: 'Forbidden Extensions: .ipynb, .parquet, .sqlite, .db VERBOTEN'
+  source: master_definition_v1.1.1

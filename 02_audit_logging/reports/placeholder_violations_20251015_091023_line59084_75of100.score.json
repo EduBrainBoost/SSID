@@ -1,0 +1,30 @@
+{
+  "id": "0bcd0cce-7e49-4337-a3d9-aa9be9d9fbf6",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 75,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/reports/placeholder_violations_20251015_091023.json",
+    "hash": "465509e93b0339811170824c6f47c3696e24c89dcd58a32d77de7a8f5a560a3ff873e040108f7dcc7c7cbdddf25468239dd2f592de1da21df36d2b26a83c441e",
+    "line": 59084,
+    "context": "    {\n      \"context_after\": [\n        \"audit_status: \\\"COMPLIANT (documented deferral)\\\"\",\n        \"compliance_score: 75/100  # +10 points\"\n      ],\n      \"context_before\": [\n        \"\","
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "fae8287a-09b9-43fb-b73e-1920d84d9525",
+    "timestamp": "2025-10-16T19:32:24.200449Z"
+  },
+  "worm": {
+    "uuid": "aa6130a7-c65a-4e62-a2e2-9fd25e6e5386",
+    "signature": "e8f24a56245b91e999afa05cbb4694035fad7ff6a85fc64fe541b8e61c4a4f8b72a92080a29b3ec790c362a0f71952669bc270f46a675afab13bb41347fb3db7",
+    "chain_prev": "4e09ec3f-fa9a-4f60-8a3e-8ebfdde6d70e"
+  },
+  "metadata": {
+    "grade": "BRONZE",
+    "component": "Audit & Compliance"
+  }
+}

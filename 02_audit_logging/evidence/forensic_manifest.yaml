@@ -1,0 +1,23 @@
+version: 1
+generated_at: '2025-10-14T11:27:54.755769+00:00'
+generator: forensic_manifest_generator.py v1.0.0
+total_files: 3
+merkle_root: 5dc0ac561ec9a82e0a6fdd9271f324a3381b67bf61417b23f736b85255bad47e
+evidence_directory: 02_audit_logging/evidence/import_resolution
+evidence:
+- path: 02_audit_logging/evidence/import_resolution/canonical_edges_20251014_111202.json
+  sha256: a9297e54e96659cd3a7d08fe014ceca78b204517f7d237805a76ba7ef88746f2
+  size_bytes: 754309
+  modified: '2025-10-14T11:12:02.594949+00:00'
+- path: 02_audit_logging/evidence/import_resolution/import_resolution_report_20251014_111202.json
+  sha256: 2f91d47527582902334c7fce5da496e342d1a52199e704f2c64a40abbae7e7a0
+  size_bytes: 4783
+  modified: '2025-10-14T11:12:02.502932+00:00'
+- path: 02_audit_logging/evidence/import_resolution/resolved_edges_20251014_111202.json
+  sha256: af6991e4402a7febd34a786558dff3aa991ae2dc8ff73561ac982a545ca57244
+  size_bytes: 2002341
+  modified: '2025-10-14T11:12:02.568692+00:00'
+integrity:
+  algorithm: SHA-256
+  merkle_algorithm: SHA-256 concatenated
+  deterministic_ordering: sorted by path

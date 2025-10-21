@@ -1,0 +1,4 @@
+# Insert into job 'scan-and-guard' in ci_backup_purge_guard.yml
+      - name: Strict Gate (no backup tests allowed)
+        run: |
+          python 12_tooling/maintenance/backup_purge_tool.py --repo-root . --strict

@@ -1,0 +1,14 @@
+version: 1
+alerts:
+  - id: FED-AGREE-001
+    when: consensus_agree_ratio < 0.67
+    severity: critical
+    action: "Block merge; trigger drift diagnosis; notify federation SRE"
+  - id: FED-LAT-002
+    when: p95_latency_ms > 100
+    severity: warning
+    action: "Scale worker pool; enable backpressure oldest-drop"
+  - id: FED-DISS-003
+    when: dissent_nodes >= 2
+    severity: warning
+    action: "Open incident; compare node signatures; run proof-drift monitor"

@@ -1,0 +1,65 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: adapters
+  version: "0.1.0"
+  description: "Protocol adapters for external blockchain networks, legacy systems, and third-party APIs"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - blockchain_adapters
+    - legacy_system_integration
+    - api_gateway_adapters
+    - protocol_translation
+    - data_format_conversion
+    - connection_management
+
+  interfaces:
+    - name: adapter_registry
+      type: rest_api
+      authentication: internal
+
+    - name: cosmos_adapter
+      type: grpc
+      authentication: required
+
+    - name: polkadot_adapter
+      type: websocket
+      authentication: required
+
+  policies:
+    - name: adapter_validation
+      enforcement: automated
+      scope: all_adapters
+
+    - name: connection_pooling
+      enforcement: automated
+      scope: all_adapters
+
+    - name: retry_policy
+      enforcement: automated
+      scope: all_requests
+      max_retries: 3
+
+  dependencies:
+    internal:
+      - 10_interoperability  # Cross-chain bridges
+      - 02_audit_logging  # Adapter logging
+    external:
+      - cosmos_sdk: ">=0.47"
+      - polkadot_js: ">=10.9"
+      - web3_py: ">=6.0"
+
+  governance:
+    maintainer: "Integration Team"
+    reviewers:
+      - blockchain_team
+      - architecture_team
+    approval_required: true
+    data_classification: confidential
+
+  compliance:
+    w3c:
+      - did_core_1_0

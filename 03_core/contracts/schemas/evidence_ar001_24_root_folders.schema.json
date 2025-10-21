@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.local/schemas/evidence_ar001_24_root_folders.json",
+  "title": "AR001 Evidence - 24 Root Folders",
+  "description": "Evidence structure for AR001: Das System MUSS aus exakt 24 Root-Ordnern bestehen",
+  "type": "object",
+  "required": [
+    "total_root_folders",
+    "root_folders"
+  ],
+  "properties": {
+    "total_root_folders": {
+      "type": "integer",
+      "description": "Number of root folders found",
+      "minimum": 0,
+      "maximum": 100,
+      "examples": [24, 23]
+    },
+    "root_folders": {
+      "type": "array",
+      "description": "List of root folder names",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d{2}_[a-z_]+$"
+      },
+      "minItems": 0,
+      "maxItems": 100,
+      "uniqueItems": true,
+      "examples": [
+        [
+          "01_ai_layer",
+          "02_audit_logging",
+          "03_core"
+        ]
+      ]
+    },
+    "expected_prefixes": {
+      "type": "array",
+      "description": "Expected folder prefixes (01_ through 24_)",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d{2}_$"
+      },
+      "minItems": 24,
+      "maxItems": 24
+    },
+    "missing_prefixes": {
+      "type": "array",
+      "description": "Missing folder prefixes (present only if validation fails)",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d{2}_$"
+      }
+    }
+  },
+  "examples": [
+    {
+      "total_root_folders": 24,
+      "root_folders": [
+        "01_ai_layer",
+        "02_audit_logging",
+        "03_core",
+        "04_deployment",
+        "05_documentation",
+        "06_data_pipeline",
+        "07_governance_legal",
+        "08_identity_score",
+        "09_meta_identity",
+        "10_interoperability",
+        "11_privacy_consent",
+        "12_reputation_trust",
+        "13_token_economy",
+        "14_zero_knowledge",
+        "15_federation",
+        "16_codex",
+        "17_oracle",
+        "18_dispute",
+        "19_recovery",
+        "20_versioning",
+        "21_analytics",
+        "22_marketplace",
+        "23_compliance",
+        "24_emergency"
+      ]
+    }
+  ]
+}

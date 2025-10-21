@@ -21,7 +21,6 @@ from typing import Dict, List, Any, Set, Tuple
 from collections import defaultdict
 import hashlib
 
-
 class ProofReuseDetector:
     """Detects suspicious patterns in proof credential usage."""
 
@@ -338,7 +337,6 @@ class ProofReuseDetector:
             }
         }
 
-
 def main():
     """Main entry point."""
     import argparse
@@ -391,7 +389,6 @@ def main():
 
     # Exit with appropriate code
     sys.exit(1 if violations_found else 0)
-
 
 if __name__ == "__main__":
     main()

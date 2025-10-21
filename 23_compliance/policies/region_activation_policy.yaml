@@ -1,0 +1,30 @@
+version: "1.0"
+contract: "region_activation.sol"
+token_standard: "ERC-721"
+description: "Non-custodial Region Activation Tokens (RAT) enabling language, legal mappings, trust routing."
+zones:
+  - code: "DACH"
+    kind: "base"
+    surcharge_percent: 0.0
+  - code: "EN-EU"
+    kind: "addon"
+    surcharge_percent: 5.0
+  - code: "US-CAN"
+    kind: "addon"
+    surcharge_percent: 10.0
+  - code: "LATAM"
+    kind: "addon"
+    surcharge_percent: 7.0
+  - code: "APAC-EN"
+    kind: "addon"
+    surcharge_percent: 5.0
+  - code: "MENA"
+    kind: "addon"
+    surcharge_percent: 10.0
+  - code: "AFRICA-EN"
+    kind: "addon"
+    surcharge_percent: 5.0
+enforcement:
+  on_chain_check: true
+  frontend_switches: true
+  dispatcher_policy_load: true

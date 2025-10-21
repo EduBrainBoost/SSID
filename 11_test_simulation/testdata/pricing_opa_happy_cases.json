@@ -1,0 +1,166 @@
+{
+  "test_cases": [
+    {
+      "name": "Enterprise E2 - Mid-Tier with Add-ons",
+      "description": "E2 subscription with compliance mesh and 24/7 SLA",
+      "input": {
+        "model": {
+          "tier_id": "E2",
+          "base_price_eur": 50000,
+          "active_regions": ["DACH", "EN-EU"],
+          "addons": ["compliance_mesh", "sla_247"],
+          "term_months": 12,
+          "token_lock_proof": true
+        },
+        "sla": {
+          "tier": "premium",
+          "uptime_guarantee": 99.99,
+          "support_level": "24_7_enterprise"
+        },
+        "rate_limit": {
+          "tier": "E2",
+          "requests_per_minute": 10000,
+          "overage_price_per_1k_eur": 0.15
+        }
+      },
+      "expected": {
+        "allow": true,
+        "computed_price_eur": 58000,
+        "overage_pricing_enabled": true,
+        "sla_eligible": true
+      }
+    },
+    {
+      "name": "Enterprise E3 - Global Deployment with Partner Discount",
+      "description": "E3 with private PQC node, global bundle, partner tier silver",
+      "input": {
+        "model": {
+          "tier_id": "E3",
+          "base_price_eur": 150000,
+          "active_regions": ["US-CAN", "APAC-EN", "MENA"],
+          "addons": ["private_pqc_node", "dao_seat"],
+          "bundles": ["global_bundle"],
+          "term_months": 24,
+          "token_lock_proof": true
+        },
+        "sla": {
+          "tier": "enterprise_plus",
+          "uptime_guarantee": 99.9999,
+          "support_level": "24_7_priority_escalation"
+        },
+        "context": {
+          "partner_tier": "silver",
+          "partner_discount_percent": 5
+        },
+        "rate_limit": {
+          "tier": "E3",
+          "requests_per_minute": 50000,
+          "overage_price_per_1k_eur": 0.10
+        }
+      },
+      "expected": {
+        "allow": true,
+        "partner_discount_eligible": true,
+        "computed_price_eur": 171000,
+        "multi_tenancy_eligible": true,
+        "api_tier_eligible": true
+      }
+    },
+    {
+      "name": "Enterprise E5 - Custom Dynamic Pricing",
+      "description": "E5 tier with dynamic overage pricing and multi-region",
+      "input": {
+        "model": {
+          "tier_id": "E5",
+          "base_price_eur": 500000,
+          "active_regions": ["DACH", "EN-EU", "US-CAN", "APAC-EN"],
+          "addons": ["compliance_mesh", "private_pqc_node", "govchain_bridge"],
+          "bundles": ["global_bundle"],
+          "term_months": 36,
+          "token_lock_proof": true
+        },
+        "sla": {
+          "tier": "enterprise_plus",
+          "uptime_guarantee": 99.9999,
+          "support_level": "24_7_priority_escalation_dedicated_account_manager"
+        },
+        "context": {
+          "dynamic_pricing_enabled": true,
+          "custom_negotiated": true
+        },
+        "rate_limit": {
+          "tier": "E5",
+          "requests_per_minute": 200000,
+          "overage_price_per_1k_eur": 0.05,
+          "dynamic_overage": true
+        }
+      },
+      "expected": {
+        "allow": true,
+        "dynamic_pricing_eligible": true,
+        "multi_tenancy_eligible": true,
+        "api_tier_eligible": true
+      }
+    },
+    {
+      "name": "S2' - Standard Tier Revenue Threshold Met",
+      "description": "S2' tier meeting 2M EUR annual revenue threshold",
+      "input": {
+        "model": {
+          "tier_id": "S2_PRIME",
+          "base_price_eur": 2000,
+          "active_regions": ["DACH"],
+          "addons": [],
+          "term_months": 12,
+          "token_lock_proof": false,
+          "annual_revenue_eur": 2500000
+        },
+        "sla": {
+          "tier": "standard",
+          "uptime_guarantee": 99.9,
+          "support_level": "business_hours"
+        },
+        "rate_limit": {
+          "tier": "S2",
+          "requests_per_minute": 1000,
+          "overage_price_per_1k_eur": 0.50
+        }
+      },
+      "expected": {
+        "allow": true,
+        "revenue_threshold_met": true,
+        "tier_eligible": "S2_PRIME"
+      }
+    },
+    {
+      "name": "S3' - Premium Tier Revenue Threshold Met",
+      "description": "S3' tier meeting 5M EUR annual revenue threshold",
+      "input": {
+        "model": {
+          "tier_id": "S3_PRIME",
+          "base_price_eur": 5000,
+          "active_regions": ["DACH", "EN-EU"],
+          "addons": ["compliance_mesh"],
+          "term_months": 24,
+          "token_lock_proof": true,
+          "annual_revenue_eur": 6000000
+        },
+        "sla": {
+          "tier": "premium",
+          "uptime_guarantee": 99.99,
+          "support_level": "24_7"
+        },
+        "rate_limit": {
+          "tier": "S3",
+          "requests_per_minute": 5000,
+          "overage_price_per_1k_eur": 0.25
+        }
+      },
+      "expected": {
+        "allow": true,
+        "revenue_threshold_met": true,
+        "tier_eligible": "S3_PRIME"
+      }
+    }
+  ]
+}

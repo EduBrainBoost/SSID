@@ -1,0 +1,2170 @@
+metadata:
+  version: 3.0.0-SEMANTIC-CORE
+  extraction_date: '2025-10-19T14:11:02.513808'
+  source: SoT_Complete_Masterlist_20251019.yaml
+  total_rules: 256
+  target_rules: 256
+  extraction_method: POLICY_DEPTH_FILTERING
+  filtering_strategy: Priority-based + Category-weighted semantic scoring
+  severity_distribution:
+    CRITICAL: 50
+    HIGH: 15
+    LOW: 165
+    MEDIUM: 26
+  category_distribution:
+    Compliance: 6
+    Metadata: 17
+    General: 166
+    General Item: 35
+    Governance: 11
+    Tokenomics: 10
+    Governance Item: 4
+    Structure: 7
+rules:
+- regel_id: SOT-SEM-001
+  zeile: 30
+  kategorie: Compliance
+  beschreibung: 'jurisdictional_compliance.compliance_basis: EU MiCA Article 3 + US
+    Howey Test'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.compliance_basis
+  wert: EU MiCA Article 3 + US Howey Test
+- regel_id: SOT-SEM-002
+  zeile: 461
+  kategorie: Compliance
+  beschreibung: 'user_responsibilities.regulatory_compliance: Users responsible for
+    local compliance'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: user_responsibilities.regulatory_compliance
+  wert: Users responsible for local compliance
+- regel_id: SOT-SEM-003
+  zeile: 461
+  kategorie: Compliance
+  beschreibung: 'regulatory_safe_harbor.eu_mica_compliance: Utility token exemption
+    under Article 3'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: regulatory_safe_harbor.eu_mica_compliance
+  wert: Utility token exemption under Article 3
+- regel_id: SOT-SEM-004
+  zeile: 461
+  kategorie: Compliance
+  beschreibung: 'regulatory_safe_harbor.uk_fca_compliance: No regulated financial
+    services provided'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: regulatory_safe_harbor.uk_fca_compliance
+  wert: No regulated financial services provided
+- regel_id: SOT-SEM-005
+  zeile: 511
+  kategorie: Compliance
+  beschreibung: 'partnership_requirements.legal_compliance: Full regulatory compliance
+    in operating jurisdictions'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: partnership_requirements.legal_compliance
+  wert: Full regulatory compliance in operating jurisdictions
+- regel_id: SOT-SEM-006
+  zeile: 610
+  kategorie: Compliance
+  beschreibung: 'world_market_readiness.compliance_certification: Third-party audit
+    completion'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: world_market_readiness.compliance_certification
+  wert: Third-party audit completion
+- regel_id: SOT-SEM-007
+  zeile: 30
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-008
+  zeile: 104
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-009
+  zeile: 146
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-010
+  zeile: 353
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-011
+  zeile: 461
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-012
+  zeile: 511
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-013
+  zeile: 550
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-014
+  zeile: 550
+  kategorie: Metadata
+  beschreibung: 'current_version.version: 4.1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: current_version.version
+  wert: 4.1.0
+- regel_id: SOT-SEM-015
+  zeile: 610
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-016
+  zeile: 655
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-017
+  zeile: 821
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-018
+  zeile: 897
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-019
+  zeile: 979
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-020
+  zeile: 1045
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-021
+  zeile: 1045
+  kategorie: Metadata
+  beschreibung: 'export_formats.openapi.version: 3.0.3'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: export_formats.openapi.version
+  wert: 3.0.3
+- regel_id: SOT-SEM-022
+  zeile: 1045
+  kategorie: Metadata
+  beschreibung: 'export_formats.json_schema.version: draft-07'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: export_formats.json_schema.version
+  wert: draft-07
+- regel_id: SOT-SEM-023
+  zeile: 1112
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: CRITICAL
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-SEM-024
+  zeile: 30
+  kategorie: General
+  beschreibung: 'jurisdictional_compliance.blacklist_jurisdictions: List container'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.blacklist_jurisdictions
+  wert: List with 4 items
+- regel_id: SOT-SEM-025
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.blacklist_jurisdictions item 0: IR'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.blacklist_jurisdictions[0]
+  wert: IR
+- regel_id: SOT-SEM-026
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.blacklist_jurisdictions item 1: KP'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.blacklist_jurisdictions[1]
+  wert: KP
+- regel_id: SOT-SEM-027
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.blacklist_jurisdictions item 2: SY'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.blacklist_jurisdictions[2]
+  wert: SY
+- regel_id: SOT-SEM-028
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.blacklist_jurisdictions item 3: CU'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.blacklist_jurisdictions[3]
+  wert: CU
+- regel_id: SOT-SEM-029
+  zeile: 30
+  kategorie: General
+  beschreibung: 'jurisdictional_compliance.excluded_entities: List container'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.excluded_entities
+  wert: List with 3 items
+- regel_id: SOT-SEM-030
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.excluded_entities item 0: RU_designated_entities'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.excluded_entities[0]
+  wert: RU_designated_entities
+- regel_id: SOT-SEM-031
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.excluded_entities item 1: Belarus_designated_entities'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.excluded_entities[1]
+  wert: Belarus_designated_entities
+- regel_id: SOT-SEM-032
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.excluded_entities item 2: Venezuela_government_entities'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.excluded_entities[2]
+  wert: Venezuela_government_entities
+- regel_id: SOT-SEM-033
+  zeile: 30
+  kategorie: General
+  beschreibung: 'jurisdictional_compliance.excluded_markets: List container'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.excluded_markets
+  wert: List with 3 items
+- regel_id: SOT-SEM-034
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.excluded_markets item 0: India'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.excluded_markets[0]
+  wert: India
+- regel_id: SOT-SEM-035
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.excluded_markets item 1: Pakistan'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.excluded_markets[1]
+  wert: Pakistan
+- regel_id: SOT-SEM-036
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'jurisdictional_compliance.excluded_markets item 2: Myanmar'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: jurisdictional_compliance.excluded_markets[2]
+  wert: Myanmar
+- regel_id: SOT-SEM-037
+  zeile: 550
+  kategorie: General
+  beschreibung: 'compatibility_matrix.supported_versions: List container'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: compatibility_matrix.supported_versions
+  wert: List with 3 items
+- regel_id: SOT-SEM-038
+  zeile: 550
+  kategorie: General Item
+  beschreibung: 'compatibility_matrix.supported_versions item 0: 4.1.x'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: compatibility_matrix.supported_versions[0]
+  wert: 4.1.x
+- regel_id: SOT-SEM-039
+  zeile: 550
+  kategorie: General Item
+  beschreibung: 'compatibility_matrix.supported_versions item 1: 4.0.x'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: compatibility_matrix.supported_versions[1]
+  wert: 4.0.x
+- regel_id: SOT-SEM-040
+  zeile: 550
+  kategorie: General Item
+  beschreibung: 'compatibility_matrix.supported_versions item 2: 3.2.x'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: compatibility_matrix.supported_versions[2]
+  wert: 3.2.x
+- regel_id: SOT-SEM-041
+  zeile: 550
+  kategorie: General
+  beschreibung: 'compatibility_matrix.deprecated_versions: List container'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: compatibility_matrix.deprecated_versions
+  wert: List with 2 items
+- regel_id: SOT-SEM-042
+  zeile: 550
+  kategorie: General Item
+  beschreibung: 'compatibility_matrix.deprecated_versions item 0: 3.1.x'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: compatibility_matrix.deprecated_versions[0]
+  wert: 3.1.x
+- regel_id: SOT-SEM-043
+  zeile: 550
+  kategorie: General Item
+  beschreibung: 'compatibility_matrix.deprecated_versions item 1: 3.0.x'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: compatibility_matrix.deprecated_versions[1]
+  wert: 3.0.x
+- regel_id: SOT-SEM-044
+  zeile: 550
+  kategorie: General
+  beschreibung: 'badge_validity.tied_to_version: True'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: badge_validity.tied_to_version
+  wert: 'True'
+- regel_id: SOT-SEM-045
+  zeile: 550
+  kategorie: General
+  beschreibung: 'lts_support.lts_versions: List container'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: lts_support.lts_versions
+  wert: List with 2 items
+- regel_id: SOT-SEM-046
+  zeile: 550
+  kategorie: General Item
+  beschreibung: 'lts_support.lts_versions item 0: 4.1.x'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: lts_support.lts_versions[0]
+  wert: 4.1.x
+- regel_id: SOT-SEM-047
+  zeile: 550
+  kategorie: General Item
+  beschreibung: 'lts_support.lts_versions item 1: 3.2.x'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: lts_support.lts_versions[1]
+  wert: 3.2.x
+- regel_id: SOT-SEM-048
+  zeile: 1045
+  kategorie: General
+  beschreibung: 'portability_guarantees.schema_versioning: True'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: portability_guarantees.schema_versioning
+  wert: 'True'
+- regel_id: SOT-SEM-049
+  zeile: 1112
+  kategorie: General
+  beschreibung: 'blockchain_anchoring.critical_events_immediate: True'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: blockchain_anchoring.critical_events_immediate
+  wert: 'True'
+- regel_id: SOT-SEM-050
+  zeile: 1112
+  kategorie: General
+  beschreibung: 'blockchain_anchoring.business_critical_immediate: True'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: blockchain_anchoring.business_critical_immediate
+  wert: 'True'
+- regel_id: SOT-SEM-051
+  zeile: 146
+  kategorie: Governance
+  beschreibung: 'supply_mechanics.deflationary_mechanisms.governance_burning: Unsuccessful
+    proposals burn deposit'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: supply_mechanics.deflationary_mechanisms.governance_burning
+  wert: Unsuccessful proposals burn deposit
+- regel_id: SOT-SEM-052
+  zeile: 146
+  kategorie: Governance
+  beschreibung: 'supply_mechanics.circulation_controls.reserve_governance: DAO-controlled
+    release only'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: supply_mechanics.circulation_controls.reserve_governance
+  wert: DAO-controlled release only
+- regel_id: SOT-SEM-053
+  zeile: 30
+  kategorie: Tokenomics
+  beschreibung: 'fee_structure.total_fee: 3% of identity verification transactions'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: fee_structure.total_fee
+  wert: 3% of identity verification transactions
+- regel_id: SOT-SEM-054
+  zeile: 30
+  kategorie: Tokenomics
+  beschreibung: 'fee_structure.burn_from_system_fee: 50% of 2% with daily/monthly
+    caps'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: fee_structure.burn_from_system_fee
+  wert: 50% of 2% with daily/monthly caps
+- regel_id: SOT-SEM-055
+  zeile: 30
+  kategorie: Tokenomics
+  beschreibung: 'fee_structure.fee_collection: Smart contract automated'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: fee_structure.fee_collection
+  wert: Smart contract automated
+- regel_id: SOT-SEM-056
+  zeile: 30
+  kategorie: Tokenomics
+  beschreibung: 'legal_safe_harbor.security_token: False'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: legal_safe_harbor.security_token
+  wert: 'False'
+- regel_id: SOT-SEM-057
+  zeile: 30
+  kategorie: Tokenomics
+  beschreibung: 'legal_safe_harbor.e_money_token: False'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: legal_safe_harbor.e_money_token
+  wert: 'False'
+- regel_id: SOT-SEM-058
+  zeile: 104
+  kategorie: Tokenomics
+  beschreibung: 'primary_utilities.identity_verification.fee_burn_mechanism: Deflationary
+    token economics'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: primary_utilities.identity_verification.fee_burn_mechanism
+  wert: Deflationary token economics
+- regel_id: SOT-SEM-059
+  zeile: 146
+  kategorie: Tokenomics
+  beschreibung: 'fee_routing.system_fees.total_fee: 3% of verification transaction
+    value'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: fee_routing.system_fees.total_fee
+  wert: 3% of verification transaction value
+- regel_id: SOT-SEM-060
+  zeile: 146
+  kategorie: Tokenomics
+  beschreibung: 'fee_routing.system_fees.allocation.dev_fee: 1% direct developer reward'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: fee_routing.system_fees.allocation.dev_fee
+  wert: 1% direct developer reward
+- regel_id: SOT-SEM-061
+  zeile: 146
+  kategorie: Tokenomics
+  beschreibung: 'staking_mechanics.system_fee_invariance: True'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: staking_mechanics.system_fee_invariance
+  wert: 'True'
+- regel_id: SOT-SEM-062
+  zeile: 461
+  kategorie: Tokenomics
+  beschreibung: 'legal_position.token_purpose: Pure utility for identity verification
+    services'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: legal_position.token_purpose
+  wert: Pure utility for identity verification services
+- regel_id: SOT-SEM-063
+  zeile: 550
+  kategorie: General
+  beschreibung: 'lts_support.security_patches: 5 years minimum'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: lts_support.security_patches
+  wert: 5 years minimum
+- regel_id: SOT-SEM-064
+  zeile: 610
+  kategorie: General
+  beschreibung: 'release_schedule.security_releases: Immediate (within 24-48 hours)'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: release_schedule.security_releases
+  wert: Immediate (within 24-48 hours)
+- regel_id: SOT-SEM-065
+  zeile: 655
+  kategorie: General
+  beschreibung: 'deprecation_framework.security_support: 18 months for critical issues'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: deprecation_framework.security_support
+  wert: 18 months for critical issues
+- regel_id: SOT-SEM-066
+  zeile: 30
+  kategorie: Governance
+  beschreibung: 'governance_framework.proposal_system: Snapshot + on-chain execution'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_framework.proposal_system
+  wert: Snapshot + on-chain execution
+- regel_id: SOT-SEM-067
+  zeile: 104
+  kategorie: Governance
+  beschreibung: 'primary_utilities.governance_participation.proposal_threshold: 1%
+    of total supply to propose'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.governance_participation.proposal_threshold
+  wert: 1% of total supply to propose
+- regel_id: SOT-SEM-068
+  zeile: 146
+  kategorie: Governance
+  beschreibung: 'governance_fees.proposal_deposits: 100% burned if proposal fails'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_fees.proposal_deposits
+  wert: 100% burned if proposal fails
+- regel_id: SOT-SEM-069
+  zeile: 146
+  kategorie: Governance
+  beschreibung: 'governance_parameters.proposal_framework.proposal_threshold: 1% of
+    total supply (10,000,000 SSID)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.proposal_framework.proposal_threshold
+  wert: 1% of total supply (10,000,000 SSID)
+- regel_id: SOT-SEM-070
+  zeile: 146
+  kategorie: Governance
+  beschreibung: 'governance_parameters.proposal_framework.proposal_deposit: 10,000
+    SSID (burned if proposal fails)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.proposal_framework.proposal_deposit
+  wert: 10,000 SSID (burned if proposal fails)
+- regel_id: SOT-SEM-071
+  zeile: 146
+  kategorie: Governance
+  beschreibung: 'governance_parameters.proposal_framework.proposal_types: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.proposal_framework.proposal_types
+  wert: List with 4 items
+- regel_id: SOT-SEM-072
+  zeile: 146
+  kategorie: Governance Item
+  beschreibung: 'governance_parameters.proposal_framework.proposal_types item 0: Protocol
+    upgrades (requires supermajority)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.proposal_framework.proposal_types[0]
+  wert: Protocol upgrades (requires supermajority)
+- regel_id: SOT-SEM-073
+  zeile: 146
+  kategorie: Governance Item
+  beschreibung: 'governance_parameters.proposal_framework.proposal_types item 1: Parameter
+    changes (requires simple majority)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.proposal_framework.proposal_types[1]
+  wert: Parameter changes (requires simple majority)
+- regel_id: SOT-SEM-074
+  zeile: 146
+  kategorie: Governance Item
+  beschreibung: 'governance_parameters.proposal_framework.proposal_types item 2: Treasury
+    allocation (requires quorum + majority)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.proposal_framework.proposal_types[2]
+  wert: Treasury allocation (requires quorum + majority)
+- regel_id: SOT-SEM-075
+  zeile: 146
+  kategorie: Governance Item
+  beschreibung: 'governance_parameters.proposal_framework.proposal_types item 3: Emergency
+    proposals (expedited process)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.proposal_framework.proposal_types[3]
+  wert: Emergency proposals (expedited process)
+- regel_id: SOT-SEM-076
+  zeile: 146
+  kategorie: Governance
+  beschreibung: 'governance_parameters.timelock_framework.standard_proposals: 48 hours
+    minimum execution delay'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.timelock_framework.standard_proposals
+  wert: 48 hours minimum execution delay
+- regel_id: SOT-SEM-077
+  zeile: 146
+  kategorie: Governance
+  beschreibung: 'governance_parameters.timelock_framework.emergency_proposals: 6 hours
+    execution delay (security only)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.timelock_framework.emergency_proposals
+  wert: 6 hours execution delay (security only)
+- regel_id: SOT-SEM-078
+  zeile: 146
+  kategorie: Governance
+  beschreibung: 'governance_parameters.governance_rewards.proposal_creator_rewards:
+    1000 SSID for successful proposals'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.governance_rewards.proposal_creator_rewards
+  wert: 1000 SSID for successful proposals
+- regel_id: SOT-SEM-079
+  zeile: 979
+  kategorie: Structure
+  beschreibung: 'ai_integration.realtime_checks.integration_path: 24_meta_orchestration/triggers/ci/ai_agents/'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: ai_integration.realtime_checks.integration_path
+  wert: 24_meta_orchestration/triggers/ci/ai_agents/
+- regel_id: SOT-SEM-080
+  zeile: 979
+  kategorie: Structure
+  beschreibung: 'policy_automation.risk_assessment_ai.model_path: 07_governance_legal/ai_risk_models/'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: policy_automation.risk_assessment_ai.model_path
+  wert: 07_governance_legal/ai_risk_models/
+- regel_id: SOT-SEM-081
+  zeile: 1045
+  kategorie: Structure
+  beschreibung: 'export_formats.openapi.schema_path: 10_interoperability/schemas/compliance_openapi.yaml'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: export_formats.openapi.schema_path
+  wert: 10_interoperability/schemas/compliance_openapi.yaml
+- regel_id: SOT-SEM-082
+  zeile: 1045
+  kategorie: Structure
+  beschreibung: 'export_formats.json_schema.schema_path: 10_interoperability/schemas/compliance_jsonschema.json'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: export_formats.json_schema.schema_path
+  wert: 10_interoperability/schemas/compliance_jsonschema.json
+- regel_id: SOT-SEM-083
+  zeile: 1045
+  kategorie: Structure
+  beschreibung: 'export_formats.graphql.schema_path: 10_interoperability/schemas/compliance.graphql'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: export_formats.graphql.schema_path
+  wert: 10_interoperability/schemas/compliance.graphql
+- regel_id: SOT-SEM-084
+  zeile: 1045
+  kategorie: Structure
+  beschreibung: 'export_formats.rdf_turtle.ontology_path: 10_interoperability/ontologies/ssid_compliance.ttl'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: export_formats.rdf_turtle.ontology_path
+  wert: 10_interoperability/ontologies/ssid_compliance.ttl
+- regel_id: SOT-SEM-085
+  zeile: 1045
+  kategorie: Structure
+  beschreibung: 'import_capabilities.mapping_engine.path: 10_interoperability/mapping_engine/'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: import_capabilities.mapping_engine.path
+  wert: 10_interoperability/mapping_engine/
+- regel_id: SOT-SEM-086
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.identity_verification.description: Pay for identity
+    score calculations and verifications'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: primary_utilities.identity_verification.description
+  wert: Pay for identity score calculations and verifications
+- regel_id: SOT-SEM-087
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.identity_verification.burn_source_note: Burns originate
+    exclusively from treasury portion of 3% system fee (no direct verification fee
+    split)'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: primary_utilities.identity_verification.burn_source_note
+  wert: Burns originate exclusively from treasury portion of 3% system fee (no direct
+    verification fee split)
+- regel_id: SOT-SEM-088
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.governance_participation.description: Vote on protocol
+    upgrades and parameter changes'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: primary_utilities.governance_participation.description
+  wert: Vote on protocol upgrades and parameter changes
+- regel_id: SOT-SEM-089
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.ecosystem_rewards.description: Reward validators,
+    contributors, and ecosystem participants'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: primary_utilities.ecosystem_rewards.description
+  wert: Reward validators, contributors, and ecosystem participants
+- regel_id: SOT-SEM-090
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.staking_utility.description: Stake tokens for enhanced
+    verification services'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: primary_utilities.staking_utility.description
+  wert: Stake tokens for enhanced verification services
+- regel_id: SOT-SEM-091
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.system_fees.note: 3% system fee applies to identity verification
+    transactions only'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: fee_routing.system_fees.note
+  wert: 3% system fee applies to identity verification transactions only
+- regel_id: SOT-SEM-092
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.validator_rewards.note: Old fee split (50/25/15/10) is
+    deprecated and replaced by fixed 3% system fee.'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: fee_routing.validator_rewards.note
+  wert: Old fee split (50/25/15/10) is deprecated and replaced by fixed 3% system
+    fee.
+- regel_id: SOT-SEM-093
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_controls.note: All governance parameters centrally defined
+    - see governance_parameters section'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: governance_controls.note
+  wert: All governance parameters centrally defined - see governance_parameters section
+- regel_id: SOT-SEM-094
+  zeile: 511
+  kategorie: General
+  beschreibung: 'partnership_tiers.tier_1_strategic.description: Fortune 500 implementation
+    partners'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: partnership_tiers.tier_1_strategic.description
+  wert: Fortune 500 implementation partners
+- regel_id: SOT-SEM-095
+  zeile: 511
+  kategorie: General
+  beschreibung: 'partnership_tiers.tier_2_specialized.description: Compliance and
+    consulting firms'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: partnership_tiers.tier_2_specialized.description
+  wert: Compliance and consulting firms
+- regel_id: SOT-SEM-096
+  zeile: 511
+  kategorie: General
+  beschreibung: 'partnership_tiers.tier_3_technology.description: Technology integration
+    partners'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: partnership_tiers.tier_3_technology.description
+  wert: Technology integration partners
+- regel_id: SOT-SEM-097
+  zeile: 610
+  kategorie: General
+  beschreibung: 'communication_strategy.release_notes: Comprehensive changelog with
+    business impact'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: communication_strategy.release_notes
+  wert: Comprehensive changelog with business impact
+- regel_id: SOT-SEM-098
+  zeile: 655
+  kategorie: General
+  beschreibung: 'communication_channels.release_notes: Deprecation announcements'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: communication_channels.release_notes
+  wert: Deprecation announcements
+- regel_id: SOT-SEM-099
+  zeile: 979
+  kategorie: General
+  beschreibung: 'ai_integration.policy_bots.description: Automated policy validation
+    and compliance checking'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: ai_integration.policy_bots.description
+  wert: Automated policy validation and compliance checking
+- regel_id: SOT-SEM-100
+  zeile: 979
+  kategorie: General
+  beschreibung: 'ai_integration.realtime_checks.description: Continuous compliance
+    monitoring via AI agents'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: ai_integration.realtime_checks.description
+  wert: Continuous compliance monitoring via AI agents
+- regel_id: SOT-SEM-101
+  zeile: 979
+  kategorie: General
+  beschreibung: 'ai_integration.natural_language_queries.description: Ask compliance
+    questions in natural language'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: ai_integration.natural_language_queries.description
+  wert: Ask compliance questions in natural language
+- regel_id: SOT-SEM-102
+  zeile: 979
+  kategorie: General
+  beschreibung: 'policy_automation.auto_policy_updates.description: AI-driven policy
+    suggestions with business review'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: policy_automation.auto_policy_updates.description
+  wert: AI-driven policy suggestions with business review
+- regel_id: SOT-SEM-103
+  zeile: 979
+  kategorie: General
+  beschreibung: 'policy_automation.compliance_chatbot.description: AI assistant for
+    compliance questions'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: policy_automation.compliance_chatbot.description
+  wert: AI assistant for compliance questions
+- regel_id: SOT-SEM-104
+  zeile: 979
+  kategorie: General
+  beschreibung: 'policy_automation.risk_assessment_ai.description: AI-powered risk
+    assessment for policy changes'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: policy_automation.risk_assessment_ai.description
+  wert: AI-powered risk assessment for policy changes
+- regel_id: SOT-SEM-105
+  zeile: 30
+  kategorie: General
+  beschreibung: 'classification: PUBLIC - Token Framework Standards'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: PUBLIC - Token Framework Standards
+- regel_id: SOT-SEM-106
+  zeile: 461
+  kategorie: General
+  beschreibung: 'classification: PUBLIC - Legal Disclaimers'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: PUBLIC - Legal Disclaimers
+- regel_id: SOT-SEM-107
+  zeile: 511
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL - Partnership Strategy'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL - Partnership Strategy
+- regel_id: SOT-SEM-108
+  zeile: 550
+  kategorie: General
+  beschreibung: 'classification: PUBLIC - Version Management'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: PUBLIC - Version Management
+- regel_id: SOT-SEM-109
+  zeile: 821
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL - Business Strategy'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL - Business Strategy
+- regel_id: SOT-SEM-110
+  zeile: 897
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL - Regulatory Intelligence'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL - Regulatory Intelligence
+- regel_id: SOT-SEM-111
+  zeile: 979
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL - Enterprise AI Integration'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL - Enterprise AI Integration
+- regel_id: SOT-SEM-112
+  zeile: 1045
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL - Enterprise Data Strategy'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL - Enterprise Data Strategy
+- regel_id: SOT-SEM-113
+  zeile: 1112
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL - Enterprise Audit Innovation'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL - Enterprise Audit Innovation
+- regel_id: SOT-SEM-114
+  zeile: 30
+  kategorie: General
+  beschreibung: 'token_definition.purpose: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.purpose
+  wert: List with 3 items
+- regel_id: SOT-SEM-115
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'token_definition.purpose item 0: utility'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.purpose[0]
+  wert: utility
+- regel_id: SOT-SEM-116
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'token_definition.purpose item 1: governance'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.purpose[1]
+  wert: governance
+- regel_id: SOT-SEM-117
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'token_definition.purpose item 2: reward'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.purpose[2]
+  wert: reward
+- regel_id: SOT-SEM-118
+  zeile: 30
+  kategorie: General
+  beschreibung: 'token_definition.explicit_exclusions: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.explicit_exclusions
+  wert: List with 5 items
+- regel_id: SOT-SEM-119
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'token_definition.explicit_exclusions item 0: investment'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.explicit_exclusions[0]
+  wert: investment
+- regel_id: SOT-SEM-120
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'token_definition.explicit_exclusions item 1: security'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.explicit_exclusions[1]
+  wert: security
+- regel_id: SOT-SEM-121
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'token_definition.explicit_exclusions item 2: e_money'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.explicit_exclusions[2]
+  wert: e_money
+- regel_id: SOT-SEM-122
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'token_definition.explicit_exclusions item 3: yield_bearing'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.explicit_exclusions[3]
+  wert: yield_bearing
+- regel_id: SOT-SEM-123
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'token_definition.explicit_exclusions item 4: redemption_rights'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.explicit_exclusions[4]
+  wert: redemption_rights
+- regel_id: SOT-SEM-124
+  zeile: 30
+  kategorie: General
+  beschreibung: 'token_definition.legal_position: Pure utility token for identity
+    verification services'
+  enforcement: SHOULD
+  priority: LOW
+  feld: token_definition.legal_position
+  wert: Pure utility token for identity verification services
+- regel_id: SOT-SEM-125
+  zeile: 30
+  kategorie: General
+  beschreibung: 'technical_specification.blockchain: Polygon (EVM Compatible)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: technical_specification.blockchain
+  wert: Polygon (EVM Compatible)
+- regel_id: SOT-SEM-126
+  zeile: 30
+  kategorie: General
+  beschreibung: 'technical_specification.standard: ERC-20 Compatible'
+  enforcement: SHOULD
+  priority: LOW
+  feld: technical_specification.standard
+  wert: ERC-20 Compatible
+- regel_id: SOT-SEM-127
+  zeile: 30
+  kategorie: General
+  beschreibung: 'technical_specification.supply_model: Fixed cap with deflationary
+    mechanisms'
+  enforcement: SHOULD
+  priority: LOW
+  feld: technical_specification.supply_model
+  wert: Fixed cap with deflationary mechanisms
+- regel_id: SOT-SEM-128
+  zeile: 30
+  kategorie: General
+  beschreibung: 'technical_specification.custody_model: Non-custodial by design'
+  enforcement: SHOULD
+  priority: LOW
+  feld: technical_specification.custody_model
+  wert: Non-custodial by design
+- regel_id: SOT-SEM-129
+  zeile: 30
+  kategorie: General
+  beschreibung: 'technical_specification.smart_contract_automation: Full autonomous
+    distribution'
+  enforcement: SHOULD
+  priority: LOW
+  feld: technical_specification.smart_contract_automation
+  wert: Full autonomous distribution
+- regel_id: SOT-SEM-130
+  zeile: 30
+  kategorie: General
+  beschreibung: 'fee_structure.scope: identity_verification_payments_only'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_structure.scope
+  wert: identity_verification_payments_only
+- regel_id: SOT-SEM-131
+  zeile: 30
+  kategorie: General
+  beschreibung: 'fee_structure.allocation: 1% dev (direct), 2% system treasury'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_structure.allocation
+  wert: 1% dev (direct), 2% system treasury
+- regel_id: SOT-SEM-132
+  zeile: 30
+  kategorie: General
+  beschreibung: 'fee_structure.no_manual_intervention: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_structure.no_manual_intervention
+  wert: 'True'
+- regel_id: SOT-SEM-133
+  zeile: 30
+  kategorie: General
+  beschreibung: 'legal_safe_harbor.stablecoin: False'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_safe_harbor.stablecoin
+  wert: 'False'
+- regel_id: SOT-SEM-134
+  zeile: 30
+  kategorie: General
+  beschreibung: 'legal_safe_harbor.yield_bearing: False'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_safe_harbor.yield_bearing
+  wert: 'False'
+- regel_id: SOT-SEM-135
+  zeile: 30
+  kategorie: General
+  beschreibung: 'legal_safe_harbor.redemption_rights: False'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_safe_harbor.redemption_rights
+  wert: 'False'
+- regel_id: SOT-SEM-136
+  zeile: 30
+  kategorie: General
+  beschreibung: 'legal_safe_harbor.passive_income: False'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_safe_harbor.passive_income
+  wert: 'False'
+- regel_id: SOT-SEM-137
+  zeile: 30
+  kategorie: General
+  beschreibung: 'legal_safe_harbor.investment_contract: False'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_safe_harbor.investment_contract
+  wert: 'False'
+- regel_id: SOT-SEM-138
+  zeile: 30
+  kategorie: General
+  beschreibung: 'legal_safe_harbor.admin_controls: No privileged admin keys. Proxy
+    owner = DAO Timelock; emergency multisig acts only via time-locked governance
+    paths (no direct overrides).'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_safe_harbor.admin_controls
+  wert: No privileged admin keys. Proxy owner = DAO Timelock; emergency multisig acts
+    only via time-locked governance paths (no direct overrides).
+- regel_id: SOT-SEM-139
+  zeile: 30
+  kategorie: General
+  beschreibung: 'legal_safe_harbor.upgrade_mechanism: On-chain proposals only via
+    DAO governance'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_safe_harbor.upgrade_mechanism
+  wert: On-chain proposals only via DAO governance
+- regel_id: SOT-SEM-140
+  zeile: 30
+  kategorie: General
+  beschreibung: 'business_model.role: Technology publisher and open source maintainer'
+  enforcement: SHOULD
+  priority: LOW
+  feld: business_model.role
+  wert: Technology publisher and open source maintainer
+- regel_id: SOT-SEM-141
+  zeile: 30
+  kategorie: General
+  beschreibung: 'business_model.not_role: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: business_model.not_role
+  wert: List with 4 items
+- regel_id: SOT-SEM-142
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'business_model.not_role item 0: payment_service_provider'
+  enforcement: SHOULD
+  priority: LOW
+  feld: business_model.not_role[0]
+  wert: payment_service_provider
+- regel_id: SOT-SEM-143
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'business_model.not_role item 1: custodian'
+  enforcement: SHOULD
+  priority: LOW
+  feld: business_model.not_role[1]
+  wert: custodian
+- regel_id: SOT-SEM-144
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'business_model.not_role item 2: operator'
+  enforcement: SHOULD
+  priority: LOW
+  feld: business_model.not_role[2]
+  wert: operator
+- regel_id: SOT-SEM-145
+  zeile: 30
+  kategorie: General Item
+  beschreibung: 'business_model.not_role item 3: exchange'
+  enforcement: SHOULD
+  priority: LOW
+  feld: business_model.not_role[3]
+  wert: exchange
+- regel_id: SOT-SEM-146
+  zeile: 30
+  kategorie: General
+  beschreibung: 'business_model.user_interactions: Direct peer-to-peer via smart contracts'
+  enforcement: SHOULD
+  priority: LOW
+  feld: business_model.user_interactions
+  wert: Direct peer-to-peer via smart contracts
+- regel_id: SOT-SEM-147
+  zeile: 30
+  kategorie: General
+  beschreibung: 'business_model.kyc_responsibility: Third-party KYC providers (users
+    pay directly)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: business_model.kyc_responsibility
+  wert: Third-party KYC providers (users pay directly)
+- regel_id: SOT-SEM-148
+  zeile: 30
+  kategorie: General
+  beschreibung: 'business_model.data_custody: Zero personal data on-chain'
+  enforcement: SHOULD
+  priority: LOW
+  feld: business_model.data_custody
+  wert: Zero personal data on-chain
+- regel_id: SOT-SEM-149
+  zeile: 30
+  kategorie: General
+  beschreibung: 'governance_framework.dao_ready: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_framework.dao_ready
+  wert: 'True'
+- regel_id: SOT-SEM-150
+  zeile: 30
+  kategorie: General
+  beschreibung: 'governance_framework.voting_mechanism: Token-weighted governance'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_framework.voting_mechanism
+  wert: Token-weighted governance
+- regel_id: SOT-SEM-151
+  zeile: 30
+  kategorie: General
+  beschreibung: 'governance_framework.upgrade_authority: DAO only (no admin keys)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_framework.upgrade_authority
+  wert: DAO only (no admin keys)
+- regel_id: SOT-SEM-152
+  zeile: 30
+  kategorie: General
+  beschreibung: 'governance_framework.emergency_procedures: Community multisig'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_framework.emergency_procedures
+  wert: Community multisig
+- regel_id: SOT-SEM-153
+  zeile: 30
+  kategorie: General
+  beschreibung: 'governance_framework.reference: See detailed governance_parameters
+    section below for quorum, timelock, and voting requirements'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_framework.reference
+  wert: See detailed governance_parameters section below for quorum, timelock, and
+    voting requirements
+- regel_id: SOT-SEM-154
+  zeile: 30
+  kategorie: General
+  beschreibung: 'jurisdictional_compliance.reference: See 23_compliance/jurisdictions/coverage_matrix.yaml
+    for complete exclusion lists'
+  enforcement: SHOULD
+  priority: LOW
+  feld: jurisdictional_compliance.reference
+  wert: See 23_compliance/jurisdictions/coverage_matrix.yaml for complete exclusion
+    lists
+- regel_id: SOT-SEM-155
+  zeile: 30
+  kategorie: General
+  beschreibung: 'jurisdictional_compliance.regulatory_exemptions: Utility token exemption'
+  enforcement: SHOULD
+  priority: LOW
+  feld: jurisdictional_compliance.regulatory_exemptions
+  wert: Utility token exemption
+- regel_id: SOT-SEM-156
+  zeile: 30
+  kategorie: General
+  beschreibung: 'risk_mitigation.no_fiat_pegging: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: risk_mitigation.no_fiat_pegging
+  wert: 'True'
+- regel_id: SOT-SEM-157
+  zeile: 30
+  kategorie: General
+  beschreibung: 'risk_mitigation.no_redemption_mechanism: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: risk_mitigation.no_redemption_mechanism
+  wert: 'True'
+- regel_id: SOT-SEM-158
+  zeile: 30
+  kategorie: General
+  beschreibung: 'risk_mitigation.no_yield_promises: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: risk_mitigation.no_yield_promises
+  wert: 'True'
+- regel_id: SOT-SEM-159
+  zeile: 30
+  kategorie: General
+  beschreibung: 'risk_mitigation.no_marketing_investment: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: risk_mitigation.no_marketing_investment
+  wert: 'True'
+- regel_id: SOT-SEM-160
+  zeile: 30
+  kategorie: General
+  beschreibung: 'risk_mitigation.clear_utility_purpose: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: risk_mitigation.clear_utility_purpose
+  wert: 'True'
+- regel_id: SOT-SEM-161
+  zeile: 30
+  kategorie: General
+  beschreibung: 'risk_mitigation.open_source_license: Apache 2.0'
+  enforcement: SHOULD
+  priority: LOW
+  feld: risk_mitigation.open_source_license
+  wert: Apache 2.0
+- regel_id: SOT-SEM-162
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.identity_verification.smart_contract: 20_foundation/tokenomics/contracts/verification_payment.sol'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.identity_verification.smart_contract
+  wert: 20_foundation/tokenomics/contracts/verification_payment.sol
+- regel_id: SOT-SEM-163
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.identity_verification.burn_clarification: No manual/admin
+    burns. Programmatic burns allowed only from the treasury portion of the 3% system
+    fee and failed proposal deposits, as defined in token_economics.'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.identity_verification.burn_clarification
+  wert: No manual/admin burns. Programmatic burns allowed only from the treasury portion
+    of the 3% system fee and failed proposal deposits, as defined in token_economics.
+- regel_id: SOT-SEM-164
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.governance_participation.voting_weight: Linear
+    token holdings'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.governance_participation.voting_weight
+  wert: Linear token holdings
+- regel_id: SOT-SEM-165
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.ecosystem_rewards.distribution_method: Merit-based
+    allocation via DAO'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.ecosystem_rewards.distribution_method
+  wert: Merit-based allocation via DAO
+- regel_id: SOT-SEM-166
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.ecosystem_rewards.reward_pools: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.ecosystem_rewards.reward_pools
+  wert: List with 3 items
+- regel_id: SOT-SEM-167
+  zeile: 104
+  kategorie: General Item
+  beschreibung: 'primary_utilities.ecosystem_rewards.reward_pools item 0: validation'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.ecosystem_rewards.reward_pools[0]
+  wert: validation
+- regel_id: SOT-SEM-168
+  zeile: 104
+  kategorie: General Item
+  beschreibung: 'primary_utilities.ecosystem_rewards.reward_pools item 1: development'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.ecosystem_rewards.reward_pools[1]
+  wert: development
+- regel_id: SOT-SEM-169
+  zeile: 104
+  kategorie: General Item
+  beschreibung: 'primary_utilities.ecosystem_rewards.reward_pools item 2: community'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.ecosystem_rewards.reward_pools[2]
+  wert: community
+- regel_id: SOT-SEM-170
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.staking_utility.staking_rewards: Service fee discounts
+    (not yield)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.staking_utility.staking_rewards
+  wert: Service fee discounts (not yield)
+- regel_id: SOT-SEM-171
+  zeile: 104
+  kategorie: General
+  beschreibung: 'primary_utilities.staking_utility.slashing_conditions: False verification
+    penalties'
+  enforcement: SHOULD
+  priority: LOW
+  feld: primary_utilities.staking_utility.slashing_conditions
+  wert: False verification penalties
+- regel_id: SOT-SEM-172
+  zeile: 104
+  kategorie: General
+  beschreibung: 'compliance_utilities.audit_payments: Pay for compliance audit services'
+  enforcement: SHOULD
+  priority: LOW
+  feld: compliance_utilities.audit_payments
+  wert: Pay for compliance audit services
+- regel_id: SOT-SEM-173
+  zeile: 104
+  kategorie: General
+  beschreibung: 'compliance_utilities.regulatory_reporting: Submit regulatory reports
+    with token fees'
+  enforcement: SHOULD
+  priority: LOW
+  feld: compliance_utilities.regulatory_reporting
+  wert: Submit regulatory reports with token fees
+- regel_id: SOT-SEM-174
+  zeile: 104
+  kategorie: General
+  beschreibung: 'compliance_utilities.legal_attestations: Create verifiable compliance
+    attestations'
+  enforcement: SHOULD
+  priority: LOW
+  feld: compliance_utilities.legal_attestations
+  wert: Create verifiable compliance attestations
+- regel_id: SOT-SEM-175
+  zeile: 104
+  kategorie: General
+  beschreibung: 'secondary_utilities.marketplace_access: Access to identity verification
+    marketplace'
+  enforcement: SHOULD
+  priority: LOW
+  feld: secondary_utilities.marketplace_access
+  wert: Access to identity verification marketplace
+- regel_id: SOT-SEM-176
+  zeile: 104
+  kategorie: General
+  beschreibung: 'secondary_utilities.premium_features: Enhanced verification algorithms'
+  enforcement: SHOULD
+  priority: LOW
+  feld: secondary_utilities.premium_features
+  wert: Enhanced verification algorithms
+- regel_id: SOT-SEM-177
+  zeile: 104
+  kategorie: General
+  beschreibung: 'secondary_utilities.api_access: Developer API rate limiting and access
+    control'
+  enforcement: SHOULD
+  priority: LOW
+  feld: secondary_utilities.api_access
+  wert: Developer API rate limiting and access control
+- regel_id: SOT-SEM-178
+  zeile: 104
+  kategorie: General
+  beschreibung: 'secondary_utilities.data_portability: Export/import verification
+    data'
+  enforcement: SHOULD
+  priority: LOW
+  feld: secondary_utilities.data_portability
+  wert: Export/import verification data
+- regel_id: SOT-SEM-179
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.total_supply: 1,000,000,000 SSID'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.total_supply
+  wert: 1,000,000,000 SSID
+- regel_id: SOT-SEM-180
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.initial_distribution.ecosystem_development: 40%'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.initial_distribution.ecosystem_development
+  wert: 40%
+- regel_id: SOT-SEM-181
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.initial_distribution.community_rewards: 25%'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.initial_distribution.community_rewards
+  wert: 25%
+- regel_id: SOT-SEM-182
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.initial_distribution.team_development: 15%'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.initial_distribution.team_development
+  wert: 15%
+- regel_id: SOT-SEM-183
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.initial_distribution.partnerships: 10%'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.initial_distribution.partnerships
+  wert: 10%
+- regel_id: SOT-SEM-184
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.initial_distribution.reserve_fund: 10%'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.initial_distribution.reserve_fund
+  wert: 10%
+- regel_id: SOT-SEM-185
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.deflationary_mechanisms.staking_slashing: Penalties
+    for false verification or equivocation'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.deflationary_mechanisms.staking_slashing
+  wert: Penalties for false verification or equivocation
+- regel_id: SOT-SEM-186
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.circulation_controls.max_annual_inflation: 0%'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.circulation_controls.max_annual_inflation
+  wert: 0%
+- regel_id: SOT-SEM-187
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.circulation_controls.team_vesting_schedule: 25%
+    per year over 4 years'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.circulation_controls.team_vesting_schedule
+  wert: 25% per year over 4 years
+- regel_id: SOT-SEM-188
+  zeile: 146
+  kategorie: General
+  beschreibung: 'supply_mechanics.circulation_controls.partnership_unlock: Milestone-based'
+  enforcement: SHOULD
+  priority: LOW
+  feld: supply_mechanics.circulation_controls.partnership_unlock
+  wert: Milestone-based
+- regel_id: SOT-SEM-189
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.system_fees.scope: identity_verification_payments_only'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.system_fees.scope
+  wert: identity_verification_payments_only
+- regel_id: SOT-SEM-190
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.system_fees.allocation.system_treasury: 2% system treasury'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.system_fees.allocation.system_treasury
+  wert: 2% system treasury
+- regel_id: SOT-SEM-191
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.system_fees.burn_from_system_fee.policy: 50% of treasury
+    share burned'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.system_fees.burn_from_system_fee.policy
+  wert: 50% of treasury share burned
+- regel_id: SOT-SEM-192
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.system_fees.burn_from_system_fee.base: circulating_supply_snapshot'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.system_fees.burn_from_system_fee.base
+  wert: circulating_supply_snapshot
+- regel_id: SOT-SEM-193
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc: 00:00:00'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc
+  wert: 00:00:00
+- regel_id: SOT-SEM-194
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ:
+    0.5'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ
+  wert: '0.5'
+- regel_id: SOT-SEM-195
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ:
+    2.0'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ
+  wert: '2.0'
+- regel_id: SOT-SEM-196
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.system_fees.burn_from_system_fee.oracle_source: on-chain
+    circulating supply oracle (DAO-controlled)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.system_fees.burn_from_system_fee.oracle_source
+  wert: on-chain circulating supply oracle (DAO-controlled)
+- regel_id: SOT-SEM-197
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.validator_rewards.source: Treasury budget (DAO-decided
+    monthly allocation)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.validator_rewards.source
+  wert: Treasury budget (DAO-decided monthly allocation)
+- regel_id: SOT-SEM-198
+  zeile: 146
+  kategorie: General
+  beschreibung: 'fee_routing.validator_rewards.no_per_transaction_split: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: fee_routing.validator_rewards.no_per_transaction_split
+  wert: 'True'
+- regel_id: SOT-SEM-199
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_fees.voting_gas: Subsidized from treasury fund'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_fees.voting_gas
+  wert: Subsidized from treasury fund
+- regel_id: SOT-SEM-200
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_controls.authority: DAO_only'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_controls.authority
+  wert: DAO_only
+- regel_id: SOT-SEM-201
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_controls.reference: 07_governance_legal/governance_defaults.yaml'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_controls.reference
+  wert: 07_governance_legal/governance_defaults.yaml
+- regel_id: SOT-SEM-202
+  zeile: 146
+  kategorie: General
+  beschreibung: 'staking_mechanics.minimum_stake: 1000 SSID'
+  enforcement: SHOULD
+  priority: LOW
+  feld: staking_mechanics.minimum_stake
+  wert: 1000 SSID
+- regel_id: SOT-SEM-203
+  zeile: 146
+  kategorie: General
+  beschreibung: 'staking_mechanics.maximum_discount: 50% fee reduction'
+  enforcement: SHOULD
+  priority: LOW
+  feld: staking_mechanics.maximum_discount
+  wert: 50% fee reduction
+- regel_id: SOT-SEM-204
+  zeile: 146
+  kategorie: General
+  beschreibung: 'staking_mechanics.slashing_penalty: 5% of staked amount'
+  enforcement: SHOULD
+  priority: LOW
+  feld: staking_mechanics.slashing_penalty
+  wert: 5% of staked amount
+- regel_id: SOT-SEM-205
+  zeile: 146
+  kategorie: General
+  beschreibung: 'staking_mechanics.unstaking_period: 14 days'
+  enforcement: SHOULD
+  priority: LOW
+  feld: staking_mechanics.unstaking_period
+  wert: 14 days
+- regel_id: SOT-SEM-206
+  zeile: 146
+  kategorie: General
+  beschreibung: 'staking_mechanics.discount_applies_to: user_service_price_only'
+  enforcement: SHOULD
+  priority: LOW
+  feld: staking_mechanics.discount_applies_to
+  wert: user_service_price_only
+- regel_id: SOT-SEM-207
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_requirements.quorum_standard: 4% of
+    circulating supply'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_requirements.quorum_standard
+  wert: 4% of circulating supply
+- regel_id: SOT-SEM-208
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_requirements.quorum_protocol_upgrade:
+    8% of circulating supply'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_requirements.quorum_protocol_upgrade
+  wert: 8% of circulating supply
+- regel_id: SOT-SEM-209
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_requirements.quorum_emergency: 2% of
+    circulating supply'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_requirements.quorum_emergency
+  wert: 2% of circulating supply
+- regel_id: SOT-SEM-210
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_requirements.simple_majority: 50% +
+    1 of votes cast'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_requirements.simple_majority
+  wert: 50% + 1 of votes cast
+- regel_id: SOT-SEM-211
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_requirements.supermajority: 66.7% of
+    votes cast'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_requirements.supermajority
+  wert: 66.7% of votes cast
+- regel_id: SOT-SEM-212
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_requirements.emergency_supermajority:
+    75% of votes cast'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_requirements.emergency_supermajority
+  wert: 75% of votes cast
+- regel_id: SOT-SEM-213
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.timelock_framework.protocol_upgrades: 168 hours
+    (7 days) execution delay'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.timelock_framework.protocol_upgrades
+  wert: 168 hours (7 days) execution delay
+- regel_id: SOT-SEM-214
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.timelock_framework.parameter_changes: 24 hours
+    execution delay'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.timelock_framework.parameter_changes
+  wert: 24 hours execution delay
+- regel_id: SOT-SEM-215
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.timelock_framework.treasury_allocations: 72
+    hours execution delay'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.timelock_framework.treasury_allocations
+  wert: 72 hours execution delay
+- regel_id: SOT-SEM-216
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_periods.standard_voting: 7 days (168
+    hours)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_periods.standard_voting
+  wert: 7 days (168 hours)
+- regel_id: SOT-SEM-217
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_periods.protocol_upgrade_voting: 14
+    days (336 hours)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_periods.protocol_upgrade_voting
+  wert: 14 days (336 hours)
+- regel_id: SOT-SEM-218
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_periods.emergency_voting: 24 hours (security
+    issues only)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_periods.emergency_voting
+  wert: 24 hours (security issues only)
+- regel_id: SOT-SEM-219
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.voting_periods.parameter_voting: 5 days (120
+    hours)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.voting_periods.parameter_voting
+  wert: 5 days (120 hours)
+- regel_id: SOT-SEM-220
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.delegation_system.delegation_enabled: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.delegation_system.delegation_enabled
+  wert: 'True'
+- regel_id: SOT-SEM-221
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.delegation_system.self_delegation_default:
+    True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.delegation_system.self_delegation_default
+  wert: 'True'
+- regel_id: SOT-SEM-222
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.delegation_system.delegation_changes: Immediate
+    effect'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.delegation_system.delegation_changes
+  wert: Immediate effect
+- regel_id: SOT-SEM-223
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.delegation_system.vote_weight_calculation:
+    Token balance + delegated tokens'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.delegation_system.vote_weight_calculation
+  wert: Token balance + delegated tokens
+- regel_id: SOT-SEM-224
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.governance_rewards.voter_participation_rewards:
+    0.1% of treasury per quarter'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.governance_rewards.voter_participation_rewards
+  wert: 0.1% of treasury per quarter
+- regel_id: SOT-SEM-225
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.governance_rewards.delegate_rewards: Based
+    on participation and performance'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.governance_rewards.delegate_rewards
+  wert: Based on participation and performance
+- regel_id: SOT-SEM-226
+  zeile: 146
+  kategorie: General
+  beschreibung: 'governance_parameters.governance_rewards.minimum_participation: 10%
+    of voting power for rewards'
+  enforcement: SHOULD
+  priority: LOW
+  feld: governance_parameters.governance_rewards.minimum_participation
+  wert: 10% of voting power for rewards
+- regel_id: SOT-SEM-227
+  zeile: 353
+  kategorie: General
+  beschreibung: 'quality_standards.accuracy_threshold: 95% minimum'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quality_standards.accuracy_threshold
+  wert: 95% minimum
+- regel_id: SOT-SEM-228
+  zeile: 353
+  kategorie: General
+  beschreibung: 'quality_standards.consistency_score: 90% minimum across documents'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quality_standards.consistency_score
+  wert: 90% minimum across documents
+- regel_id: SOT-SEM-229
+  zeile: 353
+  kategorie: General
+  beschreibung: 'quality_standards.cultural_appropriateness: Native speaker validation
+    required'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quality_standards.cultural_appropriateness
+  wert: Native speaker validation required
+- regel_id: SOT-SEM-230
+  zeile: 353
+  kategorie: General
+  beschreibung: 'quality_standards.technical_precision: Zero tolerance for technical
+    term errors'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quality_standards.technical_precision
+  wert: Zero tolerance for technical term errors
+- regel_id: SOT-SEM-231
+  zeile: 353
+  kategorie: General
+  beschreibung: 'translation_workflow.step_1: Machine translation (DeepL/Google)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: translation_workflow.step_1
+  wert: Machine translation (DeepL/Google)
+- regel_id: SOT-SEM-232
+  zeile: 353
+  kategorie: General
+  beschreibung: 'translation_workflow.step_2: Technical review by bilingual expert'
+  enforcement: SHOULD
+  priority: LOW
+  feld: translation_workflow.step_2
+  wert: Technical review by bilingual expert
+- regel_id: SOT-SEM-233
+  zeile: 353
+  kategorie: General
+  beschreibung: 'translation_workflow.step_3: Native speaker validation'
+  enforcement: SHOULD
+  priority: LOW
+  feld: translation_workflow.step_3
+  wert: Native speaker validation
+- regel_id: SOT-SEM-234
+  zeile: 353
+  kategorie: General
+  beschreibung: 'translation_workflow.step_4: Cultural appropriateness check'
+  enforcement: SHOULD
+  priority: LOW
+  feld: translation_workflow.step_4
+  wert: Cultural appropriateness check
+- regel_id: SOT-SEM-235
+  zeile: 353
+  kategorie: General
+  beschreibung: 'translation_workflow.step_5: Final quality assurance'
+  enforcement: SHOULD
+  priority: LOW
+  feld: translation_workflow.step_5
+  wert: Final quality assurance
+- regel_id: SOT-SEM-236
+  zeile: 353
+  kategorie: General
+  beschreibung: 'maintenance_schedule.major_updates: Full retranslation within 30
+    days'
+  enforcement: SHOULD
+  priority: LOW
+  feld: maintenance_schedule.major_updates
+  wert: Full retranslation within 30 days
+- regel_id: SOT-SEM-237
+  zeile: 353
+  kategorie: General
+  beschreibung: 'maintenance_schedule.minor_updates: Translation within 14 days'
+  enforcement: SHOULD
+  priority: LOW
+  feld: maintenance_schedule.minor_updates
+  wert: Translation within 14 days
+- regel_id: SOT-SEM-238
+  zeile: 353
+  kategorie: General
+  beschreibung: 'maintenance_schedule.urgent_updates: Translation within 48 hours'
+  enforcement: SHOULD
+  priority: LOW
+  feld: maintenance_schedule.urgent_updates
+  wert: Translation within 48 hours
+- regel_id: SOT-SEM-239
+  zeile: 353
+  kategorie: General
+  beschreibung: 'maintenance_schedule.quarterly_review: Full consistency check'
+  enforcement: SHOULD
+  priority: LOW
+  feld: maintenance_schedule.quarterly_review
+  wert: Full consistency check
+- regel_id: SOT-SEM-240
+  zeile: 353
+  kategorie: General
+  beschreibung: 'specialized_terminology.legal_terms: Certified legal translator required'
+  enforcement: SHOULD
+  priority: LOW
+  feld: specialized_terminology.legal_terms
+  wert: Certified legal translator required
+- regel_id: SOT-SEM-241
+  zeile: 353
+  kategorie: General
+  beschreibung: 'specialized_terminology.regulatory_terms: Compliance expert validation'
+  enforcement: SHOULD
+  priority: LOW
+  feld: specialized_terminology.regulatory_terms
+  wert: Compliance expert validation
+- regel_id: SOT-SEM-242
+  zeile: 353
+  kategorie: General
+  beschreibung: 'specialized_terminology.technical_terms: Technical subject matter
+    expert review'
+  enforcement: SHOULD
+  priority: LOW
+  feld: specialized_terminology.technical_terms
+  wert: Technical subject matter expert review
+- regel_id: SOT-SEM-243
+  zeile: 353
+  kategorie: General
+  beschreibung: 'specialized_terminology.business_terms: Local business context validation'
+  enforcement: SHOULD
+  priority: LOW
+  feld: specialized_terminology.business_terms
+  wert: Local business context validation
+- regel_id: SOT-SEM-244
+  zeile: 461
+  kategorie: General
+  beschreibung: 'investment_disclaimers.no_public_offer: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: investment_disclaimers.no_public_offer
+  wert: 'True'
+- regel_id: SOT-SEM-245
+  zeile: 461
+  kategorie: General
+  beschreibung: 'investment_disclaimers.no_investment_vehicle: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: investment_disclaimers.no_investment_vehicle
+  wert: 'True'
+- regel_id: SOT-SEM-246
+  zeile: 461
+  kategorie: General
+  beschreibung: 'investment_disclaimers.no_yield_promises: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: investment_disclaimers.no_yield_promises
+  wert: 'True'
+- regel_id: SOT-SEM-247
+  zeile: 461
+  kategorie: General
+  beschreibung: 'investment_disclaimers.no_custody_services: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: investment_disclaimers.no_custody_services
+  wert: 'True'
+- regel_id: SOT-SEM-248
+  zeile: 461
+  kategorie: General
+  beschreibung: 'investment_disclaimers.no_financial_advice: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: investment_disclaimers.no_financial_advice
+  wert: 'True'
+- regel_id: SOT-SEM-249
+  zeile: 461
+  kategorie: General
+  beschreibung: 'investment_disclaimers.no_solicitation: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: investment_disclaimers.no_solicitation
+  wert: 'True'
+- regel_id: SOT-SEM-250
+  zeile: 461
+  kategorie: General
+  beschreibung: 'legal_position.framework_purpose: Technical and compliance documentation
+    only'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_position.framework_purpose
+  wert: Technical and compliance documentation only
+- regel_id: SOT-SEM-251
+  zeile: 461
+  kategorie: General
+  beschreibung: 'legal_position.business_model: Open source technology publisher'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_position.business_model
+  wert: Open source technology publisher
+- regel_id: SOT-SEM-252
+  zeile: 461
+  kategorie: General
+  beschreibung: 'legal_position.revenue_source: Development services and consulting
+    only'
+  enforcement: SHOULD
+  priority: LOW
+  feld: legal_position.revenue_source
+  wert: Development services and consulting only
+- regel_id: SOT-SEM-253
+  zeile: 461
+  kategorie: General
+  beschreibung: 'prohibited_representations: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: prohibited_representations
+  wert: List with 6 items
+- regel_id: SOT-SEM-254
+  zeile: 461
+  kategorie: General Item
+  beschreibung: 'prohibited_representations item 0: Investment opportunity'
+  enforcement: SHOULD
+  priority: LOW
+  feld: prohibited_representations[0]
+  wert: Investment opportunity
+- regel_id: SOT-SEM-255
+  zeile: 461
+  kategorie: General Item
+  beschreibung: 'prohibited_representations item 1: Expected returns or yields'
+  enforcement: SHOULD
+  priority: LOW
+  feld: prohibited_representations[1]
+  wert: Expected returns or yields
+- regel_id: SOT-SEM-256
+  zeile: 461
+  kategorie: General Item
+  beschreibung: 'prohibited_representations item 2: Token price appreciation'
+  enforcement: SHOULD
+  priority: LOW
+  feld: prohibited_representations[2]
+  wert: Token price appreciation

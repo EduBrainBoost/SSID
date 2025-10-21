@@ -1,0 +1,1732 @@
+contract_id: sot_contract
+version: 1.0.0
+severity_scale:
+- CRITICAL
+- HIGH
+- MEDIUM
+- LOW
+- INFO
+generator: SSID Codex Engine (deterministic)
+source_file: SSID_structure_level3_part1_MAX.md
+source_line_range: 1-349
+rules:
+- rule_id: SOT-0001
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'business_model' as defined in SoT document
+    lines 30-100.
+- rule_id: SOT-0002
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.data_custody
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'business_model.data_custody' as defined
+    in SoT document lines 30-100.
+- rule_id: SOT-0003
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.kyc_responsibility
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'business_model.kyc_responsibility'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0004
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.not_role
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'business_model.not_role' as defined
+    in SoT document lines 30-100.
+- rule_id: SOT-0005
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.role
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'business_model.role' as defined in
+    SoT document lines 30-100.
+- rule_id: SOT-0006
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.user_interactions
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'business_model.user_interactions' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0007
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: compliance_utilities
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'compliance_utilities' as defined in
+    SoT document lines 104-142.
+- rule_id: SOT-0008
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: compliance_utilities.audit_payments
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'compliance_utilities.audit_payments'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0009
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: compliance_utilities.legal_attestations
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'compliance_utilities.legal_attestations'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0010
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: compliance_utilities.regulatory_reporting
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'compliance_utilities.regulatory_reporting'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0011
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing' as defined in SoT document
+    lines 146-250.
+- rule_id: SOT-0012
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees' as defined
+    in SoT document lines 146-250.
+- rule_id: SOT-0013
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.allocation
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.allocation'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0014
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.allocation.dev_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.allocation.dev_fee'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0015
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.allocation.system_treasury
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.allocation.system_treasury'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0016
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.burn_from_system_fee'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0017
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.base
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.burn_from_system_fee.base'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0018
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0019
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0020
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.oracle_source
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.burn_from_system_fee.oracle_source'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0021
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.policy
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.burn_from_system_fee.policy'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0022
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0023
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.note
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.note' as defined
+    in SoT document lines 146-250.
+- rule_id: SOT-0024
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.scope
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.scope' as defined
+    in SoT document lines 146-250.
+- rule_id: SOT-0025
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.total_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.system_fees.total_fee'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0026
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.validator_rewards
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.validator_rewards' as defined
+    in SoT document lines 146-250.
+- rule_id: SOT-0027
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.validator_rewards.no_per_transaction_split
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.validator_rewards.no_per_transaction_split'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0028
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.validator_rewards.note
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.validator_rewards.note'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0029
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.validator_rewards.source
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_routing.validator_rewards.source'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0030
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_structure' as defined in SoT document
+    lines 30-100.
+- rule_id: SOT-0031
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.allocation
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_structure.allocation' as defined
+    in SoT document lines 30-100.
+- rule_id: SOT-0032
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.burn_from_system_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_structure.burn_from_system_fee'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0033
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.fee_collection
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_structure.fee_collection' as defined
+    in SoT document lines 30-100.
+- rule_id: SOT-0034
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.no_manual_intervention
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_structure.no_manual_intervention'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0035
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.scope
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_structure.scope' as defined in
+    SoT document lines 30-100.
+- rule_id: SOT-0036
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.total_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'fee_structure.total_fee' as defined
+    in SoT document lines 30-100.
+- rule_id: SOT-0037
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_controls
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_controls' as defined in
+    SoT document lines 146-250.
+- rule_id: SOT-0038
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_controls.authority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_controls.authority' as defined
+    in SoT document lines 146-250.
+- rule_id: SOT-0039
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_controls.note
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_controls.note' as defined
+    in SoT document lines 146-250.
+- rule_id: SOT-0040
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_controls.reference
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_controls.reference' as defined
+    in SoT document lines 146-250.
+- rule_id: SOT-0041
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_fees
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_fees' as defined in SoT
+    document lines 146-250.
+- rule_id: SOT-0042
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_fees.proposal_deposits
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_fees.proposal_deposits'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0043
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_fees.voting_gas
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_fees.voting_gas' as defined
+    in SoT document lines 146-250.
+- rule_id: SOT-0044
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_framework' as defined in
+    SoT document lines 30-100.
+- rule_id: SOT-0045
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.dao_ready
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_framework.dao_ready' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0046
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.emergency_procedures
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_framework.emergency_procedures'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0047
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.proposal_system
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_framework.proposal_system'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0048
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.reference
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_framework.reference' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0049
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.upgrade_authority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_framework.upgrade_authority'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0050
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.voting_mechanism
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_framework.voting_mechanism'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0051
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters' as defined in
+    SoT document lines 146-250.
+- rule_id: SOT-0052
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.delegation_system'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0053
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system.delegation_changes
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.delegation_system.delegation_changes'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0054
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system.delegation_enabled
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.delegation_system.delegation_enabled'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0055
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system.self_delegation_default
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.delegation_system.self_delegation_default'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0056
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system.vote_weight_calculation
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.delegation_system.vote_weight_calculation'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0057
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.governance_rewards'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0058
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards.delegate_rewards
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.governance_rewards.delegate_rewards'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0059
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards.minimum_participation
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.governance_rewards.minimum_participation'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0060
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards.proposal_creator_rewards
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.governance_rewards.proposal_creator_rewards'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0061
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards.voter_participation_rewards
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.governance_rewards.voter_participation_rewards'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0062
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.proposal_framework'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0063
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_deposit
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.proposal_framework.proposal_deposit'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0064
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_threshold
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.proposal_framework.proposal_threshold'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0065
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_types
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.proposal_framework.proposal_types'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0066
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.timelock_framework'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0067
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.emergency_proposals
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.timelock_framework.emergency_proposals'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0068
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.parameter_changes
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.timelock_framework.parameter_changes'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0069
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.protocol_upgrades
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.timelock_framework.protocol_upgrades'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0070
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.standard_proposals
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.timelock_framework.standard_proposals'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0071
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.treasury_allocations
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.timelock_framework.treasury_allocations'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0072
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_periods'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0073
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods.emergency_voting
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_periods.emergency_voting'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0074
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods.parameter_voting
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_periods.parameter_voting'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0075
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods.protocol_upgrade_voting
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_periods.protocol_upgrade_voting'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0076
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods.standard_voting
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_periods.standard_voting'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0077
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_requirements'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0078
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.emergency_supermajority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_requirements.emergency_supermajority'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0079
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.quorum_emergency
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_requirements.quorum_emergency'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0080
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.quorum_protocol_upgrade
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_requirements.quorum_protocol_upgrade'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0081
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.quorum_standard
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_requirements.quorum_standard'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0082
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.simple_majority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_requirements.simple_majority'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0083
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.supermajority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'governance_parameters.voting_requirements.supermajority'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0084
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 1-120
+    path: grundprinzipien.ausnahmen.allowed_root_files
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'grundprinzipien.ausnahmen.allowed_root_files'
+    as defined in SoT document lines 1-120.
+- rule_id: SOT-0085
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 1-120
+    path: grundprinzipien.critical.structure_exceptions_yaml
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'grundprinzipien.critical.structure_exceptions_yaml'
+    as defined in SoT document lines 1-120.
+- rule_id: SOT-0086
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 1-120
+    path: grundprinzipien.root_level_ausnahmen
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'grundprinzipien.root_level_ausnahmen'
+    as defined in SoT document lines 1-120.
+- rule_id: SOT-0087
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 1-120
+    path: grundprinzipien.verbindliche_root_module
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'grundprinzipien.verbindliche_root_module'
+    as defined in SoT document lines 1-120.
+- rule_id: SOT-0088
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'jurisdictional_compliance' as defined
+    in SoT document lines 30-100.
+- rule_id: SOT-0089
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.blacklist_jurisdictions
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'jurisdictional_compliance.blacklist_jurisdictions'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0090
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.compliance_basis
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'jurisdictional_compliance.compliance_basis'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0091
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_entities
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'jurisdictional_compliance.excluded_entities'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0092
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_markets
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'jurisdictional_compliance.excluded_markets'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0093
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.reference
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'jurisdictional_compliance.reference'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0094
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.regulatory_exemptions
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'jurisdictional_compliance.regulatory_exemptions'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0095
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor' as defined in SoT
+    document lines 30-100.
+- rule_id: SOT-0096
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.admin_controls
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor.admin_controls' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0097
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.e_money_token
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor.e_money_token' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0098
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.investment_contract
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor.investment_contract'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0099
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.passive_income
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor.passive_income' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0100
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.redemption_rights
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor.redemption_rights'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0101
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.security_token
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor.security_token' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0102
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.stablecoin
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor.stablecoin' as defined
+    in SoT document lines 30-100.
+- rule_id: SOT-0103
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.upgrade_mechanism
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor.upgrade_mechanism'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0104
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.yield_bearing
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'legal_safe_harbor.yield_bearing' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0105
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities' as defined in SoT
+    document lines 104-142.
+- rule_id: SOT-0106
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.ecosystem_rewards'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0107
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards.description
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.ecosystem_rewards.description'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0108
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards.distribution_method
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.ecosystem_rewards.distribution_method'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0109
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards.reward_pools
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.ecosystem_rewards.reward_pools'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0110
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.governance_participation
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.governance_participation'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0111
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.governance_participation.description
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.governance_participation.description'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0112
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.governance_participation.proposal_threshold
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.governance_participation.proposal_threshold'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0113
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.governance_participation.voting_weight
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.governance_participation.voting_weight'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0114
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.identity_verification'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0115
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.burn_clarification
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.identity_verification.burn_clarification'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0116
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.burn_source_note
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.identity_verification.burn_source_note'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0117
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.description
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.identity_verification.description'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0118
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.fee_burn_mechanism
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.identity_verification.fee_burn_mechanism'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0119
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.smart_contract
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.identity_verification.smart_contract'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0120
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.staking_utility
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.staking_utility'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0121
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.staking_utility.description
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.staking_utility.description'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0122
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.staking_utility.slashing_conditions
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.staking_utility.slashing_conditions'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0123
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.staking_utility.staking_rewards
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'primary_utilities.staking_utility.staking_rewards'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0124
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'risk_mitigation' as defined in SoT
+    document lines 30-100.
+- rule_id: SOT-0125
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.clear_utility_purpose
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'risk_mitigation.clear_utility_purpose'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0126
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.no_fiat_pegging
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'risk_mitigation.no_fiat_pegging' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0127
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.no_marketing_investment
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'risk_mitigation.no_marketing_investment'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0128
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.no_redemption_mechanism
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'risk_mitigation.no_redemption_mechanism'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0129
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.no_yield_promises
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'risk_mitigation.no_yield_promises'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0130
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.open_source_license
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'risk_mitigation.open_source_license'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0131
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'secondary_utilities' as defined in
+    SoT document lines 104-142.
+- rule_id: SOT-0132
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities.api_access
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'secondary_utilities.api_access' as
+    defined in SoT document lines 104-142.
+- rule_id: SOT-0133
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities.data_portability
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'secondary_utilities.data_portability'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0134
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities.marketplace_access
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'secondary_utilities.marketplace_access'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0135
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities.premium_features
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'secondary_utilities.premium_features'
+    as defined in SoT document lines 104-142.
+- rule_id: SOT-0136
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'staking_mechanics' as defined in SoT
+    document lines 146-250.
+- rule_id: SOT-0137
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.discount_applies_to
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'staking_mechanics.discount_applies_to'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0138
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.maximum_discount
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'staking_mechanics.maximum_discount'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0139
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.minimum_stake
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'staking_mechanics.minimum_stake' as
+    defined in SoT document lines 146-250.
+- rule_id: SOT-0140
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.slashing_penalty
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'staking_mechanics.slashing_penalty'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0141
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.system_fee_invariance
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'staking_mechanics.system_fee_invariance'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0142
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.unstaking_period
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'staking_mechanics.unstaking_period'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0143
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics' as defined in SoT
+    document lines 146-250.
+- rule_id: SOT-0144
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.circulation_controls'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0145
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls.max_annual_inflation
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.circulation_controls.max_annual_inflation'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0146
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls.partnership_unlock
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.circulation_controls.partnership_unlock'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0147
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls.reserve_governance
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.circulation_controls.reserve_governance'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0148
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls.team_vesting_schedule
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.circulation_controls.team_vesting_schedule'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0149
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.deflationary_mechanisms
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.deflationary_mechanisms'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0150
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.deflationary_mechanisms.governance_burning
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.deflationary_mechanisms.governance_burning'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0151
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.deflationary_mechanisms.staking_slashing
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.deflationary_mechanisms.staking_slashing'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0152
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.initial_distribution'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0153
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.community_rewards
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.initial_distribution.community_rewards'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0154
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.ecosystem_development
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.initial_distribution.ecosystem_development'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0155
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.partnerships
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.initial_distribution.partnerships'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0156
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.reserve_fund
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.initial_distribution.reserve_fund'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0157
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.team_development
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.initial_distribution.team_development'
+    as defined in SoT document lines 146-250.
+- rule_id: SOT-0158
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.total_supply
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'supply_mechanics.total_supply' as defined
+    in SoT document lines 146-250.
+- rule_id: SOT-0159
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'technical_specification' as defined
+    in SoT document lines 30-100.
+- rule_id: SOT-0160
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.blockchain
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'technical_specification.blockchain'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0161
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.custody_model
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'technical_specification.custody_model'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0162
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.smart_contract_automation
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'technical_specification.smart_contract_automation'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0163
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.standard
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'technical_specification.standard' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0164
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.supply_model
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'technical_specification.supply_model'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0165
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: token_definition
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'token_definition' as defined in SoT
+    document lines 30-100.
+- rule_id: SOT-0166
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: token_definition.explicit_exclusions
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'token_definition.explicit_exclusions'
+    as defined in SoT document lines 30-100.
+- rule_id: SOT-0167
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: token_definition.legal_position
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'token_definition.legal_position' as
+    defined in SoT document lines 30-100.
+- rule_id: SOT-0168
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: token_definition.purpose
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'token_definition.purpose' as defined
+    in SoT document lines 30-100.
+- rule_id: SOT-0169
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: classification
+  category: METADATA
+  severity: INFO
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'classification' as defined in SoT document
+    lines 30-100.
+- rule_id: SOT-0170
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: date
+  category: METADATA
+  severity: INFO
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'date' as defined in SoT document lines
+    146-250.
+- rule_id: SOT-0171
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: deprecated
+  category: METADATA
+  severity: INFO
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'deprecated' as defined in SoT document
+    lines 146-250.
+- rule_id: SOT-0172
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: version
+  category: METADATA
+  severity: INFO
+  enforcement: policy+test
+  description: Enforce semantic constraint at 'version' as defined in SoT document
+    lines 146-250.

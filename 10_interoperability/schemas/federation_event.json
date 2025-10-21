@@ -1,0 +1,390 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ssid.foundation/schemas/federation_event.json",
+  "title": "Federated Audit Event Schema",
+  "description": "Schema for Cross-Federation Proof Activation events (AMP L9-Federated Proof Plane)",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "event_id",
+    "timestamp",
+    "source_module",
+    "event_type",
+    "severity",
+    "data",
+    "federation_context"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Unique event identifier (UUID or sequential)",
+      "pattern": "^[a-zA-Z0-9_\\-]+$",
+      "minLength": 8,
+      "maxLength": 128,
+      "examples": ["kyc_verification_001", "health_check_12345"]
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Event timestamp (ISO 8601)",
+      "format": "date-time",
+      "examples": ["2025-10-14T12:34:56.789Z"]
+    },
+    "source_module": {
+      "type": "string",
+      "description": "Source module path (e.g., 03_core/healthcheck)",
+      "pattern": "^[0-9]{2}_[a-z_]+(/[a-z_]+)*$",
+      "examples": ["03_core/healthcheck", "14_zero_time_auth/kyc_gateway"]
+    },
+    "event_type": {
+      "type": "string",
+      "description": "Event type category",
+      "enum": [
+        "HEALTH_CHECK",
+        "KYC_VERIFICATION",
+        "COMPLIANCE_CHECK",
+        "AI_DECISION",
+        "BLOCKCHAIN_ANCHOR",
+        "WORM_WRITE",
+        "IDENTITY_SCORE_UPDATE",
+        "FEDERATION_SYNC",
+        "CONSENSUS_VOTE",
+        "PROOF_CREDIT_ALLOCATION"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "description": "Event severity level",
+      "enum": ["DEBUG", "INFO", "NOTICE", "WARNING", "ERROR", "CRITICAL", "ALERT"]
+    },
+    "data": {
+      "type": "object",
+      "description": "Event-specific payload data",
+      "additionalProperties": true
+    },
+    "requires_worm": {
+      "type": "boolean",
+      "description": "Whether event requires WORM storage (immutable)",
+      "default": true
+    },
+    "requires_blockchain": {
+      "type": "boolean",
+      "description": "Whether event requires blockchain anchoring",
+      "default": false
+    },
+    "requires_federation_sync": {
+      "type": "boolean",
+      "description": "Whether event requires federation synchronization",
+      "default": false
+    },
+    "federation_context": {
+      "type": "object",
+      "description": "Federation coordination metadata (required for L9-Federated Proof Plane)",
+      "required": [
+        "node_id",
+        "region",
+        "federation_zone",
+        "proof_root_hash",
+        "proof_sequence",
+        "consensus_round",
+        "sync_timestamp"
+      ],
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "description": "Originating node identifier",
+          "pattern": "^[a-z0-9\\-]+$",
+          "examples": ["eu-node-001", "us-node-002", "apac-node-003"]
+        },
+        "region": {
+          "type": "string",
+          "description": "Geographic region (cloud provider region format)",
+          "pattern": "^[a-z]{2}-[a-z]+-[0-9]{1}$",
+          "examples": ["eu-west-1", "us-east-1", "ap-southeast-1"]
+        },
+        "federation_zone": {
+          "type": "string",
+          "description": "Federation zone for proof coordination",
+          "enum": ["eu", "us", "apac", "global", "ssid", "opencore"],
+          "examples": ["eu", "global", "ssid"]
+        },
+        "proof_root_hash": {
+          "type": "string",
+          "description": "Merkle root hash for this proof batch (SHA-256)",
+          "pattern": "^[a-f0-9]{64}$",
+          "examples": ["abc123def456..."]
+        },
+        "proof_sequence": {
+          "type": "integer",
+          "description": "Sequence number in proof stream (monotonically increasing)",
+          "minimum": 0,
+          "examples": [100001, 200050]
+        },
+        "consensus_round": {
+          "type": "integer",
+          "description": "Consensus round number for this batch",
+          "minimum": 0,
+          "examples": [42, 1337]
+        },
+        "sync_timestamp": {
+          "type": "string",
+          "description": "Federation sync timestamp (ISO 8601)",
+          "format": "date-time",
+          "examples": ["2025-10-14T12:34:56.789Z"]
+        },
+        "target_zone": {
+          "type": "string",
+          "description": "Target zone for cross-federation proof forwarding (optional)",
+          "enum": ["eu", "us", "apac", "global", "ssid", "opencore"],
+          "examples": ["opencore"]
+        },
+        "bridge_id": {
+          "type": "string",
+          "description": "Bridge identifier for cross-federation routing (optional)",
+          "pattern": "^[a-z0-9\\-]+$",
+          "examples": ["ssid-opencore-bridge-001"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "proof_metadata": {
+      "type": "object",
+      "description": "Proof-specific metadata for validation and archiving",
+      "properties": {
+        "proof_type": {
+          "type": "string",
+          "description": "Type of proof",
+          "enum": ["kyc", "compliance", "audit", "health", "identity_score", "governance"],
+          "examples": ["kyc", "compliance"]
+        },
+        "proof_weight": {
+          "type": "number",
+          "description": "Importance score for this proof (0.0-1.0)",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "examples": [0.95, 0.75]
+        },
+        "proof_validators": {
+          "type": "array",
+          "description": "List of node_ids that validated this proof",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9\\-]+$"
+          },
+          "examples": [["eu-node-001", "us-node-002"]]
+        },
+        "proof_signature": {
+          "type": "string",
+          "description": "Digital signature (post-quantum: Dilithium)",
+          "pattern": "^[a-f0-9]+$",
+          "examples": ["abc123def456..."]
+        },
+        "merkle_proof_path": {
+          "type": "array",
+          "description": "Merkle proof path (sibling hashes) for verification",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "examples": [["abc123...", "def456...", "ghi789..."]]
+        }
+      },
+      "additionalProperties": true
+    },
+    "consensus_metadata": {
+      "type": "object",
+      "description": "Consensus metadata for batch validation",
+      "properties": {
+        "batch_id": {
+          "type": "string",
+          "description": "Batch identifier (UUID)",
+          "pattern": "^[a-f0-9\\-]{36}$",
+          "examples": ["550e8400-e29b-41d4-a716-446655440000"]
+        },
+        "batch_size": {
+          "type": "integer",
+          "description": "Number of proofs in this batch",
+          "minimum": 1,
+          "examples": [1000, 5000]
+        },
+        "consensus_status": {
+          "type": "string",
+          "description": "Current consensus status",
+          "enum": ["pending", "validating", "consensus_reached", "consensus_failed", "finalized"],
+          "examples": ["consensus_reached"]
+        },
+        "consensus_threshold": {
+          "type": "number",
+          "description": "Consensus threshold (fraction of nodes required)",
+          "minimum": 0.5,
+          "maximum": 1.0,
+          "default": 0.67,
+          "examples": [0.67, 0.75]
+        },
+        "votes_received": {
+          "type": "integer",
+          "description": "Number of consensus votes received",
+          "minimum": 0,
+          "examples": [5, 10]
+        },
+        "votes_required": {
+          "type": "integer",
+          "description": "Number of consensus votes required",
+          "minimum": 1,
+          "examples": [7, 10]
+        },
+        "validation_signatures": {
+          "type": "object",
+          "description": "Validation signatures from federation nodes",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Digital signature from node_id",
+            "pattern": "^[a-f0-9]+$"
+          },
+          "examples": [{
+            "eu-node-001": "abc123...",
+            "us-node-002": "def456..."
+          }]
+        }
+      },
+      "additionalProperties": false
+    },
+    "credit_allocation": {
+      "type": "object",
+      "description": "MiCA-compliant proof credit allocation (utility-based, non-custodial)",
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "description": "Node receiving credit allocation",
+          "pattern": "^[a-z0-9\\-]+$"
+        },
+        "credit_score": {
+          "type": "number",
+          "description": "Utility credit score (non-monetary)",
+          "minimum": 0.0,
+          "examples": [4523.75, 3890.12]
+        },
+        "governance_weight": {
+          "type": "number",
+          "description": "Governance voting weight (0.0-1.0)",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "examples": [0.9532, 0.8102]
+        },
+        "allocation_hash": {
+          "type": "string",
+          "description": "SHA-256 hash of allocation data (audit trail)",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "blockchain_anchor_tx": {
+          "type": "string",
+          "description": "On-chain transaction hash for credit allocation proof (optional)",
+          "pattern": "^0x[a-f0-9]{64}$",
+          "examples": ["0xabc123def456..."]
+        }
+      },
+      "required": ["node_id", "credit_score", "governance_weight", "allocation_hash"],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "event_id": "kyc_verification_001",
+      "timestamp": "2025-10-14T12:34:56.789Z",
+      "source_module": "14_zero_time_auth/kyc_gateway",
+      "event_type": "KYC_VERIFICATION",
+      "severity": "INFO",
+      "data": {
+        "user_id": "user_12345",
+        "verification_status": "PASSED",
+        "kyc_level": "FULL"
+      },
+      "requires_worm": true,
+      "requires_blockchain": true,
+      "requires_federation_sync": true,
+      "federation_context": {
+        "node_id": "eu-node-001",
+        "region": "eu-west-1",
+        "federation_zone": "eu",
+        "proof_root_hash": "abc123def456789...",
+        "proof_sequence": 100001,
+        "consensus_round": 42,
+        "sync_timestamp": "2025-10-14T12:34:56.789Z"
+      },
+      "proof_metadata": {
+        "proof_type": "kyc",
+        "proof_weight": 0.95,
+        "proof_validators": ["eu-node-001", "us-node-002"],
+        "proof_signature": "abc123def456..."
+      },
+      "consensus_metadata": {
+        "batch_id": "550e8400-e29b-41d4-a716-446655440000",
+        "batch_size": 1000,
+        "consensus_status": "consensus_reached",
+        "consensus_threshold": 0.67,
+        "votes_received": 7,
+        "votes_required": 7,
+        "validation_signatures": {
+          "eu-node-001": "abc123...",
+          "us-node-002": "def456..."
+        }
+      }
+    },
+    {
+      "event_id": "health_check_001",
+      "timestamp": "2025-10-14T12:35:00.000Z",
+      "source_module": "03_core/healthcheck",
+      "event_type": "HEALTH_CHECK",
+      "severity": "INFO",
+      "data": {
+        "component": "api_gateway",
+        "status": "healthy",
+        "services_checked": 5,
+        "failed": 0
+      },
+      "requires_worm": true,
+      "requires_blockchain": false,
+      "requires_federation_sync": false,
+      "federation_context": {
+        "node_id": "eu-node-001",
+        "region": "eu-west-1",
+        "federation_zone": "eu",
+        "proof_root_hash": "",
+        "proof_sequence": 0,
+        "consensus_round": 0,
+        "sync_timestamp": "2025-10-14T12:35:00.000Z"
+      }
+    },
+    {
+      "event_id": "cross_fed_proof_001",
+      "timestamp": "2025-10-14T12:36:00.000Z",
+      "source_module": "10_interoperability/federation",
+      "event_type": "FEDERATION_SYNC",
+      "severity": "NOTICE",
+      "data": {
+        "sync_type": "cross_zone_forwarding",
+        "source_zone": "ssid",
+        "target_zone": "opencore"
+      },
+      "requires_worm": true,
+      "requires_blockchain": true,
+      "requires_federation_sync": true,
+      "federation_context": {
+        "node_id": "ssid-eu-001",
+        "region": "eu-west-1",
+        "federation_zone": "ssid",
+        "proof_root_hash": "xyz789abc123...",
+        "proof_sequence": 200050,
+        "consensus_round": 100,
+        "sync_timestamp": "2025-10-14T12:36:00.000Z",
+        "target_zone": "opencore",
+        "bridge_id": "ssid-opencore-bridge-001"
+      },
+      "proof_metadata": {
+        "proof_type": "compliance",
+        "proof_weight": 0.85,
+        "proof_validators": ["ssid-eu-001", "ssid-us-002", "opencore-eu-001"]
+      }
+    }
+  ]
+}

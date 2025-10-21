@@ -27,7 +27,6 @@ SUPPORTED_EXT = (".json", ".yaml", ".yml", ".csv")
 HASH_RE = re.compile(r"sha(256|3-256|512):[0-9a-f]{64,128}|blake2b:[0-9a-f]{64,128}", re.I)
 DID_RE = re.compile(r"did:[a-z0-9]+:[a-zA-Z0-9._-]+", re.I)
 
-
 def load_text(path: Path) -> str:
     """Load text content from file, handling errors gracefully."""
     try:
@@ -35,13 +34,11 @@ def load_text(path: Path) -> str:
     except Exception:
         return ""
 
-
 def extract_candidates(content: str):
     """Extract hash and DID candidates from text content."""
     hashes = set(HASH_RE.findall(content))
     dids = set(DID_RE.findall(content))
     return hashes, dids
-
 
 def scan_dir(directory: Path):
     """Recursively scan directory for supported file types and extract candidates."""
@@ -58,7 +55,6 @@ def scan_dir(directory: Path):
                 if h or d:
                     candidates.append((p, h, d))
     return candidates
-
 
 def build_index():
     """Build index of all hashes and DIDs found across monitored directories."""
@@ -79,7 +75,6 @@ def build_index():
 
     return index
 
-
 def detect_collisions(index):
     """Detect collisions where same hash/DID appears in multiple files."""
     collisions = []
@@ -94,7 +89,6 @@ def detect_collisions(index):
             })
 
     return sorted(collisions, key=lambda x: x["count"], reverse=True)
-
 
 def log_findings(collisions):
     """Log findings to JSONL audit log."""
@@ -130,7 +124,6 @@ def log_findings(collisions):
 
     return status, collisions
 
-
 def main():
     """Main execution function."""
     print("[SCAN] Scanning for duplicate identity hashes and DIDs...")
@@ -146,7 +139,6 @@ def main():
         exit(2)
     else:
         exit(0)
-
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,21 @@
+version: "5.0"
+
+spec:
+  revenue_bands:
+    S2_prime_eur: 2000000  # €2M
+    S3_prime_eur: 5000000  # €5M
+
+tiers:
+  - {id: core_access, name: "SSID Core Access", price_eur: 29, dids_included: 1}
+  - {id: professional, name: "SSID Professional", price_eur: 99, dids_included: 10}
+  - {id: enterprise_trust, name: "SSID Enterprise Trust", price_eur: 499, dids_included: 50}
+  - {id: global_proof_suite, name: "SSID Global Proof Suite", price_eur: 2000, dids_included: "unlimited"}
+  - {id: interfederation_elite, name: "SSID InterFederation Elite", price_eur: 10000, dids_included: "unlimited"}
+  - {id: sovereign_infrastructure, name: "SSID Sovereign Infrastructure Tier", price_eur: "custom_min_25000", dids_included: "unlimited"}
+regional_zones:
+  DACH: { language: "de", surcharge_percent: 0.0 }
+  EN-EU: { language: "en", surcharge_percent: 5.0 }
+discounts:
+  - {id: loyalty_12, months: 12, percent: 5}
+  - {id: loyalty_24, months: 24, percent: 10}
+  - {id: loyalty_36, months: 36, percent: 15}

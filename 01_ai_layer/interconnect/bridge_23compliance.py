@@ -4,7 +4,6 @@
 from typing import Dict, Any
 from pathlib import Path
 
-
 def validate_ai_decision(decision: Dict[str, Any], policy_name: str = "AI_ETHICS") -> bool:
     """
     Validate AI decision against compliance policies.
@@ -36,7 +35,6 @@ def validate_ai_decision(decision: Dict[str, Any], policy_name: str = "AI_ETHICS
 
     return True
 
-
 def check_bias_constraints(features: Dict[str, Any]) -> bool:
     """
     Check if feature set violates bias constraints.
@@ -56,7 +54,6 @@ def check_bias_constraints(features: Dict[str, Any]) -> bool:
 
     return True
 
-
 def log_ai_compliance_check(decision: Dict, result: bool) -> None:
     """Log compliance check to evidence trail"""
     repo_root = Path(__file__).resolve().parents[2]
@@ -74,7 +71,6 @@ def log_ai_compliance_check(decision: Dict, result: bool) -> None:
 
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(json.dumps(log_entry) + "\n")
-
 
 if __name__ == "__main__":
     test_decision = {"model": "identity_scorer", "score": 75, "confidence": 0.85, "id": "test-001"}

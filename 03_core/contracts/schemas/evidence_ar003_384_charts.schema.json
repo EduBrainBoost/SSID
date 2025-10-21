@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.local/schemas/evidence_ar003_384_charts.json",
+  "title": "AR003 Evidence - 384 Charts",
+  "description": "Evidence structure for AR003: Es MUESSEN exakt 384 Chart-Dateien existieren (24x16)",
+  "type": "object",
+  "required": [
+    "total_charts",
+    "sample_charts"
+  ],
+  "properties": {
+    "total_charts": {
+      "type": "integer",
+      "description": "Number of chart.yaml files found",
+      "minimum": 0,
+      "maximum": 1000,
+      "examples": [384, 350]
+    },
+    "sample_charts": {
+      "type": "array",
+      "description": "Sample of chart.yaml file paths (first 10)",
+      "items": {
+        "type": "string",
+        "pattern": ".*\\/chart\\.yaml$"
+      },
+      "minItems": 0,
+      "maxItems": 10,
+      "examples": [
+        [
+          "01_ai_layer/shards/Shard_01_Identity/chart.yaml",
+          "01_ai_layer/shards/Shard_02_Documents/chart.yaml"
+        ]
+      ]
+    },
+    "expected_count": {
+      "type": "integer",
+      "description": "Expected number of charts (24 roots × 16 shards)",
+      "const": 384
+    },
+    "missing_count": {
+      "type": "integer",
+      "description": "Number of missing charts (present only if validation fails)",
+      "minimum": 0,
+      "maximum": 384
+    }
+  },
+  "examples": [
+    {
+      "total_charts": 384,
+      "sample_charts": [
+        "01_ai_layer/shards/Shard_01_Identity/chart.yaml",
+        "01_ai_layer/shards/Shard_02_Documents/chart.yaml",
+        "02_audit_logging/shards/Shard_01_Identity/chart.yaml"
+      ],
+      "expected_count": 384
+    },
+    {
+      "total_charts": 350,
+      "sample_charts": [
+        "01_ai_layer/shards/Shard_01_Identity/chart.yaml"
+      ],
+      "expected_count": 384,
+      "missing_count": 34
+    }
+  ]
+}

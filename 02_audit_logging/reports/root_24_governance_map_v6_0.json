@@ -1,0 +1,1751 @@
+{
+  "generated_at": "2025-10-13T15:58:51.510869Z",
+  "version": "v6.0",
+  "total_roots": 24,
+  "roots": [
+    {
+      "root": "01_ai_layer",
+      "chart": {
+        "capabilities": [
+          "identity_verification_ml",
+          "risk_pattern_detection",
+          "behavioral_analytics",
+          "fraud_detection_models",
+          "synthetic_data_generation"
+        ],
+        "policies": [
+          {
+            "name": "ai_ethics",
+            "enforcement": "manual_review",
+            "scope": "all_models"
+          },
+          {
+            "name": "data_minimization",
+            "enforcement": "automated",
+            "scope": "training_data"
+          },
+          {
+            "name": "model_versioning",
+            "enforcement": "automated",
+            "scope": "deployments"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "model_inference",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "training_pipeline",
+            "type": "internal",
+            "authentication": "required"
+          },
+          {
+            "name": "monitoring_metrics",
+            "type": "prometheus",
+            "authentication": "internal"
+          }
+        ],
+        "compliance": [
+          "gdpr",
+          "ai_act"
+        ],
+        "internal_dependencies": [
+          "09_meta_identity",
+          "08_identity_score",
+          "02_audit_logging"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "model_inference.py",
+          "secondary": "\\n      - training_pipeline.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 15,
+        "boundary": 10,
+        "negative": 5,
+        "total": 30
+      }
+    },
+    {
+      "root": "02_audit_logging",
+      "chart": {
+        "capabilities": [
+          "immutable_audit_logs",
+          "worm_storage",
+          "blockchain_anchoring",
+          "forensic_evidence_collection",
+          "compliance_reporting",
+          "merkle_tree_verification"
+        ],
+        "policies": [
+          {
+            "name": "immutability",
+            "enforcement": "automated",
+            "scope": "all_logs"
+          },
+          {
+            "name": "retention",
+            "enforcement": "automated",
+            "scope": "all_logs"
+          },
+          {
+            "name": "integrity_verification",
+            "enforcement": "continuous",
+            "scope": "all_logs"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "log_ingestion",
+            "type": "grpc",
+            "authentication": "required"
+          },
+          {
+            "name": "log_query",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "blockchain_anchor",
+            "type": "async_queue",
+            "authentication": "internal"
+          }
+        ],
+        "compliance": [
+          "dsgvo",
+          "dora",
+          "iso_27001"
+        ],
+        "internal_dependencies": [
+          "21_post_quantum_crypto",
+          "15_infra"
+        ],
+        "data_classification": "highly_confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "log_ingestion.py",
+          "secondary": "\\n      - blockchain_anchor.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "03_core",
+      "chart": {
+        "capabilities": [
+          "did_lifecycle_management",
+          "verifiable_credential_issuance",
+          "proof_aggregation",
+          "transaction_processing",
+          "smart_contract_integration",
+          "cryptographic_operations"
+        ],
+        "policies": [
+          {
+            "name": "did_uniqueness",
+            "enforcement": "automated",
+            "scope": "all_dids"
+          },
+          {
+            "name": "credential_schema_validation",
+            "enforcement": "automated",
+            "scope": "all_vcs"
+          },
+          {
+            "name": "transaction_integrity",
+            "enforcement": "automated",
+            "scope": "all_transactions"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "did_resolver",
+            "type": "rest_api",
+            "authentication": "optional"
+          },
+          {
+            "name": "vc_issuer",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "proof_aggregator",
+            "type": "grpc",
+            "authentication": "required"
+          }
+        ],
+        "compliance": [
+          "w3c_standards",
+          "mica"
+        ],
+        "internal_dependencies": [
+          "09_meta_identity",
+          "14_zero_time_auth",
+          "02_audit_logging",
+          "21_post_quantum_crypto"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "did_manager.py",
+          "secondary": "\\n      - vc_issuer.py\\n      - proof_aggregator.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "04_deployment",
+      "chart": {
+        "capabilities": [
+          "infrastructure_as_code",
+          "multi_environment_deployment",
+          "blue_green_deployments",
+          "canary_releases",
+          "rollback_automation",
+          "configuration_management"
+        ],
+        "policies": [
+          {
+            "name": "environment_isolation",
+            "enforcement": "automated",
+            "scope": "all_environments"
+          },
+          {
+            "name": "secret_management",
+            "enforcement": "automated",
+            "scope": "all_deployments"
+          },
+          {
+            "name": "deployment_approval",
+            "enforcement": "manual",
+            "scope": "production"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "deployment_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "infrastructure_provisioning",
+            "type": "terraform",
+            "authentication": "required"
+          },
+          {
+            "name": "config_management",
+            "type": "gitops",
+            "authentication": "required"
+          }
+        ],
+        "compliance": [
+          "dora",
+          "iso_27001"
+        ],
+        "internal_dependencies": [
+          "15_infra",
+          "23_compliance",
+          "02_audit_logging"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "deploy.sh",
+          "secondary": "\\n      - rollback.sh"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "05_documentation",
+      "chart": {
+        "capabilities": [
+          "api_documentation",
+          "architecture_diagrams",
+          "compliance_documentation",
+          "user_guides",
+          "developer_onboarding",
+          "changelog_management"
+        ],
+        "policies": [
+          {
+            "name": "documentation_versioning",
+            "enforcement": "automated",
+            "scope": "all_docs"
+          },
+          {
+            "name": "accuracy_validation",
+            "enforcement": "manual_review",
+            "scope": "all_docs"
+          },
+          {
+            "name": "accessibility",
+            "enforcement": "automated",
+            "scope": "web_docs"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "documentation_portal",
+            "type": "web",
+            "authentication": "optional"
+          },
+          {
+            "name": "api_specs",
+            "type": "openapi",
+            "authentication": null
+          },
+          {
+            "name": "schema_registry",
+            "type": "json_schema",
+            "authentication": "optional"
+          }
+        ],
+        "compliance": [
+          "iso_27001",
+          "accessibility"
+        ],
+        "internal_dependencies": [
+          "16_codex",
+          "23_compliance"
+        ],
+        "data_classification": "public"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "build_docs.sh",
+          "secondary": []
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "06_data_pipeline",
+      "chart": {
+        "capabilities": [
+          "data_ingestion",
+          "etl_workflows",
+          "data_validation",
+          "privacy_preserving_transformation",
+          "batch_processing",
+          "stream_processing"
+        ],
+        "policies": [
+          {
+            "name": "pii_detection",
+            "enforcement": "automated",
+            "scope": "all_data"
+          },
+          {
+            "name": "data_quality",
+            "enforcement": "automated",
+            "scope": "all_pipelines"
+          },
+          {
+            "name": "data_lineage",
+            "enforcement": "automated",
+            "scope": "all_transformations"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "data_ingestion_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "stream_processor",
+            "type": "kafka",
+            "authentication": "required"
+          },
+          {
+            "name": "batch_jobs",
+            "type": "airflow",
+            "authentication": "internal"
+          }
+        ],
+        "compliance": [
+          "dsgvo"
+        ],
+        "internal_dependencies": [
+          "09_meta_identity",
+          "02_audit_logging",
+          "22_datasets"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "ingest.py",
+          "secondary": "\\n      - transform.py\\n      - validate.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "07_governance_legal",
+      "chart": {
+        "capabilities": [
+          "legal_compliance_management",
+          "risk_assessment",
+          "governance_framework",
+          "regulatory_mapping",
+          "contract_management",
+          "privacy_policy_management"
+        ],
+        "policies": [
+          {
+            "name": "legal_review_required",
+            "enforcement": "manual",
+            "scope": "all_contracts"
+          },
+          {
+            "name": "gdpr_compliance",
+            "enforcement": "automated",
+            "scope": "all_services"
+          },
+          {
+            "name": "mica_compliance",
+            "enforcement": "automated",
+            "scope": "token_services"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "compliance_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "risk_registry",
+            "type": "database",
+            "authentication": "internal"
+          },
+          {
+            "name": "policy_repository",
+            "type": "git",
+            "authentication": "required"
+          }
+        ],
+        "compliance": [
+          "dsgvo",
+          "mica",
+          "amld6",
+          "dora"
+        ],
+        "internal_dependencies": [
+          "23_compliance",
+          "02_audit_logging",
+          "20_foundation"
+        ],
+        "data_classification": "highly_confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "compliance_check.py",
+          "secondary": []
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "08_identity_score",
+      "chart": {
+        "capabilities": [
+          "identity_reputation_scoring",
+          "risk_assessment",
+          "trust_metrics_calculation",
+          "behavioral_risk_analysis",
+          "fraud_detection",
+          "anomaly_detection"
+        ],
+        "policies": [
+          {
+            "name": "score_transparency",
+            "enforcement": "automated",
+            "scope": "all_scores"
+          },
+          {
+            "name": "bias_detection",
+            "enforcement": "continuous",
+            "scope": "all_models"
+          },
+          {
+            "name": "score_versioning",
+            "enforcement": "automated",
+            "scope": "all_calculations"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "scoring_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "risk_engine",
+            "type": "grpc",
+            "authentication": "required"
+          },
+          {
+            "name": "metrics_export",
+            "type": "prometheus",
+            "authentication": "internal"
+          }
+        ],
+        "compliance": [
+          "dsgvo",
+          "mica",
+          "amld6"
+        ],
+        "internal_dependencies": [
+          "01_ai_layer",
+          "09_meta_identity",
+          "02_audit_logging"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "risk_engine.py",
+          "secondary": "\\n      - reputation_calculator.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "09_meta_identity",
+      "chart": {
+        "capabilities": [
+          "did_management",
+          "verifiable_credential_storage",
+          "hash_only_pii_storage",
+          "identity_resolution",
+          "credential_revocation",
+          "biometric_hash_storage"
+        ],
+        "policies": [
+          {
+            "name": "hash_only_pii",
+            "enforcement": "automated",
+            "scope": "all_pii"
+          },
+          {
+            "name": "no_raw_biometrics",
+            "enforcement": "automated",
+            "scope": "all_biometric_data"
+          },
+          {
+            "name": "right_to_erasure",
+            "enforcement": "automated",
+            "scope": "all_identities"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "identity_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "credential_vault",
+            "type": "grpc",
+            "authentication": "required"
+          },
+          {
+            "name": "did_resolver",
+            "type": "universal_resolver",
+            "authentication": "optional"
+          }
+        ],
+        "compliance": [
+          "dsgvo",
+          "w3c"
+        ],
+        "internal_dependencies": [
+          "21_post_quantum_crypto",
+          "02_audit_logging",
+          "14_zero_time_auth"
+        ],
+        "data_classification": "highly_confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "did_service.py",
+          "secondary": "\\n      - credential_vault.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "10_interoperability",
+      "chart": {
+        "capabilities": [
+          "cross_chain_bridges",
+          "protocol_adapters",
+          "external_api_integration",
+          "message_translation",
+          "data_format_conversion",
+          "federated_identity"
+        ],
+        "policies": [
+          {
+            "name": "bridge_security",
+            "enforcement": "automated",
+            "scope": "all_bridges"
+          },
+          {
+            "name": "adapter_validation",
+            "enforcement": "automated",
+            "scope": "all_adapters"
+          },
+          {
+            "name": "protocol_versioning",
+            "enforcement": "automated",
+            "scope": "all_protocols"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "bridge_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "adapter_registry",
+            "type": "grpc",
+            "authentication": "internal"
+          },
+          {
+            "name": "federation_protocol",
+            "type": "didcomm",
+            "authentication": "required"
+          }
+        ],
+        "compliance": [
+          "w3c",
+          "mica"
+        ],
+        "internal_dependencies": [
+          "09_meta_identity",
+          "19_adapters",
+          "02_audit_logging"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "bridge_service.py",
+          "secondary": "\\n      - adapter_registry.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "11_test_simulation",
+      "chart": {
+        "capabilities": [
+          "unit_testing",
+          "integration_testing",
+          "e2e_testing",
+          "load_testing",
+          "chaos_engineering",
+          "compliance_validation",
+          "opa_policy_testing"
+        ],
+        "policies": [
+          {
+            "name": "test_coverage_minimum",
+            "enforcement": "automated",
+            "scope": "all_code"
+          },
+          {
+            "name": "integration_test_required",
+            "enforcement": "automated",
+            "scope": "all_merges"
+          },
+          {
+            "name": "compliance_test_required",
+            "enforcement": "automated",
+            "scope": "policy_changes"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "test_runner",
+            "type": "pytest",
+            "authentication": "ci_only"
+          },
+          {
+            "name": "load_generator",
+            "type": "locust",
+            "authentication": "internal"
+          },
+          {
+            "name": "compliance_validator",
+            "type": "opa",
+            "authentication": "internal"
+          }
+        ],
+        "compliance": [
+          "dora",
+          "iso_27001"
+        ],
+        "internal_dependencies": [
+          "all_roots"
+        ],
+        "data_classification": "internal"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "pytest.ini",
+          "secondary": "\\n      - run_tests.sh"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 21,
+        "boundary": 14,
+        "negative": 7,
+        "total": 42
+      }
+    },
+    {
+      "root": "12_tooling",
+      "chart": {
+        "capabilities": [
+          "cli_tools",
+          "automation_scripts",
+          "code_generation",
+          "migration_tools",
+          "debugging_utilities",
+          "performance_profiling"
+        ],
+        "policies": [
+          {
+            "name": "script_validation",
+            "enforcement": "automated",
+            "scope": "all_scripts"
+          },
+          {
+            "name": "tool_versioning",
+            "enforcement": "automated",
+            "scope": "all_tools"
+          },
+          {
+            "name": "safe_execution",
+            "enforcement": "automated",
+            "scope": "all_scripts"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "cli",
+            "type": "command_line",
+            "authentication": "developer"
+          },
+          {
+            "name": "automation_api",
+            "type": "rest_api",
+            "authentication": "ci_only"
+          },
+          {
+            "name": "code_generator",
+            "type": "template_engine",
+            "authentication": "developer"
+          }
+        ],
+        "compliance": [
+          "iso_27001"
+        ],
+        "internal_dependencies": [
+          "16_codex",
+          "23_compliance"
+        ],
+        "data_classification": "internal"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "cli.py",
+          "secondary": []
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "13_ui_layer",
+      "chart": {
+        "capabilities": [
+          "web_ui_components",
+          "mobile_responsive_design",
+          "wasm_policy_evaluation",
+          "real_time_updates",
+          "accessibility_compliance",
+          "i18n_localization"
+        ],
+        "policies": [
+          {
+            "name": "safe_fix_only",
+            "enforcement": "automated",
+            "scope": "policy_evaluation"
+          },
+          {
+            "name": "accessibility_wcag",
+            "enforcement": "automated",
+            "scope": "all_components"
+          },
+          {
+            "name": "csp_enforcement",
+            "enforcement": "automated",
+            "scope": "all_pages"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "web_app",
+            "type": "react",
+            "authentication": "session_based"
+          },
+          {
+            "name": "opa_wasm_eval",
+            "type": "wasm",
+            "authentication": "client_side"
+          },
+          {
+            "name": "websocket_updates",
+            "type": "websocket",
+            "authentication": "token_based"
+          }
+        ],
+        "compliance": [
+          "dsgvo",
+          "wcag"
+        ],
+        "internal_dependencies": [
+          "03_core",
+          "14_zero_time_auth",
+          "23_compliance"
+        ],
+        "data_classification": "public"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "src/index.tsx",
+          "secondary": "\\n      - webpack.config.js"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "14_zero_time_auth",
+      "chart": {
+        "capabilities": [
+          "authentication_service",
+          "authorization_rbac",
+          "kyc_kyb_gateway",
+          "zero_knowledge_proofs",
+          "session_management",
+          "mfa_support"
+        ],
+        "policies": [
+          {
+            "name": "password_policy",
+            "enforcement": "automated",
+            "scope": "all_users"
+          },
+          {
+            "name": "mfa_required",
+            "enforcement": "automated",
+            "scope": "privileged_users"
+          },
+          {
+            "name": "session_timeout",
+            "enforcement": "automated",
+            "scope": "all_sessions"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "auth_api",
+            "type": "rest_api",
+            "authentication": "none"
+          },
+          {
+            "name": "kyc_gateway",
+            "type": "rest_api",
+            "authentication": "api_key"
+          },
+          {
+            "name": "zkp_verifier",
+            "type": "grpc",
+            "authentication": "required"
+          }
+        ],
+        "compliance": [
+          "dsgvo",
+          "amld6",
+          "oauth2",
+          "oidc"
+        ],
+        "internal_dependencies": [
+          "09_meta_identity",
+          "21_post_quantum_crypto",
+          "02_audit_logging"
+        ],
+        "data_classification": "highly_confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "auth_service.py",
+          "secondary": "\\n      - kyc_gateway.py\\n      - zkp_verifier.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "15_infra",
+      "chart": {
+        "capabilities": [
+          "database_management",
+          "caching_layer",
+          "message_queuing",
+          "object_storage",
+          "cdn_services",
+          "backup_recovery"
+        ],
+        "policies": [
+          {
+            "name": "encryption_at_rest",
+            "enforcement": "automated",
+            "scope": "all_storage"
+          },
+          {
+            "name": "encryption_in_transit",
+            "enforcement": "automated",
+            "scope": "all_connections"
+          },
+          {
+            "name": "backup_retention",
+            "enforcement": "automated",
+            "scope": "all_data"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "database_cluster",
+            "type": "postgresql",
+            "authentication": "password"
+          },
+          {
+            "name": "cache_cluster",
+            "type": "redis",
+            "authentication": "password"
+          },
+          {
+            "name": "message_broker",
+            "type": "kafka",
+            "authentication": "sasl"
+          }
+        ],
+        "compliance": [
+          "dora",
+          "iso_27001"
+        ],
+        "internal_dependencies": [
+          "04_deployment",
+          "02_audit_logging"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "database.tf",
+          "secondary": "\\n      - cache.tf\\n      - storage.tf"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "16_codex",
+      "chart": {
+        "capabilities": [
+          "schema_registry",
+          "structure_definitions",
+          "manifest_registry",
+          "version_control",
+          "json_schema_validation",
+          "openapi_specs"
+        ],
+        "policies": [
+          {
+            "name": "schema_versioning",
+            "enforcement": "automated",
+            "scope": "all_schemas"
+          },
+          {
+            "name": "backward_compatibility",
+            "enforcement": "automated",
+            "scope": "all_changes"
+          },
+          {
+            "name": "schema_validation",
+            "enforcement": "automated",
+            "scope": "all_schemas"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "schema_api",
+            "type": "rest_api",
+            "authentication": "optional"
+          },
+          {
+            "name": "manifest_repository",
+            "type": "git",
+            "authentication": "developer"
+          },
+          {
+            "name": "validation_service",
+            "type": "grpc",
+            "authentication": "internal"
+          }
+        ],
+        "compliance": [
+          "iso_27001"
+        ],
+        "internal_dependencies": [
+          "05_documentation",
+          "23_compliance"
+        ],
+        "data_classification": "internal"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "schema_registry.py",
+          "secondary": "\\n      - validator.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "17_observability",
+      "chart": {
+        "capabilities": [
+          "metrics_collection",
+          "distributed_tracing",
+          "log_aggregation",
+          "alerting",
+          "sla_monitoring",
+          "performance_profiling"
+        ],
+        "policies": [
+          {
+            "name": "metrics_retention",
+            "enforcement": "automated",
+            "scope": "all_metrics"
+          },
+          {
+            "name": "trace_sampling",
+            "enforcement": "automated",
+            "scope": "all_traces"
+          },
+          {
+            "name": "alert_routing",
+            "enforcement": "automated",
+            "scope": "all_alerts"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "metrics_endpoint",
+            "type": "prometheus",
+            "authentication": "internal"
+          },
+          {
+            "name": "tracing_collector",
+            "type": "opentelemetry",
+            "authentication": "internal"
+          },
+          {
+            "name": "log_shipper",
+            "type": "fluentd",
+            "authentication": "internal"
+          }
+        ],
+        "compliance": [
+          "dora",
+          "iso_27001"
+        ],
+        "internal_dependencies": [
+          "02_audit_logging",
+          "15_infra"
+        ],
+        "data_classification": "internal"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "metrics_collector.py",
+          "secondary": "\\n      - tracer.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "18_data_layer",
+      "chart": {
+        "capabilities": [
+          "data_modeling",
+          "orm_management",
+          "database_migrations",
+          "query_optimization",
+          "connection_pooling",
+          "transaction_management"
+        ],
+        "policies": [
+          {
+            "name": "migration_review",
+            "enforcement": "manual",
+            "scope": "all_migrations"
+          },
+          {
+            "name": "query_timeout",
+            "enforcement": "automated",
+            "scope": "all_queries"
+          },
+          {
+            "name": "connection_limit",
+            "enforcement": "automated",
+            "scope": "all_pools"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "orm_api",
+            "type": "sqlalchemy",
+            "authentication": "internal"
+          },
+          {
+            "name": "migration_tool",
+            "type": "alembic",
+            "authentication": "developer"
+          },
+          {
+            "name": "query_builder",
+            "type": "internal",
+            "authentication": "required"
+          }
+        ],
+        "compliance": [
+          "dsgvo"
+        ],
+        "internal_dependencies": [
+          "15_infra",
+          "02_audit_logging"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "models.py",
+          "secondary": "\\n      - migrations/"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "19_adapters",
+      "chart": {
+        "capabilities": [
+          "blockchain_adapters",
+          "legacy_system_integration",
+          "api_gateway_adapters",
+          "protocol_translation",
+          "data_format_conversion",
+          "connection_management"
+        ],
+        "policies": [
+          {
+            "name": "adapter_validation",
+            "enforcement": "automated",
+            "scope": "all_adapters"
+          },
+          {
+            "name": "connection_pooling",
+            "enforcement": "automated",
+            "scope": "all_adapters"
+          },
+          {
+            "name": "retry_policy",
+            "enforcement": "automated",
+            "scope": "all_requests"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "adapter_registry",
+            "type": "rest_api",
+            "authentication": "internal"
+          },
+          {
+            "name": "cosmos_adapter",
+            "type": "grpc",
+            "authentication": "required"
+          },
+          {
+            "name": "polkadot_adapter",
+            "type": "websocket",
+            "authentication": "required"
+          }
+        ],
+        "compliance": [
+          "w3c"
+        ],
+        "internal_dependencies": [
+          "10_interoperability",
+          "02_audit_logging"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "cosmos_adapter.py",
+          "secondary": "\\n      - polkadot_adapter.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "20_foundation",
+      "chart": {
+        "capabilities": [
+          "utility_token_management",
+          "tokenomics_modeling",
+          "governance_voting",
+          "staking_mechanisms",
+          "fee_distribution",
+          "treasury_management"
+        ],
+        "policies": [
+          {
+            "name": "non_custodial",
+            "enforcement": "automated",
+            "scope": "all_operations"
+          },
+          {
+            "name": "transparent_fees",
+            "enforcement": "automated",
+            "scope": "all_transactions"
+          },
+          {
+            "name": "governance_quorum",
+            "enforcement": "automated",
+            "scope": "all_votes"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "token_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "governance_contract",
+            "type": "smart_contract",
+            "authentication": "wallet"
+          },
+          {
+            "name": "staking_service",
+            "type": "grpc",
+            "authentication": "required"
+          }
+        ],
+        "compliance": [
+          "mica",
+          "mica_token_type"
+        ],
+        "internal_dependencies": [
+          "07_governance_legal",
+          "03_core",
+          "02_audit_logging"
+        ],
+        "data_classification": "public"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "token_contract.sol",
+          "secondary": "\\n      - governance.sol"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "21_post_quantum_crypto",
+      "chart": {
+        "capabilities": [
+          "pqc_key_generation",
+          "quantum_resistant_signatures",
+          "lattice_based_encryption",
+          "hash_based_signatures",
+          "pqc_key_exchange",
+          "hybrid_crypto_schemes"
+        ],
+        "policies": [
+          {
+            "name": "nist_pqc_only",
+            "enforcement": "automated",
+            "scope": "all_operations"
+          },
+          {
+            "name": "key_rotation",
+            "enforcement": "automated",
+            "scope": "all_keys"
+          },
+          {
+            "name": "quantum_safe_storage",
+            "enforcement": "automated",
+            "scope": "all_keys"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "crypto_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "key_management_service",
+            "type": "grpc",
+            "authentication": "required"
+          },
+          {
+            "name": "signing_service",
+            "type": "grpc",
+            "authentication": "required"
+          }
+        ],
+        "compliance": [
+          "eidas",
+          "nist",
+          "iso"
+        ],
+        "internal_dependencies": [
+          "09_meta_identity",
+          "02_audit_logging",
+          "03_core"
+        ],
+        "data_classification": "highly_confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "pqc_keygen.py",
+          "secondary": "\\n      - signing_service.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "22_datasets",
+      "chart": {
+        "capabilities": [
+          "dataset_cataloging",
+          "synthetic_data_generation",
+          "test_fixture_management",
+          "data_versioning",
+          "data_quality_validation",
+          "anonymization"
+        ],
+        "policies": [
+          {
+            "name": "no_real_pii",
+            "enforcement": "automated",
+            "scope": "all_datasets"
+          },
+          {
+            "name": "dataset_versioning",
+            "enforcement": "automated",
+            "scope": "all_datasets"
+          },
+          {
+            "name": "k_anonymity",
+            "enforcement": "automated",
+            "scope": "anonymized_datasets"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "dataset_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "synthetic_data_generator",
+            "type": "grpc",
+            "authentication": "internal"
+          },
+          {
+            "name": "data_catalog",
+            "type": "web",
+            "authentication": "developer"
+          }
+        ],
+        "compliance": [
+          "dsgvo"
+        ],
+        "internal_dependencies": [
+          "06_data_pipeline",
+          "01_ai_layer",
+          "11_test_simulation"
+        ],
+        "data_classification": "internal"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "synthetic_generator.py",
+          "secondary": "\\n      - catalog.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "23_compliance",
+      "chart": {
+        "capabilities": [
+          "opa_policy_management",
+          "regulatory_compliance_mapping",
+          "compliance_testing",
+          "evidence_collection",
+          "audit_trail_management",
+          "anti_gaming_controls"
+        ],
+        "policies": [
+          {
+            "name": "policy_as_code",
+            "enforcement": "automated",
+            "scope": "all_policies"
+          },
+          {
+            "name": "wasm_compilation",
+            "enforcement": "automated",
+            "scope": "production_policies"
+          },
+          {
+            "name": "quarterly_review",
+            "enforcement": "manual",
+            "scope": "all_frameworks"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "opa_policy_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "compliance_dashboard",
+            "type": "web",
+            "authentication": "required"
+          },
+          {
+            "name": "evidence_vault",
+            "type": "worm_storage",
+            "authentication": "internal"
+          }
+        ],
+        "compliance": [
+          "dsgvo",
+          "dora",
+          "mica",
+          "amld6"
+        ],
+        "internal_dependencies": [
+          "02_audit_logging",
+          "07_governance_legal",
+          "11_test_simulation"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "policies/",
+          "secondary": "\\n      - tests/"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    },
+    {
+      "root": "24_meta_orchestration",
+      "chart": {
+        "capabilities": [
+          "workflow_orchestration",
+          "registry_management",
+          "ci_cd_coordination",
+          "dependency_resolution",
+          "version_management",
+          "certification_tracking"
+        ],
+        "policies": [
+          {
+            "name": "orchestration_approval",
+            "enforcement": "manual",
+            "scope": "production_workflows"
+          },
+          {
+            "name": "registry_immutability",
+            "enforcement": "automated",
+            "scope": "published_versions"
+          },
+          {
+            "name": "dependency_validation",
+            "enforcement": "automated",
+            "scope": "all_workflows"
+          }
+        ],
+        "interfaces": [
+          {
+            "name": "orchestration_api",
+            "type": "rest_api",
+            "authentication": "required"
+          },
+          {
+            "name": "registry_service",
+            "type": "grpc",
+            "authentication": "internal"
+          },
+          {
+            "name": "ci_trigger",
+            "type": "webhook",
+            "authentication": "github_app"
+          }
+        ],
+        "compliance": [
+          "iso_27001",
+          "dora"
+        ],
+        "internal_dependencies": [
+          "all_roots"
+        ],
+        "data_classification": "confidential"
+      },
+      "manifest": {
+        "entry_points": {
+          "primary": "workflow_engine.py",
+          "secondary": "\\n      - registry_service.py"
+        },
+        "test_coverage_threshold": 80,
+        "safe_fix": true,
+        "root_24_lock": "enforced",
+        "pii_policy": "hash_only"
+      },
+      "tests_planned": {
+        "happy": 18,
+        "boundary": 12,
+        "negative": 6,
+        "total": 36
+      }
+    }
+  ]
+}

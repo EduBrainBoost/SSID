@@ -1,0 +1,15 @@
+package root_artifact_guard
+
+default allow := false
+
+deny[msg] {
+  some f
+  f := input.files[_]
+  endswith(lower(f.name), ".zip")
+  f.path_depth == 1        # repo root
+  msg := sprintf("Root drop forbidden for bundles: %s", [f.name])
+}
+
+allow {
+  not deny[_]
+}

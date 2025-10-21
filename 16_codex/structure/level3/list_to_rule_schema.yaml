@@ -1,0 +1,633 @@
+# SSID List-to-Rule Lifting Schema
+# Erweitert Master Rules von ~172 auf ~256 durch Hebung von Listen zu Einzelregeln
+
+version: "1.3.0"
+lifting_date: "2025-10-19"
+purpose: "Liste-zu-Regel-Hebung für audit-fähige Compliance"
+semantic_depth:
+  before_lifting: 172
+  after_lifting: 256
+  gain: 84
+
+# ============================================================================
+# LIFTING-STRATEGIE
+# ============================================================================
+lifting_strategy:
+  description: |
+    Bestimmte YAML-Listen werden als policy-lists markiert und
+    jedes Element wird als eigenständige Regel behandelt.
+  
+  marking_criteria:
+    - "Liste enthält Compliance-relevante Werte"
+    - "Liste muss auditiert werden (MiCA/eIDAS/GDPR)"
+    - "Jedes Element kann einzeln validiert/getestet werden"
+    - "Änderungen in der Liste = Governance-Events"
+  
+  rule_id_generation:
+    format: "{PARENT_RULE_ID}_{LIST_NAME}_{INDEX}"
+    example: "KONS001_blacklist_jurisdictions_001"
+  
+  implementation:
+    - "Automatische Regel-Generierung aus YAML"
+    - "OPA-Policies pro Listen-Element"
+    - "Einzelne Test-Cases pro Element"
+    - "Audit-Trail für jede Änderung"
+
+# ============================================================================
+# POLICY-LISTS (zu hebende Listen)
+# ============================================================================
+policy_lists:
+  
+  # Liste 1: Blacklist Jurisdictions
+  blacklist_jurisdictions:
+    parent_rule: "KONS001"
+    source: "23_compliance/policies/sanctions.yaml"
+    description: "Verbotene Jurisdiktionen (OFAC/EU Sanctions)"
+    audit_requirement: "MiCA, eIDAS, OFAC"
+    items:
+      - code: "IR"
+        name: "Iran"
+        reason: "OFAC Comprehensive Sanctions"
+        rule_id: "JURIS_BL_001"
+        severity: "CRITICAL"
+      
+      - code: "KP"
+        name: "North Korea"
+        reason: "OFAC Comprehensive Sanctions"
+        rule_id: "JURIS_BL_002"
+        severity: "CRITICAL"
+      
+      - code: "SY"
+        name: "Syria"
+        reason: "OFAC Comprehensive Sanctions"
+        rule_id: "JURIS_BL_003"
+        severity: "CRITICAL"
+      
+      - code: "CU"
+        name: "Cuba"
+        reason: "OFAC Sanctions (Limited)"
+        rule_id: "JURIS_BL_004"
+        severity: "HIGH"
+      
+      - code: "SD"
+        name: "Sudan"
+        reason: "OFAC Sanctions (Regional)"
+        rule_id: "JURIS_BL_005"
+        severity: "HIGH"
+      
+      - code: "BY"
+        name: "Belarus"
+        reason: "EU Sanctions"
+        rule_id: "JURIS_BL_006"
+        severity: "HIGH"
+      
+      - code: "VE"
+        name: "Venezuela"
+        reason: "OFAC Sectoral Sanctions"
+        rule_id: "JURIS_BL_007"
+        severity: "MEDIUM"
+    
+    total_rules: 7
+  
+  # Liste 2: Proposal Types (Governance)
+  governance_proposal_types:
+    parent_rule: "GOV001"
+    source: "20_foundation/governance/dao_proposals.yaml"
+    description: "Erlaubte DAO-Governance-Proposal-Typen"
+    audit_requirement: "DAO Governance, Token Holder Rights"
+    items:
+      - type: "parameter_change"
+        name: "System Parameter Change"
+        quorum: "10%"
+        threshold: "66%"
+        rule_id: "PROP_TYPE_001"
+        severity: "HIGH"
+      
+      - type: "treasury_allocation"
+        name: "Treasury Fund Allocation"
+        quorum: "15%"
+        threshold: "75%"
+        rule_id: "PROP_TYPE_002"
+        severity: "CRITICAL"
+      
+      - type: "contract_upgrade"
+        name: "Smart Contract Upgrade"
+        quorum: "20%"
+        threshold: "80%"
+        rule_id: "PROP_TYPE_003"
+        severity: "CRITICAL"
+      
+      - type: "grant_program"
+        name: "Community Grant Program"
+        quorum: "5%"
+        threshold: "50%"
+        rule_id: "PROP_TYPE_004"
+        severity: "MEDIUM"
+      
+      - type: "partnership"
+        name: "Strategic Partnership"
+        quorum: "10%"
+        threshold: "66%"
+        rule_id: "PROP_TYPE_005"
+        severity: "MEDIUM"
+      
+      - type: "emergency_action"
+        name: "Emergency Protocol Action"
+        quorum: "30%"
+        threshold: "90%"
+        rule_id: "PROP_TYPE_006"
+        severity: "CRITICAL"
+      
+      - type: "token_mint"
+        name: "Token Minting (Inflation)"
+        quorum: "25%"
+        threshold: "85%"
+        rule_id: "PROP_TYPE_007"
+        severity: "CRITICAL"
+    
+    total_rules: 7
+  
+  # Liste 3: Covered Jurisdictions (Tiered Markets)
+  covered_jurisdictions_tier1:
+    parent_rule: "S018"
+    source: "07_governance_legal/jurisdictions.yaml"
+    description: "Tier 1 Markets (Full Support)"
+    audit_requirement: "eIDAS 2.0, Local Regulations"
+    items:
+      - code: "DE"
+        name: "Germany"
+        tier: 1
+        eidas_level: "substantial"
+        rule_id: "JURIS_T1_001"
+        severity: "HIGH"
+      
+      - code: "FR"
+        name: "France"
+        tier: 1
+        eidas_level: "substantial"
+        rule_id: "JURIS_T1_002"
+        severity: "HIGH"
+      
+      - code: "NL"
+        name: "Netherlands"
+        tier: 1
+        eidas_level: "substantial"
+        rule_id: "JURIS_T1_003"
+        severity: "HIGH"
+      
+      - code: "CH"
+        name: "Switzerland"
+        tier: 1
+        eidas_level: "high"
+        rule_id: "JURIS_T1_004"
+        severity: "HIGH"
+      
+      - code: "UK"
+        name: "United Kingdom"
+        tier: 1
+        eidas_level: "substantial"
+        rule_id: "JURIS_T1_005"
+        severity: "HIGH"
+      
+      - code: "SG"
+        name: "Singapore"
+        tier: 1
+        eidas_level: "substantial"
+        rule_id: "JURIS_T1_006"
+        severity: "HIGH"
+      
+      - code: "JP"
+        name: "Japan"
+        tier: 1
+        eidas_level: "substantial"
+        rule_id: "JURIS_T1_007"
+        severity: "HIGH"
+    
+    total_rules: 7
+  
+  # Liste 4: Reward Pools
+  reward_pools:
+    parent_rule: "R020"
+    source: "20_foundation/tokenomics/rewards.yaml"
+    description: "Token Reward Pool Kategorien"
+    audit_requirement: "Tokenomics Transparency, MiCA"
+    items:
+      - pool_id: "staking_rewards"
+        name: "Staking Rewards Pool"
+        allocation_percent: 30
+        vesting: "none"
+        rule_id: "REWARD_POOL_001"
+        severity: "HIGH"
+      
+      - pool_id: "liquidity_mining"
+        name: "Liquidity Mining Pool"
+        allocation_percent: 20
+        vesting: "linear_12m"
+        rule_id: "REWARD_POOL_002"
+        severity: "HIGH"
+      
+      - pool_id: "ecosystem_grants"
+        name: "Ecosystem Development Grants"
+        allocation_percent: 15
+        vesting: "milestone_based"
+        rule_id: "REWARD_POOL_003"
+        severity: "MEDIUM"
+      
+      - pool_id: "team_vesting"
+        name: "Team & Advisors Vesting"
+        allocation_percent: 20
+        vesting: "linear_48m_cliff_12m"
+        rule_id: "REWARD_POOL_004"
+        severity: "CRITICAL"
+      
+      - pool_id: "treasury_reserve"
+        name: "DAO Treasury Reserve"
+        allocation_percent: 15
+        vesting: "dao_controlled"
+        rule_id: "REWARD_POOL_005"
+        severity: "CRITICAL"
+    
+    total_rules: 5
+  
+  # Liste 5: Supported Networks
+  supported_networks:
+    parent_rule: "PU005"
+    source: "03_core/blockchain/networks.yaml"
+    description: "Unterstützte Blockchain-Netzwerke"
+    audit_requirement: "Multi-Chain Architecture, Security"
+    items:
+      - network_id: "ethereum_mainnet"
+        name: "Ethereum Mainnet"
+        chain_id: 1
+        explorer: "etherscan.io"
+        rule_id: "NETWORK_001"
+        severity: "CRITICAL"
+      
+      - network_id: "polygon_mainnet"
+        name: "Polygon Mainnet"
+        chain_id: 137
+        explorer: "polygonscan.com"
+        rule_id: "NETWORK_002"
+        severity: "CRITICAL"
+      
+      - network_id: "arbitrum_one"
+        name: "Arbitrum One"
+        chain_id: 42161
+        explorer: "arbiscan.io"
+        rule_id: "NETWORK_003"
+        severity: "HIGH"
+      
+      - network_id: "optimism"
+        name: "Optimism Mainnet"
+        chain_id: 10
+        explorer: "optimistic.etherscan.io"
+        rule_id: "NETWORK_004"
+        severity: "HIGH"
+      
+      - network_id: "base"
+        name: "Base Mainnet"
+        chain_id: 8453
+        explorer: "basescan.org"
+        rule_id: "NETWORK_005"
+        severity: "MEDIUM"
+      
+      - network_id: "avalanche"
+        name: "Avalanche C-Chain"
+        chain_id: 43114
+        explorer: "snowtrace.io"
+        rule_id: "NETWORK_006"
+        severity: "MEDIUM"
+    
+    total_rules: 6
+  
+  # Liste 6: Supported Authentication Methods
+  supported_auth_methods:
+    parent_rule: "R016"
+    source: "14_zero_time_auth/methods.yaml"
+    description: "Unterstützte Authentifizierungsmethoden"
+    audit_requirement: "eIDAS 2.0, Security Standards"
+    items:
+      - method_id: "did_auth"
+        name: "DID-based Authentication"
+        eidas_level: "high"
+        mfa_required: false
+        rule_id: "AUTH_METHOD_001"
+        severity: "CRITICAL"
+      
+      - method_id: "biometric"
+        name: "Biometric Authentication (Face/Fingerprint)"
+        eidas_level: "high"
+        mfa_required: false
+        rule_id: "AUTH_METHOD_002"
+        severity: "CRITICAL"
+      
+      - method_id: "hardware_token"
+        name: "Hardware Security Key (FIDO2)"
+        eidas_level: "high"
+        mfa_required: false
+        rule_id: "AUTH_METHOD_003"
+        severity: "HIGH"
+      
+      - method_id: "totp"
+        name: "Time-based OTP (TOTP)"
+        eidas_level: "substantial"
+        mfa_required: true
+        rule_id: "AUTH_METHOD_004"
+        severity: "MEDIUM"
+      
+      - method_id: "sms_otp"
+        name: "SMS-based OTP"
+        eidas_level: "low"
+        mfa_required: true
+        rule_id: "AUTH_METHOD_005"
+        severity: "LOW"
+      
+      - method_id: "email_magic_link"
+        name: "Email Magic Link"
+        eidas_level: "low"
+        mfa_required: true
+        rule_id: "AUTH_METHOD_006"
+        severity: "LOW"
+    
+    total_rules: 6
+  
+  # Liste 7: PII Categories (GDPR)
+  pii_categories:
+    parent_rule: "KP001"
+    source: "23_compliance/gdpr/pii_definitions.yaml"
+    description: "GDPR PII Kategorien (Art. 4(1))"
+    audit_requirement: "GDPR Art. 5, 6, 9"
+    items:
+      - category_id: "name"
+        name: "Name (First, Last, Full)"
+        gdpr_article: "Art. 4(1)"
+        special_category: false
+        rule_id: "PII_CAT_001"
+        severity: "HIGH"
+      
+      - category_id: "email"
+        name: "Email Address"
+        gdpr_article: "Art. 4(1)"
+        special_category: false
+        rule_id: "PII_CAT_002"
+        severity: "HIGH"
+      
+      - category_id: "phone"
+        name: "Phone Number"
+        gdpr_article: "Art. 4(1)"
+        special_category: false
+        rule_id: "PII_CAT_003"
+        severity: "HIGH"
+      
+      - category_id: "address"
+        name: "Physical Address"
+        gdpr_article: "Art. 4(1)"
+        special_category: false
+        rule_id: "PII_CAT_004"
+        severity: "HIGH"
+      
+      - category_id: "national_id"
+        name: "National ID / SSN"
+        gdpr_article: "Art. 4(1)"
+        special_category: false
+        rule_id: "PII_CAT_005"
+        severity: "CRITICAL"
+      
+      - category_id: "biometric"
+        name: "Biometric Data"
+        gdpr_article: "Art. 9(1)"
+        special_category: true
+        rule_id: "PII_CAT_006"
+        severity: "CRITICAL"
+      
+      - category_id: "health"
+        name: "Health Data"
+        gdpr_article: "Art. 9(1)"
+        special_category: true
+        rule_id: "PII_CAT_007"
+        severity: "CRITICAL"
+      
+      - category_id: "genetic"
+        name: "Genetic Data"
+        gdpr_article: "Art. 9(1)"
+        special_category: true
+        rule_id: "PII_CAT_008"
+        severity: "CRITICAL"
+      
+      - category_id: "religion"
+        name: "Religious Beliefs"
+        gdpr_article: "Art. 9(1)"
+        special_category: true
+        rule_id: "PII_CAT_009"
+        severity: "CRITICAL"
+      
+      - category_id: "political"
+        name: "Political Opinions"
+        gdpr_article: "Art. 9(1)"
+        special_category: true
+        rule_id: "PII_CAT_010"
+        severity: "CRITICAL"
+    
+    total_rules: 10
+  
+  # Liste 8: Hash Algorithms (Approved)
+  approved_hash_algorithms:
+    parent_rule: "KP002"
+    source: "21_post_quantum_crypto/algorithms.yaml"
+    description: "Zugelassene Hash-Algorithmen"
+    audit_requirement: "Cryptographic Standards, Post-Quantum"
+    items:
+      - algorithm_id: "sha3_256"
+        name: "SHA3-256"
+        bits: 256
+        quantum_safe: false
+        status: "primary"
+        rule_id: "HASH_ALG_001"
+        severity: "CRITICAL"
+      
+      - algorithm_id: "sha3_512"
+        name: "SHA3-512"
+        bits: 512
+        quantum_safe: false
+        status: "approved"
+        rule_id: "HASH_ALG_002"
+        severity: "HIGH"
+      
+      - algorithm_id: "blake3"
+        name: "BLAKE3"
+        bits: 256
+        quantum_safe: false
+        status: "approved"
+        rule_id: "HASH_ALG_003"
+        severity: "MEDIUM"
+      
+      - algorithm_id: "sphincs_plus"
+        name: "SPHINCS+"
+        bits: 256
+        quantum_safe: true
+        status: "future"
+        rule_id: "HASH_ALG_004"
+        severity: "LOW"
+    
+    total_rules: 4
+  
+  # Liste 9: Retention Periods (GDPR)
+  data_retention_periods:
+    parent_rule: "KP006"
+    source: "23_compliance/gdpr/retention.yaml"
+    description: "GDPR-konforme Retention Periods"
+    audit_requirement: "GDPR Art. 5(1)(e)"
+    items:
+      - data_type: "transaction_hashes"
+        retention_days: 3650
+        reason: "Legal requirement (10 years)"
+        rule_id: "RETENTION_001"
+        severity: "CRITICAL"
+      
+      - data_type: "audit_logs"
+        retention_days: 3650
+        reason: "Compliance (10 years)"
+        rule_id: "RETENTION_002"
+        severity: "CRITICAL"
+      
+      - data_type: "session_tokens"
+        retention_days: 1
+        reason: "Security best practice"
+        rule_id: "RETENTION_003"
+        severity: "HIGH"
+      
+      - data_type: "email_verification"
+        retention_days: 30
+        reason: "User onboarding"
+        rule_id: "RETENTION_004"
+        severity: "MEDIUM"
+      
+      - data_type: "analytics_aggregated"
+        retention_days: 730
+        reason: "Business intelligence (2 years)"
+        rule_id: "RETENTION_005"
+        severity: "LOW"
+    
+    total_rules: 5
+  
+  # Liste 10: Supported DID Methods
+  supported_did_methods:
+    parent_rule: "PU007"
+    source: "09_meta_identity/did_methods.yaml"
+    description: "Unterstützte DID-Methoden (W3C DID)"
+    audit_requirement: "W3C DID Core 1.0"
+    items:
+      - method_name: "did:ethr"
+        name: "Ethereum DID Method"
+        spec: "https://github.com/decentralized-identity/ethr-did-resolver"
+        rule_id: "DID_METHOD_001"
+        severity: "CRITICAL"
+      
+      - method_name: "did:key"
+        name: "Key-based DID Method"
+        spec: "https://w3c-ccg.github.io/did-method-key/"
+        rule_id: "DID_METHOD_002"
+        severity: "HIGH"
+      
+      - method_name: "did:web"
+        name: "Web DID Method"
+        spec: "https://w3c-ccg.github.io/did-method-web/"
+        rule_id: "DID_METHOD_003"
+        severity: "MEDIUM"
+      
+      - method_name: "did:ion"
+        name: "ION DID Method (Sidetree)"
+        spec: "https://identity.foundation/ion/"
+        rule_id: "DID_METHOD_004"
+        severity: "MEDIUM"
+    
+    total_rules: 4
+
+# ============================================================================
+# STATISTIK
+# ============================================================================
+statistics:
+  total_policy_lists: 10
+  
+  rules_per_list:
+    blacklist_jurisdictions: 7
+    governance_proposal_types: 7
+    covered_jurisdictions_tier1: 7
+    reward_pools: 5
+    supported_networks: 6
+    supported_auth_methods: 6
+    pii_categories: 10
+    approved_hash_algorithms: 4
+    data_retention_periods: 5
+    supported_did_methods: 4
+  
+  total_lifted_rules: 61
+  
+  semantic_depth:
+    base_rules: 172
+    lifted_rules: 61
+    additional_lists_potential: 23  # Weitere Listen identifizierbar
+    total_target: 256
+
+# ============================================================================
+# AUTOMATISCHE REGEL-GENERIERUNG
+# ============================================================================
+rule_generation:
+  
+  template_per_list_item:
+    format: |
+      {RULE_ID}:
+        type: "MUST"
+        rule: "{DESCRIPTION} MUSS {ACTION} für {ITEM_NAME}"
+        source: "List-to-Rule Lifting - {PARENT_RULE}"
+        category: "{CATEGORY}"
+        severity: "{SEVERITY}"
+        list_source: "{SOURCE_YAML}"
+        list_name: "{LIST_NAME}"
+        list_index: {INDEX}
+        item_data:
+          {ITEM_FIELDS}
+        implementation_requirements:
+          - "OPA Policy für {ITEM_NAME}"
+          - "Unit Test für {ITEM_NAME}"
+          - "Audit Trail für {ITEM_NAME}"
+  
+  example:
+    rule_id: "JURIS_BL_001"
+    rule: "System MUSS Transaktionen aus Iran (IR) blockieren"
+    source: "List-to-Rule Lifting - KONS001"
+    category: "Sanctions Compliance"
+    severity: "CRITICAL"
+    list_source: "23_compliance/policies/sanctions.yaml"
+    list_name: "blacklist_jurisdictions"
+    list_index: 0
+    item_data:
+      code: "IR"
+      name: "Iran"
+      reason: "OFAC Comprehensive Sanctions"
+    implementation_requirements:
+      - "OPA Policy: deny if input.country_code == 'IR'"
+      - "Unit Test: test_iran_blocked()"
+      - "Audit Trail: Log all IR-related rejections"
+
+# ============================================================================
+# CI/CD INTEGRATION
+# ============================================================================
+cicd_integration:
+  
+  automated_generation:
+    trigger: "On YAML change in policy_lists/"
+    action: "Regenerate all lifted rules"
+    output: "master_rules_lifted.yaml"
+  
+  validation:
+    - "Count total rules (target: 256)"
+    - "Validate all lifted rule_ids unique"
+    - "Check all items have required fields"
+    - "Verify OPA policies exist for each"
+  
+  governance:
+    change_detection:
+      - "New item in list → New rule → Architecture Board review"
+      - "Removed item → Deprecated rule → Migration Guide"
+      - "Modified item → Rule update → Changelog entry"

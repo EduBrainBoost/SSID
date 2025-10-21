@@ -1,0 +1,118 @@
+# SSID OPA Policy - 15_infra (FUNCTIONAL v6.3)
+# Auto-generated from 15_infra/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.15infra.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "15_infra",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "15_infra_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "15_infra"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["database_management", "caching_layer", "message_queuing", "object_storage", "cdn_services", "backup_recovery"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "15_infra_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 15_infra operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "15_infra_operation"
+  input.request.valid == false
+  msg := "Invalid request for 15_infra - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "15_infra_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: encryption_at_rest (enforcement: automated, scope: all_storage)
+deny_encryptionatrest[msg] {
+  input.request.type == "15_infra_operation"
+  input.policy_check == "encryption_at_rest"
+  not input.policy_compliance.encryptionatrest
+  msg := "Policy violation: encryption_at_rest (scope: all_storage)"
+}
+
+# Policy: encryption_in_transit (enforcement: automated, scope: all_connections)
+deny_encryptionintransit[msg] {
+  input.request.type == "15_infra_operation"
+  input.policy_check == "encryption_in_transit"
+  not input.policy_compliance.encryptionintransit
+  msg := "Policy violation: encryption_in_transit (scope: all_connections)"
+}
+
+# Policy: backup_retention (enforcement: automated, scope: all_data)
+deny_backupretention[msg] {
+  input.request.type == "15_infra_operation"
+  input.policy_check == "backup_retention"
+  not input.policy_compliance.backupretention
+  msg := "Policy violation: backup_retention (scope: all_data)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "15_infra_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 15_infra"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "15_infra_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 15_infra"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "15_infra",
+  "capabilities": 6,
+  "policies": 3
+}

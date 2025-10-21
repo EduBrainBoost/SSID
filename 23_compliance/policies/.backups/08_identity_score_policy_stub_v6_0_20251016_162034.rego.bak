@@ -1,0 +1,118 @@
+# SSID OPA Policy - 08_identity_score (FUNCTIONAL v6.3)
+# Auto-generated from 08_identity_score/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.08identityscore.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "08_identity_score",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "08_identity_score_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "08_identity_score"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["identity_reputation_scoring", "risk_assessment", "trust_metrics_calculation", "behavioral_risk_analysis", "fraud_detection", "anomaly_detection"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "08_identity_score_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 08_identity_score operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "08_identity_score_operation"
+  input.request.valid == false
+  msg := "Invalid request for 08_identity_score - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "08_identity_score_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: score_transparency (enforcement: automated, scope: all_scores)
+deny_scoretransparency[msg] {
+  input.request.type == "08_identity_score_operation"
+  input.policy_check == "score_transparency"
+  not input.policy_compliance.scoretransparency
+  msg := "Policy violation: score_transparency (scope: all_scores)"
+}
+
+# Policy: bias_detection (enforcement: continuous, scope: all_models)
+deny_biasdetection[msg] {
+  input.request.type == "08_identity_score_operation"
+  input.policy_check == "bias_detection"
+  not input.policy_compliance.biasdetection
+  msg := "Policy violation: bias_detection (scope: all_models)"
+}
+
+# Policy: score_versioning (enforcement: automated, scope: all_calculations)
+deny_scoreversioning[msg] {
+  input.request.type == "08_identity_score_operation"
+  input.policy_check == "score_versioning"
+  not input.policy_compliance.scoreversioning
+  msg := "Policy violation: score_versioning (scope: all_calculations)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "08_identity_score_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 08_identity_score"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "08_identity_score_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 08_identity_score"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "08_identity_score",
+  "capabilities": 6,
+  "policies": 3
+}

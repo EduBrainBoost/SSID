@@ -1,0 +1,142 @@
+# SSID v10.0 - Knowledge Integrity Policy
+# ==========================================
+# Epistemic validation rules for verifiable knowledge system
+
+version: "10.0.0"
+status: ACTIVE
+certification_date: 2025-10-12T17:53:00.000000
+framework: "Knowledge Integrity Layer v1.0 + Root-24-LOCK v9.0"
+mode: EPISTEMIC_VALIDATION
+
+# Inheritance from v9.0
+inherits_from:
+  - version: "9.0.0"
+    policy: "root_24_v9_final_policy.yaml"
+    status: CERTIFIED
+    sha512_hash: "26ff893b23dfa0dc561ec043b4ecf1068e40ebc6074f9898dda315d338f5d197"
+    merkle_root: "93ea18070334379704eb8e873b3973fe9910589fcbff0adc3977fb6614195c30"
+
+# Knowledge Integrity Requirements
+knowledge_requirements:
+  proof_hash_required: true
+  source_reference_required: true
+  audit_chain_required: true
+  version_tracking_required: true
+  cryptographic_verification: true
+
+# Artifact Categories
+artifact_categories:
+  reports:
+    extensions: [".md", ".json"]
+    verification_level: HIGH
+    requires_hash: true
+    requires_source: true
+
+  policies:
+    extensions: [".yaml", ".rego"]
+    verification_level: CRITICAL
+    requires_hash: true
+    requires_source: true
+    requires_audit: true
+
+  proofs:
+    extensions: [".json"]
+    patterns: ["*_chain.json", "*_proof.json", "*_pqc_*.json"]
+    verification_level: CRITICAL
+    requires_hash: true
+    requires_signature: true
+
+  audits:
+    extensions: [".md", ".json"]
+    patterns: ["*_audit.*", "*_score.json"]
+    verification_level: HIGH
+    requires_hash: true
+    requires_reference: true
+
+# Epistemic Validation Rules
+validation_rules:
+  - rule_id: "KI-001"
+    name: "Proof Hash Requirement"
+    description: "All claims must reference a verifiable cryptographic hash"
+    severity: CRITICAL
+    enforcement: MANDATORY
+
+  - rule_id: "KI-002"
+    name: "Source Attribution"
+    description: "All artifacts must cite their source of truth"
+    severity: HIGH
+    enforcement: MANDATORY
+
+  - rule_id: "KI-003"
+    name: "Audit Chain Linkage"
+    description: "All artifacts must link to a valid audit report"
+    severity: HIGH
+    enforcement: RECOMMENDED
+
+  - rule_id: "KI-004"
+    name: "Version Traceability"
+    description: "All versioned artifacts must maintain backward compatibility"
+    severity: MEDIUM
+    enforcement: RECOMMENDED
+
+  - rule_id: "KI-005"
+    name: "Cryptographic Verification"
+    description: "All proofs must be verifiable via PQC signatures"
+    severity: CRITICAL
+    enforcement: MANDATORY
+
+# Reference Chain Requirements
+reference_chain:
+  minimum_depth: 1
+  maximum_depth: 5
+  circular_references: FORBIDDEN
+  broken_references: WARNING
+  external_references: ALLOWED_WITH_VERIFICATION
+
+# Scoring System
+scoring:
+  epistemic_score_threshold: 100.0
+  verification_coverage_minimum: 0.95
+  reference_chain_completeness: 1.0
+  cryptographic_verification_required: true
+
+# Integration with v9.0 Root-24-LOCK
+v9_integration:
+  inherit_chain_of_custody: true
+  inherit_pqc_proofs: true
+  inherit_merkle_root: true
+  inherit_module_hashes: true
+
+# Authorized Exceptions (Inherited from v9.0)
+exceptions:
+  - name: ".claude"
+    status: "PERMANENT_DOCUMENTED_EXCEPTION"
+    purpose: "Claude AI IDE configuration"
+    in_gitignore: true
+    rationale: "IDE-specific, non-portable, excluded from version control"
+    inherited_from: "v9.0"
+
+  - name: ".git"
+    status: "INFRASTRUCTURE"
+    inherited_from: "v9.0"
+
+  - name: ".github"
+    status: "INFRASTRUCTURE"
+    inherited_from: "v9.0"
+
+# System State
+system:
+  state: ACTIVE
+  epistemic_validation: enabled
+  auto_verification: active
+  knowledge_graph: generated
+  cost_usd: 0.0
+
+# Certification Target
+certification:
+  level: EPISTEMIC
+  target_score: 100.0
+  knowledge_integrity: verified
+  reference_chains: complete
+  pqc_proof: active
+  v9_inheritance: complete

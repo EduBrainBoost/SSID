@@ -1,0 +1,66 @@
+apiVersion: ssid/implementation/v1
+kind: Manifest
+metadata:
+  name: 15-infra
+  version: "0.1.0"
+  description: "Implementation manifest for 15 Infra"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  maintainer: "Infrastructure Team"
+
+  entry_points:
+    primary: "database.tf"
+    secondary: \n      - cache.tf\n      - storage.tf
+
+  dependencies:
+    runtime:
+      python: ">=3.11"
+
+    build:
+      - setuptools
+      - wheel
+
+    test:
+      - pytest
+      - pytest-cov
+
+  build:
+    command: "python -m pip install -e ."
+    artifacts:
+      - dist/
+      - build/
+
+  test:
+    command: "pytest tests/ --cov=infra"
+    coverage_threshold: 80
+
+  deployment:
+    environments:
+      - dev
+      - stage
+      - prod
+
+    health_check:
+      enabled: true
+      endpoint: "/health"
+      interval_seconds: 30
+
+  observability:
+    metrics:
+      enabled: true
+      port: 9090
+
+    logging:
+      level: INFO
+      format: json
+
+    tracing:
+      enabled: true
+      sample_rate: 0.1
+
+  compliance:
+    safe_fix: true
+    root_24_lock: enforced
+    pii_policy: hash_only

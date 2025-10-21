@@ -1,0 +1,365 @@
+# SSID Proof Linking Legal Matrix v5.2
+# Roles, Responsibilities, and Legal Status Mapping
+
+version: "5.2.0"
+last_updated: "2025-10-12"
+jurisdiction: "Global (GDPR, CCPA compliant)"
+
+###########################################
+# Role Definitions
+###########################################
+
+roles:
+  ssid:
+    name: "SSID Project"
+    legal_status: "Code Publisher (Non-Controller)"
+    responsibility: "Proof Emission Framework Provider"
+    gdpr_role: "Processor (for infrastructure only)"
+    liability: "Limited to software defects"
+    data_access: "Hash-only (no PII)"
+    description: |
+      SSID provides the proof emission framework and smart contracts
+      but does not process, store, or control any personal data.
+      All PII handling is delegated to Providers.
+
+  provider:
+    name: "KYC/Identity Provider"
+    legal_status: "Data Controller"
+    responsibility: "PII Processing & KYC Execution"
+    gdpr_role: "Controller"
+    liability: "Full responsibility for data processing"
+    data_access: "Full PII access"
+    description: |
+      Provider executes KYC/AML checks, processes user PII,
+      obtains consent, and manages data subject rights.
+      Provider generates proof digests and submits to SSID infrastructure.
+
+  user:
+    name: "End User / Data Subject"
+    legal_status: "Data Subject"
+    responsibility: "Consent & Provider Selection"
+    gdpr_role: "Data Subject"
+    liability: "None (protected party)"
+    data_access: "Own data only"
+    description: |
+      User selects Provider, grants consent for KYC processing,
+      and exercises data subject rights (access, erasure, portability).
+      User does not interact with SSID directly.
+
+  auditor:
+    name: "Independent Auditor"
+    legal_status: "Third-Party Verifier"
+    responsibility: "Compliance Verification"
+    gdpr_role: "External Auditor"
+    liability: "Professional liability (audit quality)"
+    data_access: "Audit logs only (no PII)"
+    description: |
+      Auditor verifies proof integrity, policy compliance,
+      and technical implementation. No access to user PII.
+
+###########################################
+# Responsibility Matrix
+###########################################
+
+responsibilities:
+  data_collection:
+    responsible_party: "Provider"
+    ssid_role: "None"
+    legal_basis: "User consent (GDPR Art. 6(1)(a))"
+    documentation: "Provider privacy policy"
+
+  data_processing:
+    responsible_party: "Provider"
+    ssid_role: "Infrastructure provider only"
+    legal_basis: "Legitimate interest (KYC/AML compliance)"
+    documentation: "Provider DPA (Data Processing Agreement)"
+
+  consent_management:
+    responsible_party: "Provider"
+    ssid_role: "None"
+    legal_basis: "GDPR Art. 7 (Consent)"
+    documentation: "Provider consent records"
+
+  proof_emission:
+    responsible_party: "SSID + Provider (shared)"
+    ssid_role: "Technical framework"
+    legal_basis: "Legitimate interest (fraud prevention)"
+    documentation: "Proof emission logs (hash-only)"
+
+  on_chain_anchoring:
+    responsible_party: "SSID"
+    ssid_role: "Smart contract execution"
+    legal_basis: "Legitimate interest (immutable proof)"
+    documentation: "Blockchain TX records"
+
+  ack_verification:
+    responsible_party: "Provider"
+    ssid_role: "Signature verification only"
+    legal_basis: "Contractual necessity"
+    documentation: "ACK audit logs"
+
+  data_retention:
+    responsible_party: "Provider"
+    ssid_role: "Hash retention only (no PII)"
+    legal_basis: "Legal obligation (AML retention periods)"
+    documentation: "Provider retention policy"
+
+  data_erasure:
+    responsible_party: "Provider"
+    ssid_role: "Cannot erase blockchain hashes (GDPR exception)"
+    legal_basis: "GDPR Art. 17(3)(b) (Legal obligation)"
+    documentation: "Provider erasure procedure"
+
+  breach_notification:
+    responsible_party: "Provider"
+    ssid_role: "Infrastructure breach notification only"
+    legal_basis: "GDPR Art. 33 (Notification duty)"
+    documentation: "Incident response plan"
+
+  data_subject_rights:
+    responsible_party: "Provider"
+    ssid_role: "None (no user interface)"
+    legal_basis: "GDPR Art. 15-22 (Data subject rights)"
+    documentation: "Provider DSAR procedure"
+
+###########################################
+# Liability Allocation
+###########################################
+
+liability:
+  pii_leak:
+    liable_party: "Provider"
+    ssid_liability: "None (no PII access)"
+    mitigation: "PII filtering enforced by OPA policies"
+
+  unauthorized_access:
+    liable_party: "Provider"
+    ssid_liability: "Infrastructure security only"
+    mitigation: "Access control + audit logging"
+
+  data_breach:
+    liable_party: "Provider (PII), SSID (infrastructure)"
+    ssid_liability: "Limited to hash data breach"
+    mitigation: "Encryption + WORM logging"
+
+  incorrect_kyc:
+    liable_party: "Provider"
+    ssid_liability: "None (no KYC execution)"
+    mitigation: "Provider certification required"
+
+  smart_contract_bug:
+    liable_party: "SSID"
+    ssid_liability: "Code defect liability"
+    mitigation: "Smart contract audits + insurance"
+
+  blockchain_immutability:
+    liable_party: "SSID"
+    ssid_liability: "Limited (technical constraint)"
+    mitigation: "GDPR Art. 17(3)(b) exception"
+
+###########################################
+# Compliance Mappings
+###########################################
+
+compliance:
+  gdpr:
+    applicable_to: ["Provider", "SSID (limited)"]
+    key_articles:
+      - "Art. 6(1): Lawfulness of processing"
+      - "Art. 7: Conditions for consent"
+      - "Art. 17: Right to erasure (blockchain exception)"
+      - "Art. 25: Data protection by design"
+      - "Art. 32: Security of processing"
+      - "Art. 33: Breach notification"
+    ssid_compliance_measures:
+      - "Zero PII architecture"
+      - "Hash-only anchoring"
+      - "OPA policy enforcement"
+      - "Audit logging (WORM)"
+
+  ccpa:
+    applicable_to: ["Provider (California users)"]
+    key_provisions:
+      - "§1798.100: Right to know"
+      - "§1798.105: Right to delete"
+      - "§1798.120: Right to opt-out"
+    ssid_compliance_measures:
+      - "No California consumer data processed by SSID"
+      - "Provider responsibility for CCPA compliance"
+
+  aml_kyc:
+    applicable_to: ["Provider"]
+    regulations:
+      - "FATF Recommendations"
+      - "EU 5AMLD"
+      - "US Bank Secrecy Act"
+    ssid_compliance_measures:
+      - "Proof-of-KYC framework"
+      - "Audit trail for compliance verification"
+
+  pci_dss:
+    applicable_to: ["Provider (if processing payments)"]
+    ssid_role: "Not applicable (no payment processing)"
+
+###########################################
+# Data Flow & Control
+###########################################
+
+data_flow:
+  user_to_provider:
+    data_type: "PII (full KYC data)"
+    legal_basis: "User consent"
+    encryption: "TLS 1.3+"
+    storage: "Provider-controlled"
+    retention: "Provider policy"
+
+  provider_to_layer14:
+    data_type: "Filtered metadata (no PII)"
+    legal_basis: "Legitimate interest"
+    encryption: "HMAC signature"
+    storage: "Transient (emission only)"
+    retention: "Audit logs only"
+
+  layer14_to_layer9:
+    data_type: "Digest hash (SHA-512 + BLAKE2b)"
+    legal_basis: "Legitimate interest"
+    encryption: "Hash-only (irreversible)"
+    storage: "Registry (hash-only)"
+    retention: "Permanent (blockchain)"
+
+  layer9_to_blockchain:
+    data_type: "Digest hash (bytes32)"
+    legal_basis: "Legitimate interest"
+    encryption: "None (public blockchain)"
+    storage: "Immutable ledger"
+    retention: "Permanent (GDPR exception)"
+
+  provider_to_layer14_ack:
+    data_type: "ACK JWT (signed)"
+    legal_basis: "Contractual necessity"
+    encryption: "EdDSA/RS256 signature"
+    storage: "Audit logs only"
+    retention: "7 years (compliance)"
+
+###########################################
+# Legal Safeguards
+###########################################
+
+safeguards:
+  privacy_by_design:
+    measures:
+      - "PII filtering at Layer 14 ingress"
+      - "Hash-only emission"
+      - "Zero-knowledge architecture"
+      - "OPA policy enforcement (100%)"
+    compliance: "GDPR Art. 25"
+
+  data_minimization:
+    measures:
+      - "7-field allow-list for metadata"
+      - "No raw data transmission"
+      - "Digest-only anchoring"
+    compliance: "GDPR Art. 5(1)(c)"
+
+  integrity_protection:
+    measures:
+      - "HMAC digest IDs"
+      - "Merkle tree verification"
+      - "On-chain anchoring"
+      - "WORM audit logs"
+    compliance: "GDPR Art. 5(1)(f)"
+
+  access_control:
+    measures:
+      - "Provider-only emission access"
+      - "Authorized emitter registry"
+      - "JWT-based ACK authentication"
+    compliance: "GDPR Art. 32(1)(b)"
+
+  audit_trail:
+    measures:
+      - "WORM logging"
+      - "SHA-256 checksums"
+      - "Blockchain immutability"
+    compliance: "GDPR Art. 5(2) (Accountability)"
+
+###########################################
+# Dispute Resolution
+###########################################
+
+dispute_resolution:
+  pii_related_disputes:
+    responsible_party: "Provider"
+    jurisdiction: "Provider's jurisdiction"
+    mechanism: "Provider DSAR procedure"
+
+  proof_validity_disputes:
+    responsible_party: "SSID + Provider"
+    jurisdiction: "Arbitration (per DPA)"
+    mechanism: "Blockchain verification + audit logs"
+
+  technical_disputes:
+    responsible_party: "SSID"
+    jurisdiction: "Open-source community governance"
+    mechanism: "GitHub issue tracking"
+
+###########################################
+# Document References
+###########################################
+
+references:
+  policies:
+    - "23_compliance/policies/proof_linking_policy.rego"
+    - "23_compliance/policies/privacy_policy.md"
+    - "23_compliance/policies/data_processing_agreement.md"
+
+  technical_docs:
+    - "14_zero_time_auth/kyc_gateway/proof_emission/README.md"
+    - "20_foundation/global_proof_nexus_engine.py"
+    - "07_governance_legal/contracts/ProofEmitter.sol"
+
+  audit_reports:
+    - "23_compliance/reports/proof_linking_audit_report.md"
+    - "02_audit_logging/reports/proof_linking_badge.svg"
+
+  external_standards:
+    - "GDPR (EU 2016/679)"
+    - "CCPA (California Civil Code §1798)"
+    - "FATF Recommendations"
+    - "ISO 27001 (Information Security)"
+
+###########################################
+# Attestations
+###########################################
+
+attestations:
+  ssid_attestation: |
+    SSID Project attests that:
+    1. No PII is processed, stored, or transmitted by SSID infrastructure
+    2. All proof emissions are hash-only (SHA-512 + BLAKE2b)
+    3. 100% OPA policy coverage enforces zero-PII architecture
+    4. Smart contracts are open-source and auditable
+    5. SSID acts as Code Publisher only, not Data Controller
+
+  provider_attestation_required: |
+    Provider must attest that:
+    1. Valid user consent obtained before KYC processing
+    2. GDPR/CCPA compliance maintained for all PII
+    3. Data subject rights (access, erasure) honored
+    4. Breach notification procedures implemented
+    5. AML/KYC regulatory compliance maintained
+
+###########################################
+# Revision History
+###########################################
+
+revision_history:
+  - version: "5.2.0"
+    date: "2025-10-12"
+    changes: "Initial release - Proof Emission & Provider Linking"
+  - version: "5.1.0"
+    date: "2025-09-15"
+    changes: "KYC Gateway integration baseline"
+  - version: "5.0.0"
+    date: "2025-08-01"
+    changes: "Foundation blueprint v5.0"

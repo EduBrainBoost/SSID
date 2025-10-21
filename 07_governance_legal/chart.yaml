@@ -1,0 +1,70 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: governance_legal
+  version: "0.1.0"
+  description: "Legal compliance framework, governance structures, risk management, and regulatory mappings"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - legal_compliance_management
+    - risk_assessment
+    - governance_framework
+    - regulatory_mapping
+    - contract_management
+    - privacy_policy_management
+
+  interfaces:
+    - name: compliance_api
+      type: rest_api
+      authentication: required
+
+    - name: risk_registry
+      type: database
+      authentication: internal
+
+    - name: policy_repository
+      type: git
+      authentication: required
+
+  policies:
+    - name: legal_review_required
+      enforcement: manual
+      scope: all_contracts
+      approvers_required: 2
+
+    - name: gdpr_compliance
+      enforcement: automated
+      scope: all_services
+
+    - name: mica_compliance
+      enforcement: automated
+      scope: token_services
+
+  dependencies:
+    internal:
+      - 23_compliance  # Compliance policies
+      - 02_audit_logging  # Legal audit trail
+      - 20_foundation  # Tokenomics legal
+    external:
+      - none
+
+  governance:
+    maintainer: "Legal Team"
+    reviewers:
+      - general_counsel
+      - compliance_officer
+    approval_required: true
+    data_classification: highly_confidential
+
+  compliance:
+    dsgvo:
+      - all_articles  # Complete framework
+    mica:
+      - title_2  # Crypto-asset service providers
+    amld6:
+      - all_articles  # AML framework
+    dora:
+      - governance_articles

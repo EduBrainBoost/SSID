@@ -1,0 +1,118 @@
+# SSID OPA Policy - 13_ui_layer (FUNCTIONAL v6.3)
+# Auto-generated from 13_ui_layer/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.13uilayer.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "13_ui_layer",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "13_ui_layer_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "13_ui_layer"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["web_ui_components", "mobile_responsive_design", "wasm_policy_evaluation", "real_time_updates", "accessibility_compliance", "i18n_localization"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "13_ui_layer_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 13_ui_layer operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "13_ui_layer_operation"
+  input.request.valid == false
+  msg := "Invalid request for 13_ui_layer - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "13_ui_layer_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: safe_fix_only (enforcement: automated, scope: policy_evaluation)
+deny_safefixonly[msg] {
+  input.request.type == "13_ui_layer_operation"
+  input.policy_check == "safe_fix_only"
+  not input.policy_compliance.safefixonly
+  msg := "Policy violation: safe_fix_only (scope: policy_evaluation)"
+}
+
+# Policy: accessibility_wcag (enforcement: automated, scope: all_components)
+deny_accessibilitywcag[msg] {
+  input.request.type == "13_ui_layer_operation"
+  input.policy_check == "accessibility_wcag"
+  not input.policy_compliance.accessibilitywcag
+  msg := "Policy violation: accessibility_wcag (scope: all_components)"
+}
+
+# Policy: csp_enforcement (enforcement: automated, scope: all_pages)
+deny_cspenforcement[msg] {
+  input.request.type == "13_ui_layer_operation"
+  input.policy_check == "csp_enforcement"
+  not input.policy_compliance.cspenforcement
+  msg := "Policy violation: csp_enforcement (scope: all_pages)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "13_ui_layer_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 13_ui_layer"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "13_ui_layer_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 13_ui_layer"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "13_ui_layer",
+  "capabilities": 6,
+  "policies": 3
+}

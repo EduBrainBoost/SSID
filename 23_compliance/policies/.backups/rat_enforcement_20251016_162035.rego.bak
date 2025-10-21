@@ -1,0 +1,36 @@
+package ssid.rat
+
+default allow = false
+
+import future.keywords.if
+
+# Tiers that can use global bundle
+global_bundle_tiers := ["global_proof_suite", "interfederation_elite", "sovereign_infrastructure"]
+
+# Valid regions
+valid_regions := ["DACH", "EN-EU", "US-CAN", "ASIA-PAC", "LATAM", "AFRICA", "MENA",
+                  "OCEANIA", "NORDICS", "EASTERN-EU"]
+
+allow if {
+  valid_regions_check
+  valid_bundle_for_tier
+}
+
+valid_regions_check if {
+  count(input.regions) > 0
+  every region in input.regions {
+    region == valid_regions[_]
+  }
+}
+
+valid_bundle_for_tier if {
+  # If no bundle specified, allow
+  not input.bundle
+} else if {
+  # If bundle is not global_bundle, allow
+  input.bundle != "global_bundle"
+} else if {
+  # If bundle is global_bundle, tier must be in allowed list
+  input.bundle == "global_bundle"
+  input.tier == global_bundle_tiers[_]
+}

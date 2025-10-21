@@ -1,0 +1,138 @@
+# SSID Master Rules Coverage Check - CI/CD Integration
+# Prüft bei jedem Commit/PR, ob alle Master-Regeln in allen 5 SoT-Artefakten implementiert sind
+
+name: Master Rules Coverage Check
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Daily at 02:00 UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  coverage-check:
+    name: Check Master Rules Coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better analysis
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Run Coverage Checker
+        id: coverage
+        run: |
+          python 16_codex/structure/level3/coverage_checker.py \
+            --rules 16_codex/structure/level3/master_rules.yaml \
+            --repo . \
+            --output 02_audit_logging/reports/coverage/master_rules_coverage_$(date +%Y%m%d_%H%M%S).json \
+            --fail-under 100
+        continue-on-error: true
+
+      - name: Generate SHA256 hash of report
+        if: always()
+        run: |
+          LATEST_REPORT=$(ls -t 02_audit_logging/reports/coverage/master_rules_coverage_*.json | head -1)
+          if [ -f "$LATEST_REPORT" ]; then
+            SHA256=$(sha256sum "$LATEST_REPORT" | cut -d' ' -f1)
+            echo "Report SHA256: $SHA256"
+            echo "report_sha256=$SHA256" >> $GITHUB_ENV
+            echo "report_path=$LATEST_REPORT" >> $GITHUB_ENV
+          fi
+
+      - name: Upload Coverage Report as Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-rules-coverage-report
+          path: 02_audit_logging/reports/coverage/master_rules_coverage_*.json
+          retention-days: 90
+
+      - name: Comment on PR with Coverage Results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = process.env.report_path;
+
+            if (!reportPath || !fs.existsSync(reportPath)) {
+              console.log('No report found');
+              return;
+            }
+
+            const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+            const summary = report.summary;
+
+            const coverageEmoji = summary.overall_coverage_percent === 100 ? '✅' : '❌';
+            const status = summary.overall_coverage_percent === 100 ? 'SUCCESS' : 'FAILURE';
+
+            let comment = `## ${coverageEmoji} Master Rules Coverage Report\n\n`;
+            comment += `**Status:** ${status}\n\n`;
+            comment += `### Summary\n`;
+            comment += `- Total Rules: ${summary.total_rules}\n`;
+            comment += `- 100% Coverage: ${summary.rules_with_100_coverage}\n`;
+            comment += `- With Gaps: ${summary.rules_with_gaps}\n`;
+            comment += `- **Overall Coverage: ${summary.overall_coverage_percent}%**\n\n`;
+
+            comment += `### Coverage by Artefact\n`;
+            comment += `| Artefact | Coverage |\n`;
+            comment += `|----------|----------|\n`;
+            for (const [artefact, percent] of Object.entries(summary.coverage_by_artefact)) {
+              const emoji = percent === 100 ? '✅' : percent >= 80 ? '⚠️' : '❌';
+              comment += `| ${artefact} | ${emoji} ${percent.toFixed(2)}% |\n`;
+            }
+            comment += `\n`;
+
+            if (report.gaps && report.gaps.length > 0) {
+              comment += `### Coverage Gaps (${report.gaps.length} rules)\n`;
+              const topGaps = report.gaps.slice(0, 10);
+              comment += `| Rule ID | Severity | Missing In |\n`;
+              comment += `|---------|----------|------------|\n`;
+              for (const gap of topGaps) {
+                comment += `| ${gap.rule_id} | ${gap.severity} | ${gap.missing_in.join(', ')} |\n`;
+              }
+              if (report.gaps.length > 10) {
+                comment += `\n_... and ${report.gaps.length - 10} more gaps. See full report artifact._\n`;
+              }
+            }
+
+            comment += `\n---\n`;
+            comment += `**Report SHA256:** \`${process.env.report_sha256}\`\n`;
+            comment += `**Timestamp:** ${report.timestamp}\n`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Fail if coverage < 100%
+        if: steps.coverage.outcome == 'failure'
+        run: |
+          echo "❌ Master Rules Coverage Check FAILED"
+          echo "Coverage gaps detected. All rules MUST be present in all 5 SoT Artefacts."
+          exit 1
+
+      - name: Success message
+        if: steps.coverage.outcome == 'success'
+        run: |
+          echo "✅ Master Rules Coverage Check PASSED"
+          echo "100% coverage achieved across all 5 SoT Artefacts!"

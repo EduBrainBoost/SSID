@@ -1,0 +1,43 @@
+name: CI - SoT Implementation Audit
+on:
+  push:
+    paths:
+      - '03_core/validators/sot/**'
+      - '23_compliance/policies/sot/**'
+      - '16_codex/contracts/sot/**'
+      - '12_tooling/cli/sot_validator.py'
+      - '11_test_simulation/tests_compliance/test_sot_rules.py'
+      - '12_tooling/cli/sot_audit_verifier.py'
+      - '24_meta_orchestration/sot_enforcement/sot_audit_manifest.yaml'
+  workflow_dispatch: {}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip pyyaml
+      - name: Run SoT Implementation Auditor
+        run: |
+          python 12_tooling/cli/sot_audit_verifier.py --json > audit.json
+          echo "Audit Report:"
+          cat audit.json
+      - name: Enforce PASS (100/100)
+        run: |
+          python - << 'PY'
+          import json, sys
+          data=json.load(open('audit.json'))
+          if data['overall_score'] < 100.0 or data['verdict'] != 'PASS':
+              print('FAIL: Overall score must be 100/100. Got', data['overall_score'])
+              sys.exit(24)
+          for rid, info in data['rules'].items():
+              if info['score'] < 100.0:
+                  print(f'FAIL: Rule {rid} below 100/100 -> {info["score"]}')
+                  sys.exit(24)
+          print('PASS: All rules 100/100')
+          PY

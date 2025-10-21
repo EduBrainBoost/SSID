@@ -1,0 +1,185 @@
+package ssid.rat_test
+
+import data.ssid.rat
+
+# Test: Global bundle allowed for tier 3+ (global_proof_suite)
+test_allow_global_bundle_tier3 {
+	rat.allow with input as {
+		"model": {
+			"regional_zones": {
+				"DACH": {"surcharge_percent": 0},
+				"EN-EU": {"surcharge_percent": 5},
+			},
+		},
+		"request": {
+			"tier": "global_proof_suite",
+			"regions": ["DACH"],
+			"bundles": ["global_bundle"],
+		},
+	}
+}
+
+# Test: Global bundle allowed for tier 4 (interfederation_elite)
+test_allow_global_bundle_tier4 {
+	rat.allow with input as {
+		"model": {"regional_zones": {"DACH": {}}},
+		"request": {
+			"tier": "interfederation_elite",
+			"regions": ["DACH"],
+			"bundles": ["global_bundle"],
+		},
+	}
+}
+
+# Test: Global bundle allowed for tier 5 (sovereign_infrastructure)
+test_allow_global_bundle_tier5 {
+	rat.allow with input as {
+		"model": {"regional_zones": {"DACH": {}}},
+		"request": {
+			"tier": "sovereign_infrastructure",
+			"regions": ["DACH"],
+			"bundles": ["global_bundle"],
+		},
+	}
+}
+
+# Negative Test: Global bundle DENIED for tier 0 (core_access)
+test_deny_global_bundle_tier0 {
+	not rat.allow with input as {
+		"model": {"regional_zones": {"DACH": {}}},
+		"request": {
+			"tier": "core_access",
+			"regions": ["DACH"],
+			"bundles": ["global_bundle"],
+		},
+	}
+}
+
+# Negative Test: Global bundle DENIED for tier 1 (professional)
+test_deny_global_bundle_tier1 {
+	not rat.allow with input as {
+		"model": {"regional_zones": {"DACH": {}}},
+		"request": {
+			"tier": "professional",
+			"regions": ["DACH"],
+			"bundles": ["global_bundle"],
+		},
+	}
+}
+
+# Negative Test: Global bundle DENIED for tier 2 (enterprise_trust)
+test_deny_global_bundle_tier2 {
+	not rat.allow with input as {
+		"model": {"regional_zones": {"DACH": {}}},
+		"request": {
+			"tier": "enterprise_trust",
+			"regions": ["DACH"],
+			"bundles": ["global_bundle"],
+		},
+	}
+}
+
+# Test: Non-global bundles allowed for all tiers
+test_allow_eu_bundle_tier0 {
+	rat.allow with input as {
+		"model": {"regional_zones": {"DACH": {}}},
+		"request": {
+			"tier": "core_access",
+			"regions": ["DACH"],
+			"bundles": ["eu_bundle"],
+		},
+	}
+}
+
+# Test: No bundles always allowed
+test_allow_no_bundles {
+	rat.allow with input as {
+		"model": {"regional_zones": {"DACH": {}}},
+		"request": {
+			"tier": "core_access",
+			"regions": ["DACH"],
+			"bundles": [],
+		},
+	}
+}
+
+# Test: Regions supported - single region
+test_allow_single_region {
+	rat.allow with input as {
+		"model": {
+			"regional_zones": {
+				"DACH": {},
+				"EN-EU": {},
+			},
+		},
+		"request": {
+			"tier": "professional",
+			"regions": ["DACH"],
+			"bundles": [],
+		},
+	}
+}
+
+# Test: Regions supported - multiple regions
+test_allow_multiple_regions {
+	rat.allow with input as {
+		"model": {
+			"regional_zones": {
+				"DACH": {},
+				"EN-EU": {},
+				"US-CAN": {},
+			},
+		},
+		"request": {
+			"tier": "global_proof_suite",
+			"regions": ["DACH", "EN-EU", "US-CAN"],
+			"bundles": ["global_bundle"],
+		},
+	}
+}
+
+# Negative Test: Unsupported region should DENY
+test_deny_unsupported_region {
+	not rat.allow with input as {
+		"model": {
+			"regional_zones": {
+				"DACH": {},
+				"EN-EU": {},
+			},
+		},
+		"request": {
+			"tier": "professional",
+			"regions": ["INVALID-REGION"],
+			"bundles": [],
+		},
+	}
+}
+
+# Negative Test: Partially supported regions should DENY
+test_deny_partial_region_support {
+	not rat.allow with input as {
+		"model": {
+			"regional_zones": {
+				"DACH": {},
+				"EN-EU": {},
+			},
+		},
+		"request": {
+			"tier": "professional",
+			"regions": ["DACH", "UNSUPPORTED"],
+			"bundles": [],
+		},
+	}
+}
+
+# Edge Test: Empty regions should allow (no region requirement)
+test_allow_empty_regions {
+	rat.allow with input as {
+		"model": {"regional_zones": {"DACH": {}}},
+		"request": {
+			"tier": "professional",
+			"regions": [],
+			"bundles": [],
+		},
+	}
+}

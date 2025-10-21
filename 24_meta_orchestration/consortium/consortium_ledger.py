@@ -18,13 +18,11 @@ from dataclasses import dataclass, field, asdict
 from enum import Enum
 import secrets
 
-
 class ValidationResult(Enum):
     """Anchor validation results"""
     PASS = "PASS"
     FAIL = "FAIL"
     CONDITIONAL = "CONDITIONAL"
-
 
 class MemberTier(Enum):
     """Consortium membership tiers"""
@@ -32,7 +30,6 @@ class MemberTier(Enum):
     FULL = "full_member"
     ASSOCIATE = "associate_member"
     OBSERVER = "observer"
-
 
 @dataclass
 class ConsortiumMember:
@@ -49,7 +46,6 @@ class ConsortiumMember:
     accurate_validations: int = 0
     last_active: datetime = field(default_factory=datetime.now)
 
-
 @dataclass
 class CrossSignature:
     """Cross-signature from validator organization"""
@@ -60,7 +56,6 @@ class CrossSignature:
     validation_evidence: str
     signature: str
     reputation_at_signing: float
-
 
 @dataclass
 class ConsortiumAnchor:
@@ -77,7 +72,6 @@ class ConsortiumAnchor:
     consensus_timestamp: Optional[datetime] = None
     ledger_sequence: Optional[int] = None
 
-
 @dataclass
 class LedgerBlock:
     """Block in consortium ledger"""
@@ -88,7 +82,6 @@ class LedgerBlock:
     consortium_hash: str
     merkle_root: str
     block_signatures: List[Dict[str, str]] = field(default_factory=list)
-
 
 class ConsortiumLedger:
     """
@@ -611,7 +604,6 @@ class ConsortiumLedger:
         }
         block_file.write_text(json.dumps(data, indent=2), encoding='utf-8')
 
-
 def demo_consortium():
     """Demonstrate consortium ledger functionality"""
     print("=== SSID Consortium Ledger Demo ===\n")
@@ -709,7 +701,6 @@ def demo_consortium():
         print(f"   Signatures: {proof['signatures_count']}")
 
     print("\n=== Demo Complete ===")
-
 
 if __name__ == "__main__":
     demo_consortium()

@@ -1,0 +1,424 @@
+openapi: 3.0.3
+info:
+  title: SSID Architecture Validation API
+  description: |
+    API for validating SSID repository compliance against Architecture Master Rules (AR001-AR010).
+
+    This API provides endpoints to validate the 24x16 matrix architecture and ensure
+    compliance with critical structural requirements.
+
+    **Coverage Target**: Architecture Rules (AR001-AR010) from master_rules.yaml
+    **Priority**: CRITICAL - These rules define the foundational structure
+
+    **References**:
+    - Master Rules: 16_codex/structure/level3/master_rules.yaml
+    - Validator Implementation: 03_core/validators/architecture_validator.py
+    - Test Suite: tests/test_architecture_rules.py
+  version: 1.0.0
+  contact:
+    name: SSID Architecture Team
+    url: https://github.com/yourusername/SSID
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://api.ssid.local/v1
+    description: Local development server
+  - url: https://api.ssid.prod/v1
+    description: Production server
+
+paths:
+  /validate/architecture:
+    get:
+      summary: Validate all Architecture Rules (AR001-AR010)
+      description: |
+        Validates the entire repository against all 10 Architecture Master Rules.
+        Returns comprehensive validation results with evidence and violations.
+      operationId: validateAllArchitectureRules
+      tags:
+        - Architecture Validation
+      parameters:
+        - name: repo_path
+          in: query
+          description: Path to SSID repository (defaults to current directory)
+          required: false
+          schema:
+            type: string
+            default: "."
+      responses:
+        '200':
+          description: Validation completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResponse'
+        '400':
+          description: Invalid repository path
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /validate/architecture/{ruleId}:
+    get:
+      summary: Validate specific Architecture Rule
+      description: |
+        Validates a single Architecture Rule by ID (AR001-AR010).
+        Useful for focused validation during development.
+      operationId: validateArchitectureRuleById
+      tags:
+        - Architecture Validation
+      parameters:
+        - name: ruleId
+          in: path
+          description: Architecture Rule ID (AR001-AR010)
+          required: true
+          schema:
+            type: string
+            pattern: '^AR0(0[1-9]|10)$'
+            example: AR001
+        - name: repo_path
+          in: query
+          description: Path to SSID repository
+          required: false
+          schema:
+            type: string
+            default: "."
+      responses:
+        '200':
+          description: Validation completed for specific rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+        '400':
+          description: Invalid rule ID or repository path
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Rule ID not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /validate/architecture/ar001:
+    get:
+      summary: AR001 - Validate 24 Root Folders
+      description: Das System MUSS aus exakt 24 Root-Ordnern bestehen
+      operationId: validateAR001
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR001 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+  /validate/architecture/ar002:
+    get:
+      summary: AR002 - Validate 16 Shards per Root
+      description: Jeder Root-Ordner MUSS exakt 16 Shards enthalten
+      operationId: validateAR002
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR002 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+  /validate/architecture/ar003:
+    get:
+      summary: AR003 - Validate 384 Charts
+      description: Es MUESSEN exakt 384 Chart-Dateien existieren (24x16)
+      operationId: validateAR003
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR003 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+  /validate/architecture/ar004:
+    get:
+      summary: AR004 - Validate Root Folder Format
+      description: Root-Ordner MUESSEN Format '{NR}_{NAME}' haben
+      operationId: validateAR004
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR004 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+  /validate/architecture/ar005:
+    get:
+      summary: AR005 - Validate Shard Format
+      description: Shards MUESSEN Format 'Shard_{NR}_{NAME}' haben
+      operationId: validateAR005
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR005 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+  /validate/architecture/ar006:
+    get:
+      summary: AR006 - Validate chart.yaml Exists
+      description: Jeder Shard MUSS eine chart.yaml (SoT) enthalten
+      operationId: validateAR006
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR006 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+  /validate/architecture/ar007:
+    get:
+      summary: AR007 - Validate manifest.yaml Exists
+      description: Jede Implementierung MUSS eine manifest.yaml enthalten
+      operationId: validateAR007
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR007 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+  /validate/architecture/ar008:
+    get:
+      summary: AR008 - Validate Path Structure
+      description: Pfadstruktur MUSS sein - {ROOT}/shards/{SHARD}/chart.yaml
+      operationId: validateAR008
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR008 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+  /validate/architecture/ar009:
+    get:
+      summary: AR009 - Validate Implementations Path
+      description: Implementierungen MUESSEN unter implementations/{IMPL_ID}/ liegen
+      operationId: validateAR009
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR009 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+  /validate/architecture/ar010:
+    get:
+      summary: AR010 - Validate Contracts Folder
+      description: Contracts MUESSEN in contracts/-Ordner mit OpenAPI/JSON-Schema liegen
+      operationId: validateAR010
+      tags:
+        - Architecture Rules
+      parameters:
+        - $ref: '#/components/parameters/RepoPath'
+      responses:
+        '200':
+          description: AR010 validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureValidationResult'
+
+components:
+  parameters:
+    RepoPath:
+      name: repo_path
+      in: query
+      description: Path to SSID repository
+      required: false
+      schema:
+        type: string
+        default: "."
+
+  schemas:
+    ArchitectureValidationResponse:
+      type: object
+      description: Complete validation results for all Architecture Rules
+      required:
+        - total_rules
+        - passed_count
+        - failed_count
+        - results
+        - timestamp
+      properties:
+        total_rules:
+          type: integer
+          description: Total number of rules validated
+          example: 10
+          minimum: 10
+          maximum: 10
+        passed_count:
+          type: integer
+          description: Number of rules that passed validation
+          example: 8
+          minimum: 0
+          maximum: 10
+        failed_count:
+          type: integer
+          description: Number of rules that failed validation
+          example: 2
+          minimum: 0
+          maximum: 10
+        results:
+          type: array
+          description: Individual validation results for each rule
+          items:
+            $ref: '#/components/schemas/ArchitectureValidationResult'
+          minItems: 10
+          maxItems: 10
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when validation was performed
+          example: "2025-10-19T14:30:00Z"
+        repo_path:
+          type: string
+          description: Repository path that was validated
+          example: "/home/user/SSID"
+
+    ArchitectureValidationResult:
+      type: object
+      description: Validation result for a single Architecture Rule
+      required:
+        - rule_id
+        - rule_text
+        - passed
+        - evidence
+        - violations
+        - severity
+      properties:
+        rule_id:
+          type: string
+          description: Architecture Rule identifier
+          pattern: '^AR0(0[1-9]|10)$'
+          example: AR001
+        rule_text:
+          type: string
+          description: Human-readable rule description in German
+          example: "Das System MUSS aus exakt 24 Root-Ordnern bestehen"
+        passed:
+          type: boolean
+          description: Whether the rule validation passed
+          example: true
+        evidence:
+          type: object
+          description: Evidence collected during validation (structure varies by rule)
+          additionalProperties: true
+          example:
+            total_root_folders: 24
+            root_folders:
+              - "01_ai_layer"
+              - "02_audit_logging"
+        violations:
+          type: array
+          description: List of violations found (empty if passed=true)
+          items:
+            type: string
+          example: []
+        severity:
+          type: string
+          description: Severity level of the rule
+          enum:
+            - CRITICAL
+            - HIGH
+            - MEDIUM
+            - LOW
+          example: CRITICAL
+
+    ErrorResponse:
+      type: object
+      description: Error response
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error type
+          example: "INVALID_REPOSITORY_PATH"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "The specified repository path does not exist"
+        details:
+          type: object
+          description: Additional error details
+          additionalProperties: true
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for authentication (required in production)
+
+security:
+  - ApiKeyAuth: []
+
+tags:
+  - name: Architecture Validation
+    description: Endpoints for validating Architecture Master Rules
+  - name: Architecture Rules
+    description: Individual Architecture Rule validation endpoints (AR001-AR010)

@@ -14,7 +14,6 @@ from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, field
 
-
 @dataclass
 class SyncedComplianceView:
     """Synchronized compliance data for both technical and narrative views"""
@@ -37,7 +36,6 @@ class SyncedComplianceView:
     data_sources: List[str]
     last_sync: datetime
     sync_integrity_hash: str
-
 
 class DashboardNarrativeSync:
     """
@@ -733,7 +731,6 @@ class DashboardNarrativeSync:
 
         return md
 
-
 def main():
     """Main CLI entry point"""
     print("=== SSID Dashboard-Narrative Sync ===\n")
@@ -757,7 +754,6 @@ def main():
     print("\n=== Sync Complete ===")
     print(f"\nSynced views available in: {output_dir}")
     print(f"Integrity hash: {synced_view.sync_integrity_hash}")
-
 
 if __name__ == "__main__":
     main()

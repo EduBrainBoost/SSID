@@ -1,0 +1,242 @@
+# artifact_retention.rego - Artifact Retention Policy
+# Author: edubrainboost ©2025 MIT License
+#
+# Evaluates artifact cleanup health and enforces retention limits:
+# - Generated reports within retention window
+# - Build artifacts cleaned regularly
+# - Living code never touched
+# - Snapshot consolidation functioning
+#
+# Input format:
+# {
+#   "living_code_count": 52161,
+#   "generated_reports_count": 10,
+#   "cleanup_candidates_count": 15,
+#   "total_temporary_mb": 3.5,
+#   "living_code_touched": false,
+#   "snapshot_success_rate": 100.0
+# }
+
+package artifact_retention
+
+# ===== Configuration Parameters =====
+
+# Maximum temporary artifact storage (MB)
+max_total_temporary_mb := 500
+
+# Maximum age for generated reports (days)
+max_report_age_days := 30
+
+# Maximum age for build artifacts (days)
+max_build_artifact_age_days := 7
+
+# Minimum snapshot success rate (%)
+min_snapshot_success_rate := 95.0
+
+# ===== Core Rules =====
+
+# Living code is never touched
+living_code_protected if {
+    input.living_code_touched == false
+}
+
+# Temporary storage is reasonable
+temporary_storage_healthy if {
+    input.total_temporary_mb <= max_total_temporary_mb
+}
+
+# Snapshot consolidation is functioning
+snapshot_success_healthy if {
+    # Allow if no snapshots created yet
+    not input.snapshot_success_rate
+}
+
+snapshot_success_healthy if {
+    # Or if success rate is acceptable
+    input.snapshot_success_rate >= min_snapshot_success_rate
+}
+
+# ===== Deny Rules =====
+
+deny[msg] if {
+    # CRITICAL: Living code was touched
+    input.living_code_touched == true
+    msg := "CRITICAL: Living code was modified during cleanup (FORBIDDEN)"
+}
+
+deny[msg] if {
+    # CRITICAL: Temporary storage exceeds limit
+    not temporary_storage_healthy
+    msg := sprintf(
+        "Temporary artifact storage exceeds limit: %.1f MB (max: %d MB)",
+        [input.total_temporary_mb, max_total_temporary_mb]
+    )
+}
+
+deny[msg] if {
+    # CRITICAL: Snapshot success rate too low
+    input.snapshot_success_rate
+    not snapshot_success_healthy
+    msg := sprintf(
+        "Snapshot success rate too low: %.1f%% (min: %.1f%%)",
+        [input.snapshot_success_rate, min_snapshot_success_rate]
+    )
+}
+
+# ===== Warning Rules =====
+
+warn[msg] if {
+    # Warn if approaching temporary storage limit
+    temporary_storage_healthy
+    utilization := (input.total_temporary_mb * 100.0) / max_total_temporary_mb
+    utilization > 80.0
+    msg := sprintf(
+        "Temporary storage approaching limit: %.1f MB (%.1f%% of capacity)",
+        [input.total_temporary_mb, utilization]
+    )
+}
+
+warn[msg] if {
+    # Warn if many cleanup candidates
+    input.cleanup_candidates_count > 100
+    msg := sprintf(
+        "Many cleanup candidates: %d files (consider more frequent cleanup)",
+        [input.cleanup_candidates_count]
+    )
+}
+
+warn[msg] if {
+    # Warn if no snapshots exist yet
+    not input.snapshot_success_rate
+    msg := "No snapshots created yet - consolidation not yet active"
+}
+
+# ===== Info Rules =====
+
+info[msg] if {
+    msg := sprintf(
+        "Living code: %d files (protected)",
+        [input.living_code_count]
+    )
+}
+
+info[msg] if {
+    msg := sprintf(
+        "Generated reports: %d files",
+        [input.generated_reports_count]
+    )
+}
+
+info[msg] if {
+    msg := sprintf(
+        "Cleanup candidates: %d files",
+        [input.cleanup_candidates_count]
+    )
+}
+
+info[msg] if {
+    input.snapshot_success_rate
+    msg := sprintf(
+        "Snapshot success rate: %.1f%%",
+        [input.snapshot_success_rate]
+    )
+}
+
+# ===== Assessment =====
+
+assessment := {
+    "living_code_protected": living_code_protected,
+    "temporary_storage_healthy": temporary_storage_healthy,
+    "snapshot_success_healthy": snapshot_success_healthy,
+    "temporary_utilization_pct": temporary_utilization_pct
+}
+
+temporary_utilization_pct := (input.total_temporary_mb * 100.0) / max_total_temporary_mb
+
+# ===== Policy Decision =====
+
+policy_decision := {
+    "allow": count(deny) == 0,
+    "deny_reasons": deny,
+    "warnings": warn,
+    "info": info,
+    "assessment": assessment,
+    "recommendation": recommendation
+}
+
+# Recommendation based on assessment
+recommendation := "Artifact cleanup healthy - no action required" if {
+    count(deny) == 0
+    count(warn) == 0
+} else := "IMMEDIATE ACTION: Living code was touched!" if {
+    input.living_code_touched == true
+} else := "Execute forensic cleanup immediately" if {
+    not temporary_storage_healthy
+} else := "Execute forensic cleanup soon" if {
+    input.cleanup_candidates_count > 100
+} else := "Monitor warnings"
+
+# ===== Testing =====
+
+# Test case: Healthy cleanup
+test_healthy_cleanup if {
+    test_input := {
+        "living_code_count": 52161,
+        "generated_reports_count": 10,
+        "cleanup_candidates_count": 15,
+        "total_temporary_mb": 3.5,
+        "living_code_touched": false,
+        "snapshot_success_rate": 100.0
+    }
+
+    result := policy_decision with input as test_input
+    result.allow == true
+}
+
+# Test case: Living code touched (CRITICAL)
+test_living_code_touched if {
+    test_input := {
+        "living_code_count": 52161,
+        "generated_reports_count": 10,
+        "cleanup_candidates_count": 15,
+        "total_temporary_mb": 3.5,
+        "living_code_touched": true,
+        "snapshot_success_rate": 100.0
+    }
+
+    result := policy_decision with input as test_input
+    result.allow == false
+    count(result.deny_reasons) > 0
+}
+
+# Test case: Temporary storage exceeds limit
+test_storage_exceeds_limit if {
+    test_input := {
+        "living_code_count": 52161,
+        "generated_reports_count": 10,
+        "cleanup_candidates_count": 15,
+        "total_temporary_mb": 550.0,
+        "living_code_touched": false,
+        "snapshot_success_rate": 100.0
+    }
+
+    result := policy_decision with input as test_input
+    result.allow == false
+    count(result.deny_reasons) > 0
+}
+
+# Test case: Low snapshot success rate
+test_low_snapshot_success if {
+    test_input := {
+        "living_code_count": 52161,
+        "generated_reports_count": 10,
+        "cleanup_candidates_count": 15,
+        "total_temporary_mb": 3.5,
+        "living_code_touched": false,
+        "snapshot_success_rate": 85.0
+    }
+
+    result := policy_decision with input as test_input
+    result.allow == false
+    count(result.deny_reasons) > 0
+}

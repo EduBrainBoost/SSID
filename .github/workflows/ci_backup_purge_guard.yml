@@ -1,0 +1,79 @@
+name: backup-purge-guard
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      purge:
+        description: 'Run purge after scan (moves files into WORM archives)'
+        required: false
+        default: 'false'
+
+jobs:
+  scan-and-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      - name: Run unit tests (self-check)
+        run: pytest -q 11_test_simulation/tests/test_backup_purge_tool.py
+
+      - name: Scan backups for tests (non-destructive)
+        id: scan
+        run: |
+          python 12_tooling/maintenance/backup_purge_tool.py --repo-root .
+          COUNT=$(python -c "import json; print(json.load(open('02_audit_logging/logs/backup_purge_scan.json'))['found'])")
+          echo "backup_count=$COUNT" >> $GITHUB_OUTPUT
+          echo "::notice::Backup test files found: $COUNT"
+
+      - name: Run strict mode gate
+        run: python 12_tooling/maintenance/backup_purge_tool.py --repo-root . --strict
+
+      - name: OPA Guard - backup tests must be zero
+        uses: open-policy-agent/setup-opa@v2
+        if: steps.scan.outputs.backup_count > 0
+
+      - name: Evaluate OPA policy (deny list)
+        if: steps.scan.outputs.backup_count > 0
+        run: |
+          opa eval -f pretty -i 02_audit_logging/logs/backup_purge_scan.json             -d 23_compliance/policies/backup_test_exclusion.rego             "data.ssid.backup_test_exclusion.deny"
+          # Fail if any deny messages exist
+          DENY_COUNT=$(opa eval -f raw -i 02_audit_logging/logs/backup_purge_scan.json -d 23_compliance/policies/backup_test_exclusion.rego "count(data.ssid.backup_test_exclusion.deny)")
+          echo "deny_count=$DENY_COUNT"
+          if [ "$DENY_COUNT" -gt 0 ]; then
+            echo "::error::OPA Policy Violation - $DENY_COUNT backup test(s) detected"
+            exit 1
+          fi
+
+      - name: Report Success
+        if: steps.scan.outputs.backup_count == 0
+        run: |
+          echo "::notice::✅ PASS - No backup test files detected"
+          echo "::notice::Repository is clean - all backup tests archived in WORM storage"
+
+      - name: Purge (optional - workflow_dispatch only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.purge == 'true' }}
+        run: |
+          python 12_tooling/maintenance/backup_purge_tool.py --repo-root . --purge
+
+      - name: Upload audit artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-purge-audit
+          path: |
+            02_audit_logging/logs/backup_purge_scan.json
+            02_audit_logging/logs/backup_purge_summary.json
+            02_audit_logging/reports/BACKUP_PURGE_AUDIT.md

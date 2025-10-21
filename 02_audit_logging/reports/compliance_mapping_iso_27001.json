@@ -1,0 +1,319 @@
+{
+  "timestamp": "2025-10-13T19:43:53.712397Z",
+  "framework": "ISO_27001",
+  "source_file": "iso_27001_mapping.json",
+  "data": {
+    "meta": {
+      "framework": "ISO 27001",
+      "version": "2022",
+      "source": "ISO/IEC 27001:2022",
+      "last_updated": "2025-10-13T19:40:00Z",
+      "maintainer": "edubrainboost",
+      "status": "active",
+      "classification": "PUBLIC - Compliance Mapping",
+      "regulatory_basis": "ISO/IEC 27001:2022 - Information Security Management Systems"
+    },
+    "mappings": [
+      {
+        "id": "ISO-27001-A.5.1",
+        "description": "Policies for Information Security",
+        "applies_to": [
+          "07_governance_legal",
+          "23_compliance",
+          "05_documentation"
+        ],
+        "verification": "manual",
+        "test_reference": "test_security_policies.py",
+        "controls": [
+          "Information security policy defined",
+          "Policy approved by management",
+          "Policy communicated to employees",
+          "Policy review and update procedures"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.5.7",
+        "description": "Threat Intelligence",
+        "applies_to": [
+          "17_observability",
+          "01_ai_layer",
+          "23_compliance"
+        ],
+        "verification": "automated",
+        "test_reference": "test_threat_intelligence.py",
+        "controls": [
+          "Threat intelligence collection",
+          "Vulnerability monitoring",
+          "Security advisory tracking",
+          "Threat landscape analysis"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.5.23",
+        "description": "Information Security for Use of Cloud Services",
+        "applies_to": [
+          "15_infra",
+          "19_adapters",
+          "23_compliance"
+        ],
+        "verification": "manual",
+        "test_reference": "test_cloud_security.py",
+        "controls": [
+          "Cloud service provider assessment",
+          "Data location controls",
+          "Service level agreements",
+          "Exit strategy defined"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.1",
+        "description": "User Endpoint Devices",
+        "applies_to": [
+          "13_ui_layer",
+          "14_zero_time_auth",
+          "15_infra"
+        ],
+        "verification": "automated",
+        "test_reference": "test_endpoint_security.py",
+        "controls": [
+          "Endpoint security requirements",
+          "Device registration procedures",
+          "Remote wipe capability",
+          "Bring-your-own-device policy"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.2",
+        "description": "Privileged Access Rights",
+        "applies_to": [
+          "14_zero_time_auth",
+          "03_core",
+          "15_infra"
+        ],
+        "verification": "automated",
+        "test_reference": "test_privileged_access.py",
+        "controls": [
+          "Privileged account inventory",
+          "Privileged access approval",
+          "Access review procedures",
+          "Just-in-time access provisioning"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.3",
+        "description": "Information Access Restriction",
+        "applies_to": [
+          "14_zero_time_auth",
+          "18_data_layer",
+          "03_core"
+        ],
+        "verification": "automated",
+        "test_reference": "test_access_restriction.py",
+        "controls": [
+          "Need-to-know access principle",
+          "Role-based access control (RBAC)",
+          "Access control lists",
+          "Least privilege enforcement"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.10",
+        "description": "Information Deletion",
+        "applies_to": [
+          "18_data_layer",
+          "02_audit_logging",
+          "09_meta_identity"
+        ],
+        "verification": "automated",
+        "test_reference": "test_secure_deletion.py",
+        "controls": [
+          "Secure deletion procedures",
+          "Data retention schedules",
+          "Cryptographic erasure (key destruction)",
+          "Deletion verification"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.11",
+        "description": "Data Masking",
+        "applies_to": [
+          "09_meta_identity",
+          "18_data_layer",
+          "11_test_simulation"
+        ],
+        "verification": "automated",
+        "test_reference": "test_data_masking.py",
+        "controls": [
+          "Pseudonymization techniques",
+          "Hash-based data protection",
+          "Test data anonymization",
+          "Production data masking"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.12",
+        "description": "Data Leakage Prevention",
+        "applies_to": [
+          "17_observability",
+          "02_audit_logging",
+          "15_infra"
+        ],
+        "verification": "automated",
+        "test_reference": "test_dlp.py",
+        "controls": [
+          "Data classification",
+          "Egress filtering",
+          "Sensitive data detection",
+          "Exfiltration prevention"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.16",
+        "description": "Monitoring Activities",
+        "applies_to": [
+          "17_observability",
+          "02_audit_logging",
+          "23_compliance"
+        ],
+        "verification": "automated",
+        "test_reference": "test_monitoring.py",
+        "controls": [
+          "Security event logging",
+          "Log analysis and correlation",
+          "Alerting mechanisms",
+          "24/7 monitoring capabilities"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.23",
+        "description": "Web Filtering",
+        "applies_to": [
+          "15_infra",
+          "13_ui_layer",
+          "17_observability"
+        ],
+        "verification": "automated",
+        "test_reference": "test_web_filtering.py",
+        "controls": [
+          "Malicious site blocking",
+          "Content filtering policies",
+          "URL reputation checking",
+          "Safe browsing enforcement"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.24",
+        "description": "Use of Cryptography",
+        "applies_to": [
+          "21_post_quantum_crypto",
+          "03_core",
+          "18_data_layer"
+        ],
+        "verification": "automated",
+        "test_reference": "test_cryptography.py",
+        "controls": [
+          "Cryptographic policy",
+          "Key management procedures",
+          "Algorithm selection (AES-256-GCM, TLS 1.3)",
+          "Post-quantum cryptography readiness"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.28",
+        "description": "Secure Coding",
+        "applies_to": [
+          "03_core",
+          "12_tooling",
+          "23_compliance"
+        ],
+        "verification": "automated",
+        "test_reference": "test_secure_coding.py",
+        "controls": [
+          "Secure coding standards",
+          "Code review procedures",
+          "Static application security testing (SAST)",
+          "Dependency vulnerability scanning"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.31",
+        "description": "Separation of Development, Test and Production",
+        "applies_to": [
+          "04_deployment",
+          "11_test_simulation",
+          "15_infra"
+        ],
+        "verification": "automated",
+        "test_reference": "test_env_separation.py",
+        "controls": [
+          "Environment isolation",
+          "Production data protection",
+          "Test data generation",
+          "Deployment pipelines"
+        ],
+        "implementation_status": "implemented"
+      },
+      {
+        "id": "ISO-27001-A.8.32",
+        "description": "Change Management",
+        "applies_to": [
+          "04_deployment",
+          "23_compliance",
+          "12_tooling"
+        ],
+        "verification": "manual",
+        "test_reference": "test_change_mgmt.py",
+        "controls": [
+          "Change approval process",
+          "Change impact assessment",
+          "Rollback procedures",
+          "Change documentation"
+        ],
+        "implementation_status": "implemented"
+      }
+    ],
+    "compliance_metrics": {
+      "overall_coverage": "87%",
+      "automated_controls": 12,
+      "manual_controls": 3,
+      "implemented_controls": 15,
+      "pending_controls": 0
+    },
+    "references": [
+      {
+        "title": "ISO/IEC 27001:2022",
+        "url": "https://www.iso.org/standard/27001"
+      },
+      {
+        "title": "ISO/IEC 27002:2022 - Implementation Guidance",
+        "url": "https://www.iso.org/standard/75652.html"
+      }
+    ],
+    "certification_status": {
+      "status": "Implementation Complete",
+      "target_certification_date": "2026-Q2",
+      "certification_body": "TBD",
+      "scope": "SSID Identity Verification and Authentication Platform"
+    },
+    "implementation_notes": "SSID implements ISO 27001:2022 controls with emphasis on cryptographic security, access control, and continuous monitoring. Post-quantum cryptography and AI-driven threat detection provide enhanced security posture beyond standard requirements."
+  },
+  "score": {
+    "total_controls": 15,
+    "implemented": 15,
+    "planned": 0,
+    "score": 100.0
+  }
+}

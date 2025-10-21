@@ -1,0 +1,118 @@
+# SSID OPA Policy - 11_test_simulation (FUNCTIONAL v6.3)
+# Auto-generated from 11_test_simulation/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.11testsimulation.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "11_test_simulation",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 7,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "11_test_simulation_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "11_test_simulation"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["unit_testing", "integration_testing", "e2e_testing", "load_testing", "chaos_engineering", "compliance_validation", "opa_policy_testing"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "11_test_simulation_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 11_test_simulation operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "11_test_simulation_operation"
+  input.request.valid == false
+  msg := "Invalid request for 11_test_simulation - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "11_test_simulation_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: test_coverage_minimum (enforcement: automated, scope: all_code)
+deny_testcoverageminimum[msg] {
+  input.request.type == "11_test_simulation_operation"
+  input.policy_check == "test_coverage_minimum"
+  not input.policy_compliance.testcoverageminimum
+  msg := "Policy violation: test_coverage_minimum (scope: all_code)"
+}
+
+# Policy: integration_test_required (enforcement: automated, scope: all_merges)
+deny_integrationtestrequired[msg] {
+  input.request.type == "11_test_simulation_operation"
+  input.policy_check == "integration_test_required"
+  not input.policy_compliance.integrationtestrequired
+  msg := "Policy violation: integration_test_required (scope: all_merges)"
+}
+
+# Policy: compliance_test_required (enforcement: automated, scope: policy_changes)
+deny_compliancetestrequired[msg] {
+  input.request.type == "11_test_simulation_operation"
+  input.policy_check == "compliance_test_required"
+  not input.policy_compliance.compliancetestrequired
+  msg := "Policy violation: compliance_test_required (scope: policy_changes)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "11_test_simulation_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 11_test_simulation"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "11_test_simulation_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 11_test_simulation"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "11_test_simulation",
+  "capabilities": 7,
+  "policies": 3
+}

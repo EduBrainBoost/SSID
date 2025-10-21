@@ -1,0 +1,91 @@
+# SSID Proof Emission Engine v5.2 Configuration
+# Layer 14 -> Layer 9 Bidirectional Proof Flow
+
+version: "5.2"
+
+# Layer 9 Global Proof Nexus Integration
+layer9:
+  endpoint: "http://localhost:8009"
+  api_key: "${LAYER9_API_KEY}"  # Environment variable
+  timeout_seconds: 30
+  retry_policy:
+    max_retries: 3
+    backoff_multiplier: 2
+    initial_delay_seconds: 5
+
+# On-Chain Anchoring (ProofEmitter.sol)
+blockchain:
+  enabled: true
+  network: "ethereum_sepolia"  # or mainnet, polygon, etc.
+  contract_address: "${PROOF_EMITTER_CONTRACT_ADDRESS}"
+  rpc_endpoint: "${BLOCKCHAIN_RPC_ENDPOINT}"
+  gas_limit: 100000
+  max_gas_price_gwei: 50
+
+# Provider Acknowledgement Flow
+provider_ack:
+  enabled: true
+  jwt_algorithm: "EdDSA"  # or RS256
+  jwt_expiry_seconds: 300
+  ack_timeout_seconds: 60
+  retry_on_failure: true
+  max_ack_retries: 2
+
+# Cryptographic Settings
+crypto:
+  hmac_secret: "${PROOF_EMISSION_HMAC_SECRET}"  # 256-bit minimum
+  hash_algorithms:
+    primary: "sha512"
+    merkle: "blake2b"
+  nonce_length_bytes: 16
+  signature_algorithm: "EdDSA"
+
+# Security & Privacy
+security:
+  pii_filter_mode: "strict_allowlist"
+  allowed_metadata_fields:
+    - event_type
+    - event_id
+    - timestamp
+    - provider_type
+    - verification_level
+    - document_type_hash
+    - jurisdiction_code
+  enable_replay_protection: true
+  max_timestamp_skew_seconds: 3600
+
+# Audit & Logging
+audit:
+  log_path: "02_audit_logging/proof_emission/"
+  worm_enabled: true
+  log_level: "INFO"
+  structured_logging: true
+  export_format: "jsonl"
+
+# OPA Policy Enforcement
+opa:
+  enabled: true
+  policy_path: "23_compliance/policies/proof_linking_policy.rego"
+  strict_mode: true
+  deny_on_policy_error: true
+
+# Performance & Limits
+limits:
+  max_digest_size_bytes: 1048576  # 1MB
+  max_concurrent_emissions: 10
+  rate_limit_per_minute: 100
+  queue_size: 1000
+
+# Monitoring & Alerts
+monitoring:
+  enable_metrics: true
+  metrics_port: 9090
+  alert_on_failure: true
+  alert_webhook: "${ALERT_WEBHOOK_URL}"
+
+# Development & Testing
+development:
+  mock_layer9: false
+  mock_blockchain: false
+  skip_opa_validation: false
+  verbose_logging: false

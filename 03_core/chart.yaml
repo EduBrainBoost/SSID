@@ -1,0 +1,71 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: core
+  version: "0.1.0"
+  description: "Core service logic including DID management, proof aggregation, and transaction processing"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - did_lifecycle_management
+    - verifiable_credential_issuance
+    - proof_aggregation
+    - transaction_processing
+    - smart_contract_integration
+    - cryptographic_operations
+
+  interfaces:
+    - name: did_resolver
+      type: rest_api
+      standard: w3c_did_core
+      authentication: optional
+
+    - name: vc_issuer
+      type: rest_api
+      standard: w3c_vc_data_model
+      authentication: required
+
+    - name: proof_aggregator
+      type: grpc
+      authentication: required
+
+  policies:
+    - name: did_uniqueness
+      enforcement: automated
+      scope: all_dids
+
+    - name: credential_schema_validation
+      enforcement: automated
+      scope: all_vcs
+
+    - name: transaction_integrity
+      enforcement: automated
+      scope: all_transactions
+
+  dependencies:
+    internal:
+      - 09_meta_identity  # Identity storage
+      - 14_zero_time_auth  # Authentication
+      - 02_audit_logging  # Transaction logging
+      - 21_post_quantum_crypto  # Cryptography
+    external:
+      - python: ">=3.11"
+      - did_resolution_library: ">=1.0"
+
+  governance:
+    maintainer: "Core Engineering Team"
+    reviewers:
+      - architecture_team
+      - security_team
+    approval_required: true
+    data_classification: confidential
+
+  compliance:
+    w3c_standards:
+      - did_core_1_0
+      - vc_data_model_1_1
+    mica:
+      - article_60  # Asset protection
+      - article_74  # Record keeping

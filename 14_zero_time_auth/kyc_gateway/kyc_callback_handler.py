@@ -24,7 +24,6 @@ import yaml
 
 from proof_verifier import ProofVerifier, ProofVerifierError, create_proof_record
 
-
 # Configure structured logging
 logging.basicConfig(
     level=logging.INFO,
@@ -32,7 +31,6 @@ logging.basicConfig(
     datefmt="%Y-%m-%dT%H:%M:%SZ",
 )
 logger = logging.getLogger(__name__)
-
 
 class KYCCallbackHandler:
     """
@@ -212,7 +210,6 @@ class KYCCallbackHandler:
         else:
             logger.info(json.dumps(log_entry))
 
-
 def main():
     """CLI entry point for testing"""
     import argparse
@@ -247,7 +244,6 @@ def main():
     except Exception as e:
         print(json.dumps({"status": "FAIL", "error": str(e)}, indent=2))
         exit(1)
-
 
 if __name__ == "__main__":
     main()

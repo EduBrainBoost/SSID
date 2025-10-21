@@ -12,12 +12,45 @@ Provides shared fixtures for:
 Version: Sprint 2 Week 5-6 Day 2
 """
 
-import pytest
+# ============================================================================
+# CRITICAL IMPORT ORDER - DO NOT CHANGE
+# Set up sys.path FIRST, before any other imports
+# ============================================================================
+
 import sys
 from pathlib import Path
+
+# Execute IMMEDIATELY when this module is imported (before pytest collection)
+_root = Path(__file__).parent.parent
+_critical_modules = [
+    "02_audit_logging",
+    "03_core",
+    "08_identity_score",
+    "23_compliance",
+    "24_meta_orchestration"
+]
+
+for _module_name in _critical_modules:
+    _module_path = _root / _module_name
+    if _module_path.exists() and str(_module_path) not in sys.path:
+        sys.path.insert(0, str(_module_path))
+
+# NOW import other modules after sys.path is set up
+import pytest
 from datetime import datetime
 import hashlib
 
+# ============================================================================
+# pytest_configure - Additional configuration
+# ============================================================================
+
+def pytest_configure(config):
+    """
+    Configure pytest BEFORE test collection starts.
+    Path setup is already done at module import time above.
+    """
+    # Paths already set up - this is just a backup
+    pass
 
 # ============================================================================
 # Import Helper for Number-Prefixed Modules
@@ -36,8 +69,7 @@ def add_module_path(module_name):
     if module_path.exists() and str(module_path) not in sys.path:
         sys.path.insert(0, str(module_path))
 
-
-# Auto-add critical modules to path
+# Auto-add critical modules to path (backward compatibility)
 CRITICAL_MODULES = [
     "02_audit_logging",
     "03_core",
@@ -48,7 +80,6 @@ CRITICAL_MODULES = [
 
 for module in CRITICAL_MODULES:
     add_module_path(module)
-
 
 # ============================================================================
 # Audit Logging Fixtures
@@ -80,7 +111,6 @@ def sample_audit_log():
             "user_id": "user_002"
         }
     ]
-
 
 @pytest.fixture
 def sample_hash_chain():
@@ -124,7 +154,6 @@ def sample_hash_chain():
 
     return chain
 
-
 # ============================================================================
 # Health Check Fixtures
 # ============================================================================
@@ -155,7 +184,6 @@ def mock_health_endpoint(monkeypatch):
     except ImportError:
         pass  # requests not installed
 
-
 @pytest.fixture
 def sample_health_data():
     """
@@ -174,7 +202,6 @@ def sample_health_data():
         },
         "uptime_seconds": 3600
     }
-
 
 # ============================================================================
 # Dependency Graph Fixtures
@@ -198,7 +225,6 @@ def sample_dependency_graph():
         ]
     }
 
-
 @pytest.fixture
 def sample_circular_dependencies():
     """
@@ -215,7 +241,6 @@ def sample_circular_dependencies():
             ("C", "A")  # Cycle: A -> B -> C -> A
         ]
     }
-
 
 # ============================================================================
 # Badge/Signature Fixtures
@@ -242,7 +267,6 @@ def sample_badge_data():
         }
     }
 
-
 @pytest.fixture
 def sample_tampered_badge():
     """
@@ -261,7 +285,6 @@ def sample_tampered_badge():
             "user_id": "user_002"
         }
     }
-
 
 # ============================================================================
 # Time Fixtures
@@ -287,7 +310,6 @@ def freeze_time_2025():
     except ImportError:
         pytest.skip("freezegun not installed")
 
-
 # ============================================================================
 # Anti-Gaming Fixtures
 # ============================================================================
@@ -307,7 +329,6 @@ def sample_event_sequence():
         {"ts": "2025-01-01T12:01:15Z", "user": "alice", "action": "submit"},
         {"ts": "2025-01-01T12:02:00Z", "user": "bob", "action": "view"}
     ]
-
 
 @pytest.fixture
 def sample_anomaly_events():
@@ -332,7 +353,6 @@ def sample_anomaly_events():
 
     return events
 
-
 # ============================================================================
 # Identity Score Fixtures
 # ============================================================================
@@ -352,7 +372,6 @@ def sample_identity_data():
         "activity_count": 50,
         "social_links": 2
     }
-
 
 # ============================================================================
 # Anti-Gaming Specific Fixtures (23_compliance/anti_gaming)
@@ -387,7 +406,6 @@ def sample_valid_badges():
         }
     ]
 
-
 @pytest.fixture
 def sample_invalid_badges():
     """
@@ -417,7 +435,6 @@ def sample_invalid_badges():
         }
     ]
 
-
 @pytest.fixture
 def sample_mixed_badges(sample_valid_badges, sample_invalid_badges):
     """
@@ -427,7 +444,6 @@ def sample_mixed_badges(sample_valid_badges, sample_invalid_badges):
         Combined list of valid and invalid badges
     """
     return sample_valid_badges + sample_invalid_badges
-
 
 @pytest.fixture
 def sample_identity_hashes_clean():
@@ -444,7 +460,6 @@ def sample_identity_hashes_clean():
         "901stu234vwx",
         "567yza890bcd"
     ]
-
 
 @pytest.fixture
 def sample_identity_hashes_duplicates():
@@ -465,7 +480,6 @@ def sample_identity_hashes_duplicates():
         "ghi789"   # Duplicate!
     ]
 
-
 @pytest.fixture
 def sample_dependency_graph_acyclic():
     """
@@ -484,7 +498,6 @@ def sample_dependency_graph_acyclic():
         ],
         "has_cycles": False
     }
-
 
 @pytest.fixture
 def sample_dependency_graph_cyclic():
@@ -507,7 +520,6 @@ def sample_dependency_graph_cyclic():
         ]
     }
 
-
 @pytest.fixture
 def sample_overfitting_patterns_clean():
     """
@@ -523,7 +535,6 @@ def sample_overfitting_patterns_clean():
         "test_profile_update": 98,
         "test_logout": 101
     }
-
 
 @pytest.fixture
 def sample_overfitting_patterns_suspicious():
@@ -541,7 +552,6 @@ def sample_overfitting_patterns_suspicious():
         "test_logout": 4
     }
 
-
 # ============================================================================
 # Utility Functions
 # ============================================================================
@@ -549,7 +559,6 @@ def sample_overfitting_patterns_suspicious():
 def generate_hash(data: str) -> str:
     """Generate SHA-256 hash for testing"""
     return hashlib.sha256(data.encode()).hexdigest()
-
 
 @pytest.fixture
 def hash_generator():

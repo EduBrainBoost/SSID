@@ -20,7 +20,6 @@ from typing import List, Dict, Any, Optional
 from collections import defaultdict
 import statistics
 
-
 class ActivityWindowScanner:
     """Scans audit logs for unexpected activity patterns indicating automation/gaming."""
 
@@ -319,7 +318,6 @@ class ActivityWindowScanner:
             }
         }
 
-
 def main():
     """Main entry point."""
     import argparse
@@ -354,7 +352,6 @@ def main():
 
     # Exit with appropriate code
     sys.exit(1 if is_suspicious else 0)
-
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,30 @@
+{
+  "id": "d4a97867-775f-4c1d-93f2-6e42f323a511",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 100,
+  "status": "actual",
+  "source": {
+    "file": "24_meta_orchestration/promotion_rules.yaml",
+    "hash": "92da5c410b00f16e41834a2024837cd6b4e977a41748fb16def2e87514fcb47612904a22ff09791f994beeb17f43c03f25c7c8d173ba2d93aa93d605502b5652",
+    "line": 136,
+    "context": "        - \"Verify CI/CD pipelines\"\n      completion_criteria:\n        - \"Root-24-LOCK: PASS\"\n        - \"Compliance Score: 100/100\"\n        - \"All tests passing\"\n        - \"CI/CD workflows green\"\n"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "801ccd2a-caea-4a16-ac9f-c5f2f833e16e",
+    "timestamp": "2025-10-16T19:32:41.761771Z"
+  },
+  "worm": {
+    "uuid": "80b7bdae-2eaf-4e10-9f67-b9e1ebefb219",
+    "signature": "76ddde651bb2fd82a7dfb67ba56be1348a05f46442c28a9746b3a2518164e06246830e3299bbc9add0cbd1f9fa061b7990370aa2cdc17d4da409120c1a247416",
+    "chain_prev": "dbd6fcc9-1446-4625-a69f-a960b0f0eee7"
+  },
+  "metadata": {
+    "grade": "PLATINUM",
+    "component": "Meta Orchestration"
+  }
+}

@@ -1,0 +1,351 @@
+# SSID Pricing Enforcement Policy v5.1
+# Root-24-LOCK Compliance Enforced
+# Generated: 2025-10-13
+# OPA Policy for Pricing & Region Activation Framework v5.1
+
+package ssid.pricing.enforcement.v5_1
+
+import future.keywords.if
+import future.keywords.in
+
+# Version metadata
+version := "5.1.0"
+effective_date := "2025-10-13"
+root_compliance := "ROOT_24_LOCK_ENFORCED"
+
+# Tier definitions
+tier_definitions := {
+    "T1_STARTER": {
+        "name": "Starter",
+        "price_eur": 99,
+        "did_quota": 5,
+        "min_delegates": 0,
+        "max_delegates": 10
+    },
+    "T2_PROFESSIONAL": {
+        "name": "Professional",
+        "price_eur": 499,
+        "did_quota": 50,
+        "min_delegates": 0,
+        "max_delegates": 100
+    },
+    "T3_BUSINESS_PLUS": {
+        "name": "Business Plus",
+        "price_eur": 249,
+        "did_quota": 20,
+        "min_delegates": 10,
+        "max_delegates": 100
+    },
+    "T4_ENTERPRISE": {
+        "name": "Enterprise",
+        "price_eur": 2499,
+        "did_quota": 500,
+        "min_delegates": 0,
+        "max_delegates": 1000
+    },
+    "T5_SOVEREIGN": {
+        "name": "Sovereign",
+        "price_eur": 40000,
+        "did_quota": "unlimited",
+        "min_delegates": 0,
+        "max_delegates": "unlimited"
+    }
+}
+
+# Add-on definitions
+addon_definitions := {
+    "AO_WHITE_LABEL": {
+        "name": "White-Label UI Package",
+        "price_eur": 299,
+        "available_for": ["T2_PROFESSIONAL", "T3_BUSINESS_PLUS", "T4_ENTERPRISE"]
+    },
+    "AO_PREMIUM_API": {
+        "name": "Premium API Quota Boost",
+        "price_eur": 199,
+        "available_for": ["T2_PROFESSIONAL", "T3_BUSINESS_PLUS", "T4_ENTERPRISE"]
+    },
+    "AO_AUDIT_EXPORT": {
+        "name": "Audit Export & Analytics",
+        "price_eur": 149,
+        "available_for": ["T2_PROFESSIONAL", "T3_BUSINESS_PLUS", "T4_ENTERPRISE"]
+    },
+    "AO_FIVE_NINES": {
+        "name": "Five Nines SLA (99.999%)",
+        "price_eur": 999,
+        "available_for": ["T4_ENTERPRISE"]
+    },
+    "AO_ENTERPRISE_BUNDLE": {
+        "name": "Enterprise Suite Bundle",
+        "price_eur": 1499,
+        "available_for": ["T4_ENTERPRISE"],
+        "discount_percentage": 25
+    }
+}
+
+# Region surcharges
+region_surcharges := {
+    "R1_EU_CENTRAL": 0,
+    "R2_EU_WEST": 0,
+    "R3_US_EAST": 0,
+    "R4_US_WEST": 0,
+    "R5_APAC": 8,
+    "R6_ME_UAE": 15,
+    "R7_UK": 3,
+    "R8_APAC_EXT": 12,
+    "R9_LATAM_BR": 10,
+    "R10_EU_EAST": 5
+}
+
+# Thresholds
+segment_2_min_revenue_eur := 3000000
+segment_3_min_revenue_eur := 6500000
+add_on_adoption_cap_percentage := 70
+sovereign_floor_eur := 40000
+
+# =============================================================================
+# Rule 1: Business Plus Eligibility
+# =============================================================================
+
+# Business Plus tier requires delegate count between 10 and 100
+default allow_business_plus = false
+
+allow_business_plus if {
+    input.tier_id == "T3_BUSINESS_PLUS"
+    input.delegate_count >= 10
+    input.delegate_count <= 100
+}
+
+deny_business_plus contains msg if {
+    input.tier_id == "T3_BUSINESS_PLUS"
+    input.delegate_count < 10
+    msg := sprintf("Business Plus tier requires at least 10 delegates (provided: %d)", [input.delegate_count])
+}
+
+deny_business_plus contains msg if {
+    input.tier_id == "T3_BUSINESS_PLUS"
+    input.delegate_count > 100
+    msg := sprintf("Business Plus tier allows maximum 100 delegates (provided: %d)", [input.delegate_count])
+}
+
+# =============================================================================
+# Rule 2: Sovereign Floor Enforcement
+# =============================================================================
+
+# Sovereign tier must meet minimum €40,000 price floor
+default allow_sovereign_floor = false
+
+allow_sovereign_floor if {
+    input.tier_id == "T5_SOVEREIGN"
+    input.price_eur >= sovereign_floor_eur
+}
+
+deny_sovereign_floor contains msg if {
+    input.tier_id == "T5_SOVEREIGN"
+    input.price_eur < sovereign_floor_eur
+    msg := sprintf("Sovereign tier requires minimum €%d (provided: €%d)", [sovereign_floor_eur, input.price_eur])
+}
+
+# =============================================================================
+# Rule 3: Add-On Adoption Cap (≤ 70%)
+# =============================================================================
+
+# Calculate total add-on cost
+total_addon_cost = sum if {
+    sum := sum([addon.price_eur | addon := input.addons[_]])
+}
+
+# Base tier price
+base_tier_price = tier_definitions[input.tier_id].price_eur
+
+# Add-on adoption percentage
+addon_adoption_percentage = percentage if {
+    base_tier_price > 0
+    percentage := (total_addon_cost / base_tier_price) * 100
+}
+
+# Allow add-ons if under cap
+default allow_addon_adoption = false
+
+allow_addon_adoption if {
+    addon_adoption_percentage <= add_on_adoption_cap_percentage
+}
+
+deny_addon_adoption contains msg if {
+    addon_adoption_percentage > add_on_adoption_cap_percentage
+    msg := sprintf("Add-on adoption exceeds %d%% cap (current: %.2f%%)", [add_on_adoption_cap_percentage, addon_adoption_percentage])
+}
+
+# =============================================================================
+# Rule 4: Region Surcharge Validation
+# =============================================================================
+
+# Calculate expected surcharge
+expected_surcharge_percentage = region_surcharges[input.region_id]
+
+expected_total_with_surcharge = total if {
+    base_price := input.base_price_eur
+    surcharge := base_price * (expected_surcharge_percentage / 100)
+    total := base_price + surcharge
+}
+
+# Validate surcharge application
+default allow_region_surcharge = false
+
+allow_region_surcharge if {
+    abs(input.total_price_eur - expected_total_with_surcharge) < 0.01
+}
+
+deny_region_surcharge contains msg if {
+    abs(input.total_price_eur - expected_total_with_surcharge) >= 0.01
+    msg := sprintf("Region surcharge mismatch: expected €%.2f, got €%.2f (region: %s, surcharge: %d%%)",
+        [expected_total_with_surcharge, input.total_price_eur, input.region_id, expected_surcharge_percentage])
+}
+
+# =============================================================================
+# Rule 5: Add-On Tier Eligibility
+# =============================================================================
+
+# Check if tier is allowed for each add-on
+addon_tier_violations[addon_id] = msg if {
+    some addon_id
+    addon := input.addons[addon_id]
+    definition := addon_definitions[addon_id]
+    not input.tier_id in definition.available_for
+    msg := sprintf("Add-on %s not available for tier %s (allowed: %v)",
+        [definition.name, tier_definitions[input.tier_id].name, definition.available_for])
+}
+
+default allow_addon_tier_eligibility = false
+
+allow_addon_tier_eligibility if {
+    count(addon_tier_violations) == 0
+}
+
+# =============================================================================
+# Rule 6: Segment Revenue Thresholds
+# =============================================================================
+
+# Segment 2 requires ≥ €3.0M annual revenue
+default allow_segment_2_threshold = false
+
+allow_segment_2_threshold if {
+    input.segment == "S2"
+    input.annual_revenue_eur >= segment_2_min_revenue_eur
+}
+
+deny_segment_2 contains msg if {
+    input.segment == "S2"
+    input.annual_revenue_eur < segment_2_min_revenue_eur
+    msg := sprintf("Segment 2 requires minimum €%d annual revenue (provided: €%d)",
+        [segment_2_min_revenue_eur, input.annual_revenue_eur])
+}
+
+# Segment 3 requires ≥ €6.5M annual revenue
+default allow_segment_3_threshold = false
+
+allow_segment_3_threshold if {
+    input.segment == "S3"
+    input.annual_revenue_eur >= segment_3_min_revenue_eur
+}
+
+deny_segment_3 contains msg if {
+    input.segment == "S3"
+    input.annual_revenue_eur < segment_3_min_revenue_eur
+    msg := sprintf("Segment 3 requires minimum €%d annual revenue (provided: €%d)",
+        [segment_3_min_revenue_eur, input.annual_revenue_eur])
+}
+
+# =============================================================================
+# Rule 7: Tier Upgrade Path Validation
+# =============================================================================
+
+tier_hierarchy := ["T1_STARTER", "T3_BUSINESS_PLUS", "T2_PROFESSIONAL", "T4_ENTERPRISE", "T5_SOVEREIGN"]
+
+tier_index(tier_id) = idx if {
+    tier_hierarchy[idx] == tier_id
+}
+
+# Allow upgrade if moving to higher tier
+default allow_tier_upgrade = false
+
+allow_tier_upgrade if {
+    input.action == "upgrade"
+    current_idx := tier_index(input.current_tier_id)
+    new_idx := tier_index(input.new_tier_id)
+    new_idx > current_idx
+}
+
+deny_tier_upgrade contains msg if {
+    input.action == "upgrade"
+    current_idx := tier_index(input.current_tier_id)
+    new_idx := tier_index(input.new_tier_id)
+    new_idx <= current_idx
+    msg := sprintf("Invalid tier upgrade: %s to %s (must upgrade to higher tier)",
+        [tier_definitions[input.current_tier_id].name, tier_definitions[input.new_tier_id].name])
+}
+
+# =============================================================================
+# Master Allow Rule
+# =============================================================================
+
+default allow = false
+
+allow if {
+    count(deny_business_plus) == 0
+    count(deny_sovereign_floor) == 0
+    count(deny_addon_adoption) == 0
+    count(deny_region_surcharge) == 0
+    count(addon_tier_violations) == 0
+}
+
+# =============================================================================
+# Comprehensive Deny Collection
+# =============================================================================
+
+deny contains msg if {
+    msg := deny_business_plus[_]
+}
+
+deny contains msg if {
+    msg := deny_sovereign_floor[_]
+}
+
+deny contains msg if {
+    msg := deny_addon_adoption[_]
+}
+
+deny contains msg if {
+    msg := deny_region_surcharge[_]
+}
+
+deny contains msg if {
+    msg := addon_tier_violations[_]
+}
+
+deny contains msg if {
+    msg := deny_segment_2[_]
+}
+
+deny contains msg if {
+    msg := deny_segment_3[_]
+}
+
+deny contains msg if {
+    msg := deny_tier_upgrade[_]
+}
+
+# =============================================================================
+# Policy Metadata
+# =============================================================================
+
+policy_info := {
+    "version": version,
+    "effective_date": effective_date,
+    "root_compliance": root_compliance,
+    "rules_count": 7,
+    "tiers_count": 5,
+    "addons_count": 5,
+    "regions_count": 10,
+    "author": "SSID Governance Team",
+    "generated_by": "Claude Code v5.1 Artifact Generator"
+}

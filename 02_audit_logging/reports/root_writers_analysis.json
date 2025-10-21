@@ -1,0 +1,823 @@
+{
+  "version": "1.0",
+  "generated_at": "2025-10-14T17:55:02.530951+00:00",
+  "repository_root": "C:\\Users\\bibel\\Documents\\Github\\SSID",
+  "statistics": {
+    "scripts_scanned": 21793,
+    "violations_found": 40,
+    "patterns_detected": {
+      "hardcoded_root_file": 24,
+      "open_root_write": 4,
+      "direct_root_write": 10,
+      "write_text_root": 1,
+      "parent_parent_root_write": 1
+    }
+  },
+  "violations": [
+    {
+      "file": "02_audit_logging\\utils\\track_progress.py",
+      "line": 262,
+      "pattern": "hardcoded_root_file",
+      "target_file": "phase_3_should",
+      "code_snippet": "for phase_key in ['phase_1_inventar', 'phase_2_must', 'phase_3_should', 'phase_4_may', 'phase_5_test",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\verify_root24_certification_v5_3.py",
+      "line": 86,
+      "pattern": "hardcoded_root_file",
+      "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+      "code_snippet": "\"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\"",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\02_audit_logging\\utils\\track_progress.py",
+      "line": 262,
+      "pattern": "hardcoded_root_file",
+      "target_file": "phase_3_should",
+      "code_snippet": "for phase_key in ['phase_1_inventar', 'phase_2_must', 'phase_3_should', 'phase_4_may', 'phase_5_test",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+      "line": 462,
+      "pattern": "open_root_write",
+      "target_file": "quantum_signature_relay_v2_test_vectors.json",
+      "code_snippet": "with open(\"quantum_signature_relay_v2_test_vectors.json\", \"w\") as f:",
+      "severity": "HIGH"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "line": 221,
+      "pattern": "hardcoded_root_file",
+      "target_file": "test_results",
+      "code_snippet": "\"test_results\": test_results,",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+      "line": 170,
+      "pattern": "hardcoded_root_file",
+      "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+      "code_snippet": "\"package.json\", \"pytest.ini\", \".github\", \"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\",",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "line": 2951,
+      "pattern": "direct_root_write",
+      "target_file": "ssid-project-v2-complete.zip",
+      "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+      "severity": "HIGH"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+      "line": 905,
+      "pattern": "direct_root_write",
+      "target_file": "ssid-project-v2-complete.zip",
+      "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+      "severity": "HIGH"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\verify_root24_certification_v5_3.py",
+      "line": 86,
+      "pattern": "hardcoded_root_file",
+      "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+      "code_snippet": "\"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\"",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\02_audit_logging\\utils\\track_progress.py",
+      "line": 262,
+      "pattern": "hardcoded_root_file",
+      "target_file": "phase_3_should",
+      "code_snippet": "for phase_key in ['phase_1_inventar', 'phase_2_must', 'phase_3_should', 'phase_4_may', 'phase_5_test",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+      "line": 455,
+      "pattern": "open_root_write",
+      "target_file": "quantum_signature_relay_v2_test_vectors.json",
+      "code_snippet": "with open(\"quantum_signature_relay_v2_test_vectors.json\", \"w\") as f:",
+      "severity": "HIGH"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "line": 215,
+      "pattern": "hardcoded_root_file",
+      "target_file": "test_results",
+      "code_snippet": "\"test_results\": test_results,",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+      "line": 170,
+      "pattern": "hardcoded_root_file",
+      "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+      "code_snippet": "\"package.json\", \"pytest.ini\", \".github\", \"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\",",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "line": 2951,
+      "pattern": "direct_root_write",
+      "target_file": "ssid-project-v2-complete.zip",
+      "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+      "severity": "HIGH"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+      "line": 905,
+      "pattern": "direct_root_write",
+      "target_file": "ssid-project-v2-complete.zip",
+      "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+      "severity": "HIGH"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\12_tooling\\verify_root24_certification_v5_3.py",
+      "line": 86,
+      "pattern": "hardcoded_root_file",
+      "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+      "code_snippet": "\"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\"",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\02_audit_logging\\utils\\track_progress.py",
+      "line": 262,
+      "pattern": "hardcoded_root_file",
+      "target_file": "phase_3_should",
+      "code_snippet": "for phase_key in ['phase_1_inventar', 'phase_2_must', 'phase_3_should', 'phase_4_may', 'phase_5_test",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+      "line": 455,
+      "pattern": "open_root_write",
+      "target_file": "quantum_signature_relay_v2_test_vectors.json",
+      "code_snippet": "with open(\"quantum_signature_relay_v2_test_vectors.json\", \"w\") as f:",
+      "severity": "HIGH"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "line": 215,
+      "pattern": "hardcoded_root_file",
+      "target_file": "test_results",
+      "code_snippet": "\"test_results\": test_results,",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+      "line": 170,
+      "pattern": "hardcoded_root_file",
+      "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+      "code_snippet": "\"package.json\", \"pytest.ini\", \".github\", \"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\",",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "line": 2951,
+      "pattern": "direct_root_write",
+      "target_file": "ssid-project-v2-complete.zip",
+      "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+      "severity": "HIGH"
+    },
+    {
+      "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+      "line": 905,
+      "pattern": "direct_root_write",
+      "target_file": "ssid-project-v2-complete.zip",
+      "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+      "severity": "HIGH"
+    },
+    {
+      "file": "11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "line": 215,
+      "pattern": "hardcoded_root_file",
+      "target_file": "test_results",
+      "code_snippet": "\"test_results\": test_results,",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 49,
+      "pattern": "direct_root_write",
+      "target_file": "SYSTEM_HEALTH_REPORT.md",
+      "code_snippet": "# Example: Path(\"SYSTEM_HEALTH_REPORT.md\")",
+      "severity": "HIGH"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 81,
+      "pattern": "direct_root_write",
+      "target_file": "report.md",
+      "code_snippet": "# Example: Path(\"report.md\").write_text(...)",
+      "severity": "HIGH"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 65,
+      "pattern": "open_root_write",
+      "target_file": "test_results.log",
+      "code_snippet": "# Example: open(\"test_results.log\", \"w\")",
+      "severity": "HIGH"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 81,
+      "pattern": "write_text_root",
+      "target_file": "report.md",
+      "code_snippet": "# Example: Path(\"report.md\").write_text(...)",
+      "severity": "HIGH"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 97,
+      "pattern": "parent_parent_root_write",
+      "target_file": "REPORT.md",
+      "code_snippet": "# Example: Path(__file__).parent.parent / \"REPORT.md\"",
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 49,
+      "pattern": "hardcoded_root_file",
+      "target_file": "SYSTEM_HEALTH_REPORT.md",
+      "code_snippet": "# Example: Path(\"SYSTEM_HEALTH_REPORT.md\")",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 114,
+      "pattern": "hardcoded_root_file",
+      "target_file": "SYSTEM_HEALTH_REPORT",
+      "code_snippet": "'SYSTEM_HEALTH_REPORT',",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 115,
+      "pattern": "hardcoded_root_file",
+      "target_file": "PHASE_3_",
+      "code_snippet": "'PHASE_3_',",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 116,
+      "pattern": "hardcoded_root_file",
+      "target_file": "MINIMAL_SURFACE",
+      "code_snippet": "'MINIMAL_SURFACE',",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 112,
+      "pattern": "hardcoded_root_file",
+      "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+      "code_snippet": "# Example: \"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\"",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 117,
+      "pattern": "hardcoded_root_file",
+      "target_file": "ROOT_24_LOCK.*BUNDLE",
+      "code_snippet": "'ROOT_24_LOCK.*BUNDLE',",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 65,
+      "pattern": "hardcoded_root_file",
+      "target_file": "test_results.log",
+      "code_snippet": "# Example: open(\"test_results.log\", \"w\")",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 118,
+      "pattern": "hardcoded_root_file",
+      "target_file": "test_results",
+      "code_snippet": "'test_results',",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "12_tooling\\analysis\\scan_root_writers.py",
+      "line": 120,
+      "pattern": "hardcoded_root_file",
+      "target_file": "_REPORT_.*\\.md",
+      "code_snippet": "'_REPORT_.*\\.md'",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "23_compliance\\guards\\root_immunity_daemon.py",
+      "line": 612,
+      "pattern": "hardcoded_root_file",
+      "target_file": "test_results.log",
+      "code_snippet": "if name in ['.coverage', 'test_results.log', '.pytest_cache'] or name.endswith('.pyc'):",
+      "severity": "MEDIUM"
+    },
+    {
+      "file": "23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "line": 2951,
+      "pattern": "direct_root_write",
+      "target_file": "ssid-project-v2-complete.zip",
+      "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+      "severity": "HIGH"
+    },
+    {
+      "file": "23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+      "line": 905,
+      "pattern": "direct_root_write",
+      "target_file": "ssid-project-v2-complete.zip",
+      "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+      "severity": "HIGH"
+    }
+  ],
+  "by_file": {
+    "02_audit_logging\\utils\\track_progress.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\verify_root24_certification_v5_3.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192628\\02_audit_logging\\utils\\track_progress.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192628\\03_core\\interfaces\\quantum_signature_relay_v2.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192628\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\forensics\\scan_root_structure_integrity.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\verify_root24_certification_v5_3.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192748\\02_audit_logging\\utils\\track_progress.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192748\\03_core\\interfaces\\quantum_signature_relay_v2.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192748\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\forensics\\scan_root_structure_integrity.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_200559\\12_tooling\\verify_root24_certification_v5_3.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_200559\\02_audit_logging\\utils\\track_progress.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_200559\\03_core\\interfaces\\quantum_signature_relay_v2.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_200559\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_200559\\12_tooling\\forensics\\scan_root_structure_integrity.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_200559\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py": 1,
+    "02_audit_logging\\backups\\placeholders_20251013_200559\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py": 1,
+    "11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py": 1,
+    "12_tooling\\analysis\\scan_root_writers.py": 14,
+    "23_compliance\\guards\\root_immunity_daemon.py": 1,
+    "23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py": 1,
+    "23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py": 1
+  },
+  "by_target_file": {
+    "phase_3_should": [
+      "02_audit_logging\\utils\\track_progress.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192628\\02_audit_logging\\utils\\track_progress.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192748\\02_audit_logging\\utils\\track_progress.py",
+      "02_audit_logging\\backups\\placeholders_20251013_200559\\02_audit_logging\\utils\\track_progress.py"
+    ],
+    "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md": [
+      "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\verify_root24_certification_v5_3.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\verify_root24_certification_v5_3.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+      "02_audit_logging\\backups\\placeholders_20251013_200559\\12_tooling\\verify_root24_certification_v5_3.py",
+      "02_audit_logging\\backups\\placeholders_20251013_200559\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ],
+    "quantum_signature_relay_v2_test_vectors.json": [
+      "02_audit_logging\\backups\\placeholders_20251013_192628\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192748\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+      "02_audit_logging\\backups\\placeholders_20251013_200559\\03_core\\interfaces\\quantum_signature_relay_v2.py"
+    ],
+    "test_results": [
+      "02_audit_logging\\backups\\placeholders_20251013_192628\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192748\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "02_audit_logging\\backups\\placeholders_20251013_200559\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ],
+    "ssid-project-v2-complete.zip": [
+      "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+      "02_audit_logging\\backups\\placeholders_20251013_200559\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "02_audit_logging\\backups\\placeholders_20251013_200559\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+      "23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py"
+    ],
+    "SYSTEM_HEALTH_REPORT.md": [
+      "12_tooling\\analysis\\scan_root_writers.py",
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ],
+    "report.md": [
+      "12_tooling\\analysis\\scan_root_writers.py",
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ],
+    "test_results.log": [
+      "12_tooling\\analysis\\scan_root_writers.py",
+      "12_tooling\\analysis\\scan_root_writers.py",
+      "23_compliance\\guards\\root_immunity_daemon.py"
+    ],
+    "REPORT.md": [
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ],
+    "SYSTEM_HEALTH_REPORT": [
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ],
+    "PHASE_3_": [
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ],
+    "MINIMAL_SURFACE": [
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ],
+    "ROOT_24_LOCK.*BUNDLE": [
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ],
+    "_REPORT_.*\\.md": [
+      "12_tooling\\analysis\\scan_root_writers.py"
+    ]
+  },
+  "top_offenders": [
+    {
+      "script": "12_tooling\\analysis\\scan_root_writers.py",
+      "violation_count": 14,
+      "violations": [
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 49,
+          "pattern": "direct_root_write",
+          "target_file": "SYSTEM_HEALTH_REPORT.md",
+          "code_snippet": "# Example: Path(\"SYSTEM_HEALTH_REPORT.md\")",
+          "severity": "HIGH"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 81,
+          "pattern": "direct_root_write",
+          "target_file": "report.md",
+          "code_snippet": "# Example: Path(\"report.md\").write_text(...)",
+          "severity": "HIGH"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 65,
+          "pattern": "open_root_write",
+          "target_file": "test_results.log",
+          "code_snippet": "# Example: open(\"test_results.log\", \"w\")",
+          "severity": "HIGH"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 81,
+          "pattern": "write_text_root",
+          "target_file": "report.md",
+          "code_snippet": "# Example: Path(\"report.md\").write_text(...)",
+          "severity": "HIGH"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 97,
+          "pattern": "parent_parent_root_write",
+          "target_file": "REPORT.md",
+          "code_snippet": "# Example: Path(__file__).parent.parent / \"REPORT.md\"",
+          "severity": "CRITICAL"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 49,
+          "pattern": "hardcoded_root_file",
+          "target_file": "SYSTEM_HEALTH_REPORT.md",
+          "code_snippet": "# Example: Path(\"SYSTEM_HEALTH_REPORT.md\")",
+          "severity": "MEDIUM"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 114,
+          "pattern": "hardcoded_root_file",
+          "target_file": "SYSTEM_HEALTH_REPORT",
+          "code_snippet": "'SYSTEM_HEALTH_REPORT',",
+          "severity": "MEDIUM"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 115,
+          "pattern": "hardcoded_root_file",
+          "target_file": "PHASE_3_",
+          "code_snippet": "'PHASE_3_',",
+          "severity": "MEDIUM"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 116,
+          "pattern": "hardcoded_root_file",
+          "target_file": "MINIMAL_SURFACE",
+          "code_snippet": "'MINIMAL_SURFACE',",
+          "severity": "MEDIUM"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 112,
+          "pattern": "hardcoded_root_file",
+          "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+          "code_snippet": "# Example: \"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\"",
+          "severity": "MEDIUM"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 117,
+          "pattern": "hardcoded_root_file",
+          "target_file": "ROOT_24_LOCK.*BUNDLE",
+          "code_snippet": "'ROOT_24_LOCK.*BUNDLE',",
+          "severity": "MEDIUM"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 65,
+          "pattern": "hardcoded_root_file",
+          "target_file": "test_results.log",
+          "code_snippet": "# Example: open(\"test_results.log\", \"w\")",
+          "severity": "MEDIUM"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 118,
+          "pattern": "hardcoded_root_file",
+          "target_file": "test_results",
+          "code_snippet": "'test_results',",
+          "severity": "MEDIUM"
+        },
+        {
+          "file": "12_tooling\\analysis\\scan_root_writers.py",
+          "line": 120,
+          "pattern": "hardcoded_root_file",
+          "target_file": "_REPORT_.*\\.md",
+          "code_snippet": "'_REPORT_.*\\.md'",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\utils\\track_progress.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\utils\\track_progress.py",
+          "line": 262,
+          "pattern": "hardcoded_root_file",
+          "target_file": "phase_3_should",
+          "code_snippet": "for phase_key in ['phase_1_inventar', 'phase_2_must', 'phase_3_should', 'phase_4_may', 'phase_5_test",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\verify_root24_certification_v5_3.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\verify_root24_certification_v5_3.py",
+          "line": 86,
+          "pattern": "hardcoded_root_file",
+          "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+          "code_snippet": "\"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\"",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192628\\02_audit_logging\\utils\\track_progress.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\02_audit_logging\\utils\\track_progress.py",
+          "line": 262,
+          "pattern": "hardcoded_root_file",
+          "target_file": "phase_3_should",
+          "code_snippet": "for phase_key in ['phase_1_inventar', 'phase_2_must', 'phase_3_should', 'phase_4_may', 'phase_5_test",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192628\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+          "line": 462,
+          "pattern": "open_root_write",
+          "target_file": "quantum_signature_relay_v2_test_vectors.json",
+          "code_snippet": "with open(\"quantum_signature_relay_v2_test_vectors.json\", \"w\") as f:",
+          "severity": "HIGH"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192628\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+          "line": 221,
+          "pattern": "hardcoded_root_file",
+          "target_file": "test_results",
+          "code_snippet": "\"test_results\": test_results,",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+          "line": 170,
+          "pattern": "hardcoded_root_file",
+          "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+          "code_snippet": "\"package.json\", \"pytest.ini\", \".github\", \"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\",",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+          "line": 2951,
+          "pattern": "direct_root_write",
+          "target_file": "ssid-project-v2-complete.zip",
+          "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+          "severity": "HIGH"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192628\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+          "line": 905,
+          "pattern": "direct_root_write",
+          "target_file": "ssid-project-v2-complete.zip",
+          "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+          "severity": "HIGH"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\verify_root24_certification_v5_3.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\verify_root24_certification_v5_3.py",
+          "line": 86,
+          "pattern": "hardcoded_root_file",
+          "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+          "code_snippet": "\"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\"",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192748\\02_audit_logging\\utils\\track_progress.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\02_audit_logging\\utils\\track_progress.py",
+          "line": 262,
+          "pattern": "hardcoded_root_file",
+          "target_file": "phase_3_should",
+          "code_snippet": "for phase_key in ['phase_1_inventar', 'phase_2_must', 'phase_3_should', 'phase_4_may', 'phase_5_test",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192748\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+          "line": 455,
+          "pattern": "open_root_write",
+          "target_file": "quantum_signature_relay_v2_test_vectors.json",
+          "code_snippet": "with open(\"quantum_signature_relay_v2_test_vectors.json\", \"w\") as f:",
+          "severity": "HIGH"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192748\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+          "line": 215,
+          "pattern": "hardcoded_root_file",
+          "target_file": "test_results",
+          "code_snippet": "\"test_results\": test_results,",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\12_tooling\\forensics\\scan_root_structure_integrity.py",
+          "line": 170,
+          "pattern": "hardcoded_root_file",
+          "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+          "code_snippet": "\"package.json\", \"pytest.ini\", \".github\", \"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\",",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_FULL.py",
+          "line": 2951,
+          "pattern": "direct_root_write",
+          "target_file": "ssid-project-v2-complete.zip",
+          "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+          "severity": "HIGH"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_192748\\23_compliance\\evidence\\legacy\\bootstrap_ssid_complete_v2_part3_FINAL.py",
+          "line": 905,
+          "pattern": "direct_root_write",
+          "target_file": "ssid-project-v2-complete.zip",
+          "code_snippet": "zip_path = Path(\"ssid-project-v2-complete.zip\")",
+          "severity": "HIGH"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_200559\\12_tooling\\verify_root24_certification_v5_3.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\12_tooling\\verify_root24_certification_v5_3.py",
+          "line": 86,
+          "pattern": "hardcoded_root_file",
+          "target_file": "ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md",
+          "code_snippet": "\"ROOT_24_LOCK_V5_3_BUNDLE_FINAL.md\"",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_200559\\02_audit_logging\\utils\\track_progress.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\02_audit_logging\\utils\\track_progress.py",
+          "line": 262,
+          "pattern": "hardcoded_root_file",
+          "target_file": "phase_3_should",
+          "code_snippet": "for phase_key in ['phase_1_inventar', 'phase_2_must', 'phase_3_should', 'phase_4_may', 'phase_5_test",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_200559\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\03_core\\interfaces\\quantum_signature_relay_v2.py",
+          "line": 455,
+          "pattern": "open_root_write",
+          "target_file": "quantum_signature_relay_v2_test_vectors.json",
+          "code_snippet": "with open(\"quantum_signature_relay_v2_test_vectors.json\", \"w\") as f:",
+          "severity": "HIGH"
+        }
+      ]
+    },
+    {
+      "script": "02_audit_logging\\backups\\placeholders_20251013_200559\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+      "violation_count": 1,
+      "violations": [
+        {
+          "file": "02_audit_logging\\backups\\placeholders_20251013_200559\\11_test_simulation\\tests_compliance\\run_anti_gaming_tests.py",
+          "line": 215,
+          "pattern": "hardcoded_root_file",
+          "target_file": "test_results",
+          "code_snippet": "\"test_results\": test_results,",
+          "severity": "MEDIUM"
+        }
+      ]
+    }
+  ]
+}

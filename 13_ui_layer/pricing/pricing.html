@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <title>SSID Pricing v5.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card { border: 1px solid #ddd; border-radius: 14px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+    .price { font-size: 26px; font-weight: 700; }
+    .muted { color: #555; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; background: #eef; margin-right: 4px; font-size: 12px; }
+    .warn { background: #ffe8cc; }
+    .ok { background: #e6ffea; }
+  </style>
+</head>
+<body>
+  <h1>SSID Pricing v5.1</h1>
+  <p class="muted">Regionen werden über RAT freigeschaltet. Regionale Zuschläge werden gemäß Policy automatisch berücksichtigt.</p>
+
+  <section class="grid" id="tiers"></section>
+
+  <h2>Regionale Zuschläge</h2>
+  <div id="regions" class="grid"></div>
+
+  <h2>Upsell-Empfehlungen</h2>
+  <div id="upsell"></div>
+
+<script>
+const tiers = [
+  { id:"core_access", name:"Core Access", price:29, perks:["Proof Badge","Lokale Hash-Registry","Trust-Index Sichtbarkeit"] },
+  { id:"professional", name:"Professional", price:99, perks:["API Access","Badge+Reputation","Compliance Report"] },
+  { id:"enterprise_trust", name:"Enterprise Trust", price:499, perks:["Full Audit Trail","Teamverwaltung+SDK","Marketplace Gateway"] },
+  { id:"global_proof_suite", name:"Global Proof Suite", price:2000, perks:["Cross-Ledger Proofs","Governance","Multi-Tenancy","Dedicated Proof Node"] },
+  { id:"interfederation_elite", name:"InterFederation Elite", price:10000, perks:["Layer-9 Access","Auto Compliance Sync","DAO Voting","Multi-Juris Audits","Direct Proof API"] },
+  { id:"sovereign_infrastructure", name:"Sovereign Infrastructure", price:25000, perks:["Dedicated Infra","Proof-Nexus Root","DAO Seat (Strategy)","Private PQC Chain","SLA 99.999%"] }
+];
+
+const regions = [
+  { code:"DACH", label:"DACH", surcharge:0.0 },
+  { code:"EN-EU", label:"EN‑EU", surcharge:0.05 },
+  { code:"US-CAN", label:"US‑CAN", surcharge:0.10 },
+  { code:"LATAM", label:"LATAM", surcharge:0.07 },
+  { code:"APAC-EN", label:"APAC‑EN", surcharge:0.05 },
+  { code:"MENA", label:"MENA", surcharge:0.10 },
+  { code:"AFRICA-EN", label:"AFRICA‑EN", surcharge:0.05 },
+];
+
+function euro(n){ return (n.toFixed(2)+' €').replace('.',','); }
+
+function renderTiers(){
+  const el = document.getElementById('tiers');
+  el.innerHTML = tiers.map(t => `
+    <div class="card">
+      <h3>${t.name}</h3>
+      <div class="price">${euro(t.price)}</div>
+      <ul>${t.perks.map(p=>`<li>${p}</li>`).join('')}</ul>
+      <div class="muted">* Regionale Zuschläge und Add‑ons werden automatisch berücksichtigt.</div>
+    </div>`).join('');
+}
+
+function renderRegions(){
+  const el = document.getElementById('regions');
+  el.innerHTML = regions.map(r => `
+    <div class="card">
+      <strong>${r.label}</strong><br/>
+      Zuschlag: <span class="pill ${r.surcharge>0?'warn':'ok'}">${(r.surcharge*100).toFixed(0)}%</span>
+    </div>`).join('');
+}
+
+function renderUpsell(){
+  const el = document.getElementById('upsell');
+  el.innerHTML = `
+    <div class="card">
+      <strong>Empfohlene Add‑ons je Stufe</strong>
+      <ul>
+        <li>Enterprise Trust → Compliance Mesh (+5.000 €)</li>
+        <li>Global Proof Suite → Private PQC Node (+10.000 €) + 24/7 SLA (+3.000 €)</li>
+        <li>Elite/Sovereign → DAO Seat (+7.000 €) + GovChain Bridge (+8.000 €)</li>
+      </ul>
+      <div class="muted">Bindungsrabatte (12/24/36M): −5/−10/−15 % via Token‑Lock</div>
+    </div>`;
+}
+
+renderTiers(); renderRegions(); renderUpsell();
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "tests": [
+    {
+      "name": "api_eligibility_s1_no_interfederation",
+      "input": {
+        "tier": "S1",
+        "api_endpoint": "/interfederation/bridge",
+        "requires_s3_prime": true
+      },
+      "expected": {
+        "allow": false
+      }
+    },
+    {
+      "name": "api_eligibility_s2_no_interfederation",
+      "input": {
+        "tier": "S2",
+        "api_endpoint": "/interfederation/bridge",
+        "requires_s3_prime": true
+      },
+      "expected": {
+        "allow": false
+      }
+    },
+    {
+      "name": "api_eligibility_s3_no_interfederation",
+      "input": {
+        "tier": "S3",
+        "api_endpoint": "/interfederation/bridge",
+        "requires_s3_prime": true
+      },
+      "expected": {
+        "allow": false
+      }
+    },
+    {
+      "name": "api_eligibility_s3_prime_interfederation_allowed",
+      "input": {
+        "tier": "S3_prime",
+        "api_endpoint": "/interfederation/bridge",
+        "requires_s3_prime": true,
+        "interfederation_enabled": true
+      },
+      "expected": {
+        "allow": true
+      }
+    },
+    {
+      "name": "api_eligibility_s1_standard_api",
+      "input": {
+        "tier": "S1",
+        "api_endpoint": "/api/users",
+        "requires_s3_prime": false
+      },
+      "expected": {
+        "allow": true
+      }
+    }
+  ]
+}

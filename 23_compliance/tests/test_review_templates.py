@@ -11,10 +11,8 @@ from pathlib import Path
 import yaml
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[2]
 REVIEWS_DIR = ROOT / "23_compliance" / "reviews" / "2025-Q4"
-
 
 def load_yaml(filename: str) -> dict:
     """Load and parse a YAML file from the reviews directory."""
@@ -26,7 +24,6 @@ def load_yaml(filename: str) -> dict:
 
     assert data, f"Empty or invalid YAML in {filename}"
     return data
-
 
 def test_review_files_exist():
     """Verify all required review files exist."""
@@ -42,7 +39,6 @@ def test_review_files_exist():
     for filename in required_files:
         path = REVIEWS_DIR / filename
         assert path.exists(), f"Required file missing: {filename}"
-
 
 def test_review_template_structure():
     """Validate review_template.yaml has required structure."""
@@ -73,7 +69,6 @@ def test_review_template_structure():
 
     # Checksum present
     assert "checksum" in data
-
 
 def test_reviewer_checklist_structure():
     """Validate reviewer_checklist.yaml has required structure."""
@@ -112,7 +107,6 @@ def test_reviewer_checklist_structure():
 
     # Checksum present
     assert "checksum" in data
-
 
 def test_reviewer_assignments_structure():
     """Validate reviewer_assignments.yaml has required structure."""
@@ -154,7 +148,6 @@ def test_reviewer_assignments_structure():
     # Checksum present
     assert "checksum" in data
 
-
 def test_review_findings_structure():
     """Validate review_findings.yaml has required structure."""
     data = load_yaml("review_findings.yaml")
@@ -193,7 +186,6 @@ def test_review_findings_structure():
     # Checksum present
     assert "checksum" in data
 
-
 def test_audit_findings_structure():
     """Validate audit_findings.yaml has required structure."""
     data = load_yaml("audit_findings.yaml")
@@ -217,7 +209,6 @@ def test_audit_findings_structure():
     # Checksum present
     assert "checksum" in data
 
-
 def test_yaml_structure_integrity():
     """Verify all YAML files are valid and parseable."""
     yaml_files = REVIEWS_DIR.glob("*.yaml")
@@ -228,7 +219,6 @@ def test_yaml_structure_integrity():
         assert "meta" in data, f"Missing meta section in {yaml_file.name}"
         assert "version" in data["meta"], f"Missing version in {yaml_file.name}"
 
-
 def test_framework_coverage():
     """Verify all four frameworks are covered in checklist."""
     checklist = load_yaml("reviewer_checklist.yaml")
@@ -238,7 +228,6 @@ def test_framework_coverage():
 
     assert required.issubset(frameworks), \
         f"Missing frameworks: {required - set(frameworks)}"
-
 
 def test_reviewer_did_format():
     """Verify all reviewer IDs follow DID format."""
@@ -252,7 +241,6 @@ def test_reviewer_did_format():
         assert re.match(did_pattern, did), \
             f"Invalid DID format: {did}"
 
-
 def test_finding_severity_valid():
     """Verify all findings have valid severity levels."""
     findings = load_yaml("review_findings.yaml")
@@ -262,7 +250,6 @@ def test_finding_severity_valid():
     for finding in findings["findings"]:
         assert finding["severity"] in valid_severities, \
             f"Invalid severity in {finding['id']}: {finding['severity']}"
-
 
 def test_checksum_placeholder():
     """Verify all YAML files have checksum placeholders for CI."""
@@ -275,7 +262,6 @@ def test_checksum_placeholder():
         assert "checksum" in data, f"Missing checksum in {filename}"
         # Checksum should either be placeholder or actual hash
         assert data["checksum"], f"Empty checksum in {filename}"
-
 
 def test_evidence_paths_reference_modules():
     """Verify evidence paths reference valid SSID modules."""
@@ -294,7 +280,6 @@ def test_evidence_paths_reference_modules():
                             path.startswith("23_compliance/")), \
                         f"Invalid evidence path: {path}"
 
-
 def test_target_dates_format():
     """Verify all target dates are in YYYY-MM-DD format."""
     findings = load_yaml("review_findings.yaml")
@@ -307,7 +292,6 @@ def test_target_dates_format():
             assert re.match(date_pattern, finding["target_date"]), \
                 f"Invalid date format in {finding['id']}: {finding['target_date']}"
 
-
 def test_remediation_owners_assigned():
     """Verify all findings have remediation owners."""
     findings = load_yaml("review_findings.yaml")
@@ -319,7 +303,6 @@ def test_remediation_owners_assigned():
             assert finding["remediation_owner"].startswith("did:ssid:"), \
                 f"Invalid remediation owner DID in {finding['id']}"
 
-
 def test_critical_findings_escalated():
     """Verify critical findings are marked for escalation."""
     findings = load_yaml("review_findings.yaml")
@@ -328,7 +311,6 @@ def test_critical_findings_escalated():
         if finding["severity"] == "critical":
             assert finding.get("escalation_required") == True, \
                 f"Critical finding {finding['id']} not marked for escalation"
-
 
 def test_readme_exists_and_has_content():
     """Verify README.md exists and has substantial content."""
@@ -342,7 +324,6 @@ def test_readme_exists_and_has_content():
     assert "DORA" in content
     assert "MiCA" in content
     assert "AMLD6" in content
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

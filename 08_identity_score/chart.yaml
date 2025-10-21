@@ -1,0 +1,70 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: identity_score
+  version: "0.1.0"
+  description: "Identity reputation scoring, risk assessment, and trust metrics calculation"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - identity_reputation_scoring
+    - risk_assessment
+    - trust_metrics_calculation
+    - behavioral_risk_analysis
+    - fraud_detection
+    - anomaly_detection
+
+  interfaces:
+    - name: scoring_api
+      type: rest_api
+      authentication: required
+
+    - name: risk_engine
+      type: grpc
+      authentication: required
+
+    - name: metrics_export
+      type: prometheus
+      authentication: internal
+
+  policies:
+    - name: score_transparency
+      enforcement: automated
+      scope: all_scores
+      mechanism: explainable_ai
+
+    - name: bias_detection
+      enforcement: continuous
+      scope: all_models
+
+    - name: score_versioning
+      enforcement: automated
+      scope: all_calculations
+
+  dependencies:
+    internal:
+      - 01_ai_layer  # ML models
+      - 09_meta_identity  # Identity data
+      - 02_audit_logging  # Score logging
+    external:
+      - python: ">=3.11"
+      - scikit_learn: ">=1.3"
+
+  governance:
+    maintainer: "Risk Engineering Team"
+    reviewers:
+      - compliance_team
+      - ai_ethics_team
+    approval_required: true
+    data_classification: confidential
+
+  compliance:
+    dsgvo:
+      - article_22  # Automated decisions
+      - article_35  # DPIA
+    mica:
+      - article_16  # Market abuse prevention
+    amld6:
+      - article_8  # Customer due diligence

@@ -1,0 +1,69 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: datasets
+  version: "0.1.0"
+  description: "Dataset management, synthetic data generation, test fixtures, and data cataloging"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - dataset_cataloging
+    - synthetic_data_generation
+    - test_fixture_management
+    - data_versioning
+    - data_quality_validation
+    - anonymization
+
+  interfaces:
+    - name: dataset_api
+      type: rest_api
+      authentication: required
+
+    - name: synthetic_data_generator
+      type: grpc
+      authentication: internal
+
+    - name: data_catalog
+      type: web
+      authentication: developer
+
+  policies:
+    - name: no_real_pii
+      enforcement: automated
+      scope: all_datasets
+      mechanism: pii_scanner
+
+    - name: dataset_versioning
+      enforcement: automated
+      scope: all_datasets
+
+    - name: k_anonymity
+      enforcement: automated
+      scope: anonymized_datasets
+      min_k: 5
+
+  dependencies:
+    internal:
+      - 06_data_pipeline  # Data processing
+      - 01_ai_layer  # Synthetic generation
+      - 11_test_simulation  # Test fixtures
+    external:
+      - faker: ">=19.0"
+      - pandas: ">=2.0"
+      - dvc: ">=3.0"
+
+  governance:
+    maintainer: "Data Science Team"
+    reviewers:
+      - privacy_team
+      - qa_team
+    approval_required: true
+    data_classification: internal
+
+  compliance:
+    dsgvo:
+      - article_5  # Data minimization
+      - article_25  # Privacy by design
+      - article_89  # Research purposes

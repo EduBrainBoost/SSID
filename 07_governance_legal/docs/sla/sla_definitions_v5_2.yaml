@@ -1,0 +1,28 @@
+apiVersion: ssid/v1
+kind: SLASet
+metadata:
+  version: v5.2.0
+  created_at: "2025-10-13T10:00:00Z"
+spec:
+  packages:
+    STANDARD:
+      uptime_percent: 99.95
+      support: "Business hours, 5x8"
+      response_times:
+        p1_minutes: 120
+        p2_hours: 8
+    ENTERPRISE:
+      uptime_percent: 99.99
+      support: "24/7"
+      response_times:
+        p1_minutes: 30
+        p2_hours: 4
+    ENTERPRISE_PLUS:
+      uptime_percent: 99.9999
+      support: "24/7 Enterprise+"
+      response_times:
+        p1_minutes: 10
+        p2_hours: 2
+  legal:
+    disclaimer: "No custody, no personal data on chain; providers handle KYC/eIDAS."
+    jurisdiction_blacklist: ["Iran","North Korea","Syria","Cuba","Sanctioned Russian regions","India","Pakistan"]

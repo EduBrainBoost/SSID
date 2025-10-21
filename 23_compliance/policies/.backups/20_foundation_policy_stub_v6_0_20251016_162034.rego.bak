@@ -1,0 +1,118 @@
+# SSID OPA Policy - 20_foundation (FUNCTIONAL v6.3)
+# Auto-generated from 20_foundation/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.20foundation.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "20_foundation",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "20_foundation_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "20_foundation"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["utility_token_management", "tokenomics_modeling", "governance_voting", "staking_mechanisms", "fee_distribution", "treasury_management"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "20_foundation_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 20_foundation operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "20_foundation_operation"
+  input.request.valid == false
+  msg := "Invalid request for 20_foundation - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "20_foundation_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: non_custodial (enforcement: automated, scope: all_operations)
+deny_noncustodial[msg] {
+  input.request.type == "20_foundation_operation"
+  input.policy_check == "non_custodial"
+  not input.policy_compliance.noncustodial
+  msg := "Policy violation: non_custodial (scope: all_operations)"
+}
+
+# Policy: transparent_fees (enforcement: automated, scope: all_transactions)
+deny_transparentfees[msg] {
+  input.request.type == "20_foundation_operation"
+  input.policy_check == "transparent_fees"
+  not input.policy_compliance.transparentfees
+  msg := "Policy violation: transparent_fees (scope: all_transactions)"
+}
+
+# Policy: governance_quorum (enforcement: automated, scope: all_votes)
+deny_governancequorum[msg] {
+  input.request.type == "20_foundation_operation"
+  input.policy_check == "governance_quorum"
+  not input.policy_compliance.governancequorum
+  msg := "Policy violation: governance_quorum (scope: all_votes)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "20_foundation_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 20_foundation"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "20_foundation_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 20_foundation"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "20_foundation",
+  "capabilities": 6,
+  "policies": 3
+}

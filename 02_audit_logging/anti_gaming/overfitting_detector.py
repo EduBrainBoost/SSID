@@ -19,13 +19,11 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, Optional
 
-
 ROOT = Path(__file__).resolve().parents[2]
 POLICY_PATH = ROOT / "23_compliance" / "policies" / "anti_gaming_policy.yaml"
 TRAIN_METRICS = ROOT / "01_ai_layer" / "evidence" / "train_metrics.json"
 EVAL_METRICS = ROOT / "01_ai_layer" / "evidence" / "eval_metrics.json"
 LOG_PATH = ROOT / "02_audit_logging" / "logs" / "anti_gaming_overfitting.jsonl"
-
 
 def load_policy() -> Dict:
     """Load anti-gaming policy configuration."""
@@ -42,7 +40,6 @@ def load_policy() -> Dict:
     with open(POLICY_PATH, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
-
 def load_metrics(path: Path) -> Optional[Dict]:
     """Load metrics from JSON file."""
     if not path.exists():
@@ -53,7 +50,6 @@ def load_metrics(path: Path) -> Optional[Dict]:
             return json.load(f)
     except (json.JSONDecodeError, OSError):
         raise NotImplementedError("TODO: Implement this function")
-
 
 def calculate_gaps(train_metrics: Dict, eval_metrics: Dict) -> Dict[str, float]:
     """Calculate gaps between train and eval metrics."""
@@ -68,7 +64,6 @@ def calculate_gaps(train_metrics: Dict, eval_metrics: Dict) -> Dict[str, float]:
 
     return gaps
 
-
 def check_overfitting(gaps: Dict[str, float], thresholds: Dict[str, float]) -> tuple[bool, list[str]]:
     """Check if gaps exceed thresholds."""
     violations = []
@@ -79,7 +74,6 @@ def check_overfitting(gaps: Dict[str, float], thresholds: Dict[str, float]) -> t
             violations.append(f"{metric}: {gap:.4f} > {threshold:.4f}")
 
     return len(violations) == 0, violations
-
 
 def write_audit_log(
     status: str,
@@ -104,7 +98,6 @@ def write_audit_log(
 
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, sort_keys=True) + "\n")
-
 
 def main() -> int:
     """Main execution."""
@@ -176,7 +169,6 @@ def main() -> int:
     print(f"Audit log: {LOG_PATH}")
 
     return 0 if status == "PASS" else 2
-
 
 if __name__ == "__main__":
     sys.exit(main())

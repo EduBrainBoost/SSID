@@ -1,0 +1,17 @@
+id: ssid.marketplace.v1
+description: Permissionless Marktplatz-Framework als Meta-Orchestration
+owners: [did:ssid:dao]
+audited_by: [did:ssid:reviewer:level3]
+hooks:
+  governance: 07_governance_legal/market_dao_vote.sol
+  compliance: 23_compliance/marketplace_policy.yaml
+  identity: 08_identity_score/seller_score_bridge.py
+  interop: 10_interoperability/market_interop_bridge.py
+  audit: 02_audit_logging/marketplace_audit_schema.yaml
+  ui: 13_ui_layer/market_metrics_dashboard.tsx
+contracts:
+  - 24_meta_orchestration/workflow_proof_anchor.sol
+  - 24_meta_orchestration/marketplace_registry.sol
+hashes:
+  blueprint_sha256: e0c67a93f91dae4f420c884039ec548611201caaffe5668f902e8f2cb0dd656f
+  manifest_sha256: a3164fe693f872f94b09706688df03b4196d349b9c7ad880be0ced13e953f804

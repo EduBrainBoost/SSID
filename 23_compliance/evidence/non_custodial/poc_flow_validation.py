@@ -17,7 +17,6 @@ from datetime import datetime, timezone
 from typing import Dict, Any
 from pathlib import Path
 
-# Mock crypto operations (in production: use nacl/cryptography)
 class MockCrypto:
     """Simulated crypto operations for PoC (replace with real crypto in production)."""
 
@@ -43,7 +42,6 @@ class MockCrypto:
             hashlib.sha256(public_key + b"_private_simulation").digest() + message
         ).digest()
         return signature == expected
-
 
 class UserDevice:
     """
@@ -91,7 +89,6 @@ class UserDevice:
         print(f"  Signature: {signature.hex()}")
 
         return signature
-
 
 class SSIDSystem:
     """
@@ -197,7 +194,6 @@ class SSIDSystem:
         print("  [OK] VALIDATION: No private key accessed")
 
         return is_valid
-
 
 def run_poc_flow() -> Dict[str, Any]:
     """
@@ -305,7 +301,6 @@ def run_poc_flow() -> Dict[str, Any]:
 
     return evidence
 
-
 def validate_non_custodial_properties(evidence: Dict[str, Any]) -> bool:
     """
     Validate that non-custodial properties hold true.
@@ -337,7 +332,6 @@ def validate_non_custodial_properties(evidence: Dict[str, Any]) -> bool:
     print("=" * 70)
 
     return all_valid
-
 
 if __name__ == "__main__":
     # Run PoC flow

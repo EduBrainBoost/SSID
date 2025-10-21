@@ -1,0 +1,216 @@
+# SSID Federation Nodes Configuration v5.4
+# Active Federation Node Registry
+
+version: "5.4.0"
+registry_type: "active_federation_nodes"
+last_updated: "2025-10-12"
+
+# OpenCore Federation (Public)
+opencore:
+  federation_id: "opencore"
+  federation_name: "OpenCore Public Federation"
+  status: "active"
+  consensus_algorithm: "bft"
+  consensus_threshold: 0.90
+
+  nodes:
+    opencore_node_01:
+      node_id: "oc_n01"
+      host: "node01.opencore.ssid.network"
+      ip: "185.199.108.153"
+      port: 8443
+      role: "validator"
+      public_key_ed25519: "0x8f3e9d2a1b4c5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f"
+      stake_amount: "500000 SSID"
+      uptime_percentage: 99.8
+      joined_date: "2025-08-01"
+      blockchain: "ethereum_mainnet"
+      chain_id: 1
+
+    opencore_node_02:
+      node_id: "oc_n02"
+      host: "node02.opencore.ssid.network"
+      ip: "185.199.109.153"
+      port: 8443
+      role: "validator"
+      public_key_ed25519: "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
+      stake_amount: "450000 SSID"
+      uptime_percentage: 99.5
+      joined_date: "2025-08-05"
+      blockchain: "ethereum_mainnet"
+      chain_id: 1
+
+    opencore_node_03:
+      node_id: "oc_n03"
+      host: "node03.opencore.ssid.network"
+      ip: "185.199.110.153"
+      port: 8443
+      role: "validator"
+      public_key_ed25519: "0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c"
+      stake_amount: "600000 SSID"
+      uptime_percentage: 99.9
+      joined_date: "2025-08-10"
+      blockchain: "ethereum_mainnet"
+      chain_id: 1
+
+# TrustNet Federation (EU Permissioned)
+trustnet:
+  federation_id: "trustnet"
+  federation_name: "TrustNet EU Federation"
+  status: "active"
+  consensus_algorithm: "bft"
+  consensus_threshold: 0.90
+
+  nodes:
+    trustnet_node_01:
+      node_id: "tn_n01"
+      host: "node01.trustnet.ssid.eu"
+      ip: "195.201.123.100"
+      port: 8443
+      role: "validator"
+      public_key_ed25519: "0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d"
+      certification: "eIDAS_compliant"
+      uptime_percentage: 99.7
+      joined_date: "2025-09-01"
+      blockchain: "polygon"
+      chain_id: 137
+      jurisdiction: "EU"
+
+    trustnet_node_02:
+      node_id: "tn_n02"
+      host: "node02.trustnet.ssid.eu"
+      ip: "195.201.124.100"
+      port: 8443
+      role: "validator"
+      public_key_ed25519: "0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e"
+      certification: "eIDAS_compliant"
+      uptime_percentage: 99.6
+      joined_date: "2025-09-05"
+      blockchain: "polygon"
+      chain_id: 137
+      jurisdiction: "EU"
+
+# GovChain Federation (Government)
+govchain:
+  federation_id: "govchain"
+  federation_name: "GovChain G20 Federation"
+  status: "active"
+  consensus_algorithm: "pbft"
+  consensus_threshold: 0.90
+
+  nodes:
+    govchain_node_us:
+      node_id: "gc_us"
+      host: "node.us.govchain.ssid.gov"
+      ip: "198.51.100.10"
+      port: 9443
+      role: "sovereign_validator"
+      public_key_ed25519: "0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f"
+      government_entity: "US_Treasury"
+      uptime_percentage: 99.9
+      joined_date: "2025-10-01"
+      blockchain: "hyperledger_fabric"
+      jurisdiction: "USA"
+
+    govchain_node_de:
+      node_id: "gc_de"
+      host: "node.de.govchain.ssid.gov"
+      ip: "198.51.100.11"
+      port: 9443
+      role: "sovereign_validator"
+      public_key_ed25519: "0x6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a"
+      government_entity: "DE_BaFin"
+      uptime_percentage: 99.8
+      joined_date: "2025-10-01"
+      blockchain: "hyperledger_fabric"
+      jurisdiction: "Germany"
+
+# EUDI Federation (EU Identity Wallet)
+eudi:
+  federation_id: "eudi"
+  federation_name: "EUDI Wallet Federation"
+  status: "pilot"
+  consensus_algorithm: "qmv"  # Qualified Majority Voting
+  consensus_threshold: 0.75
+
+  nodes:
+    eudi_node_fr:
+      node_id: "eudi_fr"
+      host: "node.fr.eudi.ssid.eu"
+      ip: "195.154.100.50"
+      port: 8443
+      role: "member_state_validator"
+      public_key_ed25519: "0x7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b"
+      member_state: "France"
+      eidas_certification: "qualified"
+      uptime_percentage: 99.5
+      joined_date: "2025-11-01"
+      blockchain: "ebsi"
+      jurisdiction: "France"
+
+    eudi_node_nl:
+      node_id: "eudi_nl"
+      host: "node.nl.eudi.ssid.eu"
+      ip: "195.154.101.50"
+      port: 8443
+      role: "member_state_validator"
+      public_key_ed25519: "0x8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c"
+      member_state: "Netherlands"
+      eidas_certification: "qualified"
+      uptime_percentage: 99.7
+      joined_date: "2025-11-01"
+      blockchain: "ebsi"
+      jurisdiction: "Netherlands"
+
+# Observer Nodes (Read-Only)
+observers:
+  observer_01:
+    node_id: "obs_01"
+    host: "observer01.ssid.network"
+    ip: "203.0.113.100"
+    port: 8080
+    role: "observer"
+    public_key_ed25519: "0x9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d"
+    access_level: "read_only"
+    joined_date: "2025-10-12"
+
+# Network Configuration
+network:
+  protocol: "https"
+  tls_version: "1.3"
+  signature_algorithm: "EdDSA (Ed25519)"
+  encryption: "AES-256-GCM"
+
+  ports:
+    proof_api: 8443
+    governance_api: 8444
+    metrics_api: 9090
+
+  timeouts:
+    proof_validation_seconds: 30
+    consensus_round_seconds: 5
+    health_check_seconds: 10
+
+# Trust Scoring Parameters
+trust_scoring:
+  update_interval_hours: 6
+
+  weights:
+    uptime: 0.40
+    proof_success_rate: 0.35
+    latency: 0.15
+    stake_amount: 0.10
+
+  thresholds:
+    minimum_trust_score: 0.75
+    warning_threshold: 0.80
+    excellent_threshold: 0.95
+
+# Metadata
+metadata:
+  total_nodes: 10
+  active_validators: 9
+  observers: 1
+  total_federations: 4
+  checksum_algorithm: "SHA-256"
+  signature_required: true

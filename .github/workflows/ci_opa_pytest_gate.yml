@@ -1,0 +1,181 @@
+name: CI OPA Pytest Gate v5.2
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  stage_1_compile_opa:
+    name: Stage 1 - Compile OPA Policies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup OPA
+        uses: open-policy-agent/setup-opa@v2
+        with:
+          version: '0.59.0'
+
+      - name: Compile pricing_enforcement_v5_2.rego
+        run: |
+          opa build -t wasm -e pricing_enforcement_v5_2/allow \
+            23_compliance/policies/pricing_enforcement_v5_2.rego \
+            -o 23_compliance/policies/pricing_enforcement_v5_2_bundle.tar.gz
+          tar -xzf 23_compliance/policies/pricing_enforcement_v5_2_bundle.tar.gz -C 23_compliance/policies/
+          sha256sum 23_compliance/policies/policy.wasm > 23_compliance/policies/pricing_enforcement_v5_2.wasm.sha256
+
+      - name: Upload WASM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-wasm-v5_2
+          path: |
+            23_compliance/policies/policy.wasm
+            23_compliance/policies/pricing_enforcement_v5_2.wasm.sha256
+          retention-days: 7
+
+  stage_2_pytest_execution:
+    name: Stage 2 - Execute Pytest Suite
+    runs-on: ubuntu-latest
+    needs: stage_1_compile_opa
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pytest pytest-json-report pyyaml
+
+      - name: Download WASM artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: opa-wasm-v5_2
+          path: 23_compliance/policies/
+
+      - name: Run pytest with JSON output
+        run: |
+          python 12_tooling/ci/run_pytests.py \
+            --test-file 11_test_simulation/tests/test_pricing_policy_v5_2.py \
+            --output-json 11_test_simulation/results/pytest_v5_2_results.json \
+            --fail-threshold 0.85
+        continue-on-error: false
+
+      - name: Upload pytest results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pytest-results-v5_2
+          path: 11_test_simulation/results/pytest_v5_2_results.json
+          retention-days: 30
+
+  stage_3_opa_gate_validation:
+    name: Stage 3 - OPA Gate Validation
+    runs-on: ubuntu-latest
+    needs: stage_2_pytest_execution
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install OPA Gate dependencies
+        run: |
+          pip install pyyaml
+
+      - name: Download pytest results
+        uses: actions/download-artifact@v4
+        with:
+          name: pytest-results-v5_2
+          path: 11_test_simulation/results/
+
+      - name: Run OPA Gate validation
+        run: |
+          python 12_tooling/ci/run_opa_gate.py \
+            --pytest-json 11_test_simulation/results/pytest_v5_2_results.json \
+            --policy 23_compliance/policies/pricing_enforcement_v5_2.rego \
+            --fixtures 16_codex/fixtures/pricing/v5_2/ \
+            --gate-threshold 0.85 \
+            --output-report 02_audit_logging/reports/ci_opa_gate_v5_2_validation.json
+        continue-on-error: false
+
+      - name: Upload OPA Gate report
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-gate-report-v5_2
+          path: 02_audit_logging/reports/ci_opa_gate_v5_2_validation.json
+          retention-days: 90
+
+  stage_4_certification_seal:
+    name: Stage 4 - Generate Certification Seal
+    runs-on: ubuntu-latest
+    needs: stage_3_opa_gate_validation
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install certification dependencies
+        run: |
+          pip install pyyaml cryptography
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+
+      - name: Generate certification seal
+        run: |
+          python 12_tooling/ci/run_opa_gate.py \
+            --mode seal \
+            --pytest-json artifacts/pytest-results-v5_2/pytest_v5_2_results.json \
+            --opa-report artifacts/opa-gate-report-v5_2/ci_opa_gate_v5_2_validation.json \
+            --wasm-sha256 artifacts/opa-wasm-v5_2/pricing_enforcement_v5_2.wasm.sha256 \
+            --output-seal 02_audit_logging/reports/ci_opa_gate_v5_2_certification_seal.json \
+            --score-target 100
+
+      - name: Verify certification score
+        run: |
+          python -c "
+          import json
+          with open('02_audit_logging/reports/ci_opa_gate_v5_2_certification_seal.json') as f:
+              seal = json.load(f)
+          score = seal.get('certification_score', 0)
+          print(f'Certification Score: {score}/100')
+          if score < 85:
+              raise Exception(f'Certification failed: score {score} below threshold 85')
+          print('✅ CI OPA Gate v5.2 CERTIFIED')
+          "
+
+      - name: Upload certification seal
+        uses: actions/upload-artifact@v4
+        with:
+          name: certification-seal-v5_2
+          path: 02_audit_logging/reports/ci_opa_gate_v5_2_certification_seal.json
+          retention-days: 365
+
+      - name: Generate badge
+        if: success()
+        run: |
+          echo "CI_OPA_GATE_V5_2_CERTIFIED=true" >> $GITHUB_ENV
+          echo "![CI OPA Gate v5.2](https://img.shields.io/badge/CI%20OPA%20Gate-v5.2%20Certified-success)" >> $GITHUB_STEP_SUMMARY

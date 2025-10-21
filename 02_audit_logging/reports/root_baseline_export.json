@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "generated": "2025-10-14T17:37:20.487635+00:00",
+  "policy_source": "24_meta_orchestration/registry/root_exception_policy.yaml",
+  "core_4_file_lock": [
+    ".github/",
+    ".gitignore",
+    "LICENSE",
+    "README.md"
+  ],
+  "temporary_exceptions": [
+    ".git/",
+    ".pytest_cache",
+    "__pycache__",
+    "pytest.ini"
+  ],
+  "scoped_exceptions": [
+    {
+      "path": ".claude/",
+      "allowed_in": [
+        "16_codex",
+        "20_foundation"
+      ]
+    }
+  ],
+  "allowed_root_directories": [
+    "01_ai_layer",
+    "02_audit_logging",
+    "03_core",
+    "04_deployment",
+    "05_documentation",
+    "06_data_pipeline",
+    "07_governance_legal",
+    "08_identity_score",
+    "09_meta_identity",
+    "10_interoperability",
+    "11_test_simulation",
+    "12_tooling",
+    "13_ui_layer",
+    "14_zero_time_auth",
+    "15_infra",
+    "16_codex",
+    "17_observability",
+    "18_data_layer",
+    "19_adapters",
+    "20_foundation",
+    "21_post_quantum_crypto",
+    "22_datasets",
+    "23_compliance",
+    "24_meta_orchestration",
+    "25_malicious_root"
+  ]
+}

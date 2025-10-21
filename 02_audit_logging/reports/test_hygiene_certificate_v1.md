@@ -2,7 +2,7 @@
 
 **Certificate ID:** SSID-TH-2025-10-15-001  
 
-**Score:** 100/100  
+**Score:**100/100 <!-- SCORE_REF:reports/test_hygiene_certificate_v1_line5_100of100.score.json --> 
 **Status:** CERTIFIED - PRODUCTION SEALED [LOCK]  
 
 **Validity:** 2025-10-15 -> 2026-10-15

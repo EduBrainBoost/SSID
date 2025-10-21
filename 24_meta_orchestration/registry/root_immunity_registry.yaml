@@ -1,0 +1,25 @@
+apiVersion: ssid/v1
+kind: RootImmunity
+metadata:
+  name: root_immunity
+  version: v5.3
+  labels:
+    scope: compliance
+    lock: root-24
+spec:
+  merkle:
+    root: a5fb5850e7aa9ca0b2d085cf05197d6b996d4036e22bb25d21d567989c6fa2a2
+    proofs_file: 23_compliance/merkle/root_write_merkle_proofs.json
+  policy:
+    path: 23_compliance/policies/root_write_prevention.rego
+  validation:
+    opa_inputs:
+      - 11_test_simulation/fixtures/test_root_write_policy.json
+      - 11_test_simulation/fixtures/test_root_write_policy_allow.json
+  certification:
+    report: 02_audit_logging/reports/ROOT_IMMUNITY_CERT_AUDIT_REPORT.md
+    badge: 13_ui_layer/assets/badges/root_immunity_badge.svg
+status:
+  state: CERTIFIED
+  score: 100
+  valid_until: 2045-12-31T23:59:59Z

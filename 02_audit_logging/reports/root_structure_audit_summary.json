@@ -1,0 +1,66 @@
+{
+  "audit_date": "2025-10-12T17:21:15.485220",
+  "project_root": "C:\\Users\\bibel\\Documents\\Github\\SSID",
+  "policy_version": "Root-24-LOCK v1.0",
+  "statistics": {
+    "critical_violations": 1,
+    "warnings": 0,
+    "info": 0,
+    "total_root_items": 31,
+    "authorized_roots": 24,
+    "authorized_exceptions": 6,
+    "unauthorized_items": 1
+  },
+  "compliance_status": "FAIL",
+  "violations": [
+    {
+      "path": ".claude",
+      "severity": "CRITICAL",
+      "type": "Unauthorized Root Directory",
+      "recommendation": "Remove or integrate into authorized Root-24 structure",
+      "is_exception": false
+    },
+    {
+      "path": ".git",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true
+    },
+    {
+      "path": ".github",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true
+    },
+    {
+      "path": ".gitignore",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true
+    },
+    {
+      "path": "LICENSE",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true
+    },
+    {
+      "path": "README.md",
+      "severity": "INFO",
+      "type": "Authorized Exception",
+      "recommendation": "No action required (authorized infrastructure file)",
+      "is_exception": true
+    }
+  ]
+}

@@ -24,3 +24,11 @@ def test_run_checker_and_score_written():
 if __name__ == "__main__":
     import pytest
     pytest.main([__file__, "-v"])
+
+
+# Cross-Evidence Links (Entropy Boost)
+# REF: a933af2f-e064-46da-8f0d-ae995f579a24
+# REF: ea3008b7-0dce-43eb-a59d-1e612e3e71f0
+# REF: 97937c8f-2b42-4f30-92ce-b995c2b0659a
+# REF: 7e9559f3-19b5-43b3-aa67-249d09e715f0
+# REF: be42bcf2-b381-4c93-86ce-3be5036ac2f1

@@ -1,0 +1,2142 @@
+metadata:
+  version: 3.0.0-PART3-FINAL
+  level: A_SEMANTIC
+  part: 3
+  generated: '2025-10-19T14:32:59.817250'
+  source: SoT_Semantic_Core_Part3_256_20251019.yaml
+  extraction_method: POLICY_DEPTH_FILTERING_FROM_COMPLETE_EXTRACTION_PART3
+  total_rules: 256
+  target_rules: 256
+  severity_distribution:
+    CRITICAL: 35
+    HIGH: 14
+    MEDIUM: 5
+    LOW: 195
+    INFO: 7
+  usage: Python- und Rego-Validatoren, SoT-Audits, MiCA/eIDAS-Zertifizierung (Part3)
+rules:
+- rule_id: SOT-PART3-SEM-001
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_processing.auto_quarantine: True'
+  field: quarantine_processing.auto_quarantine
+  value: 'True'
+- rule_id: SOT-PART3-SEM-002
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'hash_ledger_system.ledger_structure.quarantine_officer: Person responsible
+    for quarantine action'
+  field: hash_ledger_system.ledger_structure.quarantine_officer
+  value: Person responsible for quarantine action
+- rule_id: SOT-PART3-SEM-003
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.quarantine_metrics: List container'
+  field: quarantine_monitoring.quarantine_metrics
+  value: List with 6 items
+- rule_id: SOT-PART3-SEM-004
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.quarantine_metrics item 0: Average quarantine
+    duration by category'
+  field: quarantine_monitoring.quarantine_metrics[0]
+  value: Average quarantine duration by category
+- rule_id: SOT-PART3-SEM-005
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.quarantine_metrics item 1: Release success rate'
+  field: quarantine_monitoring.quarantine_metrics[1]
+  value: Release success rate
+- rule_id: SOT-PART3-SEM-006
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.quarantine_metrics item 2: Repeat quarantine
+    patterns'
+  field: quarantine_monitoring.quarantine_metrics[2]
+  value: Repeat quarantine patterns
+- rule_id: SOT-PART3-SEM-007
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.quarantine_metrics item 3: Business impact of
+    quarantined items'
+  field: quarantine_monitoring.quarantine_metrics[3]
+  value: Business impact of quarantined items
+- rule_id: SOT-PART3-SEM-008
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.quarantine_metrics item 4: Compliance effectiveness
+    scores'
+  field: quarantine_monitoring.quarantine_metrics[4]
+  value: Compliance effectiveness scores
+- rule_id: SOT-PART3-SEM-009
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.quarantine_metrics item 5: Cost of quarantine
+    operations'
+  field: quarantine_monitoring.quarantine_metrics[5]
+  value: Cost of quarantine operations
+- rule_id: SOT-PART3-SEM-010
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'anti_gaming_quarantine.quarantine_gaming_detection: Monitor attempts
+    to game quarantine system'
+  field: anti_gaming_quarantine.quarantine_gaming_detection
+  value: Monitor attempts to game quarantine system
+- rule_id: SOT-PART3-SEM-011
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'anti_gaming_quarantine.false_quarantine_prevention: Prevent malicious
+    quarantine triggers'
+  field: anti_gaming_quarantine.false_quarantine_prevention
+  value: Prevent malicious quarantine triggers
+- rule_id: SOT-PART3-SEM-012
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'anti_gaming_quarantine.quarantine_integrity_verification: Regular
+    integrity checks'
+  field: anti_gaming_quarantine.quarantine_integrity_verification
+  value: Regular integrity checks
+- rule_id: SOT-PART3-SEM-013
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_structure.subfolders.quarantined: 02_audit_logging/quarantine/singleton/quarantine_store/quarantined/'
+  field: quarantine_structure.subfolders.quarantined
+  value: 02_audit_logging/quarantine/singleton/quarantine_store/quarantined/
+- rule_id: SOT-PART3-SEM-014
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'retention_policy.quarantined_retention: 30 days'
+  field: retention_policy.quarantined_retention
+  value: 30 days
+- rule_id: SOT-PART3-SEM-015
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: Quarantine/Evidence
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'security_controls.read_only_quarantine: True'
+  field: security_controls.read_only_quarantine
+  value: 'True'
+- rule_id: SOT-PART3-SEM-016
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.compliance_violations: List container'
+  field: quarantine_triggers.compliance_violations
+  value: List with 6 items
+- rule_id: SOT-PART3-SEM-017
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.compliance_violations item 0: Failed structure
+    validation (score < 70)'
+  field: quarantine_triggers.compliance_violations[0]
+  value: Failed structure validation (score < 70)
+- rule_id: SOT-PART3-SEM-018
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.compliance_violations item 1: Circular dependency
+    detection'
+  field: quarantine_triggers.compliance_violations[1]
+  value: Circular dependency detection
+- rule_id: SOT-PART3-SEM-019
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.compliance_violations item 2: Badge integrity
+    violations'
+  field: quarantine_triggers.compliance_violations[2]
+  value: Badge integrity violations
+- rule_id: SOT-PART3-SEM-020
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.compliance_violations item 3: Review deadline
+    overdue (>30 days)'
+  field: quarantine_triggers.compliance_violations[3]
+  value: Review deadline overdue (>30 days)
+- rule_id: SOT-PART3-SEM-021
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.compliance_violations item 4: Business logic gaming
+    detection'
+  field: quarantine_triggers.compliance_violations[4]
+  value: Business logic gaming detection
+- rule_id: SOT-PART3-SEM-022
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.compliance_violations item 5: Confidentiality
+    breach attempts'
+  field: quarantine_triggers.compliance_violations[5]
+  value: Confidentiality breach attempts
+- rule_id: SOT-PART3-SEM-023
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_retention.retention_periods.compliance_violations: 7 years
+    minimum'
+  field: quarantine_retention.retention_periods.compliance_violations
+  value: 7 years minimum
+- rule_id: SOT-PART3-SEM-024
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_governance.release_criteria.compliance_remediation: All
+    compliance violations addressed'
+  field: quarantine_governance.release_criteria.compliance_remediation
+  value: All compliance violations addressed
+- rule_id: SOT-PART3-SEM-025
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'integration_points.compliance_system: 23_compliance/policies/ → quarantine
+    triggers'
+  field: integration_points.compliance_system
+  value: 23_compliance/policies/ → quarantine triggers
+- rule_id: SOT-PART3-SEM-026
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: Regulatory
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'security_controls.worm_compliance: True'
+  field: security_controls.worm_compliance
+  value: 'True'
+- rule_id: SOT-PART3-SEM-027
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'regulatory_basis: Global Privacy Landscape 2025 + Emerging Markets'
+  field: regulatory_basis
+  value: Global Privacy Landscape 2025 + Emerging Markets
+- rule_id: SOT-PART3-SEM-028
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.regulatory_flags: List container'
+  field: quarantine_triggers.regulatory_flags
+  value: List with 5 items
+- rule_id: SOT-PART3-SEM-029
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.regulatory_flags item 0: Sanctioned entity interaction'
+  field: quarantine_triggers.regulatory_flags[0]
+  value: Sanctioned entity interaction
+- rule_id: SOT-PART3-SEM-030
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.regulatory_flags item 1: Jurisdiction exclusion
+    violations'
+  field: quarantine_triggers.regulatory_flags[1]
+  value: Jurisdiction exclusion violations
+- rule_id: SOT-PART3-SEM-031
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.regulatory_flags item 2: AML/KYC failure patterns'
+  field: quarantine_triggers.regulatory_flags[2]
+  value: AML/KYC failure patterns
+- rule_id: SOT-PART3-SEM-032
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.regulatory_flags item 3: Regulatory mapping inconsistencies'
+  field: quarantine_triggers.regulatory_flags[3]
+  value: Regulatory mapping inconsistencies
+- rule_id: SOT-PART3-SEM-033
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_triggers.regulatory_flags item 4: Audit trail tampering
+    attempts'
+  field: quarantine_triggers.regulatory_flags[4]
+  value: Audit trail tampering attempts
+- rule_id: SOT-PART3-SEM-034
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_retention.retention_periods.regulatory_flags: 10 years
+    minimum'
+  field: quarantine_retention.retention_periods.regulatory_flags
+  value: 10 years minimum
+- rule_id: SOT-PART3-SEM-035
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: CRITICAL
+  enforcement: SHOULD
+  description: 'quarantine_retention.retention_periods.business_critical: Permanent
+    retention'
+  field: quarantine_retention.retention_periods.business_critical
+  value: Permanent retention
+- rule_id: SOT-PART3-SEM-036
+  source: SSID_structure_level3_part3_MAX.md:651
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: 12_tooling/hooks/pre_commit/confidentiality_check.sh'
+  originaltext: 12_tooling/hooks/pre_commit/confidentiality_check.sh
+- rule_id: SOT-PART3-SEM-037
+  source: SSID_structure_level3_part3_MAX.md:669
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: 23_compliance/anti_gaming/overfitting_detector.py --business-logic-check
+    --enter'
+  originaltext: 23_compliance/anti_gaming/overfitting_detector.py --business-logic-check
+    --enterprise
+- rule_id: SOT-PART3-SEM-038
+  source: SSID_structure_level3_part3_MAX.md:670
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: 23_compliance/anti_gaming/dependency_graph_generator.py
+    --export-all-formats --c'
+  originaltext: 23_compliance/anti_gaming/dependency_graph_generator.py --export-all-formats
+    --confidential
+- rule_id: SOT-PART3-SEM-039
+  source: SSID_structure_level3_part3_MAX.md:878
+  category: Bash Validation
+  severity: HIGH
+  enforcement: MUST
+  description: 'Bash logic: 24_meta_orchestration/triggers/ci/gates/business_compliance_gate.py   #
+    Business'
+  originaltext: '24_meta_orchestration/triggers/ci/gates/business_compliance_gate.py   #
+    Business Confidentiality'
+- rule_id: SOT-PART3-SEM-040
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: Quarantine/Evidence
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'audit_enhancement.evidence_timestamping: full_blockchain'
+  field: audit_enhancement.evidence_timestamping
+  value: full_blockchain
+- rule_id: SOT-PART3-SEM-041
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Quarantine/Evidence
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'integration_points.audit_logging: 02_audit_logging/storage/ → quarantine
+    evidence'
+  field: integration_points.audit_logging
+  value: 02_audit_logging/storage/ → quarantine evidence
+- rule_id: SOT-PART3-SEM-042
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: Quarantine/Evidence
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'quarantine_structure.evidence_path: 23_compliance/evidence/malware_quarantine_hashes/'
+  field: quarantine_structure.evidence_path
+  value: 23_compliance/evidence/malware_quarantine_hashes/
+- rule_id: SOT-PART3-SEM-043
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: Quarantine/Evidence
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'quarantine_structure.evidence_path_note: Primary hash-ledger is stored
+    under 02_audit_logging/quarantine/hash_ledger/; a signed, immutable export is
+    mirrored under 23_compliance/evidence/malware_quarantine_hashes/.'
+  field: quarantine_structure.evidence_path_note
+  value: Primary hash-ledger is stored under 02_audit_logging/quarantine/hash_ledger/;
+    a signed, immutable export is mirrored under 23_compliance/evidence/malware_quarantine_hashes/.
+- rule_id: SOT-PART3-SEM-044
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: Quarantine/Evidence
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'retention_policy.hash_evidence_retention: permanent'
+  field: retention_policy.hash_evidence_retention
+  value: permanent
+- rule_id: SOT-PART3-SEM-045
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: Quarantine/Evidence
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'security_controls.evidence_immutable: True'
+  field: security_controls.evidence_immutable
+  value: 'True'
+- rule_id: SOT-PART3-SEM-046
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: Standards
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'deprecated_standards: List container'
+  field: deprecated_standards
+  value: List with 1 items
+- rule_id: SOT-PART3-SEM-047
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: Privacy
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'deprecated_privacy: List container'
+  field: deprecated_privacy
+  value: List with 1 items
+- rule_id: SOT-PART3-SEM-048
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'quarantine_governance.release_criteria.technical_validation: Technical
+    security clearance'
+  field: quarantine_governance.release_criteria.technical_validation
+  value: Technical security clearance
+- rule_id: SOT-PART3-SEM-049
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: HIGH
+  enforcement: SHOULD
+  description: 'internal_reviews.quarterly.external_validation: Optional external
+    consultant'
+  field: internal_reviews.quarterly.external_validation
+  value: Optional external consultant
+- rule_id: SOT-PART3-SEM-050
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Review/Documentation
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'quarantine_governance.release_criteria.documentation_complete: Full
+    audit trail and lessons learned'
+  field: quarantine_governance.release_criteria.documentation_complete
+  value: Full audit trail and lessons learned
+- rule_id: SOT-PART3-SEM-051
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Review/Documentation
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_committee: List container'
+  field: quarantine_governance.review_committee
+  value: List with 5 items
+- rule_id: SOT-PART3-SEM-052
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Review/Documentation
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_committee item 0: Senior Compliance Officer
+    (Chair)'
+  field: quarantine_governance.review_committee[0]
+  value: Senior Compliance Officer (Chair)
+- rule_id: SOT-PART3-SEM-053
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Review/Documentation
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_committee item 1: Legal Counsel'
+  field: quarantine_governance.review_committee[1]
+  value: Legal Counsel
+- rule_id: SOT-PART3-SEM-054
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Review/Documentation
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_committee item 2: Technical Security
+    Lead'
+  field: quarantine_governance.review_committee[2]
+  value: Technical Security Lead
+- rule_id: SOT-PART3-SEM-055
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Review/Documentation
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_committee item 3: Business Risk Manager'
+  field: quarantine_governance.review_committee[3]
+  value: Business Risk Manager
+- rule_id: SOT-PART3-SEM-056
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Review/Documentation
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_committee item 4: External Auditor (quarterly
+    reviews)'
+  field: quarantine_governance.review_committee[4]
+  value: External Auditor (quarterly reviews)
+- rule_id: SOT-PART3-SEM-057
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: Review/Documentation
+  severity: LOW
+  enforcement: SHOULD
+  description: 'internal_reviews.monthly.business_review: True'
+  field: internal_reviews.monthly.business_review
+  value: 'True'
+- rule_id: SOT-PART3-SEM-058
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Integration
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.dashboard_integration: Real-time quarantine
+    status monitoring'
+  field: quarantine_monitoring.dashboard_integration
+  value: Real-time quarantine status monitoring
+- rule_id: SOT-PART3-SEM-059
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Integration
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.reporting_integration: Quarterly board reporting
+    inclusion'
+  field: quarantine_monitoring.reporting_integration
+  value: Quarterly board reporting inclusion
+- rule_id: SOT-PART3-SEM-060
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'deprecated_privacy[0].notes: CPRA-Updates 2023/2024 integriert'
+  field: deprecated_privacy[0].notes
+  value: CPRA-Updates 2023/2024 integriert
+- rule_id: SOT-PART3-SEM-061
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'description: Internal regulatory change tracking'
+  field: description
+  value: Internal regulatory change tracking
+- rule_id: SOT-PART3-SEM-062
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'body[2].attributes.description: Full name and reference (internal
+    classification)'
+  field: body[2].attributes.description
+  value: Full name and reference (internal classification)
+- rule_id: SOT-PART3-SEM-063
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: 'body[3].attributes.description: Detailed assessment of competitive
+    and operational impact'
+  field: body[3].attributes.description
+  value: Detailed assessment of competitive and operational impact
+- rule_id: SOT-PART3-SEM-064
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL'
+  field: classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-065
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL'
+  field: classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-066
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL - Enterprise Evidence Management'
+  field: classification
+  value: CONFIDENTIAL - Enterprise Evidence Management
+- rule_id: SOT-PART3-SEM-067
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'storage_tiers.blockchain_anchors.classification: CONFIDENTIAL'
+  field: storage_tiers.blockchain_anchors.classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-068
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'storage_tiers.internal_review_documentation.classification: CONFIDENTIAL'
+  field: storage_tiers.internal_review_documentation.classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-069
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'storage_tiers.business_evidence.classification: CONFIDENTIAL'
+  field: storage_tiers.business_evidence.classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-070
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL - Enterprise Quarantine Management'
+  field: classification
+  value: CONFIDENTIAL - Enterprise Quarantine Management
+- rule_id: SOT-PART3-SEM-071
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL'
+  field: classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-072
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL'
+  field: classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-073
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'internal_reviews.monthly.classification: CONFIDENTIAL'
+  field: internal_reviews.monthly.classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-074
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'internal_reviews.quarterly.classification: CONFIDENTIAL'
+  field: internal_reviews.quarterly.classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-075
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'internal_reviews.semi_annual.classification: CONFIDENTIAL'
+  field: internal_reviews.semi_annual.classification
+  value: CONFIDENTIAL
+- rule_id: SOT-PART3-SEM-076
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: General
+  severity: LOW
+  enforcement: MUST
+  description: 'classification: CONFIDENTIAL - Security Operations'
+  field: classification
+  value: CONFIDENTIAL - Security Operations
+- rule_id: SOT-PART3-SEM-077
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 2.2'
+  field: version
+  value: '2.2'
+- rule_id: SOT-PART3-SEM-078
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.1'
+  field: version
+  value: '1.1'
+- rule_id: SOT-PART3-SEM-079
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART3-SEM-080
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART3-SEM-081
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.5'
+  field: version
+  value: '1.5'
+- rule_id: SOT-PART3-SEM-082
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART3-SEM-083
+  source: SSID_structure_level3_part3_MAX.md:908
+  category: Metadata
+  severity: INFO
+  enforcement: MUST
+  description: 'version: 1.0'
+  field: version
+  value: '1.0'
+- rule_id: SOT-PART3-SEM-084
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'ccpa_cpra/.name: Kalifornien CCPA/CPRA'
+  field: ccpa_cpra/.name
+  value: Kalifornien CCPA/CPRA
+- rule_id: SOT-PART3-SEM-085
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'ccpa_cpra/.path: 23_compliance/privacy/ccpa_cpra/'
+  field: ccpa_cpra/.path
+  value: 23_compliance/privacy/ccpa_cpra/
+- rule_id: SOT-PART3-SEM-086
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'ccpa_cpra/.business_priority: HIGH'
+  field: ccpa_cpra/.business_priority
+  value: HIGH
+- rule_id: SOT-PART3-SEM-087
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'lgpd_br/.name: Brasilien LGPD'
+  field: lgpd_br/.name
+  value: Brasilien LGPD
+- rule_id: SOT-PART3-SEM-088
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'lgpd_br/.path: 23_compliance/privacy/lgpd_br/'
+  field: lgpd_br/.path
+  value: 23_compliance/privacy/lgpd_br/
+- rule_id: SOT-PART3-SEM-089
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'lgpd_br/.business_priority: MEDIUM'
+  field: lgpd_br/.business_priority
+  value: MEDIUM
+- rule_id: SOT-PART3-SEM-090
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pdpa_sg/.name: Singapur PDPA'
+  field: pdpa_sg/.name
+  value: Singapur PDPA
+- rule_id: SOT-PART3-SEM-091
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pdpa_sg/.path: 23_compliance/privacy/pdpa_sg/'
+  field: pdpa_sg/.path
+  value: 23_compliance/privacy/pdpa_sg/
+- rule_id: SOT-PART3-SEM-092
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pdpa_sg/.business_priority: HIGH'
+  field: pdpa_sg/.business_priority
+  value: HIGH
+- rule_id: SOT-PART3-SEM-093
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'appi_jp/.name: Japan APPI'
+  field: appi_jp/.name
+  value: Japan APPI
+- rule_id: SOT-PART3-SEM-094
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'appi_jp/.path: 23_compliance/privacy/appi_jp/'
+  field: appi_jp/.path
+  value: 23_compliance/privacy/appi_jp/
+- rule_id: SOT-PART3-SEM-095
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'appi_jp/.business_priority: MEDIUM'
+  field: appi_jp/.business_priority
+  value: MEDIUM
+- rule_id: SOT-PART3-SEM-096
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pipl_cn/.name: China PIPL'
+  field: pipl_cn/.name
+  value: China PIPL
+- rule_id: SOT-PART3-SEM-097
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pipl_cn/.path: 23_compliance/privacy/pipl_cn/'
+  field: pipl_cn/.path
+  value: 23_compliance/privacy/pipl_cn/
+- rule_id: SOT-PART3-SEM-098
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pipl_cn/.business_priority: LOW'
+  field: pipl_cn/.business_priority
+  value: LOW
+- rule_id: SOT-PART3-SEM-099
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'popia_za/.name: Südafrika POPIA'
+  field: popia_za/.name
+  value: Südafrika POPIA
+- rule_id: SOT-PART3-SEM-100
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'popia_za/.path: 23_compliance/privacy/popia_za/'
+  field: popia_za/.path
+  value: 23_compliance/privacy/popia_za/
+- rule_id: SOT-PART3-SEM-101
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'popia_za/.business_priority: LOW'
+  field: popia_za/.business_priority
+  value: LOW
+- rule_id: SOT-PART3-SEM-102
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pipeda_ca/.name: Kanada PIPEDA + Provinzrecht-Notizen'
+  field: pipeda_ca/.name
+  value: Kanada PIPEDA + Provinzrecht-Notizen
+- rule_id: SOT-PART3-SEM-103
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pipeda_ca/.path: 23_compliance/privacy/pipeda_ca/'
+  field: pipeda_ca/.path
+  value: 23_compliance/privacy/pipeda_ca/
+- rule_id: SOT-PART3-SEM-104
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pipeda_ca/.business_priority: MEDIUM'
+  field: pipeda_ca/.business_priority
+  value: MEDIUM
+- rule_id: SOT-PART3-SEM-105
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'dpdp_in/.name: Indien DPDP Act 2023'
+  field: dpdp_in/.name
+  value: Indien DPDP Act 2023
+- rule_id: SOT-PART3-SEM-106
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'dpdp_in/.path: 23_compliance/privacy/dpdp_in/'
+  field: dpdp_in/.path
+  value: 23_compliance/privacy/dpdp_in/
+- rule_id: SOT-PART3-SEM-107
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'dpdp_in/.business_priority: MEDIUM'
+  field: dpdp_in/.business_priority
+  value: MEDIUM
+- rule_id: SOT-PART3-SEM-108
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'deprecated_privacy[0].id: ccpa_original'
+  field: deprecated_privacy[0].id
+  value: ccpa_original
+- rule_id: SOT-PART3-SEM-109
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'deprecated_privacy[0].status: deprecated'
+  field: deprecated_privacy[0].status
+  value: deprecated
+- rule_id: SOT-PART3-SEM-110
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'deprecated_privacy[0].replaced_by: ccpa_cpra'
+  field: deprecated_privacy[0].replaced_by
+  value: ccpa_cpra
+- rule_id: SOT-PART3-SEM-111
+  source: SSID_structure_level3_part3_MAX.md:225
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'deprecated_privacy[0].deprecation_date: 2023-01-01'
+  field: deprecated_privacy[0].deprecation_date
+  value: '2023-01-01'
+- rule_id: SOT-PART3-SEM-112
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'nist_csf_20/.name: NIST CSF 2.0 (Govern/Identify/Protect/Detect/Respond/Recover)
+    - Mapping auf DORA/NIS2'
+  field: nist_csf_20/.name
+  value: NIST CSF 2.0 (Govern/Identify/Protect/Detect/Respond/Recover) - Mapping auf
+    DORA/NIS2
+- rule_id: SOT-PART3-SEM-113
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'nist_csf_20/.path: 23_compliance/security/nist_csf_20/'
+  field: nist_csf_20/.path
+  value: 23_compliance/security/nist_csf_20/
+- rule_id: SOT-PART3-SEM-114
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'nist_csf_20/.business_priority: HIGH'
+  field: nist_csf_20/.business_priority
+  value: HIGH
+- rule_id: SOT-PART3-SEM-115
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pqc/.name: FIPS 203/204/205: ML-KEM, ML-DSA, SLH-DSA - Krypto-Agilität
+    & Migrationsplan'
+  field: pqc/.name
+  value: 'FIPS 203/204/205: ML-KEM, ML-DSA, SLH-DSA - Krypto-Agilität & Migrationsplan'
+- rule_id: SOT-PART3-SEM-116
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pqc/.path: 23_compliance/security/pqc/'
+  field: pqc/.path
+  value: 23_compliance/security/pqc/
+- rule_id: SOT-PART3-SEM-117
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'pqc/.business_priority: HIGH'
+  field: pqc/.business_priority
+  value: HIGH
+- rule_id: SOT-PART3-SEM-118
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'etsi_trust/.name: eIDAS/Signaturen: EN 319 401/411/421 (Policy/CA/TSL)'
+  field: etsi_trust/.name
+  value: 'eIDAS/Signaturen: EN 319 401/411/421 (Policy/CA/TSL)'
+- rule_id: SOT-PART3-SEM-119
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'etsi_trust/.path: 23_compliance/security/etsi_trust/'
+  field: etsi_trust/.path
+  value: 23_compliance/security/etsi_trust/
+- rule_id: SOT-PART3-SEM-120
+  source: SSID_structure_level3_part3_MAX.md:291
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'etsi_trust/.business_priority: MEDIUM'
+  field: etsi_trust/.business_priority
+  value: MEDIUM
+- rule_id: SOT-PART3-SEM-121
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'name: Regulatory Update Request (Internal)'
+  field: name
+  value: Regulatory Update Request (Internal)
+- rule_id: SOT-PART3-SEM-122
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'title: [INTERNAL-REGULATORY] '
+  field: title
+  value: '[INTERNAL-REGULATORY] '
+- rule_id: SOT-PART3-SEM-123
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'labels: List container'
+  field: labels
+  value: List with 4 items
+- rule_id: SOT-PART3-SEM-124
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'labels item 0: compliance'
+  field: labels[0]
+  value: compliance
+- rule_id: SOT-PART3-SEM-125
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'labels item 1: regulatory'
+  field: labels[1]
+  value: regulatory
+- rule_id: SOT-PART3-SEM-126
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'labels item 2: internal'
+  field: labels[2]
+  value: internal
+- rule_id: SOT-PART3-SEM-127
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'labels item 3: confidential'
+  field: labels[3]
+  value: confidential
+- rule_id: SOT-PART3-SEM-128
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body: List container'
+  field: body
+  value: List with 5 items
+- rule_id: SOT-PART3-SEM-129
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].type: dropdown'
+  field: body[0].type
+  value: dropdown
+- rule_id: SOT-PART3-SEM-130
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].id: regulation_type'
+  field: body[0].id
+  value: regulation_type
+- rule_id: SOT-PART3-SEM-131
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].attributes.label: Regulation Type'
+  field: body[0].attributes.label
+  value: Regulation Type
+- rule_id: SOT-PART3-SEM-132
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].attributes.options: List container'
+  field: body[0].attributes.options
+  value: List with 5 items
+- rule_id: SOT-PART3-SEM-133
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].attributes.options item 0: New Regulation'
+  field: body[0].attributes.options[0]
+  value: New Regulation
+- rule_id: SOT-PART3-SEM-134
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].attributes.options item 1: Regulation Update'
+  field: body[0].attributes.options[1]
+  value: Regulation Update
+- rule_id: SOT-PART3-SEM-135
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].attributes.options item 2: Internal Policy Change'
+  field: body[0].attributes.options[2]
+  value: Internal Policy Change
+- rule_id: SOT-PART3-SEM-136
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].attributes.options item 3: Deprecation Notice'
+  field: body[0].attributes.options[3]
+  value: Deprecation Notice
+- rule_id: SOT-PART3-SEM-137
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].attributes.options item 4: Business Impact Assessment'
+  field: body[0].attributes.options[4]
+  value: Business Impact Assessment
+- rule_id: SOT-PART3-SEM-138
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[0].validations.required: True'
+  field: body[0].validations.required
+  value: 'True'
+- rule_id: SOT-PART3-SEM-139
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[1].type: dropdown'
+  field: body[1].type
+  value: dropdown
+- rule_id: SOT-PART3-SEM-140
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[1].id: business_priority'
+  field: body[1].id
+  value: business_priority
+- rule_id: SOT-PART3-SEM-141
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[1].attributes.label: Business Priority'
+  field: body[1].attributes.label
+  value: Business Priority
+- rule_id: SOT-PART3-SEM-142
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[1].attributes.options: List container'
+  field: body[1].attributes.options
+  value: List with 4 items
+- rule_id: SOT-PART3-SEM-143
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[1].attributes.options item 0: CRITICAL (Market access impact)'
+  field: body[1].attributes.options[0]
+  value: CRITICAL (Market access impact)
+- rule_id: SOT-PART3-SEM-144
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[1].attributes.options item 1: HIGH (Compliance risk)'
+  field: body[1].attributes.options[1]
+  value: HIGH (Compliance risk)
+- rule_id: SOT-PART3-SEM-145
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[1].attributes.options item 2: MEDIUM (Process optimization)'
+  field: body[1].attributes.options[2]
+  value: MEDIUM (Process optimization)
+- rule_id: SOT-PART3-SEM-146
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[1].attributes.options item 3: LOW (Future consideration)'
+  field: body[1].attributes.options[3]
+  value: LOW (Future consideration)
+- rule_id: SOT-PART3-SEM-147
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[1].validations.required: True'
+  field: body[1].validations.required
+  value: 'True'
+- rule_id: SOT-PART3-SEM-148
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[2].type: input'
+  field: body[2].type
+  value: input
+- rule_id: SOT-PART3-SEM-149
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[2].id: regulation_name'
+  field: body[2].id
+  value: regulation_name
+- rule_id: SOT-PART3-SEM-150
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[2].attributes.label: Regulation/Standard Name'
+  field: body[2].attributes.label
+  value: Regulation/Standard Name
+- rule_id: SOT-PART3-SEM-151
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[2].validations.required: True'
+  field: body[2].validations.required
+  value: 'True'
+- rule_id: SOT-PART3-SEM-152
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[3].type: textarea'
+  field: body[3].type
+  value: textarea
+- rule_id: SOT-PART3-SEM-153
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[3].id: business_impact'
+  field: body[3].id
+  value: business_impact
+- rule_id: SOT-PART3-SEM-154
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[3].attributes.label: Business Impact Assessment'
+  field: body[3].attributes.label
+  value: Business Impact Assessment
+- rule_id: SOT-PART3-SEM-155
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[3].validations.required: True'
+  field: body[3].validations.required
+  value: 'True'
+- rule_id: SOT-PART3-SEM-156
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[4].type: checkboxes'
+  field: body[4].type
+  value: checkboxes
+- rule_id: SOT-PART3-SEM-157
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[4].id: internal_clearance'
+  field: body[4].id
+  value: internal_clearance
+- rule_id: SOT-PART3-SEM-158
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[4].attributes.label: Internal Clearance'
+  field: body[4].attributes.label
+  value: Internal Clearance
+- rule_id: SOT-PART3-SEM-159
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[4].attributes.options: List container'
+  field: body[4].attributes.options
+  value: List with 4 items
+- rule_id: SOT-PART3-SEM-160
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[4].attributes.options[0].label: Legal team reviewed'
+  field: body[4].attributes.options[0].label
+  value: Legal team reviewed
+- rule_id: SOT-PART3-SEM-161
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[4].attributes.options[1].label: Compliance team assessed'
+  field: body[4].attributes.options[1].label
+  value: Compliance team assessed
+- rule_id: SOT-PART3-SEM-162
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[4].attributes.options[2].label: Business impact evaluated'
+  field: body[4].attributes.options[2].label
+  value: Business impact evaluated
+- rule_id: SOT-PART3-SEM-163
+  source: SSID_structure_level3_part3_MAX.md:330
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'body[4].attributes.options[3].label: Competitive analysis completed'
+  field: body[4].attributes.options[3].label
+  value: Competitive analysis completed
+- rule_id: SOT-PART3-SEM-164
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.immutable_store.path: 02_audit_logging/storage/worm/immutable_store/'
+  field: storage_tiers.immutable_store.path
+  value: 02_audit_logging/storage/worm/immutable_store/
+- rule_id: SOT-PART3-SEM-165
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.immutable_store.retention: permanent'
+  field: storage_tiers.immutable_store.retention
+  value: permanent
+- rule_id: SOT-PART3-SEM-166
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.immutable_store.integrity: sha256_hash'
+  field: storage_tiers.immutable_store.integrity
+  value: sha256_hash
+- rule_id: SOT-PART3-SEM-167
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.immutable_store.encryption: aes256_enterprise'
+  field: storage_tiers.immutable_store.encryption
+  value: aes256_enterprise
+- rule_id: SOT-PART3-SEM-168
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.blockchain_anchors.enabled: True'
+  field: storage_tiers.blockchain_anchors.enabled
+  value: 'True'
+- rule_id: SOT-PART3-SEM-169
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.blockchain_anchors.path: 02_audit_logging/storage/blockchain_anchors/'
+  field: storage_tiers.blockchain_anchors.path
+  value: 02_audit_logging/storage/blockchain_anchors/
+- rule_id: SOT-PART3-SEM-170
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.blockchain_anchors.service: opentimestamp'
+  field: storage_tiers.blockchain_anchors.service
+  value: opentimestamp
+- rule_id: SOT-PART3-SEM-171
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.blockchain_anchors.frequency: weekly'
+  field: storage_tiers.blockchain_anchors.frequency
+  value: weekly
+- rule_id: SOT-PART3-SEM-172
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.evidence_chain.path: 23_compliance/evidence/ci_runs/'
+  field: storage_tiers.evidence_chain.path
+  value: 23_compliance/evidence/ci_runs/
+- rule_id: SOT-PART3-SEM-173
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.evidence_chain.retention: 10_years'
+  field: storage_tiers.evidence_chain.retention
+  value: 10_years
+- rule_id: SOT-PART3-SEM-174
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.evidence_chain.encryption: aes256'
+  field: storage_tiers.evidence_chain.encryption
+  value: aes256
+- rule_id: SOT-PART3-SEM-175
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.evidence_chain.backup: encrypted_offsite'
+  field: storage_tiers.evidence_chain.backup
+  value: encrypted_offsite
+- rule_id: SOT-PART3-SEM-176
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.internal_review_documentation.path: 23_compliance/reviews/internal/'
+  field: storage_tiers.internal_review_documentation.path
+  value: 23_compliance/reviews/internal/
+- rule_id: SOT-PART3-SEM-177
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.internal_review_documentation.retention: 15_years'
+  field: storage_tiers.internal_review_documentation.retention
+  value: 15_years
+- rule_id: SOT-PART3-SEM-178
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.internal_review_documentation.encryption: aes256'
+  field: storage_tiers.internal_review_documentation.encryption
+  value: aes256
+- rule_id: SOT-PART3-SEM-179
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.business_evidence.path: 23_compliance/evidence/business_assessments/'
+  field: storage_tiers.business_evidence.path
+  value: 23_compliance/evidence/business_assessments/
+- rule_id: SOT-PART3-SEM-180
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.business_evidence.retention: permanent'
+  field: storage_tiers.business_evidence.retention
+  value: permanent
+- rule_id: SOT-PART3-SEM-181
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'storage_tiers.business_evidence.encryption: aes256'
+  field: storage_tiers.business_evidence.encryption
+  value: aes256
+- rule_id: SOT-PART3-SEM-182
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'audit_enhancement.blockchain_anchoring: enabled'
+  field: audit_enhancement.blockchain_anchoring
+  value: enabled
+- rule_id: SOT-PART3-SEM-183
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'audit_enhancement.opentimestamp_enabled: True'
+  field: audit_enhancement.opentimestamp_enabled
+  value: 'True'
+- rule_id: SOT-PART3-SEM-184
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'audit_enhancement.proof_of_existence: sha256+blockchain+timestamp'
+  field: audit_enhancement.proof_of_existence
+  value: sha256+blockchain+timestamp
+- rule_id: SOT-PART3-SEM-185
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'audit_enhancement.verification_method: hash_chain+blockchain'
+  field: audit_enhancement.verification_method
+  value: hash_chain+blockchain
+- rule_id: SOT-PART3-SEM-186
+  source: SSID_structure_level3_part3_MAX.md:425
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'audit_enhancement.enterprise_controls: full_audit_trail'
+  field: audit_enhancement.enterprise_controls
+  value: full_audit_trail
+- rule_id: SOT-PART3-SEM-187
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_singleton.canonical_path: 02_audit_logging/quarantine/singleton/quarantine_store/'
+  field: quarantine_singleton.canonical_path
+  value: 02_audit_logging/quarantine/singleton/quarantine_store/
+- rule_id: SOT-PART3-SEM-188
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_singleton.principle: Single source of truth for all quarantined
+    items'
+  field: quarantine_singleton.principle
+  value: Single source of truth for all quarantined items
+- rule_id: SOT-PART3-SEM-189
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_singleton.access_control: Restricted to compliance officers
+    and senior management'
+  field: quarantine_singleton.access_control
+  value: Restricted to compliance officers and senior management
+- rule_id: SOT-PART3-SEM-190
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_singleton.encryption: AES-256 with enterprise key management'
+  field: quarantine_singleton.encryption
+  value: AES-256 with enterprise key management
+- rule_id: SOT-PART3-SEM-191
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_triggers.technical_violations: List container'
+  field: quarantine_triggers.technical_violations
+  value: List with 5 items
+- rule_id: SOT-PART3-SEM-192
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_triggers.technical_violations item 0: Version compatibility
+    failures'
+  field: quarantine_triggers.technical_violations[0]
+  value: Version compatibility failures
+- rule_id: SOT-PART3-SEM-193
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_triggers.technical_violations item 1: Anti-gaming control
+    bypasses'
+  field: quarantine_triggers.technical_violations[1]
+  value: Anti-gaming control bypasses
+- rule_id: SOT-PART3-SEM-194
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_triggers.technical_violations item 2: Unauthorized access
+    patterns'
+  field: quarantine_triggers.technical_violations[2]
+  value: Unauthorized access patterns
+- rule_id: SOT-PART3-SEM-195
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_triggers.technical_violations item 3: Data integrity hash
+    mismatches'
+  field: quarantine_triggers.technical_violations[3]
+  value: Data integrity hash mismatches
+- rule_id: SOT-PART3-SEM-196
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_triggers.technical_violations item 4: Enterprise boundary
+    violations'
+  field: quarantine_triggers.technical_violations[4]
+  value: Enterprise boundary violations
+- rule_id: SOT-PART3-SEM-197
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_processing.intake_processor: 02_audit_logging/quarantine/processing/quarantine_processor.py'
+  field: quarantine_processing.intake_processor
+  value: 02_audit_logging/quarantine/processing/quarantine_processor.py
+- rule_id: SOT-PART3-SEM-198
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_processing.manual_override_required: Compliance Officer
+    + Legal approval'
+  field: quarantine_processing.manual_override_required
+  value: Compliance Officer + Legal approval
+- rule_id: SOT-PART3-SEM-199
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_processing.escalation_timeline: 24 hours for critical,
+    72 hours for high priority'
+  field: quarantine_processing.escalation_timeline
+  value: 24 hours for critical, 72 hours for high priority
+- rule_id: SOT-PART3-SEM-200
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_retention.policies_file: 02_audit_logging/quarantine/retention/quarantine_policies.yaml'
+  field: quarantine_retention.policies_file
+  value: 02_audit_logging/quarantine/retention/quarantine_policies.yaml
+- rule_id: SOT-PART3-SEM-201
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_retention.retention_periods.technical_violations: 5 years
+    minimum'
+  field: quarantine_retention.retention_periods.technical_violations
+  value: 5 years minimum
+- rule_id: SOT-PART3-SEM-202
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_retention.retention_periods.legal_hold: Until litigation
+    resolution'
+  field: quarantine_retention.retention_periods.legal_hold
+  value: Until litigation resolution
+- rule_id: SOT-PART3-SEM-203
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_retention.purge_automation: False'
+  field: quarantine_retention.purge_automation
+  value: 'False'
+- rule_id: SOT-PART3-SEM-204
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_retention.archive_to_cold_storage: After 2 years active
+    retention'
+  field: quarantine_retention.archive_to_cold_storage
+  value: After 2 years active retention
+- rule_id: SOT-PART3-SEM-205
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_retention.enterprise_backup: Encrypted offsite + blockchain
+    anchoring'
+  field: quarantine_retention.enterprise_backup
+  value: Encrypted offsite + blockchain anchoring
+- rule_id: SOT-PART3-SEM-206
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.ledger_file: 02_audit_logging/quarantine/hash_ledger/quarantine_chain.json'
+  field: hash_ledger_system.ledger_file
+  value: 02_audit_logging/quarantine/hash_ledger/quarantine_chain.json
+- rule_id: SOT-PART3-SEM-207
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.hash_algorithm: SHA-256'
+  field: hash_ledger_system.hash_algorithm
+  value: SHA-256
+- rule_id: SOT-PART3-SEM-208
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.chain_integrity: Each entry includes previous hash'
+  field: hash_ledger_system.chain_integrity
+  value: Each entry includes previous hash
+- rule_id: SOT-PART3-SEM-209
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.immutable_properties: True'
+  field: hash_ledger_system.immutable_properties
+  value: 'True'
+- rule_id: SOT-PART3-SEM-210
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.blockchain_anchoring: Daily commitment to private
+    enterprise blockchain'
+  field: hash_ledger_system.blockchain_anchoring
+  value: Daily commitment to private enterprise blockchain
+- rule_id: SOT-PART3-SEM-211
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.ledger_structure.entry_id: UUID v4'
+  field: hash_ledger_system.ledger_structure.entry_id
+  value: UUID v4
+- rule_id: SOT-PART3-SEM-212
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.ledger_structure.timestamp: ISO 8601 UTC'
+  field: hash_ledger_system.ledger_structure.timestamp
+  value: ISO 8601 UTC
+- rule_id: SOT-PART3-SEM-213
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.ledger_structure.item_hash: SHA-256 of quarantined
+    item'
+  field: hash_ledger_system.ledger_structure.item_hash
+  value: SHA-256 of quarantined item
+- rule_id: SOT-PART3-SEM-214
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.ledger_structure.trigger_reason: Classification
+    and details'
+  field: hash_ledger_system.ledger_structure.trigger_reason
+  value: Classification and details
+- rule_id: SOT-PART3-SEM-215
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.ledger_structure.business_impact: Revenue/compliance
+    risk assessment'
+  field: hash_ledger_system.ledger_structure.business_impact
+  value: Revenue/compliance risk assessment
+- rule_id: SOT-PART3-SEM-216
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.ledger_structure.previous_hash: Chain integrity
+    verification'
+  field: hash_ledger_system.ledger_structure.previous_hash
+  value: Chain integrity verification
+- rule_id: SOT-PART3-SEM-217
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'hash_ledger_system.ledger_structure.blockchain_anchor: Enterprise
+    blockchain transaction ID'
+  field: hash_ledger_system.ledger_structure.blockchain_anchor
+  value: Enterprise blockchain transaction ID
+- rule_id: SOT-PART3-SEM-218
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_schedule.daily: New quarantine items
+    assessment'
+  field: quarantine_governance.review_schedule.daily
+  value: New quarantine items assessment
+- rule_id: SOT-PART3-SEM-219
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_schedule.weekly: Pending release evaluations'
+  field: quarantine_governance.review_schedule.weekly
+  value: Pending release evaluations
+- rule_id: SOT-PART3-SEM-220
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_schedule.monthly: Quarantine policy effectiveness
+    review'
+  field: quarantine_governance.review_schedule.monthly
+  value: Quarantine policy effectiveness review
+- rule_id: SOT-PART3-SEM-221
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.review_schedule.quarterly: Full quarantine audit
+    with external validation'
+  field: quarantine_governance.review_schedule.quarterly
+  value: Full quarantine audit with external validation
+- rule_id: SOT-PART3-SEM-222
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.release_criteria.legal_clearance: Legal team
+    sign-off required'
+  field: quarantine_governance.release_criteria.legal_clearance
+  value: Legal team sign-off required
+- rule_id: SOT-PART3-SEM-223
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_governance.release_criteria.business_approval: Business
+    impact assessment completed'
+  field: quarantine_governance.release_criteria.business_approval
+  value: Business impact assessment completed
+- rule_id: SOT-PART3-SEM-224
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.alert_system: Immediate notification for high-risk
+    quarantines'
+  field: quarantine_monitoring.alert_system
+  value: Immediate notification for high-risk quarantines
+- rule_id: SOT-PART3-SEM-225
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'quarantine_monitoring.competitive_intelligence: Market impact assessment
+    for quarantined items'
+  field: quarantine_monitoring.competitive_intelligence
+  value: Market impact assessment for quarantined items
+- rule_id: SOT-PART3-SEM-226
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'anti_gaming_quarantine.bypass_attempt_logging: Log all quarantine
+    bypass attempts'
+  field: anti_gaming_quarantine.bypass_attempt_logging
+  value: Log all quarantine bypass attempts
+- rule_id: SOT-PART3-SEM-227
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'anti_gaming_quarantine.insider_threat_monitoring: Monitor internal
+    quarantine manipulations'
+  field: anti_gaming_quarantine.insider_threat_monitoring
+  value: Monitor internal quarantine manipulations
+- rule_id: SOT-PART3-SEM-228
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'integration_points.governance_legal: 07_governance_legal/risk/ → quarantine
+    risk assessment'
+  field: integration_points.governance_legal
+  value: 07_governance_legal/risk/ → quarantine risk assessment
+- rule_id: SOT-PART3-SEM-229
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'integration_points.business_intelligence: Competitive impact analysis
+    for quarantined items'
+  field: integration_points.business_intelligence
+  value: Competitive impact analysis for quarantined items
+- rule_id: SOT-PART3-SEM-230
+  source: SSID_structure_level3_part3_MAX.md:473
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'integration_points.enterprise_dashboard: Real-time quarantine visibility
+    for executives'
+  field: integration_points.enterprise_dashboard
+  value: Real-time quarantine visibility for executives
+- rule_id: SOT-PART3-SEM-231
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.W3C_VC_20.name: W3C Verifiable Credentials 2.0'
+  field: active_standards.W3C_VC_20.name
+  value: W3C Verifiable Credentials 2.0
+- rule_id: SOT-PART3-SEM-232
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.W3C_VC_20.path: 10_interoperability/standards/w3c_vc2/'
+  field: active_standards.W3C_VC_20.path
+  value: 10_interoperability/standards/w3c_vc2/
+- rule_id: SOT-PART3-SEM-233
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.W3C_VC_20.business_priority: HIGH'
+  field: active_standards.W3C_VC_20.business_priority
+  value: HIGH
+- rule_id: SOT-PART3-SEM-234
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.OpenID_Connect_4_VC.name: OpenID Connect 4 Verifiable
+    Credentials'
+  field: active_standards.OpenID_Connect_4_VC.name
+  value: OpenID Connect 4 Verifiable Credentials
+- rule_id: SOT-PART3-SEM-235
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.OpenID_Connect_4_VC.path: 14_zero_time_auth/sso/protocols/oidc4vc/'
+  field: active_standards.OpenID_Connect_4_VC.path
+  value: 14_zero_time_auth/sso/protocols/oidc4vc/
+- rule_id: SOT-PART3-SEM-236
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.OpenID_Connect_4_VC.business_priority: HIGH'
+  field: active_standards.OpenID_Connect_4_VC.business_priority
+  value: HIGH
+- rule_id: SOT-PART3-SEM-237
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.ISO_IEC_27001_2022.name: ISO/IEC 27001:2022'
+  field: active_standards.ISO_IEC_27001_2022.name
+  value: ISO/IEC 27001:2022
+- rule_id: SOT-PART3-SEM-238
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.ISO_IEC_27001_2022.path: 23_compliance/mappings/iso27001/'
+  field: active_standards.ISO_IEC_27001_2022.path
+  value: 23_compliance/mappings/iso27001/
+- rule_id: SOT-PART3-SEM-239
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.ISO_IEC_27001_2022.business_priority: CRITICAL'
+  field: active_standards.ISO_IEC_27001_2022.business_priority
+  value: CRITICAL
+- rule_id: SOT-PART3-SEM-240
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.NIST_SSDF.name: NIST Secure Software Development
+    Framework'
+  field: active_standards.NIST_SSDF.name
+  value: NIST Secure Software Development Framework
+- rule_id: SOT-PART3-SEM-241
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.NIST_SSDF.path: 23_compliance/mappings/nist_ssdf/'
+  field: active_standards.NIST_SSDF.path
+  value: 23_compliance/mappings/nist_ssdf/
+- rule_id: SOT-PART3-SEM-242
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.NIST_SSDF.business_priority: HIGH'
+  field: active_standards.NIST_SSDF.business_priority
+  value: HIGH
+- rule_id: SOT-PART3-SEM-243
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.SLSA.name: Supply Chain Levels for Software Artifacts'
+  field: active_standards.SLSA.name
+  value: Supply Chain Levels for Software Artifacts
+- rule_id: SOT-PART3-SEM-244
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.SLSA.path: 23_compliance/mappings/slsa/'
+  field: active_standards.SLSA.path
+  value: 23_compliance/mappings/slsa/
+- rule_id: SOT-PART3-SEM-245
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'active_standards.SLSA.business_priority: MEDIUM'
+  field: active_standards.SLSA.business_priority
+  value: MEDIUM
+- rule_id: SOT-PART3-SEM-246
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'deprecated_standards[0].id: ISO27001_2013'
+  field: deprecated_standards[0].id
+  value: ISO27001_2013
+- rule_id: SOT-PART3-SEM-247
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'deprecated_standards[0].status: deprecated'
+  field: deprecated_standards[0].status
+  value: deprecated
+- rule_id: SOT-PART3-SEM-248
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'deprecated_standards[0].replaced_by: ISO_IEC_27001_2022'
+  field: deprecated_standards[0].replaced_by
+  value: ISO_IEC_27001_2022
+- rule_id: SOT-PART3-SEM-249
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'deprecated_standards[0].migration_deadline: 2025-12-31'
+  field: deprecated_standards[0].migration_deadline
+  value: '2025-12-31'
+- rule_id: SOT-PART3-SEM-250
+  source: SSID_structure_level3_part3_MAX.md:681
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'deprecated_standards[0].business_impact: Migration required for enterprise
+    compliance'
+  field: deprecated_standards[0].business_impact
+  value: Migration required for enterprise compliance
+- rule_id: SOT-PART3-SEM-251
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'internal_reviews.monthly.scope: Badge metrics validation, compliance
+    updates, business impact'
+  field: internal_reviews.monthly.scope
+  value: Badge metrics validation, compliance updates, business impact
+- rule_id: SOT-PART3-SEM-252
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'internal_reviews.monthly.owner: Compliance Team Lead'
+  field: internal_reviews.monthly.owner
+  value: Compliance Team Lead
+- rule_id: SOT-PART3-SEM-253
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'internal_reviews.monthly.deliverable: internal_monthly_YYYY-MM.md'
+  field: internal_reviews.monthly.deliverable
+  value: internal_monthly_YYYY-MM.md
+- rule_id: SOT-PART3-SEM-254
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'internal_reviews.quarterly.scope: Full compliance matrix review, threshold
+    validation, competitive analysis'
+  field: internal_reviews.quarterly.scope
+  value: Full compliance matrix review, threshold validation, competitive analysis
+- rule_id: SOT-PART3-SEM-255
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'internal_reviews.quarterly.owner: Senior Compliance Officer + Legal'
+  field: internal_reviews.quarterly.owner
+  value: Senior Compliance Officer + Legal
+- rule_id: SOT-PART3-SEM-256
+  source: SSID_structure_level3_part3_MAX.md:731
+  category: General
+  severity: LOW
+  enforcement: SHOULD
+  description: 'internal_reviews.quarterly.deliverable: internal_quarterly_YYYY-QX.md'
+  field: internal_reviews.quarterly.deliverable
+  value: internal_quarterly_YYYY-QX.md

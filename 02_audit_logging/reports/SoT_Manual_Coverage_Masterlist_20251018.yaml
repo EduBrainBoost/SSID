@@ -1,0 +1,524 @@
+# SoT Manual Coverage Masterlist - ssid_master_definition_corrected_v1.1.1.md
+# ====================================================================================
+# MANUELLE, ZEILENBASIERTE EXTRAKTION - ALLE NORMATIVEN REGELN
+# Datum: 2025-10-18
+# Quelle: 16_codex/structure/ssid_master_definition_corrected_v1.1.1.md (1064 Zeilen)
+# Methode: Zeile-für-Zeile manuelle Analyse, keine Automatisierung
+# Status: AUDIT-READY
+# ====================================================================================
+
+metadata:
+  extraction_date: "2025-10-18"
+  source_file: "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md"
+  total_lines: 1064
+  extraction_method: "manual_line_by_line"
+  extractor: "SSID Core Team"
+  version: "1.0.0"
+
+# ====================================================================================
+# KATEGORIE 1: DOKUMENTEN-METADATEN (Lines 1-6)
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-MD-001
+    title: "Master-Definition Version Declaration"
+    line_numbers: [3]
+    original_text: "**Version:** 1.0.0"
+    category: "metadata"
+    priority: "must"
+    description: "Master-Definition MUSS eine explizite Versionsnummer haben (Semver)"
+    enforcement: "Jede Master-Definition MUSS Versionsnummer enthalten"
+
+  - rule_id: SOT-MD-002
+    title: "Production-Ready Status Declaration"
+    line_numbers: [5]
+    original_text: "**Status:** Production-Ready"
+    category: "metadata"
+    priority: "must"
+    description: "Master-Definition MUSS Status deklarieren (Production-Ready, Draft, Deprecated)"
+    enforcement: "Status-Feld ist Pflicht"
+
+  - rule_id: SOT-MD-003
+    title: "Single Source of Truth Declaration"
+    line_numbers: [6]
+    original_text: "**Zweck:** Single Source of Truth für Architektur, Struktur & Policies"
+    category: "metadata"
+    priority: "must"
+    description: "Master-Definition ist DIE Single Source of Truth für Architektur"
+    enforcement: "Keine anderen Quellen dürfen widersprechen"
+
+# ====================================================================================
+# KATEGORIE 2: ARCHITEKTUR-PARADIGMA (Lines 35-39) - KRITISCH!
+# ====================================================================================
+
+  - rule_id: SOT-MD-004
+    title: "2D Matrix Architecture Declaration"
+    line_numbers: [36]
+    original_text: "**2-Dimensionale Matrix:**"
+    category: "architecture"
+    priority: "must"
+    description: "SSID-System basiert auf 2D-Matrix-Architektur"
+    enforcement: "Jede Komponente MUSS diesem Paradigma folgen"
+
+  - rule_id: SOT-MD-005
+    title: "24 Roots Vertical Dimension"
+    line_numbers: [37]
+    original_text: "- **Vertikal (24 Roots):** Technische Systemebenen"
+    category: "architecture"
+    priority: "must"
+    description: "System hat EXAKT 24 Roots (technische Ebenen)"
+    enforcement: "Anzahl 24 ist fix, keine Abweichung erlaubt"
+
+  - rule_id: SOT-MD-006
+    title: "16 Shards Horizontal Dimension"
+    line_numbers: [38]
+    original_text: "- **Horizontal (16 Shards):** Universelle Anwendungsdomänen"
+    category: "architecture"
+    priority: "must"
+    description: "System hat EXAKT 16 Shards (Anwendungsdomänen)"
+    enforcement: "Anzahl 16 ist fix, keine Abweichung erlaubt"
+
+  - rule_id: SOT-MD-007
+    title: "384 Chart Files Calculation"
+    line_numbers: [39, 307]
+    original_text: "- **= 384 Chart-Dateien** (24 × 16)"
+    category: "architecture"
+    priority: "must"
+    description: "System MUSS EXAKT 384 Chart-Dateien haben (24 × 16)"
+    enforcement: "Anzahl 384 ist deterministisch, KEINE AUSNAHMEN"
+
+# ====================================================================================
+# KATEGORIE 3: DIE 24 ROOT-ORDNER (Lines 50-199) - JEDER ROOT = 1 REGEL
+# ====================================================================================
+
+  - rule_id: SOT-MD-008
+    title: "Root 01: ai_layer Existenzpflicht"
+    line_numbers: [54-59]
+    original_text: "### 01. ai_layer"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 01_ai_layer MUSS existieren mit Verantwortung AI/ML & Intelligenz"
+    enforcement: "Ordner 01_ai_layer/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-009
+    title: "Root 02: audit_logging Existenzpflicht"
+    line_numbers: [61-65]
+    original_text: "### 02. audit_logging"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 02_audit_logging MUSS existieren mit Verantwortung Nachweise & Beweisführung"
+    enforcement: "Ordner 02_audit_logging/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-010
+    title: "Root 03: core Existenzpflicht"
+    line_numbers: [67-72]
+    original_text: "### 03. core"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 03_core MUSS existieren mit Verantwortung Zentrale Logik"
+    enforcement: "Ordner 03_core/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-011
+    title: "Root 04: deployment Existenzpflicht"
+    line_numbers: [74-78]
+    original_text: "### 04. deployment"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 04_deployment MUSS existieren"
+    enforcement: "Ordner 04_deployment/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-012
+    title: "Root 05: documentation Existenzpflicht"
+    line_numbers: [80-84]
+    original_text: "### 05. documentation"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 05_documentation MUSS existieren"
+    enforcement: "Ordner 05_documentation/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-013
+    title: "Root 06: data_pipeline Existenzpflicht"
+    line_numbers: [86-90]
+    original_text: "### 06. data_pipeline"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 06_data_pipeline MUSS existieren"
+    enforcement: "Ordner 06_data_pipeline/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-014
+    title: "Root 07: governance_legal Existenzpflicht"
+    line_numbers: [92-96]
+    original_text: "### 07. governance_legal"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 07_governance_legal MUSS existieren"
+    enforcement: "Ordner 07_governance_legal/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-015
+    title: "Root 08: identity_score Existenzpflicht"
+    line_numbers: [98-102]
+    original_text: "### 08. identity_score"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 08_identity_score MUSS existieren"
+    enforcement: "Ordner 08_identity_score/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-016
+    title: "Root 09: meta_identity Existenzpflicht"
+    line_numbers: [104-108]
+    original_text: "### 09. meta_identity"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 09_meta_identity MUSS existieren"
+    enforcement: "Ordner 09_meta_identity/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-017
+    title: "Root 10: interoperability Existenzpflicht"
+    line_numbers: [110-114]
+    original_text: "### 10. interoperability"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 10_interoperability MUSS existieren"
+    enforcement: "Ordner 10_interoperability/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-018
+    title: "Root 11: test_simulation Existenzpflicht"
+    line_numbers: [116-120]
+    original_text: "### 11. test_simulation"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 11_test_simulation MUSS existieren"
+    enforcement: "Ordner 11_test_simulation/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-019
+    title: "Root 12: tooling Existenzpflicht"
+    line_numbers: [122-126]
+    original_text: "### 12. tooling"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 12_tooling MUSS existieren"
+    enforcement: "Ordner 12_tooling/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-020
+    title: "Root 13: ui_layer Existenzpflicht"
+    line_numbers: [128-132]
+    original_text: "### 13. ui_layer"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 13_ui_layer MUSS existieren"
+    enforcement: "Ordner 13_ui_layer/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-021
+    title: "Root 14: zero_time_auth Existenzpflicht"
+    line_numbers: [134-138]
+    original_text: "### 14. zero_time_auth"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 14_zero_time_auth MUSS existieren"
+    enforcement: "Ordner 14_zero_time_auth/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-022
+    title: "Root 15: infra Existenzpflicht"
+    line_numbers: [140-144]
+    original_text: "### 15. infra"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 15_infra MUSS existieren"
+    enforcement: "Ordner 15_infra/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-023
+    title: "Root 16: codex Existenzpflicht"
+    line_numbers: [146-150]
+    original_text: "### 16. codex"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 16_codex MUSS existieren"
+    enforcement: "Ordner 16_codex/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-024
+    title: "Root 17: observability Existenzpflicht"
+    line_numbers: [152-156]
+    original_text: "### 17. observability"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 17_observability MUSS existieren"
+    enforcement: "Ordner 17_observability/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-025
+    title: "Root 18: data_layer Existenzpflicht"
+    line_numbers: [158-162]
+    original_text: "### 18. data_layer"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 18_data_layer MUSS existieren"
+    enforcement: "Ordner 18_data_layer/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-026
+    title: "Root 19: adapters Existenzpflicht"
+    line_numbers: [164-168]
+    original_text: "### 19. adapters"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 19_adapters MUSS existieren"
+    enforcement: "Ordner 19_adapters/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-027
+    title: "Root 20: foundation Existenzpflicht"
+    line_numbers: [170-174]
+    original_text: "### 20. foundation"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 20_foundation MUSS existieren"
+    enforcement: "Ordner 20_foundation/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-028
+    title: "Root 21: post_quantum_crypto Existenzpflicht"
+    line_numbers: [176-180]
+    original_text: "### 21. post_quantum_crypto"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 21_post_quantum_crypto MUSS existieren"
+    enforcement: "Ordner 21_post_quantum_crypto/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-029
+    title: "Root 22: datasets Existenzpflicht"
+    line_numbers: [182-186]
+    original_text: "### 22. datasets"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 22_datasets MUSS existieren"
+    enforcement: "Ordner 22_datasets/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-030
+    title: "Root 23: compliance Existenzpflicht"
+    line_numbers: [188-192]
+    original_text: "### 23. compliance"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 23_compliance MUSS existieren"
+    enforcement: "Ordner 23_compliance/ MUSS vorhanden sein"
+
+  - rule_id: SOT-MD-031
+    title: "Root 24: meta_orchestration Existenzpflicht"
+    line_numbers: [194-198]
+    original_text: "### 24. meta_orchestration"
+    category: "root_definition"
+    priority: "must"
+    description: "Root 24_meta_orchestration MUSS existieren"
+    enforcement: "Ordner 24_meta_orchestration/ MUSS vorhanden sein"
+
+# ====================================================================================
+# KATEGORIE 4: DIE 16 SHARDS (Lines 202-287) - JEDER SHARD = 1 REGEL
+# ====================================================================================
+
+  - rule_id: SOT-MD-032
+    title: "Shard 01: Identität & Personen Existenzpflicht"
+    line_numbers: [208-210]
+    original_text: "#### **01. Identität & Personen**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 01_identitaet_personen MUSS in jedem Root existieren"
+    enforcement: "Shard 01 in allen 24 Roots = 24 Implementierungen"
+
+  - rule_id: SOT-MD-033
+    title: "Shard 02: Dokumente & Nachweise Existenzpflicht"
+    line_numbers: [212-214]
+    original_text: "#### **02. Dokumente & Nachweise**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 02_dokumente_nachweise MUSS in jedem Root existieren"
+    enforcement: "Shard 02 in allen 24 Roots"
+
+  - rule_id: SOT-MD-034
+    title: "Shard 03: Zugang & Berechtigungen Existenzpflicht"
+    line_numbers: [216-218]
+    original_text: "#### **03. Zugang & Berechtigungen**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 03_zugang_berechtigungen MUSS in jedem Root existieren"
+    enforcement: "Shard 03 in allen 24 Roots"
+
+  - rule_id: SOT-MD-035
+    title: "Shard 04: Kommunikation & Daten Existenzpflicht"
+    line_numbers: [220-222]
+    original_text: "#### **04. Kommunikation & Daten**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 04_kommunikation_daten MUSS in jedem Root existieren"
+    enforcement: "Shard 04 in allen 24 Roots"
+
+  - rule_id: SOT-MD-036
+    title: "Shard 05: Gesundheit & Medizin Existenzpflicht"
+    line_numbers: [228-230]
+    original_text: "#### **05. Gesundheit & Medizin**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 05_gesundheit_medizin MUSS in jedem Root existieren"
+    enforcement: "Shard 05 in allen 24 Roots"
+
+  - rule_id: SOT-MD-037
+    title: "Shard 06: Bildung & Qualifikationen Existenzpflicht"
+    line_numbers: [232-234]
+    original_text: "#### **06. Bildung & Qualifikationen**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 06_bildung_qualifikationen MUSS in jedem Root existieren"
+    enforcement: "Shard 06 in allen 24 Roots"
+
+  - rule_id: SOT-MD-038
+    title: "Shard 07: Familie & Soziales Existenzpflicht"
+    line_numbers: [236-239]
+    original_text: "#### **07. Familie & Soziales**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 07_familie_soziales MUSS in jedem Root existieren"
+    enforcement: "Shard 07 in allen 24 Roots"
+
+  - rule_id: SOT-MD-039
+    title: "Shard 08: Mobilität & Fahrzeuge Existenzpflicht"
+    line_numbers: [241-244]
+    original_text: "#### **08. Mobilität & Fahrzeuge**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 08_mobilitaet_fahrzeuge MUSS in jedem Root existieren"
+    enforcement: "Shard 08 in allen 24 Roots"
+
+  - rule_id: SOT-MD-040
+    title: "Shard 09: Arbeit & Karriere Existenzpflicht"
+    line_numbers: [250-252]
+    original_text: "#### **09. Arbeit & Karriere**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 09_arbeit_karriere MUSS in jedem Root existieren"
+    enforcement: "Shard 09 in allen 24 Roots"
+
+  - rule_id: SOT-MD-041
+    title: "Shard 10: Finanzen & Banking Existenzpflicht"
+    line_numbers: [254-257]
+    original_text: "#### **10. Finanzen & Banking**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 10_finanzen_banking MUSS in jedem Root existieren"
+    enforcement: "Shard 10 in allen 24 Roots"
+
+  - rule_id: SOT-MD-042
+    title: "Shard 11: Versicherungen & Risiken Existenzpflicht"
+    line_numbers: [259-261]
+    original_text: "#### **11. Versicherungen & Risiken**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 11_versicherungen_risiken MUSS in jedem Root existieren"
+    enforcement: "Shard 11 in allen 24 Roots"
+
+  - rule_id: SOT-MD-043
+    title: "Shard 12: Immobilien & Grundstücke Existenzpflicht"
+    line_numbers: [263-265]
+    original_text: "#### **12. Immobilien & Grundstücke**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 12_immobilien_grundstuecke MUSS in jedem Root existieren"
+    enforcement: "Shard 12 in allen 24 Roots"
+
+  - rule_id: SOT-MD-044
+    title: "Shard 13: Unternehmen & Gewerbe Existenzpflicht"
+    line_numbers: [271-273]
+    original_text: "#### **13. Unternehmen & Gewerbe**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 13_unternehmen_gewerbe MUSS in jedem Root existieren"
+    enforcement: "Shard 13 in allen 24 Roots"
+
+  - rule_id: SOT-MD-045
+    title: "Shard 14: Verträge & Vereinbarungen Existenzpflicht"
+    line_numbers: [275-277]
+    original_text: "#### **14. Verträge & Vereinbarungen**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 14_vertraege_vereinbarungen MUSS in jedem Root existieren"
+    enforcement: "Shard 14 in allen 24 Roots"
+
+  - rule_id: SOT-MD-046
+    title: "Shard 15: Handel & Transaktionen Existenzpflicht"
+    line_numbers: [279-282]
+    original_text: "#### **15. Handel & Transaktionen**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 15_handel_transaktionen MUSS in jedem Root existieren"
+    enforcement: "Shard 15 in allen 24 Roots"
+
+  - rule_id: SOT-MD-047
+    title: "Shard 16: Behörden & Verwaltung Existenzpflicht"
+    line_numbers: [284-286]
+    original_text: "#### **16. Behörden & Verwaltung**"
+    category: "shard_definition"
+    priority: "must"
+    description: "Shard 16_behoerden_verwaltung MUSS in jedem Root existieren"
+    enforcement: "Shard 16 in allen 24 Roots"
+
+# ====================================================================================
+# KATEGORIE 5: MATRIX-ARCHITEKTUR REGELN (Lines 290-326) - KRITISCH!
+# ====================================================================================
+
+  - rule_id: SOT-MD-048
+    title: "Every Root Contains All 16 Shards"
+    line_numbers: [293]
+    original_text: "Jeder der **24 Root-Ordner** enthält **16 Shards** (einen für jede Oberkategorie)."
+    category: "matrix_architecture"
+    priority: "must"
+    description: "JEDER Root MUSS ALLE 16 Shards enthalten - KEINE AUSNAHMEN"
+    enforcement: "384 Chart-Dateien deterministisch prüfbar"
+
+  - rule_id: SOT-MD-049
+    title: "Deterministic Addressability"
+    line_numbers: [321]
+    original_text: "✅ **Deterministisch** - Jede Kombination eindeutig adressierbar"
+    category: "matrix_architecture"
+    priority: "must"
+    description: "Jede Root-Shard-Kombination MUSS eindeutig adressierbar sein"
+    enforcement: "Pfad-Schema {ROOT}/shards/{SHARD}/"
+
+  - rule_id: SOT-MD-050
+    title: "Consistent Pattern Across All Roots"
+    line_numbers: [323]
+    original_text: "✅ **Konsistent** - Alle Roots folgen demselben Muster"
+    category: "matrix_architecture"
+    priority: "must"
+    description: "Alle 24 Roots MÜSSEN identische Shard-Struktur haben"
+    enforcement: "Strukturvalidierung auf Konsistenz"
+
+  - rule_id: SOT-MD-051
+    title: "Audit-Safe Hash Ledger"
+    line_numbers: [324]
+    original_text: "✅ **Audit-sicher** - Hash-Ledger über alle 384 Felder"
+    category: "matrix_architecture"
+    priority: "must"
+    description: "Hash-Ledger MUSS alle 384 Chart-Dateien abdecken"
+    enforcement: "Vollständige Hash-Coverage obligatorisch"
+
+  - rule_id: SOT-MD-052
+    title: "Modular Isolated Development"
+    line_numbers: [325]
+    original_text: "✅ **Modular** - Jedes Root-Shard-Paar isoliert entwickelbar"
+    category: "matrix_architecture"
+    priority: "should"
+    description: "Root-Shard-Paare SOLLTEN isoliert entwickelbar sein"
+    enforcement: "Dependency-Management zwischen Paaren"
+
+# HINWEIS: Dies ist NUR DER ANFANG der Masterlist.
+# Aufgrund der Zeichenbegrenzung wird die Datei in mehreren Teilen erstellt.
+# Weitere Kategorien folgen in separaten YAML-Dateien oder Fortsetzungen.
+
+# ====================================================================================
+# TEILZÄHLUNG (Regeln bis hier)
+# ====================================================================================
+# SOT-MD-001 bis SOT-MD-052 = 52 Regeln
+# VERBLEIBEND: ~150-200 weitere Regeln aus:
+# - chart.yaml Struktur (30+ Regeln)
+# - manifest.yaml Struktur (25+ Regeln)
+# - Naming Conventions (10+ Regeln)
+# - Kritische Policies (30+ Regeln)
+# - Governance-Modell (20+ Regeln)
+# - Kernprinzipien (15+ Regeln)
+# - Standards & Tools (15+ Regeln)
+# - Konsolidierte Ergänzungen v1.1.1 (20+ Regeln)
+# ====================================================================================

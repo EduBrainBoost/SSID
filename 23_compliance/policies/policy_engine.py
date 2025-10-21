@@ -7,7 +7,6 @@ from typing import Dict, Any
 import os
 import json
 
-
 # Policy definitions
 POLICIES = {
     "AI_DECISION_POLICY": {
@@ -36,7 +35,6 @@ POLICIES = {
         },
     },
 }
-
 
 def evaluate_policy(policy_name: str, decision: Dict[str, Any]) -> bool:
     """
@@ -91,7 +89,6 @@ def evaluate_policy(policy_name: str, decision: Dict[str, Any]) -> bool:
 
     return True
 
-
 def get_policy(policy_name: str) -> Dict[str, Any]:
     """
     Retrieve policy definition by name.
@@ -104,7 +101,6 @@ def get_policy(policy_name: str) -> Dict[str, Any]:
     """
     return POLICIES.get(policy_name, {})
 
-
 def list_policies() -> list:
     """
     List all available policy names.
@@ -113,7 +109,6 @@ def list_policies() -> list:
         List of policy names
     """
     return list(POLICIES.keys())
-
 
 if __name__ == "__main__":
     # Self-test

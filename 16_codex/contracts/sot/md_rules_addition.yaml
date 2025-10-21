@@ -1,0 +1,704 @@
+# ============================================================
+# MD-* RULES: Master-Definition Granular Rules (57 NEW)
+# Source: ssid_master_definition_corrected_v1.1.1.md
+# Coverage: 100% (201 total rules, 144 already covered, 57 added here)
+# Total System Rules: 384 (24×16 Matrix Alignment)
+# ============================================================
+
+# --- MD-STRUCT: Structure Path Validation (2 rules) ---
+
+- rule_id: MD-STRUCT-009
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: "Pfad {ROOT}/shards/{SHARD}/chart.yaml MUSS existieren"
+  sot_artefacts:
+    python: validate_md_struct_009() in sot_validator_core.py
+    rego: MD-STRUCT-009 deny rule in sot_policy.rego
+    cli: --rules MD-STRUCT-009 flag supported
+    test: test_md_struct_009() in test_sot_validator.py
+
+- rule_id: MD-STRUCT-010
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: "Pfad .../implementations/{IMPL}/manifest.yaml MUSS existieren"
+  sot_artefacts:
+    python: validate_md_struct_010() in sot_validator_core.py
+    rego: MD-STRUCT-010 deny rule in sot_policy.rego
+    cli: --rules MD-STRUCT-010 flag supported
+    test: test_md_struct_010() in test_sot_validator.py
+
+# --- MD-CHART: Chart.yaml Field Validation (5 rules) ---
+
+- rule_id: MD-CHART-024
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CHART_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "chart.yaml MUSS compatibility.core_min_version definieren"
+  sot_artefakte:
+    python: validate_md_chart_024() in sot_validator_core.py
+    rego: MD-CHART-024 deny rule in sot_policy.rego
+    cli: --rules MD-CHART-024 flag supported
+    test: test_md_chart_024() in test_sot_validator.py
+
+- rule_id: MD-CHART-029
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CHART_STRUCTURE
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: "chart.yaml SOLLTE orchestration.workflows definieren"
+  sot_artefakte:
+    python: validate_md_chart_029() in sot_validator_core.py
+    rego: MD-CHART-029 informational only in sot_policy.rego
+    cli: --rules MD-CHART-029 flag supported
+    test: test_md_chart_029() in test_sot_validator.py
+
+- rule_id: MD-CHART-045
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CHART_STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: "chart.yaml MUSS security.encryption (at_rest, in_transit) definieren"
+  sot_artefakte:
+    python: validate_md_chart_045() in sot_validator_core.py
+    rego: MD-CHART-045 deny rule in sot_policy.rego
+    cli: --rules MD-CHART-045 flag supported
+    test: test_md_chart_045() in test_sot_validator.py
+
+- rule_id: MD-CHART-048
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CHART_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "chart.yaml MUSS resources.compute definieren"
+  sot_artefakte:
+    python: validate_md_chart_048() in sot_validator_core.py
+    rego: MD-CHART-048 deny rule in sot_policy.rego
+    cli: --rules MD-CHART-048 flag supported
+    test: test_md_chart_048() in test_sot_validator.py
+
+- rule_id: MD-CHART-050
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CHART_STRUCTURE
+  severity: LOW
+  enforcement: SHOULD
+  description: "chart.yaml SOLLTE roadmap.upcoming definieren"
+  sot_artefakte:
+    python: validate_md_chart_050() in sot_validator_core.py
+    rego: MD-CHART-050 informational only in sot_policy.rego
+    cli: --rules MD-CHART-050 flag supported
+    test: test_md_chart_050() in test_sot_validator.py
+
+# --- MD-MANIFEST: Manifest.yaml Field Validation (28 rules) ---
+
+- rule_id: MD-MANIFEST-004
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "manifest.yaml MUSS metadata.maturity definieren"
+  sot_artefakte:
+    python: validate_md_manifest_004() in sot_validator_core.py
+    rego: MD-MANIFEST-004 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-004 flag supported
+    test: test_md_manifest_004() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-009
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "manifest.yaml MUSS technology_stack.linting_formatting definieren"
+  sot_artefakte:
+    python: validate_md_manifest_009() in sot_validator_core.py
+    rego: MD-MANIFEST-009 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-009 flag supported
+    test: test_md_manifest_009() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-012
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "manifest.yaml MUSS artifacts.configuration.location definieren"
+  sot_artefakte:
+    python: validate_md_manifest_012() in sot_validator_core.py
+    rego: MD-MANIFEST-012 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-012 flag supported
+    test: test_md_manifest_012() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-013
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: "manifest.yaml SOLLTE artifacts.models.location definieren (AI/ML)"
+  sot_artefakte:
+    python: validate_md_manifest_013() in sot_validator_core.py
+    rego: MD-MANIFEST-013 informational only in sot_policy.rego
+    cli: --rules MD-MANIFEST-013 flag supported
+    test: test_md_manifest_013() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-014
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: SHOULD
+  description: "manifest.yaml SOLLTE artifacts.protocols.location definieren (gRPC)"
+  sot_artefakte:
+    python: validate_md_manifest_014() in sot_validator_core.py
+    rego: MD-MANIFEST-014 informational only in sot_policy.rego
+    cli: --rules MD-MANIFEST-014 flag supported
+    test: test_md_manifest_014() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-015
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS artifacts.tests.location definieren"
+  sot_artefakte:
+    python: validate_md_manifest_015() in sot_validator_core.py
+    rego: MD-MANIFEST-015 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-015 flag supported
+    test: test_md_manifest_015() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-016
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "manifest.yaml MUSS artifacts.documentation.location definieren"
+  sot_artefakte:
+    python: validate_md_manifest_016() in sot_validator_core.py
+    rego: MD-MANIFEST-016 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-016 flag supported
+    test: test_md_manifest_016() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-017
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "manifest.yaml MUSS artifacts.scripts.location definieren"
+  sot_artefakte:
+    python: validate_md_manifest_017() in sot_validator_core.py
+    rego: MD-MANIFEST-017 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-017 flag supported
+    test: test_md_manifest_017() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-018
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS artifacts.docker.files=[Dockerfile,docker-compose.yml] definieren"
+  sot_artefakte:
+    python: validate_md_manifest_018() in sot_validator_core.py
+    rego: MD-MANIFEST-018 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-018 flag supported
+    test: test_md_manifest_018() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-023
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS build.commands definieren"
+  sot_artefakte:
+    python: validate_md_manifest_023() in sot_validator_core.py
+    rego: MD-MANIFEST-023 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-023 flag supported
+    test: test_md_manifest_023() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-024
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS build.docker definieren"
+  sot_artefakte:
+    python: validate_md_manifest_024() in sot_validator_core.py
+    rego: MD-MANIFEST-024 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-024 flag supported
+    test: test_md_manifest_024() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-025
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS deployment.kubernetes.manifests_location definieren"
+  sot_artefakte:
+    python: validate_md_manifest_025() in sot_validator_core.py
+    rego: MD-MANIFEST-025 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-025 flag supported
+    test: test_md_manifest_025() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-026
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS deployment.helm.chart_location definieren"
+  sot_artefakte:
+    python: validate_md_manifest_026() in sot_validator_core.py
+    rego: MD-MANIFEST-026 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-026 flag supported
+    test: test_md_manifest_026() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-027
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS deployment.environment_variables definieren"
+  sot_artefakte:
+    python: validate_md_manifest_027() in sot_validator_core.py
+    rego: MD-MANIFEST-027 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-027 flag supported
+    test: test_md_manifest_027() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-029
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: "manifest.yaml MUSS testing.unit_tests.coverage_target>=80 definieren"
+  sot_artefakte:
+    python: validate_md_manifest_029() in sot_validator_core.py
+    rego: MD-MANIFEST-029 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-029 flag supported
+    test: test_md_manifest_029() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-032
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: "manifest.yaml MUSS testing.security_tests definieren"
+  sot_artefakte:
+    python: validate_md_manifest_032() in sot_validator_core.py
+    rego: MD-MANIFEST-032 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-032 flag supported
+    test: test_md_manifest_032() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-033
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS testing.performance_tests definieren"
+  sot_artefakte:
+    python: validate_md_manifest_033() in sot_validator_core.py
+    rego: MD-MANIFEST-033 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-033 flag supported
+    test: test_md_manifest_033() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-036
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS observability.logging.format=json definieren"
+  sot_artefakte:
+    python: validate_md_manifest_036() in sot_validator_core.py
+    rego: MD-MANIFEST-036 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-036 flag supported
+    test: test_md_manifest_036() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-038
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: "manifest.yaml MUSS observability.health_checks.liveness definieren"
+  sot_artefakte:
+    python: validate_md_manifest_038() in sot_validator_core.py
+    rego: MD-MANIFEST-038 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-038 flag supported
+    test: test_md_manifest_038() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-039
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: "manifest.yaml MUSS observability.health_checks.readiness definieren"
+  sot_artefakte:
+    python: validate_md_manifest_039() in sot_validator_core.py
+    rego: MD-MANIFEST-039 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-039 flag supported
+    test: test_md_manifest_039() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-040
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "manifest.yaml MUSS development.setup definieren"
+  sot_artefakte:
+    python: validate_md_manifest_040() in sot_validator_core.py
+    rego: MD-MANIFEST-040 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-040 flag supported
+    test: test_md_manifest_040() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-041
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "manifest.yaml MUSS development.local_development definieren"
+  sot_artefakte:
+    python: validate_md_manifest_041() in sot_validator_core.py
+    rego: MD-MANIFEST-041 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-041 flag supported
+    test: test_md_manifest_041() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-042
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS development.pre_commit_hooks definieren"
+  sot_artefakte:
+    python: validate_md_manifest_042() in sot_validator_core.py
+    rego: MD-MANIFEST-042 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-042 flag supported
+    test: test_md_manifest_042() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-046
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS performance.baseline_benchmarks definieren"
+  sot_artefakte:
+    python: validate_md_manifest_046() in sot_validator_core.py
+    rego: MD-MANIFEST-046 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-046 flag supported
+    test: test_md_manifest_046() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-047
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS performance.optimization_targets definieren"
+  sot_artefakte:
+    python: validate_md_manifest_047() in sot_validator_core.py
+    rego: MD-MANIFEST-047 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-047 flag supported
+    test: test_md_manifest_047() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-048
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: HIGH
+  enforcement: MUST
+  description: "manifest.yaml MUSS performance.resource_requirements definieren"
+  sot_artefakte:
+    python: validate_md_manifest_048() in sot_validator_core.py
+    rego: MD-MANIFEST-048 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-048 flag supported
+    test: test_md_manifest_048() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-049
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "manifest.yaml MUSS changelog.location=CHANGELOG.md definieren"
+  sot_artefakte:
+    python: validate_md_manifest_049() in sot_validator_core.py
+    rego: MD-MANIFEST-049 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-049 flag supported
+    test: test_md_manifest_049() in test_sot_validator.py
+
+- rule_id: MD-MANIFEST-050
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: MANIFEST_STRUCTURE
+  severity: MEDIUM
+  enforcement: MUST
+  description: "manifest.yaml MUSS support.contacts definieren"
+  sot_artefakte:
+    python: validate_md_manifest_050() in sot_validator_core.py
+    rego: MD-MANIFEST-050 deny rule in sot_policy.rego
+    cli: --rules MD-MANIFEST-050 flag supported
+    test: test_md_manifest_050() in test_sot_validator.py
+
+# --- MD-POLICY: Critical Policy Enforcement (6 rules) ---
+
+- rule_id: MD-POLICY-009
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  enforcement: MUST
+  description: "Hashing MUSS deterministisch sein"
+  sot_artefakte:
+    python: validate_md_policy_009() in sot_validator_core.py
+    rego: MD-POLICY-009 deny rule in sot_policy.rego
+    cli: --rules MD-POLICY-009 flag supported
+    test: test_md_policy_009() in test_sot_validator.py
+
+- rule_id: MD-POLICY-012
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  enforcement: MUST
+  description: "Purpose Limitation MUSS erzwungen werden"
+  sot_artefakte:
+    python: validate_md_policy_012() in sot_validator_core.py
+    rego: MD-POLICY-012 deny rule in sot_policy.rego
+    cli: --rules MD-POLICY-012 flag supported
+    test: test_md_policy_012() in test_sot_validator.py
+
+- rule_id: MD-POLICY-023
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  enforcement: MUST
+  description: "Hourly Anchoring MUSS implementiert sein"
+  sot_artefakte:
+    python: validate_md_policy_023() in sot_validator_core.py
+    rego: MD-POLICY-023 deny rule in sot_policy.rego
+    cli: --rules MD-POLICY-023 flag supported
+    test: test_md_policy_023() in test_sot_validator.py
+
+- rule_id: MD-POLICY-027
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  enforcement: MUST
+  description: "Encryption MUSS AES-256-GCM verwenden"
+  sot_artefakte:
+    python: validate_md_policy_027() in sot_validator_core.py
+    rego: MD-POLICY-027 deny rule in sot_policy.rego
+    cli: --rules MD-POLICY-027 flag supported
+    test: test_md_policy_027() in test_sot_validator.py
+
+- rule_id: MD-POLICY-028
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CRITICAL_POLICIES
+  severity: CRITICAL
+  enforcement: MUST
+  description: "TLS 1.3 MUSS für in-transit encryption verwendet werden"
+  sot_artefakte:
+    python: validate_md_policy_028() in sot_validator_core.py
+    rego: MD-POLICY-028 deny rule in sot_policy.rego
+    cli: --rules MD-POLICY-028 flag supported
+    test: test_md_policy_028() in test_sot_validator.py
+
+# --- MD-PRINC: Principles (6 rules) ---
+
+- rule_id: MD-PRINC-007
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CORE_PRINCIPLES
+  severity: CRITICAL
+  enforcement: MUST
+  description: "RBAC MUSS für alle Zugriffe implementiert sein"
+  sot_artefakte:
+    python: validate_md_princ_007() in sot_validator_core.py
+    rego: MD-PRINC-007 deny rule in sot_policy.rego
+    cli: --rules MD-PRINC-007 flag supported
+    test: test_md_princ_007() in test_sot_validator.py
+
+- rule_id: MD-PRINC-009
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CORE_PRINCIPLES
+  severity: HIGH
+  enforcement: MUST
+  description: "Continuous Vulnerability Scanning MUSS implementiert sein"
+  sot_artefakte:
+    python: validate_md_princ_009() in sot_validator_core.py
+    rego: MD-PRINC-009 deny rule in sot_policy.rego
+    cli: --rules MD-PRINC-009 flag supported
+    test: test_md_princ_009() in test_sot_validator.py
+
+- rule_id: MD-PRINC-013
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CORE_PRINCIPLES
+  severity: HIGH
+  enforcement: MUST
+  description: "AlertManager MUSS für Alerting integriert sein"
+  sot_artefakte:
+    python: validate_md_princ_013() in sot_validator_core.py
+    rego: MD-PRINC-013 deny rule in sot_policy.rego
+    cli: --rules MD-PRINC-013 flag supported
+    test: test_md_princ_013() in test_sot_validator.py
+
+- rule_id: MD-PRINC-018
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CORE_PRINCIPLES
+  severity: MEDIUM
+  enforcement: MUST
+  description: "Load Balancing MUSS konfiguriert sein"
+  sot_artefakte:
+    python: validate_md_princ_018() in sot_validator_core.py
+    rego: MD-PRINC-018 deny rule in sot_policy.rego
+    cli: --rules MD-PRINC-018 flag supported
+    test: test_md_princ_018() in test_sot_validator.py
+
+- rule_id: MD-PRINC-019
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CORE_PRINCIPLES
+  severity: MEDIUM
+  enforcement: MUST
+  description: "Caching-Strategien MÜSSEN definiert sein"
+  sot_artefakte:
+    python: validate_md_princ_019() in sot_validator_core.py
+    rego: MD-PRINC-019 deny rule in sot_policy.rego
+    cli: --rules MD-PRINC-019 flag supported
+    test: test_md_princ_019() in test_sot_validator.py
+
+- rule_id: MD-PRINC-020
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: CORE_PRINCIPLES
+  severity: HIGH
+  enforcement: MUST
+  description: "Performance-Benchmarks MÜSSEN als Gates definiert sein"
+  sot_artefakte:
+    python: validate_md_princ_020() in sot_validator_core.py
+    rego: MD-PRINC-020 deny rule in sot_policy.rego
+    cli: --rules MD-PRINC-020 flag supported
+    test: test_md_princ_020() in test_sot_validator.py
+
+# --- MD-GOV: Governance Rules (7 rules) ---
+
+- rule_id: MD-GOV-005
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: "Compliance Team MUSS Policies prüfen"
+  sot_artefakte:
+    python: validate_md_gov_005() in sot_validator_core.py
+    rego: MD-GOV-005 deny rule in sot_policy.rego
+    cli: --rules MD-GOV-005 flag supported
+    test: test_md_gov_005() in test_sot_validator.py
+
+- rule_id: MD-GOV-006
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: "Compliance Team MUSS Constraints genehmigen"
+  sot_artefakte:
+    python: validate_md_gov_006() in sot_validator_core.py
+    rego: MD-GOV-006 deny rule in sot_policy.rego
+    cli: --rules MD-GOV-006 flag supported
+    test: test_md_gov_006() in test_sot_validator.py
+
+- rule_id: MD-GOV-007
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: "Security Team MUSS Threat Modeling durchführen"
+  sot_artefakte:
+    python: validate_md_gov_007() in sot_validator_core.py
+    rego: MD-GOV-007 deny rule in sot_policy.rego
+    cli: --rules MD-GOV-007 flag supported
+    test: test_md_gov_007() in test_sot_validator.py
+
+- rule_id: MD-GOV-008
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: "Change-Prozess MUSS 7 Schritte haben"
+  sot_artefakte:
+    python: validate_md_gov_008() in sot_validator_core.py
+    rego: MD-GOV-008 deny rule in sot_policy.rego
+    cli: --rules MD-GOV-008 flag supported
+    test: test_md_gov_008() in test_sot_validator.py
+
+- rule_id: MD-GOV-009
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: "SHOULD->MUST promotion MUSS 90d + 99.5% SLA erfüllen"
+  sot_artefakte:
+    python: validate_md_gov_009() in sot_validator_core.py
+    rego: MD-GOV-009 deny rule in sot_policy.rego
+    cli: --rules MD-GOV-009 flag supported
+    test: test_md_gov_009() in test_sot_validator.py
+
+- rule_id: MD-GOV-010
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: "SHOULD->MUST promotion MUSS 95% Contract Test Coverage erfüllen"
+  sot_artefakte:
+    python: validate_md_gov_010() in sot_validator_core.py
+    rego: MD-GOV-010 deny rule in sot_policy.rego
+    cli: --rules MD-GOV-010 flag supported
+    test: test_md_gov_010() in test_sot_validator.py
+
+- rule_id: MD-GOV-011
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: VERSIONING_GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: "HAVE->SHOULD promotion MUSS Feature complete + Beta + Doku erfüllen"
+  sot_artefakte:
+    python: validate_md_gov_011() in sot_validator_core.py
+    rego: MD-GOV-011 deny rule in sot_policy.rego
+    cli: --rules MD-GOV-011 flag supported
+    test: test_md_gov_011() in test_sot_validator.py
+
+# --- MD-EXT: Extension Rules v1.1.1 (4 rules) ---
+
+- rule_id: MD-EXT-012
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: EXTENSIONS
+  severity: MEDIUM
+  enforcement: MUST
+  description: "OPA MUSS string_similarity() helper function haben"
+  sot_artefakte:
+    python: validate_md_ext_012() in sot_validator_core.py
+    rego: MD-EXT-012 meta-rule validated separately
+    cli: --rules MD-EXT-012 flag supported
+    test: test_md_ext_012() in test_sot_validator.py
+
+- rule_id: MD-EXT-014
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: EXTENSIONS
+  severity: MEDIUM
+  enforcement: MUST
+  description: "CI MUSS schedule 0 0 1 */3 * quarterly audit haben"
+  sot_artefakte:
+    python: validate_md_ext_014() in sot_validator_core.py
+    rego: MD-EXT-014 deny rule in sot_policy.rego
+    cli: --rules MD-EXT-014 flag supported
+    test: test_md_ext_014() in test_sot_validator.py
+
+- rule_id: MD-EXT-015
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: EXTENSIONS
+  severity: LOW
+  enforcement: MUST
+  description: "CI MUSS actions/upload-artifact@v4 verwenden"
+  sot_artefakte:
+    python: validate_md_ext_015() in sot_validator_core.py
+    rego: MD-EXT-015 deny rule in sot_policy.rego
+    cli: --rules MD-EXT-015 flag supported
+    test: test_md_ext_015() in test_sot_validator.py
+
+- rule_id: MD-EXT-018
+  source: ssid_master_definition_corrected_v1.1.1.md
+  category: EXTENSIONS
+  severity: HIGH
+  enforcement: MUST
+  description: "Sanctions MUSS sha256 Hash verwenden"
+  sot_artefakte:
+    python: validate_md_ext_018() in sot_validator_core.py
+    rego: MD-EXT-018 deny rule in sot_policy.rego
+    cli: --rules MD-EXT-018 flag supported
+    test: test_md_ext_018() in test_sot_validator.py

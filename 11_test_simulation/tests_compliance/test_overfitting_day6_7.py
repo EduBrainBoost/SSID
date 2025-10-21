@@ -30,7 +30,6 @@ from overfitting_detector import (
     generate_evidence_report
 )
 
-
 # ============================================================================
 # PART 1: is_overfitting() Tests (15 tests)
 # ============================================================================
@@ -39,61 +38,49 @@ def test_is_overfitting_clear_case():
     """Test obvious overfitting case"""
     assert is_overfitting(0.99, 0.75, gap_threshold=0.15) is True
 
-
 def test_is_overfitting_no_overfitting_small_gap():
     """Test when gap is below threshold"""
     assert is_overfitting(0.98, 0.90, gap_threshold=0.15) is False
-
 
 def test_is_overfitting_low_train_accuracy():
     """Test when training accuracy is too low"""
     assert is_overfitting(0.80, 0.50, gap_threshold=0.15, min_train=0.95) is False
 
-
 def test_is_overfitting_exact_threshold():
     """Test exact threshold boundary"""
     assert is_overfitting(0.95, 0.79, gap_threshold=0.15, min_train=0.95) is True
-
 
 def test_is_overfitting_just_below_threshold():
     """Test just below gap threshold"""
     assert is_overfitting(0.95, 0.801, gap_threshold=0.15, min_train=0.95) is False
 
-
 def test_is_overfitting_none_train_accuracy():
     """Test with None training accuracy"""
     assert is_overfitting(None, 0.80) is False
-
 
 def test_is_overfitting_none_val_accuracy():
     """Test with None validation accuracy"""
     assert is_overfitting(0.95, None) is False
 
-
 def test_is_overfitting_both_none():
     """Test with both accuracies as None"""
     assert is_overfitting(None, None) is False
-
 
 def test_is_overfitting_perfect_training():
     """Test with perfect training accuracy"""
     assert is_overfitting(1.0, 0.80, gap_threshold=0.15) is True
 
-
 def test_is_overfitting_perfect_both():
     """Test with perfect training and validation"""
     assert is_overfitting(1.0, 1.0, gap_threshold=0.15) is False
-
 
 def test_is_overfitting_validation_higher():
     """Test validation > training (shouldn't flag)"""
     assert is_overfitting(0.90, 0.95, gap_threshold=0.15) is False
 
-
 def test_is_overfitting_custom_min_train():
     """Test with custom min_train threshold"""
     assert is_overfitting(0.90, 0.70, gap_threshold=0.15, min_train=0.92) is False
-
 
 def test_is_overfitting_realistic_scenario():
     """Test realistic ML overfitting scenario"""
@@ -101,19 +88,16 @@ def test_is_overfitting_realistic_scenario():
     val_acc = 0.72
     assert is_overfitting(train_acc, val_acc, gap_threshold=0.20, min_train=0.95) is True
 
-
 def test_is_overfitting_realistic_good_model():
     """Test realistic well-generalized model"""
     train_acc = 0.94
     val_acc = 0.91
     assert is_overfitting(train_acc, val_acc, gap_threshold=0.15, min_train=0.95) is False
 
-
 def test_is_overfitting_default_parameters():
     """Test using default parameter values"""
     assert is_overfitting(0.98, 0.80) is True
     assert is_overfitting(0.94, 0.92) is False
-
 
 # ============================================================================
 # PART 2: analyze_model_metrics() Tests (10 tests)
@@ -134,7 +118,6 @@ def test_analyze_model_metrics_no_overfitting():
     assert result["accuracy_gap"] == round(0.94 - 0.91, 4)
     assert "timestamp" in result
 
-
 def test_analyze_model_metrics_medium_risk():
     """Test analysis with medium risk overfitting"""
     result = analyze_model_metrics(
@@ -148,7 +131,6 @@ def test_analyze_model_metrics_medium_risk():
     assert result["risk_level"] == "MEDIUM"
     assert result["accuracy_gap"] == round(0.97 - 0.80, 4)
 
-
 def test_analyze_model_metrics_high_risk():
     """Test analysis with high risk overfitting"""
     result = analyze_model_metrics(
@@ -160,7 +142,6 @@ def test_analyze_model_metrics_high_risk():
 
     assert result["overfitting_detected"] is True
     assert result["risk_level"] == "HIGH"
-
 
 def test_analyze_model_metrics_critical_risk():
     """Test analysis with critical risk overfitting"""
@@ -174,7 +155,6 @@ def test_analyze_model_metrics_critical_risk():
     assert result["overfitting_detected"] is True
     assert result["risk_level"] == "CRITICAL"
 
-
 def test_analyze_model_metrics_warning_high_train():
     """Test warning for suspiciously high training accuracy"""
     result = analyze_model_metrics(
@@ -186,7 +166,6 @@ def test_analyze_model_metrics_warning_high_train():
 
     assert "warnings" in result
     assert any("suspiciously high" in w for w in result["warnings"])
-
 
 def test_analyze_model_metrics_warning_low_val():
     """Test warning for critically low validation accuracy"""
@@ -200,7 +179,6 @@ def test_analyze_model_metrics_warning_low_val():
     assert "warnings" in result
     assert any("critically low" in w for w in result["warnings"])
 
-
 def test_analyze_model_metrics_warning_test_val_mismatch():
     """Test warning for test/validation mismatch"""
     result = analyze_model_metrics(
@@ -213,7 +191,6 @@ def test_analyze_model_metrics_warning_test_val_mismatch():
     assert "warnings" in result
     assert any("mismatch" in w for w in result["warnings"])
 
-
 def test_analyze_model_metrics_no_test_accuracy():
     """Test analysis without test accuracy"""
     result = analyze_model_metrics(
@@ -225,7 +202,6 @@ def test_analyze_model_metrics_no_test_accuracy():
 
     assert result["test_accuracy"] is None
     assert result["overfitting_detected"] is False
-
 
 def test_analyze_model_metrics_threshold_config():
     """Test threshold configuration in output"""
@@ -240,7 +216,6 @@ def test_analyze_model_metrics_threshold_config():
     assert result["threshold_config"]["gap_threshold"] == 0.10
     assert result["threshold_config"]["min_train"] == 0.92
 
-
 def test_analyze_model_metrics_multiple_warnings():
     """Test model triggering multiple warnings"""
     result = analyze_model_metrics(
@@ -252,7 +227,6 @@ def test_analyze_model_metrics_multiple_warnings():
 
     assert "warnings" in result
     assert len(result["warnings"]) >= 2
-
 
 # ============================================================================
 # PART 3: batch_analyze_models() Tests (7 tests)
@@ -267,7 +241,6 @@ def test_batch_analyze_empty_list():
     assert result["high_risk_count"] == 0
     assert result["overfitting_rate"] == 0.0
     assert result["results"] == []
-
 
 def test_batch_analyze_single_model():
     """Test batch analysis with single model"""
@@ -287,7 +260,6 @@ def test_batch_analyze_single_model():
     assert result["overfitting_rate"] == 0.0
     assert len(result["results"]) == 1
 
-
 def test_batch_analyze_all_overfitting():
     """Test batch analysis with all models overfitting"""
     models = [
@@ -301,7 +273,6 @@ def test_batch_analyze_all_overfitting():
     assert result["total_models"] == 3
     assert result["overfitting_count"] == 3
     assert result["overfitting_rate"] == 1.0
-
 
 def test_batch_analyze_mixed_models():
     """Test batch analysis with mixed overfitting/non-overfitting"""
@@ -317,7 +288,6 @@ def test_batch_analyze_mixed_models():
     assert result["overfitting_count"] == 1
     assert result["overfitting_rate"] == round(1 / 3, 4)
 
-
 def test_batch_analyze_high_risk_count():
     """Test high risk count calculation"""
     models = [
@@ -331,7 +301,6 @@ def test_batch_analyze_high_risk_count():
     assert result["overfitting_count"] == 3
     assert result["high_risk_count"] == 2  # HIGH + CRITICAL
 
-
 def test_batch_analyze_missing_model_id():
     """Test batch analysis with missing model_id"""
     models = [
@@ -341,7 +310,6 @@ def test_batch_analyze_missing_model_id():
     result = batch_analyze_models(models)
 
     assert result["results"][0]["model_id"] == "unknown"
-
 
 def test_batch_analyze_timestamp():
     """Test that batch analysis includes timestamp"""
@@ -354,7 +322,6 @@ def test_batch_analyze_timestamp():
     assert "timestamp" in result
     # Validate ISO format
     datetime.fromisoformat(result["timestamp"].replace('Z', '+00:00'))
-
 
 # ============================================================================
 # PART 4: generate_evidence_report() Tests (3 tests)
@@ -375,7 +342,6 @@ def test_generate_evidence_report_creates_file(tmp_path):
 
     assert output_path.exists()
 
-
 def test_generate_evidence_report_adds_hash(tmp_path):
     """Test that evidence hash is added"""
     analysis = {
@@ -393,7 +359,6 @@ def test_generate_evidence_report_adds_hash(tmp_path):
 
     assert "evidence_hash" in loaded
     assert len(loaded["evidence_hash"]) == 64  # SHA-256 hex length
-
 
 def test_generate_evidence_report_hash_consistency(tmp_path):
     """Test that evidence hash is deterministic"""

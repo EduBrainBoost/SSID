@@ -14,7 +14,6 @@ from datetime import datetime, date
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 
-
 @dataclass
 class ComplianceSummary:
     """Human-readable compliance summary"""
@@ -29,7 +28,6 @@ class ComplianceSummary:
     remediation_plan: List[Dict[str, Any]]
     recommendations: List[str]
     sign_off: Dict[str, str]
-
 
 class LegalSummaryGenerator:
     """
@@ -646,7 +644,6 @@ The unified compliance framework addresses multi-jurisdictional requirements:
 - **Consider External Expertise:** Engage consultants if needed
 """
 
-
 def main():
     """Main CLI entry point"""
     print("=== SSID Legal Summary Generator ===\n")
@@ -679,7 +676,6 @@ def main():
     print("- Executive Summary (for C-level/Board)")
     print("- Detailed Compliance Report (for auditors)")
     print("- Framework-Specific Reports (GDPR, DORA, MiCA, AMLD6)")
-
 
 if __name__ == "__main__":
     main()

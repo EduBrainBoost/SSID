@@ -1,0 +1,91 @@
+# Evidence Retention Policy - Rolling Evidence Window
+# Version: 1
+# Date: 2025-10-14
+# Purpose: Prevent evidence accumulation, maintain forensic integrity
+
+version: 1
+date: 2025-10-14
+
+rolling_window:
+  # Active evidence window (accessible for analysis)
+  active_retention_days: 14
+  active_retention_builds: 10
+
+  # Archive evidence window (WORM storage)
+  archive_retention_months: 12
+
+  # Critical evidence (never auto-delete)
+  permanent_patterns:
+    - "**/*merkle_root*"
+    - "**/*forensic_manifest*"
+    - "**/*proof_chain*"
+    - "**/*_FINAL*"
+    - "**/FORENSIC_*.md"
+
+evidence_types:
+  # Timestamped evidence (apply rolling window)
+  timestamped:
+    - "import_resolution/import_resolution_report_*.json"
+    - "import_resolution/canonical_edges_*.json"
+    - "import_resolution/resolved_edges_*.json"
+    - "blockchain/emits/emit_*.json"
+    - "rotation_*.json"
+    - "deps/dependency_graph_*.json"
+
+  # Build-based evidence (apply build limit)
+  build_based:
+    - "builds/build_*.json"
+    - "builds/test_results_*.json"
+    - "ci_runs/run_*.json"
+
+  # Permanent evidence (never delete)
+  permanent:
+    - "forensic_manifest.yaml"
+    - "dependency_graph.json"  # Latest only
+    - "merkle_roots/*.json"
+    - "proof_chains/*.json"
+
+worm_archive:
+  enabled: true
+  location: "02_audit_logging/archives/evidence"
+  compression: "tar.gz"
+  naming: "evidence_archive_{start_date}_{end_date}.tar.gz"
+
+  # Archive structure
+  index: true  # Generate index.json for each archive
+  verify_on_write: true  # SHA-256 checksum
+  immutable: true  # No modification after creation
+
+cleanup_strategy:
+  mode: "archive_then_delete"  # vs. "delete_only"
+  batch_size: 100  # Max files per cleanup run
+  dry_run_default: true
+
+  # Safety checks
+  require_clean_git: false  # Evidence cleanup doesn't require clean tree
+  require_worm_success: true  # Only delete if archiving succeeded
+  min_files_to_keep: 5  # Never delete all evidence
+
+opa_gate:
+  policy: "23_compliance/policies/opa/evidence_retention.rego"
+  max_active_files: 500  # Trigger cleanup if exceeded
+  max_total_size_mb: 100  # Trigger cleanup if exceeded
+  min_archive_success_rate: 95  # % of files successfully archived
+
+audit_trail:
+  enabled: true
+  report_directory: "02_audit_logging/evidence"
+  report_format: "evidence_cleanup_{timestamp}.json"
+  retention_days: 365
+
+metadata:
+  created_by: automation
+  last_updated: 2025-10-14T12:00:00Z
+  maintained_by: ci_workflow
+  review_frequency: quarterly
+  rationale: |
+    Prevents evidence accumulation while maintaining forensic integrity:
+    - Active window (14 days / 10 builds): Fast access for debugging
+    - WORM archive (12 months): Compliance + audit trail
+    - Permanent evidence: Critical merkle roots + proof chains
+    - Rolling deletion: Prevents unbounded growth

@@ -10,7 +10,6 @@ import datetime
 import os
 from typing import Dict
 
-
 def record_registry_lock(
     lock_path: str = "24_meta_orchestration/registry/locks/bridge_lock.json"
 ) -> Dict[str, str]:
@@ -46,7 +45,6 @@ def record_registry_lock(
 
     return entry
 
-
 def get_last_sync_timestamp(
     lock_path: str = "24_meta_orchestration/registry/locks/bridge_lock.json"
 ) -> str:
@@ -73,7 +71,6 @@ def get_last_sync_timestamp(
             return last_entry.get("ts", "")
     except (IOError, json.JSONDecodeError):
         return ""
-
 
 def verify_lock_integrity(
     lock_path: str = "24_meta_orchestration/registry/locks/bridge_lock.json"
@@ -110,7 +107,6 @@ def verify_lock_integrity(
         return True
     except (IOError, json.JSONDecodeError):
         return False
-
 
 if __name__ == "__main__":
     # Self-test

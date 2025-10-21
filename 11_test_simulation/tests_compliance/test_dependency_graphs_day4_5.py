@@ -31,7 +31,6 @@ from detect_circular_dependencies import (
     generate_evidence_report
 )
 
-
 # ============================================================================
 # PART 1: detect_circular_dependencies.py Tests (18 tests)
 # ============================================================================
@@ -44,20 +43,17 @@ def test_detect_cycles_empty_graph():
     cycles = detect_cycles(edges)
     assert cycles == []
 
-
 def test_detect_cycles_single_node():
     """Test cycle detection with single isolated node"""
     edges = [("A", "B")]
     cycles = detect_cycles(edges)
     assert cycles == []
 
-
 def test_detect_cycles_linear_chain():
     """Test cycle detection on linear dependency chain (no cycles)"""
     edges = [("A", "B"), ("B", "C"), ("C", "D")]
     cycles = detect_cycles(edges)
     assert cycles == []
-
 
 def test_detect_cycles_tree_structure():
     """Test cycle detection on tree structure (no cycles)"""
@@ -69,7 +65,6 @@ def test_detect_cycles_tree_structure():
     ]
     cycles = detect_cycles(edges)
     assert cycles == []
-
 
 def test_detect_cycles_dag():
     """Test cycle detection on DAG (directed acyclic graph)"""
@@ -83,7 +78,6 @@ def test_detect_cycles_dag():
     cycles = detect_cycles(edges)
     assert cycles == []
 
-
 # --- Graphs with Cycles ---
 
 def test_detect_cycles_simple_self_loop():
@@ -93,7 +87,6 @@ def test_detect_cycles_simple_self_loop():
     assert len(cycles) == 1
     assert "A" in cycles[0]
 
-
 def test_detect_cycles_two_node_cycle():
     """Test detection of two-node cycle"""
     edges = [("A", "B"), ("B", "A")]
@@ -101,14 +94,12 @@ def test_detect_cycles_two_node_cycle():
     assert len(cycles) == 1
     assert set(cycles[0]) == {"A", "B"}
 
-
 def test_detect_cycles_three_node_cycle():
     """Test detection of three-node cycle"""
     edges = [("A", "B"), ("B", "C"), ("C", "A")]
     cycles = detect_cycles(edges)
     assert len(cycles) == 1
     assert set(cycles[0][:3]) == {"A", "B", "C"}  # Exclude repeated node
-
 
 def test_detect_cycles_multiple_cycles():
     """Test detection of multiple independent cycles"""
@@ -123,7 +114,6 @@ def test_detect_cycles_multiple_cycles():
     cycles = detect_cycles(edges)
     assert len(cycles) >= 2
 
-
 def test_detect_cycles_nested_cycles():
     """Test detection of overlapping/nested cycles"""
     edges = [
@@ -135,7 +125,6 @@ def test_detect_cycles_nested_cycles():
     ]
     cycles = detect_cycles(edges)
     assert len(cycles) >= 1
-
 
 # --- analyze_dependency_graph Tests ---
 
@@ -149,7 +138,6 @@ def test_analyze_empty_graph():
     assert result["cycles_detected"] == 0
     assert result["risk_level"] == "NONE"
 
-
 def test_analyze_acyclic_graph():
     """Test analysis of acyclic graph"""
     edges = [("A", "B"), ("B", "C"), ("C", "D")]
@@ -160,7 +148,6 @@ def test_analyze_acyclic_graph():
     assert result["cycles_detected"] == 0
     assert result["risk_level"] == "NONE"
 
-
 def test_analyze_single_cycle():
     """Test analysis of graph with single cycle"""
     edges = [("A", "B"), ("B", "C"), ("C", "A")]
@@ -169,7 +156,6 @@ def test_analyze_single_cycle():
     assert result["cycles_detected"] == 1
     assert result["risk_level"] == "LOW"  # 1-2 cycles
     assert result["max_cycle_length"] == 3
-
 
 def test_analyze_multiple_cycles_risk_medium():
     """Test risk assessment for moderate number of cycles"""
@@ -182,7 +168,6 @@ def test_analyze_multiple_cycles_risk_medium():
 
     assert result["cycles_detected"] >= 2
     assert result["risk_level"] in ["LOW", "MEDIUM"]
-
 
 def test_analyze_complex_graph_high_risk():
     """Test risk assessment for complex graph with many cycles"""
@@ -200,7 +185,6 @@ def test_analyze_complex_graph_high_risk():
     assert result["cycles_detected"] > 5
     assert result["risk_level"] == "HIGH"
 
-
 def test_analyze_cycle_statistics():
     """Test cycle length statistics calculation"""
     edges = [
@@ -212,7 +196,6 @@ def test_analyze_cycle_statistics():
     assert "max_cycle_length" in result
     assert "avg_cycle_length" in result
     assert result["max_cycle_length"] >= 2
-
 
 def test_generate_evidence_report(tmp_path):
     """Test evidence report generation"""
@@ -235,7 +218,6 @@ def test_generate_evidence_report(tmp_path):
 
     assert "evidence_hash" in loaded
     assert loaded["cycles_detected"] == 1
-
 
 def test_evidence_report_hash_consistency(tmp_path):
     """Test that evidence hash is deterministic"""
@@ -260,7 +242,6 @@ def test_evidence_report_hash_consistency(tmp_path):
         data2 = json.load(f)
 
     assert data1["evidence_hash"] == data2["evidence_hash"]
-
 
 # ============================================================================
 # PART 2: dependency_graph_generator.py Tests (20 tests)
@@ -300,7 +281,6 @@ dependencies:
 
     return repo
 
-
 # --- DependencyGraphGenerator Initialization ---
 
 def test_generator_init(temp_repo):
@@ -312,7 +292,6 @@ def test_generator_init(temp_repo):
     assert isinstance(gen.modules, set)
     assert isinstance(gen.violations, list)
 
-
 # --- Dependency Parsing ---
 
 def test_parse_dependencies_valid_charts(temp_repo):
@@ -322,7 +301,6 @@ def test_parse_dependencies_valid_charts(temp_repo):
 
     assert isinstance(deps, dict)
     assert len(deps) >= 1  # Should find at least module1
-
 
 def test_parse_dependencies_handles_missing_metadata(tmp_path):
     """Test parsing handles malformed chart.yaml gracefully"""
@@ -340,7 +318,6 @@ def test_parse_dependencies_handles_missing_metadata(tmp_path):
     # Should not crash, returns empty or partial data
     assert isinstance(deps, dict)
 
-
 def test_parse_dependencies_skips_git_folders(tmp_path):
     """Test that .git folders are skipped during scanning"""
     repo = tmp_path / "repo_with_git"
@@ -357,7 +334,6 @@ def test_parse_dependencies_skips_git_folders(tmp_path):
     # Should not include .git content
     assert "fake" not in str(deps)
 
-
 # --- Graph Building ---
 
 def test_build_graph_from_dependencies(temp_repo):
@@ -370,14 +346,12 @@ def test_build_graph_from_dependencies(temp_repo):
     assert "module1::shard1" in gen.graph
     assert "module2" in gen.graph["module1::shard1"]
 
-
 def test_build_graph_empty_dependencies():
     """Test building graph from empty dependencies"""
     gen = DependencyGraphGenerator(Path("/fake"))
     gen.build_graph({})
 
     assert len(gen.graph) == 0
-
 
 # --- Cycle Detection (Tarjan's Algorithm) ---
 
@@ -391,7 +365,6 @@ def test_find_all_cycles_tarjan_no_cycles(temp_repo):
 
     assert len(cycles) == 0
 
-
 def test_find_all_cycles_tarjan_simple_cycle(temp_repo):
     """Test Tarjan's algorithm detects simple cycle"""
     gen = DependencyGraphGenerator(temp_repo)
@@ -402,7 +375,6 @@ def test_find_all_cycles_tarjan_simple_cycle(temp_repo):
 
     assert len(cycles) >= 1
     assert set(cycles[0]) == {"A", "B"}
-
 
 def test_find_all_cycles_tarjan_multiple_sccs(temp_repo):
     """Test Tarjan's algorithm finds multiple strongly connected components"""
@@ -419,7 +391,6 @@ def test_find_all_cycles_tarjan_multiple_sccs(temp_repo):
 
     assert len(cycles) >= 2
 
-
 # --- Violation Generation ---
 
 def test_generate_violations_from_cycles(temp_repo):
@@ -433,7 +404,6 @@ def test_generate_violations_from_cycles(temp_repo):
     assert all(isinstance(v, DependencyViolation) for v in gen.violations)
     assert all(v.severity == "critical" for v in gen.violations)
 
-
 def test_violation_contains_cycle_info(temp_repo):
     """Test that violations contain full cycle information"""
     gen = DependencyGraphGenerator(temp_repo)
@@ -445,7 +415,6 @@ def test_violation_contains_cycle_info(temp_repo):
     assert violation.violation_type == "circular_dependency"
     assert "X" in violation.cycle
     assert len(violation.cycle) >= 3
-
 
 # --- DOT Export ---
 
@@ -464,7 +433,6 @@ def test_export_graph_dot(temp_repo, tmp_path):
     assert "digraph DependencyGraph" in content
     assert '"A"' in content
     assert '"B"' in content
-
 
 def test_export_graph_dot_highlights_cycles(temp_repo, tmp_path):
     """Test that DOT export highlights detected cycles in red"""
@@ -489,14 +457,13 @@ def test_export_graph_dot_highlights_cycles(temp_repo, tmp_path):
     content = output_file.read_text()
     assert "color=red" in content  # Cycles should be highlighted
 
-
 # --- Full Analysis Workflow ---
 
 def test_run_analysis_success(temp_repo):
     """Test full analysis workflow completes successfully"""
     gen = DependencyGraphGenerator(temp_repo)
 
-    # Mock the versioning module to avoid import errors
+    
     mock_versioning = MagicMock()
     with patch.dict('sys.modules', {'dependency_graph_versioning': mock_versioning}):
         result = gen.run_analysis()
@@ -506,13 +473,12 @@ def test_run_analysis_success(temp_repo):
     assert result.total_modules >= 0
     assert result.total_dependencies >= 0
 
-
 def test_run_analysis_pass_no_cycles(temp_repo):
     """Test analysis returns PASS when no cycles detected"""
     gen = DependencyGraphGenerator(temp_repo)
 
     # The temp_repo fixture provides an acyclic graph (module1 -> module2)
-    # Mock the versioning module to avoid import errors
+    
     mock_versioning = MagicMock()
     with patch.dict('sys.modules', {'dependency_graph_versioning': mock_versioning}):
         result = gen.run_analysis()
@@ -521,13 +487,12 @@ def test_run_analysis_pass_no_cycles(temp_repo):
     assert result.status == "PASS"
     assert result.cycles_found == 0
 
-
 def test_run_analysis_fail_with_cycles(temp_repo):
     """Test analysis returns FAIL when cycles detected"""
     gen = DependencyGraphGenerator(temp_repo)
 
-    # Mock find_all_cycles_tarjan to simulate finding cycles
-    # Mock the versioning module to avoid import errors
+    
+    
     mock_versioning = MagicMock()
     with patch.dict('sys.modules', {'dependency_graph_versioning': mock_versioning}):
         with patch.object(gen, 'find_all_cycles_tarjan', return_value=[["A", "B"]]):
@@ -536,19 +501,17 @@ def test_run_analysis_fail_with_cycles(temp_repo):
     assert result.status == "FAIL"
     assert result.cycles_found > 0
 
-
 def test_run_analysis_generates_output_files(temp_repo):
     """Test that analysis generates output files"""
     gen = DependencyGraphGenerator(temp_repo)
 
-    # Mock the versioning module to avoid import errors
+    
     mock_versioning = MagicMock()
     with patch.dict('sys.modules', {'dependency_graph_versioning': mock_versioning}):
         result = gen.run_analysis()
 
     assert result.graph_file is not None
     assert result.violations_file is not None
-
 
 # --- Edge Cases ---
 

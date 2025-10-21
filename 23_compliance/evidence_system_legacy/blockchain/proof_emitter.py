@@ -38,7 +38,6 @@ from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
 from enum import Enum
 
-
 class ProofType(Enum):
     """Types of compliance proofs"""
     TEST_EXECUTION = "test_execution"
@@ -47,7 +46,6 @@ class ProofType(Enum):
     SCORE_CALCULATION = "score_calculation"
     GOVERNANCE_VOTE = "governance_vote"
     AUDIT_EVENT = "audit_event"
-
 
 @dataclass
 class ComplianceProof:
@@ -78,7 +76,6 @@ class ComplianceProof:
 
     def to_json(self) -> str:
         return json.dumps(self.to_dict(), indent=2, sort_keys=True)
-
 
 class ProofEmitter:
     """
@@ -418,7 +415,6 @@ class ProofEmitter:
 
         return report
 
-
 # Pytest integration hook
 def pytest_runtest_makereport(item, call):
     """
@@ -454,7 +450,6 @@ def pytest_runtest_makereport(item, call):
                 )
     """
     raise NotImplementedError("TODO: Implement this block")
-
 
 def main():
     """CLI entry point for testing"""
@@ -497,7 +492,6 @@ def main():
 
     print("\nProof report:")
     print(json.dumps(report, indent=2))
-
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,234 @@
+# SSID Activation Switch Configuration
+# v6.0 → v7.0 Transition: Dormant Mode (Cost-Neutral)
+#
+# Purpose: Prevent any external costs until DAO treasury is enabled
+# Status: DORMANT (all external integrations disabled)
+# Activation: Requires 3-of-5 multi-sig + treasury funding
+
+version: "1.0.0"
+last_updated: "2025-10-12T00:00:00Z"
+
+# =============================================================================
+# DORMANT MODE (STRICT ENFORCEMENT)
+# =============================================================================
+
+# Master dormant switch - MUST be true until treasury approved
+dormant: true
+
+# External service switches (all disabled in dormant mode)
+allow_mainnet: false        # No Ethereum/Polygon/etc mainnet transactions
+allow_ipfs: false           # No IPFS pinning or network calls
+allow_cosmos: false         # No Cosmos SDK broadcasts
+allow_external_apis: false  # No third-party API calls
+allow_webhooks: false       # No outbound webhooks
+
+# =============================================================================
+# GUARDS & SAFETY MECHANISMS
+# =============================================================================
+
+guards:
+  # Treasury must be enabled before any activation
+  require_treasury: true
+
+  # Multi-sig quorum for activation (DAO governance)
+  require_multisig: "3-of-5"
+
+  # Minimum treasury balance before allowing costs (in USD)
+  min_treasury_balance_usd: 10000
+
+  # Rate limiting (applies even when activated)
+  rate_limits_enforced: true
+
+  # OPA policy enforcement
+  opa_validation_required: true
+
+# =============================================================================
+# TREASURY CONFIGURATION (DISABLED IN DORMANT MODE)
+# =============================================================================
+
+treasury:
+  # Treasury status - MUST be false in dormant mode
+  enabled: false
+
+  # Treasury wallet address (empty until activated)
+  address: ""
+
+  # Multi-sig wallet addresses (empty until activated)
+  multisig_signers: []
+
+  # Current balance (0 in dormant mode)
+  balance_usd: 0
+
+  # Budget allocations (all 0 in dormant mode)
+  budgets:
+    evm_anchoring: 0
+    ipfs_pinning: 0
+    cosmos_broadcasting: 0
+    monitoring: 0
+    contingency: 0
+
+# =============================================================================
+# COST CONTROLS (ALL ZERO IN DORMANT MODE)
+# =============================================================================
+
+cost_controls:
+  # EVM (Ethereum, Polygon, etc) transaction limits
+  evm_anchor_max_tx_per_day: 0
+  evm_max_gas_price_gwei: 0
+  evm_max_tx_value_usd: 0
+
+  # IPFS pinning limits
+  ipfs_pin_quota_mb: 0
+  ipfs_max_pins_per_day: 0
+  ipfs_max_cost_per_pin_usd: 0
+
+  # Cosmos SDK transaction limits
+  cosmos_broadcast_max_tx_per_day: 0
+  cosmos_max_gas_price: 0
+  cosmos_max_tx_value_usd: 0
+
+  # API call limits (for third-party services)
+  api_max_calls_per_day: 0
+  api_max_cost_per_call_usd: 0
+
+# =============================================================================
+# ACTIVATION REQUIREMENTS (CHECKLIST)
+# =============================================================================
+
+activation_requirements:
+  # Governance approval
+  dao_vote_passed: false
+  multisig_quorum_met: false  # 3-of-5 signers approved
+
+  # Treasury funding
+  treasury_funded: false
+  min_balance_met: false
+
+  # Technical readiness
+  security_audit_passed: false
+  integration_tests_passed: false
+  monitoring_active: false
+
+  # Compliance
+  opa_policies_validated: false
+  zero_pii_verified: false
+  gdpr_compliance_confirmed: false
+
+# =============================================================================
+# OPERATIONAL MODES
+# =============================================================================
+
+operational_modes:
+  # Current mode
+  current_mode: "dormant"
+
+  # Available modes
+  available_modes:
+    - dormant          # No external costs (current)
+    - testing          # Testnet only (post-activation)
+    - staging          # Mainnet simulation (post-activation)
+    - production       # Full activation (post-activation)
+
+  # Mode transition history
+  mode_history: []
+
+# =============================================================================
+# MONITORING & ALERTING (DORMANT MODE)
+# =============================================================================
+
+monitoring:
+  # Cost tracking (all 0 in dormant mode)
+  total_cost_usd: 0
+  daily_cost_usd: 0
+  monthly_cost_usd: 0
+
+  # Alert thresholds (inactive in dormant mode)
+  alert_on_cost_over_usd: 0
+  alert_on_treasury_below_usd: 0
+  alert_on_activation_attempt: true  # Always alert if activation attempted
+
+  # Alert channels (inactive)
+  alert_email: ""
+  alert_webhook: ""
+  alert_slack: ""
+
+# =============================================================================
+# AUDIT TRAIL
+# =============================================================================
+
+audit:
+  # Activation attempts (should be empty in dormant mode)
+  activation_attempts: []
+
+  # Configuration changes
+  config_changes: []
+
+  # Last audit date
+  last_audit: "2025-10-12T00:00:00Z"
+
+  # Audit log path
+  audit_log_path: "02_audit_logging/activation_audit.log"
+
+# =============================================================================
+# EMERGENCY CONTROLS
+# =============================================================================
+
+emergency:
+  # Emergency shutdown (instant revert to dormant)
+  shutdown_enabled: true
+
+  # Emergency contacts (empty in dormant mode)
+  emergency_contacts: []
+
+  # Auto-shutdown triggers
+  auto_shutdown_on_anomaly: true
+  auto_shutdown_on_cost_overrun: true
+  auto_shutdown_on_security_alert: true
+
+# =============================================================================
+# METADATA
+# =============================================================================
+
+metadata:
+  version: "1.0.0"
+  created_at: "2025-10-12T00:00:00Z"
+  last_updated: "2025-10-12T00:00:00Z"
+  schema_version: "1"
+
+  # Configuration signature (for tamper detection)
+  signature: ""
+  signature_algorithm: "EdDSA_Ed25519"
+
+  # Checksum
+  checksum: ""
+  checksum_algorithm: "SHA-256"
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+notes: |
+  DORMANT MODE ENFORCEMENT:
+
+  This configuration enforces strict cost-neutrality for the SSID v6.0 → v7.0
+  transition. ALL external integrations (EVM, IPFS, Cosmos, APIs) are disabled
+  until the DAO treasury is enabled via multi-sig approval.
+
+  ACTIVATION PROCESS:
+
+  1. DAO vote passes (governance)
+  2. Multi-sig quorum met (3-of-5 signers)
+  3. Treasury funded (minimum $10,000 USD)
+  4. Security audit passed
+  5. OPA policies validated
+  6. Update this config: dormant=false, treasury.enabled=true
+  7. Deploy via CI/CD with cost controls
+
+  SAFETY MECHANISMS:
+
+  - OPA policies block any action if dormant=true
+  - CI/CD pipeline aborts if activation detected
+  - Emergency shutdown reverts to dormant instantly
+  - All costs are tracked and rate-limited
+
+  DO NOT MODIFY WITHOUT DAO APPROVAL.

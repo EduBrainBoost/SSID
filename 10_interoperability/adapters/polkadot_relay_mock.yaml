@@ -1,0 +1,284 @@
+version: "8.0.0"
+adapter_type: "polkadot_parachain_relay"
+mode: "mock"
+status: "dormant"
+
+# Polkadot / Kusama Relay Chain Specification
+relay_specification:
+  protocol: "XCMP"  # Cross-Chain Message Passing
+  version: "v3"
+  consensus: "GRANDPA/BABE"
+  runtime: "mock-runtime"
+
+relay_chain:
+  name: "mock-relay"
+  network_type: "testnet"
+  genesis_hash: "0xmock_genesis_hash_000000000000000000000000000000000000000000000000"
+  ss58_format: 42  # Generic Substrate
+  token_symbol: "MOCK"
+  token_decimals: 12
+
+parachain:
+  parachain_id: null  # Not registered in dormant
+  parachain_name: "SSID Parachain Mock"
+  state: "unregistered"
+  lease_period: null
+  auction_status: "not_participated"
+
+# Local-only endpoints
+endpoints:
+  ws: "ws://localhost:9944"
+  wss: "wss://localhost:9945"
+  http: "http://localhost:9933"
+  mode: "local_simulation"
+
+# XCMP (Cross-Chain Message Passing) Configuration
+xcmp:
+  enabled: false  # Dormant
+  version: "v3"
+  format: "xcm_v3"
+  max_message_size_bytes: 102400
+  max_messages_per_block: 10
+
+# XCM (Cross-Consensus Message) Format
+xcm_format:
+  version: 3
+  instruction_set:
+    - "WithdrawAsset"
+    - "ReserveAssetDeposited"
+    - "ReceiveTeleportedAsset"
+    - "DepositAsset"
+    - "DepositReserveAsset"
+    - "InitiateReserveWithdraw"
+    - "InitiateTeleport"
+    - "QueryResponse"
+    - "TransferAsset"
+    - "TransferReserveAsset"
+    - "Transact"
+    - "DescendOrigin"
+    - "ClearOrigin"
+    - "BuyExecution"
+    - "RefundSurplus"
+    - "SetErrorHandler"
+    - "SetAppendix"
+    - "ClearError"
+    - "ClaimAsset"
+    - "Trap"
+
+mock_message:
+  format: "xcm_v3"
+  structure:
+    version: 3
+    instructions:
+      - instruction: "WithdrawAsset"
+        assets:
+          - id:
+              Concrete:
+                parents: 0
+                interior: "Here"
+            fun:
+              Fungible: 1000000000000  
+      - instruction: "BuyExecution"
+        fees:
+          id:
+            Concrete:
+              parents: 0
+              interior: "Here"
+          fun:
+            Fungible: 100000000  # Fees
+        weight_limit: "Unlimited"
+      - instruction: "DepositAsset"
+        assets: "All"
+        beneficiary:
+          parents: 0
+          interior:
+            X1:
+              AccountId32:
+                network: null
+                id: "0xmock_account_id"
+
+validators:
+  - address: "mock_validator_1"
+    session_keys:
+      grandpa: "0xmock_grandpa_key_1"
+      babe: "0xmock_babe_key_1"
+      imonline: "0xmock_imonline_key_1"
+      parachain: "0xmock_parachain_key_1"
+    commission: 0
+    blocked: false
+  - address: "mock_validator_2"
+    session_keys:
+      grandpa: "0xmock_grandpa_key_2"
+      babe: "0xmock_babe_key_2"
+      imonline: "0xmock_imonline_key_2"
+      parachain: "0xmock_parachain_key_2"
+    commission: 0
+    blocked: false
+
+collator:
+  enabled: false
+  collator_id: null
+  boot_nodes: []
+  reserved_nodes: []
+  prometheus_endpoint: null
+
+state_proof:
+  algorithm: "blake2b"
+  trie_type: "substrate_trie"
+  proof_format: "compact"
+  verification_method: "merkle_proof"
+  mock_enabled: true
+
+# Extrinsics (Substrate Transactions)
+extrinsic_types:
+  - name: "system.remark"
+    pallet: "system"
+    call: "remark"
+    mock_enabled: true
+  - name: "balances.transfer"
+    pallet: "balances"
+    call: "transfer"
+    mock_enabled: true
+  - name: "xcmPallet.send"
+    pallet: "xcmPallet"
+    call: "send"
+    mock_enabled: true
+  - name: "parachainSystem.set_validation_data"
+    pallet: "parachainSystem"
+    call: "set_validation_data"
+    mock_enabled: false  # Requires real relay
+
+# Runtime Metadata (Simplified)
+runtime_metadata:
+  spec_name: "ssid-parachain-mock"
+  impl_name: "ssid-parachain-mock"
+  authoring_version: 1
+  spec_version: 1
+  impl_version: 1
+  apis: []
+  transaction_version: 1
+
+fees:
+  base_fee: 0
+  per_byte_fee: 0
+  weight_to_fee_coefficient: 0
+  existential_deposit: 0
+  cost_usd: 0
+
+# HRMP (Horizontal Relay-routed Message Passing)
+hrmp:
+  enabled: false
+  max_message_size: 102400
+  channels: []
+  channel_deposits: 0
+
+# DMP (Downward Message Passing)
+dmp:
+  enabled: false
+  max_message_size: 102400
+  queue_capacity: 100
+
+# UMP (Upward Message Passing)
+ump:
+  enabled: false
+  max_message_size: 102400
+  service_overweight_max_weight: 1000000000000
+
+storage:
+  state_version: 1
+  trie_version: 1
+  hash_algorithm: "blake2b_256"
+  key_hashing: "twox64_concat"
+
+# Account Schema
+account_schema:
+  address_format: "ss58"
+  ss58_prefix: 42
+  public_key_type: "sr25519"
+  derivation_path: "//mock//account//0"
+  mock_seed: "mock mock mock mock mock mock mock mock mock mock mock mock"
+
+bridge:
+  enabled: false
+  bridge_type: "xcm_bridge"
+  target_chains: []
+  relayer_account: null
+  min_balance: 0
+
+governance:
+  enabled: false
+  democracy_enabled: false
+  council_enabled: false
+  treasury_enabled: false
+  proposal_bond: 0
+  proposal_bond_minimum: 0
+
+# Security Settings
+security:
+  require_signature: false  
+  verify_state_proofs: true  # Local only
+  allow_mainnet_keys: false
+  key_derivation: "sr25519"
+  mock_mnemonic: "mock mock mock mock mock mock mock mock mock mock mock mock"
+
+# Monitoring (Local Only)
+monitoring:
+  metrics_enabled: false
+  logging_level: "debug"
+  telemetry_enabled: false
+  prometheus_endpoint: null
+
+# Dormant Constraints
+constraints:
+  max_xcm_messages_per_day: 0
+  max_transfer_amount_dot: 0
+  block_all_mainnet: true
+  simulation_only: true
+  no_relay_nodes: true
+
+economics:
+  slot_lease_cost_dot: 0
+  crowdloan_cap_dot: 0
+  auction_participation: false
+  treasury_allocation: 0
+
+# Integration Tests
+test_vectors:
+  - name: "mock_xcm_transfer"
+    operation: "xcm_send"
+    expected_result: "success"
+    local_only: true
+  - name: "mock_state_proof"
+    operation: "verify_state_proof"
+    expected_result: "success"
+    local_only: true
+  - name: "mock_extrinsic"
+    operation: "submit_extrinsic"
+    expected_result: "success"
+    local_only: true
+
+pallets:
+  - name: "system"
+    enabled: true
+  - name: "timestamp"
+    enabled: true
+  - name: "balances"
+    enabled: true
+  - name: "transaction_payment"
+    enabled: true
+  - name: "xcm_pallet"
+    enabled: false  # Dormant
+  - name: "parachain_system"
+    enabled: false  # No relay
+  - name: "cumulus_xcm"
+    enabled: false  # Dormant
+
+# Metadata
+metadata:
+  created: "2025-10-12"
+  author: "SSID Core Team"
+  license: "Proprietary"
+  documentation: "https://docs.substrate.io/polkadot-parachain-protocol/"
+  audit_status: "pending"
+  cost_estimate_usd: 0
+  relay_slot_cost_usd: 0  # Not participating

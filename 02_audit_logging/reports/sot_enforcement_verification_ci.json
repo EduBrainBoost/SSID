@@ -1,18 +1,18 @@
 {
   "metadata": {
     "report_version": "2.0.0",
-    "generated_at": "2025-10-15T21:24:00.863718Z",
+    "generated_at": "2025-10-16T16:10:31.587302Z",
     "tool": "verify_sot_enforcement_v2.py",
     "purpose": "SoT Functional Enforcement Verification (Level 3 \u2192 Level 4)"
   },
   "summary": {
-    "overall_score": 79,
+    "overall_score": 80,
     "certification_level": "SILVER",
     "certification_status": "SILVER_ENFORCEMENT",
     "phase_scores": {
       "static_analysis": 52,
       "dynamic_execution": 100,
-      "audit_proof": 87
+      "audit_proof": 91
     }
   },
   "phase1_static_analysis": {
@@ -129,7 +129,7 @@
           "cmd": "bash 12_tooling/scripts/structure_guard.sh",
           "rc": 0,
           "success": true,
-          "duration_s": 0.31,
+          "duration_s": 0.29,
           "stdout_sample": "\u00e2\u0153\u2026 structure_guard PASS\n",
           "stderr_sample": ""
         },
@@ -138,7 +138,7 @@
           "cmd": "opa version",
           "rc": 0,
           "success": true,
-          "duration_s": 0.05,
+          "duration_s": 0.04,
           "stdout_sample": "Version: 1.9.0\nBuild Commit: c49e670294e45bb3fd76b9e945cf821478a4bbfc\nBuild Timestamp: 2025-09-26T08:53:51Z\nBuild Hostname: \nGo Version: go1.25.1\nPlatform: windows/amd64\nRego Version: v1\nWebAssembly: available\n",
           "stderr_sample": ""
         },
@@ -147,8 +147,8 @@
           "cmd": "python 02_audit_logging/tools/verify_sot_enforcement_v2.py --ci-mode",
           "rc": 2,
           "success": true,
-          "duration_s": 0.26,
-          "stdout_sample": "SoT Enforcement: 39/100 (NONE)\n",
+          "duration_s": 0.24,
+          "stdout_sample": "SoT Enforcement:40/100 <!-- SCORE_REF:reports/sot_enforcement_verification_ci_line151_40of100.score.json -->(NONE)\n",
           "stderr_sample": "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\tools\\verify_sot_enforcement_v2.py:642: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\n  \"generated_at\": datetime.datetime.utcnow().isoformat() + \"Z\",\n"
         },
         {
@@ -156,8 +156,8 @@
           "cmd": "pre-commit run --all-files --config 12_tooling/hooks/pre_commit/config.yaml",
           "rc": 1,
           "success": true,
-          "duration_s": 7.86,
-          "stdout_sample": "SSID Structure Validation (Root-24-LOCK).................................Passed\nSSID Structure Guard (Exit 24 on violation)..............................Passed\nSSID SoT Functional Enforcement (Level 4)................................Failed\n- hook id: ssid-sot-enforcement\n- duration: 0.27s\n- exit code: 2\n\nC:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\tools\\verify_sot_enforcement_v2.py:642: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future v",
+          "duration_s": 7.41,
+          "stdout_sample": "SSID Structure Validation (Root-24-LOCK).................................Passed\nSSID Structure Guard (Exit 24 on violation)..............................Passed\nSSID SoT Functional Enforcement (Level 4)................................Failed\n- hook id: ssid-sot-enforcement\n- duration: 0.25s\n- exit code: 2\n\nC:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\tools\\verify_sot_enforcement_v2.py:642: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future v",
           "stderr_sample": ""
         }
       ],
@@ -165,7 +165,7 @@
     }
   },
   "phase3_audit_proof": {
-    "score": 87,
+    "score": 91,
     "weight": "25%",
     "description": "WORM log and evidence trail verification",
     "results": {
@@ -193,6 +193,10 @@
           "02_audit_logging\\evidence"
         ],
         "evidence_found": [
+          {
+            "file": "02_audit_logging\\logs\\anti_gaming_badge_integrity.jsonl",
+            "pattern": "enforcement"
+          },
           {
             "file": "02_audit_logging\\logs\\backup_purge_summary.json",
             "pattern": "structure.*validation"
@@ -226,6 +230,10 @@
             "pattern": "compliance.*check"
           },
           {
+            "file": "02_audit_logging\\evidence\\deps\\dependency_graph.json",
+            "pattern": "enforcement"
+          },
+          {
             "file": "02_audit_logging\\evidence\\import_resolution\\canonical_edges_20251014_111202.json",
             "pattern": "structure.*validation"
           },
@@ -242,9 +250,9 @@
             "pattern": "compliance.*check"
           }
         ],
-        "evidence_count": 12,
+        "evidence_count": 14,
         "patterns_required": 3,
-        "score": 24,
+        "score": 28,
         "max_score": 30,
         "status": "PASS"
       },
@@ -347,15 +355,15 @@
     "HIGH: Integrate worm_audit_logging into CI/test workflows (0/2 refs found)",
     "MEDIUM: Limited audit evidence for anti_gaming_logs - consider increasing logging"
   ],
-  "worm_signature_path": "02_audit_logging\\storage\\worm\\immutable_store\\sot_enforcement_v2_20251015T212400864716Z_07e175c4-878a-43c3-b5e2-9b57e9051ee6.json",
+  "worm_signature_path": "02_audit_logging\\storage\\worm\\immutable_store\\sot_enforcement_v2_20251016T161031587302Z_457e95f2-a60f-4d80-ada6-5441e7e25d70.json",
   "worm_signature": {
     "kind": "sot_enforcement_verification_v2",
-    "timestamp": "2025-10-15T21:24:00.864716Z",
-    "sha512": "6095c7901801434bc17052b89135e12e8d57464f7c05551a87259a98cf2a9a9d6dbedc25308998121022ce8c873fb97d7b6c35c199860970618ffed4dc7eb7b9",
-    "blake2b": "35ab8f9613c698c205a62e9c60192c18224f250f9133585df26f40aa70e0b114",
-    "uuid": "07e175c4-878a-43c3-b5e2-9b57e9051ee6",
+    "timestamp": "2025-10-16T16:10:31.587302Z",
+    "sha512": "59cc09772b403ffcfc245b4b7c9889304d19fd941696a34855fc675ad4d5b9b963f3bc30bc5f00714c8fd62e1b45d6c50c294e391bae1355790b51a98f16611d",
+    "blake2b": "5c2ec86effb7619fb8143ac86212a9c6142bb38572e6b4d171d08256c557a4ff",
+    "uuid": "457e95f2-a60f-4d80-ada6-5441e7e25d70",
     "algorithm": "Dilithium2(placeholder)-HMAC-SHA256",
-    "overall_score": 79,
+    "overall_score": 80,
     "certification_level": "SILVER",
     "certification_status": "SILVER_ENFORCEMENT"
   }

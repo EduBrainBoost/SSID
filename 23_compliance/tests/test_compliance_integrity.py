@@ -17,7 +17,6 @@ from typing import Dict, List, Set
 import pytest
 import yaml
 
-
 # Define the repository root (3 levels up from this test file)
 REPO_ROOT = Path(__file__).parent.parent.parent
 COMPLIANCE_DIR = REPO_ROOT / "23_compliance"
@@ -51,7 +50,6 @@ EXPECTED_MODULES = [
     "24_meta_orchestration",
 ]
 
-
 def calculate_sha256(file_path: Path) -> str:
     """Calculate SHA256 checksum of a file."""
     sha256_hash = hashlib.sha256()
@@ -60,12 +58,10 @@ def calculate_sha256(file_path: Path) -> str:
             sha256_hash.update(byte_block)
     return f"sha256:{sha256_hash.hexdigest()}"
 
-
 def load_yaml_mapping(file_path: Path) -> Dict:
     """Load YAML mapping file."""
     with open(file_path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
-
 
 def get_existing_modules() -> Set[str]:
     """Get list of actually existing module directories in repository."""
@@ -74,7 +70,6 @@ def get_existing_modules() -> Set[str]:
         if item.is_dir() and item.name.startswith(tuple(f"{i:02d}_" for i in range(1, 25))):
             existing.add(item.name)
     return existing
-
 
 class TestComplianceMappings:
     """Test suite for compliance mapping integrity."""
@@ -286,7 +281,6 @@ class TestComplianceMappings:
                 assert "title" in ref, f"{context}: Missing 'title'"
                 assert "url" in ref, f"{context}: Missing 'url'"
 
-
 class TestComplianceCoverage:
     """Test compliance coverage across all frameworks."""
 
@@ -337,7 +331,6 @@ class TestComplianceCoverage:
                     f"{framework}:mappings[{idx}]: Invalid status '{status}'"
                 )
 
-
     def test_missing_references(self, all_mappings, existing_modules):
         """Test for modules that exist but have no compliance mappings (warning only)."""
         # Collect all referenced modules
@@ -374,7 +367,6 @@ class TestComplianceCoverage:
                 f"Consider adding mappings if these modules handle regulated data or operations.",
                 UserWarning
             )
-
 
 class TestMissingModules:
     """Test for new modules added without compliance consideration."""
@@ -445,7 +437,6 @@ class TestMissingModules:
             f"Unmapped modules: {sorted(concerning_unmapped)}"
         )
 
-
 class TestReviewFramework:
     """Test review framework structure."""
 
@@ -481,7 +472,6 @@ class TestReviewFramework:
 
         for section in required_sections:
             assert section in data, f"review_template.yaml: Missing section '{section}'"
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "--tb=short"])

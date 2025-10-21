@@ -1,0 +1,19 @@
+package ssid.safefix
+
+default allow = false
+
+# Input schema:
+# {
+#   "wasm": [ {"path": "...", "hash": "abc", "expected": "abc"} ]
+# }
+allow {
+  count(deny) == 0
+}
+
+deny[msg] {
+  some i
+  w := input.wasm[i]
+  w.expected != ""  # expected file exists
+  w.hash != w.expected
+  msg := sprintf("WASM hash drift: %s", [w.path])
+}

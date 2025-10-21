@@ -1,0 +1,191 @@
+version: "8.0.0"
+adapter_type: "cosmos_ibc_bridge"
+mode: "mock"
+status: "dormant"
+
+# IBC (Inter-Blockchain Communication) v3 Specification
+ibc_specification:
+  version: "v3"
+  protocol: "IBC"
+  transport: "tendermint"
+  consensus: "CometBFT"
+
+chain:
+  chain_id: "ssid-testnet-1"
+  chain_name: "SSID Testnet"
+  network_type: "testnet"
+  bech32_prefix: "ssid"
+
+# Local-only endpoints
+endpoints:
+  rpc: "http://localhost:26657"
+  grpc: "http://localhost:9090"
+  rest: "http://localhost:1317"
+  wss: "ws://localhost:26657/websocket"
+  mode: "local_simulation"
+
+connection:
+  connection_id: "connection-mock-0"
+  client_id: "07-tendermint-mock-0"
+  counterparty_connection_id: "connection-mock-1"
+  counterparty_client_id: "07-tendermint-mock-1"
+  state: "STATE_INIT"
+  delay_period: 0
+
+channel:
+  channel_id: "channel-mock-0"
+  port_id: "transfer"
+  counterparty_channel_id: "channel-mock-1"
+  counterparty_port_id: "transfer"
+  ordering: "ORDER_UNORDERED"
+  version: "ics20-1"
+  state: "STATE_INIT"
+
+# Validator Proof Schema (Local Hash Only)
+validator_proof:
+  algorithm: "sha256"
+  merkle_root_type: "iavl"
+  proof_format: "ics23"
+  mock_validators:
+    - address: "ssidvaloper1mockvalidator1"
+      pub_key: "mock_ed25519_pubkey_1"
+      voting_power: 100
+      proposer_priority: 0
+    - address: "ssidvaloper1mockvalidator2"
+      pub_key: "mock_ed25519_pubkey_2"
+      voting_power: 100
+      proposer_priority: 0
+
+message_types:
+  - type: "MsgTransfer"
+    description: "ICS20 token transfer"
+    mock_enabled: true
+  - type: "MsgRecvPacket"
+    description: "Receive packet"
+    mock_enabled: true
+  - type: "MsgAcknowledgement"
+    description: "Acknowledge packet"
+    mock_enabled: true
+  - type: "MsgTimeout"
+    description: "Timeout packet"
+    mock_enabled: true
+
+mock_transaction:
+  format: "cosmos_tx"
+  fields:
+    - name: "chain_id"
+      type: "string"
+      example: "ssid-testnet-1"
+    - name: "account_number"
+      type: "uint64"
+      example: 0
+    - name: "sequence"
+      type: "uint64"
+      example: 0
+    - name: "fee"
+      type: "Fee"
+      example:
+        amount:
+          - denom: "ussid"
+            amount: "0"
+        gas_limit: "200000"
+    - name: "msgs"
+      type: "array"
+      example: []
+    - name: "memo"
+      type: "string"
+      example: "SSID Mock Transaction"
+
+gas:
+  default_gas_limit: 200000
+  gas_price: 0
+  gas_adjustment: 1.5
+  max_gas: 2000000
+  cost_usd: 0
+
+# Packet Schema
+packet_schema:
+  sequence: "uint64"
+  source_port: "string"
+  source_channel: "string"
+  destination_port: "string"
+  destination_channel: "string"
+  data: "bytes"
+  timeout_height:
+    revision_number: "uint64"
+    revision_height: "uint64"
+  timeout_timestamp: "uint64"
+
+mock_proof_generation:
+  enabled: true
+  deterministic: true
+  hash_algorithm: "sha256"
+  proof_spec:
+    leaf_spec:
+      hash: "SHA256"
+      prehash_key: "NO_HASH"
+      prehash_value: "SHA256"
+      length: "VAR_PROTO"
+      prefix: "0x00"
+    inner_spec:
+      child_order: [0, 1]
+      child_size: 33
+      min_prefix_length: 4
+      max_prefix_length: 12
+      empty_child: ""
+      hash: "SHA256"
+
+relayer:
+  enabled: false
+  mode: "mock"
+  poll_interval_seconds: 0
+  max_msg_per_tx: 5
+  max_tx_size_bytes: 100000
+  strategy: "packets"
+
+# Security Settings
+security:
+  require_signature: false  
+  verify_proofs: true  # Local verification only
+  allow_mainnet_keys: false
+  key_derivation_path: "m/44'/118'/0'/0/0"
+  mock_mnemonic: "mock mock mock mock mock mock mock mock mock mock mock mock"
+
+# Monitoring (Local Only)
+monitoring:
+  metrics_enabled: false
+  logging_level: "debug"
+  trace_enabled: false
+  export_prometheus: false
+
+# Dormant Constraints
+constraints:
+  max_transfers_per_day: 0
+  max_transfer_amount_usd: 0
+  allowed_tokens: []
+  block_all_mainnet: true
+  simulation_only: true
+
+# Integration Tests
+test_vectors:
+  - name: "mock_transfer"
+    operation: "MsgTransfer"
+    expected_result: "success"
+    local_only: true
+  - name: "mock_packet_receive"
+    operation: "MsgRecvPacket"
+    expected_result: "success"
+    local_only: true
+  - name: "proof_verification"
+    operation: "verify_merkle_proof"
+    expected_result: "success"
+    local_only: true
+
+# Metadata
+metadata:
+  created: "2025-10-12"
+  author: "SSID Core Team"
+  license: "Proprietary"
+  documentation: "https://docs.cosmos.network/ibc"
+  audit_status: "pending"
+  cost_estimate_usd: 0

@@ -11,12 +11,10 @@ import sys
 import json
 import subprocess
 from pathlib import Path
-from datetime import datetime, timedelta
-
+from datetime import datetime, timedelta, timezone
 
 ROOT = Path(__file__).resolve().parents[2]
 ANTI_GAMING = ROOT / "02_audit_logging" / "anti_gaming"
-
 
 def test_circular_dependency_validator():
     """Test circular dependency validator."""
@@ -46,7 +44,6 @@ def test_circular_dependency_validator():
 
     print("  ✓ PASS")
 
-
 def test_dependency_graph_generator():
     """Test dependency graph generator."""
     print("[TEST] Dependency Graph Generator...")
@@ -73,7 +70,6 @@ def test_dependency_graph_generator():
     assert log_file.exists(), "Log file not created"
 
     print("  ✓ PASS")
-
 
 def test_overfitting_detector():
     """Test overfitting detector."""
@@ -109,7 +105,6 @@ def test_overfitting_detector():
 
     print("  ✓ PASS")
 
-
 def test_replay_attack_detector():
     """Test replay attack detector."""
     print("[TEST] Replay Attack Detector...")
@@ -118,10 +113,12 @@ def test_replay_attack_detector():
     events_file = ROOT / "02_audit_logging" / "evidence" / "identity_events.jsonl"
     events_file.parent.mkdir(parents=True, exist_ok=True)
 
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
+    ts1 = now.isoformat().replace('+00:00', 'Z')
+    ts2 = (now + timedelta(seconds=10)).isoformat().replace('+00:00', 'Z')
     events = [
-        {"did": "did:ssid:test1", "nonce": "nonce_unique_1", "ts": now.isoformat() + "Z", "sig": "sig1"},
-        {"did": "did:ssid:test2", "nonce": "nonce_unique_2", "ts": (now + timedelta(seconds=10)).isoformat() + "Z", "sig": "sig2"},
+        {"did": "did:ssid:test1", "nonce": "nonce_unique_1", "ts": ts1, "sig": "sig1"},
+        {"did": "did:ssid:test2", "nonce": "nonce_unique_2", "ts": ts2, "sig": "sig2"},
     ]
 
     with open(events_file, "w") as f:
@@ -145,7 +142,6 @@ def test_replay_attack_detector():
 
     print("  ✓ PASS")
 
-
 def test_time_skew_analyzer():
     """Test time skew analyzer."""
     print("[TEST] Time Skew Analyzer...")
@@ -166,7 +162,6 @@ def test_time_skew_analyzer():
         assert "threshold" in last_entry
 
     print("  ✓ PASS")
-
 
 def test_anomaly_rate_guard():
     """Test anomaly rate guard."""
@@ -189,7 +184,6 @@ def test_anomaly_rate_guard():
 
     print("  ✓ PASS")
 
-
 def test_badge_integrity_checker():
     """Test badge integrity checker."""
     print("[TEST] Badge Integrity Checker...")
@@ -209,13 +203,13 @@ def test_badge_integrity_checker():
     assert log_file.exists(), "Log file not created"
 
     with open(log_file, "r") as f:
-        lines = f.readlines()
+        lines = [line.strip() for line in f.readlines() if line.strip()]
+        assert len(lines) > 0, "Log file empty"
         last_entry = json.loads(lines[-1])
         assert "verified" in last_entry
         assert "status" in last_entry
 
     print("  ✓ PASS")
-
 
 def main():
     """Run all tests."""
@@ -254,7 +248,6 @@ def main():
     print("=" * 70)
 
     return 0 if failed == 0 else 1
-
 
 if __name__ == "__main__":
     sys.exit(main())

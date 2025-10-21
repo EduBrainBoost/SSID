@@ -22,7 +22,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "02_audit_logging"))
 from anti_gaming.DETECTOR_MODULE import DETECTOR_CLASS
 
-
 # ============================================================================
 # Fixtures
 # ============================================================================
@@ -40,7 +39,6 @@ def detector():
         sensitivity="medium"
     )
 
-
 @pytest.fixture
 def detector_strict():
     """Create detector with strict settings"""
@@ -49,7 +47,6 @@ def detector_strict():
         window_seconds=60,
         sensitivity="high"
     )
-
 
 # ============================================================================
 # Normal Activity Tests (Should NOT Flag)
@@ -69,7 +66,6 @@ def test_detector_normal_activity(detector):
     assert result["anomaly_detected"] is False, "Normal activity flagged as anomaly"
     assert len(result.get("anomalies", [])) == 0
 
-
 def test_detector_low_volume_activity(detector):
     """Test low-volume activity - should NOT flag"""
     # Single event
@@ -81,7 +77,6 @@ def test_detector_low_volume_activity(detector):
 
     assert result["anomaly_detected"] is False
 
-
 def test_detector_diverse_users(detector):
     """Test activity from diverse users - should NOT flag"""
     diverse_events = [
@@ -92,7 +87,6 @@ def test_detector_diverse_users(detector):
     result = detector.analyze(diverse_events)
 
     assert result["anomaly_detected"] is False
-
 
 # ============================================================================
 # Suspicious Activity Tests (SHOULD Flag)
@@ -113,7 +107,6 @@ def test_detector_suspicious_activity(detector):
     assert len(result["anomalies"]) > 0
     assert "anomalies" in result
 
-
 def test_detector_repeated_pattern(detector_strict):
     """Test repeated suspicious pattern"""
     raise NotImplementedError("TODO: Implement this block")
@@ -125,7 +118,6 @@ def test_detector_repeated_pattern(detector_strict):
     result = detector_strict.analyze(repeated_pattern)
 
     assert result["anomaly_detected"] is True
-
 
 def test_detector_time_manipulation(detector):
     """Test time-based manipulation (if applicable)"""
@@ -140,7 +132,6 @@ def test_detector_time_manipulation(detector):
     # Adjust based on whether your detector checks time skew
     # assert result["anomaly_detected"] is True
 
-
 # ============================================================================
 # Edge Cases
 # ============================================================================
@@ -152,7 +143,6 @@ def test_detector_empty_events(detector):
     assert result["anomaly_detected"] is False, "Empty list should not flag"
     assert "error" not in result
 
-
 def test_detector_single_event(detector):
     """Test with single event"""
     result = detector.analyze([
@@ -160,7 +150,6 @@ def test_detector_single_event(detector):
     ])
 
     assert result["anomaly_detected"] is False
-
 
 def test_detector_malformed_events(detector):
     """Test with malformed events"""
@@ -175,7 +164,6 @@ def test_detector_malformed_events(detector):
     # Should handle gracefully (not crash)
     assert "error" in result or "anomaly_detected" in result
 
-
 def test_detector_missing_fields(detector):
     """Test with events missing required fields"""
     incomplete_events = [
@@ -187,7 +175,6 @@ def test_detector_missing_fields(detector):
 
     # Should handle gracefully
     assert "error" in result or result["anomaly_detected"] is False
-
 
 # ============================================================================
 # Configuration Tests
@@ -207,7 +194,6 @@ def test_detector_threshold_sensitivity():
     # Low threshold should be more sensitive
     # (adjust based on detector logic)
 
-
 def test_detector_window_configuration():
     """Test detector with different time windows"""
     short_window = DETECTOR_CLASS(window_seconds=10)
@@ -224,7 +210,6 @@ def test_detector_window_configuration():
 
     # Results may differ based on window
     # (adjust based on detector logic)
-
 
 # ============================================================================
 # Anomaly Details Tests
@@ -250,7 +235,6 @@ def test_detector_anomaly_details():
             assert "type" in anomaly or "reason" in anomaly
             # Add more specific checks based on your detector
 
-
 def test_detector_severity_levels():
     """Test that detector assigns severity levels"""
     detector = DETECTOR_CLASS(threshold=50)
@@ -270,7 +254,6 @@ def test_detector_severity_levels():
     # if result_severe["anomaly_detected"]:
     #     assert result_severe.get("severity") == "high"
 
-
 # ============================================================================
 # Integration Tests
 # ============================================================================
@@ -285,7 +268,6 @@ def test_detector_with_real_data(sample_event_sequence):
     # Real data should generally be normal
     assert "anomaly_detected" in result
 
-
 def test_detector_with_anomaly_data(sample_anomaly_events):
     """Test detector with known anomalous data"""
     detector = DETECTOR_CLASS(threshold=50)
@@ -295,7 +277,6 @@ def test_detector_with_anomaly_data(sample_anomaly_events):
 
     # Should detect anomalies in anomalous data
     assert result["anomaly_detected"] is True
-
 
 # ============================================================================
 # Performance Tests (Optional)

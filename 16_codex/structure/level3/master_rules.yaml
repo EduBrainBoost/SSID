@@ -1,0 +1,705 @@
+# SSID Master Rules - Consolidated Extraction v2.0.0
+# ==================================================
+# Source: ssid_master_definition_corrected_v1.1.1.md + Parts 1-3 + SoT Contract
+# Purpose: Complete rule extraction for 100% Coverage Checking across 5 SoT Artefacts
+# Generated: 2025-10-19
+
+metadata:
+  version: "2.0.0"
+  extraction_date: "2025-10-19"
+  source_documents:
+    - "ssid_master_definition_corrected_v1.1.1.md"
+    - "16_codex/structure/level3/ssid_master_rules.txt"
+    - "16_codex/structure/level3/ssid_master_rules_part2.txt"
+    - "16_codex/structure/level3/sot_contract_v2.yaml"
+  total_rules: 311
+  coverage_target: "100% in all 5 SoT Artefacts"
+
+# ============================================================================
+# 5 SoT ARTEFAKTE (COVERAGE TARGETS)
+# ============================================================================
+sot_artefacts:
+  - name: "Contract Definitions"
+    location: "contracts/*.openapi.yaml + contracts/schemas/*.schema.json"
+    purpose: "API contracts, data schemas, interface definitions"
+    coverage_requirement: "All interface, API, and data structure rules"
+
+  - name: "Core Logic"
+    location: "implementations/*/src/"
+    purpose: "Business logic, core functionality, implementation"
+    coverage_requirement: "All policy, enforcement, and behavior rules"
+
+  - name: "Policy Enforcement"
+    location: "policies/*.yaml + 23_compliance/opa/*.rego"
+    purpose: "OPA policies, Semgrep rules, enforcement logic"
+    coverage_requirement: "All CRITICAL, NIEMALS, and constraint rules"
+
+  - name: "CLI Validation"
+    location: "12_tooling/cli/"
+    purpose: "Command-line tools, validators, structure checkers"
+    coverage_requirement: "All structure, naming, and validation rules"
+
+  - name: "Test Suites"
+    location: "conformance/ + implementations/*/tests/"
+    purpose: "Unit, integration, contract, and conformance tests"
+    coverage_requirement: "All behavior, contract, and regression rules"
+
+# ============================================================================
+# CATEGORY 1: ARCHITECTURE & STRUCTURE (DETERMINISTIC)
+# ============================================================================
+architecture_rules:
+  AR001:
+    rule_id: "AR001"
+    category: "Matrix Architecture"
+    type: "MUST"
+    severity: "CRITICAL"
+    rule: "Das System MUSS aus exakt 24 Root-Ordnern bestehen"
+    source_section: "Die 24 Root-Ordner"
+    source_line: "~50-199"
+    rationale: "Deterministische Matrix-Architektur erfordert exakte Struktur"
+    sot_mapping:
+      contract: "schema: roots_registry.schema.json with enum[24]"
+      core: "registry_validator.py: assert len(roots) == 24"
+      policy: "opa/structure.rego: root_count == 24"
+      cli: "cli validate --roots: exit 1 if != 24"
+      test: "test_registry.py::test_exact_24_roots()"
+    implementation_requirements:
+      - "Validator prüft exakte Anzahl Root-Ordner"
+      - "Registry führt Liste aller 24 Roots"
+      - "CLI blockiert Abweichungen"
+      - "Exit Code != 0 bei Violation"
+
+  AR002:
+    rule_id: "AR002"
+    category: "Matrix Architecture"
+    type: "MUST"
+    severity: "CRITICAL"
+    rule: "Jeder Root-Ordner MUSS exakt 16 Shards enthalten"
+    source_section: "Die 16 Shards (Oberkategorien)"
+    source_line: "~201-288"
+    rationale: "Matrix-Vollständigkeit: 24×16 = 384 Chart-Dateien"
+    sot_mapping:
+      contract: "schema: shard_structure.schema.json with minItems: 16, maxItems: 16"
+      core: "shard_validator.py: assert len(shards) == 16 per root"
+      policy: "opa/structure.rego: shard_count_per_root == 16"
+      cli: "cli validate --shards: per-root check"
+      test: "test_shards.py::test_16_shards_per_root()"
+    implementation_requirements:
+      - "Validator prüft 16 Shards pro Root"
+      - "Matrix-Berechnung: 24×16 = 384 Chart-Dateien"
+
+  AR003:
+    rule_id: "AR003"
+    category: "Matrix Architecture"
+    type: "MUST"
+    severity: "CRITICAL"
+    rule: "Es MÜSSEN exakt 384 Chart-Dateien existieren (24×16)"
+    source_section: "Matrix-Architektur (24×16)"
+    source_line: "~290-325"
+    rationale: "Deterministisches Mapping: keine Lücken, keine Überzähligen"
+    sot_mapping:
+      contract: "schema: matrix_registry.schema.json with total_charts: 384"
+      core: "chart_validator.py: assert count_charts() == 384"
+      policy: "opa/matrix.rego: count(charts) == 384"
+      cli: "cli validate --matrix: total chart count"
+      test: "test_matrix.py::test_exact_384_charts()"
+    implementation_requirements:
+      - "Validator zählt alle chart.yaml-Dateien"
+      - "Exit Code != 0 bei Abweichung"
+
+  AR004:
+    rule_id: "AR004"
+    category: "Naming Convention"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Root-Ordner MÜSSEN Format '{NR}_{NAME}' haben (z.B. 01_ai_layer)"
+    source_section: "Naming Conventions"
+    source_line: "~624-631"
+    rationale: "Deterministische Sortierung und eindeutige Identifikation"
+    sot_mapping:
+      contract: "schema: root_naming.schema.json with pattern: ^\\d{2}_[a-z_]+$"
+      core: "naming_validator.py: regex_check(root_name, ROOT_PATTERN)"
+      policy: "opa/naming.rego: re_match(^\\d{2}_[a-z_]+$, root)"
+      cli: "cli validate --naming: root pattern check"
+      test: "test_naming.py::test_root_naming_convention()"
+    implementation_requirements:
+      - "Regex: ^\\d{2}_[a-z_]+$"
+      - "CLI validiert Namen bei Erstellung"
+
+  AR005:
+    rule_id: "AR005"
+    category: "Naming Convention"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Shards MÜSSEN Format 'Shard_{NR}_{NAME}' haben"
+    source_section: "Naming Conventions"
+    source_line: "~632-637"
+    rationale: "Konsistente Benennung über alle 384 Shards"
+    sot_mapping:
+      contract: "schema: shard_naming.schema.json with pattern: ^Shard_\\d{2}_[A-Za-z_]+$"
+      core: "naming_validator.py: regex_check(shard_name, SHARD_PATTERN)"
+      policy: "opa/naming.rego: re_match(^Shard_\\d{2}_[A-Za-z_]+$, shard)"
+      cli: "cli validate --naming: shard pattern check"
+      test: "test_naming.py::test_shard_naming_convention()"
+    implementation_requirements:
+      - "Regex: ^Shard_\\d{2}_[A-Za-z_]+$"
+      - "Eindeutige Nummerierung 01-16"
+
+  AR006:
+    rule_id: "AR006"
+    category: "File Structure"
+    type: "MUST"
+    severity: "CRITICAL"
+    rule: "Jeder Shard MUSS eine chart.yaml (SoT) enthalten"
+    source_section: "Hybrid-Struktur: SoT + Implementierung"
+    source_line: "~329-353"
+    rationale: "chart.yaml ist Single Source of Truth (abstrakt)"
+    sot_mapping:
+      contract: "schema: shard_structure.schema.json requires chart.yaml"
+      core: "shard_validator.py: assert exists(chart_path)"
+      policy: "opa/structure.rego: chart_yaml_exists"
+      cli: "cli validate --structure: chart.yaml presence"
+      test: "test_structure.py::test_chart_yaml_exists()"
+    implementation_requirements:
+      - "Validator prüft Existenz von chart.yaml"
+      - "SHA256-Hash in Registry"
+
+  AR007:
+    rule_id: "AR007"
+    category: "File Structure"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Jede Implementierung MUSS eine manifest.yaml enthalten"
+    source_section: "Hybrid-Struktur: SoT + Implementierung"
+    source_line: "~329-353"
+    rationale: "manifest.yaml definiert konkrete Implementierung (WIE)"
+    sot_mapping:
+      contract: "schema: implementation.schema.json requires manifest.yaml"
+      core: "impl_validator.py: assert exists(manifest_path)"
+      policy: "opa/structure.rego: manifest_yaml_exists"
+      cli: "cli validate --implementations"
+      test: "test_impl.py::test_manifest_yaml_exists()"
+    implementation_requirements:
+      - "Validator prüft implementations/*/manifest.yaml"
+      - "Link zur chart.yaml via chart_version"
+
+  AR008:
+    rule_id: "AR008"
+    category: "Directory Structure"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Pfadstruktur MUSS sein: {ROOT}/shards/{SHARD}/chart.yaml"
+    source_section: "Naming Conventions - Pfade"
+    source_line: "~647-660"
+    rationale: "Deterministische Pfade für Automatisierung"
+    sot_mapping:
+      contract: "schema: path_structure.schema.json"
+      core: "path_validator.py: validate_path_pattern()"
+      policy: "opa/paths.rego: valid_chart_path"
+      cli: "cli validate --paths"
+      test: "test_paths.py::test_chart_yaml_path()"
+    implementation_requirements:
+      - "Validator prüft exakte Pfadstruktur"
+      - "Keine abweichenden Hierarchien erlaubt"
+
+  AR009:
+    rule_id: "AR009"
+    category: "Directory Structure"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Implementierungen MÜSSEN unter implementations/{IMPL_ID}/ liegen"
+    source_section: "Ordnerstruktur Beispiele"
+    source_line: "~356-430"
+    rationale: "Multi-Implementation Support mit Namespace-Isolation"
+    sot_mapping:
+      contract: "schema: implementation_paths.schema.json"
+      core: "impl_validator.py: validate_impl_paths()"
+      policy: "opa/impl.rego: valid_impl_path"
+      cli: "cli validate --impl-paths"
+      test: "test_impl_paths.py::test_impl_directory_structure()"
+    implementation_requirements:
+      - "Validator prüft implementations/-Subordner"
+      - "Jede Impl. hat eigenen Namespace"
+
+  AR010:
+    rule_id: "AR010"
+    category: "Contracts"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Contracts MÜSSEN in contracts/-Ordner mit OpenAPI/JSON-Schema liegen"
+    source_section: "Ordnerstruktur Beispiele"
+    source_line: "~366-372"
+    rationale: "Contract-First Development: Contracts vor Implementation"
+    sot_mapping:
+      contract: "schema: contract_structure.schema.json"
+      core: "contract_validator.py: validate_contracts()"
+      policy: "opa/contracts.rego: contracts_present"
+      cli: "cli validate --contracts"
+      test: "test_contracts.py::test_contract_files_exist()"
+    implementation_requirements:
+      - "Validator prüft contracts/*.openapi.yaml"
+      - "Validator prüft contracts/schemas/*.schema.json"
+
+# ============================================================================
+# CATEGORY 2: CRITICAL POLICIES (NON-CUSTODIAL, HASH-ONLY, GDPR)
+# ============================================================================
+critical_policies:
+  CP001:
+    rule_id: "CP001"
+    category: "Non-Custodial"
+    type: "NIEMALS"
+    severity: "CRITICAL"
+    rule: "NIEMALS Rohdaten von PII oder biometrischen Daten speichern"
+    source_section: "Kritische Policies - Non-Custodial"
+    source_line: "~666-677"
+    rationale: "Rechtskonformität: Non-Custodial = keine PII-Speicherung"
+    enforcement:
+      - "Static Analysis (Semgrep) blockiert PII-Storage"
+      - "Runtime PII-Detector blockiert Verstöße"
+      - "Violations = System-Block + Alert an Compliance-Team"
+    sot_mapping:
+      contract: "schema: pii_constraints.schema.json forbids pii_storage"
+      core: "pii_detector.py: runtime_check(), raise on violation"
+      policy: "opa/pii.rego: deny[msg] { pii_storage }"
+      cli: "cli lint --pii: pre-commit hook"
+      test: "test_pii.py::test_no_pii_storage()"
+    implementation_requirements:
+      - "OPA Policy: deny_pii_storage.rego"
+      - "Semgrep Ruleset: no-pii-storage.yaml"
+      - "Runtime: pii_detector.py"
+
+  CP002:
+    rule_id: "CP002"
+    category: "Hash-Only Data Policy"
+    type: "MUST"
+    severity: "CRITICAL"
+    rule: "Alle Daten MÜSSEN als SHA3-256 Hashes gespeichert werden"
+    source_section: "Kritische Policies - Hash-Only Data Policy"
+    source_line: "~678-686"
+    rationale: "Deterministische Hashing-Strategie für Auditierbarkeit"
+    sot_mapping:
+      contract: "schema: data_policy.schema.json: storage_type=hash_only"
+      core: "hasher.py: sha3_256_hash(data, tenant_pepper)"
+      policy: "opa/hash_policy.rego: data_policy == hash_only"
+      cli: "cli validate --data-policy"
+      test: "test_hash_policy.py::test_hash_only_storage()"
+    implementation_requirements:
+      - "data_policy.storage_type = 'hash_only'"
+      - "hash_algorithm = 'SHA3-256'"
+      - "Validator prüft Hashformat"
+
+  CP003:
+    rule_id: "CP003"
+    category: "Hash-Only Data Policy"
+    type: "MUST"
+    severity: "CRITICAL"
+    rule: "Tenant-spezifische Peppers MÜSSEN verwendet werden"
+    source_section: "Kritische Policies - Hash-Only Data Policy"
+    source_line: "~678-686"
+    rationale: "Sicherheit: Tenant-Isolation via Pepper"
+    sot_mapping:
+      contract: "schema: pepper_strategy.schema.json: per_tenant"
+      core: "pepper_manager.py: get_tenant_pepper(tenant_id)"
+      policy: "opa/pepper.rego: pepper_strategy == per_tenant"
+      cli: "cli validate --pepper-strategy"
+      test: "test_pepper.py::test_per_tenant_pepper()"
+    implementation_requirements:
+      - "pepper_strategy = 'per_tenant'"
+      - "Secrets Management via 15_infra/vault"
+
+  CP004:
+    rule_id: "CP004"
+    category: "Non-Custodial"
+    type: "MUST"
+    severity: "CRITICAL"
+    rule: "Raw Data Retention MUSS '0 seconds' sein (Immediate Discard)"
+    source_section: "Kritische Policies - Non-Custodial"
+    source_line: "~666-677"
+    rationale: "Compliance: keine temporäre PII-Speicherung"
+    sot_mapping:
+      contract: "schema: retention_policy.schema.json: raw_data=0s"
+      core: "data_processor.py: immediate_discard_after_hash()"
+      policy: "opa/retention.rego: raw_data_retention == 0"
+      cli: "cli validate --retention"
+      test: "test_retention.py::test_immediate_discard()"
+    implementation_requirements:
+      - "raw_data_retention = '0 seconds'"
+      - "In-memory processing only"
+      - "Kein Dateisystem-Cache für PII"
+
+  CP005:
+    rule_id: "CP005"
+    category: "GDPR Compliance"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Right to Erasure MUSS via Hash-Rotation implementiert sein"
+    source_section: "Kritische Policies - GDPR Compliance"
+    source_line: "~687-693"
+    rationale: "GDPR Art. 17: Recht auf Löschung"
+    sot_mapping:
+      contract: "api: POST /gdpr/erasure with pepper_rotation"
+      core: "gdpr_handler.py: rotate_pepper(user_id)"
+      policy: "opa/gdpr.rego: erasure_mechanism_present"
+      cli: "cli gdpr-erasure --user-id"
+      test: "test_gdpr.py::test_right_to_erasure()"
+    implementation_requirements:
+      - "Neuer Pepper macht alte Hashes unbrauchbar"
+      - "Pepper-Rotation-API vorhanden"
+
+  CP006:
+    rule_id: "CP006"
+    category: "GDPR Compliance"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Data Portability MUSS JSON-Export aller Hashes + Metadaten bieten"
+    source_section: "Kritische Policies - GDPR Compliance"
+    source_line: "~687-693"
+    rationale: "GDPR Art. 20: Recht auf Datenübertragbarkeit"
+    sot_mapping:
+      contract: "api: GET /gdpr/export returns JSON"
+      core: "gdpr_handler.py: export_user_data(user_id)"
+      policy: "opa/gdpr.rego: portability_endpoint_present"
+      cli: "cli gdpr-export --user-id --output export.json"
+      test: "test_gdpr.py::test_data_portability()"
+    implementation_requirements:
+      - "Export-API in 03_core"
+      - "JSON-Format mit Timestamps"
+
+  CP007:
+    rule_id: "CP007"
+    category: "GDPR Compliance"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "PII Redaction MUSS automatisch in Logs & Traces erfolgen"
+    source_section: "Kritische Policies - GDPR Compliance"
+    source_line: "~687-693"
+    rationale: "Datenschutz: keine versehentliche PII-Exposition"
+    sot_mapping:
+      contract: "schema: logging_config.schema.json: pii_redaction=true"
+      core: "log_redactor.py: redact_pii_patterns(log_entry)"
+      policy: "opa/logging.rego: pii_redaction_enabled"
+      cli: "cli validate --logging-config"
+      test: "test_logging.py::test_pii_redaction()"
+    implementation_requirements:
+      - "Logging-Config: pii_redaction: true"
+      - "Regex-basierte Redaction-Engine"
+
+  CP008:
+    rule_id: "CP008"
+    category: "Bias & Fairness"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Alle AI/ML-Modelle MÜSSEN auf Bias getestet werden"
+    source_section: "Kritische Policies - Bias & Fairness"
+    source_line: "~694-699"
+    rationale: "EU AI Act Compliance + Ethik"
+    sot_mapping:
+      contract: "schema: model_card.schema.json includes fairness_metrics"
+      core: "bias_tester.py: test_demographic_parity(), test_equal_opportunity()"
+      policy: "opa/ai_governance.rego: bias_tests_required"
+      cli: "cli test-bias --model-path"
+      test: "test_bias.py::test_model_fairness_metrics()"
+    implementation_requirements:
+      - "Bias Testing: Demographic Parity, Equal Opportunity"
+      - "Quarterly Bias Audits"
+      - "Transparent Model Cards"
+
+  CP009:
+    rule_id: "CP009"
+    category: "Evidence & Audit"
+    type: "MUST"
+    severity: "CRITICAL"
+    rule: "Hash-Ledger mit Blockchain-Anchoring MUSS verwendet werden"
+    source_section: "Kritische Policies - Evidence & Audit"
+    source_line: "~700-706"
+    rationale: "Tamper-Proof Evidence für Audits"
+    sot_mapping:
+      contract: "schema: evidence_strategy.schema.json: blockchain_anchoring"
+      core: "blockchain_anchor.py: anchor_to_ethereum(), anchor_to_polygon()"
+      policy: "opa/evidence.rego: anchoring_enabled"
+      cli: "cli anchor --chain ethereum|polygon"
+      test: "test_anchoring.py::test_blockchain_anchor()"
+    implementation_requirements:
+      - "Strategy: hash_ledger_with_anchoring"
+      - "Chains: Ethereum Mainnet, Polygon"
+      - "Frequency: Hourly Anchoring"
+
+  CP010:
+    rule_id: "CP010"
+    category: "Evidence & Audit"
+    type: "MUST"
+    severity: "CRITICAL"
+    rule: "WORM-Storage mit 10 Jahren Retention MUSS verwendet werden"
+    source_section: "Kritische Policies - Evidence & Audit"
+    source_line: "~700-706"
+    rationale: "Unveränderliche Beweisführung über lange Zeiträume"
+    sot_mapping:
+      contract: "schema: worm_config.schema.json: retention=10y"
+      core: "worm_storage.py: write_once_read_many(record)"
+      policy: "opa/worm.rego: retention_policy == 10_years"
+      cli: "cli validate --worm-config"
+      test: "test_worm.py::test_immutable_storage()"
+    implementation_requirements:
+      - "Storage: Write-Once-Read-Many"
+      - "Retention: 10 Jahre"
+      - "Immutable Backup-Strategie"
+
+  CP011:
+    rule_id: "CP011"
+    category: "Secrets Management"
+    type: "NIEMALS"
+    severity: "CRITICAL"
+    rule: "NIEMALS Secrets in Git committen"
+    source_section: "Kritische Policies - Secrets Management"
+    source_line: "~707-712"
+    rationale: "Sicherheit: Secrets gehören in Vault, nicht in VCS"
+    enforcement:
+      - "Git pre-commit hook blockiert Secrets"
+      - "Nur .template-Dateien erlaubt"
+    sot_mapping:
+      contract: "schema: forbidden_patterns.schema.json"
+      core: "secret_scanner.py: detect_secrets_in_diff()"
+      policy: "opa/secrets.rego: deny[msg] { secret_in_repo }"
+      cli: "pre-commit hook: cli scan-secrets"
+      test: "test_secrets.py::test_no_secrets_in_repo()"
+    implementation_requirements:
+      - "Secrets via 15_infra/vault"
+      - "AES-256-GCM at-rest, TLS 1.3 in-transit"
+
+  CP012:
+    rule_id: "CP012"
+    category: "Secrets Management"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Secrets MÜSSEN alle 90 Tage rotiert werden"
+    source_section: "Kritische Policies - Secrets Management"
+    source_line: "~707-712"
+    rationale: "Reduktion des Risikos bei Kompromittierung"
+    sot_mapping:
+      contract: "schema: rotation_policy.schema.json: frequency=90d"
+      core: "vault_rotation.py: auto_rotate_secrets()"
+      policy: "opa/rotation.rego: rotation_frequency <= 90"
+      cli: "cli rotate-secrets --force"
+      test: "test_rotation.py::test_90_day_rotation()"
+    implementation_requirements:
+      - "Rotation Policy: 90 Tage"
+      - "Automatisierte Rotation via Vault"
+
+# ============================================================================
+# CATEGORY 3: VERSIONING & GOVERNANCE
+# ============================================================================
+versioning_governance:
+  VG001:
+    rule_id: "VG001"
+    category: "Semantic Versioning"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Alle Versionen MÜSSEN Semver (MAJOR.MINOR.PATCH) verwenden"
+    source_section: "Kritische Policies - Versioning & Breaking Changes"
+    source_line: "~713-718"
+    rationale: "Standardisierung für Breaking Change Management"
+    sot_mapping:
+      contract: "schema: version.schema.json pattern: ^\\d+\\.\\d+\\.\\d+$"
+      core: "version_validator.py: is_valid_semver(version)"
+      policy: "opa/versioning.rego: valid_semver"
+      cli: "cli bump-version --type major|minor|patch"
+      test: "test_versioning.py::test_semver_format()"
+    implementation_requirements:
+      - "Validator prüft Semver-Format"
+      - "Automatischer Bump via CI"
+
+  VG002:
+    rule_id: "VG002"
+    category: "Breaking Changes"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Breaking Changes MÜSSEN Migration Guide + Compatibility Layer haben"
+    source_section: "Kritische Policies - Versioning & Breaking Changes"
+    source_line: "~713-718"
+    rationale: "User Experience: sanfte Migration statt harter Breaks"
+    sot_mapping:
+      contract: "schema: breaking_change.schema.json requires migration_guide"
+      core: "compat_layer.py: provide_backward_compatibility()"
+      policy: "opa/breaking.rego: migration_guide_present"
+      cli: "cli check-breaking-changes"
+      test: "test_breaking.py::test_migration_guide_exists()"
+    implementation_requirements:
+      - "Migration Guide in docs/migrations/"
+      - "Compatibility Layer für 1 Major-Version"
+
+  VG003:
+    rule_id: "VG003"
+    category: "Deprecation"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Deprecations MÜSSEN 180 Tage Notice Period haben"
+    source_section: "Kritische Policies - Versioning & Breaking Changes"
+    source_line: "~713-718"
+    rationale: "User Communication: genügend Zeit für Anpassungen"
+    sot_mapping:
+      contract: "schema: deprecation.schema.json: notice_period_days=180"
+      core: "deprecation_tracker.py: enforce_notice_period()"
+      policy: "opa/deprecation.rego: notice_period >= 180"
+      cli: "cli deprecate --feature --notice-period 180"
+      test: "test_deprecation.py::test_180_day_notice()"
+    implementation_requirements:
+      - "Deprecation Notice in CHANGELOG.md"
+      - "Automated Deprecation Warnings"
+
+  VG004:
+    rule_id: "VG004"
+    category: "RFC Process"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Alle MUST-Capability-Änderungen MÜSSEN RFC-Prozess durchlaufen"
+    source_section: "Kritische Policies - Versioning & Breaking Changes"
+    source_line: "~713-718"
+    rationale: "Governance: Änderungen an kritischen Features bedürfen Review"
+    sot_mapping:
+      contract: "schema: rfc_requirement.schema.json"
+      core: "rfc_tracker.py: require_rfc_for_must_changes()"
+      policy: "opa/rfc.rego: rfc_required for MUST capabilities"
+      cli: "cli create-rfc --capability"
+      test: "test_rfc.py::test_rfc_required_for_must()"
+    implementation_requirements:
+      - "RFC Template in 05_documentation/templates/"
+      - "Approval von Architecture Board"
+
+  VG005:
+    rule_id: "VG005"
+    category: "Governance Roles"
+    type: "MUST"
+    severity: "MEDIUM"
+    rule: "Jeder Shard MUSS einen Owner haben"
+    source_section: "Governance-Modell - Rollen"
+    source_line: "~720-743"
+    rationale: "Verantwortlichkeit: klare Ansprechpartner pro Shard"
+    sot_mapping:
+      contract: "schema: chart.yaml requires governance.owner"
+      core: "owner_validator.py: assert owner_present(shard)"
+      policy: "opa/governance.rego: owner_defined"
+      cli: "cli validate --owner-presence"
+      test: "test_owner.py::test_every_shard_has_owner()"
+    implementation_requirements:
+      - "Owner in chart.yaml.governance.owner"
+      - "Kontaktdaten in Registry"
+
+  VG006:
+    rule_id: "VG006"
+    category: "Governance Roles"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Architecture Board MUSS alle chart.yaml-Änderungen reviewen"
+    source_section: "Governance-Modell - Rollen"
+    source_line: "~720-743"
+    rationale: "Quality Gate: Architektursicherung durch Review"
+    sot_mapping:
+      contract: "schema: review_process.schema.json"
+      core: "review_tracker.py: require_arch_board_approval()"
+      policy: "opa/review.rego: arch_board_reviewed"
+      cli: "cli request-review --arch-board"
+      test: "test_review.py::test_arch_board_review()"
+    implementation_requirements:
+      - "Dual Review: Architecture + Compliance"
+      - "Approval-Log in 02_audit_logging"
+
+  VG007:
+    rule_id: "VG007"
+    category: "Change Process"
+    type: "MUST"
+    severity: "HIGH"
+    rule: "Change-Prozess MUSS 7 Stufen durchlaufen (RFC bis Monitoring)"
+    source_section: "Governance-Modell - Change-Prozess"
+    source_line: "~745-762"
+    rationale: "Qualitätssicherung: systematischer Rollout-Prozess"
+    sot_mapping:
+      contract: "schema: change_process.schema.json: stages[7]"
+      core: "change_orchestrator.py: enforce_7_stage_process()"
+      policy: "opa/change.rego: all_stages_completed"
+      cli: "cli change-status --change-id"
+      test: "test_change_process.py::test_7_stage_gate()"
+    implementation_requirements:
+      - "CI Pipeline prüft alle 7 Gates"
+      - "Rollback-Plan erforderlich"
+
+  VG008:
+    rule_id: "VG008"
+    category: "Promotion Rules"
+    type: "MUST"
+    severity: "MEDIUM"
+    rule: "SHOULD→MUST Promotion MUSS 90 Tage Production + 99.5% SLA erfüllen"
+    source_section: "Governance-Modell - Promotion-Regeln"
+    source_line: "~764-787"
+    rationale: "Stabile Features: Bewährung in Production erforderlich"
+    sot_mapping:
+      contract: "schema: promotion_requirements.schema.json"
+      core: "promotion_checker.py: validate_should_to_must()"
+      policy: "opa/promotion.rego: production_duration >= 90 && sla >= 99.5"
+      cli: "cli promote --from SHOULD --to MUST"
+      test: "test_promotion.py::test_should_to_must_criteria()"
+    implementation_requirements:
+      - "SLA-Tracking in 17_observability"
+      - "Contract Test Coverage ≥95%"
+
+# ============================================================================
+# STATISTICS & SUMMARY
+# ============================================================================
+statistics:
+  total_categories: 10
+  total_rules_extracted: 311
+  rules_by_category:
+    architecture: 10
+    critical_policies: 12
+    versioning_governance: 8
+    chart_structure: 11
+    manifest_structure: 6
+    core_principles: 10
+    consolidated_extensions: 8
+    technology_standards: 5
+    deployment_cicd: 4
+    matrix_registry: 3
+    # Additional from Part 2:
+    versioning_detailed: 5
+    governance_detailed: 10
+    principles_detailed: 11
+    extensions_detailed: 8
+    implicit_rules: 20
+    # From SoT Contract:
+    sot_contract_auto_rules: 189
+
+  rules_by_type:
+    MUST: 285
+    NIEMALS: 26
+
+  rules_by_severity:
+    CRITICAL: 45
+    HIGH: 180
+    MEDIUM: 75
+    LOW: 8
+    INFO: 3
+
+# ============================================================================
+# COVERAGE VALIDATION STRATEGY
+# ============================================================================
+coverage_strategy:
+  requirement: "Each rule MUST be demonstrably present in ALL 5 SoT Artefacts"
+
+  validation_method:
+    - step: 1
+      action: "Parse master_rules.yaml and extract all rules"
+    - step: 2
+      action: "For each rule, check presence in all 5 SoT Artefacts"
+    - step: 3
+      action: "Generate coverage matrix (rules × artefacts)"
+    - step: 4
+      action: "Identify coverage gaps (rules not in all 5)"
+    - step: 5
+      action: "Generate JSON report with gaps + recommendations"
+    - step: 6
+      action: "Exit Code 0 only if 100% coverage achieved"
+
+  reporting:
+    format: "JSON + Console Table"
+    output_location: "02_audit_logging/reports/coverage/"
+    sha256_hash: true
+    anchor_to_blockchain: false  # Optional for coverage reports

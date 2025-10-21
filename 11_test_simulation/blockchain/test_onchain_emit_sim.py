@@ -11,11 +11,9 @@ from pathlib import Path
 import importlib.util
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[2]
 EMIT_PATH = ROOT / "20_foundation" / "smart_contracts" / "proof_emitter.py"
 LOG_PATH = ROOT / "02_audit_logging" / "evidence" / "blockchain" / "emits" / "blueprint42_proof.jsonl"
-
 
 def load_emitter_module():
     """Dynamically load proof_emitter.py as module."""
@@ -23,7 +21,6 @@ def load_emitter_module():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
-
 
 class TestOnchainEmitDryRun:
     """Test on-chain proof emission in DRY_RUN mode."""
@@ -134,7 +131,6 @@ class TestOnchainEmitDryRun:
             result = emitter.emit("TEST_PROOF", uri)
             assert result["status"] == "SIMULATED"
 
-
 class TestEmitterModuleFunctions:
     """Test individual emitter module functions."""
 
@@ -162,7 +158,6 @@ class TestEmitterModuleFunctions:
         assert temp_evid.exists()
         assert (temp_evid / "blueprint42_proof.jsonl").exists()
 
-
 class TestEmitterCLI:
     """Test command-line interface of emitter."""
 
@@ -186,7 +181,6 @@ class TestEmitterCLI:
         output = json.loads(result.stdout)
         assert output["status"] == "SIMULATED"
         assert output["tx"] is None
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

@@ -17,7 +17,6 @@ from dataclasses import dataclass, field
 from collections import defaultdict
 import hashlib
 
-
 @dataclass
 class ComplianceSnapshot:
     """Point-in-time compliance state"""
@@ -31,7 +30,6 @@ class ComplianceSnapshot:
     audit_events: List[Dict[str, Any]]
     metadata: Dict[str, Any]
 
-
 @dataclass
 class ComplianceTimeline:
     """Timeline of compliance evolution"""
@@ -40,7 +38,6 @@ class ComplianceTimeline:
     snapshots: List[ComplianceSnapshot]
     key_events: List[Dict[str, Any]]
     trends: Dict[str, Any]
-
 
 class HistoricalSimulator:
     """
@@ -662,7 +659,6 @@ class HistoricalSimulator:
 
         return text
 
-
 def demo_historical_simulation():
     """Demonstrate historical simulation capabilities"""
     print("=== SSID Historical Compliance Simulator Demo ===\n")
@@ -725,7 +721,6 @@ def demo_historical_simulation():
         print("\n=== Demo Complete ===")
     else:
         print(f"Unified index not found at {unified_index_path}")
-
 
 if __name__ == "__main__":
     demo_historical_simulation()

@@ -7,7 +7,6 @@ from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict
 
-
 def push_evidence_to_compliance() -> Dict:
     """
     Push audit evidence hash chain to compliance registry.
@@ -48,7 +47,6 @@ def push_evidence_to_compliance() -> Dict:
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
 
-
 def verify_evidence_integrity(evidence_file: Path) -> bool:
     """Verify hash chain integrity"""
     if not evidence_file.exists():
@@ -65,7 +63,6 @@ def verify_evidence_integrity(evidence_file: Path) -> bool:
         return len(data["chain"]) > 0
     except:
         return False
-
 
 if __name__ == "__main__":
     result = push_evidence_to_compliance()

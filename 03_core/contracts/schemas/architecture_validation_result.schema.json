@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.local/schemas/architecture_validation_result.json",
+  "title": "Architecture Validation Result",
+  "description": "Result of an Architecture Rule validation (AR001-AR010)",
+  "type": "object",
+  "required": [
+    "rule_id",
+    "rule_text",
+    "passed",
+    "evidence",
+    "violations",
+    "severity"
+  ],
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "description": "Architecture Rule identifier",
+      "pattern": "^AR0(0[1-9]|10)$",
+      "examples": [
+        "AR001",
+        "AR002",
+        "AR010"
+      ]
+    },
+    "rule_text": {
+      "type": "string",
+      "description": "Human-readable rule description in German",
+      "minLength": 10,
+      "maxLength": 500,
+      "examples": [
+        "Das System MUSS aus exakt 24 Root-Ordnern bestehen",
+        "Jeder Root-Ordner MUSS exakt 16 Shards enthalten"
+      ]
+    },
+    "passed": {
+      "type": "boolean",
+      "description": "Whether the rule validation passed"
+    },
+    "evidence": {
+      "type": "object",
+      "description": "Evidence collected during validation (structure varies by rule)",
+      "additionalProperties": true,
+      "examples": [
+        {
+          "total_root_folders": 24,
+          "root_folders": [
+            "01_ai_layer",
+            "02_audit_logging"
+          ]
+        }
+      ]
+    },
+    "violations": {
+      "type": "array",
+      "description": "List of violations found (empty if passed=true)",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "examples": [
+        [],
+        [
+          "Expected 24 root folders, found 23",
+          "Missing folders with prefixes: ['24_']"
+        ]
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "description": "Severity level of the rule",
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ],
+      "default": "CRITICAL"
+    }
+  },
+  "examples": [
+    {
+      "rule_id": "AR001",
+      "rule_text": "Das System MUSS aus exakt 24 Root-Ordnern bestehen",
+      "passed": true,
+      "evidence": {
+        "total_root_folders": 24,
+        "root_folders": [
+          "01_ai_layer",
+          "02_audit_logging",
+          "03_core",
+          "04_deployment",
+          "05_documentation",
+          "06_data_pipeline",
+          "07_governance_legal",
+          "08_identity_score",
+          "09_meta_identity",
+          "10_interoperability",
+          "11_privacy_consent",
+          "12_reputation_trust",
+          "13_token_economy",
+          "14_zero_knowledge",
+          "15_federation",
+          "16_codex",
+          "17_oracle",
+          "18_dispute",
+          "19_recovery",
+          "20_versioning",
+          "21_analytics",
+          "22_marketplace",
+          "23_compliance",
+          "24_emergency"
+        ]
+      },
+      "violations": [],
+      "severity": "CRITICAL"
+    },
+    {
+      "rule_id": "AR005",
+      "rule_text": "Shards MUESSEN Format 'Shard_{NR}_{NAME}' haben",
+      "passed": false,
+      "evidence": {
+        "01_ai_layer": {
+          "invalid_shards": [
+            "01_identitaet_personen",
+            "02_dokumente_nachweise"
+          ]
+        }
+      },
+      "violations": [
+        "01_ai_layer/01_identitaet_personen: Invalid format (expected: Shard_##_Name)",
+        "01_ai_layer/02_dokumente_nachweise: Invalid format (expected: Shard_##_Name)"
+      ],
+      "severity": "CRITICAL"
+    }
+  ]
+}

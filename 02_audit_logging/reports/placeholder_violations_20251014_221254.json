@@ -1,0 +1,33 @@
+{
+  "mode": "dry-run",
+  "summary": {
+    "by_severity": {
+      "high": 1,
+      "low": 0,
+      "medium": 0
+    },
+    "files_affected": 1,
+    "total_violations": 1
+  },
+  "timestamp": "2025-10-14T22:12:54.883880Z",
+  "tool": "placeholder_removal_tool",
+  "version": "1.0.0",
+  "violations": [
+    {
+      "context_after": [
+        "",
+        "        # Create minimal config"
+      ],
+      "context_before": [
+        "        # Create test file with placeholder",
+        "        test_file = Path(temp_dir) / \"test_module.py\""
+      ],
+      "description": "TODO placeholder",
+      "file_path": "11_test_simulation\\tools\\test_placeholder_removal.py",
+      "line_number": 109,
+      "matched_text": "pass  # TODO",
+      "pattern": "pass\\s*#\\s*(TODO|placeholder)",
+      "severity": "high"
+    }
+  ]
+}

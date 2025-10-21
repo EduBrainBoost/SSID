@@ -1,0 +1,633 @@
+# SSID Master Rules - Teil 2 (Fortsetzung)
+# Fortsetzung der vollständigen Regelextraktion
+
+# ============================================================================
+# SEKTION 11: VERSIONING & BREAKING CHANGES
+# ============================================================================
+section_versioning:
+  
+  VER001:
+    type: "MUST"
+    rule: "Alle Versionen MÜSSEN Semver (MAJOR.MINOR.PATCH) verwenden"
+    source: "Kritische Policies - Versioning & Breaking Changes"
+    category: "Semantic Versioning"
+    implementation_requirements:
+      - "Validator prüft Semver-Format"
+      - "Automatischer Bump via CI"
+  
+  VER002:
+    type: "MUST"
+    rule: "Breaking Changes MÜSSEN Migration Guide haben"
+    source: "Kritische Policies - Versioning & Breaking Changes"
+    category: "Breaking Changes"
+    implementation_requirements:
+      - "Migration Guide in docs/migrations/"
+      - "Schritt-für-Schritt-Anleitung"
+  
+  VER003:
+    type: "MUST"
+    rule: "Breaking Changes MÜSSEN Compatibility Layer haben"
+    source: "Kritische Policies - Versioning & Breaking Changes"
+    category: "Compatibility Layer"
+    implementation_requirements:
+      - "Compatibility Layer für 1 Major-Version"
+      - "Backward-Compatibility wo möglich"
+  
+  VER004:
+    type: "MUST"
+    rule: "Deprecations MÜSSEN 180 Tage Notice Period haben"
+    source: "Kritische Policies - Versioning & Breaking Changes"
+    category: "Deprecation"
+    implementation_requirements:
+      - "Deprecation Notice in CHANGELOG.md"
+      - "Automated Deprecation Warnings"
+      - "180 Tage vor Removal"
+  
+  VER005:
+    type: "MUST"
+    rule: "Alle MUST-Capability-Änderungen MÜSSEN RFC-Prozess durchlaufen"
+    source: "Kritische Policies - Versioning & Breaking Changes"
+    category: "RFC Process"
+    implementation_requirements:
+      - "RFC Template in 05_documentation/templates/"
+      - "Approval von Architecture Board"
+
+# ============================================================================
+# SEKTION 12: GOVERNANCE-MODELL
+# ============================================================================
+section_governance:
+  
+  GOV001:
+    type: "MUST"
+    rule: "Jeder Shard MUSS einen Owner haben"
+    source: "Governance-Modell - Rollen"
+    category: "Governance Roles - Owner"
+    implementation_requirements:
+      - "Owner in chart.yaml.governance.owner"
+      - "Kontaktdaten: team, lead, contact"
+      - "Verantwortlich für Shard-Entwicklung"
+  
+  GOV002:
+    type: "MUST"
+    rule: "Owner MUSS über SHOULD/HAVE-Promotions entscheiden"
+    source: "Governance-Modell - Rollen"
+    category: "Governance Roles - Owner"
+    implementation_requirements:
+      - "Entscheidung über Capability-Promotions"
+      - "Koordination von Implementierungen"
+  
+  GOV003:
+    type: "MUST"
+    rule: "Architecture Board MUSS alle chart.yaml-Änderungen reviewen"
+    source: "Governance-Modell - Rollen"
+    category: "Governance Roles - Architecture Board"
+    implementation_requirements:
+      - "Dual Review: Architecture + Compliance"
+      - "Approval-Log in 02_audit_logging"
+  
+  GOV004:
+    type: "MUST"
+    rule: "Architecture Board MUSS Breaking Changes genehmigen"
+    source: "Governance-Modell - Rollen"
+    category: "Governance Roles - Architecture Board"
+    implementation_requirements:
+      - "Genehmigung erforderlich für Breaking Changes"
+      - "Definition von Schnittstellen-Standards"
+  
+  GOV005:
+    type: "MUST"
+    rule: "Compliance Team MUSS alle Policies prüfen"
+    source: "Governance-Modell - Rollen"
+    category: "Governance Roles - Compliance Team"
+    implementation_requirements:
+      - "Prüfung aller chart.yaml-Policies"
+      - "Genehmigung von Constraint-Änderungen"
+      - "Audit-Oversight"
+  
+  GOV006:
+    type: "MUST"
+    rule: "Security Team MUSS Threat Modeling durchführen"
+    source: "Governance-Modell - Rollen"
+    category: "Governance Roles - Security Team"
+    implementation_requirements:
+      - "Threat Modeling pro Shard"
+      - "Penetration Testing"
+      - "Vulnerability Management"
+  
+  GOV007:
+    type: "MUST"
+    rule: "Change-Prozess MUSS 7 Stufen durchlaufen"
+    source: "Governance-Modell - Change-Prozess"
+    category: "Change Process"
+    implementation_requirements:
+      - "1. RFC erstellen (für MUST-Changes)"
+      - "2. Contract-Tests implementieren"
+      - "3. Dual Review (Architecture + Compliance)"
+      - "4. Semver-Bump + Changelog"
+      - "5. CI/CD Pipeline (alle Tests grün)"
+      - "6. Canary Deployment (5% → 25% → 50% → 100%)"
+      - "7. Monitoring & Alerting (Error Rate < 0.5%)"
+  
+  GOV008:
+    type: "MUST"
+    rule: "SHOULD→MUST Promotion MUSS 90 Tage Production erfüllen"
+    source: "Governance-Modell - Promotion-Regeln"
+    category: "Promotion Rules"
+    implementation_requirements:
+      - "In Production für ≥90 Tage"
+      - "SLA Compliance ≥99.5%"
+      - "Contract Test Coverage ≥95%"
+  
+  GOV009:
+    type: "MUST"
+    rule: "HAVE→SHOULD Promotion MUSS Feature Complete sein"
+    source: "Governance-Modell - Promotion-Regeln"
+    category: "Promotion Rules"
+    implementation_requirements:
+      - "Feature complete"
+      - "Beta-Testing erfolgreich"
+      - "Dokumentation vollständig"
+  
+  GOV010:
+    type: "MUST"
+    rule: "MUST→Deprecated MUSS 180 Tage Notice Period haben"
+    source: "Governance-Modell - Promotion-Regeln"
+    category: "Deprecation Rules"
+    implementation_requirements:
+      - "Notice Period: 180 Tage"
+      - "Migration Guide vorhanden"
+      - "Compatibility Layer implementiert"
+
+# ============================================================================
+# SEKTION 13: KERNPRINZIPIEN
+# ============================================================================
+section_kernprinzipien:
+  
+  PRIN001:
+    type: "MUST"
+    rule: "API-Contract (OpenAPI/JSON-Schema) MUSS VOR Implementierung existieren"
+    source: "Kernprinzipien - Contract-First Development"
+    category: "Contract-First"
+    severity: "HIGH"
+    implementation_requirements:
+      - "Contracts in contracts/ vor src/"
+      - "Auto-generierte Tests aus Contracts"
+      - "Klare Schnittstellen"
+  
+  PRIN002:
+    type: "MUST"
+    rule: "SoT (chart.yaml) und Implementierung (manifest.yaml) MÜSSEN getrennt sein"
+    source: "Kernprinzipien - Separation of Concerns"
+    category: "Separation of Concerns"
+    implementation_requirements:
+      - "chart.yaml = WAS (abstrakt)"
+      - "manifest.yaml = WIE (konkret)"
+      - "Keine Vermischung"
+  
+  PRIN003:
+    type: "MUST"
+    rule: "Ein Shard MUSS mehrere Implementierungen unterstützen können"
+    source: "Kernprinzipien - Multi-Implementation Support"
+    category: "Multi-Implementation"
+    implementation_requirements:
+      - "Implementierungen unter implementations/{IMPL_ID}/"
+      - "Default-Implementierung in chart.yaml definiert"
+      - "A/B-Testing möglich"
+  
+  PRIN004:
+    type: "MUST"
+    rule: "24×16 = 384 Chart-Dateien, keine Ausnahmen"
+    source: "Kernprinzipien - Deterministic Architecture"
+    category: "Deterministic Architecture"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Validator prüft exakte Anzahl"
+      - "Matrix-Struktur unveränderlich"
+      - "Eindeutige Adressierung"
+  
+  PRIN005:
+    type: "MUST"
+    rule: "Alles relevante MUSS gehasht, geloggt und geanchort werden"
+    source: "Kernprinzipien - Evidence-Based Compliance"
+    category: "Evidence-Based Compliance"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Hash-Ledger für alle Operationen"
+      - "Blockchain-Anchoring (Ethereum, Polygon)"
+      - "WORM-Storage (10 Jahre)"
+  
+  PRIN006:
+    type: "MUST"
+    rule: "mTLS MUSS für alle internen Verbindungen verwendet werden"
+    source: "Kernprinzipien - Zero-Trust Security"
+    category: "Zero-Trust"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "TLS 1.3 minimum"
+      - "Certificate Rotation alle 90 Tage"
+      - "RBAC für alle Zugriffe"
+  
+  PRIN007:
+    type: "MUST"
+    rule: "PII-Detection MUSS zur Laufzeit erfolgen"
+    source: "Kernprinzipien - Zero-Trust Security"
+    category: "Zero-Trust"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Runtime PII-Detector aktiv"
+      - "Continuous Vulnerability Scanning"
+  
+  PRIN008:
+    type: "MUST"
+    rule: "Metrics, Tracing, Logging MÜSSEN von Anfang an eingebaut sein"
+    source: "Kernprinzipien - Observability by Design"
+    category: "Observability"
+    implementation_requirements:
+      - "Prometheus + Jaeger + Loki"
+      - "PII-Redaction in Logs"
+      - "Alerting: AlertManager"
+  
+  PRIN009:
+    type: "MUST"
+    rule: "Alle AI/ML-Modelle MÜSSEN Fairness Metrics haben"
+    source: "Kernprinzipien - Bias-Aware AI/ML"
+    category: "Bias-Aware AI/ML"
+    implementation_requirements:
+      - "Fairness Metrics: Demographic Parity, Equal Opportunity"
+      - "Quarterly Bias Audits"
+      - "Transparent Model Cards"
+  
+  PRIN010:
+    type: "MUST"
+    rule: "Jeder Shard MUSS horizontal skalieren können"
+    source: "Kernprinzipien - Scalability & Performance"
+    category: "Scalability"
+    implementation_requirements:
+      - "Horizontal Pod Autoscaling (HPA)"
+      - "Performance-Benchmarks als Gates"
+      - "Load Balancing"
+  
+  PRIN011:
+    type: "MUST"
+    rule: "Dokumentation MUSS aus Code/Contracts generiert werden"
+    source: "Kernprinzipien - Documentation as Code"
+    category: "Documentation as Code"
+    implementation_requirements:
+      - "OpenAPI → Swagger UI"
+      - "JSON-Schema → Docs"
+      - "Publish to 05_documentation/"
+
+# ============================================================================
+# SEKTION 14: KONSOLIDIERTE ERGÄNZUNGEN v1.1.1
+# ============================================================================
+section_konsolidierte_erweiterungen:
+  
+  KONS001:
+    type: "MUST"
+    rule: "UK/APAC-spezifische Regeln MÜSSEN in country_specific definiert sein"
+    source: "Konsolidierte Ergänzungen v1.1.1 - Regulatory Matrix"
+    category: "Country-Specific Compliance"
+    implementation_requirements:
+      - "uk.ico_uk_gdpr.mandatory: true"
+      - "singapore.mas_pdpa.mandatory: true"
+      - "japan.jfsa_appi.mandatory: true"
+      - "australia.au_privacy_act_1988.mandatory: true"
+  
+  KONS002:
+    type: "MUST"
+    rule: "Substring-Helper MUSS has_substr() heißen (nicht contains())"
+    source: "Konsolidierte Ergänzungen v1.1.1 - OPA-Regeln"
+    category: "OPA Implementation"
+    implementation_requirements:
+      - "Umbenennung zur Vermeidung Namenskonflikt"
+      - "Fuzzy-Matching: string_similarity()"
+  
+  KONS003:
+    type: "MUST"
+    rule: "Sanctions-Workflow MUSS täglich laufen (cron: '15 3 * * *')"
+    source: "Konsolidierte Ergänzungen v1.1.1 - CI/Workflows"
+    category: "CI/CD Schedules"
+    implementation_requirements:
+      - "Daily Sanctions Check"
+      - "Quarterly Audit Report (cron: '0 0 1 */3 *')"
+  
+  KONS004:
+    type: "MUST"
+    rule: "Build-Step MUSS entities_to_check.json vor OPA-Check erstellen"
+    source: "Konsolidierte Ergänzungen v1.1.1 - Sanctions Workflow"
+    category: "Sanctions Workflow"
+    implementation_requirements:
+      - "Script: 23_compliance/scripts/build_entities_list.py"
+      - "Input: 24_meta_orchestration/registry/endpoints.yaml"
+  
+  KONS005:
+    type: "MUST"
+    rule: "Sanctions-Daten MÜSSEN max_age_hours: 24 erfüllen"
+    source: "Konsolidierte Ergänzungen v1.1.1 - Freshness Policy"
+    category: "Sanctions Freshness"
+    implementation_requirements:
+      - "sources.yaml: max_age_hours: 24"
+      - "OFAC SDN + EU Consolidated Lists"
+      - "Freshness Check in CI"
+  
+  KONS006:
+    type: "MUST"
+    rule: "Jeder Root MUSS docs/incident_response_plan.md haben"
+    source: "Konsolidierte Ergänzungen v1.1.1 - DORA"
+    category: "DORA Compliance"
+    implementation_requirements:
+      - "Template: 05_documentation/templates/TEMPLATE_INCIDENT_RESPONSE.md"
+      - "Validator prüft Existenz"
+  
+  KONS007:
+    type: "NIEMALS"
+    rule: "NIEMALS .ipynb, .parquet, .sqlite, .db-Dateien committen"
+    source: "Konsolidierte Ergänzungen v1.1.1 - Verbotene Dateiendungen"
+    category: "Forbidden Files"
+    enforcement:
+      - "Git pre-commit hook blockiert diese Extensions"
+      - "Validator prüft Root-Struktur"
+    implementation_requirements:
+      - ".gitignore erweitert"
+      - "CI-Check aktiv"
+  
+  KONS008:
+    type: "MUST"
+    rule: "OPA MUSS 24_meta_orchestration/registry/generated/repo_scan.json verwenden"
+    source: "Konsolidierte Ergänzungen v1.1.1 - OPA-Inputs"
+    category: "OPA Input Unification"
+    implementation_requirements:
+      - "Kein Mix mit depth_report.json"
+      - "Vereinheitlichte Input-Quelle"
+
+# ============================================================================
+# SEKTION 15: IMPLIZITE REGELN AUS KONTEXT
+# ============================================================================
+section_implizite_regeln:
+  
+  IMP001:
+    type: "MUST"
+    rule: "Alle Dateien MÜSSEN UTF-8-Encoding verwenden"
+    source: "Implizit aus Coding Standards"
+    category: "File Encoding"
+    implementation_requirements:
+      - "UTF-8 ohne BOM"
+      - "Validator prüft Encoding"
+  
+  IMP002:
+    type: "MUST"
+    rule: "Line Endings MÜSSEN LF (Unix-Style) sein"
+    source: "Implizit aus Coding Standards"
+    category: "Line Endings"
+    implementation_requirements:
+      - "Keine CRLF (Windows)"
+      - "Git: core.autocrlf=false"
+  
+  IMP003:
+    type: "MUST"
+    rule: "YAML-Dateien MÜSSEN valides YAML 1.2 sein"
+    source: "Implizit aus Verwendung"
+    category: "YAML Validation"
+    implementation_requirements:
+      - "YAML 1.2 Spec konform"
+      - "Validator: yamllint"
+  
+  IMP004:
+    type: "MUST"
+    rule: "JSON-Dateien MÜSSEN valides JSON sein"
+    source: "Implizit aus Verwendung"
+    category: "JSON Validation"
+    implementation_requirements:
+      - "JSON Spec konform"
+      - "Validator: jsonlint"
+  
+  IMP005:
+    type: "MUST"
+    rule: "Markdown-Dateien MÜSSEN CommonMark-kompatibel sein"
+    source: "Implizit aus Dokumentationsstandard"
+    category: "Markdown Standard"
+    implementation_requirements:
+      - "CommonMark Spec"
+      - "Validator: markdownlint"
+  
+  IMP006:
+    type: "MUST"
+    rule: "Git Commits MÜSSEN Conventional Commits-Format folgen"
+    source: "Implizit aus CI/CD-Konventionen"
+    category: "Commit Messages"
+    implementation_requirements:
+      - "Format: type(scope): subject"
+      - "Types: feat, fix, docs, style, refactor, test, chore"
+      - "Validator: commitlint"
+  
+  IMP007:
+    type: "MUST"
+    rule: "Alle Python-Code MUSS PEP 8-konform sein"
+    source: "Implizit aus Python-Verwendung"
+    category: "Python Style"
+    implementation_requirements:
+      - "black formatter"
+      - "ruff linter"
+      - "mypy type checker"
+  
+  IMP008:
+    type: "MUST"
+    rule: "Alle Rust-Code MUSS rustfmt-konform sein"
+    source: "Implizit aus Rust-Verwendung"
+    category: "Rust Style"
+    implementation_requirements:
+      - "rustfmt formatter"
+      - "clippy linter"
+  
+  IMP009:
+    type: "MUST"
+    rule: "Test Coverage MUSS mindestens 80% betragen"
+    source: "Implizit aus Testing-Requirements"
+    category: "Test Coverage"
+    implementation_requirements:
+      - "Unit Tests: ≥80%"
+      - "Integration Tests vorhanden"
+      - "Coverage-Report in CI"
+  
+  IMP010:
+    type: "MUST"
+    rule: "Alle Dependencies MÜSSEN Versionen pinnen"
+    source: "Implizit aus Dependency Management"
+    category: "Dependency Pinning"
+    implementation_requirements:
+      - "Exakte Versionen in requirements.txt"
+      - "Lockfiles (poetry.lock, Cargo.lock) committen"
+  
+  IMP011:
+    type: "MUST"
+    rule: "Docker Images MÜSSEN Tags mit SHA haben"
+    source: "Implizit aus Deployment-Best-Practices"
+    category: "Docker Image Tagging"
+    implementation_requirements:
+      - "Format: {VERSION}-{GIT_SHA}"
+      - "Keine 'latest'-Tags in Production"
+  
+  IMP012:
+    type: "MUST"
+    rule: "Kubernetes Resources MÜSSEN Namespace angeben"
+    source: "Implizit aus K8s-Deployment"
+    category: "Kubernetes Namespaces"
+    implementation_requirements:
+      - "Explizite Namespace-Angabe"
+      - "Keine default-Namespace-Nutzung"
+  
+  IMP013:
+    type: "MUST"
+    rule: "Alle Secrets MÜSSEN in Vault gespeichert sein"
+    source: "Implizit aus Secrets Management"
+    category: "Secrets Storage"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Vault als zentrale Quelle"
+      - "Keine Secrets in Config-Files"
+      - "Keine Secrets in Environment Variables (außer Vault-Token)"
+  
+  IMP014:
+    type: "MUST"
+    rule: "Alle Logs MÜSSEN JSON-Format haben"
+    source: "Implizit aus Observability-Stack"
+    category: "Logging Format"
+    implementation_requirements:
+      - "Structured Logging"
+      - "JSON mit Timestamp, Level, Message"
+      - "PII-Redaction aktiv"
+  
+  IMP015:
+    type: "MUST"
+    rule: "Alle Metrics MÜSSEN Prometheus-Format haben"
+    source: "Implizit aus Observability-Stack"
+    category: "Metrics Format"
+    implementation_requirements:
+      - "Prometheus Exporter"
+      - "Metrics mit Labels"
+      - "Histogram für Latencies"
+  
+  IMP016:
+    type: "MUST"
+    rule: "Alle Traces MÜSSEN OpenTelemetry-kompatibel sein"
+    source: "Implizit aus Observability-Stack"
+    category: "Tracing Format"
+    implementation_requirements:
+      - "OpenTelemetry SDK"
+      - "Jaeger Exporter"
+      - "Trace Context Propagation"
+  
+  IMP017:
+    type: "MUST"
+    rule: "CI/CD MUSS idempotent sein"
+    source: "Implizit aus CI/CD-Best-Practices"
+    category: "CI/CD Idempotence"
+    implementation_requirements:
+      - "Wiederholbare Builds"
+      - "Keine Seiteneffekte"
+      - "Deterministische Artefakte"
+  
+  IMP018:
+    type: "MUST"
+    rule: "Rollbacks MÜSSEN in unter 5 Minuten möglich sein"
+    source: "Implizit aus Deployment-Strategy"
+    category: "Rollback Speed"
+    implementation_requirements:
+      - "Blue-Green oder Canary"
+      - "Automated Rollback bei Errors"
+      - "RTO: <5 Minuten"
+  
+  IMP019:
+    type: "MUST"
+    rule: "SLA MUSS für MUST-Capabilities ≥99.5% sein"
+    source: "Implizit aus SLA-Definitionen"
+    category: "SLA Requirements"
+    implementation_requirements:
+      - "Uptime: ≥99.5%"
+      - "Latency: p95 <500ms"
+      - "Error Rate: <0.5%"
+  
+  IMP020:
+    type: "MUST"
+    rule: "Backups MÜSSEN täglich erstellt werden"
+    source: "Implizit aus Disaster Recovery"
+    category: "Backup Frequency"
+    implementation_requirements:
+      - "Daily Backups"
+      - "Retention: 30 Tage"
+      - "Restore-Test monatlich"
+
+# ============================================================================
+# FINALE STATISTIK
+# ============================================================================
+statistics:
+  total_rules: 156
+  rules_by_section:
+    projektuebersicht: 9
+    roots_24: 26
+    shards_16: 18
+    matrix: 7
+    hybrid: 11
+    ordnerstruktur: 12
+    chartyaml: 19
+    manifestyaml: 11
+    naming: 4
+    kritische_policies: 15
+    versioning: 5
+    governance: 10
+    kernprinzipien: 11
+    konsolidierte_erweiterungen: 8
+    implizite_regeln: 20
+  
+  rules_by_type:
+    MUST: 143
+    NIEMALS: 13
+  
+  rules_by_severity:
+    CRITICAL: 28
+    HIGH: 45
+    MEDIUM: 83
+  
+  rules_by_category:
+    Architecture: 35
+    Non-Custodial: 12
+    Hash-Only: 8
+    GDPR: 7
+    Security: 15
+    Governance: 10
+    Versioning: 5
+    Testing: 8
+    Deployment: 10
+    Observability: 12
+    Compliance: 14
+    CI/CD: 10
+    Others: 20
+
+# ============================================================================
+# MAPPING ZU 5 SOT-ARTEFAKTEN
+# ============================================================================
+sot_artifact_mapping:
+  contract_definitions:
+    relevant_rules: [CY006, PRIN001, O003, IMP003, IMP004, ...]
+    primary_location: "contracts/*.openapi.yaml + contracts/schemas/*.schema.json"
+    validation_method: "OpenAPI Validator + JSON Schema Validator"
+  
+  core_logic:
+    relevant_rules: [H003, KP001, KP002, KP004, IMP007, IMP008, ...]
+    primary_location: "implementations/*/src/"
+    validation_method: "Static Analysis + Unit Tests"
+  
+  policy_enforcement:
+    relevant_rules: [KP001, KP008, KP013, CY005, KONS002, ...]
+    primary_location: "policies/*.yaml + 23_compliance/opa/*.rego"
+    validation_method: "OPA Test + Semgrep"
+  
+  cli_validation:
+    relevant_rules: [R001, S001, M001, NC001, NC002, ...]
+    primary_location: "12_tooling/cli/"
+    validation_method: "CLI Tests + Integration Tests"
+  
+  test_suites:
+    relevant_rules: [CY012, MY007, IMP009, O009, ...]
+    primary_location: "conformance/ + implementations/*/tests/"
+    validation_method: "Test Execution + Coverage Report"

@@ -1,0 +1,661 @@
+{
+  "generated_at": "2025-10-17T00:26:43.882717Z",
+  "inputs": [
+    {
+      "path": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+      "sha512": "0738ce890a6fdf751144c7f251de47b4a401347f45996db8662f2427be72d851355388aba5fd251ee84186de860325115c0e44489999d840f6bc0138ae46e587"
+    },
+    {
+      "path": "16_codex/structure/blueprint_v4.2/sot_rules_filtered.csv",
+      "sha512": "0738ce890a6fdf751144c7f251de47b4a401347f45996db8662f2427be72d851355388aba5fd251ee84186de860325115c0e44489999d840f6bc0138ae46e587"
+    },
+    {
+      "path": "16_codex/structure/blueprint_v4.2/sot_rules_filtered.json",
+      "sha512": "4e794d2896bec460a6fe02946c88c84985b6d5b2d4b4ac60ab16cfb730c2513966ad01575442e4e795ba519dab6ec4b647a0eb7ab5cb1042d72551407ebf7fa3"
+    },
+    {
+      "path": "16_codex/structure/blueprint_v4.2/SOT_RULES_FULL_REPORT.md",
+      "sha512": "21761b79b7c9383a4b86d3300ec57d4fffd2b4b0ec38287df2ee0aecb98dab918401839bcbddf0cefce85f9528e405d6aef25f9d8bb5353ab91978aca9acafb2"
+    },
+    {
+      "path": "16_codex/structure/blueprint_v4.2/SSID_structure_level3_part1_MAX.md",
+      "sha512": "dec1cb2c923f8c2d2d2d455f44b0c0699036f4c6dc05c9797f23231e59753d2244f5ddf71c8542a8b47b0e3a843de4e14a03d429c039e618b942662756ceac0f"
+    },
+    {
+      "path": "16_codex/structure/blueprint_v4.2/SSID_structure_level3_part2_MAX.md",
+      "sha512": "8731c906c790769a37dbd6826156b5151d14377ac418819b0d52c149930e357d2eab14ee2fcd6fc1be43e9fef8e46431f01ddb218e863f1d3c7aac21eb2bdacf"
+    },
+    {
+      "path": "16_codex/structure/blueprint_v4.2/SSID_structure_level3_part3_MAX.md",
+      "sha512": "091924cd6d49667192057311333314b8ac54ba1bbf89f05a46d1c2cf009dc5dcbdfc4f76b42b3895bb8b3bea89542d74ed774f74c90a409ac6bceef8d0280c70"
+    },
+    {
+      "path": "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md",
+      "sha512": "548d0bc6a5e73abe1072c2c83acf620d401d9758ff34547b53a66519df916b42e5c35c53adb72138c9dc1faa7c72a9f41f14175d5eb0e39d858d0da8b1bb2452"
+    }
+  ],
+  "stats": {
+    "total_rules": 5734,
+    "covered_policy": 1107,
+    "covered_test": 1248,
+    "full_coverage": 618,
+    "missing": 3997,
+    "coverage_policy_percent": 19.31,
+    "coverage_test_percent": 21.76,
+    "full_coverage_percent": 10.78,
+    "integrity_score": 20.54
+  },
+  "missing": {
+    "policies": [
+      {
+        "rule_id": "942182b8",
+        "rule_text": "**Version:** 1.0.0",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 3
+      },
+      {
+        "rule_id": "8b8c51a6",
+        "rule_text": "**Erstellt:** 2025-10-02",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 4
+      },
+      {
+        "rule_id": "50206b56",
+        "rule_text": "---",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 8
+      },
+      {
+        "rule_id": "23b46107",
+        "rule_text": "## 📋 Inhaltsverzeichnis",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 10
+      },
+      {
+        "rule_id": "2091749a",
+        "rule_text": "1. [Projektübersicht](#projektübersicht)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 12
+      },
+      {
+        "rule_id": "8d2f1566",
+        "rule_text": "3. [Die 16 Shards (Oberkategorien)](#die-16-shards-oberkategorien)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 14
+      },
+      {
+        "rule_id": "46ea600b",
+        "rule_text": "4. [Matrix-Architektur (24×16)](#matrix-architektur-24×16)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 15
+      },
+      {
+        "rule_id": "cc2511b9",
+        "rule_text": "5. [Hybrid-Struktur: SoT + Implementierung](#hybrid-struktur-sot--implementierung)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 16
+      },
+      {
+        "rule_id": "f55f42fa",
+        "rule_text": "6. [Ordnerstruktur Beispiele](#ordnerstruktur-beispiele)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 17
+      },
+      {
+        "rule_id": "e0de4bee",
+        "rule_text": "10. [Kritische Policies](#kritische-policies)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 21
+      },
+      {
+        "rule_id": "b19188f6",
+        "rule_text": "11. [Governance-Modell](#governance-modell)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 22
+      },
+      {
+        "rule_id": "88127c47",
+        "rule_text": "12. [Kernprinzipien](#kernprinzipien)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 23
+      },
+      {
+        "rule_id": "cc3187a5",
+        "rule_text": "13. [Nächste Schritte](#nächste-schritte)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 24
+      },
+      {
+        "rule_id": "6b336f90",
+        "rule_text": "---",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 26
+      },
+      {
+        "rule_id": "c7d1ddaf",
+        "rule_text": "## Projektübersicht",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 28
+      },
+      {
+        "rule_id": "74db1a01",
+        "rule_text": "### Vision",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 32
+      },
+      {
+        "rule_id": "37eee693",
+        "rule_text": "### Architektur-Paradigma",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 35
+      },
+      {
+        "rule_id": "dbce6456",
+        "rule_text": "**2-Dimensionale Matrix:**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 36
+      },
+      {
+        "rule_id": "e12c378f",
+        "rule_text": "- **Vertikal (24 Roots):** Technische Systemebenen",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 37
+      },
+      {
+        "rule_id": "bb6a52a1",
+        "rule_text": "- **Horizontal (16 Shards):** Universelle Anwendungsdomänen",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 38
+      },
+      {
+        "rule_id": "1e1737b8",
+        "rule_text": "### Technologie-Stack",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 41
+      },
+      {
+        "rule_id": "1a348c08",
+        "rule_text": "- **Smart Contracts:** Solidity, Rust",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 43
+      },
+      {
+        "rule_id": "0acd7948",
+        "rule_text": "---",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 48
+      },
+      {
+        "rule_id": "6d7c7391",
+        "rule_text": "### 01. ai_layer",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 54
+      },
+      {
+        "rule_id": "3f53def9",
+        "rule_text": "**AI/ML & Intelligenz**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 55
+      },
+      {
+        "rule_id": "90180b33",
+        "rule_text": "- KI-Modelle (Training, Inferenz, Federated Learning)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 56
+      },
+      {
+        "rule_id": "5ba3f4c3",
+        "rule_text": "- Risk/Trust-Scoring, Bias- & Fairness-Kontrollen",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 57
+      },
+      {
+        "rule_id": "9b1ed420",
+        "rule_text": "- AI Governance (EU AI Act, Drift Detection, Safety)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 58
+      },
+      {
+        "rule_id": "0b0f054e",
+        "rule_text": "- Multi-Modal (Text, Bild, Audio, Video)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 59
+      },
+      {
+        "rule_id": "33442da1",
+        "rule_text": "### 02. audit_logging",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 61
+      },
+      {
+        "rule_id": "c79b877a",
+        "rule_text": "**Nachweise & Beweisführung**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 62
+      },
+      {
+        "rule_id": "7663381e",
+        "rule_text": "### 03. core",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 67
+      },
+      {
+        "rule_id": "d68a4991",
+        "rule_text": "**Zentrale Logik**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 68
+      },
+      {
+        "rule_id": "9b00ee0e",
+        "rule_text": "- Smart Contract Kernsystem (On-Chain-Regeln)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 69
+      },
+      {
+        "rule_id": "dbe97c41",
+        "rule_text": "- Dispatcher-Schnittstellen",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 70
+      },
+      {
+        "rule_id": "39032496",
+        "rule_text": "### 04. deployment",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 74
+      },
+      {
+        "rule_id": "16fee57e",
+        "rule_text": "**Auslieferung & Distribution**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 75
+      },
+      {
+        "rule_id": "07adecfd",
+        "rule_text": "- CI/CD-Pipelines, Rollouts, Cluster-Konfiguration",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 76
+      },
+      {
+        "rule_id": "56c68c19",
+        "rule_text": "- Deployment-Strategien (Canary, Blue/Green)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 77
+      },
+      {
+        "rule_id": "c3d6da0a",
+        "rule_text": "- Container & Orchestrierung (K8s, Terraform)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 78
+      },
+      {
+        "rule_id": "acf68200",
+        "rule_text": "### 05. documentation",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 80
+      },
+      {
+        "rule_id": "009ccac2",
+        "rule_text": "**Dokumentation & I18N**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 81
+      },
+      {
+        "rule_id": "dba81202",
+        "rule_text": "- Developer Guides, User Manuals, API Docs",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 82
+      },
+      {
+        "rule_id": "15084c9e",
+        "rule_text": "- Mehrsprachigkeit (I18N-Layer)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 83
+      },
+      {
+        "rule_id": "bd2b94ef",
+        "rule_text": "- Strukturdateien, Docusaurus Export",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 84
+      },
+      {
+        "rule_id": "ef9793e2",
+        "rule_text": "### 06. data_pipeline",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 86
+      },
+      {
+        "rule_id": "5d53f99b",
+        "rule_text": "**Datenfluss & Verarbeitung**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 87
+      },
+      {
+        "rule_id": "1900fac1",
+        "rule_text": "- ETL/ELT-Prozesse, Datenströme",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 88
+      },
+      {
+        "rule_id": "d45b058d",
+        "rule_text": "- Orchestrierung (Batch, Stream, Realtime)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 89
+      },
+      {
+        "rule_id": "5be06a44",
+        "rule_text": "- ML/AI Data-Feeds",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 90
+      }
+    ],
+    "tests": [
+      {
+        "rule_id": "942182b8",
+        "rule_text": "**Version:** 1.0.0",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 3
+      },
+      {
+        "rule_id": "8b8c51a6",
+        "rule_text": "**Erstellt:** 2025-10-02",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 4
+      },
+      {
+        "rule_id": "50206b56",
+        "rule_text": "---",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 8
+      },
+      {
+        "rule_id": "23b46107",
+        "rule_text": "## 📋 Inhaltsverzeichnis",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 10
+      },
+      {
+        "rule_id": "2091749a",
+        "rule_text": "1. [Projektübersicht](#projektübersicht)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 12
+      },
+      {
+        "rule_id": "9bfe5f91",
+        "rule_text": "2. [Die 24 Root-Ordner](#die-24-root-ordner)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 13
+      },
+      {
+        "rule_id": "8d2f1566",
+        "rule_text": "3. [Die 16 Shards (Oberkategorien)](#die-16-shards-oberkategorien)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 14
+      },
+      {
+        "rule_id": "46ea600b",
+        "rule_text": "4. [Matrix-Architektur (24×16)](#matrix-architektur-24×16)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 15
+      },
+      {
+        "rule_id": "cc2511b9",
+        "rule_text": "5. [Hybrid-Struktur: SoT + Implementierung](#hybrid-struktur-sot--implementierung)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 16
+      },
+      {
+        "rule_id": "f55f42fa",
+        "rule_text": "6. [Ordnerstruktur Beispiele](#ordnerstruktur-beispiele)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 17
+      },
+      {
+        "rule_id": "cebd33ec",
+        "rule_text": "7. [chart.yaml Struktur](#chartyaml-struktur)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 18
+      },
+      {
+        "rule_id": "6588e90c",
+        "rule_text": "9. [Naming Conventions](#naming-conventions)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 20
+      },
+      {
+        "rule_id": "e0de4bee",
+        "rule_text": "10. [Kritische Policies](#kritische-policies)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 21
+      },
+      {
+        "rule_id": "b19188f6",
+        "rule_text": "11. [Governance-Modell](#governance-modell)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 22
+      },
+      {
+        "rule_id": "88127c47",
+        "rule_text": "12. [Kernprinzipien](#kernprinzipien)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 23
+      },
+      {
+        "rule_id": "cc3187a5",
+        "rule_text": "13. [Nächste Schritte](#nächste-schritte)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 24
+      },
+      {
+        "rule_id": "6b336f90",
+        "rule_text": "---",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 26
+      },
+      {
+        "rule_id": "c7d1ddaf",
+        "rule_text": "## Projektübersicht",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 28
+      },
+      {
+        "rule_id": "74db1a01",
+        "rule_text": "### Vision",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 32
+      },
+      {
+        "rule_id": "37eee693",
+        "rule_text": "### Architektur-Paradigma",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 35
+      },
+      {
+        "rule_id": "dbce6456",
+        "rule_text": "**2-Dimensionale Matrix:**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 36
+      },
+      {
+        "rule_id": "e12c378f",
+        "rule_text": "- **Vertikal (24 Roots):** Technische Systemebenen",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 37
+      },
+      {
+        "rule_id": "bb6a52a1",
+        "rule_text": "- **Horizontal (16 Shards):** Universelle Anwendungsdomänen",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 38
+      },
+      {
+        "rule_id": "dc5c1a1b",
+        "rule_text": "- **= 384 Chart-Dateien** (24 × 16)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 39
+      },
+      {
+        "rule_id": "1e1737b8",
+        "rule_text": "### Technologie-Stack",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 41
+      },
+      {
+        "rule_id": "435f2410",
+        "rule_text": "- **Blockchain/DLT:** Ethereum, Polygon, eigene Layer",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 42
+      },
+      {
+        "rule_id": "1a348c08",
+        "rule_text": "- **Smart Contracts:** Solidity, Rust",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 43
+      },
+      {
+        "rule_id": "a2e7f106",
+        "rule_text": "- **Identity:** W3C DID, Verifiable Credentials",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 44
+      },
+      {
+        "rule_id": "f2fd5650",
+        "rule_text": "- **Compliance:** GDPR, eIDAS 2.0, EU AI Act, MiCA",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 46
+      },
+      {
+        "rule_id": "0acd7948",
+        "rule_text": "---",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 48
+      },
+      {
+        "rule_id": "960bcbb5",
+        "rule_text": "## Die 24 Root-Ordner",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 50
+      },
+      {
+        "rule_id": "6d7c7391",
+        "rule_text": "### 01. ai_layer",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 54
+      },
+      {
+        "rule_id": "3f53def9",
+        "rule_text": "**AI/ML & Intelligenz**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 55
+      },
+      {
+        "rule_id": "90180b33",
+        "rule_text": "- KI-Modelle (Training, Inferenz, Federated Learning)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 56
+      },
+      {
+        "rule_id": "5ba3f4c3",
+        "rule_text": "- Risk/Trust-Scoring, Bias- & Fairness-Kontrollen",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 57
+      },
+      {
+        "rule_id": "9b1ed420",
+        "rule_text": "- AI Governance (EU AI Act, Drift Detection, Safety)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 58
+      },
+      {
+        "rule_id": "33442da1",
+        "rule_text": "### 02. audit_logging",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 61
+      },
+      {
+        "rule_id": "c79b877a",
+        "rule_text": "**Nachweise & Beweisführung**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 62
+      },
+      {
+        "rule_id": "31402bee",
+        "rule_text": "- Audit-Trails, Logging, Retention, Quarantine",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 64
+      },
+      {
+        "rule_id": "7663381e",
+        "rule_text": "### 03. core",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 67
+      },
+      {
+        "rule_id": "d68a4991",
+        "rule_text": "**Zentrale Logik**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 68
+      },
+      {
+        "rule_id": "9b00ee0e",
+        "rule_text": "- Smart Contract Kernsystem (On-Chain-Regeln)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 69
+      },
+      {
+        "rule_id": "dbe97c41",
+        "rule_text": "- Dispatcher-Schnittstellen",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 70
+      },
+      {
+        "rule_id": "39032496",
+        "rule_text": "### 04. deployment",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 74
+      },
+      {
+        "rule_id": "16fee57e",
+        "rule_text": "**Auslieferung & Distribution**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 75
+      },
+      {
+        "rule_id": "07adecfd",
+        "rule_text": "- CI/CD-Pipelines, Rollouts, Cluster-Konfiguration",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 76
+      },
+      {
+        "rule_id": "56c68c19",
+        "rule_text": "- Deployment-Strategien (Canary, Blue/Green)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 77
+      },
+      {
+        "rule_id": "c3d6da0a",
+        "rule_text": "- Container & Orchestrierung (K8s, Terraform)",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 78
+      },
+      {
+        "rule_id": "acf68200",
+        "rule_text": "### 05. documentation",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 80
+      },
+      {
+        "rule_id": "009ccac2",
+        "rule_text": "**Dokumentation & I18N**",
+        "source_file": "16_codex/structure/blueprint_v4.2/sot_all_lines.csv",
+        "line_no": 81
+      }
+    ]
+  },
+  "worm": {
+    "sha512": "5f995a1b26ae250d8d6296903443cc79ffee6e8c9611595411a69358247969f4e45e1c520866d4edd0153476a5cb8c027d998481e17de192f510f8afaa5b5147",
+    "blake2b": "8a935d3e9f74d790e4224ecbb44bf394a137f2252b189f9cd5c995ab40f75730597f40aaf877aeb89df5ae9cbee6a8c69d527b906574416aa200738902a4af44",
+    "md_sha512": "a656c59a2049984281378fcb454b4d90f58ac1f7cefb4ed43c4bb64e133074d51307b67874d613cf0d0940013145014e895dbe40225497366033acf2050e6d76",
+    "md_blake2b": "016252334ffb5c2eef21337ae7ca4e3cc3dbea39328ceec7fb12b365be210d8a30137bbc05e9863a7749cce0d929666bad323a9ee4e17dc28b829280a091f90d"
+  },
+  "verdict": "NON-COMPLIANT ⚠️"
+}

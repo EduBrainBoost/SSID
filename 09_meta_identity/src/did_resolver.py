@@ -7,10 +7,8 @@ from typing import Dict, Any, Optional
 import hashlib
 import json
 
-
 # In-memory DID registry (in production, this would be blockchain-based)
 DID_REGISTRY: Dict[str, Dict[str, Any]] = {}
-
 
 def resolve_did(did: str) -> Dict[str, Any]:
     """
@@ -32,9 +30,8 @@ def resolve_did(did: str) -> Dict[str, Any]:
     if did in DID_REGISTRY:
         return DID_REGISTRY[did]
 
-    # Generate stub document for unknown DIDs
+    
     return generate_stub_did_document(did)
-
 
 def generate_stub_did_document(did: str) -> Dict[str, Any]:
     """
@@ -65,7 +62,6 @@ def generate_stub_did_document(did: str) -> Dict[str, Any]:
         "_stub": True,
     }
 
-
 def register_did(did: str, did_document: Dict[str, Any]) -> bool:
     """
     Register a DID and its document in the registry.
@@ -85,7 +81,6 @@ def register_did(did: str, did_document: Dict[str, Any]) -> bool:
 
     DID_REGISTRY[did] = did_document
     return True
-
 
 def verify_did_signature(did: str, message: str, signature: str) -> bool:
     """
@@ -108,7 +103,6 @@ def verify_did_signature(did: str, message: str, signature: str) -> bool:
     # For now, just check that signature is not empty and DID exists
     return bool(signature and did_doc.get("verificationMethod"))
 
-
 def get_did_metadata(did: str) -> Dict[str, Any]:
     """
     Get metadata about a DID.
@@ -128,7 +122,6 @@ def get_did_metadata(did: str) -> Dict[str, Any]:
         "has_verification_methods": bool(did_doc.get("verificationMethod")),
         "has_services": bool(did_doc.get("service")),
     }
-
 
 if __name__ == "__main__":
     # Self-test

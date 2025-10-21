@@ -1,0 +1,26 @@
+version: 1.0.0
+last_updated: '2025-10-21 18:31:18'
+sources:
+- name: ofac_sdn
+  url: https://www.treasury.gov/ofac/downloads/sdn.xml
+  type: sanctions
+  region: US
+  sha256: placeholder_hash_to_be_updated_on_download
+  last_fetched: '2025-10-21'
+- name: eu_consolidated
+  url: https://webgate.ec.europa.eu/fsd/fsf/public/files/xmlFullSanctionsList_1_1/content
+  type: sanctions
+  region: EU
+  sha256: placeholder_hash_to_be_updated_on_download
+  last_fetched: '2025-10-21'
+- name: un_consolidated
+  url: https://scsanctions.un.org/resources/xml/en/consolidated.xml
+  type: sanctions
+  region: UN
+  sha256: placeholder_hash_to_be_updated_on_download
+  last_fetched: '2025-10-21'
+freshness_policy:
+  max_age_hours: 24
+  check_interval_hours: 6
+  auto_update: true
+  alert_on_stale: true

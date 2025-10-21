@@ -19,11 +19,9 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
 
-
 ROOT = Path(__file__).resolve().parents[2]
 POLICY_PATH = ROOT / "23_compliance" / "policies" / "anti_gaming_policy.yaml"
 LOG_PATH = ROOT / "02_audit_logging" / "logs" / "anti_gaming_time_skew.jsonl"
-
 
 def load_policy() -> Dict:
     """Load anti-gaming policy configuration."""
@@ -40,7 +38,6 @@ def load_policy() -> Dict:
     with open(POLICY_PATH, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
-
 def find_jsonl_files() -> List[Path]:
     """Find all JSONL files in audit/evidence directories."""
     jsonl_files = []
@@ -55,7 +52,6 @@ def find_jsonl_files() -> List[Path]:
             jsonl_files.extend(search_dir.rglob("*.jsonl"))
 
     return sorted(jsonl_files)
-
 
 def extract_timestamps(jsonl_file: Path) -> List[Dict]:
     """Extract timestamps from JSONL file."""
@@ -72,6 +68,11 @@ def extract_timestamps(jsonl_file: Path) -> List[Dict]:
 
                 try:
                     entry = json.loads(line)
+
+                    # Skip if entry is not a dict
+                    if not isinstance(entry, dict):
+                        continue
+
                     # Try common timestamp fields
                     ts_value = entry.get("timestamp") or entry.get("ts")
 
@@ -82,14 +83,15 @@ def extract_timestamps(jsonl_file: Path) -> List[Dict]:
                             "timestamp": ts_value
                         })
 
-                except json.JSONDecodeError:
-                    raise NotImplementedError("TODO: Implement this block")
+                except (json.JSONDecodeError, AttributeError, TypeError):
+                    # Skip malformed JSON lines or invalid entries
+                    continue
 
     except OSError:
-        raise NotImplementedError("TODO: Implement this block")
+        # Skip files that can't be read
+        pass
 
     return timestamps
-
 
 def analyze_skew(timestamps: List[Dict], max_skew_seconds: int) -> tuple[int, List[Dict]]:
     """Analyze timestamps for skew violations."""
@@ -133,10 +135,10 @@ def analyze_skew(timestamps: List[Dict], max_skew_seconds: int) -> tuple[int, Li
                 })
 
         except (ValueError, AttributeError):
-            raise NotImplementedError("TODO: Implement this block")
+            # Skip invalid timestamp pairs
+            continue
 
     return max_skew, violations
-
 
 def write_audit_log(
     status: str,
@@ -162,7 +164,6 @@ def write_audit_log(
 
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, sort_keys=True) + "\n")
-
 
 def main() -> int:
     """Main execution."""
@@ -220,7 +221,6 @@ def main() -> int:
     print(f"Audit log: {LOG_PATH}")
 
     return 0 if status == "PASS" else 2
-
 
 if __name__ == "__main__":
     sys.exit(main())

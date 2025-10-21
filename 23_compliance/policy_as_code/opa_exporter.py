@@ -13,7 +13,6 @@ from pathlib import Path
 from typing import Dict, List, Any
 from datetime import datetime
 
-
 class OPARegoExporter:
     """
     Export SSID compliance policies to OPA Rego format
@@ -570,7 +569,6 @@ module_risk := "OK" if {{
 
         return rego
 
-
 def main():
     """Main CLI entry point"""
     print("=== SSID Policy-as-Code OPA Exporter ===\n")
@@ -670,7 +668,6 @@ Generated: {datetime.now().isoformat()}
     print("\n=== Export Complete ===")
     print(f"\nPolicies exported to: {output_dir}")
     print(f"Deploy to OPA with: opa run --server {output_dir}")
-
 
 if __name__ == "__main__":
     main()

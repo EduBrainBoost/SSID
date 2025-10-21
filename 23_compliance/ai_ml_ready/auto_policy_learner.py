@@ -16,7 +16,6 @@ from dataclasses import dataclass, field
 from collections import defaultdict, Counter
 import re
 
-
 @dataclass
 class AuditPattern:
     """Detected pattern in audit data"""
@@ -27,7 +26,6 @@ class AuditPattern:
     confidence: float
     evidence: List[Dict]
     suggested_action: str
-
 
 @dataclass
 class PolicyProposal:
@@ -43,7 +41,6 @@ class PolicyProposal:
     approval_status: str = "pending"
     reviewer_notes: List[str] = field(default_factory=list)
 
-
 @dataclass
 class LearningSession:
     """AI learning session"""
@@ -54,7 +51,6 @@ class LearningSession:
     proposals_generated: int
     proposals: List[PolicyProposal]
     session_metrics: Dict
-
 
 class AutoPolicyLearner:
     """
@@ -737,7 +733,6 @@ The Auto-Policy Learning Engine analyzed {session.audit_data_analyzed} audit rec
         }
         session_file.write_text(json.dumps(data, indent=2), encoding='utf-8')
 
-
 def main():
     """Main CLI entry point"""
     print("=== SSID Auto-Policy Learning Engine ===\n")
@@ -771,7 +766,6 @@ def main():
 
     print("\n=== Learning Complete ===")
     print(f"\nReview proposals in: {output_dir}")
-
 
 if __name__ == "__main__":
     main()

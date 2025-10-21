@@ -1,0 +1,70 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: foundation
+  version: "0.1.0"
+  description: "Tokenomics, utility token framework, governance mechanisms, and economic models"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - utility_token_management
+    - tokenomics_modeling
+    - governance_voting
+    - staking_mechanisms
+    - fee_distribution
+    - treasury_management
+
+  interfaces:
+    - name: token_api
+      type: rest_api
+      authentication: required
+
+    - name: governance_contract
+      type: smart_contract
+      blockchain: ethereum
+      authentication: wallet
+
+    - name: staking_service
+      type: grpc
+      authentication: required
+
+  policies:
+    - name: non_custodial
+      enforcement: automated
+      scope: all_operations
+
+    - name: transparent_fees
+      enforcement: automated
+      scope: all_transactions
+      disclosure_required: true
+
+    - name: governance_quorum
+      enforcement: automated
+      scope: all_votes
+      min_participation: 10_percent
+
+  dependencies:
+    internal:
+      - 07_governance_legal  # Legal framework
+      - 03_core  # Token operations
+      - 02_audit_logging  # Token logging
+    external:
+      - solidity: ">=0.8.20"
+      - hardhat: ">=2.17"
+
+  governance:
+    maintainer: "Tokenomics Team"
+    reviewers:
+      - legal_team
+      - economics_team
+    approval_required: true
+    data_classification: public
+
+  compliance:
+    mica:
+      - article_3  # Token classification
+      - article_57  # CASP requirements
+      - article_60  # Asset protection
+    mica_token_type: utility

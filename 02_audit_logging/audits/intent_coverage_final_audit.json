@@ -1,0 +1,112 @@
+{
+  "timestamp": "2025-10-14T18:21:00.593969Z",
+  "created_files": [],
+  "validation": [
+    {
+      "check": "present::24_meta_orchestration/registry/artifact_intent_manifest.yaml",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::24_meta_orchestration/registry/subscriptions_registry.yaml",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::24_meta_orchestration/registry/roadmap_manifest.yaml",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::24_meta_orchestration/registry/artifact_index.json",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::12_tooling/tools/intent_coverage_tracker.py",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::23_compliance/guards/precommit_intent_guard.py",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::23_compliance/policies/opa/intent_coverage.rego",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::.github/workflows/intent_coverage_gate.yml",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::11_test_simulation/tests_governance/test_intent_coverage.py",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::02_audit_logging/reports/intent_coverage_report.json",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "present::02_audit_logging/reports/intent_coverage_report.md",
+      "ok": true,
+      "info": "required file must exist"
+    },
+    {
+      "check": "yaml::artifact_intent_manifest",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "check": "yaml::subscriptions_registry",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "check": "yaml::roadmap_manifest",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "check": "json::artifact_index",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "check": "schema::artifact_intents_complete",
+      "ok": true,
+      "info": "missing=[]"
+    },
+    {
+      "check": "schema::subscriptions_registry_keys",
+      "ok": true,
+      "info": "missing=[]"
+    },
+    {
+      "check": "schema::roadmap_entries",
+      "ok": true,
+      "info": "first_missing=[]"
+    },
+    {
+      "check": "workflow::fail_on_missing_flag",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "check": "policy::intent_coverage_has_deny",
+      "ok": false,
+      "info": ""
+    },
+    {
+      "check": "tests::import_tracker",
+      "ok": true,
+      "info": ""
+    }
+  ],
+  "score": 95
+}

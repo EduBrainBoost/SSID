@@ -45,7 +45,6 @@ from datetime import datetime, timezone, timedelta
 from dataclasses import dataclass, asdict
 from collections import defaultdict
 
-
 @dataclass
 class ComplianceReport:
     """
@@ -76,7 +75,6 @@ class ComplianceReport:
 
     def to_dict(self) -> Dict:
         return asdict(self)
-
 
 class AutoReportGenerator:
     """
@@ -718,7 +716,6 @@ class AutoReportGenerator:
         print(f"HTML report saved: {output_file}")
         return output_file
 
-
 def main():
     """CLI entry point"""
     repo_root = Path(__file__).resolve().parents[2]
@@ -746,7 +743,6 @@ def main():
     print(f"   Status: {report.summary['compliance_status']}")
     print(f"\n   JSON: {json_path}")
     print(f"   HTML: {html_path}")
-
 
 if __name__ == "__main__":
     main()

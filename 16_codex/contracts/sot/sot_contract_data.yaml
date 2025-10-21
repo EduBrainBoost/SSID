@@ -1,0 +1,189 @@
+# SOT Contract Data
+# Auto-generated contract data based on SOT-V2 rules
+# Generated: 2025-10-20T22:21:11.495679
+#
+# This file contains the actual contract data that validators check against.
+# Field values are placeholder/defaults - customize as needed.
+
+business_model:
+  data_custody: non-custodial
+  kyc_responsibility: user-managed
+  not_role:
+  - central-issuer
+  - price-stabilizer
+  - investment-manager
+  role: decentralized-utility
+  user_interactions:
+  - stake
+  - vote
+  - verify
+  - earn-rewards
+classification: utility-token
+compliance_utilities:
+  audit_payments: false
+  legal_attestations: false
+  regulatory_reporting: false
+date: '2025-10-20'
+deprecated: false
+fee_routing:
+  system_fees:
+    allocation:
+      dev_fee: 0.3%
+      system_treasury: 1.2%
+    burn_from_system_fee:
+      base: 0.5%
+      daily_cap_percent_of_circ: 0.5%
+      monthly_cap_percent_of_circ: 0.5%
+      oracle_source: 0.5%
+      policy: 0.5%
+      snapshot_time_utc: 0.5%
+    note: 10%
+    scope: 10%
+    total_fee: 1.5%
+  validator_rewards:
+    no_per_transaction_split: 10%
+    note: 10%
+    source: 10%
+fee_structure:
+  allocation: 10%
+  burn_from_system_fee: 0.5%
+  fee_collection: 10%
+  no_manual_intervention: 10%
+  scope: 10%
+  total_fee: 1.5%
+governance_controls:
+  authority: TBD
+  note: {}
+  reference: TBD
+governance_fees:
+  proposal_deposits: 10%
+  voting_gas: 10%
+governance_framework:
+  dao_ready: true
+  emergency_procedures: {}
+  proposal_system: {}
+  reference: TBD
+  upgrade_authority: TBD
+  voting_mechanism: automated
+governance_parameters:
+  delegation_system:
+    delegation_changes: {}
+    delegation_enabled: true
+    self_delegation_default: true
+    vote_weight_calculation: token-weighted
+  governance_rewards:
+    delegate_rewards: {}
+    minimum_participation: {}
+    proposal_creator_rewards: {}
+    voter_participation_rewards: {}
+  proposal_framework:
+    proposal_deposit: {}
+    proposal_threshold: 10%
+    proposal_types: []
+  timelock_framework:
+    emergency_proposals: 24 hours
+    parameter_changes: 30 days
+    protocol_upgrades: 30 days
+    standard_proposals: 7 days
+    treasury_allocations: 10%
+  voting_periods:
+    emergency_voting: 24 hours
+    parameter_voting: 30 days
+    protocol_upgrade_voting: 30 days
+    standard_voting: 7 days
+  voting_requirements:
+    emergency_supermajority: {}
+    quorum_emergency: {}
+    quorum_protocol_upgrade: {}
+    quorum_standard: {}
+    simple_majority: {}
+    supermajority: {}
+grundprinzipien:
+  ausnahmen:
+    allowed_root_files: true
+  critical:
+    structure_exceptions_yaml: {}
+  root_level_ausnahmen: {}
+  verbindliche_root_module: {}
+jurisdictional_compliance:
+  blacklist_jurisdictions: []
+  compliance_basis: false
+  excluded_entities: []
+  excluded_markets: []
+  reference: TBD
+  regulatory_exemptions: []
+legal_safe_harbor:
+  admin_controls: false
+  e_money_token: false
+  investment_contract: TBD
+  passive_income: false
+  redemption_rights: false
+  security_token: false
+  stablecoin: false
+  upgrade_mechanism: automated
+  yield_bearing: false
+primary_utilities:
+  ecosystem_rewards:
+    description: Auto-generated placeholder description
+    distribution_method: proportional
+    reward_pools: []
+  governance_participation:
+    description: Auto-generated placeholder description
+    proposal_threshold: 10%
+    voting_weight: {}
+  identity_verification:
+    burn_clarification: {}
+    burn_source_note: TBD
+    description: Auto-generated placeholder description
+    fee_burn_mechanism: 0.5%
+    smart_contract: TBD
+  staking_utility:
+    description: Auto-generated placeholder description
+    slashing_conditions: []
+    staking_rewards: {}
+risk_mitigation:
+  clear_utility_purpose: {}
+  no_fiat_pegging: {}
+  no_marketing_investment: {}
+  no_redemption_mechanism: automated
+  no_yield_promises: {}
+  open_source_license: TBD
+secondary_utilities:
+  api_access: {}
+  data_portability: {}
+  marketplace_access: {}
+  premium_features: {}
+staking_mechanics:
+  discount_applies_to: 10%
+  maximum_discount: 10%
+  minimum_stake: {}
+  slashing_penalty: 10%
+  system_fee_invariance: 10%
+  unstaking_period: 30 days
+supply_mechanics:
+  circulation_controls:
+    max_annual_inflation: '1000000000'
+    partnership_unlock: 30 days
+    reserve_governance: '100000'
+    team_vesting_schedule: 30 days
+  deflationary_mechanisms:
+    governance_burning: '100000'
+    staking_slashing: '100000'
+  initial_distribution:
+    community_rewards: '100000'
+    ecosystem_development: '100000'
+    partnerships: '100000'
+    reserve_fund: '100000'
+    team_development: '100000'
+  total_supply: '1000000000'
+technical_specification:
+  blockchain: Ethereum
+  custody_model: non-custodial
+  smart_contract_automation: TBD
+  standard: ERC-20
+  supply_model: '100000'
+token_definition:
+  explicit_exclusions: []
+  legal_position: false
+  purpose: {}
+version: '2.0'

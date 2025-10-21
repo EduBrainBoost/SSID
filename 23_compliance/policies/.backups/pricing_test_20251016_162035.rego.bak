@@ -1,0 +1,115 @@
+package ssid.pricing_test
+
+import data.ssid.pricing
+
+# Test: Valid pricing model should ALLOW
+test_allow_valid_pricing {
+	pricing.allow with input as {
+		"tiers": [
+			{"id": "core_access", "price_eur": 29},
+			{"id": "professional", "price_eur": 99},
+			{"id": "enterprise_trust", "price_eur": 499},
+		],
+		"discounts": [
+			{"id": "loyalty_12", "months": 12, "percent": 5},
+			{"id": "loyalty_24", "months": 24, "percent": 10},
+		],
+	}
+}
+
+# Test: Price monotonicity enforced
+test_allow_monotonic_prices {
+	pricing.allow with input as {
+		"tiers": [
+			{"id": "tier1", "price_eur": 100},
+			{"id": "tier2", "price_eur": 200},
+			{"id": "tier3", "price_eur": 300},
+		],
+		"discounts": [{"id": "d1", "months": 12, "percent": 5}],
+	}
+}
+
+# Test: Custom pricing handled correctly
+test_allow_custom_pricing {
+	pricing.allow with input as {
+		"tiers": [
+			{"id": "tier1", "price_eur": 100},
+			{"id": "sovereign", "price_eur": "custom_min_25000"},
+		],
+		"discounts": [{"id": "d1", "months": 12, "percent": 10}],
+	}
+}
+
+# Negative Test: Discount >20% should DENY
+test_deny_excessive_discount {
+	not pricing.allow with input as {
+		"tiers": [{"id": "core_access", "price_eur": 29}],
+		"discounts": [{"id": "excessive", "months": 12, "percent": 25}],
+	}
+}
+
+# Negative Test: Discount at boundary (20%) should ALLOW
+test_allow_boundary_discount {
+	pricing.allow with input as {
+		"tiers": [{"id": "core_access", "price_eur": 29}],
+		"discounts": [{"id": "max_discount", "months": 12, "percent": 20}],
+	}
+}
+
+# Negative Test: Discount >20.01% should DENY
+test_deny_discount_over_boundary {
+	not pricing.allow with input as {
+		"tiers": [{"id": "core_access", "price_eur": 29}],
+		"discounts": [{"id": "over", "months": 12, "percent": 20.01}],
+	}
+}
+
+# Negative Test: Negative discount should DENY
+test_deny_negative_discount {
+	not pricing.allow with input as {
+		"tiers": [{"id": "core_access", "price_eur": 29}],
+		"discounts": [{"id": "negative", "months": 12, "percent": -5}],
+	}
+}
+
+# Negative Test: Non-monotonic prices should DENY
+test_deny_non_monotonic {
+	not pricing.allow with input as {
+		"tiers": [
+			{"id": "professional", "price_eur": 99},
+			{"id": "core_access", "price_eur": 29},
+		],
+		"discounts": [{"id": "d1", "months": 12, "percent": 5}],
+	}
+}
+
+# Negative Test: Decreasing prices should DENY
+test_deny_decreasing_prices {
+	not pricing.allow with input as {
+		"tiers": [
+			{"id": "tier1", "price_eur": 1000},
+			{"id": "tier2", "price_eur": 500},
+			{"id": "tier3", "price_eur": 100},
+		],
+		"discounts": [{"id": "d1", "months": 12, "percent": 10}],
+	}
+}
+
+# Edge Test: Empty discounts should ALLOW (if prices monotonic)
+test_allow_no_discounts {
+	pricing.allow with input as {
+		"tiers": [
+			{"id": "tier1", "price_eur": 100},
+			{"id": "tier2", "price_eur": 200},
+		],
+		"discounts": [],
+	}
+}
+
+# Edge Test: Single tier should ALLOW
+test_allow_single_tier {
+	pricing.allow with input as {
+		"tiers": [{"id": "only", "price_eur": 100}],
+		"discounts": [{"id": "d1", "months": 12, "percent": 5}],
+	}
+}

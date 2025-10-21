@@ -1,0 +1,118 @@
+# SSID OPA Policy - 19_adapters (FUNCTIONAL v6.3)
+# Auto-generated from 19_adapters/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.19adapters.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "19_adapters",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "19_adapters_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "19_adapters"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["blockchain_adapters", "legacy_system_integration", "api_gateway_adapters", "protocol_translation", "data_format_conversion", "connection_management"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "19_adapters_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 19_adapters operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "19_adapters_operation"
+  input.request.valid == false
+  msg := "Invalid request for 19_adapters - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "19_adapters_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: adapter_validation (enforcement: automated, scope: all_adapters)
+deny_adaptervalidation[msg] {
+  input.request.type == "19_adapters_operation"
+  input.policy_check == "adapter_validation"
+  not input.policy_compliance.adaptervalidation
+  msg := "Policy violation: adapter_validation (scope: all_adapters)"
+}
+
+# Policy: connection_pooling (enforcement: automated, scope: all_adapters)
+deny_connectionpooling[msg] {
+  input.request.type == "19_adapters_operation"
+  input.policy_check == "connection_pooling"
+  not input.policy_compliance.connectionpooling
+  msg := "Policy violation: connection_pooling (scope: all_adapters)"
+}
+
+# Policy: retry_policy (enforcement: automated, scope: all_requests)
+deny_retrypolicy[msg] {
+  input.request.type == "19_adapters_operation"
+  input.policy_check == "retry_policy"
+  not input.policy_compliance.retrypolicy
+  msg := "Policy violation: retry_policy (scope: all_requests)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "19_adapters_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 19_adapters"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "19_adapters_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 19_adapters"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "19_adapters",
+  "capabilities": 6,
+  "policies": 3
+}

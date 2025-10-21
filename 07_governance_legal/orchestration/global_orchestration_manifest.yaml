@@ -1,0 +1,455 @@
+# SSID Global Proof Orchestration Manifest v5.3
+# Multi-Federation Governance & Cross-Layer Coordination
+
+version: "5.3.0"
+manifest_type: "global_orchestration"
+created: "2025-10-12"
+last_updated: "2025-10-12"
+status: "active"
+
+###########################################
+# Governance Model
+###########################################
+
+governance:
+  model: "DAO + BFT Consensus"
+  consensus_algorithm: "Byzantine Fault Tolerant"
+  threshold: 0.90  # 90% agreement required
+  epoch_duration_hours: 24
+
+  roles:
+    dao_governor:
+      title: "SSID DAO Meta-Governor"
+      responsibility: "Policy approval, threshold updates, federation admission"
+      authority_level: "supreme"
+      multi_sig_required: true
+      min_signers: 3
+      jurisdiction: "Neutral (Swiss Foundation Model)"
+
+    federation_node:
+      title: "Federation Node Operator"
+      responsibility: "Proof emission, digest validation, consensus participation"
+      authority_level: "regional"
+      staking_required: true
+      min_stake: "100000 SSID"
+      jurisdiction: "Regional (per federation)"
+
+    validator:
+      title: "Proof Validator"
+      responsibility: "Cross-federation proof verification"
+      authority_level: "technical"
+      certification_required: true
+      jurisdiction: "Independent"
+
+    auditor:
+      title: "External Compliance Auditor"
+      responsibility: "Cross-federation compliance monitoring"
+      authority_level: "oversight"
+      independence_required: true
+      jurisdiction: "Independent"
+
+    observer:
+      title: "Read-Only Observer"
+      responsibility: "Monitoring and analytics"
+      authority_level: "none"
+      staking_required: false
+      jurisdiction: "Any"
+
+    user:
+      title: "End User / Data Subject"
+      responsibility: "Initiates proof requests, grants consent"
+      authority_level: "self-sovereign"
+      jurisdiction: "Self-determined"
+
+###########################################
+# Federations Registry
+###########################################
+
+federations:
+  opencore:
+    name: "OpenCore Federation"
+    type: "public"
+    status: "active"
+    launch_date: "2025-08-01"
+    jurisdiction: "Global"
+    consensus_nodes: 12
+    min_validators: 9  # 75% of nodes
+
+    endpoints:
+      proof_api: "https://opencore.ssid.network/api/v1/proof"
+      governance_api: "https://opencore.ssid.network/api/v1/governance"
+      metrics_api: "https://opencore.ssid.network/api/v1/metrics"
+
+    blockchain:
+      primary: "ethereum_mainnet"
+      fallback: ["polygon", "arbitrum"]
+      contract_address: "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0"
+
+    governance:
+      voting_power_distribution: "stake_weighted"
+      proposal_threshold: "5% of total stake"
+      voting_period_days: 7
+
+  trustnet:
+    name: "TrustNet Federation"
+    type: "permissioned"
+    status: "active"
+    launch_date: "2025-09-01"
+    jurisdiction: "EU"
+    consensus_nodes: 8
+    min_validators: 6  # 75% of nodes
+
+    endpoints:
+      proof_api: "https://trustnet.ssid.eu/api/v1/proof"
+      governance_api: "https://trustnet.ssid.eu/api/v1/governance"
+      metrics_api: "https://trustnet.ssid.eu/api/v1/metrics"
+
+    blockchain:
+      primary: "polygon"
+      fallback: ["gnosis"]
+      contract_address: "0x9876543210abcdef9876543210abcdef98765432"
+
+    governance:
+      voting_power_distribution: "one_node_one_vote"
+      proposal_threshold: "2 nodes"
+      voting_period_days: 5
+
+    compliance:
+      gdpr_enforced: true
+      eidas_compatible: true
+
+  govchain:
+    name: "GovChain Federation"
+    type: "government"
+    status: "active"
+    launch_date: "2025-10-01"
+    jurisdiction: "Multi-National (G20)"
+    consensus_nodes: 20
+    min_validators: 15  # 75% of nodes
+
+    endpoints:
+      proof_api: "https://govchain.ssid.gov/api/v1/proof"
+      governance_api: "https://govchain.ssid.gov/api/v1/governance"
+      metrics_api: "https://govchain.ssid.gov/api/v1/metrics"
+
+    blockchain:
+      primary: "hyperledger_fabric"
+      fallback: ["ethereum_private"]
+      contract_address: "fabric://govchain/proofemitter"
+
+    governance:
+      voting_power_distribution: "equal_sovereign"
+      proposal_threshold: "3 nations"
+      voting_period_days: 14
+
+    compliance:
+      kyc_required: true
+      aml_enforced: true
+      government_only: true
+
+  eudi:
+    name: "EUDI Wallet Federation"
+    type: "permissioned"
+    status: "pilot"
+    launch_date: "2025-11-01"
+    jurisdiction: "EU"
+    consensus_nodes: 27  # One per EU member state
+    min_validators: 20  # 75% of nodes
+
+    endpoints:
+      proof_api: "https://eudi.ssid.eu/api/v1/proof"
+      governance_api: "https://eudi.ssid.eu/api/v1/governance"
+      metrics_api: "https://eudi.ssid.eu/api/v1/metrics"
+
+    blockchain:
+      primary: "ebsi"  # European Blockchain Services Infrastructure
+      fallback: ["polygon"]
+      contract_address: "ebsi://eudi/proofemitter"
+
+    governance:
+      voting_power_distribution: "qualified_majority"
+      proposal_threshold: "4 member states"
+      voting_period_days: 10
+
+    compliance:
+      eidas_2_0_enforced: true
+      gdpr_enforced: true
+      arfv2_compatible: true
+
+###########################################
+# Cross-Federation Proof Routing
+###########################################
+
+proof_routing:
+  enabled: true
+  routing_algorithm: "trust_weighted_shortest_path"
+  max_hops: 3
+  timeout_seconds: 30
+
+  trust_matrix:
+    # Trust scores (0.0 - 1.0) for inter-federation routing
+    opencore:
+      trustnet: 0.95
+      govchain: 0.90
+      eudi: 0.92
+    trustnet:
+      opencore: 0.95
+      govchain: 0.88
+      eudi: 0.98
+    govchain:
+      opencore: 0.85
+      trustnet: 0.88
+      eudi: 0.90
+    eudi:
+      opencore: 0.92
+      trustnet: 0.98
+      govchain: 0.90
+
+  routing_rules:
+    - name: "PII Restriction"
+      condition: "contains_pii == true"
+      action: "block"
+
+    - name: "Government Priority"
+      condition: "source_federation == 'govchain'"
+      action: "priority_queue"
+
+    - name: "EUDI Compatibility"
+      condition: "target_federation == 'eudi'"
+      action: "require_eidas_signature"
+
+    - name: "Cross-Border Routing"
+      condition: "source_jurisdiction != target_jurisdiction"
+      action: "legal_compliance_check"
+
+###########################################
+# Consensus Parameters
+###########################################
+
+consensus:
+  algorithm: "pbft"  # Practical Byzantine Fault Tolerance
+  block_time_seconds: 3
+  finality_blocks: 2
+
+  thresholds:
+    proof_acceptance: 0.90  # 90% of validators must agree
+    governance_decision: 0.67  # 67% supermajority
+    emergency_action: 0.80  # 80% for emergency actions
+    federation_admission: 0.75  # 75% for new federation admission
+
+  slashing:
+    enabled: true
+    conditions:
+      - "double_signing"
+      - "prolonged_unavailability"
+      - "malicious_proof_submission"
+    penalties:
+      minor_violation: "10% stake"
+      major_violation: "50% stake"
+      critical_violation: "100% stake + ban"
+
+###########################################
+# Security & Privacy
+###########################################
+
+security:
+  encryption:
+    transport: "TLS 1.3"
+    at_rest: "AES-256-GCM"
+    key_rotation_days: 90
+
+  signature_algorithms:
+    primary: "EdDSA (Ed25519)"
+    fallback: ["RS256", "ES256"]
+
+  hashing:
+    digest: "SHA-512"
+    merkle: "BLAKE3"
+    chain: "Keccak-256"
+
+  replay_protection:
+    enabled: true
+    nonce_length_bytes: 16
+    timestamp_tolerance_seconds: 300
+
+  rate_limiting:
+    proof_requests_per_minute: 1000
+    governance_proposals_per_day: 10
+    api_calls_per_second: 100
+
+privacy:
+  pii_policy: "zero_pii"
+  data_minimization: "strict_allowlist"
+  anonymization: "k_anonymity_10"
+
+  compliance_frameworks:
+    - "GDPR (EU 2016/679)"
+    - "CCPA (California)"
+    - "eIDAS 2.0 (EU)"
+    - "LGPD (Brazil)"
+    - "POPIA (South Africa)"
+
+###########################################
+# Monitoring & Observability
+###########################################
+
+observability:
+  metrics_collection:
+    enabled: true
+    interval_seconds: 10
+    retention_days: 90
+
+  metrics:
+    - "proof_emission_rate"
+    - "proof_validation_latency"
+    - "consensus_participation_rate"
+    - "cross_federation_routing_latency"
+    - "governance_proposal_count"
+    - "slashing_events"
+
+  alerting:
+    enabled: true
+    channels: ["slack", "pagerduty", "email"]
+
+    alert_rules:
+      - name: "High Proof Rejection Rate"
+        condition: "rejection_rate > 0.05"
+        severity: "critical"
+
+      - name: "Consensus Delay"
+        condition: "block_time > 10s"
+        severity: "warning"
+
+      - name: "Federation Unreachable"
+        condition: "federation_down_time > 60s"
+        severity: "critical"
+
+      - name: "Validator Offline"
+        condition: "validator_offline_time > 300s"
+        severity: "warning"
+
+###########################################
+# Audit & Compliance
+###########################################
+
+audit:
+  frequency: "daily"
+  scope: "all_layers"
+
+  audit_cycle:
+    epoch_duration_hours: 24
+    epoch_start_utc: "00:00"
+
+  auditors:
+    - name: "OPA Policy Engine"
+      type: "automated"
+      coverage_requirement: 100
+
+    - name: "External Security Auditor"
+      type: "manual"
+      frequency: "quarterly"
+
+    - name: "Compliance Officer"
+      type: "manual"
+      frequency: "monthly"
+
+  audit_artifacts:
+    - "proof_emission_logs"
+    - "governance_decision_logs"
+    - "consensus_participation_logs"
+    - "cross_federation_routing_logs"
+    - "slashing_events"
+    - "merkle_proofs"
+
+  worm_logging:
+    enabled: true
+    signature_algorithm: "HMAC-SHA512"
+    storage_backend: "s3_glacier"
+    retention_years: 7
+
+###########################################
+# Resilience & Failover
+###########################################
+
+resilience:
+  isolation_policy: "federation_isolation"
+
+  failover:
+    enabled: true
+    detection_timeout_seconds: 30
+    recovery_timeout_seconds: 300
+
+  health_checks:
+    interval_seconds: 10
+    timeout_seconds: 5
+
+    checks:
+      - "api_endpoint_reachable"
+      - "consensus_participation"
+      - "proof_validation_functional"
+      - "blockchain_sync_status"
+
+  circuit_breaker:
+    enabled: true
+    failure_threshold: 5
+    timeout_seconds: 60
+    half_open_requests: 3
+
+###########################################
+# Versioning & Upgrades
+###########################################
+
+versioning:
+  current_version: "5.3.0"
+  upgrade_policy: "coordinated_rollout"
+
+  upgrade_process:
+    - "governance_proposal"
+    - "voting_period"
+    - "approval_threshold_met"
+    - "testing_period"
+    - "coordinated_deployment"
+    - "rollback_window"
+
+  backwards_compatibility:
+    supported_versions: ["5.2.0", "5.1.0"]
+    deprecation_notice_days: 90
+
+###########################################
+# Legal & Jurisdiction
+###########################################
+
+legal:
+  governing_law: "Swiss Law"
+  dispute_resolution: "Arbitration (WIPO)"
+
+  liability:
+    ssid_dao: "Limited to governance decisions"
+    federation_nodes: "Full liability for regional operations"
+    validators: "Technical accuracy liability"
+    auditors: "Professional liability"
+
+  data_controller:
+    ssid: "Non-Controller (Code Publisher)"
+    federations: "Joint Controllers (regional)"
+    providers: "Controllers (user data)"
+
+###########################################
+# Metadata
+###########################################
+
+metadata:
+  schema_version: "1.0"
+  authors: ["SSID Core Team", "Claude Sonnet 4.5"]
+  license: "Apache 2.0"
+  repository: "https://github.com/ssid/ssid"
+  documentation: "https://docs.ssid.network/orchestration"
+
+  checksum:
+    algorithm: "SHA-256"
+    value: "[To be computed]"
+
+  signature:
+    algorithm: "EdDSA"
+    public_key: "[DAO Multi-Sig Key]"
+    signature: "[To be signed]"

@@ -1,0 +1,1748 @@
+# ====================================================================================
+# SoT MASTER-DEFINITION EXTRACTION - PART 1, LINES 27-101 (ULTRA-GRANULAR)
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 27-101 (Token Architecture & Legal Safe Harbor)
+# Datum: 2025-10-18
+# Extraktionsmethode: ULTRA-GRANULAR (jedes Feld = separate Regel)
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# ====================================================================================
+
+metadata:
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_ultra_granular_field_by_field"
+  extraction_date: "2025-10-18"
+  line_range: "27-101"
+  section: "Token Architecture & Legal Safe Harbor"
+  total_rules_extracted: 61
+  zero_tolerance_policy: true
+  audit_ready: true
+
+# ====================================================================================
+# LINES 32-35: METADATA (4 REGELN)
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-UG-005
+    line_number: 32
+    section: "Token Framework"
+    subsection: "metadata"
+    field: "version"
+    title: "Field: version = '1.0'"
+
+    original_text: |
+      version: "1.0"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Version field MUSS '1.0' sein.
+
+    enforcement: |
+      CI MUSS prüfen: version = "1.0"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "version"
+      exact_value: "1.0"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-006
+    line_number: 33
+    section: "Token Framework"
+    subsection: "metadata"
+    field: "date"
+    title: "Field: date = '2025-09-15'"
+
+    original_text: |
+      date: "2025-09-15"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Date field MUSS ISO 8601 format haben.
+
+    enforcement: |
+      CI MUSS prüfen: date format ist ISO 8601 (YYYY-MM-DD)
+
+    evidence_schema:
+      type: "yaml_field_format"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "date"
+      format: "ISO 8601 (YYYY-MM-DD)"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-007
+    line_number: 34
+    section: "Token Framework"
+    subsection: "metadata"
+    field: "deprecated"
+    title: "Field: deprecated = false"
+
+    original_text: |
+      deprecated: false
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Deprecated field MUSS false sein.
+
+    enforcement: |
+      CI MUSS prüfen: deprecated = false
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "deprecated"
+      exact_value: false
+      expected_type: "boolean"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-008
+    line_number: 35
+    section: "Token Framework"
+    subsection: "metadata"
+    field: "classification"
+    title: "Field: classification = 'PUBLIC - Token Framework Standards'"
+
+    original_text: |
+      classification: "PUBLIC - Token Framework Standards"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Classification MUSS 'PUBLIC - Token Framework Standards' sein.
+
+    enforcement: |
+      CI MUSS prüfen: classification = "PUBLIC - Token Framework Standards"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "classification"
+      exact_value: "PUBLIC - Token Framework Standards"
+      ci_enforcement: true
+
+# ====================================================================================
+# LINES 37-40: TOKEN_DEFINITION (4 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-UG-009
+    line_number: 38
+    section: "Token Framework"
+    subsection: "token_definition"
+    field: "purpose"
+    title: "Field: purpose = ['utility', 'governance', 'reward']"
+
+    original_text: |
+      purpose: ["utility", "governance", "reward"]
+
+    category: "token_definition"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Purpose MUSS exakt diese 3 Werte haben: utility, governance, reward.
+
+    enforcement: |
+      CI MUSS prüfen: purpose array hat exakt diese 3 items
+
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "token_definition.purpose"
+      expected_items: ["utility", "governance", "reward"]
+      ci_enforcement: true
+      criticality: "CRITICAL - Token Classification"
+
+  - rule_id: SOT-UG-010
+    line_number: 39
+    section: "Token Framework"
+    subsection: "token_definition"
+    field: "explicit_exclusions"
+    title: "Field: explicit_exclusions = ['investment', 'security', 'e_money', 'yield_bearing', 'redemption_rights']"
+
+    original_text: |
+      explicit_exclusions: ["investment", "security", "e_money", "yield_bearing", "redemption_rights"]
+
+    category: "token_definition"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Explicit exclusions MUSS alle 5 forbidden types beinhalten.
+
+    enforcement: |
+      CI MUSS prüfen: explicit_exclusions hat alle 5 items
+
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "token_definition.explicit_exclusions"
+      expected_items: ["investment", "security", "e_money", "yield_bearing", "redemption_rights"]
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn nicht alle 5 vorhanden"
+      criticality: "CRITICAL - Securities Law Compliance"
+
+  - rule_id: SOT-UG-011
+    line_number: 40
+    section: "Token Framework"
+    subsection: "token_definition"
+    field: "legal_position"
+    title: "Field: legal_position = 'Pure utility token for identity verification services'"
+
+    original_text: |
+      legal_position: "Pure utility token for identity verification services"
+
+    category: "token_definition"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Legal position MUSS 'Pure utility' definieren.
+
+    enforcement: |
+      CI MUSS prüfen: legal_position enthält "Pure utility"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "token_definition.legal_position"
+      contains: "Pure utility"
+      ci_enforcement: true
+      criticality: "CRITICAL - Legal Position"
+
+  - rule_id: SOT-UG-012
+    line_number: 37
+    section: "Token Framework"
+    subsection: "token_definition"
+    field: "section_existence"
+    title: "Section: token_definition - Section Existence"
+
+    original_text: |
+      token_definition:
+
+    category: "token_definition"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Section token_definition MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: token_definition section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section_path: "token_definition"
+      ci_enforcement: true
+      criticality: "CRITICAL - Core Definition"
+
+# ====================================================================================
+# LINES 42-47: TECHNICAL_SPECIFICATION (6 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-UG-013
+    line_number: 43
+    section: "Token Framework"
+    subsection: "technical_specification"
+    field: "blockchain"
+    title: "Field: blockchain = 'Polygon (EVM Compatible)'"
+
+    original_text: |
+      blockchain: "Polygon (EVM Compatible)"
+
+    category: "technical_specification"
+    priority: "must"
+
+    description: |
+      Blockchain MUSS Polygon (EVM Compatible) sein.
+
+    enforcement: |
+      CI MUSS prüfen: blockchain = "Polygon (EVM Compatible)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "technical_specification.blockchain"
+      exact_value: "Polygon (EVM Compatible)"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-014
+    line_number: 44
+    section: "Token Framework"
+    subsection: "technical_specification"
+    field: "standard"
+    title: "Field: standard = 'ERC-20 Compatible'"
+
+    original_text: |
+      standard: "ERC-20 Compatible"
+
+    category: "technical_specification"
+    priority: "must"
+
+    description: |
+      Standard MUSS ERC-20 Compatible sein.
+
+    enforcement: |
+      CI MUSS prüfen: standard = "ERC-20 Compatible"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "technical_specification.standard"
+      exact_value: "ERC-20 Compatible"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-015
+    line_number: 45
+    section: "Token Framework"
+    subsection: "technical_specification"
+    field: "supply_model"
+    title: "Field: supply_model = 'Fixed cap with deflationary mechanisms'"
+
+    original_text: |
+      supply_model: "Fixed cap with deflationary mechanisms"
+
+    category: "technical_specification"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Supply model MUSS Fixed cap with deflationary mechanisms sein.
+
+    enforcement: |
+      CI MUSS prüfen: supply_model enthält "Fixed cap" und "deflationary"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "technical_specification.supply_model"
+      contains_all:
+        - "Fixed cap"
+        - "deflationary"
+      ci_enforcement: true
+      criticality: "CRITICAL - Supply Model"
+
+  - rule_id: SOT-UG-016
+    line_number: 46
+    section: "Token Framework"
+    subsection: "technical_specification"
+    field: "custody_model"
+    title: "Field: custody_model = 'Non-custodial by design'"
+
+    original_text: |
+      custody_model: "Non-custodial by design"
+
+    category: "technical_specification"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Custody model MUSS Non-custodial by design sein.
+
+    enforcement: |
+      CI MUSS prüfen: custody_model enthält "Non-custodial"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "technical_specification.custody_model"
+      contains: "Non-custodial"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn custodial"
+      criticality: "CRITICAL - Banking Regulation Compliance"
+
+  - rule_id: SOT-UG-017
+    line_number: 47
+    section: "Token Framework"
+    subsection: "technical_specification"
+    field: "smart_contract_automation"
+    title: "Field: smart_contract_automation = 'Full autonomous distribution'"
+
+    original_text: |
+      smart_contract_automation: "Full autonomous distribution"
+
+    category: "technical_specification"
+    priority: "must"
+
+    description: |
+      Smart contract automation MUSS Full autonomous distribution sein.
+
+    enforcement: |
+      CI MUSS prüfen: smart_contract_automation field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "technical_specification.smart_contract_automation"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-018
+    line_number: 42
+    section: "Token Framework"
+    subsection: "technical_specification"
+    field: "section_existence"
+    title: "Section: technical_specification - Section Existence"
+
+    original_text: |
+      technical_specification:
+
+    category: "technical_specification"
+    priority: "must"
+
+    description: |
+      Section technical_specification MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: technical_specification section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section_path: "technical_specification"
+      ci_enforcement: true
+
+# ====================================================================================
+# LINES 49-55: FEE_STRUCTURE (7 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-UG-019
+    line_number: 50
+    section: "Token Framework"
+    subsection: "fee_structure"
+    field: "scope"
+    title: "Field: scope = 'identity_verification_payments_only'"
+
+    original_text: |
+      scope: "identity_verification_payments_only"
+
+    category: "fee_structure"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Scope MUSS identity_verification_payments_only sein.
+
+    enforcement: |
+      CI MUSS prüfen: scope = "identity_verification_payments_only"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "fee_structure.scope"
+      exact_value: "identity_verification_payments_only"
+      ci_enforcement: true
+      criticality: "CRITICAL - Legal Safe Harbor"
+
+  - rule_id: SOT-UG-020
+    line_number: 51
+    section: "Token Framework"
+    subsection: "fee_structure"
+    field: "total_fee"
+    title: "Field: total_fee = '3% of identity verification transactions'"
+
+    original_text: |
+      total_fee: "3% of identity verification transactions"
+
+    category: "fee_structure"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Total fee MUSS 3% sein.
+
+    enforcement: |
+      CI MUSS prüfen: total_fee enthält "3%"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "fee_structure.total_fee"
+      contains: "3%"
+      ci_enforcement: true
+      criticality: "CRITICAL - Fee Definition"
+
+  - rule_id: SOT-UG-021
+    line_number: 52
+    section: "Token Framework"
+    subsection: "fee_structure"
+    field: "allocation"
+    title: "Field: allocation = '1% dev (direct), 2% system treasury'"
+
+    original_text: |
+      allocation: "1% dev (direct), 2% system treasury"
+
+    category: "fee_structure"
+    priority: "must"
+
+    description: |
+      Allocation MUSS 1% dev + 2% system treasury sein.
+
+    enforcement: |
+      CI MUSS prüfen: allocation enthält "1% dev" und "2% system treasury"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "fee_structure.allocation"
+      contains_all:
+        - "1% dev"
+        - "2% system treasury"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-022
+    line_number: 53
+    section: "Token Framework"
+    subsection: "fee_structure"
+    field: "burn_from_system_fee"
+    title: "Field: burn_from_system_fee = '50% of 2% with daily/monthly caps'"
+
+    original_text: |
+      burn_from_system_fee: "50% of 2% with daily/monthly caps"
+
+    category: "fee_structure"
+    priority: "must"
+
+    description: |
+      Burn from system fee MUSS 50% of 2% with caps sein.
+
+    enforcement: |
+      CI MUSS prüfen: burn_from_system_fee enthält "50%"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "fee_structure.burn_from_system_fee"
+      contains: "50%"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-023
+    line_number: 54
+    section: "Token Framework"
+    subsection: "fee_structure"
+    field: "fee_collection"
+    title: "Field: fee_collection = 'Smart contract automated'"
+
+    original_text: |
+      fee_collection: "Smart contract automated"
+
+    category: "fee_structure"
+    priority: "must"
+
+    description: |
+      Fee collection MUSS smart contract automated sein.
+
+    enforcement: |
+      CI MUSS prüfen: fee_collection enthält "Smart contract"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "fee_structure.fee_collection"
+      contains: "Smart contract"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-024
+    line_number: 55
+    section: "Token Framework"
+    subsection: "fee_structure"
+    field: "no_manual_intervention"
+    title: "Field: no_manual_intervention = true"
+
+    original_text: |
+      no_manual_intervention: true
+
+    category: "fee_structure"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_manual_intervention MUSS true sein.
+
+    enforcement: |
+      CI MUSS prüfen: no_manual_intervention = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "fee_structure.no_manual_intervention"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - No Admin Intervention"
+
+  - rule_id: SOT-UG-025
+    line_number: 49
+    section: "Token Framework"
+    subsection: "fee_structure"
+    field: "section_existence"
+    title: "Section: fee_structure - Section Existence"
+
+    original_text: |
+      fee_structure:
+
+    category: "fee_structure"
+    priority: "must"
+
+    description: |
+      Section fee_structure MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: fee_structure section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section_path: "fee_structure"
+      ci_enforcement: true
+
+# ====================================================================================
+# LINES 57-66: LEGAL_SAFE_HARBOR (10 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-UG-026
+    line_number: 58
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "security_token"
+    title: "Field: security_token = false"
+
+    original_text: |
+      security_token: false
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: security_token MUSS false sein.
+
+    enforcement: |
+      CI MUSS prüfen: security_token = false
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "legal_safe_harbor.security_token"
+      exact_value: false
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn true"
+      criticality: "CRITICAL - Securities Law"
+
+  - rule_id: SOT-UG-027
+    line_number: 59
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "e_money_token"
+    title: "Field: e_money_token = false"
+
+    original_text: |
+      e_money_token: false
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: e_money_token MUSS false sein.
+
+    enforcement: |
+      CI MUSS prüfen: e_money_token = false
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "legal_safe_harbor.e_money_token"
+      exact_value: false
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn true"
+      criticality: "CRITICAL - E-Money Regulation"
+
+  - rule_id: SOT-UG-028
+    line_number: 60
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "stablecoin"
+    title: "Field: stablecoin = false"
+
+    original_text: |
+      stablecoin: false
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: stablecoin MUSS false sein.
+
+    enforcement: |
+      CI MUSS prüfen: stablecoin = false
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "legal_safe_harbor.stablecoin"
+      exact_value: false
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn true"
+      criticality: "CRITICAL - Stablecoin Regulation"
+
+  - rule_id: SOT-UG-029
+    line_number: 61
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "yield_bearing"
+    title: "Field: yield_bearing = false"
+
+    original_text: |
+      yield_bearing: false
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: yield_bearing MUSS false sein.
+
+    enforcement: |
+      CI MUSS prüfen: yield_bearing = false
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "legal_safe_harbor.yield_bearing"
+      exact_value: false
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn true"
+      criticality: "CRITICAL - No Yield Promise"
+
+  - rule_id: SOT-UG-030
+    line_number: 62
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "redemption_rights"
+    title: "Field: redemption_rights = false"
+
+    original_text: |
+      redemption_rights: false
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: redemption_rights MUSS false sein.
+
+    enforcement: |
+      CI MUSS prüfen: redemption_rights = false
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "legal_safe_harbor.redemption_rights"
+      exact_value: false
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn true"
+      criticality: "CRITICAL - No Redemption"
+
+  - rule_id: SOT-UG-031
+    line_number: 63
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "passive_income"
+    title: "Field: passive_income = false"
+
+    original_text: |
+      passive_income: false
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: passive_income MUSS false sein.
+
+    enforcement: |
+      CI MUSS prüfen: passive_income = false
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "legal_safe_harbor.passive_income"
+      exact_value: false
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn true"
+      criticality: "CRITICAL - No Passive Income"
+
+  - rule_id: SOT-UG-032
+    line_number: 64
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "investment_contract"
+    title: "Field: investment_contract = false"
+
+    original_text: |
+      investment_contract: false
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: investment_contract MUSS false sein.
+
+    enforcement: |
+      CI MUSS prüfen: investment_contract = false
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "legal_safe_harbor.investment_contract"
+      exact_value: false
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn true"
+      criticality: "CRITICAL - No Investment Contract"
+
+  - rule_id: SOT-UG-033
+    line_number: 65
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "admin_controls"
+    title: "Field: admin_controls - No Privileged Admin Keys"
+
+    original_text: |
+      admin_controls: "No privileged admin keys. Proxy owner = DAO Timelock; emergency multisig acts only via time-locked governance paths (no direct overrides)."
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Admin controls MÜSSEN "No privileged admin keys" bestätigen.
+
+    enforcement: |
+      CI MUSS prüfen: admin_controls enthält "No privileged admin keys"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "legal_safe_harbor.admin_controls"
+      contains: "No privileged admin keys"
+      ci_enforcement: true
+      criticality: "CRITICAL - Decentralization"
+
+  - rule_id: SOT-UG-034
+    line_number: 66
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "upgrade_mechanism"
+    title: "Field: upgrade_mechanism = 'On-chain proposals only via DAO governance'"
+
+    original_text: |
+      upgrade_mechanism: "On-chain proposals only via DAO governance"
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Upgrade mechanism MUSS DAO governance only sein.
+
+    enforcement: |
+      CI MUSS prüfen: upgrade_mechanism enthält "DAO governance"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "legal_safe_harbor.upgrade_mechanism"
+      contains: "DAO governance"
+      ci_enforcement: true
+      criticality: "CRITICAL - Governance Control"
+
+  - rule_id: SOT-UG-035
+    line_number: 57
+    section: "Token Framework"
+    subsection: "legal_safe_harbor"
+    field: "section_existence"
+    title: "Section: legal_safe_harbor - Section Existence"
+
+    original_text: |
+      legal_safe_harbor:
+
+    category: "legal_safe_harbor"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Section legal_safe_harbor MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: legal_safe_harbor section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section_path: "legal_safe_harbor"
+      ci_enforcement: true
+      criticality: "CRITICAL - Legal Foundation"
+
+# ====================================================================================
+# LINES 68-73: BUSINESS_MODEL (6 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-UG-036
+    line_number: 69
+    section: "Token Framework"
+    subsection: "business_model"
+    field: "role"
+    title: "Field: role = 'Technology publisher and open source maintainer'"
+
+    original_text: |
+      role: "Technology publisher and open source maintainer"
+
+    category: "business_model"
+    priority: "must"
+
+    description: |
+      Role MUSS Technology publisher and open source maintainer sein.
+
+    enforcement: |
+      CI MUSS prüfen: role field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "business_model.role"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-037
+    line_number: 70
+    section: "Token Framework"
+    subsection: "business_model"
+    field: "not_role"
+    title: "Field: not_role - Forbidden Roles Array"
+
+    original_text: |
+      not_role: ["payment_service_provider", "custodian", "operator", "exchange"]
+
+    category: "business_model"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: not_role MUSS alle 4 forbidden roles beinhalten.
+
+    enforcement: |
+      CI MUSS prüfen: not_role array hat alle 4 items
+
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "business_model.not_role"
+      expected_items: ["payment_service_provider", "custodian", "operator", "exchange"]
+      ci_enforcement: true
+      criticality: "CRITICAL - Regulatory Position"
+
+  - rule_id: SOT-UG-038
+    line_number: 71
+    section: "Token Framework"
+    subsection: "business_model"
+    field: "user_interactions"
+    title: "Field: user_interactions = 'Direct peer-to-peer via smart contracts'"
+
+    original_text: |
+      user_interactions: "Direct peer-to-peer via smart contracts"
+
+    category: "business_model"
+    priority: "must"
+
+    description: |
+      User interactions MÜSSEN direct peer-to-peer sein.
+
+    enforcement: |
+      CI MUSS prüfen: user_interactions enthält "peer-to-peer"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "business_model.user_interactions"
+      contains: "peer-to-peer"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-039
+    line_number: 72
+    section: "Token Framework"
+    subsection: "business_model"
+    field: "kyc_responsibility"
+    title: "Field: kyc_responsibility = 'Third-party KYC providers (users pay directly)'"
+
+    original_text: |
+      kyc_responsibility: "Third-party KYC providers (users pay directly)"
+
+    category: "business_model"
+    priority: "must"
+
+    description: |
+      KYC responsibility MUSS bei third-party providers liegen.
+
+    enforcement: |
+      CI MUSS prüfen: kyc_responsibility enthält "Third-party"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "business_model.kyc_responsibility"
+      contains: "Third-party"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-040
+    line_number: 73
+    section: "Token Framework"
+    subsection: "business_model"
+    field: "data_custody"
+    title: "Field: data_custody = 'Zero personal data on-chain'"
+
+    original_text: |
+      data_custody: "Zero personal data on-chain"
+
+    category: "business_model"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: data_custody MUSS Zero personal data on-chain sein.
+
+    enforcement: |
+      CI MUSS prüfen: data_custody enthält "Zero personal data"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "business_model.data_custody"
+      contains: "Zero personal data"
+      ci_enforcement: true
+      criticality: "CRITICAL - Privacy"
+
+  - rule_id: SOT-UG-041
+    line_number: 68
+    section: "Token Framework"
+    subsection: "business_model"
+    field: "section_existence"
+    title: "Section: business_model - Section Existence"
+
+    original_text: |
+      business_model:
+
+    category: "business_model"
+    priority: "must"
+
+    description: |
+      Section business_model MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: business_model section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section_path: "business_model"
+      ci_enforcement: true
+
+# ====================================================================================
+# LINES 75-81: GOVERNANCE_FRAMEWORK (7 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-UG-042
+    line_number: 76
+    section: "Token Framework"
+    subsection: "governance_framework"
+    field: "dao_ready"
+    title: "Field: dao_ready = true"
+
+    original_text: |
+      dao_ready: true
+
+    category: "governance_framework"
+    priority: "must"
+
+    description: |
+      dao_ready MUSS true sein.
+
+    enforcement: |
+      CI MUSS prüfen: dao_ready = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "governance_framework.dao_ready"
+      exact_value: true
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-043
+    line_number: 77
+    section: "Token Framework"
+    subsection: "governance_framework"
+    field: "voting_mechanism"
+    title: "Field: voting_mechanism = 'Token-weighted governance'"
+
+    original_text: |
+      voting_mechanism: "Token-weighted governance"
+
+    category: "governance_framework"
+    priority: "must"
+
+    description: |
+      Voting mechanism MUSS Token-weighted governance sein.
+
+    enforcement: |
+      CI MUSS prüfen: voting_mechanism field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "governance_framework.voting_mechanism"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-044
+    line_number: 78
+    section: "Token Framework"
+    subsection: "governance_framework"
+    field: "proposal_system"
+    title: "Field: proposal_system = 'Snapshot + on-chain execution'"
+
+    original_text: |
+      proposal_system: "Snapshot + on-chain execution"
+
+    category: "governance_framework"
+    priority: "must"
+
+    description: |
+      Proposal system MUSS Snapshot + on-chain execution sein.
+
+    enforcement: |
+      CI MUSS prüfen: proposal_system field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "governance_framework.proposal_system"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-045
+    line_number: 79
+    section: "Token Framework"
+    subsection: "governance_framework"
+    field: "upgrade_authority"
+    title: "Field: upgrade_authority = 'DAO only (no admin keys)'"
+
+    original_text: |
+      upgrade_authority: "DAO only (no admin keys)"
+
+    category: "governance_framework"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: upgrade_authority MUSS DAO only (no admin keys) sein.
+
+    enforcement: |
+      CI MUSS prüfen: upgrade_authority enthält "DAO only" und "no admin keys"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "governance_framework.upgrade_authority"
+      contains_all:
+        - "DAO only"
+        - "no admin keys"
+      ci_enforcement: true
+      criticality: "CRITICAL - Decentralization"
+
+  - rule_id: SOT-UG-046
+    line_number: 80
+    section: "Token Framework"
+    subsection: "governance_framework"
+    field: "emergency_procedures"
+    title: "Field: emergency_procedures = 'Community multisig'"
+
+    original_text: |
+      emergency_procedures: "Community multisig"
+
+    category: "governance_framework"
+    priority: "must"
+
+    description: |
+      Emergency procedures MUSS Community multisig sein.
+
+    enforcement: |
+      CI MUSS prüfen: emergency_procedures field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "governance_framework.emergency_procedures"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-047
+    line_number: 81
+    section: "Token Framework"
+    subsection: "governance_framework"
+    field: "reference"
+    title: "Field: reference - Cross-Reference to governance_parameters"
+
+    original_text: |
+      reference: "See detailed governance_parameters section below for quorum, timelock, and voting requirements"
+
+    category: "governance_framework"
+    priority: "must"
+
+    description: |
+      Reference field MUSS auf governance_parameters section verweisen.
+
+    enforcement: |
+      CI MUSS prüfen: reference field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "governance_framework.reference"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-048
+    line_number: 75
+    section: "Token Framework"
+    subsection: "governance_framework"
+    field: "section_existence"
+    title: "Section: governance_framework - Section Existence"
+
+    original_text: |
+      governance_framework:
+
+    category: "governance_framework"
+    priority: "must"
+
+    description: |
+      Section governance_framework MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: governance_framework section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section_path: "governance_framework"
+      ci_enforcement: true
+
+# ====================================================================================
+# LINES 83-92: JURISDICTIONAL_COMPLIANCE (10 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-UG-049
+    line_number: 84
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "reference"
+    title: "Field: reference - Cross-Reference to coverage_matrix.yaml"
+
+    original_text: |
+      reference: "See 23_compliance/jurisdictions/coverage_matrix.yaml for complete exclusion lists"
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+
+    description: |
+      Reference field MUSS auf coverage_matrix.yaml verweisen.
+
+    enforcement: |
+      CI MUSS prüfen: reference enthält "coverage_matrix.yaml"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "jurisdictional_compliance.reference"
+      contains: "coverage_matrix.yaml"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-050
+    line_number: 85
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "blacklist_jurisdictions"
+    title: "Field: blacklist_jurisdictions = ['IR', 'KP', 'SY', 'CU']"
+
+    original_text: |
+      blacklist_jurisdictions: ["IR", "KP", "SY", "CU"]
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: blacklist_jurisdictions MUSS alle 4 core sanctioned territories beinhalten.
+
+    enforcement: |
+      CI MUSS prüfen: blacklist_jurisdictions array hat alle 4 items
+
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "jurisdictional_compliance.blacklist_jurisdictions"
+      expected_items: ["IR", "KP", "SY", "CU"]
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn nicht alle 4 vorhanden"
+      criticality: "CRITICAL - Sanctions Compliance (OFAC)"
+
+  - rule_id: SOT-UG-051
+    line_number: 86
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "excluded_entities"
+    title: "Field: excluded_entities - Array Existence"
+
+    original_text: |
+      excluded_entities:
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+
+    description: |
+      excluded_entities array MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: excluded_entities ist ein Array
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "jurisdictional_compliance.excluded_entities"
+      expected_type: "array"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-052
+    line_number: 87
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "excluded_entities[0]"
+    title: "Array Item: excluded_entities[0] = 'RU_designated_entities'"
+
+    original_text: |
+      - "RU_designated_entities"
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: RU_designated_entities MUSS in excluded_entities sein.
+
+    enforcement: |
+      CI MUSS prüfen: excluded_entities enthält "RU_designated_entities"
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "jurisdictional_compliance.excluded_entities"
+      contains_item: "RU_designated_entities"
+      ci_enforcement: true
+      criticality: "CRITICAL - Sanctions Compliance"
+
+  - rule_id: SOT-UG-053
+    line_number: 88
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "excluded_entities[1]"
+    title: "Array Item: excluded_entities[1] = 'Belarus_designated_entities'"
+
+    original_text: |
+      - "Belarus_designated_entities"
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Belarus_designated_entities MUSS in excluded_entities sein.
+
+    enforcement: |
+      CI MUSS prüfen: excluded_entities enthält "Belarus_designated_entities"
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "jurisdictional_compliance.excluded_entities"
+      contains_item: "Belarus_designated_entities"
+      ci_enforcement: true
+      criticality: "CRITICAL - Sanctions Compliance"
+
+  - rule_id: SOT-UG-054
+    line_number: 89
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "excluded_entities[2]"
+    title: "Array Item: excluded_entities[2] = 'Venezuela_government_entities'"
+
+    original_text: |
+      - "Venezuela_government_entities"
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Venezuela_government_entities MUSS in excluded_entities sein.
+
+    enforcement: |
+      CI MUSS prüfen: excluded_entities enthält "Venezuela_government_entities"
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "jurisdictional_compliance.excluded_entities"
+      contains_item: "Venezuela_government_entities"
+      ci_enforcement: true
+      criticality: "CRITICAL - Sanctions Compliance"
+
+  - rule_id: SOT-UG-055
+    line_number: 90
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "excluded_markets"
+    title: "Field: excluded_markets = ['India', 'Pakistan', 'Myanmar']"
+
+    original_text: |
+      excluded_markets: ["India", "Pakistan", "Myanmar"]
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+
+    description: |
+      excluded_markets MUSS India, Pakistan, Myanmar beinhalten.
+
+    enforcement: |
+      CI MUSS prüfen: excluded_markets array hat alle 3 items
+
+    evidence_schema:
+      type: "yaml_array_exact_match"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "jurisdictional_compliance.excluded_markets"
+      expected_items: ["India", "Pakistan", "Myanmar"]
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-056
+    line_number: 91
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "compliance_basis"
+    title: "Field: compliance_basis = 'EU MiCA Article 3 + US Howey Test'"
+
+    original_text: |
+      compliance_basis: "EU MiCA Article 3 + US Howey Test"
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: compliance_basis MUSS EU MiCA Article 3 + US Howey Test sein.
+
+    enforcement: |
+      CI MUSS prüfen: compliance_basis enthält "MiCA Article 3" und "Howey Test"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "jurisdictional_compliance.compliance_basis"
+      contains_all:
+        - "MiCA Article 3"
+        - "Howey Test"
+      ci_enforcement: true
+      criticality: "CRITICAL - Legal Foundation"
+
+  - rule_id: SOT-UG-057
+    line_number: 92
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "regulatory_exemptions"
+    title: "Field: regulatory_exemptions = 'Utility token exemption'"
+
+    original_text: |
+      regulatory_exemptions: "Utility token exemption"
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: regulatory_exemptions MUSS Utility token exemption sein.
+
+    enforcement: |
+      CI MUSS prüfen: regulatory_exemptions enthält "Utility token exemption"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "jurisdictional_compliance.regulatory_exemptions"
+      contains: "Utility token exemption"
+      ci_enforcement: true
+      criticality: "CRITICAL - Regulatory Position"
+
+  - rule_id: SOT-UG-058
+    line_number: 83
+    section: "Token Framework"
+    subsection: "jurisdictional_compliance"
+    field: "section_existence"
+    title: "Section: jurisdictional_compliance - Section Existence"
+
+    original_text: |
+      jurisdictional_compliance:
+
+    category: "jurisdictional_compliance"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Section jurisdictional_compliance MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: jurisdictional_compliance section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section_path: "jurisdictional_compliance"
+      ci_enforcement: true
+      criticality: "CRITICAL - Compliance Foundation"
+
+# ====================================================================================
+# LINES 94-100: RISK_MITIGATION (7 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-UG-059
+    line_number: 95
+    section: "Token Framework"
+    subsection: "risk_mitigation"
+    field: "no_fiat_pegging"
+    title: "Field: no_fiat_pegging = true"
+
+    original_text: |
+      no_fiat_pegging: true
+
+    category: "risk_mitigation"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_fiat_pegging MUSS true sein.
+
+    enforcement: |
+      CI MUSS prüfen: no_fiat_pegging = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "risk_mitigation.no_fiat_pegging"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - No Stablecoin"
+
+  - rule_id: SOT-UG-060
+    line_number: 96
+    section: "Token Framework"
+    subsection: "risk_mitigation"
+    field: "no_redemption_mechanism"
+    title: "Field: no_redemption_mechanism = true"
+
+    original_text: |
+      no_redemption_mechanism: true
+
+    category: "risk_mitigation"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_redemption_mechanism MUSS true sein.
+
+    enforcement: |
+      CI MUSS prüfen: no_redemption_mechanism = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "risk_mitigation.no_redemption_mechanism"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - No Redemption Rights"
+
+  - rule_id: SOT-UG-061
+    line_number: 97
+    section: "Token Framework"
+    subsection: "risk_mitigation"
+    field: "no_yield_promises"
+    title: "Field: no_yield_promises = true"
+
+    original_text: |
+      no_yield_promises: true
+
+    category: "risk_mitigation"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_yield_promises MUSS true sein.
+
+    enforcement: |
+      CI MUSS prüfen: no_yield_promises = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "risk_mitigation.no_yield_promises"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - No Yield Promise"
+
+  - rule_id: SOT-UG-062
+    line_number: 98
+    section: "Token Framework"
+    subsection: "risk_mitigation"
+    field: "no_marketing_investment"
+    title: "Field: no_marketing_investment = true"
+
+    original_text: |
+      no_marketing_investment: true
+
+    category: "risk_mitigation"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: no_marketing_investment MUSS true sein.
+
+    enforcement: |
+      CI MUSS prüfen: no_marketing_investment = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "risk_mitigation.no_marketing_investment"
+      exact_value: true
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn false"
+      criticality: "CRITICAL - No Investment Marketing"
+
+  - rule_id: SOT-UG-063
+    line_number: 99
+    section: "Token Framework"
+    subsection: "risk_mitigation"
+    field: "clear_utility_purpose"
+    title: "Field: clear_utility_purpose = true"
+
+    original_text: |
+      clear_utility_purpose: true
+
+    category: "risk_mitigation"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: clear_utility_purpose MUSS true sein.
+
+    enforcement: |
+      CI MUSS prüfen: clear_utility_purpose = true
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "risk_mitigation.clear_utility_purpose"
+      exact_value: true
+      ci_enforcement: true
+      criticality: "CRITICAL - Utility Definition"
+
+  - rule_id: SOT-UG-064
+    line_number: 100
+    section: "Token Framework"
+    subsection: "risk_mitigation"
+    field: "open_source_license"
+    title: "Field: open_source_license = 'Apache 2.0'"
+
+    original_text: |
+      open_source_license: "Apache 2.0"
+
+    category: "risk_mitigation"
+    priority: "must"
+
+    description: |
+      open_source_license MUSS Apache 2.0 sein.
+
+    enforcement: |
+      CI MUSS prüfen: open_source_license = "Apache 2.0"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      field_path: "risk_mitigation.open_source_license"
+      exact_value: "Apache 2.0"
+      ci_enforcement: true
+
+  - rule_id: SOT-UG-065
+    line_number: 94
+    section: "Token Framework"
+    subsection: "risk_mitigation"
+    field: "section_existence"
+    title: "Section: risk_mitigation - Section Existence"
+
+    original_text: |
+      risk_mitigation:
+
+    category: "risk_mitigation"
+    priority: "must"
+
+    description: |
+      Section risk_mitigation MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: risk_mitigation section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "20_foundation/tokenomics/ssid_token_framework.yaml"
+      section_path: "risk_mitigation"
+      ci_enforcement: true
+
+# ====================================================================================
+# INTEGRATION STATUS
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 61
+  line_range: "27-101"
+  audit_ready: true
+
+# ====================================================================================
+# RULE COUNT VERIFICATION
+# ====================================================================================
+
+rule_count_verification:
+  lines_32_35: 4   # Metadata
+  lines_37_40: 4   # token_definition
+  lines_42_47: 6   # technical_specification
+  lines_49_55: 7   # fee_structure
+  lines_57_66: 10  # legal_safe_harbor
+  lines_68_73: 6   # business_model
+  lines_75_81: 7   # governance_framework
+  lines_83_92: 10  # jurisdictional_compliance
+  lines_94_100: 7  # risk_mitigation
+  total: 61
+  verified: true

@@ -1,0 +1,68 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: test_simulation
+  version: "0.1.0"
+  description: "Test suites, simulation scenarios, load testing, and compliance validation"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - unit_testing
+    - integration_testing
+    - e2e_testing
+    - load_testing
+    - chaos_engineering
+    - compliance_validation
+    - opa_policy_testing
+
+  interfaces:
+    - name: test_runner
+      type: pytest
+      authentication: ci_only
+
+    - name: load_generator
+      type: locust
+      authentication: internal
+
+    - name: compliance_validator
+      type: opa
+      authentication: internal
+
+  policies:
+    - name: test_coverage_minimum
+      enforcement: automated
+      scope: all_code
+      threshold: 80_percent
+
+    - name: integration_test_required
+      enforcement: automated
+      scope: all_merges
+
+    - name: compliance_test_required
+      enforcement: automated
+      scope: policy_changes
+
+  dependencies:
+    internal:
+      - all_roots  # Tests all modules
+    external:
+      - pytest: ">=7.4"
+      - playwright: ">=1.40"
+      - opa: ">=0.64"
+      - locust: ">=2.15"
+
+  governance:
+    maintainer: "QA Team"
+    reviewers:
+      - engineering_team
+    approval_required: false
+    data_classification: internal
+
+  compliance:
+    dora:
+      - article_21  # Resilience testing
+      - article_24  # Advanced testing
+    iso_27001:
+      - control_a12_1_4  # Separation of environments

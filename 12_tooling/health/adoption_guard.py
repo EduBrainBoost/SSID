@@ -40,7 +40,6 @@ FORBIDDEN_PATTERNS = [
     re.compile(r"""\breturn\s+\{\s*['"]status['"]\s*:\s*['"]up['"]"""),  # return {"status": "up"}
 ]
 
-
 def _all_files(root: str, pattern: str) -> List[str]:
     """
     Recursively find all files matching pattern.
@@ -61,7 +60,6 @@ def _all_files(root: str, pattern: str) -> List[str]:
             if fnmatch.fnmatch(normalized, pattern):
                 out.append(p)
     return out
-
 
 def scan_repo_for_adoption(root: str = ".") -> Dict[str, Any]:
     """
@@ -121,7 +119,6 @@ def scan_repo_for_adoption(root: str = ".") -> Dict[str, Any]:
         "violations": violations
     }
 
-
 def main():
     """
     Main entry point for adoption guard CLI.
@@ -177,7 +174,6 @@ def main():
 
     # Exit with error code if violations found
     sys.exit(1 if res["violations"] else 0)
-
 
 if __name__ == "__main__":
     main()

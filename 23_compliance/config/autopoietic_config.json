@@ -1,0 +1,71 @@
+{
+  "version": "10.0.0",
+  "mode": "AUTOPOIETIC_CONTINUUM",
+  "configuration_date": "2025-10-12T18:14:46.257726+00:00",
+  "self_evaluation_capabilities": {
+    "pytest_mutation_detection": {
+      "enabled": true,
+      "schedule": "on_change",
+      "test_suites": [
+        "test_root_24_integrity.py",
+        "test_knowledge_integrity.py",
+        "test_knowledge_consistency.py",
+        "test_interfederation_readiness.py"
+      ],
+      "failure_threshold": 0,
+      "auto_remediation": true
+    },
+    "opa_enforcement_loop": {
+      "enabled": true,
+      "schedule": "continuous",
+      "policy_files": 22,
+      "violation_threshold": 0,
+      "auto_block": true
+    },
+    "policy_hash_monitoring": {
+      "enabled": true,
+      "algorithm": "SHA-256",
+      "monitored_policies": [
+        "root_24_v9_final_policy.yaml",
+        "root_24_integrity_policy.yaml",
+        "knowledge_integrity_policy.yaml",
+        "privacy_policy.yaml"
+      ],
+      "hash_change_action": "trigger_revalidation"
+    },
+    "merkle_root_verification": {
+      "enabled": true,
+      "schedule": "hourly",
+      "expected_root_sha256": "a7166bcf0f9b36a055ded508f91f3bd7e16a499f92dce458ae731b697fd84309",
+      "drift_tolerance": 0,
+      "auto_alert": true
+    },
+    "structure_integrity_check": {
+      "enabled": true,
+      "schedule": "on_change",
+      "root_module_count": 24,
+      "unauthorized_file_tolerance": 0,
+      "auto_quarantine": true
+    }
+  },
+  "reflexive_autonomy": {
+    "self_healing": true,
+    "auto_documentation_update": true,
+    "proof_chain_auto_extension": true,
+    "registry_auto_update": true
+  },
+  "epistemic_validation": {
+    "knowledge_consistency_check": true,
+    "sot_drift_detection": true,
+    "documentation_code_alignment": true
+  },
+  "operational_parameters": {
+    "evaluation_frequency": "continuous",
+    "alert_on_violations": true,
+    "block_on_critical": true,
+    "log_all_evaluations": true,
+    "cost_optimization": true
+  },
+  "state": "ACTIVE",
+  "status": "OPERATIONAL"
+}

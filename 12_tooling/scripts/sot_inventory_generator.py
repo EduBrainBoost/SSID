@@ -17,7 +17,6 @@ from typing import Dict, List, Set
 from datetime import datetime, timezone
 from dataclasses import dataclass, field, asdict
 
-
 @dataclass
 class ImplementationStatus:
     """Status of a requirement implementation"""
@@ -25,7 +24,7 @@ class ImplementationStatus:
     name: str
     category: str
     priority: str  # MUST, SHOULD, HAVE
-    status: str  # implemented, partial, missing, stub
+    status: str  
     confidence: float  # 0.0 - 1.0
     repo_paths: List[str] = field(default_factory=list)
     evidence_files: List[str] = field(default_factory=list)
@@ -35,7 +34,6 @@ class ImplementationStatus:
 
     def to_dict(self) -> Dict:
         return asdict(self)
-
 
 class SoTInventoryGenerator:
     """Generate SoT inventory and gap analysis"""
@@ -386,14 +384,12 @@ class SoTInventoryGenerator:
 
         print("\n[!] Phase 1 Complete - Review gap_report.yaml for actionable next steps")
 
-
 def main():
     """CLI entry point"""
     repo_root = Path(__file__).resolve().parents[1]
 
     generator = SoTInventoryGenerator(repo_root)
     generator.run()
-
 
 if __name__ == "__main__":
     main()

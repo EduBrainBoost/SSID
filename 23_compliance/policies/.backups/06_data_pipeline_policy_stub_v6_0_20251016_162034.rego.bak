@@ -1,0 +1,118 @@
+# SSID OPA Policy - 06_data_pipeline (FUNCTIONAL v6.3)
+# Auto-generated from 06_data_pipeline/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.06datapipeline.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "06_data_pipeline",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "06_data_pipeline_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "06_data_pipeline"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["data_ingestion", "etl_workflows", "data_validation", "privacy_preserving_transformation", "batch_processing", "stream_processing"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "06_data_pipeline_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 06_data_pipeline operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "06_data_pipeline_operation"
+  input.request.valid == false
+  msg := "Invalid request for 06_data_pipeline - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "06_data_pipeline_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: pii_detection (enforcement: automated, scope: all_data)
+deny_piidetection[msg] {
+  input.request.type == "06_data_pipeline_operation"
+  input.policy_check == "pii_detection"
+  not input.policy_compliance.piidetection
+  msg := "Policy violation: pii_detection (scope: all_data)"
+}
+
+# Policy: data_quality (enforcement: automated, scope: all_pipelines)
+deny_dataquality[msg] {
+  input.request.type == "06_data_pipeline_operation"
+  input.policy_check == "data_quality"
+  not input.policy_compliance.dataquality
+  msg := "Policy violation: data_quality (scope: all_pipelines)"
+}
+
+# Policy: data_lineage (enforcement: automated, scope: all_transformations)
+deny_datalineage[msg] {
+  input.request.type == "06_data_pipeline_operation"
+  input.policy_check == "data_lineage"
+  not input.policy_compliance.datalineage
+  msg := "Policy violation: data_lineage (scope: all_transformations)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "06_data_pipeline_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 06_data_pipeline"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "06_data_pipeline_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 06_data_pipeline"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "06_data_pipeline",
+  "capabilities": 6,
+  "policies": 3
+}

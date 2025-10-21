@@ -1,0 +1,150 @@
+# SSID Integrity Targets Registry (PROMPT 9)
+# Defines canonical thresholds for all enforcement gates
+
+version: 1.0.0
+schema_version: "2025-10"
+last_updated: "2025-10-16T19:40:00Z"
+
+targets:
+  score_authenticity:
+    metric: "authenticity_rate"
+    threshold: 1.0
+    enforcement: "hard-block"
+    exit_code_on_fail: 2
+    description: "All scores must be authentic (from canonical manifests)"
+    tool: "verify_score_authenticity_strict.py"
+    report: "02_audit_logging/reports/score_authenticity_strict.json"
+
+  sot_policy_alignment:
+    metric: "coverage_percent"
+    threshold: 100.0
+    enforcement: "hard-block"
+    exit_code_on_fail: 2
+    description: "100% SoT rules must have corresponding policy enforcement"
+    tool: "verify_sot_policy_alignment.py"
+    report: "02_audit_logging/reports/sot_policy_alignment_audit.json"
+
+  entropy_resilience:
+    metric: "resilience"
+    threshold: 0.70
+    enforcement: "hard-block"
+    exit_code_on_fail: 2
+    description: "Trust entropy resilience must be >= 0.70"
+    tool: "opa"
+    policy: "23_compliance/policies/entropy_resilience_threshold.rego"
+    input: "02_audit_logging/reports/trust_entropy_analysis.json"
+
+  evidence_network:
+    metrics:
+      mutual_information_bits:
+        threshold: 10.0
+        description: "Minimum mutual information between evidence nodes"
+      graph_density:
+        threshold: 0.12
+        description: "Minimum graph density for evidence network"
+      avg_degree:
+        threshold: 10.0
+        description: "Average node degree (cross-references per artifact)"
+    enforcement: "hard-block"
+    exit_code_on_fail: 2
+    tool: "evidence_network_gate.py"
+    report: "02_audit_logging/reports/evidence_network_gate.json"
+
+  truth_vector:
+    metrics:
+      y_axis_authenticity:
+        threshold: 0.98
+        description: "Y-axis (Content Integrity) from authenticity_rate"
+      vector_magnitude:
+        threshold: 0.90
+        description: "Truth vector magnitude |V|"
+    enforcement: "soft-warning"
+    exit_code_on_fail: 1
+    tool: "truth_vector_analysis.py"
+    report: "02_audit_logging/reports/truth_vector_analysis.json"
+
+  forensic_aggregator:
+    metric: "master_score"
+    threshold: 0.93
+    cap_at_1.0_when:
+      structural_integrity: ">= 0.99"
+      authenticity_rate: ">= 0.99"
+      resilience: ">= 0.70"
+      vector_magnitude: ">= 0.90"
+    enforcement: "soft-warning"
+    exit_code_on_fail: 1
+    tool: "forensic_aggregator.py"
+    report: "02_audit_logging/reports/forensic_integrity_matrix.json"
+
+  non_canonical_scores:
+    metric: "raw_score_count"
+    threshold: 0
+    enforcement: "root-24-lock"
+    exit_code_on_fail: 24
+    description: "No raw X/100 or X/400 scores allowed without SCORE_REF"
+    tool: "no_raw_scores.py"
+    hook: "pre-commit"
+
+certification_levels:
+  platinum_forensic:
+    requirements:
+      score_authenticity: 1.0
+      sot_policy_alignment: 100.0
+      entropy_resilience: ">= 0.70"
+      truth_vector_magnitude: ">= 0.90"
+      forensic_aggregator: 1.0
+    grade: "PLATINUM-Forensic"
+    certification_score: "100/100"
+
+  platinum:
+    requirements:
+      score_authenticity: ">= 0.99"
+      sot_policy_alignment: ">= 95.0"
+      truth_vector_magnitude: ">= 0.85"
+    grade: "PLATINUM"
+    certification_score: "96/100"
+
+  gold:
+    requirements:
+      score_authenticity: ">= 0.95"
+      sot_policy_alignment: ">= 85.0"
+      truth_vector_magnitude: ">= 0.75"
+    grade: "GOLD"
+    certification_score: "85/100"
+
+enforcement_order:
+  - name: "Score Schema Validation"
+    tool: "jsonschema"
+    schema: "02_audit_logging/schemas/score_manifest.schema.json"
+    pattern: "**/*.score.json"
+
+  - name: "Score Authenticity Strict"
+    tool: "verify_score_authenticity_strict.py"
+    blocking: true
+
+  - name: "SoT-Policy 100% Alignment"
+    tool: "verify_sot_policy_alignment.py"
+    blocking: true
+
+  - name: "Entropy Resilience OPA Gate"
+    tool: "opa eval"
+    policy: "entropy_resilience_threshold.rego"
+    blocking: true
+
+  - name: "Evidence Network Gate"
+    tool: "evidence_network_gate.py"
+    blocking: true
+
+  - name: "Truth Vector Analysis"
+    tool: "truth_vector_analysis.py"
+    blocking: false
+
+  - name: "Forensic Aggregator"
+    tool: "forensic_aggregator.py"
+    blocking: false
+
+metadata:
+  purpose: "Canonical registry of all integrity thresholds"
+  enforcement_philosophy: "Hard gates for fraud prevention, soft gates for quality measurement"
+  root_24_lock_compliance: true
+  worm_backing: true

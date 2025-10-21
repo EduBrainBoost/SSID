@@ -1,0 +1,10 @@
+version: "1.0"
+engine: "marketplace_fee_engine"
+fees:
+  system_fee_percent: 2.0
+  developer_reward_percent: 1.0
+  optional_revenue_share_percent: 5.0
+settlement:
+  custody: "non-custodial"
+  distribution: "on-chain-automatic"
+  transparency: "hash-logged"

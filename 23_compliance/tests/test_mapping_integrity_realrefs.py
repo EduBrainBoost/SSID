@@ -18,10 +18,8 @@ import yaml
 import re
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[2]
 MAPS_DIR = ROOT / "23_compliance" / "mappings"
-
 
 def load_mapping_file(filename: str) -> dict:
     """Load and parse a compliance mapping YAML file."""
@@ -33,7 +31,6 @@ def load_mapping_file(filename: str) -> dict:
 
     assert data, f"Empty or invalid YAML in {filename}"
     return data
-
 
 def test_gdpr_mapping_structure():
     """Verify GDPR mapping has required structure and real article references."""
@@ -69,7 +66,6 @@ def test_gdpr_mapping_structure():
     # Should have multiple distinct articles
     assert len(found_articles) >= 5, f"Expected multiple GDPR articles, found: {found_articles}"
 
-
 def test_dora_mapping_structure():
     """Verify DORA mapping has required structure and Chapter III references."""
     data = load_mapping_file("dora_mapping.yaml")
@@ -102,7 +98,6 @@ def test_dora_mapping_structure():
 
     # Should have multiple distinct references
     assert len(found_refs) >= 5, f"Expected multiple DORA references, found: {found_refs}"
-
 
 def test_mica_mapping_structure():
     """Verify MiCA mapping has required structure and Art. 76+ references."""
@@ -137,7 +132,6 @@ def test_mica_mapping_structure():
     # Should have multiple distinct articles
     assert len(found_articles) >= 5, f"Expected multiple MiCA articles, found: {found_articles}"
 
-
 def test_amld6_mapping_structure():
     """Verify AMLD6 mapping has required structure and Art. 2-44 references."""
     data = load_mapping_file("amld6_mapping.yaml")
@@ -171,7 +165,6 @@ def test_amld6_mapping_structure():
     # Should have multiple distinct references
     assert len(found_refs) >= 5, f"Expected multiple AMLD6 references, found: {found_refs}"
 
-
 def test_all_mappings_have_real_article_references():
     """Global test: verify ALL mappings contain real regulatory article references."""
     mapping_files = {
@@ -190,7 +183,6 @@ def test_all_mappings_have_real_article_references():
             assert regex.search(full_text), \
                 f"{filename} - {entry['id']}: Missing regulatory reference"
 
-
 def test_mapping_applies_to_valid_modules():
     """Verify applies_to references valid SSID modules (00-24 range)."""
     valid_module_pattern = re.compile(r"^\d{2}_[a-z_]+$")
@@ -203,7 +195,6 @@ def test_mapping_applies_to_valid_modules():
                 for module in entry["applies_to"]:
                     assert valid_module_pattern.match(module), \
                         f"{mapping_file.name} - {entry['id']}: Invalid module reference '{module}'"
-
 
 def test_verification_methods_valid():
     """Verify all entries use valid verification methods."""
@@ -218,7 +209,6 @@ def test_verification_methods_valid():
             assert entry["verification"] in valid_methods, \
                 f"{mapping_file.name} - {entry['id']}: Invalid verification method '{entry['verification']}'"
 
-
 def test_checksums_present():
     """Verify all mapping files have checksum placeholders or values."""
     for mapping_file in MAPS_DIR.glob("*_mapping.yaml"):
@@ -228,7 +218,6 @@ def test_checksums_present():
             f"{mapping_file.name}: Missing checksum field"
         assert data["checksum"], \
             f"{mapping_file.name}: Empty checksum"
-
 
 def test_no_duplicate_ids():
     """Verify no duplicate mapping IDs within each framework."""
@@ -241,7 +230,6 @@ def test_no_duplicate_ids():
         assert len(ids) == len(unique_ids), \
             f"{mapping_file.name}: Duplicate mapping IDs found"
 
-
 def test_descriptions_not_empty():
     """Verify all descriptions are non-empty and meaningful."""
     for mapping_file in MAPS_DIR.glob("*_mapping.yaml"):
@@ -253,7 +241,6 @@ def test_descriptions_not_empty():
                 f"{mapping_file.name} - {entry['id']}: Empty description"
             assert len(desc) > 10, \
                 f"{mapping_file.name} - {entry['id']}: Description too short"
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

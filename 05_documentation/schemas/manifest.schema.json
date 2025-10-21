@@ -1,0 +1,267 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ssid.dev/schemas/manifest.v1.json",
+  "title": "Manifest",
+  "description": "Schema for SSID Implementation Manifest files (manifest.yaml)",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": {
+      "type": "string",
+      "const": "ssid/implementation/v1",
+      "description": "API version identifier"
+    },
+    "kind": {
+      "type": "string",
+      "const": "Manifest",
+      "description": "Resource kind"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["name", "version", "description", "created", "status"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^\\d{2}-[a-z-]+$",
+          "description": "Root name with numeric prefix (e.g., 01-ai-layer)"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Semantic version"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Human-readable description"
+        },
+        "created": {
+          "type": "string",
+          "format": "date",
+          "description": "Creation date (YYYY-MM-DD)"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["bootstrap", "active", "deprecated", "archived"],
+          "description": "Current lifecycle status"
+        }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "required": ["maintainer", "entry_points", "dependencies", "build", "test", "deployment", "observability", "compliance"],
+      "properties": {
+        "maintainer": {
+          "type": "string",
+          "description": "Primary maintainer team"
+        },
+        "entry_points": {
+          "type": "object",
+          "required": ["primary"],
+          "properties": {
+            "primary": {
+              "type": "string",
+              "description": "Primary entry point file"
+            },
+            "secondary": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "description": "Secondary entry points (newline-separated)"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Secondary entry points (array)"
+                }
+              ]
+            }
+          },
+          "description": "Application entry points"
+        },
+        "dependencies": {
+          "type": "object",
+          "required": ["runtime", "build", "test"],
+          "properties": {
+            "runtime": {
+              "type": "object",
+              "properties": {
+                "python": {
+                  "type": "string",
+                  "description": "Python version requirement"
+                }
+              },
+              "description": "Runtime dependencies"
+            },
+            "build": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Build dependencies"
+            },
+            "test": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Test dependencies"
+            }
+          },
+          "description": "Dependency specifications"
+        },
+        "build": {
+          "type": "object",
+          "required": ["command", "artifacts"],
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "Build command"
+            },
+            "artifacts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Build artifacts"
+            }
+          },
+          "description": "Build configuration"
+        },
+        "test": {
+          "type": "object",
+          "required": ["command", "coverage_threshold"],
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "Test command"
+            },
+            "coverage_threshold": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Minimum code coverage percentage"
+            }
+          },
+          "description": "Test configuration"
+        },
+        "deployment": {
+          "type": "object",
+          "required": ["environments", "health_check"],
+          "properties": {
+            "environments": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["dev", "stage", "prod"]
+              },
+              "description": "Deployment environments"
+            },
+            "health_check": {
+              "type": "object",
+              "required": ["enabled"],
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Whether health check is enabled"
+                },
+                "endpoint": {
+                  "type": "string",
+                  "description": "Health check endpoint"
+                },
+                "interval_seconds": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Health check interval in seconds"
+                }
+              },
+              "description": "Health check configuration"
+            }
+          },
+          "description": "Deployment configuration"
+        },
+        "observability": {
+          "type": "object",
+          "required": ["metrics", "logging", "tracing"],
+          "properties": {
+            "metrics": {
+              "type": "object",
+              "required": ["enabled"],
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Whether metrics collection is enabled"
+                },
+                "port": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 65535,
+                  "description": "Metrics port"
+                }
+              },
+              "description": "Metrics configuration"
+            },
+            "logging": {
+              "type": "object",
+              "required": ["level", "format"],
+              "properties": {
+                "level": {
+                  "type": "string",
+                  "enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+                  "description": "Log level"
+                },
+                "format": {
+                  "type": "string",
+                  "enum": ["json", "text"],
+                  "description": "Log format"
+                }
+              },
+              "description": "Logging configuration"
+            },
+            "tracing": {
+              "type": "object",
+              "required": ["enabled"],
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Whether tracing is enabled"
+                },
+                "sample_rate": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "description": "Trace sampling rate (0.0 to 1.0)"
+                }
+              },
+              "description": "Tracing configuration"
+            }
+          },
+          "description": "Observability configuration"
+        },
+        "compliance": {
+          "type": "object",
+          "required": ["safe_fix", "root_24_lock", "pii_policy"],
+          "properties": {
+            "safe_fix": {
+              "type": "boolean",
+              "description": "SAFE-FIX compliance flag"
+            },
+            "root_24_lock": {
+              "type": "string",
+              "enum": ["enforced", "relaxed", "disabled"],
+              "description": "ROOT-24-LOCK enforcement level"
+            },
+            "pii_policy": {
+              "type": "string",
+              "enum": ["hash_only", "encrypted", "prohibited"],
+              "description": "PII handling policy"
+            }
+          },
+          "description": "Compliance flags"
+        }
+      }
+    }
+  }
+}

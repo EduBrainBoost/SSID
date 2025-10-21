@@ -1,0 +1,14 @@
+apiVersion: ssid/v1
+kind: SOTAuditManifest
+metadata:
+  name: sot-implementation-audit
+  version: "1.0.0"
+  root24lock: true
+spec:
+  index: "16_codex/contracts/sot/sot_rule_index.yaml"
+  policy: "23_compliance/policies/sot/nonempty_artifact_policy.rego"
+  verifier_cli: "12_tooling/cli/sot_audit_verifier.py"
+  output_report: "23_compliance/registry/sot_implementation_audit_report.json"
+  thresholds:
+    overall: 100.0
+    per_rule: 100.0

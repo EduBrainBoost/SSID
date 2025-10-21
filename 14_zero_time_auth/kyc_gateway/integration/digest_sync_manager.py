@@ -18,7 +18,6 @@ import yaml
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
 class DigestSyncManager:
     """Synchronize digest consistency across layers"""
 

@@ -21,7 +21,6 @@ from datetime import datetime
 from typing import Dict, List, Set, Tuple
 from collections import defaultdict
 
-
 ROOT = Path(__file__).resolve().parents[2]
 POLICY_PATH = ROOT / "23_compliance" / "policies" / "anti_gaming_policy.yaml"
 LOG_PATH = ROOT / "02_audit_logging" / "logs" / "anti_gaming_circular_deps.jsonl"
@@ -31,7 +30,6 @@ EXCLUDE_DIRS = {
     ".git", "venv", "__pycache__", ".github", "datasets", "logs",
     ".pytest_cache", "node_modules", "dist", "build", ".venv"
 }
-
 
 class ImportGraphBuilder:
     """Build import dependency graph from Python files."""
@@ -126,7 +124,6 @@ class ImportGraphBuilder:
 
         return cycles
 
-
 def load_policy() -> Dict:
     """Load anti-gaming policy configuration."""
     if not POLICY_PATH.exists():
@@ -136,7 +133,6 @@ def load_policy() -> Dict:
         policy = yaml.safe_load(f)
 
     return policy
-
 
 def write_audit_log(status: str, cycles: List[List[str]], policy_version: str, thresholds: Dict) -> None:
     """Write deterministic audit log entry."""
@@ -155,7 +151,6 @@ def write_audit_log(status: str, cycles: List[List[str]], policy_version: str, t
 
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, sort_keys=True) + "\n")
-
 
 def main() -> int:
     """Main execution."""
@@ -208,7 +203,6 @@ def main() -> int:
     print(f"Audit log: {LOG_PATH}")
 
     return 0 if status == "PASS" else 2
-
 
 if __name__ == "__main__":
     sys.exit(main())

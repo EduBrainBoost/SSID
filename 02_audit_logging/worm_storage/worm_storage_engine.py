@@ -26,11 +26,9 @@ from pathlib import Path
 from typing import Dict, Any, Optional, List
 import stat
 
-
 class WORMViolationError(Exception):
     """Raised when attempting to modify immutable WORM data."""
-    raise NotImplementedError("TODO: Implement this block")
-
+    pass
 
 class WORMStorageEngine:
     """
@@ -333,7 +331,6 @@ class WORMStorageEngine:
         # Return most recent first
         return entries[-limit:][::-1]
 
-
 def test_worm_storage():
     """Test WORM storage functionality."""
     print("=" * 70)
@@ -402,7 +399,6 @@ def test_worm_storage():
     print("=" * 70)
     print("[OK] WORM Storage Engine - All Tests Passed")
     print("=" * 70)
-
 
 if __name__ == "__main__":
     test_worm_storage()

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="80" role="img" aria-label="SSID ROOT-24-LOCK CERTIFIED 100/100">
+  <title>SSID ROOT-24-LOCK CERTIFIED 100/100</title>
+  <desc>CI-verified audit seal for SSID v5.3, SAFE-FIX and ROOT-24-LOCK enforced.</desc>
+
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F5F5F5;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Main rectangle with white background -->
+  <rect width="240" height="80" rx="10" ry="10" fill="url(#bgGradient)" stroke="url(#goldGradient)" stroke-width="3" filter="url(#shadow)"/>
+
+  <!-- Lock icon (top left) -->
+  <g transform="translate(15, 20)">
+    <rect x="0" y="12" width="18" height="16" rx="2" fill="url(#goldGradient)"/>
+    <path d="M 4 12 V 8 A 5 5 0 0 1 14 8 V 12" stroke="url(#goldGradient)" stroke-width="2.5" fill="none"/>
+    <circle cx="9" cy="20" r="2.5" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Checkmark badge (top right) -->
+  <g transform="translate(205, 15)">
+    <circle cx="12" cy="12" r="12" fill="#28A745"/>
+    <path d="M 6 12 L 10 16 L 18 8" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Title text -->
+  <text x="120" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#333333">
+    ROOT-24-LOCK
+  </text>
+
+  <!-- Status text -->
+  <text x="120" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="16" fill="url(#goldGradient)">
+    CERTIFIED 100/100
+  </text>
+
+  <!-- Bottom ribbon -->
+  <rect x="20" y="65" width="200" height="2" fill="url(#goldGradient)"/>
+
+  <!-- Version indicator (bottom left) -->
+  <text x="25" y="78" font-family="Arial, sans-serif" font-size="8" fill="#666666">
+    v5.3
+  </text>
+
+  <!-- Date indicator (bottom right) -->
+  <text x="215" y="78" text-anchor="end" font-family="Arial, sans-serif" font-size="8" fill="#666666">
+    2025-10-13
+  </text>
+</svg>

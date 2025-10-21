@@ -1,0 +1,1377 @@
+# SSID Master Rules - VOLLSTÄNDIGE Extraktion v1.2
+# Quelle: ssid_master_definition_corrected_v1.1.1.md
+# Methode: Zeile-für-Zeile manuelle Extraktion
+# Zweck: 100% Coverage-Checking aller Master-Regeln
+
+version: "1.2.0"
+extraction_date: "2025-10-19"
+extraction_method: "manual_line_by_line"
+source_document: "ssid_master_definition_corrected_v1.1.1.md"
+total_rules: 156  # Nach vollständiger Extraktion
+
+# ============================================================================
+# SEKTION 1: PROJEKTÜBERSICHT
+# ============================================================================
+section_projektuebersicht:
+  
+  PU001:
+    type: "MUST"
+    rule: "SSID MUSS als universelle digitale Lebens- und Geschäftsinfrastruktur fungieren"
+    source: "Projektübersicht - Vision"
+    category: "Vision & Scope"
+    implementation_requirements:
+      - "Alle 16 Anwendungsdomänen (Shards) abdecken"
+      - "Privat, geschäftlich, behördlich unterstützen"
+  
+  PU002:
+    type: "MUST"
+    rule: "Architektur MUSS 2-dimensionale Matrix sein (24 Roots × 16 Shards)"
+    source: "Projektübersicht - Architektur-Paradigma"
+    category: "Architecture"
+    implementation_requirements:
+      - "24 vertikale Roots (technische Ebenen)"
+      - "16 horizontale Shards (Anwendungsdomänen)"
+      - "384 Chart-Dateien resulierend"
+  
+  PU003:
+    type: "MUST"
+    rule: "System MUSS dezentral und non-custodial sein"
+    source: "Projektübersicht - Vision"
+    category: "Non-Custodial"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Keine zentrale Datenspeicherung von PII"
+      - "User haben volle Kontrolle über ihre Daten"
+  
+  PU004:
+    type: "MUST"
+    rule: "System MUSS hash-basiert sein"
+    source: "Projektübersicht - Vision"
+    category: "Hash-Only"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Nur Hashes speichern, keine Rohdaten"
+      - "SHA3-256 als Standard-Hash-Algorithmus"
+  
+  PU005:
+    type: "MUST"
+    rule: "Blockchain/DLT MUSS Ethereum, Polygon oder eigene Layer verwenden"
+    source: "Projektübersicht - Technologie-Stack"
+    category: "Blockchain"
+    implementation_requirements:
+      - "Ethereum Mainnet für Anchoring"
+      - "Polygon als L2-Lösung"
+      - "Eigene Layer optional"
+  
+  PU006:
+    type: "MUST"
+    rule: "Smart Contracts MÜSSEN in Solidity oder Rust geschrieben sein"
+    source: "Projektübersicht - Technologie-Stack"
+    category: "Smart Contracts"
+    implementation_requirements:
+      - "Solidity für Ethereum-kompatible Chains"
+      - "Rust für Substrate/Polkadot"
+  
+  PU007:
+    type: "MUST"
+    rule: "Identity MUSS W3C DID und Verifiable Credentials implementieren"
+    source: "Projektübersicht - Technologie-Stack"
+    category: "Identity Standards"
+    implementation_requirements:
+      - "W3C DID Core 1.0 konform"
+      - "W3C Verifiable Credentials Data Model 1.1"
+  
+  PU008:
+    type: "MUST"
+    rule: "Storage MUSS IPFS, Hash-Ledger und WORM verwenden"
+    source: "Projektübersicht - Technologie-Stack"
+    category: "Storage"
+    implementation_requirements:
+      - "IPFS für dezentralen Storage"
+      - "Hash-Ledger für Audit-Trails"
+      - "WORM (Write-Once-Read-Many) für Evidence"
+  
+  PU009:
+    type: "MUST"
+    rule: "Compliance MUSS GDPR, eIDAS 2.0, EU AI Act, MiCA erfüllen"
+    source: "Projektübersicht - Technologie-Stack"
+    category: "Compliance"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "GDPR (EU 2016/679) konform"
+      - "eIDAS 2.0 konform"
+      - "EU AI Act konform"
+      - "MiCA konform"
+
+# ============================================================================
+# SEKTION 2: DIE 24 ROOT-ORDNER
+# ============================================================================
+section_24_roots:
+  
+  R001:
+    type: "MUST"
+    rule: "Es MÜSSEN exakt 24 Root-Ordner existieren"
+    source: "Die 24 Root-Ordner - Überschrift"
+    category: "Architecture - Roots"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Validator prüft Anzahl Root-Ordner = 24"
+      - "Keine zusätzlichen Roots erlaubt"
+      - "Keine fehlenden Roots erlaubt"
+  
+  R002:
+    type: "MUST"
+    rule: "Jeder Root MUSS eine spezifische technische Systemebene repräsentieren"
+    source: "Die 24 Root-Ordner - Einleitung"
+    category: "Architecture - Roots"
+    implementation_requirements:
+      - "01_ai_layer = AI/ML & Intelligenz"
+      - "02_audit_logging = Nachweise & Beweisführung"
+      - "03_core = Zentrale Logik"
+      - "... (alle 24 Roots definiert)"
+  
+  R003:
+    type: "MUST"
+    rule: "01_ai_layer MUSS AI/ML-Modelle, Scoring, Governance und Multi-Modal abdecken"
+    source: "Die 24 Root-Ordner - 01. ai_layer"
+    category: "Root Definition - ai_layer"
+    implementation_requirements:
+      - "KI-Modelle (Training, Inferenz, Federated Learning)"
+      - "Risk/Trust-Scoring"
+      - "Bias- & Fairness-Kontrollen"
+      - "AI Governance (EU AI Act)"
+  
+  R004:
+    type: "MUST"
+    rule: "02_audit_logging MUSS Hash-Ledger, Evidence-Matrix, Blockchain Anchors und Audit-Trails bieten"
+    source: "Die 24 Root-Ordner - 02. audit_logging"
+    category: "Root Definition - audit_logging"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Hash-Ledger für alle Operationen"
+      - "Evidence-Matrix"
+      - "Blockchain Anchors (Ethereum, Polygon)"
+      - "Audit-Trails mit Retention"
+  
+  R005:
+    type: "MUST"
+    rule: "03_core MUSS Smart Contract Kernsystem, Dispatcher und Identity-Resolver enthalten"
+    source: "Die 24 Root-Ordner - 03. core"
+    category: "Root Definition - core"
+    implementation_requirements:
+      - "Smart Contract Kernsystem (On-Chain-Regeln)"
+      - "Dispatcher-Schnittstellen"
+      - "Identity-Resolver"
+      - "Root-24-LOCK Enforcement"
+  
+  R006:
+    type: "MUST"
+    rule: "04_deployment MUSS CI/CD-Pipelines, Rollouts und Container-Orchestrierung bereitstellen"
+    source: "Die 24 Root-Ordner - 04. deployment"
+    category: "Root Definition - deployment"
+    implementation_requirements:
+      - "CI/CD-Pipelines"
+      - "Deployment-Strategien (Canary, Blue/Green)"
+      - "Container & Orchestrierung (K8s, Terraform)"
+  
+  R007:
+    type: "MUST"
+    rule: "05_documentation MUSS Developer Guides, User Manuals, API Docs und I18N enthalten"
+    source: "Die 24 Root-Ordner - 05. documentation"
+    category: "Root Definition - documentation"
+    implementation_requirements:
+      - "Developer Guides"
+      - "User Manuals"
+      - "API Docs"
+      - "Mehrsprachigkeit (I18N-Layer)"
+  
+  R008:
+    type: "MUST"
+    rule: "06_data_pipeline MUSS ETL/ELT-Prozesse und Datenströme orchestrieren"
+    source: "Die 24 Root-Ordner - 06. data_pipeline"
+    category: "Root Definition - data_pipeline"
+    implementation_requirements:
+      - "ETL/ELT-Prozesse"
+      - "Batch, Stream, Realtime"
+      - "ML/AI Data-Feeds"
+  
+  R009:
+    type: "MUST"
+    rule: "07_governance_legal MUSS eIDAS, MiCA, DSGVO, DORA und DAO-Governance abdecken"
+    source: "Die 24 Root-Ordner - 07. governance_legal"
+    category: "Root Definition - governance_legal"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "eIDAS 2.0 konform"
+      - "MiCA konform"
+      - "DSGVO konform"
+      - "DORA konform"
+      - "DAO-Governance-Regeln"
+  
+  R010:
+    type: "MUST"
+    rule: "08_identity_score MUSS Reputation-Systeme und Trust Levels bereitstellen"
+    source: "Die 24 Root-Ordner - 08. identity_score"
+    category: "Root Definition - identity_score"
+    implementation_requirements:
+      - "Identity Trust Levels"
+      - "Reputationssysteme"
+      - "Scoring-Algorithmen für SSI/DIDs"
+      - "Nur Hash-Proofs, keine PII"
+  
+  R011:
+    type: "MUST"
+    rule: "09_meta_identity MUSS DID-Schemas, Identity Wallets und Lifecycle Management enthalten"
+    source: "Die 24 Root-Ordner - 09. meta_identity"
+    category: "Root Definition - meta_identity"
+    implementation_requirements:
+      - "DID-Schemas"
+      - "Identity Wallets"
+      - "Selective Disclosure"
+      - "Profile, Avatare"
+  
+  R012:
+    type: "MUST"
+    rule: "10_interoperability MUSS DID-Resolver, Cross-Chain Bridges und API-Gateways bieten"
+    source: "Die 24 Root-Ordner - 10. interoperability"
+    category: "Root Definition - interoperability"
+    implementation_requirements:
+      - "DID-Resolver"
+      - "Standards (DIF, W3C)"
+      - "Cross-Chain Bridges"
+      - "API-Gateways"
+  
+  R013:
+    type: "MUST"
+    rule: "11_test_simulation MUSS Testumgebungen, Simulationen und Chaos Engineering enthalten"
+    source: "Die 24 Root-Ordner - 11. test_simulation"
+    category: "Root Definition - test_simulation"
+    implementation_requirements:
+      - "Testumgebungen"
+      - "Simulationen"
+      - "Mock-Chains"
+      - "Chaos Engineering"
+      - "Attack Simulations"
+  
+  R014:
+    type: "MUST"
+    rule: "12_tooling MUSS Developer Tools, CLI, SDKs und Automation Scripts bereitstellen"
+    source: "Die 24 Root-Ordner - 12. tooling"
+    category: "Root Definition - tooling"
+    implementation_requirements:
+      - "Developer Tools"
+      - "CLI"
+      - "SDKs"
+      - "CI-Helper, Linter, Formatter"
+  
+  R015:
+    type: "MUST"
+    rule: "13_ui_layer MUSS Frontend, Dashboards und Admin-GUIs enthalten"
+    source: "Die 24 Root-Ordner - 13. ui_layer"
+    category: "Root Definition - ui_layer"
+    implementation_requirements:
+      - "Frontend"
+      - "Dashboards"
+      - "Partner- & User-Portale"
+      - "Admin-GUIs"
+  
+  R016:
+    type: "MUST"
+    rule: "14_zero_time_auth MUSS Real-Time KYC/KYB und Zero-Time Login bieten"
+    source: "Die 24 Root-Ordner - 14. zero_time_auth"
+    category: "Root Definition - zero_time_auth"
+    implementation_requirements:
+      - "Real-Time KYC/KYB über Anbieter"
+      - "Zero-Time Login"
+      - "Biometrie, MFA"
+      - "DID-gebundene Session-Tokens"
+  
+  R017:
+    type: "MUST"
+    rule: "15_infra MUSS Cloud, Bare-Metal, Netzwerke und Secrets Management enthalten"
+    source: "Die 24 Root-Ordner - 15. infra"
+    category: "Root Definition - infra"
+    implementation_requirements:
+      - "Cloud, Bare-Metal, Netzwerke"
+      - "Storage, Compute, Load Balancing"
+      - "Secrets & Key Management (Vault)"
+  
+  R018:
+    type: "MUST"
+    rule: "16_codex MUSS Wissensbasis, Policies und Regelwerke enthalten"
+    source: "Die 24 Root-Ordner - 16. codex"
+    category: "Root Definition - codex"
+    implementation_requirements:
+      - "Codex"
+      - "Policies"
+      - "Blaupausen"
+      - "SSID-Bibeln (Manifeste, Strukturlevel3)"
+  
+  R019:
+    type: "MUST"
+    rule: "17_observability MUSS Logging, Metrics, Tracing und Alerts bereitstellen"
+    source: "Die 24 Root-Ordner - 17. observability"
+    category: "Root Definition - observability"
+    implementation_requirements:
+      - "Logging"
+      - "Metrics"
+      - "Tracing"
+      - "Alerts, Dashboards, SIEM"
+      - "AI-Ops Monitoring"
+  
+  R020:
+    type: "MUST"
+    rule: "18_data_layer MUSS Datenbanken, Encryption-at-Rest und Hash-Speicher enthalten"
+    source: "Die 24 Root-Ordner - 18. data_layer"
+    category: "Root Definition - data_layer"
+    implementation_requirements:
+      - "Datenbanken, GraphDBs, Time-Series"
+      - "Encryption-at-Rest"
+      - "Backups"
+      - "Hash-Speicher"
+  
+  R021:
+    type: "MUST"
+    rule: "19_adapters MUSS Adapter zu externen APIs/Chains und Provider-Connectoren bieten"
+    source: "Die 24 Root-Ordner - 19. adapters"
+    category: "Root Definition - adapters"
+    implementation_requirements:
+      - "Adapter zu externen APIs/Chains"
+      - "Payment-Provider-Connectoren"
+      - "Identity Provider SDKs"
+  
+  R022:
+    type: "MUST"
+    rule: "20_foundation MUSS SSID-Token, Tokenomics und Lizenzmodelle definieren"
+    source: "Die 24 Root-Ordner - 20. foundation"
+    category: "Root Definition - foundation"
+    implementation_requirements:
+      - "SSID-Token (Utility, Governance, Rewards)"
+      - "Tokenomics, Distribution"
+      - "Lizenzmodelle (NFT-Licenses)"
+  
+  R023:
+    type: "MUST"
+    rule: "21_post_quantum_crypto MUSS PQC-Algorithmen und Quantum-Safe Migration enthalten"
+    source: "Die 24 Root-Ordner - 21. post_quantum_crypto"
+    category: "Root Definition - post_quantum_crypto"
+    implementation_requirements:
+      - "PQC-Algorithmen (Kyber, Dilithium)"
+      - "Quantum-Safe Migration"
+      - "Hybrid-Signaturen"
+  
+  R024:
+    type: "MUST"
+    rule: "22_datasets MUSS Public Datasets und Hash-Referenzen bereitstellen"
+    source: "Die 24 Root-Ordner - 22. datasets"
+    category: "Root Definition - datasets"
+    implementation_requirements:
+      - "Public Datasets"
+      - "Trainingsdaten"
+      - "Hash-Referenzen statt PII"
+      - "Zugriff via DID & Consent"
+  
+  R025:
+    type: "MUST"
+    rule: "23_compliance MUSS Blacklists, Whitelists und Jurisdiktionsregeln enthalten"
+    source: "Die 24 Root-Ordner - 23. compliance"
+    category: "Root Definition - compliance"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Blacklists, Whitelists"
+      - "Jurisdiktionsregeln"
+      - "Policies (AML, KYC, GDPR)"
+      - "Audit-Logs, Evidence-Registrierung"
+  
+  R026:
+    type: "MUST"
+    rule: "24_meta_orchestration MUSS Dispatcher, Registry, Locks und Versionierung enthalten"
+    source: "Die 24 Root-Ordner - 24. meta_orchestration"
+    category: "Root Definition - meta_orchestration"
+    implementation_requirements:
+      - "Dispatcher"
+      - "Registry"
+      - "Locks"
+      - "Trigger & Gates"
+      - "Global Hash-Ledger"
+
+# ============================================================================
+# SEKTION 3: DIE 16 SHARDS
+# ============================================================================
+section_16_shards:
+  
+  S001:
+    type: "MUST"
+    rule: "Es MÜSSEN exakt 16 Shards existieren"
+    source: "Die 16 Shards (Oberkategorien) - Überschrift"
+    category: "Architecture - Shards"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Validator prüft Anzahl Shards = 16"
+      - "Keine zusätzlichen Shards erlaubt"
+      - "Keine fehlenden Shards erlaubt"
+  
+  S002:
+    type: "MUST"
+    rule: "Shards MÜSSEN in 4 Blöcke à 4 Shards gruppiert sein"
+    source: "Die 16 Shards (Oberkategorien) - Einleitung"
+    category: "Architecture - Shards"
+    implementation_requirements:
+      - "Block 1: IDENTITÄT & BASIS (Shards 01-04)"
+      - "Block 2: PRIVATLEBEN (Shards 05-08)"
+      - "Block 3: WIRTSCHAFT & VERMÖGEN (Shards 09-12)"
+      - "Block 4: GESCHÄFT & ÖFFENTLICH (Shards 13-16)"
+  
+  S003:
+    type: "MUST"
+    rule: "Shard 01 MUSS Identität & Personen abdecken"
+    source: "Die 16 Shards - Block 1 - 01. Identität & Personen"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "DIDs, Ausweise, Profile, Authentifizierung"
+      - "Personen, Firmen, Organisationen, Behörden"
+  
+  S004:
+    type: "MUST"
+    rule: "Shard 02 MUSS Dokumente & Nachweise abdecken"
+    source: "Die 16 Shards - Block 1 - 02. Dokumente & Nachweise"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Urkunden, Bescheinigungen, Zertifikate"
+      - "Digitale Signaturen, Notarisierungen"
+  
+  S005:
+    type: "MUST"
+    rule: "Shard 03 MUSS Zugang & Berechtigungen abdecken"
+    source: "Die 16 Shards - Block 1 - 03. Zugang & Berechtigungen"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Rollen, Rechte, Mandanten, Delegationen"
+      - "MFA, Zero-Trust, Session-Management"
+  
+  S006:
+    type: "MUST"
+    rule: "Shard 04 MUSS Kommunikation & Daten abdecken"
+    source: "Die 16 Shards - Block 1 - 04. Kommunikation & Daten"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Nachrichten, E-Mail, Chat, Datenaustausch"
+      - "APIs, Schnittstellen, Benachrichtigungen"
+  
+  S007:
+    type: "MUST"
+    rule: "Shard 05 MUSS Gesundheit & Medizin abdecken"
+    source: "Die 16 Shards - Block 2 - 05. Gesundheit & Medizin"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Krankenakte, Rezepte, Impfpass, Behandlungen"
+      - "Ärzte, Kliniken, Apotheken, Pflegedienste"
+  
+  S008:
+    type: "MUST"
+    rule: "Shard 06 MUSS Bildung & Qualifikationen abdecken"
+    source: "Die 16 Shards - Block 2 - 06. Bildung & Qualifikationen"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Zeugnisse, Abschlüsse, Kurse, Weiterbildung"
+      - "Schulen, Unis, Zertifizierungen, Skills"
+  
+  S009:
+    type: "MUST"
+    rule: "Shard 07 MUSS Familie & Soziales abdecken"
+    source: "Die 16 Shards - Block 2 - 07. Familie & Soziales"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Geburt, Heirat, Scheidung, Adoption, Erbe"
+      - "Vormundschaft, Betreuung, Sozialleistungen"
+      - "Vereine, Mitgliedschaften, Ehrenamt"
+  
+  S010:
+    type: "MUST"
+    rule: "Shard 08 MUSS Mobilität & Fahrzeuge abdecken"
+    source: "Die 16 Shards - Block 2 - 08. Mobilität & Fahrzeuge"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Führerschein, KFZ-Zulassung, Fahrzeugpapiere"
+      - "TÜV/AU, Fahrzeugkauf/-verkauf"
+      - "Maut-Accounts, Kfz-Versicherung"
+  
+  S011:
+    type: "MUST"
+    rule: "Shard 09 MUSS Arbeit & Karriere abdecken"
+    source: "Die 16 Shards - Block 3 - 09. Arbeit & Karriere"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Arbeitsverträge, Gehalt, Bewerbungen"
+      - "Freelancing, Honorare, Arbeitszeugnisse"
+  
+  S012:
+    type: "MUST"
+    rule: "Shard 10 MUSS Finanzen & Banking abdecken"
+    source: "Die 16 Shards - Block 3 - 10. Finanzen & Banking"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Konten, Zahlungen, Überweisungen, Kredite"
+      - "Investments, Portfolios, DeFi, Krypto"
+      - "Abonnements, Loyalitäts-Programme"
+  
+  S013:
+    type: "MUST"
+    rule: "Shard 11 MUSS Versicherungen & Risiken abdecken"
+    source: "Die 16 Shards - Block 3 - 11. Versicherungen & Risiken"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Alle Versicherungsarten"
+      - "Schäden, Claims, Policen, Prämien"
+  
+  S014:
+    type: "MUST"
+    rule: "Shard 12 MUSS Immobilien & Grundstücke abdecken"
+    source: "Die 16 Shards - Block 3 - 12. Immobilien & Grundstücke"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Eigentum, Miete, Pacht, Grundbuch"
+      - "Hypotheken, Bewertungen, Nutzungsrechte"
+  
+  S015:
+    type: "MUST"
+    rule: "Shard 13 MUSS Unternehmen & Gewerbe abdecken"
+    source: "Die 16 Shards - Block 4 - 13. Unternehmen & Gewerbe"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Firmendaten, Handelsregister, Lizenzen, B2B"
+      - "Buchhaltung, Bilanzen, Jahresabschlüsse"
+  
+  S016:
+    type: "MUST"
+    rule: "Shard 14 MUSS Verträge & Vereinbarungen abdecken"
+    source: "Die 16 Shards - Block 4 - 14. Verträge & Vereinbarungen"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Smart Contracts, Geschäftsverträge, AGBs"
+      - "SLAs, Lieferantenverträge, Partnerschaften"
+  
+  S017:
+    type: "MUST"
+    rule: "Shard 15 MUSS Handel & Transaktionen abdecken"
+    source: "Die 16 Shards - Block 4 - 15. Handel & Transaktionen"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Käufe, Verkäufe, Rechnungen, Garantien"
+      - "Supply Chain, Logistik, Lieferscheine"
+      - "Reisen, Events, Tickets"
+  
+  S018:
+    type: "MUST"
+    rule: "Shard 16 MUSS Behörden & Verwaltung abdecken"
+    source: "Die 16 Shards - Block 4 - 16. Behörden & Verwaltung"
+    category: "Shard Definition"
+    implementation_requirements:
+      - "Ämter, Anträge, Genehmigungen, Steuern"
+      - "Meldewesen, Gerichtsurteile, Ordnungswidrigkeiten"
+
+# ============================================================================
+# SEKTION 4: MATRIX-ARCHITEKTUR (24×16)
+# ============================================================================
+section_matrix:
+  
+  M001:
+    type: "MUST"
+    rule: "Matrix MUSS exakt 384 Chart-Dateien erzeugen (24 × 16)"
+    source: "Matrix-Architektur (24×16) - Berechnung"
+    category: "Matrix Architecture"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "24 Roots × 16 Shards = 384 Charts"
+      - "Validator prüft exakte Anzahl"
+      - "Keine Abweichungen erlaubt"
+  
+  M002:
+    type: "MUST"
+    rule: "Jeder Root MUSS alle 16 Shards enthalten"
+    source: "Matrix-Architektur (24×16) - Prinzip"
+    category: "Matrix Architecture"
+    implementation_requirements:
+      - "01_ai_layer enthält Shards 01-16"
+      - "02_audit_logging enthält Shards 01-16"
+      - "... (alle 24 Roots)"
+  
+  M003:
+    type: "MUST"
+    rule: "Matrix MUSS deterministisch sein"
+    source: "Matrix-Architektur (24×16) - Vorteile"
+    category: "Matrix Determinism"
+    implementation_requirements:
+      - "Jede Kombination eindeutig adressierbar"
+      - "Format: {ROOT_ID}/{SHARD_ID}"
+  
+  M004:
+    type: "MUST"
+    rule: "Matrix MUSS skalierbar sein"
+    source: "Matrix-Architektur (24×16) - Vorteile"
+    category: "Matrix Scalability"
+    implementation_requirements:
+      - "Unbegrenzte Unterkategorien innerhalb Shards"
+      - "Keine Änderung an Matrix-Struktur erforderlich"
+  
+  M005:
+    type: "MUST"
+    rule: "Matrix MUSS konsistent sein"
+    source: "Matrix-Architektur (24×16) - Vorteile"
+    category: "Matrix Consistency"
+    implementation_requirements:
+      - "Alle Roots folgen demselben Muster"
+      - "Keine Ausnahmen"
+  
+  M006:
+    type: "MUST"
+    rule: "Matrix MUSS audit-sicher sein"
+    source: "Matrix-Architektur (24×16) - Vorteile"
+    category: "Matrix Audit"
+    implementation_requirements:
+      - "Hash-Ledger über alle 384 Felder"
+      - "Jede Änderung nachvollziehbar"
+  
+  M007:
+    type: "MUST"
+    rule: "Matrix MUSS modular sein"
+    source: "Matrix-Architektur (24×16) - Vorteile"
+    category: "Matrix Modularity"
+    implementation_requirements:
+      - "Jedes Root-Shard-Paar isoliert entwickelbar"
+      - "Keine Kreuzabhängigkeiten erzwingen"
+
+# ============================================================================
+# SEKTION 5: HYBRID-STRUKTUR (SOT + IMPLEMENTIERUNG)
+# ============================================================================
+section_hybrid:
+  
+  H001:
+    type: "MUST"
+    rule: "System MUSS Zwei-Schichten-Architektur verwenden"
+    source: "Hybrid-Struktur: SoT + Implementierung - Konzept"
+    category: "Hybrid Architecture"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "chart.yaml (SoT) - Abstrakt: WAS"
+      - "manifest.yaml (Impl.) - Konkret: WIE"
+  
+  H002:
+    type: "MUST"
+    rule: "chart.yaml MUSS abstrakt sein (Capabilities, Policies, Interfaces)"
+    source: "Hybrid-Struktur: SoT + Implementierung - Konzept"
+    category: "Chart.yaml"
+    implementation_requirements:
+      - "Keine technischen Implementierungsdetails"
+      - "Nur WAS, nicht WIE"
+  
+  H003:
+    type: "MUST"
+    rule: "manifest.yaml MUSS konkret sein (Dateien, Tech-Stack, Artefakte)"
+    source: "Hybrid-Struktur: SoT + Implementierung - Konzept"
+    category: "Manifest.yaml"
+    implementation_requirements:
+      - "Technische Implementierungsdetails"
+      - "WIE, nicht WAS"
+  
+  H004:
+    type: "MUST"
+    rule: "SoT (chart.yaml) MUSS stabil sein (langsame Änderungsrate)"
+    source: "Hybrid-Struktur: SoT + Implementierung - Vergleich"
+    category: "SoT Stability"
+    implementation_requirements:
+      - "Selten geändert"
+      - "Nur bei Breaking Changes"
+  
+  H005:
+    type: "MUST"
+    rule: "Implementierung (manifest.yaml) DARF häufiger geändert werden"
+    source: "Hybrid-Struktur: SoT + Implementierung - Vergleich"
+    category: "Implementation Flexibility"
+    implementation_requirements:
+      - "Patches, Bugfixes erlaubt"
+      - "Keine chart.yaml-Änderung erforderlich"
+  
+  H006:
+    type: "MUST"
+    rule: "SoT MUSS Semver mit Breaking Changes verwenden"
+    source: "Hybrid-Struktur: SoT + Implementierung - Vergleich"
+    category: "SoT Versioning"
+    implementation_requirements:
+      - "Semantic Versioning"
+      - "Breaking Changes dokumentiert"
+  
+  H007:
+    type: "MUST"
+    rule: "Implementierung MUSS Patches und Bugfixes verwenden"
+    source: "Hybrid-Struktur: SoT + Implementierung - Vergleich"
+    category: "Implementation Versioning"
+    implementation_requirements:
+      - "Patch-Versionen erlaubt"
+      - "Keine Breaking Changes in Patches"
+  
+  H008:
+    type: "MUST"
+    rule: "SoT MUSS sprachunabhängig sein"
+    source: "Hybrid-Struktur: SoT + Implementierung - Vergleich"
+    category: "SoT Language Independence"
+    implementation_requirements:
+      - "Keine Programmiersprache vorgegeben"
+      - "Technologie-agnostisch"
+  
+  H009:
+    type: "MUST"
+    rule: "Implementierung DARF Programmiersprache wählen"
+    source: "Hybrid-Struktur: SoT + Implementierung - Vergleich"
+    category: "Implementation Language"
+    implementation_requirements:
+      - "Python, Rust, Go, etc. erlaubt"
+      - "Multiple Implementierungen pro Shard möglich"
+  
+  H010:
+    type: "MUST"
+    rule: "SoT-Governance MUSS vom Architecture Board übernommen werden"
+    source: "Hybrid-Struktur: SoT + Implementierung - Vergleich"
+    category: "SoT Governance"
+    implementation_requirements:
+      - "Architecture Board reviewed alle chart.yaml-Änderungen"
+      - "Approval erforderlich"
+  
+  H011:
+    type: "MUST"
+    rule: "Implementierungs-Governance DARF vom Development Team übernommen werden"
+    source: "Hybrid-Struktur: SoT + Implementierung - Vergleich"
+    category: "Implementation Governance"
+    implementation_requirements:
+      - "Development Team entscheidet über Implementierungen"
+      - "Kein Architecture Board erforderlich"
+
+# ============================================================================
+# SEKTION 6: ORDNERSTRUKTUR
+# ============================================================================
+section_ordnerstruktur:
+  
+  O001:
+    type: "MUST"
+    rule: "Pfad zu chart.yaml MUSS {ROOT}/shards/{SHARD}/chart.yaml sein"
+    source: "Ordnerstruktur Beispiele + Naming Conventions - Pfade"
+    category: "Path Structure"
+    implementation_requirements:
+      - "Exakte Pfadstruktur einhalten"
+      - "Keine Abweichungen erlaubt"
+  
+  O002:
+    type: "MUST"
+    rule: "Implementierungen MÜSSEN unter implementations/{IMPL_ID}/ liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Implementation Path"
+    implementation_requirements:
+      - "Jede Impl. hat eigenen Namespace"
+      - "Format: implementations/{IMPL_ID}/"
+  
+  O003:
+    type: "MUST"
+    rule: "Contracts MÜSSEN in contracts/ mit OpenAPI/JSON-Schema liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Contracts Path"
+    implementation_requirements:
+      - "contracts/*.openapi.yaml"
+      - "contracts/schemas/*.schema.json"
+  
+  O004:
+    type: "MUST"
+    rule: "Conformance Tests MÜSSEN in conformance/ liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Conformance Path"
+    implementation_requirements:
+      - "Contract-Tests in conformance/"
+      - "Test Framework: schemathesis"
+  
+  O005:
+    type: "MUST"
+    rule: "Policies MÜSSEN in policies/ liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Policies Path"
+    implementation_requirements:
+      - "Enforcement-Regeln in policies/"
+      - "YAML-Format"
+  
+  O006:
+    type: "MUST"
+    rule: "Docs MÜSSEN in docs/ liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Documentation Path"
+    implementation_requirements:
+      - "Shard-spezifische Doku in docs/"
+      - "Markdown-Format"
+  
+  O007:
+    type: "MUST"
+    rule: "CHANGELOG.md MUSS im Shard-Root liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Changelog"
+    implementation_requirements:
+      - "Versionsverlauf dokumentiert"
+      - "Markdown-Format"
+  
+  O008:
+    type: "MUST"
+    rule: "Source Code MUSS in implementations/*/src/ liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Source Code Path"
+    implementation_requirements:
+      - "Implementierung in src/"
+      - "Strukturiert nach services/, models/, utils/"
+  
+  O009:
+    type: "MUST"
+    rule: "Tests MÜSSEN in implementations/*/tests/ liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Tests Path"
+    implementation_requirements:
+      - "Unit Tests in tests/unit/"
+      - "Integration Tests in tests/integration/"
+      - "Fixtures in tests/fixtures/"
+  
+  O010:
+    type: "MUST"
+    rule: "Config MUSS in implementations/*/config/ liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Config Path"
+    implementation_requirements:
+      - "Settings in config/"
+      - "YAML-Format"
+  
+  O011:
+    type: "MUST"
+    rule: "Models MÜSSEN in implementations/*/models/ liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Models Path"
+    implementation_requirements:
+      - "Trained Models in models/"
+      - "Versioniert"
+  
+  O012:
+    type: "MUST"
+    rule: "Proto MUSS in implementations/*/proto/ liegen"
+    source: "Ordnerstruktur Beispiele"
+    category: "Proto Path"
+    implementation_requirements:
+      - "Protocol Buffers in proto/"
+      - ".proto-Dateien"
+
+# ============================================================================
+# SEKTION 7: CHART.YAML STRUKTUR
+# ============================================================================
+section_chartyaml:
+  
+  CY001:
+    type: "MUST"
+    rule: "chart.yaml MUSS metadata mit shard_id, version, status enthalten"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Metadata"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "shard_id: Eindeutige Shard-ID"
+      - "version: Semver (MAJOR.MINOR.PATCH)"
+      - "status: production/staging/development"
+  
+  CY002:
+    type: "MUST"
+    rule: "chart.yaml MUSS governance mit owner, reviewers, change_process enthalten"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Governance"
+    implementation_requirements:
+      - "owner: team, lead, contact"
+      - "reviewers: architecture, compliance, security"
+      - "change_process: rfc_required, approval_quorum"
+  
+  CY003:
+    type: "MUST"
+    rule: "chart.yaml MUSS capabilities mit MUST/SHOULD/HAVE kategorisieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Capabilities"
+    implementation_requirements:
+      - "MUST: Produktiv, SLA-gebunden"
+      - "SHOULD: Feature-complete, in Erprobung"
+      - "HAVE: Experimentell, optional"
+  
+  CY004:
+    type: "MUST"
+    rule: "chart.yaml MUSS constraints für pii_storage, data_policy, custody definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Constraints"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "pii_storage: 'forbidden'"
+      - "data_policy: 'hash_only'"
+      - "custody: 'non_custodial_code_only'"
+  
+  CY005:
+    type: "MUST"
+    rule: "chart.yaml MUSS enforcement mit static_analysis, runtime_checks, audit definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Enforcement"
+    implementation_requirements:
+      - "static_analysis: [semgrep, bandit]"
+      - "runtime_checks: [pii_detector]"
+      - "audit.log_to: '02_audit_logging'"
+  
+  CY006:
+    type: "MUST"
+    rule: "chart.yaml MUSS interfaces mit contracts und data_schemas definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Interfaces"
+    implementation_requirements:
+      - "contracts: [OpenAPI specs]"
+      - "data_schemas: [JSON schemas]"
+      - "authentication: 'mTLS'"
+  
+  CY007:
+    type: "MUST"
+    rule: "chart.yaml MUSS dependencies mit required und optional auflisten"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Dependencies"
+    implementation_requirements:
+      - "required: [andere Roots/Shards]"
+      - "optional: [...]"
+  
+  CY008:
+    type: "MUST"
+    rule: "chart.yaml MUSS compatibility mit semver und core_min_version definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Compatibility"
+    implementation_requirements:
+      - "semver: aktuelle Version"
+      - "core_min_version: '>=3.0.0'"
+  
+  CY009:
+    type: "MUST"
+    rule: "chart.yaml MUSS implementations mit default und available definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Implementations"
+    implementation_requirements:
+      - "default: Standard-Implementierung"
+      - "available: [Liste alternativer Implementierungen]"
+  
+  CY010:
+    type: "MUST"
+    rule: "chart.yaml MUSS conformance mit test_framework und contract_tests definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Conformance"
+    implementation_requirements:
+      - "test_framework: 'schemathesis'"
+      - "contract_tests: [Liste der Tests]"
+  
+  CY011:
+    type: "MUST"
+    rule: "chart.yaml MUSS orchestration mit workflows definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Orchestration"
+    implementation_requirements:
+      - "workflows: [multi-shard workflows]"
+  
+  CY012:
+    type: "MUST"
+    rule: "chart.yaml MUSS testing mit unit, integration, contract, e2e definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Testing"
+    implementation_requirements:
+      - "unit: location, min_coverage"
+      - "integration: location, requirements"
+      - "contract: location, framework"
+      - "e2e: location, scenarios"
+  
+  CY013:
+    type: "MUST"
+    rule: "chart.yaml MUSS documentation mit auto_generate und manual definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Documentation"
+    implementation_requirements:
+      - "auto_generate: [from contracts, schemas]"
+      - "manual: [location]"
+  
+  CY014:
+    type: "MUST"
+    rule: "chart.yaml MUSS observability mit metrics, tracing, logging, alerting definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Observability"
+    implementation_requirements:
+      - "metrics: prometheus"
+      - "tracing: jaeger"
+      - "logging: loki, pii_redaction: true"
+      - "alerting: alertmanager"
+  
+  CY015:
+    type: "MUST"
+    rule: "chart.yaml MUSS evidence mit strategy und anchoring definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Evidence"
+    implementation_requirements:
+      - "strategy: 'hash_ledger_with_anchoring'"
+      - "anchoring.chains: [ethereum, polygon]"
+  
+  CY016:
+    type: "MUST"
+    rule: "chart.yaml MUSS security mit threat_model, secrets_management, encryption definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Security"
+    implementation_requirements:
+      - "threat_model: 'docs/security/threat_model.md'"
+      - "secrets_management: '15_infra/vault'"
+      - "encryption: at_rest, in_transit"
+  
+  CY017:
+    type: "MUST"
+    rule: "chart.yaml MUSS deployment mit strategy und environments definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Deployment"
+    implementation_requirements:
+      - "strategy: 'blue-green' oder 'canary'"
+      - "environments: [dev, staging, production]"
+  
+  CY018:
+    type: "MUST"
+    rule: "chart.yaml MUSS resources mit compute definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Resources"
+    implementation_requirements:
+      - "compute: cpu, memory, autoscaling"
+  
+  CY019:
+    type: "MUST"
+    rule: "chart.yaml MUSS roadmap mit upcoming definieren"
+    source: "chart.yaml Struktur - Hauptsektionen"
+    category: "Chart.yaml - Roadmap"
+    implementation_requirements:
+      - "upcoming: [planned features, versions]"
+
+# ============================================================================
+# SEKTION 8: MANIFEST.YAML STRUKTUR
+# ============================================================================
+section_manifestyaml:
+  
+  MY001:
+    type: "MUST"
+    rule: "manifest.yaml MUSS metadata mit implementation_id, implementation_version, chart_version haben"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Metadata"
+    implementation_requirements:
+      - "implementation_id: Eindeutige Impl-ID"
+      - "implementation_version: Semver"
+      - "chart_version: Link zur chart.yaml"
+  
+  MY002:
+    type: "MUST"
+    rule: "manifest.yaml MUSS technology_stack mit language, frameworks, testing definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Technology Stack"
+    implementation_requirements:
+      - "language: name, version"
+      - "frameworks: ml, api, utilities"
+      - "testing: [pytest, schemathesis]"
+  
+  MY003:
+    type: "MUST"
+    rule: "manifest.yaml MUSS artifacts mit source_code, configuration, models definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Artifacts"
+    implementation_requirements:
+      - "source_code: location, structure"
+      - "configuration: location, files"
+      - "models: location, files"
+  
+  MY004:
+    type: "MUST"
+    rule: "manifest.yaml MUSS dependencies mit packages und services definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Dependencies"
+    implementation_requirements:
+      - "python_packages: 'requirements.txt'"
+      - "external_services: [andere Roots/Shards]"
+  
+  MY005:
+    type: "MUST"
+    rule: "manifest.yaml MUSS build mit commands definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Build"
+    implementation_requirements:
+      - "commands: install_dependencies, compile_protos"
+      - "docker: build_command, image_registry"
+  
+  MY006:
+    type: "MUST"
+    rule: "manifest.yaml MUSS deployment mit kubernetes und helm definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Deployment"
+    implementation_requirements:
+      - "kubernetes: manifests_location"
+      - "helm: chart_location"
+      - "environment_variables: required, optional"
+  
+  MY007:
+    type: "MUST"
+    rule: "manifest.yaml MUSS testing mit unit, integration, contract Tests definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Testing"
+    implementation_requirements:
+      - "unit_tests: command, coverage_target: 80"
+      - "integration_tests: command, requirements"
+      - "contract_tests: framework, location"
+  
+  MY008:
+    type: "MUST"
+    rule: "manifest.yaml MUSS observability mit metrics, tracing, logging definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Observability"
+    implementation_requirements:
+      - "metrics: exporter: 'prometheus'"
+      - "tracing: exporter: 'jaeger'"
+      - "logging: format: 'json', pii_redaction: true"
+  
+  MY009:
+    type: "MUST"
+    rule: "manifest.yaml MUSS development mit setup und local_development definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Development"
+    implementation_requirements:
+      - "setup: steps"
+      - "local_development: docker_compose"
+      - "pre_commit_hooks: [hooks]"
+  
+  MY010:
+    type: "MUST"
+    rule: "manifest.yaml MUSS compliance mit non_custodial_enforcement definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Compliance"
+    implementation_requirements:
+      - "non_custodial_enforcement: rules"
+      - "gdpr_compliance: measures"
+  
+  MY011:
+    type: "MUST"
+    rule: "manifest.yaml MUSS performance mit benchmarks definieren"
+    source: "manifest.yaml Struktur - Hauptsektionen"
+    category: "Manifest.yaml - Performance"
+    implementation_requirements:
+      - "baseline_benchmarks: [metrics]"
+      - "optimization_targets: [goals]"
+
+# ============================================================================
+# SEKTION 9: NAMING CONVENTIONS
+# ============================================================================
+section_naming:
+  
+  NC001:
+    type: "MUST"
+    rule: "Root-Ordner MÜSSEN Format '{NR}_{NAME}' haben"
+    source: "Naming Conventions - Root-Ordner"
+    category: "Naming - Roots"
+    implementation_requirements:
+      - "Format: {NR}_{NAME}"
+      - "Beispiel: 01_ai_layer, 24_meta_orchestration"
+      - "Regex: ^\\d{2}_[a-z_]+$"
+  
+  NC002:
+    type: "MUST"
+    rule: "Shards MÜSSEN Format 'Shard_{NR}_{NAME}' haben"
+    source: "Naming Conventions - Shards"
+    category: "Naming - Shards"
+    implementation_requirements:
+      - "Format: Shard_{NR}_{NAME}"
+      - "Beispiel: Shard_01_Identitaet_Personen"
+      - "Regex: ^Shard_\\d{2}_[A-Za-z_]+$"
+  
+  NC003:
+    type: "MUST"
+    rule: "Dateien MÜSSEN chart.yaml, manifest.yaml, CHANGELOG.md, README.md heißen"
+    source: "Naming Conventions - Dateien"
+    category: "Naming - Files"
+    implementation_requirements:
+      - "chart.yaml - SoT (abstrakt)"
+      - "manifest.yaml - Implementierung (konkret)"
+      - "CHANGELOG.md - Versionsverlauf"
+      - "README.md - Übersicht"
+  
+  NC004:
+    type: "MUST"
+    rule: "Pfade MÜSSEN Struktur {ROOT}/shards/{SHARD}/chart.yaml folgen"
+    source: "Naming Conventions - Pfade"
+    category: "Naming - Paths"
+    implementation_requirements:
+      - "{ROOT}/shards/{SHARD}/chart.yaml"
+      - "{ROOT}/shards/{SHARD}/implementations/{IMPL_ID}/manifest.yaml"
+      - "{ROOT}/shards/{SHARD}/contracts/{CONTRACT_NAME}.openapi.yaml"
+
+# ============================================================================
+# SEKTION 10: KRITISCHE POLICIES
+# ============================================================================
+section_kritische_policies:
+  
+  KP001:
+    type: "NIEMALS"
+    rule: "NIEMALS Rohdaten von PII oder biometrischen Daten speichern"
+    source: "Kritische Policies - Non-Custodial"
+    category: "Non-Custodial"
+    severity: "CRITICAL"
+    enforcement:
+      - "Static Analysis (Semgrep) blockiert PII-Storage"
+      - "Runtime PII-Detector blockiert Verstöße"
+      - "Violations = System-Block + Alert an Compliance-Team"
+    implementation_requirements:
+      - "Nur Hash-basierte Speicherung (SHA3-256)"
+      - "Tenant-spezifische Peppers"
+      - "Immediate Discard nach Hashing"
+  
+  KP002:
+    type: "MUST"
+    rule: "Storage MUSS hash_only sein"
+    source: "Kritische Policies - Hash-Only Data Policy"
+    category: "Hash-Only"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "storage_type: 'hash_only'"
+      - "hash_algorithm: 'SHA3-256'"
+      - "pepper_strategy: 'per_tenant'"
+  
+  KP003:
+    type: "MUST"
+    rule: "Hashes MÜSSEN deterministisch sein"
+    source: "Kritische Policies - Hash-Only Data Policy"
+    category: "Hash Determinism"
+    implementation_requirements:
+      - "deterministic: true"
+      - "Gleiche Eingabe = gleicher Hash (mit gleichem Pepper)"
+  
+  KP004:
+    type: "MUST"
+    rule: "Raw Data Retention MUSS '0 seconds' sein"
+    source: "Kritische Policies - Hash-Only Data Policy"
+    category: "Data Retention"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "raw_data_retention: '0 seconds'"
+      - "In-memory processing only"
+      - "Kein Dateisystem-Cache für PII"
+  
+  KP005:
+    type: "MUST"
+    rule: "Right to Erasure MUSS via Hash-Rotation implementiert sein"
+    source: "Kritische Policies - GDPR Compliance"
+    category: "GDPR - Right to Erasure"
+    implementation_requirements:
+      - "Neuer Pepper macht alte Hashes unbrauchbar"
+      - "Pepper-Rotation-API vorhanden"
+  
+  KP006:
+    type: "MUST"
+    rule: "Data Portability MUSS JSON-Export aller Hashes + Metadaten bieten"
+    source: "Kritische Policies - GDPR Compliance"
+    category: "GDPR - Data Portability"
+    implementation_requirements:
+      - "Export-API in 03_core"
+      - "JSON-Format mit Timestamps"
+  
+  KP007:
+    type: "MUST"
+    rule: "Purpose Limitation MUSS eingehalten werden"
+    source: "Kritische Policies - GDPR Compliance"
+    category: "GDPR - Purpose Limitation"
+    implementation_requirements:
+      - "Nur definierte Zwecke erlaubt"
+      - "Dokumentiert in chart.yaml"
+  
+  KP008:
+    type: "MUST"
+    rule: "PII Redaction MUSS automatisch in Logs & Traces erfolgen"
+    source: "Kritische Policies - GDPR Compliance"
+    category: "GDPR - PII Redaction"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Logging-Config: pii_redaction: true"
+      - "Regex-basierte Redaction-Engine"
+  
+  KP009:
+    type: "MUST"
+    rule: "Alle AI/ML-Modelle MÜSSEN auf Bias getestet werden"
+    source: "Kritische Policies - Bias & Fairness"
+    category: "Bias & Fairness"
+    severity: "HIGH"
+    implementation_requirements:
+      - "Bias Testing: Demographic Parity, Equal Opportunity"
+      - "Quarterly Bias Audits"
+      - "Transparent Model Cards"
+  
+  KP010:
+    type: "MUST"
+    rule: "Bias-Mitigation MUSS implementiert sein"
+    source: "Kritische Policies - Bias & Fairness"
+    category: "Bias Mitigation"
+    implementation_requirements:
+      - "Fairness-aware Training"
+      - "Adversarial Debiasing"
+  
+  KP011:
+    type: "MUST"
+    rule: "Evidence Strategy MUSS hash_ledger_with_anchoring sein"
+    source: "Kritische Policies - Evidence & Audit"
+    category: "Evidence"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "strategy: 'hash_ledger_with_anchoring'"
+      - "anchoring.chains: [ethereum, polygon]"
+      - "frequency: hourly"
+  
+  KP012:
+    type: "MUST"
+    rule: "WORM-Storage mit 10 Jahren Retention MUSS verwendet werden"
+    source: "Kritische Policies - Evidence & Audit"
+    category: "WORM Storage"
+    severity: "CRITICAL"
+    implementation_requirements:
+      - "Storage: Write-Once-Read-Many"
+      - "Retention: 10 Jahre"
+      - "Immutable Backup-Strategie"
+  
+  KP013:
+    type: "NIEMALS"
+    rule: "NIEMALS Secrets in Git committen"
+    source: "Kritische Policies - Secrets Management"
+    category: "Secrets Management"
+    severity: "CRITICAL"
+    enforcement:
+      - "Git pre-commit hook blockiert Secrets"
+      - "Nur .template-Dateien erlaubt"
+    implementation_requirements:
+      - "Secrets via 15_infra/vault"
+      - "AES-256-GCM at-rest, TLS 1.3 in-transit"
+  
+  KP014:
+    type: "MUST"
+    rule: "Secrets MÜSSEN alle 90 Tage rotiert werden"
+    source: "Kritische Policies - Secrets Management"
+    category: "Secrets Rotation"
+    implementation_requirements:
+      - "Rotation Policy: 90 Tage"
+      - "Automatisierte Rotation via Vault"
+  
+  KP015:
+    type: "MUST"
+    rule: "Secrets Provider MUSS Vault (15_infra/vault) sein"
+    source: "Kritische Policies - Secrets Management"
+    category: "Secrets Provider"
+    implementation_requirements:
+      - "Vault als zentrale Secrets-Quelle"
+      - "Kein lokaler Secrets-Store"
+
+# (Fortsetzung folgt aufgrund Zeichenlimit...)
+
+# ============================================================================
+# STATISTIK (vorläufig)
+# ============================================================================
+statistics:
+  extraction_status: "in_progress"
+  current_rule_count: 119
+  sections_completed: 10
+  sections_remaining: 5
+  estimated_total_rules: 156

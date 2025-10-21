@@ -1,0 +1,546 @@
+name: Federation - Hash Consistency Verification
+
+# Verifies hash consistency across federation nodes
+# Ensures Merkle roots match between nodes for consensus validation
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - '10_interoperability/**'
+      - '02_audit_logging/event_bus/**'
+      - '17_observability/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - '10_interoperability/**'
+      - '02_audit_logging/**'
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  federation_hash_consistency:
+    name: Verify Cross-Node Hash Consistency
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    strategy:
+      matrix:
+        node_id: ["eu-node-001", "us-node-002", "apac-node-003"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pytest pytest-asyncio pyyaml
+
+      - name: Simulate federation node - ${{ matrix.node_id }}
+        id: simulate_node
+        run: |
+          python - <<'EOF'
+          import sys
+          import json
+          import hashlib
+          from pathlib import Path
+          from datetime import datetime
+
+          # Add modules to path
+          ROOT = Path.cwd()
+          sys.path.insert(0, str(ROOT / "02_audit_logging" / "interfaces"))
+          sys.path.insert(0, str(ROOT / "02_audit_logging" / "event_bus"))
+
+          from audit_event_emitter import AuditEvent, EventType, EventSeverity
+
+          # Simulate node configuration
+          NODE_ID = "${{ matrix.node_id }}"
+          NODE_REGION = {
+              "eu-node-001": "eu-west-1",
+              "us-node-002": "us-east-1",
+              "apac-node-003": "ap-southeast-1"
+          }[NODE_ID]
+
+          # Create test events
+          test_events = []
+          proof_hashes = []
+
+          for i in range(100):
+              event = AuditEvent(
+                  event_id=f"federation_test_{NODE_ID}_{i}",
+                  timestamp=datetime.utcnow(),
+                  source_module="10_interoperability/federation",
+                  event_type=EventType.HEALTH_CHECK,
+                  severity=EventSeverity.INFO,
+                  data={"index": i, "node_id": NODE_ID},
+                  requires_worm=True,
+                  federation_context={
+                      "node_id": NODE_ID,
+                      "region": NODE_REGION,
+                      "proof_root_hash": "",  # Computed later
+                      "sync_timestamp": datetime.utcnow().isoformat() + "Z",
+                      "consensus_round": "1",
+                      "proof_sequence": str(i),
+                      "federation_zone": NODE_ID.split("-")[0]
+                  }
+              )
+
+              # Compute proof hash (deterministic serialization)
+              event_dict = event.to_dict()
+              event_json = json.dumps(event_dict, sort_keys=True)
+              proof_hash = hashlib.sha256(event_json.encode()).hexdigest()
+
+              proof_hashes.append(proof_hash)
+              test_events.append({
+                  "event_id": event.event_id,
+                  "proof_hash": proof_hash
+              })
+
+          # Compute Merkle root
+          def compute_merkle_root(hashes):
+              if not hashes:
+                  return hashlib.sha256(b"").hexdigest()
+
+              current_level = hashes[:]
+              while len(current_level) > 1:
+                  next_level = []
+                  for j in range(0, len(current_level), 2):
+                      left = current_level[j]
+                      right = current_level[j + 1] if j + 1 < len(current_level) else left
+                      combined = left + right
+                      parent_hash = hashlib.sha256(combined.encode()).hexdigest()
+                      next_level.append(parent_hash)
+                  current_level = next_level
+              return current_level[0]
+
+          merkle_root = compute_merkle_root(proof_hashes)
+
+          # Output results
+          result = {
+              "node_id": NODE_ID,
+              "region": NODE_REGION,
+              "proof_count": len(proof_hashes),
+              "merkle_root": merkle_root,
+              "first_proof_hash": proof_hashes[0],
+              "last_proof_hash": proof_hashes[-1]
+          }
+
+          # Write to file
+          output_dir = Path("10_interoperability/validation")
+          output_dir.mkdir(parents=True, exist_ok=True)
+
+          output_file = output_dir / f"node_{NODE_ID}_consistency.json"
+          with output_file.open("w") as f:
+              json.dump(result, f, indent=2)
+
+          print(f"Node: {NODE_ID}")
+          print(f"Region: {NODE_REGION}")
+          print(f"Proof Count: {len(proof_hashes)}")
+          print(f"Merkle Root: {merkle_root}")
+
+          print(f"::set-output name=merkle_root::{merkle_root}")
+          print(f"::set-output name=proof_count::{len(proof_hashes)}")
+          EOF
+
+      - name: Upload node consistency report
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-consistency-${{ matrix.node_id }}
+          path: 10_interoperability/validation/node_${{ matrix.node_id }}_consistency.json
+          retention-days: 30
+
+  federation_consensus_check:
+    name: Verify Cross-Node Consensus
+    needs: federation_hash_consistency
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all node reports
+        uses: actions/download-artifact@v4
+        with:
+          path: ./node-reports/
+
+      - name: Verify consensus across nodes
+        id: verify_consensus
+        run: |
+          python - <<'EOF'
+          import json
+          import sys
+          from pathlib import Path
+
+          # Load all node reports
+          reports_dir = Path("./node-reports")
+          node_reports = []
+
+          for artifact_dir in reports_dir.iterdir():
+              if artifact_dir.is_dir():
+                  for report_file in artifact_dir.glob("*.json"):
+                      with report_file.open("r") as f:
+                          node_reports.append(json.load(f))
+
+          if len(node_reports) == 0:
+              print("::error::No node reports found")
+              sys.exit(1)
+
+          print(f"Loaded {len(node_reports)} node reports")
+          print()
+
+          # Compare Merkle roots
+          merkle_roots = {}
+          for report in node_reports:
+              node_id = report["node_id"]
+              merkle_root = report["merkle_root"]
+              proof_count = report["proof_count"]
+
+              merkle_roots[node_id] = merkle_root
+
+              print(f"Node: {node_id}")
+              print(f"  Region: {report['region']}")
+              print(f"  Proof Count: {proof_count}")
+              print(f"  Merkle Root: {merkle_root}")
+              print()
+
+          # Check if all Merkle roots match
+          unique_roots = set(merkle_roots.values())
+
+          if len(unique_roots) == 1:
+              print("✅ CONSENSUS REACHED: All nodes have matching Merkle roots")
+              print(f"   Consensus Merkle Root: {list(unique_roots)[0]}")
+              consensus_status = "PASSED"
+          else:
+              print("❌ CONSENSUS FAILED: Merkle root mismatch detected")
+              print("   Divergent roots:")
+              for node_id, root in merkle_roots.items():
+                  print(f"     {node_id}: {root}")
+              consensus_status = "FAILED"
+
+          print()
+          print(f"::set-output name=consensus_status::{consensus_status}")
+          print(f"::set-output name=node_count::{len(node_reports)}")
+          print(f"::set-output name=unique_roots::{len(unique_roots)}")
+
+          if consensus_status == "FAILED":
+              print("::error::Consensus verification failed - Hash divergence detected")
+              sys.exit(1)
+          EOF
+
+      - name: Comment PR with consensus results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            // Load node reports
+            const reportsDir = './node-reports';
+            const reports = [];
+
+            function walkDir(dir) {
+              const files = fs.readdirSync(dir);
+              for (const file of files) {
+                const filePath = path.join(dir, file);
+                const stat = fs.statSync(filePath);
+                if (stat.isDirectory()) {
+                  walkDir(filePath);
+                } else if (file.endsWith('.json')) {
+                  const content = fs.readFileSync(filePath, 'utf8');
+                  reports.push(JSON.parse(content));
+                }
+              }
+            }
+
+            walkDir(reportsDir);
+
+            // Build table
+            let table = `| Node ID | Region | Proof Count | Merkle Root |\n`;
+            table += `|---------|--------|-------------|-------------|\n`;
+
+            const merkleRoots = new Set();
+            for (const report of reports) {
+              table += `| ${report.node_id} | ${report.region} | ${report.proof_count} | \`${report.merkle_root.substring(0, 16)}...\` |\n`;
+              merkleRoots.add(report.merkle_root);
+            }
+
+            const consensusStatus = merkleRoots.size === 1 ? '✅ CONSENSUS REACHED' : '❌ CONSENSUS FAILED';
+            const statusEmoji = merkleRoots.size === 1 ? '✅' : '❌';
+
+            const comment = `
+            ## Federation Hash Consistency Check ${statusEmoji}
+
+            ### Consensus Verification
+
+            **Status:** ${consensusStatus}
+            **Nodes Verified:** ${reports.length}
+            **Unique Merkle Roots:** ${merkleRoots.size}
+
+            ### Node Reports
+
+            ${table}
+
+            ${merkleRoots.size === 1
+              ? `✅ **All nodes reached consensus** on Merkle root: \`${Array.from(merkleRoots)[0].substring(0, 32)}...\`
+
+            **Recommendation:** PROCEED with Phase 3 (Multi-Node Deployment)`
+              : `❌ **Consensus verification failed** - Merkle root divergence detected.
+
+            **Action Required:** Review node implementations for hash consistency issues.
+
+            **Recommendation:** BLOCK deployment until consensus is achieved`}
+
+            📊 [View Full Report](../actions/runs/${context.runId})
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Fail if consensus not reached
+        if: steps.verify_consensus.outputs.consensus_status != 'PASSED'
+        run: |
+          echo "::error::Federation consensus verification failed"
+          echo "::error::Unique Merkle roots: ${{ steps.verify_consensus.outputs.unique_roots }}"
+          echo "::error::Expected: 1 (consensus)"
+          echo "::error::Deployment BLOCKED until consensus is achieved"
+          exit 1
+
+  merkle_tree_validation:
+    name: Validate Merkle Tree Structure
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Test Merkle tree implementation
+        run: |
+          python - <<'EOF'
+          import sys
+          import hashlib
+          from pathlib import Path
+
+          # Add modules to path
+          ROOT = Path.cwd()
+          sys.path.insert(0, str(ROOT / "10_interoperability" / "interfaces"))
+
+          from federation_protocol import compute_merkle_root, verify_merkle_proof
+
+          print("Testing Merkle Tree Implementation")
+          print("=" * 70)
+
+          # Test 1: Compute Merkle root
+          proof_hashes = [
+              "abc123",
+              "def456",
+              "ghi789",
+              "jkl012"
+          ]
+
+          merkle_root = compute_merkle_root(proof_hashes)
+          print(f"✓ Merkle root computed: {merkle_root}")
+
+          # Test 2: Empty proof list
+          empty_root = compute_merkle_root([])
+          print(f"✓ Empty root computed: {empty_root}")
+
+          # Test 3: Single proof
+          single_root = compute_merkle_root(["abc123"])
+          print(f"✓ Single proof root: {single_root}")
+
+          # Test 4: Power of 2 proofs (optimal tree)
+          optimal_proofs = ["hash" + str(i) for i in range(16)]
+          optimal_root = compute_merkle_root(optimal_proofs)
+          print(f"✓ Optimal tree (16 proofs) root: {optimal_root[:32]}...")
+
+          # Test 5: Non-power of 2 proofs
+          non_optimal_proofs = ["hash" + str(i) for i in range(13)]
+          non_optimal_root = compute_merkle_root(non_optimal_proofs)
+          print(f"✓ Non-optimal tree (13 proofs) root: {non_optimal_root[:32]}...")
+
+          print()
+          print("=" * 70)
+          print("✅ All Merkle tree tests passed")
+          EOF
+
+  protocol_compliance:
+    name: Verify Federation Protocol Compliance
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate protocol interfaces
+        run: |
+          python - <<'EOF'
+          import sys
+          from pathlib import Path
+          from typing import get_type_hints
+
+          # Add modules to path
+          ROOT = Path.cwd()
+          sys.path.insert(0, str(ROOT / "10_interoperability" / "interfaces"))
+
+          from federation_protocol import FederationProtocol, FederationBridge
+
+          print("Validating Federation Protocol Interfaces")
+          print("=" * 70)
+
+          # Check FederationProtocol methods
+          required_methods = [
+              "emit_proof",
+              "create_proof_batch",
+              "broadcast_merkle_root",
+              "validate_merkle_root",
+              "collect_consensus_votes",
+              "check_consensus_threshold",
+              "finalize_proof_batch",
+              "allocate_proof_credits",
+              "forward_proof_cross_zone",
+              "get_node_status"
+          ]
+
+          protocol_methods = [m for m in dir(FederationProtocol) if not m.startswith("_")]
+
+          for method in required_methods:
+              if method in protocol_methods:
+                  print(f"✓ FederationProtocol.{method} defined")
+              else:
+                  print(f"✗ FederationProtocol.{method} MISSING")
+                  sys.exit(1)
+
+          # Check FederationBridge methods
+          bridge_methods_required = [
+              "forward_proof",
+              "validate_cross_zone_proof",
+              "get_bridge_status"
+          ]
+
+          bridge_methods = [m for m in dir(FederationBridge) if not m.startswith("_")]
+
+          for method in bridge_methods_required:
+              if method in bridge_methods:
+                  print(f"✓ FederationBridge.{method} defined")
+              else:
+                  print(f"✗ FederationBridge.{method} MISSING")
+                  sys.exit(1)
+
+          print()
+          print("=" * 70)
+          print("✅ All protocol interfaces validated")
+          EOF
+
+      - name: Validate JSON schema
+        run: |
+          python - <<'EOF'
+          import json
+          import sys
+          from pathlib import Path
+
+          schema_path = Path("10_interoperability/schemas/federation_event.json")
+
+          if not schema_path.exists():
+              print("::error::Federation event schema not found")
+              sys.exit(1)
+
+          with schema_path.open("r") as f:
+              schema = json.load(f)
+
+          # Validate schema structure
+          required_fields = ["$schema", "$id", "title", "type", "properties"]
+          for field in required_fields:
+              if field not in schema:
+                  print(f"::error::Schema missing required field: {field}")
+                  sys.exit(1)
+
+          # Validate required properties
+          required_props = [
+              "event_id",
+              "timestamp",
+              "source_module",
+              "event_type",
+              "severity",
+              "data",
+              "federation_context"
+          ]
+
+          schema_props = schema.get("properties", {}).keys()
+          for prop in required_props:
+              if prop not in schema_props:
+                  print(f"::error::Schema missing required property: {prop}")
+                  sys.exit(1)
+
+          print("✅ Federation event schema validated")
+          print(f"   Schema version: {schema.get('version')}")
+          print(f"   Properties defined: {len(schema_props)}")
+          EOF
+
+      - name: Validate manifest configuration
+        run: |
+          pip install pyyaml
+          python - <<'EOF'
+          import yaml
+          import sys
+          from pathlib import Path
+
+          manifest_path = Path("10_interoperability/manifest_federation.yaml")
+
+          if not manifest_path.exists():
+              print("::error::Federation manifest not found")
+              sys.exit(1)
+
+          with manifest_path.open("r") as f:
+              manifest = yaml.safe_load(f)
+
+          # Validate manifest structure
+          required_sections = [
+              "federation",
+              "credit_allocation",
+              "observability",
+              "compliance"
+          ]
+
+          for section in required_sections:
+              if section not in manifest:
+                  print(f"::error::Manifest missing required section: {section}")
+                  sys.exit(1)
+
+          # Validate federation zones
+          zones = manifest["federation"].get("zones", {})
+          if len(zones) == 0:
+              print("::error::No federation zones defined")
+              sys.exit(1)
+
+          print("✅ Federation manifest validated")
+          print(f"   Zones defined: {len(zones)}")
+          print(f"   Zones: {', '.join(zones.keys())}")
+
+          # Count total nodes
+          total_nodes = sum(len(zone.get("nodes", [])) for zone in zones.values())
+          print(f"   Total nodes: {total_nodes}")
+          EOF

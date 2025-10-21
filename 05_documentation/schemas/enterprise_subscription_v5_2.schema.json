@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ssid.global/schemas/enterprise_subscription_v5_2.json",
+  "title": "Enterprise Subscription Model v5.2",
+  "description": "JSON Schema for SSID Enterprise Subscription pricing model with RAT zone resolution and DSGVO/eIDAS/MiCA compliance",
+  "type": "object",
+  "required": [
+    "version",
+    "model_name",
+    "tiers",
+    "surcharge_bounds",
+    "cap_policy",
+    "epistemic_certainty"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["5.2"],
+      "description": "Schema version"
+    },
+    "model_name": {
+      "type": "string",
+      "const": "enterprise_subscription_model_v5_2",
+      "description": "Canonical model name"
+    },
+    "tiers": {
+      "type": "object",
+      "required": ["S1", "S2", "S3", "S3_prime"],
+      "properties": {
+        "S1": {
+          "$ref": "#/definitions/tier"
+        },
+        "S2": {
+          "$ref": "#/definitions/tier"
+        },
+        "S3": {
+          "$ref": "#/definitions/tier"
+        },
+        "S3_prime": {
+          "$ref": "#/definitions/tier_s3_prime"
+        }
+      },
+      "additionalProperties": false
+    },
+    "surcharge_bounds": {
+      "type": "object",
+      "required": ["min", "max"],
+      "properties": {
+        "min": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0
+        },
+        "max": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.15
+        }
+      }
+    },
+    "cap_policy": {
+      "type": "object",
+      "required": ["formula", "max_ratio"],
+      "properties": {
+        "formula": {
+          "type": "string",
+          "pattern": "^cap\\s*<=\\s*0\\.8\\s*\\*\\s*base_fee$"
+        },
+        "max_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.8
+        }
+      }
+    },
+    "epistemic_certainty": {
+      "type": "number",
+      "minimum": 1.0,
+      "maximum": 1.0,
+      "description": "Deterministic certainty required for v5.2"
+    },
+    "compliance": {
+      "type": "object",
+      "required": ["dsgvo", "eidas", "mica", "non_custodial"],
+      "properties": {
+        "dsgvo": {
+          "type": "boolean",
+          "const": true
+        },
+        "eidas": {
+          "type": "boolean",
+          "const": true
+        },
+        "mica": {
+          "type": "boolean",
+          "const": true
+        },
+        "non_custodial": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    }
+  },
+  "definitions": {
+    "tier": {
+      "type": "object",
+      "required": ["name", "base_fee", "features", "cap_max_ratio"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["S1", "S2", "S3"]
+        },
+        "base_fee": {
+          "type": "number",
+          "minimum": 0
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "cap_max_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.8
+        },
+        "surcharge_range": {
+          "type": "object",
+          "required": ["min", "max"],
+          "properties": {
+            "min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0
+            },
+            "max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.15
+            }
+          }
+        }
+      }
+    },
+    "tier_s3_prime": {
+      "type": "object",
+      "required": ["name", "base_fee", "features", "minimum_base"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "const": "S3_prime"
+        },
+        "base_fee": {
+          "type": "number",
+          "minimum": 6670000,
+          "description": "S3' minimum base fee ≥ 6,670,000"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "minimum_base": {
+          "type": "number",
+          "minimum": 6670000,
+          "maximum": 6670000
+        },
+        "interfederation_enabled": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    }
+  }
+}

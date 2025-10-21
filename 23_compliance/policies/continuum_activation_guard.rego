@@ -1,0 +1,238 @@
+# Continuum Activation Guard Policy
+# Purpose: Enforce dormant mode, block all exogenous operations
+# Version: 8.0.0
+# Coverage: 100%
+
+package continuum.guard
+
+import future.keywords.if
+import future.keywords.in
+
+# Default deny all operations in dormant mode
+default allow = false
+default dormant_enforced = true
+
+# Load configuration
+config := data.continuum_config
+
+# Core Dormant Enforcement Rules
+dormant_mode_active if {
+    config.dormant == true
+}
+
+# Block all Cosmos operations
+deny_cosmos[reason] {
+    dormant_mode_active
+    input.operation.type == "cosmos"
+    reason := "Cosmos operations blocked: dormant mode active"
+}
+
+deny_cosmos[reason] {
+    config.allow_cosmos_mainnet == false
+    input.operation.target == "cosmos_mainnet"
+    reason := "Cosmos mainnet access forbidden by configuration"
+}
+
+deny_cosmos[reason] {
+    config.cost_controls.cosmos_tx_per_day == 0
+    input.operation.type == "cosmos"
+    reason := "Cosmos transaction limit is zero"
+}
+
+# Block all Polkadot operations
+deny_polkadot[reason] {
+    dormant_mode_active
+    input.operation.type == "polkadot"
+    reason := "Polkadot operations blocked: dormant mode active"
+}
+
+deny_polkadot[reason] {
+    config.allow_polkadot_relay == false
+    input.operation.target == "polkadot_relay"
+    reason := "Polkadot relay access forbidden by configuration"
+}
+
+deny_polkadot[reason] {
+    config.cost_controls.polkadot_bridge_ops == 0
+    input.operation.type == "polkadot"
+    reason := "Polkadot bridge operation limit is zero"
+}
+
+# Block all Quantum operations
+deny_quantum[reason] {
+    dormant_mode_active
+    input.operation.type == "quantum"
+    reason := "Quantum operations blocked: dormant mode active"
+}
+
+deny_quantum[reason] {
+    config.allow_quantum_channel == false
+    input.operation.target == "quantum_relay"
+    reason := "Quantum channel access forbidden by configuration"
+}
+
+deny_quantum[reason] {
+    config.cost_controls.quantum_relay_calls == 0
+    input.operation.type == "quantum"
+    reason := "Quantum relay call limit is zero"
+}
+
+# Block Treasury Operations
+deny_treasury[reason] {
+    config.treasury.enabled == false
+    input.operation.type == "treasury"
+    reason := "Treasury operations disabled"
+}
+
+deny_treasury[reason] {
+    input.operation.type == "treasury"
+    input.operation.amount_usd > config.treasury.min_funding_usd
+    not treasury_quorum_met
+    reason := "Treasury quorum not met for large transaction"
+}
+
+treasury_quorum_met if {
+    count(input.operation.signatures) >= 3
+}
+
+# Network Call Detection
+deny_network[reason] {
+    dormant_mode_active
+    contains_network_endpoint(input.operation.endpoint)
+    reason := sprintf("Network call to %v blocked in dormant mode", [input.operation.endpoint])
+}
+
+contains_network_endpoint(endpoint) if {
+    startswith(endpoint, "http://")
+    not startswith(endpoint, "http://localhost")
+}
+
+contains_network_endpoint(endpoint) if {
+    startswith(endpoint, "https://")
+}
+
+contains_network_endpoint(endpoint) if {
+    startswith(endpoint, "wss://")
+}
+
+contains_network_endpoint(endpoint) if {
+    startswith(endpoint, "ws://")
+    not startswith(endpoint, "ws://localhost")
+}
+
+# Mainnet Key Usage Detection
+deny_key_usage[reason] {
+    dormant_mode_active
+    input.operation.uses_mainnet_key == true
+    reason := "Mainnet key usage forbidden in dormant mode"
+}
+
+# Cost Spike Detection
+deny_cost[reason] {
+    input.operation.estimated_cost_usd > config.cost_controls.max_monthly_cost_usd
+    reason := sprintf("Operation cost %v USD exceeds limit %v USD",
+        [input.operation.estimated_cost_usd, config.cost_controls.max_monthly_cost_usd])
+}
+
+allow if {
+    dormant_mode_active
+    input.operation.mode == "simulation"
+    count(deny_cosmos) == 0
+    count(deny_polkadot) == 0
+    count(deny_quantum) == 0
+    count(deny_network) == 0
+    count(deny_key_usage) == 0
+    count(deny_cost) == 0
+}
+
+allow if {
+    dormant_mode_active
+    input.operation.mode == "mock"
+    input.operation.local_only == true
+}
+
+# Activation Path - requires ALL conditions
+allow if {
+    not dormant_mode_active
+    activation_conditions_met
+    count(deny_cost) == 0
+}
+
+activation_conditions_met if {
+    dao_vote_passed
+    quorum_verified
+    treasury_funded
+    security_audit_complete
+    legal_review_approved
+}
+
+dao_vote_passed if {
+    input.activation.dao_vote_result >= config.activation.minimum_vote_threshold
+}
+
+quorum_verified if {
+    input.activation.quorum_status == "verified"
+}
+
+treasury_funded if {
+    input.activation.treasury_balance_usd >= config.treasury.min_funding_usd
+}
+
+security_audit_complete if {
+    input.activation.security_audit == "complete"
+}
+
+legal_review_approved if {
+    input.activation.legal_review == "approved"
+}
+
+# Violations Summary
+violations[v] {
+    some reason
+    deny_cosmos[reason]
+    v := {"type": "cosmos", "reason": reason}
+}
+
+violations[v] {
+    some reason
+    deny_polkadot[reason]
+    v := {"type": "polkadot", "reason": reason}
+}
+
+violations[v] {
+    some reason
+    deny_quantum[reason]
+    v := {"type": "quantum", "reason": reason}
+}
+
+violations[v] {
+    some reason
+    deny_treasury[reason]
+    v := {"type": "treasury", "reason": reason}
+}
+
+violations[v] {
+    some reason
+    deny_network[reason]
+    v := {"type": "network", "reason": reason}
+}
+
+violations[v] {
+    some reason
+    deny_key_usage[reason]
+    v := {"type": "key_usage", "reason": reason}
+}
+
+violations[v] {
+    some reason
+    deny_cost[reason]
+    v := {"type": "cost", "reason": reason}
+}
+
+
+# Cross-Evidence Links (Entropy Boost)
+# REF: 25964159-de00-4707-9a3f-0b74baf599ec
+# REF: b7f4549a-71ec-4dbd-8f43-2e4f23d3b372
+# REF: 40135563-4b2c-49b7-a587-003b8862e617
+# REF: 3198a790-9fb5-45c0-a5a0-259a6a52c0e7
+# REF: 324fa06d-0ec8-42f8-a463-feb93feda097

@@ -1,0 +1,118 @@
+# SSID OPA Policy - 07_governance_legal (FUNCTIONAL v6.3)
+# Auto-generated from 07_governance_legal/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.07governancelegal.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "07_governance_legal",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "07_governance_legal_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "07_governance_legal"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["legal_compliance_management", "risk_assessment", "governance_framework", "regulatory_mapping", "contract_management", "privacy_policy_management"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "07_governance_legal_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 07_governance_legal operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "07_governance_legal_operation"
+  input.request.valid == false
+  msg := "Invalid request for 07_governance_legal - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "07_governance_legal_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: legal_review_required (enforcement: manual, scope: all_contracts)
+deny_legalreviewrequired[msg] {
+  input.request.type == "07_governance_legal_operation"
+  input.policy_check == "legal_review_required"
+  not input.policy_compliance.legalreviewrequired
+  msg := "Policy violation: legal_review_required (scope: all_contracts)"
+}
+
+# Policy: gdpr_compliance (enforcement: automated, scope: all_services)
+deny_gdprcompliance[msg] {
+  input.request.type == "07_governance_legal_operation"
+  input.policy_check == "gdpr_compliance"
+  not input.policy_compliance.gdprcompliance
+  msg := "Policy violation: gdpr_compliance (scope: all_services)"
+}
+
+# Policy: mica_compliance (enforcement: automated, scope: token_services)
+deny_micacompliance[msg] {
+  input.request.type == "07_governance_legal_operation"
+  input.policy_check == "mica_compliance"
+  not input.policy_compliance.micacompliance
+  msg := "Policy violation: mica_compliance (scope: token_services)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "07_governance_legal_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 07_governance_legal"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "07_governance_legal_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 07_governance_legal"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "07_governance_legal",
+  "capabilities": 6,
+  "policies": 3
+}

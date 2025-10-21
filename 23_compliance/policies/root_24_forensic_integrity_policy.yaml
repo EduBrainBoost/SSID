@@ -1,0 +1,338 @@
+version: "2.0.0"
+policy_name: "Root-24-LOCK Forensic Integrity Policy"
+description: "Structural integrity enforcement with forensic SHA-256 verification"
+mode: "FORENSIC"
+effective_date: "2025-10-12"
+enforcement_level: "strict"
+audit_date: "2025-10-12T16:45:47Z"
+
+# Reference
+source_of_truth: "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md"
+compliance_framework: "SSID Root-24-LOCK v1.0"
+cost: 0  # Local enforcement, zero cost
+
+# Forensic Audit Summary
+forensic_summary:
+  total_root_items: 38
+  authorized_roots: 24
+  authorized_exceptions: 5
+  unauthorized_items: 9
+  files_scanned: 10
+  total_size_bytes: 88794
+  total_size_kb: 86.71
+  compliance_status: "FAIL"
+  critical_violations: 3
+  warnings: 6
+
+# Authorized Root Modules (24) - IMMUTABLE
+authorized_root_modules:
+  - "01_ai_layer"
+  - "02_audit_logging"
+  - "03_core"
+  - "04_deployment"
+  - "05_documentation"
+  - "06_data_pipeline"
+  - "07_governance_legal"
+  - "08_identity_score"
+  - "09_meta_identity"
+  - "10_interoperability"
+  - "11_test_simulation"
+  - "12_tooling"
+  - "13_ui_layer"
+  - "14_zero_time_auth"
+  - "15_infra"
+  - "16_codex"
+  - "17_observability"
+  - "18_data_layer"
+  - "19_adapters"
+  - "20_foundation"
+  - "21_post_quantum_crypto"
+  - "22_datasets"
+  - "23_compliance"
+  - "24_meta_orchestration"
+
+# Authorized Exceptions (Infrastructure Files)
+authorized_exceptions:
+  files:
+    - name: "README.md"
+      purpose: "Project overview"
+      required: true
+      sha256: "0595dd703280e81cd857146e9fc95f69be625fe243bc625eefc80e42d9642824"
+      size_bytes: 1293
+
+    - name: "LICENSE"
+      purpose: "Project license"
+      required: true
+      sha256: "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+      size_bytes: 11558
+
+    - name: ".gitignore"
+      purpose: "Git ignore patterns"
+      required: true
+      sha256: null  # Not tracked
+      size_bytes: null
+
+    - name: ".gitattributes"
+      purpose: "Git attributes"
+      required: false
+      sha256: null
+      size_bytes: null
+
+    - name: ".pre-commit-config.yaml"
+      purpose: "Pre-commit hooks"
+      required: false
+      sha256: "29ae7b84f221f6a6b6362d89d4f7df5a415be47a13a8290550808370aac56971"
+      size_bytes: 450
+
+    - name: "pytest.ini"
+      purpose: "Pytest configuration"
+      required: false
+      sha256: "1adae0a97fe99ce1b3f7ee592e2082564098300f0ab68d91f0527613e91d7fd2"
+      size_bytes: 61
+
+  directories:
+    - name: ".git"
+      purpose: "Git repository metadata"
+      required: true
+      note: "Git internals, do not modify"
+
+    - name: ".github"
+      purpose: "GitHub workflows and configuration"
+      required: false
+      note: "CI/CD and GitHub-specific metadata"
+      status: "AUTHORIZED"  # GitHub convention for CI/CD workflows
+      authorization_date: "2025-10-12"
+
+# Current Violations (Forensic Data)
+violations:
+  critical:
+    count: 3
+    items:
+      - path: ".claude"
+        type: "Unauthorized Root Directory"
+        severity: "CRITICAL"
+        recommendation: "Remove from repository (IDE-specific directory)"
+        action: "DELETE"
+        notes: "IDE configuration, should be in .gitignore"
+
+      - path: ".github"
+        type: "Unauthorized Root Directory"
+        severity: "CRITICAL"
+        recommendation: "Add to policy exceptions OR migrate to 04_deployment/ci/"
+        action: "EVALUATE"
+        notes: "Contains CI/CD workflows - common GitHub convention"
+        options:
+          - "Add to authorized_exception_dirs (recommended)"
+          - "Migrate workflows to 04_deployment/ci/github/"
+
+      - path: ".pytest_cache"
+        type: "Unauthorized Root Directory"
+        severity: "CRITICAL"
+        recommendation: "Remove from repository, add to .gitignore"
+        action: "DELETE"
+        notes: "Test cache, should not be in version control"
+
+  warnings:
+    count: 6
+    items:
+      - path: "DEPLOYMENT_v5.2.md"
+        type: "Root File - Should Migrate"
+        severity: "WARNING"
+        target: "05_documentation/deployment/DEPLOYMENT_v5.2.md"
+        action: "MOVE"
+        sha256: "1d46df201e4a1da8f9c6ccfa78980293fc3c6c10bd65704f70e60b4abd477945"
+        size_bytes: 10379
+
+      - path: "DEPLOYMENT_v5.4_Federation.md"
+        type: "Root File - Should Migrate"
+        severity: "WARNING"
+        target: "05_documentation/deployment/DEPLOYMENT_v5.4_Federation.md"
+        action: "MOVE"
+        sha256: "02da6105b1dbe10e049537f2afdeafe134e2a524d42e8290b7e79822f5b4ced2"
+        size_bytes: 3082
+
+      - path: "DEPLOYMENT_v6.0_Planetary_Continuum.md"
+        type: "Root File - Should Migrate"
+        severity: "WARNING"
+        target: "05_documentation/deployment/DEPLOYMENT_v6.0_Planetary_Continuum.md"
+        action: "MOVE"
+        sha256: "36be330cc44abd42dd30df618e8e3402e3d2070f2b6c46cc2a19a4b503a73e77"
+        size_bytes: 14385
+
+      - path: "DEPLOYMENT_v8.0_Continuum_Ignition.md"
+        type: "Root File - Should Migrate"
+        severity: "WARNING"
+        target: "05_documentation/deployment/DEPLOYMENT_v8.0_Continuum_Ignition.md"
+        action: "MOVE"
+        sha256: "8ac9de5648dbd2bd4943e0407004d9566868b0d5a3ff3c49badf6685dc6db1c2"
+        size_bytes: 11355
+
+      - path: "TRANSITION_v6_to_v7_DORMANT.md"
+        type: "Root File - Should Migrate"
+        severity: "WARNING"
+        target: "05_documentation/transitions/TRANSITION_v6_to_v7_DORMANT.md"
+        action: "MOVE"
+        sha256: "06913ccde36fcf6ac63dfb9a14171c5e874561740139ef67408638a1b786f365"
+        size_bytes: 22551
+
+      - path: "ROOT_24_LOCK_COMPLIANCE_SUMMARY.md"
+        type: "Root File - Should Migrate"
+        severity: "WARNING"
+        target: "05_documentation/compliance/ROOT_24_LOCK_COMPLIANCE_SUMMARY.md"
+        action: "MOVE"
+        sha256: "cee8b64de63b7ea04b93c64a78ee88e2cc4a14d52ee160c5a2eb7d29e83537e8"
+        size_bytes: 13680
+
+# Remediation Plan (Forensic-Guided)
+remediation:
+  phase_1_critical:
+    priority: "IMMEDIATE"
+    timeline: "< 1 day"
+    actions:
+      - action: "delete_directory"
+        path: ".claude/"
+        reason: "IDE-specific, not for version control"
+        command: "rm -rf .claude/ && echo '.claude/' >> .gitignore"
+        verification: "ls -la | grep -v .claude"
+
+      - action: "delete_directory"
+        path: ".pytest_cache/"
+        reason: "Test cache, not for version control"
+        command: "rm -rf .pytest_cache/ && echo '.pytest_cache/' >> .gitignore"
+        verification: "ls -la | grep -v .pytest_cache"
+
+      - action: "evaluate_directory"
+        path: ".github/"
+        reason: "GitHub workflows - common convention"
+        options:
+          option_a:
+            name: "Add to exceptions (recommended)"
+            command: "# Update policy YAML to include .github in authorized_exception_dirs"
+          option_b:
+            name: "Migrate to 04_deployment"
+            command: "mkdir -p 04_deployment/ci/github && mv .github/workflows/* 04_deployment/ci/github/"
+
+  phase_2_warnings:
+    priority: "HIGH"
+    timeline: "< 1 week"
+    actions:
+      - action: "migrate_deployment_docs"
+        files:
+          - "DEPLOYMENT_v5.2.md"
+          - "DEPLOYMENT_v5.4_Federation.md"
+          - "DEPLOYMENT_v6.0_Planetary_Continuum.md"
+          - "DEPLOYMENT_v8.0_Continuum_Ignition.md"
+        target_directory: "05_documentation/deployment/"
+        command: "mkdir -p 05_documentation/deployment && mv DEPLOYMENT_*.md 05_documentation/deployment/"
+        sha256_verification: true
+
+      - action: "migrate_transition_docs"
+        files:
+          - "TRANSITION_v6_to_v7_DORMANT.md"
+        target_directory: "05_documentation/transitions/"
+        command: "mkdir -p 05_documentation/transitions && mv TRANSITION_*.md 05_documentation/transitions/"
+        sha256_verification: true
+
+      - action: "migrate_compliance_docs"
+        files:
+          - "ROOT_24_LOCK_COMPLIANCE_SUMMARY.md"
+        target_directory: "05_documentation/compliance/"
+        command: "mkdir -p 05_documentation/compliance && mv ROOT_24_LOCK_COMPLIANCE_SUMMARY.md 05_documentation/compliance/"
+        sha256_verification: true
+
+  phase_3_verification:
+    priority: "HIGH"
+    timeline: "Immediate after migration"
+    actions:
+      - action: "run_forensic_audit"
+        command: "python 12_tooling/root_forensic_audit.py"
+        expected_result: "Score 100/100, 0 violations"
+
+      - action: "verify_hashes"
+        command: "sha256sum 05_documentation/**/*.md"
+        expected_result: "All hashes match forensic audit baseline"
+
+      - action: "run_opa_policy"
+        command: "opa eval --data 23_compliance/policies/activation_policy.rego 'data.ssid.root24.activation.compliance_status'"
+        expected_result: "'PASS'"
+
+# SHA-256 Verification Registry
+sha256_registry:
+  authorized_files:
+    "README.md": "0595dd703280e81cd857146e9fc95f69be625fe243bc625eefc80e42d9642824"
+    "LICENSE": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+    ".pre-commit-config.yaml": "29ae7b84f221f6a6b6362d89d4f7df5a415be47a13a8290550808370aac56971"
+    "pytest.ini": "1adae0a97fe99ce1b3f7ee592e2082564098300f0ab68d91f0527613e91d7fd2"
+
+  migration_candidates:
+    "DEPLOYMENT_v5.2.md": "1d46df201e4a1da8f9c6ccfa78980293fc3c6c10bd65704f70e60b4abd477945"
+    "DEPLOYMENT_v5.4_Federation.md": "02da6105b1dbe10e049537f2afdeafe134e2a524d42e8290b7e79822f5b4ced2"
+    "DEPLOYMENT_v6.0_Planetary_Continuum.md": "36be330cc44abd42dd30df618e8e3402e3d2070f2b6c46cc2a19a4b503a73e77"
+    "DEPLOYMENT_v8.0_Continuum_Ignition.md": "8ac9de5648dbd2bd4943e0407004d9566868b0d5a3ff3c49badf6685dc6db1c2"
+    "TRANSITION_v6_to_v7_DORMANT.md": "06913ccde36fcf6ac63dfb9a14171c5e874561740139ef67408638a1b786f365"
+    "ROOT_24_LOCK_COMPLIANCE_SUMMARY.md": "cee8b64de63b7ea04b93c64a78ee88e2cc4a14d52ee160c5a2eb7d29e83537e8"
+
+# Enforcement Configuration
+enforcement:
+  # Forensic audit scanner
+  forensic_audit:
+    enabled: true
+    script: "12_tooling/root_forensic_audit.py"
+    frequency: "on_commit"
+    sha256_verification: true
+    report_path: "02_audit_logging/reports/root_forensic_audit_report.md"
+
+  # OPA Policy
+  opa_policy:
+    enabled: true
+    policy_files:
+      - "23_compliance/policies/activation_policy.rego"
+      - "23_compliance/policies/activation_guard.rego"
+    enforcement_mode: "deny"
+
+  # CI/CD Guard
+  ci_guard:
+    enabled: true
+    workflow_file: ".github/workflows/ci_structure_guard.yml"
+    fail_on_critical: true
+    fail_on_warning: false
+    sha256_checks: true
+
+# Scoring Formula
+scoring:
+  formula: "(Architecture × 0.30) + (Security × 0.25) + (Policy × 0.25) + (Testing × 0.10) + (Documentation × 0.10)"
+  current_score: 30
+  target_score: 100
+
+  deductions:
+    critical_violation: -20  # per violation
+    warning_violation: -5   # per violation
+
+  current_breakdown:
+    architecture: 0     # Critical violations present
+    security: 50        # Partial enforcement (policies exist)
+    policy: 100         # Policies active
+    testing: 100        # Tests exist
+    documentation: 100  # Documentation complete
+
+  target_breakdown:
+    architecture: 100   # After remediation
+    security: 100       # Full enforcement
+    policy: 100         # Policies active
+    testing: 100        # Tests passing
+    documentation: 100  # Documentation complete
+
+# Metadata
+metadata:
+  version: "2.0.0"
+  mode: "FORENSIC"
+  created: "2025-10-12"
+  author: "SSID Core Team"
+  license: "Proprietary"
+  compliance_framework: "SSID Root-24-LOCK"
+  audit_tool: "root_forensic_audit.py v2.0.0"
+  hash_algorithm: "SHA-256"
+  cost_usd: 0
+  reproducible: true
+  next_audit: "After remediation"
+  target_compliance: "100/100 (PASS)"

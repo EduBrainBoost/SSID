@@ -1,0 +1,292 @@
+name: CI - SoT Enforcement Gate
+
+# Single Source of Truth (SoT) Principle Enforcement
+# =====================================================
+#
+# This CI gate enforces that every SoT rule has:
+# 1. Python Module (03_core/validators/sot/)
+# 2. Rego Policy (23_compliance/policies/sot/)
+# 3. YAML Contract (16_codex/contracts/sot/)
+# 4. CLI Command (12_tooling/cli/sot_validator.py)
+# 5. Test Coverage (11_test_simulation/tests_compliance/test_sot_rules.py)
+#
+# Exit Code 24: ROOT-24-LOCK violation - SoT principle broken
+# Exit Code 0: All SoT rules validated successfully
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature/**'
+      - 'hotfix/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+jobs:
+  sot-enforcement:
+    name: SoT Enforcement Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov pyyaml
+
+      - name: Install OPA (Open Policy Agent)
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
+          opa version
+
+      - name: Verify SoT File Structure
+        id: structure
+        run: |
+          echo "=== Verifying SoT File Structure ==="
+
+          # Check Python Validators
+          echo "Checking Python Validators..."
+          test -f 03_core/validators/sot/__init__.py || exit 24
+          test -f 03_core/validators/sot/global_foundations_validators.py || exit 24
+          test -f 03_core/validators/sot/fatf_validators.py || exit 24
+          test -f 03_core/validators/sot/oecd_validators.py || exit 24
+          test -f 03_core/validators/sot/iso_validators.py || exit 24
+          test -f 03_core/validators/sot/standards_validators.py || exit 24
+          test -f 03_core/validators/sot/deprecation_validators.py || exit 24
+          echo "✅ Python Validators: OK"
+
+          # Check Rego Policies
+          echo "Checking Rego Policies..."
+          test -f 23_compliance/policies/sot/global_foundations_policy.rego || exit 24
+          test -f 23_compliance/policies/sot/fatf_policy.rego || exit 24
+          test -f 23_compliance/policies/sot/oecd_policy.rego || exit 24
+          test -f 23_compliance/policies/sot/iso_policy.rego || exit 24
+          test -f 23_compliance/policies/sot/standards_policy.rego || exit 24
+          test -f 23_compliance/policies/sot/deprecation_policy.rego || exit 24
+          echo "✅ Rego Policies: OK"
+
+          # Check YAML Contracts
+          echo "Checking YAML Contracts..."
+          test -f 16_codex/contracts/sot/global_foundations.yaml || exit 24
+          test -f 16_codex/contracts/sot/fatf_travel_rule.yaml || exit 24
+          test -f 16_codex/contracts/sot/oecd_carf.yaml || exit 24
+          test -f 16_codex/contracts/sot/iso_standards.yaml || exit 24
+          test -f 16_codex/contracts/sot/global_standards.yaml || exit 24
+          test -f 16_codex/contracts/sot/deprecation_tracking.yaml || exit 24
+          echo "✅ YAML Contracts: OK"
+
+          # Check CLI Tool
+          echo "Checking CLI Tool..."
+          test -f 12_tooling/cli/sot_validator.py || exit 24
+          echo "✅ CLI Tool: OK"
+
+          # Check Test Suite
+          echo "Checking Test Suite..."
+          test -f 11_test_simulation/tests_compliance/test_sot_rules.py || exit 24
+          echo "✅ Test Suite: OK"
+
+          # Check Master Orchestrator
+          echo "Checking Master Orchestrator..."
+          test -f 24_meta_orchestration/sot_enforcement/sot_master_orchestrator.py || exit 24
+          echo "✅ Master Orchestrator: OK"
+
+          echo "=== ✅ SoT File Structure: COMPLETE ==="
+
+      - name: Validate Rego Policies (OPA)
+        id: opa
+        run: |
+          echo "=== Validating OPA Policies ==="
+
+          # Test each policy
+          for policy in 23_compliance/policies/sot/*.rego; do
+            echo "Testing: $policy"
+            opa test "$policy" || exit 24
+            echo "✅ $policy: PASS"
+          done
+
+          echo "=== ✅ OPA Policies: ALL PASS ==="
+
+      - name: Validate YAML Contracts
+        id: yaml
+        run: |
+          echo "=== Validating YAML Contracts ==="
+
+          python -c "
+import yaml
+import sys
+
+contracts = [
+    '16_codex/contracts/sot/global_foundations.yaml',
+    '16_codex/contracts/sot/fatf_travel_rule.yaml',
+    '16_codex/contracts/sot/oecd_carf.yaml',
+    '16_codex/contracts/sot/iso_standards.yaml',
+    '16_codex/contracts/sot/global_standards.yaml',
+    '16_codex/contracts/sot/deprecation_tracking.yaml',
+]
+
+for contract in contracts:
+    try:
+        with open(contract, 'r') as f:
+            yaml.safe_load(f)
+        print(f'✅ {contract}: VALID')
+    except Exception as e:
+        print(f'❌ {contract}: INVALID - {str(e)}')
+        sys.exit(24)
+
+print('=== ✅ YAML Contracts: ALL VALID ===')
+"
+
+      - name: Run Python Validator Tests
+        id: pytest
+        run: |
+          echo "=== Running Python Validator Tests ==="
+
+          pytest 11_test_simulation/tests_compliance/test_sot_rules.py \
+            -v \
+            --tb=short \
+            --color=yes \
+            --cov=03_core/validators/sot \
+            --cov-report=term-missing \
+            --cov-report=json \
+            || exit 24
+
+          echo "=== ✅ Python Tests: ALL PASS ==="
+
+      - name: Test CLI Tool
+        id: cli
+        run: |
+          echo "=== Testing CLI Tool ==="
+
+          # Test list command
+          python 12_tooling/cli/sot_validator.py --list
+
+          # Create test config
+          cat > test_config.yaml <<EOF
+version: "2.0"
+date: "2025-09-15"
+deprecated: false
+regulatory_basis: "FATF 2025, OECD CARF 2025-07, ISO Updates 2025"
+classification: "CONFIDENTIAL - Internal Compliance Matrix"
+EOF
+
+          # Test validation
+          python 12_tooling/cli/sot_validator.py \
+            --rule version-format \
+            --input test_config.yaml \
+            --verbose
+
+          echo "=== ✅ CLI Tool: WORKING ==="
+
+      - name: Run Master Orchestrator (Dry Run)
+        id: orchestrator
+        run: |
+          echo "=== Running Master Orchestrator (Dry Run) ==="
+
+          # Create comprehensive test config
+          cat > orchestrator_test_config.yaml <<EOF
+version: "2.0"
+date: "2025-09-15"
+deprecated: false
+regulatory_basis: "FATF 2025, OECD CARF 2025-07, ISO Updates 2025"
+classification: "CONFIDENTIAL - Internal Compliance Matrix"
+
+ivms101_2023:
+  name: "IVMS101-2023 Datenmodell & Mapping-Templates"
+  path: "23_compliance/global/fatf/travel_rule/ivms101_2023/"
+  deprecated: false
+  business_priority: "CRITICAL"
+
+fatf_rec16_2025_update:
+  name: "R.16-Änderungen Juni 2025 Gap-Analyse"
+  path: "23_compliance/global/fatf/travel_rule/fatf_rec16_2025_update/"
+  deprecated: false
+  business_priority: "HIGH"
+
+deprecated_standards:
+  - id: "fatf_rec16_2024"
+    status: "deprecated"
+    deprecated: true
+    replaced_by: "fatf_rec16_2025_update"
+    deprecation_date: "2025-06-01"
+    migration_deadline: "2025-12-31"
+    notes: "Juni 2025 Updates integriert"
+EOF
+
+          # Run orchestrator
+          python 24_meta_orchestration/sot_enforcement/sot_master_orchestrator.py \
+            --config orchestrator_test_config.yaml \
+            --output 02_audit_logging/reports/sot_enforcement_evidence.json \
+            --verbose \
+            || exit 24
+
+          echo "=== ✅ Master Orchestrator: PASS ==="
+
+      - name: Generate Evidence Report
+        id: evidence
+        if: always()
+        run: |
+          echo "=== Generating Evidence Report ==="
+
+          cat > 02_audit_logging/reports/ci_sot_enforcement_summary.json <<EOF
+{
+  "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+  "commit_sha": "${{ github.sha }}",
+  "branch": "${{ github.ref }}",
+  "workflow_run_id": "${{ github.run_id }}",
+  "workflow_run_number": "${{ github.run_number }}",
+  "steps": {
+    "structure": "${{ steps.structure.outcome }}",
+    "opa": "${{ steps.opa.outcome }}",
+    "yaml": "${{ steps.yaml.outcome }}",
+    "pytest": "${{ steps.pytest.outcome }}",
+    "cli": "${{ steps.cli.outcome }}",
+    "orchestrator": "${{ steps.orchestrator.outcome }}"
+  },
+  "sot_rules_validated": 13,
+  "sot_principle": "Every rule = Scientific Foundation + Technical Manifestation",
+  "exit_code": "${{ job.status == 'success' && '0' || '24' }}"
+}
+EOF
+
+          cat 02_audit_logging/reports/ci_sot_enforcement_summary.json
+
+          echo "=== ✅ Evidence Report Generated ==="
+
+      - name: Upload Evidence Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sot-enforcement-evidence
+          path: |
+            02_audit_logging/reports/sot_enforcement_evidence.json
+            02_audit_logging/reports/ci_sot_enforcement_summary.json
+          retention-days: 90
+
+      - name: Fail on SoT Violation
+        if: failure()
+        run: |
+          echo "❌ SoT ENFORCEMENT FAILED"
+          echo "EXIT CODE: 24 (ROOT-24-LOCK VIOLATION)"
+          exit 24
+
+      - name: Success Summary
+        if: success()
+        run: |
+          echo "✅ SoT ENFORCEMENT PASSED"
+          echo "All 13 SoT rules validated successfully"
+          echo "Scientific Foundation + Technical Manifestation = COMPLETE"

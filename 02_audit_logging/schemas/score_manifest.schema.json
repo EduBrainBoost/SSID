@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ssid.swiss/schemas/score_manifest.schema.json",
+  "title": "SSID Score Manifest",
+  "description": "Canonical schema for all score artifacts in SSID - prevents fake scores and ensures WORM-backed authenticity",
+  "type": "object",
+  "required": ["id", "kind", "scale", "value", "status", "source", "ci", "worm"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this score (UUID v4)",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["cert", "phase", "evolution"],
+      "description": "Score type: cert=certification(100), phase=phase(100), evolution=roadmap(400)"
+    },
+    "scale": {
+      "type": "object",
+      "required": ["max"],
+      "properties": {
+        "max": {
+          "type": "integer",
+          "enum": [100, 400],
+          "description": "Maximum value: 100 for certifications/phases, 400 for evolution"
+        },
+        "min": {
+          "type": "integer",
+          "default": 0
+        }
+      }
+    },
+    "value": {
+      "type": "number",
+      "description": "Actual score value, must be in [scale.min, scale.max]"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["actual", "projection", "historic"],
+      "description": "Score status: actual=current, projection=planned, historic=archived"
+    },
+    "source": {
+      "type": "object",
+      "required": ["file", "hash"],
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "Relative path to original document"
+        },
+        "hash": {
+          "type": "string",
+          "description": "SHA-512 hash of source file at extraction time"
+        },
+        "line": {
+          "type": "integer",
+          "description": "Line number where score was extracted"
+        },
+        "context": {
+          "type": "string",
+          "description": "Surrounding text context"
+        }
+      }
+    },
+    "ci": {
+      "type": "object",
+      "required": ["commit", "timestamp"],
+      "properties": {
+        "commit": {
+          "type": "string",
+          "description": "Git commit SHA where score was generated"
+        },
+        "run_id": {
+          "type": "string",
+          "description": "CI run identifier (GitHub Actions run_id or local UUID)"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 timestamp of score generation"
+        }
+      }
+    },
+    "worm": {
+      "type": "object",
+      "required": ["uuid", "signature"],
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "WORM storage UUID for immutable audit trail",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "signature": {
+          "type": "string",
+          "description": "BLAKE2b signature of score manifest"
+        },
+        "chain_prev": {
+          "oneOf": [
+            {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"},
+            {"type": "null"}
+          ],
+          "description": "Previous WORM UUID in hash chain (null for first)"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Human-readable label (e.g., 'PLATINUM', 'Phase 2', 'Evolution400/400 <!-- SCORE_REF:schemas/score_manifest.schema_line108_400of400.score.json -->)"
+        },
+        "grade": {
+          "type": "string",
+          "description": "Grade label (e.g., 'A+', 'GOLD', 'PLATINUM-Forensic')"
+        },
+        "component": {
+          "type": "string",
+          "description": "System component this score applies to"
+        },
+        "tags": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"kind": {"const": "cert"}}
+      },
+      "then": {
+        "properties": {
+          "scale": {"properties": {"max": {"const": 100}}},
+          "value": {"minimum": 0, "maximum": 100}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"kind": {"const": "phase"}}
+      },
+      "then": {
+        "properties": {
+          "scale": {"properties": {"max": {"const": 100}}},
+          "value": {"minimum": 0, "maximum": 100}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"kind": {"const": "evolution"}}
+      },
+      "then": {
+        "properties": {
+          "scale": {"properties": {"max": {"const": 400}}},
+          "value": {"minimum": 0, "maximum": 400}
+        }
+      }
+    }
+  ]
+}

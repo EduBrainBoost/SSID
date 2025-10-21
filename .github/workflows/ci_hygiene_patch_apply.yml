@@ -1,0 +1,35 @@
+name: hygiene-patch-apply
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run in dry-run mode (no writes)'
+        default: 'true'
+        type: choice
+        options: ['true','false']
+jobs:
+  apply-hygiene-patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install --upgrade pip pyyaml pytest
+      - name: Self-tests
+        run: pytest -q 11_test_simulation/tests/test_apply_hygiene_patch.py
+      - name: Apply patch (dry-run)
+        if: inputs.dry_run == 'true'
+        run: |
+          python 12_tooling/maintenance/apply_hygiene_patch.py             --repo-root .             --cert-id SSID-TH-2025-10-15-001             --valid-from 2025-10-15             --valid-to 2026-10-15             --cert-hash ef6a26061246349e4a495b71246d33f624dcb8cdb96fe31eb1e12fad7720094e             --alg-label Dilithium2             --backend placeholder-hmac-sha256             --dry-run             --out-diff 02_audit_logging/logs/hygiene_patch_diff.json
+      - name: Apply patch (write)
+        if: inputs.dry_run == 'false'
+        run: |
+          python 12_tooling/maintenance/apply_hygiene_patch.py             --repo-root .             --cert-id SSID-TH-2025-10-15-001             --valid-from 2025-10-15             --valid-to 2026-10-15             --cert-hash ef6a26061246349e4a495b71246d33f624dcb8cdb96fe31eb1e12fad7720094e             --alg-label Dilithium2             --backend placeholder-hmac-sha256             --out-diff 02_audit_logging/logs/hygiene_patch_diff.json
+      - name: Upload diff
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hygiene-patch-diff
+          path: 02_audit_logging/logs/hygiene_patch_diff.json

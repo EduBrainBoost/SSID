@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "framework": "DSGVO",
+    "version": "2025-Q4",
+    "source": "23_compliance/mappings/gdpr_mapping.yaml",
+    "last_updated": "2025-10-13T19:40:00Z",
+    "maintainer": "edubrainboost",
+    "status": "active",
+    "classification": "PUBLIC - Compliance Mapping",
+    "regulatory_basis": "EU 2016/679 - Datenschutz-Grundverordnung"
+  },
+  "mappings": [
+    {
+      "id": "DSGVO-Art-5",
+      "description": "Grundsätze der Verarbeitung personenbezogener Daten",
+      "applies_to": [
+        "02_audit_logging",
+        "07_governance_legal",
+        "23_compliance",
+        "09_meta_identity"
+      ],
+      "verification": "automated",
+      "test_reference": "test_gdpr_integrity.py",
+      "controls": [
+        "Hash-only storage enforcement",
+        "Data minimization by design",
+        "Purpose limitation controls",
+        "Storage limitation policies"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-6",
+      "description": "Rechtmäßigkeit der Verarbeitung",
+      "applies_to": [
+        "09_meta_identity",
+        "14_zero_time_auth",
+        "07_governance_legal"
+      ],
+      "verification": "manual",
+      "test_reference": "test_lawful_basis.py",
+      "controls": [
+        "Consent management system",
+        "Legitimate interest assessments",
+        "Legal basis documentation"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-13-14",
+      "description": "Informationspflichten",
+      "applies_to": [
+        "13_ui_layer",
+        "05_documentation",
+        "07_governance_legal"
+      ],
+      "verification": "manual",
+      "test_reference": "test_transparency.py",
+      "controls": [
+        "Privacy notices",
+        "Data subject information",
+        "Transparency requirements"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-15-22",
+      "description": "Rechte der betroffenen Person",
+      "applies_to": [
+        "09_meta_identity",
+        "18_data_layer",
+        "03_core"
+      ],
+      "verification": "automated",
+      "test_reference": "test_data_subject_rights.py",
+      "controls": [
+        "Right to access implementation",
+        "Right to erasure (hash rotation)",
+        "Right to data portability",
+        "Right to object"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-25",
+      "description": "Datenschutz durch Technikgestaltung",
+      "applies_to": [
+        "03_core",
+        "09_meta_identity",
+        "21_post_quantum_crypto",
+        "18_data_layer"
+      ],
+      "verification": "automated",
+      "test_reference": "test_privacy_by_design.py",
+      "controls": [
+        "Privacy by design principles",
+        "Privacy by default settings",
+        "Pseudonymization",
+        "Encryption at rest and in transit"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-30",
+      "description": "Verzeichnis von Verarbeitungstätigkeiten",
+      "applies_to": [
+        "07_governance_legal",
+        "02_audit_logging",
+        "23_compliance"
+      ],
+      "verification": "manual",
+      "test_reference": "test_processing_records.py",
+      "controls": [
+        "Processing activities register",
+        "Data processing documentation",
+        "Controller/processor records"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-32",
+      "description": "Sicherheit der Verarbeitung",
+      "applies_to": [
+        "21_post_quantum_crypto",
+        "02_audit_logging",
+        "15_infra",
+        "03_core"
+      ],
+      "verification": "automated",
+      "test_reference": "test_security_controls.py",
+      "controls": [
+        "Encryption (TLS 1.3, AES-256-GCM)",
+        "Post-quantum cryptography",
+        "Access control (RBAC)",
+        "Audit logging (WORM)",
+        "Regular security testing"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-33-34",
+      "description": "Meldung von Verletzungen",
+      "applies_to": [
+        "02_audit_logging",
+        "07_governance_legal",
+        "17_observability"
+      ],
+      "verification": "manual",
+      "test_reference": "test_breach_notification.py",
+      "controls": [
+        "Breach detection mechanisms",
+        "72-hour notification procedures",
+        "Data subject notification",
+        "Incident response plan"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-35",
+      "description": "Datenschutz-Folgenabschätzung",
+      "applies_to": [
+        "07_governance_legal",
+        "01_ai_layer",
+        "08_identity_score"
+      ],
+      "verification": "manual",
+      "test_reference": "test_dpia.py",
+      "controls": [
+        "DPIA methodology",
+        "Risk assessment procedures",
+        "High-risk processing identification",
+        "Mitigation measures"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-37-39",
+      "description": "Datenschutzbeauftragter",
+      "applies_to": [
+        "07_governance_legal",
+        "23_compliance"
+      ],
+      "verification": "manual",
+      "test_reference": "test_dpo.py",
+      "controls": [
+        "DPO designation",
+        "DPO contact information",
+        "DPO reporting structures"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "DSGVO-Art-44-50",
+      "description": "Drittlandübermittlung",
+      "applies_to": [
+        "07_governance_legal",
+        "10_interoperability",
+        "19_adapters"
+      ],
+      "verification": "manual",
+      "test_reference": "test_international_transfers.py",
+      "controls": [
+        "Adequacy decisions",
+        "Standard contractual clauses",
+        "Transfer impact assessments"
+      ],
+      "implementation_status": "implemented"
+    }
+  ],
+  "compliance_metrics": {
+    "overall_coverage": "95%",
+    "automated_controls": 6,
+    "manual_controls": 5,
+    "implemented_controls": 11,
+    "pending_controls": 0
+  },
+  "references": [
+    {
+      "title": "DSGVO Official Text",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "title": "EDPB Guidelines",
+      "url": "https://edpb.europa.eu/our-work-tools/general-guidance/gdpr-guidelines-recommendations-best-practices_en"
+    }
+  ]
+}

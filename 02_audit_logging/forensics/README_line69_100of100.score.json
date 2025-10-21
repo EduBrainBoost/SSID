@@ -1,0 +1,30 @@
+{
+  "id": "2011cd64-5312-41fb-a81c-1346d3269810",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 100,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/forensics/README.md",
+    "hash": "dabba7851d16caa3034b854ce2775582253f62ffa315b0019fc3612523c8aae380a185ae2e62ea6a876f3ef9bfe63a05047a54cbe6d69926a9c09f49cd9ee50f",
+    "line": 69,
+    "context": "### 2. Score Manipulation Detection ⚠️ CRITICAL\n\n**Scans for:**\n- \"100/100\" score claims in reports without corresponding test logs\n- Claims without pytest evidence, assertions, or test execution logs"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "cc92676a-979d-48ea-b828-4720847ca414",
+    "timestamp": "2025-10-16T19:32:52.992872Z"
+  },
+  "worm": {
+    "uuid": "6d852b69-395b-4a33-a8c7-93ff5a29cedf",
+    "signature": "9cdf69b368891940ceff1b88e13d19a925c7eb3ca08195431198f71cbba2e65234bf6bc1b46035e2cd249ee42eff7b910e2539d1a37d285d51f76054278ac979",
+    "chain_prev": "0da9b580-03ce-45eb-8f3a-6de3aa2d520a"
+  },
+  "metadata": {
+    "grade": "PLATINUM",
+    "component": "Audit & Compliance"
+  }
+}

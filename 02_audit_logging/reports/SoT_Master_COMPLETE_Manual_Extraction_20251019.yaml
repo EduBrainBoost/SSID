@@ -1,0 +1,1563 @@
+metadata:
+  version: "2.0.0-COMPLETE-MANUAL"
+  extraction_date: "2025-10-19T20:00:00Z"
+  source_file: "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md"
+  source_version: "1.1.1"
+  total_lines: 1063
+  extractor: "Claude Code AI - 100% MANUELL"
+  extraction_method: "ZEILE_FÜR_ZEILE_JEDE_REGEL_EINZELN_KEINE_SCRIPTS"
+  status: "IN_PROGRESS"
+  progress: "Zeilen 1-72 erfasst (Metadata + Roots 01-03)"
+  checkpoint: "2025-10-19T20:30:00Z - 65 Regeln erfasst, fortsetzen mit Root 04"
+
+rules:
+  # METADATA (Zeilen 1-8)
+  - regel_id: "SOT-MD-001"
+    zeile: 1
+    kategorie: "Metadata - Dokumenttitel"
+    beschreibung: "Master-Definition Dokumenttitel ist 'SSID Project - Master Definition v1.0'"
+    originaltext: "# SSID Project - Master Definition v1.0"
+    enforcement: "MUST"
+    priority: "INFO"
+    betroffene_artefakte: ["Documentation", "Registry"]
+
+  - regel_id: "SOT-MD-002"
+    zeile: 3
+    kategorie: "Metadata - Version"
+    beschreibung: "Master-Definition Version ist 1.0.0"
+    originaltext: "**Version:** 1.0.0"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Registry", "Documentation"]
+
+  - regel_id: "SOT-MD-003"
+    zeile: 4
+    kategorie: "Metadata - Erstellungsdatum"
+    beschreibung: "Master-Definition wurde am 2025-10-02 erstellt"
+    originaltext: "**Erstellt:** 2025-10-02"
+    enforcement: "MUST"
+    priority: "INFO"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-004"
+    zeile: 5
+    kategorie: "Metadata - Status"
+    beschreibung: "Master-Definition Status ist 'Production-Ready'"
+    originaltext: "**Status:** Production-Ready"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-005"
+    zeile: 6
+    kategorie: "Metadata - Zweck"
+    beschreibung: "Master-Definition dient als Single Source of Truth für Architektur, Struktur & Policies"
+    originaltext: "**Zweck:** Single Source of Truth für Architektur, Struktur & Policies"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  # PROJEKTÜBERSICHT (Zeilen 28-47)
+  - regel_id: "SOT-MD-006"
+    zeile: 30
+    kategorie: "Projektübersicht - Projekttyp"
+    beschreibung: "SSID ist ein Self-Sovereign Identity (SSI) Projekt"
+    originaltext: "**SSID** ist ein **Self-Sovereign Identity (SSI) Projekt**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-007"
+    zeile: 30
+    kategorie: "Projektübersicht - Umfang"
+    beschreibung: "SSID geht über klassische digitale Identitätslösungen hinaus"
+    originaltext: "das weit über klassische digitale Identitätslösungen hinausgeht"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Documentation", "Core"]
+
+  - regel_id: "SOT-MD-008"
+    zeile: 30
+    kategorie: "Projektübersicht - Funktion"
+    beschreibung: "SSID fungiert als universelle digitale Lebens- und Geschäftsinfrastruktur"
+    originaltext: "als **universelle digitale Lebens- und Geschäftsinfrastruktur** fungiert"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-009"
+    zeile: 33
+    kategorie: "Vision - Abdeckung"
+    beschreibung: "Vision ist, alle Bereiche des täglichen Lebens (privat, geschäftlich, behördlich) abzudecken"
+    originaltext: "Alle Bereiche des täglichen Lebens (privat, geschäftlich, behördlich) durch eine dezentrale, non-custodial, hash-basierte Plattform abzudecken."
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["All"]
+
+  - regel_id: "SOT-MD-010"
+    zeile: 33
+    kategorie: "Vision - Dezentralität"
+    beschreibung: "Plattform muss dezentral sein"
+    originaltext: "dezentrale, non-custodial, hash-basierte Plattform"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-011"
+    zeile: 33
+    kategorie: "Vision - Non-Custodial"
+    beschreibung: "Plattform muss non-custodial sein (keine Rohdat enspeicherung)"
+    originaltext: "dezentrale, non-custodial, hash-basierte Plattform"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-012"
+    zeile: 33
+    kategorie: "Vision - Hash-basiert"
+    beschreibung: "Plattform muss hash-basiert sein"
+    originaltext: "dezentrale, non-custodial, hash-basierte Plattform"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-013"
+    zeile: 36
+    kategorie: "Architektur - Matrix-Paradigma"
+    beschreibung: "Architektur folgt 2-Dimensionalem Matrix-Paradigma"
+    originaltext: "**2-Dimensionale Matrix:**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-014"
+    zeile: 37
+    kategorie: "Architektur - Vertikale Dimension"
+    beschreibung: "Vertikale Dimension umfasst 24 Roots (Technische Systemebenen)"
+    originaltext: "- **Vertikal (24 Roots):** Technische Systemebenen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-015"
+    zeile: 38
+    kategorie: "Architektur - Horizontale Dimension"
+    beschreibung: "Horizontale Dimension umfasst 16 Shards (Universelle Anwendungsdomänen)"
+    originaltext: "- **Horizontal (16 Shards):** Universelle Anwendungsdomänen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-016"
+    zeile: 39
+    kategorie: "Architektur - Matrix-Größe"
+    beschreibung: "Matrix ergibt 384 Chart-Dateien (24 × 16)"
+    originaltext: "- **= 384 Chart-Dateien** (24 × 16)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core", "CLI"]
+
+  - regel_id: "SOT-MD-017"
+    zeile: 42
+    kategorie: "Tech Stack - Blockchain"
+    beschreibung: "Blockchain/DLT-Stack umfasst Ethereum"
+    originaltext: "- **Blockchain/DLT:** Ethereum, Polygon, eigene Layer"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-018"
+    zeile: 42
+    kategorie: "Tech Stack - Polygon"
+    beschreibung: "Blockchain/DLT-Stack umfasst Polygon"
+    originaltext: "- **Blockchain/DLT:** Ethereum, Polygon, eigene Layer"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-019"
+    zeile: 42
+    kategorie: "Tech Stack - Eigene Layer"
+    beschreibung: "Blockchain/DLT-Stack kann eigene Layer umfassen"
+    originaltext: "- **Blockchain/DLT:** Ethereum, Polygon, eigene Layer"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-020"
+    zeile: 43
+    kategorie: "Tech Stack - Solidity"
+    beschreibung: "Smart Contracts müssen Solidity unterstützen"
+    originaltext: "- **Smart Contracts:** Solidity, Rust"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-021"
+    zeile: 43
+    kategorie: "Tech Stack - Rust Smart Contracts"
+    beschreibung: "Smart Contracts müssen Rust unterstützen"
+    originaltext: "- **Smart Contracts:** Solidity, Rust"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-022"
+    zeile: 44
+    kategorie: "Tech Stack - W3C DID"
+    beschreibung: "Identity-Layer muss W3C DID unterstützen"
+    originaltext: "- **Identity:** W3C DID, Verifiable Credentials"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-023"
+    zeile: 44
+    kategorie: "Tech Stack - Verifiable Credentials"
+    beschreibung: "Identity-Layer muss Verifiable Credentials unterstützen"
+    originaltext: "- **Identity:** W3C DID, Verifiable Credentials"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-024"
+    zeile: 45
+    kategorie: "Tech Stack - IPFS"
+    beschreibung: "Storage-Layer muss IPFS unterstützen"
+    originaltext: "- **Storage:** IPFS, Hash-Ledger, WORM"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-025"
+    zeile: 45
+    kategorie: "Tech Stack - Hash-Ledger"
+    beschreibung: "Storage-Layer muss Hash-Ledger unterstützen"
+    originaltext: "- **Storage:** IPFS, Hash-Ledger, WORM"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-026"
+    zeile: 45
+    kategorie: "Tech Stack - WORM Storage"
+    beschreibung: "Storage-Layer muss WORM (Write-Once-Read-Many) unterstützen"
+    originaltext: "- **Storage:** IPFS, Hash-Ledger, WORM"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-027"
+    zeile: 46
+    kategorie: "Compliance - GDPR"
+    beschreibung: "System muss GDPR-konform sein"
+    originaltext: "- **Compliance:** GDPR, eIDAS 2.0, EU AI Act, MiCA"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-028"
+    zeile: 46
+    kategorie: "Compliance - eIDAS 2.0"
+    beschreibung: "System muss eIDAS 2.0-konform sein"
+    originaltext: "- **Compliance:** GDPR, eIDAS 2.0, EU AI Act, MiCA"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-029"
+    zeile: 46
+    kategorie: "Compliance - EU AI Act"
+    beschreibung: "System muss EU AI Act-konform sein"
+    originaltext: "- **Compliance:** GDPR, eIDAS 2.0, EU AI Act, MiCA"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-030"
+    zeile: 46
+    kategorie: "Compliance - MiCA"
+    beschreibung: "System muss MiCA-konform sein"
+    originaltext: "- **Compliance:** GDPR, eIDAS 2.0, EU AI Act, MiCA"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  # === DIE 24 ROOT-ORDNER (Zeilen 50-199) ===
+
+  # ROOT 01: ai_layer (Zeilen 54-59)
+  - regel_id: "SOT-MD-031"
+    zeile: 54
+    kategorie: "Root 01 - Name"
+    beschreibung: "Root 01 heißt 'ai_layer'"
+    originaltext: "### 01. ai_layer"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-032"
+    zeile: 55
+    kategorie: "Root 01 - Purpose"
+    beschreibung: "Root 01 ai_layer ist für AI/ML & Intelligenz zuständig"
+    originaltext: "**AI/ML & Intelligenz**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-033"
+    zeile: 56
+    kategorie: "Root 01 - Capability Training"
+    beschreibung: "ai_layer muss KI-Modelle Training unterstützen"
+    originaltext: "- KI-Modelle (Training, Inferenz, Federated Learning)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-034"
+    zeile: 56
+    kategorie: "Root 01 - Capability Inferenz"
+    beschreibung: "ai_layer muss KI-Modelle Inferenz unterstützen"
+    originaltext: "- KI-Modelle (Training, Inferenz, Federated Learning)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-035"
+    zeile: 56
+    kategorie: "Root 01 - Capability Federated Learning"
+    beschreibung: "ai_layer muss Federated Learning unterstützen"
+    originaltext: "- KI-Modelle (Training, Inferenz, Federated Learning)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-036"
+    zeile: 57
+    kategorie: "Root 01 - Capability Risk-Scoring"
+    beschreibung: "ai_layer muss Risk-Scoring unterstützen"
+    originaltext: "- Risk/Trust-Scoring, Bias- & Fairness-Kontrollen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-037"
+    zeile: 57
+    kategorie: "Root 01 - Capability Trust-Scoring"
+    beschreibung: "ai_layer muss Trust-Scoring unterstützen"
+    originaltext: "- Risk/Trust-Scoring, Bias- & Fairness-Kontrollen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-038"
+    zeile: 57
+    kategorie: "Root 01 - Capability Bias-Kontrollen"
+    beschreibung: "ai_layer muss Bias-Kontrollen unterstützen"
+    originaltext: "- Risk/Trust-Scoring, Bias- & Fairness-Kontrollen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-039"
+    zeile: 57
+    kategorie: "Root 01 - Capability Fairness-Kontrollen"
+    beschreibung: "ai_layer muss Fairness-Kontrollen unterstützen"
+    originaltext: "- Risk/Trust-Scoring, Bias- & Fairness-Kontrollen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-040"
+    zeile: 58
+    kategorie: "Root 01 - Capability AI Governance"
+    beschreibung: "ai_layer muss AI Governance unterstützen"
+    originaltext: "- AI Governance (EU AI Act, Drift Detection, Safety)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-041"
+    zeile: 58
+    kategorie: "Root 01 - Compliance EU AI Act"
+    beschreibung: "ai_layer muss EU AI Act-Compliance unterstützen"
+    originaltext: "- AI Governance (EU AI Act, Drift Detection, Safety)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-042"
+    zeile: 58
+    kategorie: "Root 01 - Capability Drift Detection"
+    beschreibung: "ai_layer muss Drift Detection unterstützen"
+    originaltext: "- AI Governance (EU AI Act, Drift Detection, Safety)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-043"
+    zeile: 58
+    kategorie: "Root 01 - Capability Safety"
+    beschreibung: "ai_layer muss Safety-Mechanismen unterstützen"
+    originaltext: "- AI Governance (EU AI Act, Drift Detection, Safety)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-044"
+    zeile: 59
+    kategorie: "Root 01 - Capability Multi-Modal Text"
+    beschreibung: "ai_layer muss Multi-Modal Text-Verarbeitung unterstützen"
+    originaltext: "- Multi-Modal (Text, Bild, Audio, Video)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-045"
+    zeile: 59
+    kategorie: "Root 01 - Capability Multi-Modal Bild"
+    beschreibung: "ai_layer muss Multi-Modal Bild-Verarbeitung unterstützen"
+    originaltext: "- Multi-Modal (Text, Bild, Audio, Video)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-046"
+    zeile: 59
+    kategorie: "Root 01 - Capability Multi-Modal Audio"
+    beschreibung: "ai_layer muss Multi-Modal Audio-Verarbeitung unterstützen"
+    originaltext: "- Multi-Modal (Text, Bild, Audio, Video)"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-047"
+    zeile: 59
+    kategorie: "Root 01 - Capability Multi-Modal Video"
+    beschreibung: "ai_layer muss Multi-Modal Video-Verarbeitung unterstützen"
+    originaltext: "- Multi-Modal (Text, Bild, Audio, Video)"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+
+
+  # ROOT 02: audit_logging (Zeilen 61-65)
+  - regel_id: "SOT-MD-048"
+    zeile: 61
+    kategorie: "Root 02 - Name"
+    beschreibung: "Root 02 heißt 'audit_logging'"
+    originaltext: "### 02. audit_logging"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-049"
+    zeile: 62
+    kategorie: "Root 02 - Purpose"
+    beschreibung: "Root 02 audit_logging ist für Nachweise & Beweisführung zuständig"
+    originaltext: "**Nachweise & Beweisführung**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-050"
+    zeile: 63
+    kategorie: "Root 02 - Capability Hash-Ledger"
+    beschreibung: "audit_logging muss Hash-Ledger unterstützen"
+    originaltext: "- Hash-Ledger, Evidence-Matrix, Blockchain Anchors"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-051"
+    zeile: 63
+    kategorie: "Root 02 - Capability Evidence-Matrix"
+    beschreibung: "audit_logging muss Evidence-Matrix unterstützen"
+    originaltext: "- Hash-Ledger, Evidence-Matrix, Blockchain Anchors"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-052"
+    zeile: 63
+    kategorie: "Root 02 - Capability Blockchain Anchors"
+    beschreibung: "audit_logging muss Blockchain Anchors unterstützen"
+    originaltext: "- Hash-Ledger, Evidence-Matrix, Blockchain Anchors"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-053"
+    zeile: 64
+    kategorie: "Root 02 - Capability Audit-Trails"
+    beschreibung: "audit_logging muss Audit-Trails unterstützen"
+    originaltext: "- Audit-Trails, Logging, Retention, Quarantine"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-054"
+    zeile: 64
+    kategorie: "Root 02 - Capability Logging"
+    beschreibung: "audit_logging muss Logging unterstützen"
+    originaltext: "- Audit-Trails, Logging, Retention, Quarantine"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-055"
+    zeile: 64
+    kategorie: "Root 02 - Capability Retention"
+    beschreibung: "audit_logging muss Retention (Aufbewahrung) unterstützen"
+    originaltext: "- Audit-Trails, Logging, Retention, Quarantine"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-056"
+    zeile: 64
+    kategorie: "Root 02 - Capability Quarantine"
+    beschreibung: "audit_logging muss Quarantine unterstützen"
+    originaltext: "- Audit-Trails, Logging, Retention, Quarantine"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-057"
+    zeile: 65
+    kategorie: "Root 02 - Capability Compliance-Protokolle"
+    beschreibung: "audit_logging muss Compliance-Protokolle unterstützen"
+    originaltext: "- Compliance-Protokolle, DAO-Governance-Audits"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-058"
+    zeile: 65
+    kategorie: "Root 02 - Capability DAO-Governance-Audits"
+    beschreibung: "audit_logging muss DAO-Governance-Audits unterstützen"
+    originaltext: "- Compliance-Protokolle, DAO-Governance-Audits"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  # ROOT 03: core (Zeilen 67-72)
+  - regel_id: "SOT-MD-059"
+    zeile: 67
+    kategorie: "Root 03 - Name"
+    beschreibung: "Root 03 heißt 'core'"
+    originaltext: "### 03. core"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-060"
+    zeile: 68
+    kategorie: "Root 03 - Purpose"
+    beschreibung: "Root 03 core ist für Zentrale Logik zuständig"
+    originaltext: "**Zentrale Logik**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-061"
+    zeile: 69
+    kategorie: "Root 03 - Capability Smart Contract Kernsystem"
+    beschreibung: "core muss Smart Contract Kernsystem (On-Chain-Regeln) unterstützen"
+    originaltext: "- Smart Contract Kernsystem (On-Chain-Regeln)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-062"
+    zeile: 70
+    kategorie: "Root 03 - Capability Dispatcher-Schnittstellen"
+    beschreibung: "core muss Dispatcher-Schnittstellen unterstützen"
+    originaltext: "- Dispatcher-Schnittstellen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-063"
+    zeile: 71
+    kategorie: "Root 03 - Capability Identity-Resolver"
+    beschreibung: "core muss Identity-Resolver unterstützen"
+    originaltext: "- Identity-Resolver, Core-APIs"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-064"
+    zeile: 71
+    kategorie: "Root 03 - Capability Core-APIs"
+    beschreibung: "core muss Core-APIs unterstützen"
+    originaltext: "- Identity-Resolver, Core-APIs"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Contract"]
+
+  - regel_id: "SOT-MD-065"
+    zeile: 72
+    kategorie: "Root 03 - Capability ROOT-24-LOCK"
+    beschreibung: "core muss Root-24-LOCK Enforcement unterstützen"
+    originaltext: "- Root-24-LOCK Enforcement"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+
+  # ROOT 04: deployment (Zeilen 74-78)
+  - regel_id: "SOT-MD-066"
+    zeile: 74
+    kategorie: "Root 04 - Name"
+    beschreibung: "Root 04 heißt 'deployment'"
+    originaltext: "### 04. deployment"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-067"
+    zeile: 75
+    kategorie: "Root 04 - Purpose"
+    beschreibung: "Root 04 deployment ist für Auslieferung & Distribution zuständig"
+    originaltext: "**Auslieferung & Distribution**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-068"
+    zeile: 76
+    kategorie: "Root 04 - Capability CI/CD"
+    beschreibung: "deployment muss CI/CD-Pipelines unterstützen"
+    originaltext: "- CI/CD-Pipelines, Rollouts, Cluster-Konfiguration"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "CLI"]
+
+  - regel_id: "SOT-MD-069"
+    zeile: 76
+    kategorie: "Root 04 - Capability Rollouts"
+    beschreibung: "deployment muss Rollouts unterstützen"
+    originaltext: "- CI/CD-Pipelines, Rollouts, Cluster-Konfiguration"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-070"
+    zeile: 76
+    kategorie: "Root 04 - Capability Cluster-Konfiguration"
+    beschreibung: "deployment muss Cluster-Konfiguration unterstützen"
+    originaltext: "- CI/CD-Pipelines, Rollouts, Cluster-Konfiguration"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-071"
+    zeile: 77
+    kategorie: "Root 04 - Capability Canary"
+    beschreibung: "deployment muss Canary-Deployment-Strategie unterstützen"
+    originaltext: "- Deployment-Strategien (Canary, Blue/Green)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-072"
+    zeile: 77
+    kategorie: "Root 04 - Capability Blue/Green"
+    beschreibung: "deployment muss Blue/Green-Deployment-Strategie unterstützen"
+    originaltext: "- Deployment-Strategien (Canary, Blue/Green)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-073"
+    zeile: 78
+    kategorie: "Root 04 - Capability Container"
+    beschreibung: "deployment muss Container unterstützen"
+    originaltext: "- Container & Orchestrierung (K8s, Terraform)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-074"
+    zeile: 78
+    kategorie: "Root 04 - Capability K8s"
+    beschreibung: "deployment muss Kubernetes (K8s) unterstützen"
+    originaltext: "- Container & Orchestrierung (K8s, Terraform)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-075"
+    zeile: 78
+    kategorie: "Root 04 - Capability Terraform"
+    beschreibung: "deployment muss Terraform unterstützen"
+    originaltext: "- Container & Orchestrierung (K8s, Terraform)"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+
+  # ROOT 05: documentation (Zeilen 80-84)
+  - regel_id: "SOT-MD-076"
+    zeile: 80
+    kategorie: "Root 05 - Name"
+    beschreibung: "Root 05 heißt 'documentation'"
+    originaltext: "### 05. documentation"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-077"
+    zeile: 81
+    kategorie: "Root 05 - Purpose"
+    beschreibung: "Root 05 documentation ist für Dokumentation & I18N zuständig"
+    originaltext: "**Dokumentation & I18N**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-078"
+    zeile: 82
+    kategorie: "Root 05 - Capability Developer Guides"
+    beschreibung: "documentation muss Developer Guides unterstützen"
+    originaltext: "- Developer Guides, User Manuals, API Docs"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-079"
+    zeile: 82
+    kategorie: "Root 05 - Capability User Manuals"
+    beschreibung: "documentation muss User Manuals unterstützen"
+    originaltext: "- Developer Guides, User Manuals, API Docs"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-080"
+    zeile: 82
+    kategorie: "Root 05 - Capability API Docs"
+    beschreibung: "documentation muss API Dokumentation unterstützen"
+    originaltext: "- Developer Guides, User Manuals, API Docs"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-081"
+    zeile: 83
+    kategorie: "Root 05 - Capability I18N"
+    beschreibung: "documentation muss Mehrsprachigkeit (I18N-Layer) unterstützen"
+    originaltext: "- Mehrsprachigkeit (I18N-Layer)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Documentation", "Core"]
+
+  - regel_id: "SOT-MD-082"
+    zeile: 84
+    kategorie: "Root 05 - Capability Strukturdateien"
+    beschreibung: "documentation muss Strukturdateien unterstützen"
+    originaltext: "- Strukturdateien, Docusaurus Export"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-083"
+    zeile: 84
+    kategorie: "Root 05 - Capability Docusaurus"
+    beschreibung: "documentation muss Docusaurus Export unterstützen"
+    originaltext: "- Strukturdateien, Docusaurus Export"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Documentation"]
+
+
+  # ROOT 06: data_pipeline (Zeilen 86-90)
+  - regel_id: "SOT-MD-084"
+    zeile: 86
+    kategorie: "Root 06 - Name"
+    beschreibung: "Root 06 heißt 'data_pipeline'"
+    originaltext: "### 06. data_pipeline"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-085"
+    zeile: 87
+    kategorie: "Root 06 - Purpose"
+    beschreibung: "Root 06 data_pipeline ist für Datenfluss & Verarbeitung zuständig"
+    originaltext: "**Datenfluss & Verarbeitung**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-086"
+    zeile: 88
+    kategorie: "Root 06 - Capability ETL"
+    beschreibung: "data_pipeline muss ETL-Prozesse unterstützen"
+    originaltext: "- ETL/ELT-Prozesse, Datenströme"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-087"
+    zeile: 88
+    kategorie: "Root 06 - Capability ELT"
+    beschreibung: "data_pipeline muss ELT-Prozesse unterstützen"
+    originaltext: "- ETL/ELT-Prozesse, Datenströme"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-088"
+    zeile: 88
+    kategorie: "Root 06 - Capability Datenströme"
+    beschreibung: "data_pipeline muss Datenströme unterstützen"
+    originaltext: "- ETL/ELT-Prozesse, Datenströme"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-089"
+    zeile: 89
+    kategorie: "Root 06 - Capability Batch"
+    beschreibung: "data_pipeline muss Batch-Orchestrierung unterstützen"
+    originaltext: "- Orchestrierung (Batch, Stream, Realtime)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-090"
+    zeile: 89
+    kategorie: "Root 06 - Capability Stream"
+    beschreibung: "data_pipeline muss Stream-Orchestrierung unterstützen"
+    originaltext: "- Orchestrierung (Batch, Stream, Realtime)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-091"
+    zeile: 89
+    kategorie: "Root 06 - Capability Realtime"
+    beschreibung: "data_pipeline muss Realtime-Orchestrierung unterstützen"
+    originaltext: "- Orchestrierung (Batch, Stream, Realtime)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-092"
+    zeile: 90
+    kategorie: "Root 06 - Capability ML Data-Feeds"
+    beschreibung: "data_pipeline muss ML/AI Data-Feeds unterstützen"
+    originaltext: "- ML/AI Data-Feeds"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  # ROOT 07: governance_legal (Zeilen 92-96)
+  - regel_id: "SOT-MD-093"
+    zeile: 92
+    kategorie: "Root 07 - Name"
+    beschreibung: "Root 07 heißt 'governance_legal'"
+    originaltext: "### 07. governance_legal"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-094"
+    zeile: 93
+    kategorie: "Root 07 - Purpose"
+    beschreibung: "Root 07 governance_legal ist für Recht & Steuerung zuständig"
+    originaltext: "**Recht & Steuerung**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-095"
+    zeile: 94
+    kategorie: "Root 07 - Compliance eIDAS"
+    beschreibung: "governance_legal muss eIDAS-Compliance unterstützen"
+    originaltext: "- eIDAS, MiCA, DSGVO, DORA"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-096"
+    zeile: 94
+    kategorie: "Root 07 - Compliance MiCA"
+    beschreibung: "governance_legal muss MiCA-Compliance unterstützen"
+    originaltext: "- eIDAS, MiCA, DSGVO, DORA"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-097"
+    zeile: 94
+    kategorie: "Root 07 - Compliance DSGVO"
+    beschreibung: "governance_legal muss DSGVO-Compliance unterstützen"
+    originaltext: "- eIDAS, MiCA, DSGVO, DORA"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-098"
+    zeile: 94
+    kategorie: "Root 07 - Compliance DORA"
+    beschreibung: "governance_legal muss DORA-Compliance unterstützen"
+    originaltext: "- eIDAS, MiCA, DSGVO, DORA"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+  - regel_id: "SOT-MD-099"
+    zeile: 95
+    kategorie: "Root 07 - Capability Juristische Policies"
+    beschreibung: "governance_legal muss Juristische Policies unterstützen"
+    originaltext: "- Juristische Policies, Verträge mit Providern"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Policy"]
+
+  - regel_id: "SOT-MD-100"
+    zeile: 95
+    kategorie: "Root 07 - Capability Provider-Verträge"
+    beschreibung: "governance_legal muss Verträge mit Providern unterstützen"
+    originaltext: "- Juristische Policies, Verträge mit Providern"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Documentation"]
+
+  - regel_id: "SOT-MD-101"
+    zeile: 96
+    kategorie: "Root 07 - Capability DAO-Governance"
+    beschreibung: "governance_legal muss DAO-Governance-Regeln unterstützen"
+    originaltext: "- DAO-Governance-Regeln"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  # ROOT 08: identity_score (Zeilen 98-102)
+  - regel_id: "SOT-MD-102"
+    zeile: 98
+    kategorie: "Root 08 - Name"
+    beschreibung: "Root 08 heißt 'identity_score'"
+    originaltext: "### 08. identity_score"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-103"
+    zeile: 99
+    kategorie: "Root 08 - Purpose"
+    beschreibung: "Root 08 identity_score ist für Reputation & Scoring zuständig"
+    originaltext: "**Reputation & Scoring**"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-104"
+    zeile: 100
+    kategorie: "Root 08 - Capability Trust Levels"
+    beschreibung: "identity_score muss Identity Trust Levels unterstützen"
+    originaltext: "- Identity Trust Levels, Reputationssysteme"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-105"
+    zeile: 100
+    kategorie: "Root 08 - Capability Reputationssysteme"
+    beschreibung: "identity_score muss Reputationssysteme unterstützen"
+    originaltext: "- Identity Trust Levels, Reputationssysteme"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-106"
+    zeile: 101
+    kategorie: "Root 08 - Capability Scoring-Algorithmen"
+    beschreibung: "identity_score muss Scoring-Algorithmen für SSI/DIDs unterstützen"
+    originaltext: "- Scoring-Algorithmen für SSI/DIDs"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-107"
+    zeile: 102
+    kategorie: "Root 08 - Capability Verhaltensanalysen"
+    beschreibung: "identity_score muss Verhaltensanalysen (nur Hash-Proofs, keine PII) unterstützen"
+    originaltext: "- Verhaltensanalysen (nur Hash-Proofs, keine PII)"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Policy"]
+
+  - regel_id: "SOT-MD-108"
+    zeile: 102
+    kategorie: "Root 08 - Policy No PII"
+    beschreibung: "identity_score darf KEINE PII speichern, nur Hash-Proofs"
+    originaltext: "- Verhaltensanalysen (nur Hash-Proofs, keine PII)"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Policy", "Core"]
+
+
+  # ROOT 09: meta_identity
+  - regel_id: "SOT-MD-109"
+    zeile: 104
+    kategorie: "Root 09 - Name"
+    beschreibung: "Root 09 heißt meta_identity"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-110"
+    zeile: 105
+    kategorie: "Root 09 - Purpose"
+    beschreibung: "Root 09 meta_identity ist für Digitale Identität zuständig"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+
+  - regel_id: "SOT-MD-111"
+    zeile: 106
+    kategorie: "Root 09 - Capability DID-Schemas"
+    beschreibung: "meta_identity muss DID-Schemas unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-112"
+    zeile: 106
+    kategorie: "Root 09 - Capability Identity Wallets"
+    beschreibung: "meta_identity muss Identity Wallets unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-113"
+    zeile: 107
+    kategorie: "Root 09 - Capability Selective Disclosure"
+    beschreibung: "meta_identity muss Selective Disclosure unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-114"
+    zeile: 107
+    kategorie: "Root 09 - Capability Profile"
+    beschreibung: "meta_identity muss Profile unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-115"
+    zeile: 107
+    kategorie: "Root 09 - Capability Avatare"
+    beschreibung: "meta_identity muss Avatare unterstützen"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+
+  - regel_id: "SOT-MD-116"
+    zeile: 108
+    kategorie: "Root 09 - Capability Lifecycle Management"
+    beschreibung: "meta_identity muss Identity Lifecycle Management unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+
+  # ROOT 10-24: Kompakte manuelle Erfassung aus Zeilen 110-199
+  
+  # ROOT 10: interoperability
+  - regel_id: "SOT-MD-117"
+    zeile: 110
+    kategorie: "Root 10 - Name"
+    beschreibung: "Root 10 heißt interoperability"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-118"
+    zeile: 111
+    kategorie: "Root 10 - Purpose"
+    beschreibung: "Root 10 interoperability ist für Kompatibilität zuständig"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-119"
+    zeile: 112
+    kategorie: "Root 10 - Capability DID-Resolver"
+    beschreibung: "interoperability muss DID-Resolver unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-120"
+    zeile: 112
+    kategorie: "Root 10 - Standards DIF"
+    beschreibung: "interoperability muss DIF-Standards unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-121"
+    zeile: 112
+    kategorie: "Root 10 - Standards W3C"
+    beschreibung: "interoperability muss W3C-Standards unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-122"
+    zeile: 113
+    kategorie: "Root 10 - Capability Cross-Chain Bridges"
+    beschreibung: "interoperability muss Cross-Chain Bridges unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-123"
+    zeile: 113
+    kategorie: "Root 10 - Capability Protokoll-Adapter"
+    beschreibung: "interoperability muss Protokoll-Adapter unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-124"
+    zeile: 114
+    kategorie: "Root 10 - Capability API-Gateways"
+    beschreibung: "interoperability muss API-Gateways unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  # ROOT 11: test_simulation
+  - regel_id: "SOT-MD-125"
+    zeile: 116
+    kategorie: "Root 11 - Name"
+    beschreibung: "Root 11 heißt test_simulation"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-126"
+    zeile: 117
+    kategorie: "Root 11 - Purpose"
+    beschreibung: "Root 11 test_simulation ist für Simulation und QA zuständig"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-127"
+    zeile: 118
+    kategorie: "Root 11 - Capability Testumgebungen"
+    beschreibung: "test_simulation muss Testumgebungen unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Test", "Core"]
+  - regel_id: "SOT-MD-128"
+    zeile: 118
+    kategorie: "Root 11 - Capability Simulationen"
+    beschreibung: "test_simulation muss Simulationen unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Test"]
+  - regel_id: "SOT-MD-129"
+    zeile: 118
+    kategorie: "Root 11 - Capability Mock-Chains"
+    beschreibung: "test_simulation muss Mock-Chains unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Test"]
+  - regel_id: "SOT-MD-130"
+    zeile: 119
+    kategorie: "Root 11 - Capability Chaos Engineering"
+    beschreibung: "test_simulation muss Chaos Engineering unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Test"]
+  - regel_id: "SOT-MD-131"
+    zeile: 119
+    kategorie: "Root 11 - Capability Attack Simulations"
+    beschreibung: "test_simulation muss Attack Simulations unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Test"]
+  - regel_id: "SOT-MD-132"
+    zeile: 120
+    kategorie: "Root 11 - Capability Benchmarking"
+    beschreibung: "test_simulation muss Benchmarking unterstützen"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Test"]
+  - regel_id: "SOT-MD-133"
+    zeile: 120
+    kategorie: "Root 11 - Capability Performance-Tests"
+    beschreibung: "test_simulation muss Performance-Tests unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Test"]
+
+  # ROOT 12: tooling
+  - regel_id: "SOT-MD-134"
+    zeile: 122
+    kategorie: "Root 12 - Name"
+    beschreibung: "Root 12 heißt tooling"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-135"
+    zeile: 123
+    kategorie: "Root 12 - Purpose"
+    beschreibung: "Root 12 tooling ist für Werkzeuge zuständig"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-136"
+    zeile: 124
+    kategorie: "Root 12 - Capability Developer Tools"
+    beschreibung: "tooling muss Developer Tools unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["CLI", "Core"]
+  - regel_id: "SOT-MD-137"
+    zeile: 124
+    kategorie: "Root 12 - Capability CLI"
+    beschreibung: "tooling muss CLI unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["CLI"]
+  - regel_id: "SOT-MD-138"
+    zeile: 124
+    kategorie: "Root 12 - Capability SDKs"
+    beschreibung: "tooling muss SDKs unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-139"
+    zeile: 125
+    kategorie: "Root 12 - Capability CI-Helper"
+    beschreibung: "tooling muss CI-Helper unterstützen"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["CLI"]
+  - regel_id: "SOT-MD-140"
+    zeile: 125
+    kategorie: "Root 12 - Capability Linter"
+    beschreibung: "tooling muss Linter unterstützen"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["CLI"]
+  - regel_id: "SOT-MD-141"
+    zeile: 125
+    kategorie: "Root 12 - Capability Formatter"
+    beschreibung: "tooling muss Formatter unterstützen"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["CLI"]
+  - regel_id: "SOT-MD-142"
+    zeile: 126
+    kategorie: "Root 12 - Capability Automation Scripts"
+    beschreibung: "tooling muss Automation Scripts unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["CLI"]
+
+
+  # ROOT 13-24 fortgesetzt
+  
+  # ROOT 13: ui_layer  
+  - regel_id: "SOT-MD-143"
+    zeile: 128
+    kategorie: "Root 13 - Name"
+    beschreibung: "Root 13 heißt ui_layer"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-144"
+    zeile: 129
+    kategorie: "Root 13 - Purpose"
+    beschreibung: "Root 13 ui_layer ist für Benutzeroberfläche zuständig"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-145"
+    zeile: 130
+    kategorie: "Root 13 - Capability Frontend"
+    beschreibung: "ui_layer muss Frontend unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-146"
+    zeile: 130
+    kategorie: "Root 13 - Capability Dashboards"
+    beschreibung: "ui_layer muss Dashboards unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-147"
+    zeile: 130
+    kategorie: "Root 13 - Capability Apps"
+    beschreibung: "ui_layer muss Apps unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-148"
+    zeile: 131
+    kategorie: "Root 13 - Capability Partner-Portale"
+    beschreibung: "ui_layer muss Partner-Portale unterstützen"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-149"
+    zeile: 131
+    kategorie: "Root 13 - Capability User-Portale"
+    beschreibung: "ui_layer muss User-Portale unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-150"
+    zeile: 132
+    kategorie: "Root 13 - Capability Admin-GUIs"
+    beschreibung: "ui_layer muss Admin-GUIs unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+
+  # ROOT 14: zero_time_auth
+  - regel_id: "SOT-MD-151"
+    zeile: 134
+    kategorie: "Root 14 - Name"
+    beschreibung: "Root 14 heißt zero_time_auth"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-152"
+    zeile: 135
+    kategorie: "Root 14 - Purpose"
+    beschreibung: "Root 14 zero_time_auth ist für Sofort-Authentifizierung zuständig"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-153"
+    zeile: 136
+    kategorie: "Root 14 - Capability Real-Time KYC"
+    beschreibung: "zero_time_auth muss Real-Time KYC unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-154"
+    zeile: 136
+    kategorie: "Root 14 - Capability Real-Time KYB"
+    beschreibung: "zero_time_auth muss Real-Time KYB unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-155"
+    zeile: 137
+    kategorie: "Root 14 - Capability Zero-Time Login"
+    beschreibung: "zero_time_auth muss Zero-Time Login unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-156"
+    zeile: 137
+    kategorie: "Root 14 - Capability Biometrie"
+    beschreibung: "zero_time_auth muss Biometrie unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core", "Policy"]
+  - regel_id: "SOT-MD-157"
+    zeile: 137
+    kategorie: "Root 14 - Capability MFA"
+    beschreibung: "zero_time_auth muss MFA unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-158"
+    zeile: 138
+    kategorie: "Root 14 - Capability DID Session-Tokens"
+    beschreibung: "zero_time_auth muss DID-gebundene Session-Tokens unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+
+  # ROOT 15: infra
+  - regel_id: "SOT-MD-159"
+    zeile: 140
+    kategorie: "Root 15 - Name"
+    beschreibung: "Root 15 heißt infra"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-160"
+    zeile: 141
+    kategorie: "Root 15 - Purpose"
+    beschreibung: "Root 15 infra ist für Infrastruktur zuständig"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-161"
+    zeile: 142
+    kategorie: "Root 15 - Capability Cloud"
+    beschreibung: "infra muss Cloud unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-162"
+    zeile: 142
+    kategorie: "Root 15 - Capability Bare-Metal"
+    beschreibung: "infra muss Bare-Metal unterstützen"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-163"
+    zeile: 142
+    kategorie: "Root 15 - Capability Netzwerke"
+    beschreibung: "infra muss Netzwerke unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-164"
+    zeile: 143
+    kategorie: "Root 15 - Capability Storage"
+    beschreibung: "infra muss Storage unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-165"
+    zeile: 143
+    kategorie: "Root 15 - Capability Compute"
+    beschreibung: "infra muss Compute unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-166"
+    zeile: 143
+    kategorie: "Root 15 - Capability Load Balancing"
+    beschreibung: "infra muss Load Balancing unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-167"
+    zeile: 144
+    kategorie: "Root 15 - Capability Secrets Management"
+    beschreibung: "infra muss Secrets Management unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+  - regel_id: "SOT-MD-168"
+    zeile: 144
+    kategorie: "Root 15 - Capability Key Management"
+    beschreibung: "infra muss Key Management unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core", "Policy"]
+
+
+  # ROOT 16: codex
+  - regel_id: "SOT-MD-169"
+    zeile: 146
+    kategorie: "Root 16 - Name"
+    beschreibung: "Root 16 heißt codex"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-170"
+    zeile: 147
+    kategorie: "Root 16 - Purpose"
+    beschreibung: "Root 16 codex ist für Wissensbasis und Regeln zuständig"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-171"
+    zeile: 148
+    kategorie: "Root 16 - Capability Codex"
+    beschreibung: "codex muss Codex unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract"]
+  - regel_id: "SOT-MD-172"
+    zeile: 148
+    kategorie: "Root 16 - Capability Policies"
+    beschreibung: "codex muss Policies unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Policy"]
+  - regel_id: "SOT-MD-173"
+    zeile: 148
+    kategorie: "Root 16 - Capability Blaupausen"
+    beschreibung: "codex muss Blaupausen unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Contract"]
+  - regel_id: "SOT-MD-174"
+    zeile: 149
+    kategorie: "Root 16 - Capability Regelwerke"
+    beschreibung: "codex muss Regelwerke für Module unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract"]
+  - regel_id: "SOT-MD-175"
+    zeile: 150
+    kategorie: "Root 16 - Capability SSID-Bibeln"
+    beschreibung: "codex muss SSID-Bibeln (Manifeste, Strukturlevel3) unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Documentation"]
+  # ROOT 17: observability (Zeilen 152-156)
+  - regel_id: "SOT-MD-176"
+    zeile: 152
+    kategorie: "Root 17 - Name"
+    beschreibung: "Root 17 heißt observability"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-177"
+    zeile: 153
+    kategorie: "Root 17 - Purpose"
+    beschreibung: "Root 17 observability ist für Monitoring und Insights zuständig"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Contract", "Core"]
+  - regel_id: "SOT-MD-178"
+    zeile: 154
+    kategorie: "Root 17 - Capability Logging"
+    beschreibung: "observability muss Logging unterstützen"
+    enforcement: "MUST"
+    priority: "CRITICAL"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-179"
+    zeile: 154
+    kategorie: "Root 17 - Capability Metrics"
+    beschreibung: "observability muss Metrics unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-180"
+    zeile: 154
+    kategorie: "Root 17 - Capability Tracing"
+    beschreibung: "observability muss Tracing unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-181"
+    zeile: 155
+    kategorie: "Root 17 - Capability Alerts"
+    beschreibung: "observability muss Alerts unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-182"
+    zeile: 155
+    kategorie: "Root 17 - Capability Dashboards"
+    beschreibung: "observability muss Dashboards unterstützen"
+    enforcement: "MUST"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-183"
+    zeile: 155
+    kategorie: "Root 17 - Capability SIEM"
+    beschreibung: "observability muss SIEM unterstützen"
+    enforcement: "MUST"
+    priority: "HIGH"
+    betroffene_artefakte: ["Core"]
+  - regel_id: "SOT-MD-184"
+    zeile: 156
+    kategorie: "Root 17 - Capability AI-Ops"
+    beschreibung: "observability muss AI-Ops Monitoring unterstützen"
+    enforcement: "SHOULD"
+    priority: "MEDIUM"
+    betroffene_artefakte: ["Core"]

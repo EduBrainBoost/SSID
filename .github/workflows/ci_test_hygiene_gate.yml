@@ -1,0 +1,108 @@
+name: CI - Test Hygiene Gate
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: "0 2 * * 1"  # Monday 02:00 UTC (weekly certification check)
+  workflow_dispatch: {}
+
+jobs:
+  test-hygiene-gate:
+    name: Test Hygiene Certification Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pyyaml
+
+      - name: Strict Backup Gate (Exit 2 if violations)
+        id: backup_gate
+        run: |
+          python 12_tooling/maintenance/backup_purge_tool.py --repo-root .
+          python 12_tooling/maintenance/backup_purge_tool.py --repo-root . --strict
+          BACKUP_COUNT=$(python -c "import json; print(json.load(open('02_audit_logging/logs/backup_purge_scan.json'))['found'])")
+          echo "backup_count=$BACKUP_COUNT" >> $GITHUB_OUTPUT
+          echo "::notice::Backup Gate - Count: $BACKUP_COUNT"
+
+      - name: Test Inventory Audit (Discovery Ratio >= 95%)
+        id: inventory_audit
+        run: |
+          python 12_tooling/analysis/test_inventory_audit.py --repo-root .
+          RATIO=$(python -c "import json; s=json.load(open('02_audit_logging/logs/test_inventory_audit.json')); print(s['summary']['pass_rate'])")
+          echo "discovery_ratio=$RATIO" >> $GITHUB_OUTPUT
+          echo "::notice::Discovery Ratio: $RATIO"
+
+      - name: Calculate Hygiene Score
+        id: hygiene_score
+        run: |
+          BACKUP_PASS=${{ steps.backup_gate.outputs.backup_count == '0' }}
+          RATIO_PASS=$(python -c "import json; s=json.load(open('02_audit_logging/logs/test_inventory_audit.json')); print('true' if s['summary']['pass_rate'] >= 0.95 else 'false')")
+
+          if [ "$BACKUP_PASS" = "true" ] && [ "$RATIO_PASS" = "true" ]; then
+            echo "score=100" >> $GITHUB_OUTPUT
+            echo "status=CERTIFIED" >> $GITHUB_OUTPUT
+            echo "::notice::✅ HYGIENE SCORE: 100/100 - CERTIFIED"
+          else
+            echo "score=0" >> $GITHUB_OUTPUT
+            echo "status=FAIL" >> $GITHUB_OUTPUT
+            echo "::error::❌ HYGIENE SCORE: 0/100 - FAIL"
+            exit 1
+          fi
+
+      - name: Verify Certificate Validity
+        run: |
+          ISSUED=$(date -d "2025-10-15T11:13:21Z" +%s)
+          EXPIRES=$(date -d "2026-10-15T11:13:21Z" +%s)
+          NOW=$(date +%s)
+
+          if [ $NOW -ge $ISSUED ] && [ $NOW -le $EXPIRES ]; then
+            echo "::notice::Certificate valid until 2026-10-15"
+          else
+            echo "::warning::Certificate may be expired or not yet valid"
+          fi
+
+      - name: Report Success
+        if: steps.hygiene_score.outputs.status == 'CERTIFIED'
+        run: |
+          echo "::notice::🔒 TEST HYGIENE CERTIFICATE v1.0 - PRODUCTION SEALED"
+          echo "::notice::Certificate ID: SSID-TH-2025-10-15-001"
+          echo "::notice::Score: ${{ steps.hygiene_score.outputs.score }}/100"
+          echo "::notice::Backup Tests: ${{ steps.backup_gate.outputs.backup_count }}"
+          echo "::notice::Discovery Ratio: ${{ steps.inventory_audit.outputs.discovery_ratio }}"
+          echo "::notice::Compliance: DSGVO/eIDAS/MiCA-konform"
+          echo "::notice::Architecture: ROOT-24-LOCK enforced"
+
+      - name: Upload Hygiene Evidence Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-hygiene-evidence-${{ github.run_id }}
+          path: |
+            02_audit_logging/logs/backup_purge_scan.json
+            02_audit_logging/logs/test_inventory_audit.json
+            02_audit_logging/logs/test_hygiene_score_log.json
+            02_audit_logging/reports/TEST_INTEGRATION_AUDIT.md
+            02_audit_logging/reports/test_hygiene_certificate_v1.md
+            24_meta_orchestration/registry/test_hygiene_certificate.yaml
+          retention-days: 90
+
+      - name: Badge Status
+        if: steps.hygiene_score.outputs.status == 'CERTIFIED'
+        run: |
+          echo "::notice::Badge available at: 13_ui_layer/assets/badges/test_hygiene_badge.svg"

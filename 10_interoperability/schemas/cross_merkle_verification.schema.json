@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.dev/schemas/cross_merkle_verification.schema.json",
+  "title": "Cross-Merkle Verification Protocol",
+  "description": "Schema for bidirectional merkle root verification between federated systems",
+  "version": "v11.0",
+  "type": "object",
+  "required": [
+    "source_system",
+    "target_system",
+    "merkle_proof",
+    "timestamp",
+    "pqc_signature"
+  ],
+  "properties": {
+    "source_system": {
+      "type": "object",
+      "required": [
+        "id",
+        "merkle_root",
+        "algorithm"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique system identifier",
+          "minLength": 3,
+          "maxLength": 64
+        },
+        "merkle_root": {
+          "type": "string",
+          "description": "System merkle root (hex)",
+          "pattern": "^[a-f0-9]{64,128}$"
+        },
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "SHA-256",
+            "SHA-512",
+            "BLAKE3"
+          ]
+        }
+      }
+    },
+    "target_system": {
+      "type": "object",
+      "required": [
+        "id",
+        "merkle_root",
+        "algorithm"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Target system identifier",
+          "minLength": 3,
+          "maxLength": 64
+        },
+        "merkle_root": {
+          "type": "string",
+          "description": "Target merkle root (hex)",
+          "pattern": "^[a-f0-9]{64,128}$"
+        },
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "SHA-256",
+            "SHA-512",
+            "BLAKE3"
+          ]
+        }
+      }
+    },
+    "merkle_proof": {
+      "type": "object",
+      "required": [
+        "leaf",
+        "path",
+        "combined_root"
+      ],
+      "properties": {
+        "leaf": {
+          "type": "string",
+          "description": "Leaf node hash being verified",
+          "pattern": "^[a-f0-9]{64,128}$"
+        },
+        "path": {
+          "type": "array",
+          "description": "Merkle path from leaf to root",
+          "items": {
+            "type": "object",
+            "required": [
+              "hash",
+              "position"
+            ],
+            "properties": {
+              "hash": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64,128}$"
+              },
+              "position": {
+                "type": "string",
+                "enum": [
+                  "left",
+                  "right"
+                ]
+              }
+            }
+          }
+        },
+        "combined_root": {
+          "type": "string",
+          "description": "Hash(source_root || target_root)",
+          "pattern": "^[a-f0-9]{64,128}$"
+        }
+      }
+    },
+    "pqc_signature": {
+      "type": "object",
+      "required": [
+        "algorithm",
+        "signature",
+        "public_key"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "CRYSTALS-Dilithium3",
+            "Dilithium5",
+            "Falcon-512",
+            "Falcon-1024"
+          ]
+        },
+        "signature": {
+          "type": "string",
+          "description": "Base64-encoded PQC signature",
+          "contentEncoding": "base64"
+        },
+        "public_key": {
+          "type": "string",
+          "description": "Base64-encoded PQC public key",
+          "contentEncoding": "base64"
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of verification"
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": [
+        "VERIFIED",
+        "REJECTED",
+        "PENDING",
+        "ERROR"
+      ],
+      "description": "Result of verification"
+    },
+    "reflexive_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Bidirectional symmetry score (optional)"
+    },
+    "counter_signature": {
+      "type": "string",
+      "description": "Target system PQC counter-signature",
+      "contentEncoding": "base64"
+    }
+  },
+  "additionalProperties": false
+}

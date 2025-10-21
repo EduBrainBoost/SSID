@@ -31,7 +31,6 @@ import json
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 
-
 class IntegratedAuditTrail:
     """
     Integrated audit trail system combining WORM + Blockchain.
@@ -220,7 +219,6 @@ class IntegratedAuditTrail:
             }
         }
 
-
 def demo_integrated_audit_trail():
     """Demonstration of integrated audit trail system."""
     print("=" * 70)
@@ -306,7 +304,6 @@ def demo_integrated_audit_trail():
     print("=" * 70)
     print("[OK] Integrated Audit Trail System - Demo Complete")
     print("=" * 70)
-
 
 if __name__ == "__main__":
     demo_integrated_audit_trail()

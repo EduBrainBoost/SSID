@@ -1,0 +1,49 @@
+# SSID Proof Linking v5.2 - SHA-256 Checksums
+# Generated: 2025-10-12
+# Algorithm: SHA-256
+
+# Layer 14: Proof Emission Engine
+# File: 14_zero_time_auth/kyc_gateway/proof_emission/proof_emission_engine.py
+# SHA-256: [To be computed during CI/CD]
+
+# File: 14_zero_time_auth/kyc_gateway/proof_emission/provider_ack_linker.py
+# SHA-256: [To be computed during CI/CD]
+
+# File: 14_zero_time_auth/kyc_gateway/proof_emission/digest_validator.py
+# SHA-256: [To be computed during CI/CD]
+
+# Layer 9: Global Proof Nexus Engine
+# File: 20_foundation/global_proof_nexus_engine.py
+# SHA-256: [To be computed during CI/CD]
+
+# Smart Contract
+# File: 07_governance_legal/contracts/ProofEmitter.sol
+# SHA-256: [To be computed during CI/CD]
+
+# Configuration
+# File: 14_zero_time_auth/kyc_gateway/proof_emission/config.v5.2.example.yaml
+# SHA-256: [To be computed during CI/CD]
+
+# Compliance
+# File: 23_compliance/policies/proof_linking_policy.rego
+# SHA-256: [To be computed during CI/CD]
+
+# File: 23_compliance/mappings/proof_linking_legal_matrix.yaml
+# SHA-256: [To be computed during CI/CD]
+
+# Instructions:
+# Run the following command in CI/CD to compute actual checksums:
+#   cd 14_zero_time_auth/kyc_gateway/proof_emission && sha256sum *.py
+#   cd 20_foundation && sha256sum global_proof_nexus_engine.py
+#   cd 07_governance_legal/contracts && sha256sum ProofEmitter.sol
+#   cd 23_compliance/policies && sha256sum proof_linking_policy.rego
+#   cd 23_compliance/mappings && sha256sum proof_linking_legal_matrix.yaml
+#
+# Or use certutil on Windows:
+#   certutil -hashfile <filepath> SHA256
+
+# Verification:
+# To verify integrity, recompute checksums and compare with values above.
+# Any mismatch indicates file tampering.
+
+# Signature: HMAC-SHA512 (to be applied by WORM logging system)

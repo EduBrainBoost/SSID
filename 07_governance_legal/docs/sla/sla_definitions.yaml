@@ -1,0 +1,78 @@
+version: '1.0'
+slas:
+- id: compliance_mesh
+  name: Dedicated Compliance Mesh
+  slo:
+    audit_log_ingest_latency_p95_ms: 800
+    policy_eval_latency_p95_ms: 300
+    uptime_monthly_percent: 99.9
+  observability:
+    metrics:
+    - ingest_latency_ms
+    - policy_eval_ms
+    - uptime_percent
+    traces:
+    - audit_pipeline_span
+    - rego_eval_span
+    logs:
+    - hash_worm_log
+    - policy_enforcement_log
+- id: private_pqc_node
+  name: Private PQC Node
+  slo:
+    proof_finality_seconds_p95: 15
+    anchor_success_rate_percent: 99.95
+    uptime_monthly_percent: 99.99
+  observability:
+    metrics:
+    - finality_seconds
+    - anchor_success_percent
+    - uptime_percent
+    traces:
+    - proof_chain_span
+    - anchor_tx_span
+    logs:
+    - pqc_node_log
+- id: sla_247
+  name: 24/7 Enterprise SLA
+  slo:
+    incident_ack_minutes_p95: 10
+    incident_resolve_minutes_p95: 60
+    uptime_monthly_percent: 99.999
+  observability:
+    metrics:
+    - mttr_minutes
+    - ack_time_minutes
+    - uptime_percent
+    traces:
+    - incident_response_span
+    logs:
+    - oncall_event_log
+- id: dao_seat
+  name: DAO Governance Seat
+  slo:
+    proposal_visibility_seconds_p95: 30
+    vote_finality_minutes_p95: 20
+  observability:
+    metrics:
+    - proposal_visibility_seconds
+    - vote_finality_minutes
+    traces:
+    - dao_vote_span
+    logs:
+    - dao_governance_log
+- id: govchain_bridge
+  name: GovChain Bridge
+  slo:
+    bridge_latency_seconds_p95: 25
+    bridge_success_rate_percent: 99.9
+    uptime_monthly_percent: 99.98
+  observability:
+    metrics:
+    - bridge_latency_seconds
+    - bridge_success_percent
+    - uptime_percent
+    traces:
+    - govchain_request_span
+    logs:
+    - govchain_bridge_log

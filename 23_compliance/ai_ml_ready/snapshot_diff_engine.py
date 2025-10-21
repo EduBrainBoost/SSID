@@ -18,7 +18,6 @@ from dataclasses import dataclass, field
 from collections import defaultdict
 from difflib import SequenceMatcher
 
-
 @dataclass
 class RegulatoryChange:
     """Detected change in regulatory compliance"""
@@ -33,7 +32,6 @@ class RegulatoryChange:
     impact_severity: str
     description: str
 
-
 @dataclass
 class ModuleImpact:
     """Impact analysis for SSID module"""
@@ -44,7 +42,6 @@ class ModuleImpact:
     compliance_delta: float  # Change in compliance percentage
     affected_controls: List[str]
     required_actions: List[str]
-
 
 @dataclass
 class SnapshotDiff:
@@ -70,7 +67,6 @@ class SnapshotDiff:
     root_causes: List[Dict]
     trending_issues: List[str]
     recommendations: List[str]
-
 
 class SnapshotDiffEngine:
     """
@@ -752,7 +748,6 @@ class SnapshotDiffEngine:
 
         return (implemented / len(module_controls) * 100)
 
-
 def main():
     """Main CLI entry point"""
     print("=== SSID Snapshot Diff Engine ===\n")
@@ -799,7 +794,6 @@ def main():
     print(f"Total changes: {diff.total_changes}")
     print(f"Critical changes: {diff.critical_changes}")
     print(f"Modules affected: {diff.modules_affected}")
-
 
 if __name__ == "__main__":
     from datetime import timedelta

@@ -1,0 +1,15 @@
+version: "1.0"
+kind: "enforcement_gate_manifest"
+date: "2025-10-15"
+status: "ACTIVE"
+owner: "edubrainboost"
+system_user: "bibel"
+ci_workflow: ".github/workflows/ci_enforcement_gate.yml"
+pre_commit_config: ".pre-commit-config.yaml"
+verify_tool: "02_audit_logging/tools/verify_sot_enforcement.py"
+tests:
+  - "11_test_simulation/tests/test_verify_sot_enforcement_ci.py"
+evidence:
+  worm_store: "02_audit_logging/storage/worm/immutable_store/"
+  reports: "02_audit_logging/reports/"
+  logs: "02_audit_logging/logs/"

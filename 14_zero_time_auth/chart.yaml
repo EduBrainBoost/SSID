@@ -1,0 +1,74 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: zero_time_auth
+  version: "0.1.0"
+  description: "Authentication, authorization, KYC/KYB gateway, and zero-knowledge proof verification"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - authentication_service
+    - authorization_rbac
+    - kyc_kyb_gateway
+    - zero_knowledge_proofs
+    - session_management
+    - mfa_support
+
+  interfaces:
+    - name: auth_api
+      type: rest_api
+      standard: oauth2_oidc
+      authentication: none
+
+    - name: kyc_gateway
+      type: rest_api
+      authentication: api_key
+
+    - name: zkp_verifier
+      type: grpc
+      authentication: required
+
+  policies:
+    - name: password_policy
+      enforcement: automated
+      scope: all_users
+      min_entropy: 80_bits
+
+    - name: mfa_required
+      enforcement: automated
+      scope: privileged_users
+
+    - name: session_timeout
+      enforcement: automated
+      scope: all_sessions
+      duration_minutes: 30
+
+  dependencies:
+    internal:
+      - 09_meta_identity  # Identity storage
+      - 21_post_quantum_crypto  # Cryptography
+      - 02_audit_logging  # Auth logging
+    external:
+      - oauth2: standard
+      - oidc: standard
+      - snarkjs: ">=0.7"
+
+  governance:
+    maintainer: "Security Team"
+    reviewers:
+      - identity_team
+      - compliance_team
+    approval_required: true
+    data_classification: highly_confidential
+
+  compliance:
+    dsgvo:
+      - article_32  # Security of processing
+    amld6:
+      - article_8  # Customer due diligence
+    oauth2:
+      - rfc_6749
+    oidc:
+      - openid_connect_core_1_0

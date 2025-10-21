@@ -1,0 +1,56 @@
+# Global Standards SoT Contract (Rules 10-12)
+# ============================================
+sot_contract_metadata:
+  contract_id: "SOT-GLOBAL-STANDARDS-005"
+  version: "1.0.0"
+  date: "2025-10-17"
+  classification: "CONFIDENTIAL"
+  enforcement_level: "HIGH"
+
+sot_rule_010_fsb_stablecoins:
+  rule_id: "SOT-010"
+  rule_name: "FSB Stablecoins 2023 Policy Framework"
+  scientific_foundation:
+    standard: "Financial Stability Board (FSB) Stablecoin Regulations"
+    reference: "https://www.fsb.org/work-of-the-fsb/financial-innovation-and-structural-change/crypto-assets-and-stablecoins/"
+    principle: "Market abuse and transparency controls"
+  technical_manifestation:
+    validator: "03_core/validators/sot/standards_validators.py::validate_fsb_stablecoins_2023"
+    opa_policy: "23_compliance/policies/sot/standards_policy.rego"
+    cli_command: "python 12_tooling/cli/sot_validator.py --rule fsb-stablecoins"
+    test_path: "11_test_simulation/tests_compliance/test_sot_rules.py::test_fsb_stablecoins"
+
+sot_rule_011_iosco_crypto:
+  rule_id: "SOT-011"
+  rule_name: "IOSCO Crypto Markets 2023"
+  scientific_foundation:
+    standard: "IOSCO Crypto-Asset Policies"
+    reference: "https://www.iosco.org/library/pubdocs/pdf/IOSCOPD734.pdf"
+    principle: "Crypto-asset market regulation"
+  technical_manifestation:
+    validator: "03_core/validators/sot/standards_validators.py::validate_iosco_crypto_markets_2023"
+    opa_policy: "23_compliance/policies/sot/standards_policy.rego"
+    cli_command: "python 12_tooling/cli/sot_validator.py --rule iosco-crypto"
+    test_path: "11_test_simulation/tests_compliance/test_sot_rules.py::test_iosco_crypto"
+
+sot_rule_012_nist_ai_rmf:
+  rule_id: "SOT-012"
+  rule_name: "NIST AI RMF 1.0"
+  scientific_foundation:
+    standard: "NIST AI Risk Management Framework 1.0"
+    reference: "https://www.nist.gov/itl/ai-risk-management-framework"
+    principle: "Govern/Map/Measure/Manage AI risks"
+  technical_manifestation:
+    validator: "03_core/validators/sot/standards_validators.py::validate_nist_ai_rmf_1_0"
+    opa_policy: "23_compliance/policies/sot/standards_policy.rego"
+    cli_command: "python 12_tooling/cli/sot_validator.py --rule nist-ai-rmf"
+    test_path: "11_test_simulation/tests_compliance/test_sot_rules.py::test_nist_ai_rmf"
+
+evidence:
+  python_modules: ["03_core/validators/sot/standards_validators.py"]
+  rego_policies: ["23_compliance/policies/sot/standards_policy.rego"]
+  yaml_contracts: ["16_codex/contracts/sot/global_standards.yaml"]
+  cli_commands:
+    - "python 12_tooling/cli/sot_validator.py --rule fsb-stablecoins"
+    - "python 12_tooling/cli/sot_validator.py --rule iosco-crypto"
+    - "python 12_tooling/cli/sot_validator.py --rule nist-ai-rmf"

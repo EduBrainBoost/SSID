@@ -18,20 +18,17 @@ from typing import Dict, List, Optional, Set
 import hmac
 import secrets
 
-
 class NodeRole(Enum):
     """Node roles in federation network"""
     VALIDATOR = "validator"
     OBSERVER = "observer"
     AUDITOR = "auditor"
 
-
 class VerificationResult(Enum):
     """Anchor verification results"""
     PASS = "PASS"
     FAIL = "FAIL"
     PENDING = "PENDING"
-
 
 @dataclass
 class PeerNode:
@@ -45,7 +42,6 @@ class PeerNode:
     total_verifications: int = 0
     successful_verifications: int = 0
 
-
 @dataclass
 class ComplianceAnchor:
     """Compliance anchor to be verified"""
@@ -55,7 +51,6 @@ class ComplianceAnchor:
     evidence_summary: Dict
     signature: str
     merkle_root: str
-
 
 @dataclass
 class CrossSignature:
@@ -67,7 +62,6 @@ class CrossSignature:
     signature: str
     verification_details: Dict = field(default_factory=dict)
 
-
 @dataclass
 class FederatedAnchor:
     """Anchor with federation metadata"""
@@ -76,7 +70,6 @@ class FederatedAnchor:
     consensus_reached: bool = False
     consensus_timestamp: Optional[datetime] = None
     distributed_hash: Optional[str] = None
-
 
 class FederationNode:
     """
@@ -468,7 +461,6 @@ class FederationNode:
 
         return "HEALTHY"
 
-
 def demo_federation_network():
     """Demonstrate federated evidence network"""
     print("=== SSID Federated Evidence Network Demo ===\n")
@@ -550,7 +542,6 @@ def demo_federation_network():
         print(f"   ✓ Exported to {export_path}")
 
     print("\n=== Demo Complete ===")
-
 
 if __name__ == "__main__":
     demo_federation_network()

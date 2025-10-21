@@ -1,0 +1,274 @@
+# AI Remediation Suggestion Prompt Template
+# ==========================================
+#
+# This prompt template is used by the Self-Healing Engine (Stage 2)
+# to generate AI-powered remediation suggestions for failed SoT rules.
+#
+# Version: 1.0.0
+# Date: 2025-10-17
+# LLM Provider: Claude 3.5 Sonnet (primary), GPT-4 (fallback)
+
+system_prompt: |
+  You are an expert in SoT (Single Source of Truth) validation for the SSID compliance framework.
+  Your task is to analyze failed validation rules and generate precise, actionable remediation suggestions.
+
+  Core Principles:
+  - Always provide a JSON Patch (RFC 6902 format) for programmatic fixes
+  - Include a CLI command (yq, jq, or sed) for manual application
+  - Explain the reasoning concisely (1-2 sentences)
+  - Estimate effort required (10s/30s/1m/5m)
+  - Never suggest changes that would violate other rules
+  - Prioritize simplicity and clarity over cleverness
+
+  Output Format:
+  - Return ONLY valid JSON (no markdown, no code blocks)
+  - Use the exact schema provided in the user prompt
+  - Set confidence score based on certainty (0.0-1.0)
+
+user_prompt_template: |
+  Rule {rule_id} failed validation. Please generate a remediation suggestion.
+
+  **Rule Details:**
+  - Rule ID: {rule_id}
+  - Rule Name: {rule_name}
+  - Priority: {priority} (MUST/SHOULD/HAVE)
+  - Scientific Foundation: {scientific_foundation}
+
+  **Current Data:**
+  ```yaml
+  {current_data}
+  ```
+
+  **Failure Message:**
+  {failure_message}
+
+  **Expected Behavior:**
+  {expected_behavior}
+
+  **Output Requirements:**
+  Generate a JSON object with the following structure:
+  {{
+    "patch": [
+      {{
+        "op": "add|remove|replace|move|copy|test",
+        "path": "/json/pointer/path",
+        "value": <new_value>  # omit for 'remove'
+      }}
+    ],
+    "cli_command": "yq/jq/sed command to apply fix",
+    "explanation": "1-2 sentence explanation",
+    "effort": "10 seconds|30 seconds|1 minute|5 minutes",
+    "confidence": 0.95  # 0.0-1.0, higher = more certain
+  }}
+
+  Important:
+  - Return ONLY the JSON object (no markdown formatting)
+  - Ensure JSON Patch paths use correct JSON Pointer syntax
+  - CLI command must be executable on Linux/macOS/Windows (prefer yq for YAML)
+  - For YAML files, prefer 'yq' over 'jq'
+  - Test confidence should reflect ambiguity in the fix
+
+# Output JSON Schema (for validation)
+output_schema:
+  type: object
+  required:
+    - patch
+    - cli_command
+    - explanation
+    - effort
+    - confidence
+  properties:
+    patch:
+      type: array
+      minItems: 1
+      items:
+        type: object
+        required:
+          - op
+          - path
+        properties:
+          op:
+            type: string
+            enum: [add, remove, replace, move, copy, test]
+          path:
+            type: string
+            pattern: "^/.*"  # JSON Pointer must start with /
+          value:
+            description: "Value to add/replace (omit for remove)"
+          from:
+            type: string
+            description: "Source path for move/copy operations"
+    cli_command:
+      type: string
+      minLength: 5
+      maxLength: 500
+      description: "Executable shell command to apply fix"
+    explanation:
+      type: string
+      minLength: 10
+      maxLength: 300
+      description: "Brief explanation of the fix (1-2 sentences)"
+    effort:
+      type: string
+      enum:
+        - "10 seconds"
+        - "30 seconds"
+        - "1 minute"
+        - "5 minutes"
+      description: "Estimated time to apply and verify fix"
+    confidence:
+      type: number
+      minimum: 0.0
+      maximum: 1.0
+      description: "LLM confidence in suggestion (0.0 = low, 1.0 = high)"
+
+# Example Inputs/Outputs for Testing
+examples:
+  - name: "SOT-018: Invalid YAML block marker"
+    input:
+      rule_id: "SOT-018"
+      rule_name: "YAML Block Marker Validation"
+      priority: "should"
+      scientific_foundation: "Consistency in documentation formatting (IEEE 829-2008)"
+      current_data: |
+        version: "3.2.0"
+        yaml_block_marker: "```yml"
+      failure_message: "[SOT-018] FAIL: Expected string '```yaml', got '```yml'"
+      expected_behavior: "yaml_block_marker should be exactly '```yaml' (not 'yml')"
+
+    expected_output:
+      patch:
+        - op: replace
+          path: /yaml_block_marker
+          value: "```yaml"
+      cli_command: 'yq -i ''.yaml_block_marker = "```yaml"'' config.yaml'
+      explanation: "YAML block markers should use 'yaml' not 'yml' for consistency per SOT-018 specification and IEEE 829-2008 documentation standards."
+      effort: "10 seconds"
+      confidence: 0.98
+
+  - name: "SOT-025: Missing business_priority"
+    input:
+      rule_id: "SOT-025"
+      rule_name: "Business Priority Field Validation"
+      priority: "should"
+      scientific_foundation: "Risk-based prioritization (ISO 31000:2018)"
+      current_data: |
+        instances:
+          - name: "test_instance"
+            path: "/test"
+            deprecated: false
+      failure_message: "[SOT-025] FAIL: Missing 'business_priority' in instances[0]"
+      expected_behavior: "Each instance should have business_priority: high|medium|low"
+
+    expected_output:
+      patch:
+        - op: add
+          path: /instances/0/business_priority
+          value: "medium"
+      cli_command: 'yq -i ''.instances[0].business_priority = "medium"'' config.yaml'
+      explanation: "Adding business_priority field with default 'medium' value. Review and adjust to 'high' or 'low' based on actual business criticality per ISO 31000:2018 risk assessment."
+      effort: "30 seconds"
+      confidence: 0.85
+
+  - name: "SOT-073: Missing Gaia-X name (HAVE rule)"
+    input:
+      rule_id: "SOT-073"
+      rule_name: "Gaia-X Name Validation"
+      priority: "have"
+      scientific_foundation: "Gaia-X Trust Framework compliance (optional)"
+      current_data: |
+        gaia_x:
+          path: "/gaia_x/config"
+          deprecated: false
+      failure_message: "[SOT-073] INFO: Missing 'name' in gaia_x"
+      expected_behavior: "If gaia_x object exists, it should have a 'name' field"
+
+    expected_output:
+      patch:
+        - op: add
+          path: /gaia_x/name
+          value: "gaia_x_compliance"
+      cli_command: 'yq -i ''.gaia_x.name = "gaia_x_compliance"'' config.yaml'
+      explanation: "Adding default 'name' field to gaia_x object. Since this is a HAVE rule (optional), you may customize or omit Gaia-X configuration entirely if not needed."
+      effort: "30 seconds"
+      confidence: 0.75
+
+# LLM Configuration
+llm_config:
+  model: "claude-3-5-sonnet-20241022"  # Primary
+  fallback_model: "gpt-4"  # If Claude unavailable
+  max_tokens: 1024
+  temperature: 0.1  # Low temp for deterministic fixes
+  top_p: 0.95
+
+# Rate Limiting / Caching
+rate_limiting:
+  max_requests_per_minute: 10
+  cache_ttl_seconds: 3600  # Cache suggestions for 1 hour
+  cache_key_fields:
+    - rule_id
+    - current_data_hash  # SHA256 of current_data
+
+# Cost Management
+cost_management:
+  max_cost_per_suggestion_usd: 0.01  # Alert if suggestion costs > 1 cent
+  daily_budget_usd: 10.0  # Stop after $10/day
+  log_costs: true  # Track costs in analytics
+
+# Fallback Strategy
+fallback:
+  enabled: true
+  use_rule_based_suggestions: true  # If LLM fails, use hardcoded suggestions
+  hardcoded_suggestions_file: "16_codex/prompts/fallback_suggestions.yaml"
+
+# Quality Assurance
+qa_checks:
+  - name: "validate_json_patch"
+    description: "Ensure patch conforms to RFC 6902"
+    enabled: true
+
+  - name: "test_cli_command_syntax"
+    description: "Validate CLI command is executable"
+    enabled: true
+
+  - name: "check_confidence_threshold"
+    description: "Reject suggestions with confidence < 0.6"
+    enabled: true
+    threshold: 0.6
+
+  - name: "simulate_patch_application"
+    description: "Test patch on copy of data before suggesting"
+    enabled: true
+
+# Monitoring / Telemetry
+telemetry:
+  log_all_suggestions: true
+  log_acceptance_rate: true
+  log_llm_latency: true
+  alert_on_low_confidence: true  # Alert if many suggestions have confidence < 0.7
+
+# Security
+security:
+  never_auto_apply_must_rules: true  # MUST rules require manual review
+  sanitize_llm_output: true  # Remove potential code injection
+  validate_patch_safety: true  # Check patch doesn't delete critical fields
+
+# Metadata
+metadata:
+  version: "1.0.0"
+  last_updated: "2025-10-17"
+  maintained_by: "SSID AI/ML Team"
+  usage_notes: |
+    # Usage Notes
+
+    ## Calling from Python
+    ```python
+    from self_healing_engine import SelfHealingEngine
+    engine = SelfHealingEngine(llm_provider="claude")
+    suggestion = engine.generate_suggestion(...)
+    ```
+
+    ## Calling from CLI
+    ```bash
+    python sot_validator.py --scorecard --input config.yaml --suggest-fixes
+    ```

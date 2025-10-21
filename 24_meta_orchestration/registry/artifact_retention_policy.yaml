@@ -1,0 +1,225 @@
+# Artifact Retention Policy - Forensic Cleanup
+# Version: 1
+# Date: 2025-10-14
+# Purpose: Define lifecycle for generated artifacts vs. living code
+
+version: 1
+date: 2025-10-14
+
+# ===== Artifact Classification =====
+
+artifact_types:
+  # Living Code (28% - NEVER auto-delete)
+  living_code:
+    description: "Core execution layer - policies, code, configuration"
+    patterns:
+      - "**/*.py"
+      - "**/*.rego"
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.sh"
+      - "**/*.md"
+      - "**/*.txt"
+      - "**/*.json"  # Includes schemas, configs (NOT reports)
+    exclusions:
+      - "**/*_report_*.json"
+      - "**/*_snapshot_*.json"
+      - "**/*_analysis_*.json"
+      - "**/*.coverage.json"
+      - "**/pytest_cache/**"
+      - "**/__pycache__/**"
+    retention: permanent
+    rationale: "Source code, policies, and schemas - never auto-delete"
+
+  # Generated Reports (temporary)
+  generated_reports:
+    description: "Analysis outputs, test reports, coverage data"
+    patterns:
+      - "**/*_report_*.json"
+      - "**/*_report_*.md"
+      - "**/*_snapshot_*.json"
+      - "**/*_analysis_*.json"
+      - "**/*_result_*.json"
+      - "**/coverage_*.json"
+      - "**/test_results_*.xml"
+      - "**/pytest-*.xml"
+    retention_days: 30
+    archive_before_delete: true
+    rationale: "Temporary analysis artifacts - consolidate to snapshots"
+
+  # Checksums & Verification (temporary)
+  checksums:
+    description: "Hash files for verification"
+    patterns:
+      - "**/*.sha256"
+      - "**/*.md5"
+      - "**/*.verify.json"
+    retention_days: 90
+    archive_before_delete: true
+    rationale: "Verification artifacts - archive with evidence"
+
+  # Build Artifacts (temporary)
+  build_artifacts:
+    description: "Compiled artifacts, caches, temporary build files"
+    patterns:
+      - "**/__pycache__/**"
+      - "**/.pytest_cache/**"
+      - "**/*.pyc"
+      - "**/*.pyo"
+      - "**/.coverage"
+      - "**/node_modules/**"
+      - "**/.tox/**"
+      - "**/build/**"
+      - "**/dist/**"
+    retention_days: 7
+    archive_before_delete: false
+    rationale: "Rebuild artifacts - safe to delete without archiving"
+
+  # Evidence & Audit Trails (managed by evidence_rolling_window.py)
+  evidence_trails:
+    description: "Audit evidence managed by Rolling Evidence Window"
+    patterns:
+      - "02_audit_logging/evidence/**"
+    retention_days: 14  # Managed by evidence_retention_policy.yaml
+    archive_before_delete: true
+    managed_by: "evidence_rolling_window.py"
+    rationale: "Delegated to Evidence Rolling Window Manager"
+
+  # Backup Artifacts (managed by backup_retention_policy.yaml)
+  backup_artifacts:
+    description: "Backup files managed by Backup Retention Policy"
+    patterns:
+      - "**/backups/**"
+    retention_days: 90  # Keep last 3 months
+    archive_before_delete: true
+    managed_by: "cleanup_old_backups.py"
+    rationale: "Delegated to Backup Retention Manager"
+
+  # Shadow Material (for forensic review)
+  shadow_material:
+    description: "Duplicate shard implementations (exploration artifacts)"
+    patterns:
+      - "**/shards/*/implementations/**"
+    retention: permanent  # Review quarterly, manual cleanup
+    rationale: "Shadow material for multi-implementation validation"
+
+# ===== Retention Strategy =====
+
+retention_strategy:
+  mode: "consolidate_then_archive"
+
+  # Consolidation: Group artifacts into snapshots
+  consolidation:
+    enabled: true
+    frequency: "monthly"
+    output_format: "AUDIT_SNAPSHOT_YYYYMMDD.tar.gz"
+    output_directory: "02_audit_logging/archives/snapshots"
+    include_types:
+      - generated_reports
+      - checksums
+      - evidence_trails
+    verification: true  # SHA-256 checksum
+
+  # Archive: Move to compressed storage
+  archiving:
+    enabled: true
+    compression: "tar.gz"
+    verify_on_write: true
+    immutable: true
+
+  # Deletion: Remove after archiving
+  deletion:
+    require_archive_success: true
+    require_verification: true
+    dry_run_default: true
+    min_files_to_keep: 10  # Safety threshold
+
+# ===== Exclusions (NEVER touch) =====
+
+exclusions:
+  permanent:
+    - ".git/**"
+    - ".github/**"
+    - "**/README.md"
+    - "**/LICENSE"
+    - "**/.gitignore"
+    - "**/.gitkeep"
+    - "**/forensic_manifest*.yaml"
+    - "**/*merkle_root*.json"
+    - "**/*proof_chain*.json"
+    - "**/FORENSIC_*.md"
+
+  directories:
+    - ".git"
+    - ".github"
+    - "node_modules"
+    - "venv"
+    - ".venv"
+
+# ===== OPA Gate =====
+
+opa_gate:
+  policy: "23_compliance/policies/opa/artifact_retention.rego"
+  enforcement: "hard"  # Block if policy denies
+
+  thresholds:
+    max_report_age_days: 30
+    max_checksum_age_days: 90
+    max_build_artifact_age_days: 7
+    max_total_temporary_mb: 500
+
+# ===== Guardrails =====
+
+guardrails:
+  require_clean_git: false  # Cleanup doesn't require clean tree
+  require_branch: "main"
+  max_delete_per_run: 1000
+  min_free_space_mb: 1000  # Don't cleanup if low disk space
+
+  # Safety checks
+  verify_living_code_untouched: true
+  verify_permanent_evidence_preserved: true
+  verify_archive_integrity: true
+
+# ===== Audit Trail =====
+
+audit_trail:
+  enabled: true
+  report_directory: "02_audit_logging/evidence"
+  report_format: "forensic_cleanup_{timestamp}.json"
+  retention_days: 365
+
+# ===== CI Integration =====
+
+ci_integration:
+  enabled: true
+  workflow: ".github/workflows/cleanup_generated_artifacts.yml"
+  schedule: "0 0 1 * *"  # Monthly: 1st day at 00:00 UTC
+  manual_trigger: true
+
+# ===== Metadata =====
+
+metadata:
+  created_by: automation
+  last_updated: 2025-10-14T12:00:00Z
+  maintained_by: forensic_cleanup.py
+  review_frequency: quarterly
+  rationale: |
+    Forensic Cleanup Bundle implements artifact lifecycle management:
+
+    Problem:
+      - 72% of repository is generated artifacts (Knowledge Layer)
+      - Reports, checksums, build artifacts accumulate unbounded
+      - No automatic cleanup mechanism for temporary files
+
+    Solution:
+      - Classify artifacts by type (living code vs. temporary)
+      - Consolidate reports into monthly snapshots
+      - Archive temporary artifacts with verification
+      - Delete only after successful archiving
+
+    Benefits:
+      - Lightweight repository (28% living code + recent evidence)
+      - Forensic integrity maintained (everything archived)
+      - Automatic cleanup prevents bloat
+      - Clear separation: Execution Layer vs. Knowledge Layer

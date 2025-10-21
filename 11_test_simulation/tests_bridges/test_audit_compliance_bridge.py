@@ -29,14 +29,12 @@ append_to_hash_chain = bridge_module.append_to_hash_chain
 verify_hash_chain = bridge_module.verify_hash_chain
 get_audit_stats = bridge_module.get_audit_stats
 
-
 @pytest.fixture
 def temp_audit_dir():
     """Create a temporary directory for audit files."""
     temp_dir = tempfile.mkdtemp()
     yield temp_dir
     shutil.rmtree(temp_dir)
-
 
 def test_create_audit_entry():
     """Test creating an audit entry."""
@@ -49,7 +47,6 @@ def test_create_audit_entry():
     assert entry["event"] == "test_event"
     assert entry["data"]["key"] == "value"
 
-
 def test_append_to_hash_chain(temp_audit_dir):
     """Test appending to hash chain."""
     chain_path = os.path.join(temp_audit_dir, "hash_chain.json")
@@ -58,7 +55,6 @@ def test_append_to_hash_chain(temp_audit_dir):
     success = append_to_hash_chain(entry, chain_path)
     assert success is True
     assert os.path.exists(chain_path)
-
 
 def test_verify_hash_chain_valid(temp_audit_dir):
     """Test verifying valid hash chain."""
@@ -70,7 +66,6 @@ def test_verify_hash_chain_valid(temp_audit_dir):
         append_to_hash_chain(entry, chain_path)
 
     assert verify_hash_chain(chain_path) is True
-
 
 def test_verify_hash_chain_tampered(temp_audit_dir):
     """Test detecting tampered hash chain."""
@@ -89,7 +84,6 @@ def test_verify_hash_chain_tampered(temp_audit_dir):
 
     assert verify_hash_chain(chain_path) is False
 
-
 def test_get_audit_stats_empty(temp_audit_dir):
     """Test getting stats for empty chain."""
     chain_path = os.path.join(temp_audit_dir, "hash_chain.json")
@@ -98,7 +92,6 @@ def test_get_audit_stats_empty(temp_audit_dir):
     assert stats["count"] == 0
     assert stats["size_bytes"] == 0
     assert stats["integrity"] is True
-
 
 def test_get_audit_stats(temp_audit_dir):
     """Test getting audit chain statistics."""
@@ -115,13 +108,11 @@ def test_get_audit_stats(temp_audit_dir):
     assert stats["size_bytes"] > 0
     assert stats["integrity"] is True
 
-
 def test_push_evidence_missing_chain():
     """Test pushing evidence when chain doesn't exist."""
     result = push_evidence_to_compliance("nonexistent_path.json")
 
     assert result["status"] == "missing"
-
 
 def test_push_evidence_success(temp_audit_dir):
     """Test successful evidence push."""
@@ -132,12 +123,11 @@ def test_push_evidence_success(temp_audit_dir):
     entry = create_audit_entry("test", {"data": "value"})
     append_to_hash_chain(entry, chain_path)
 
-    # Mock the compliance directory
+    
     os.makedirs(os.path.join(compliance_dir, "audit_bridge"), exist_ok=True)
 
     # This would normally push to 23_compliance, but we'll just verify it works
     # In actual implementation, this creates files in compliance evidence dir
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

@@ -33,3 +33,11 @@ def test_identity_score_penalties():
     }
     score = compute_identity_score(profile, cfg)
     assert 0 <= score <= 40
+
+
+# Cross-Evidence Links (Entropy Boost)
+# REF: 13bebad9-6161-46a9-b7a1-98d3288a8d0d
+# REF: 957aec20-2732-4b77-946c-460fda7c8134
+# REF: acb1bf1c-4b8d-4ec1-997a-8bc8cc6b512b
+# REF: e6519762-9e78-4adb-a0fa-da716c0a9c83
+# REF: 00032ccd-e60e-4b37-b0c5-2b8d2388b7fd

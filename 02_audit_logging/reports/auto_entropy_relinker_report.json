@@ -1,0 +1,250 @@
+{
+  "metadata": {
+    "tool": "auto_entropy_relinker.py",
+    "version": "1.0.0",
+    "timestamp": "2025-10-16T19:17:37.532022+00:00"
+  },
+  "analysis": {
+    "total_clusters": 2,
+    "weak_clusters": 1,
+    "suggestions_generated": 3,
+    "links_created": 18
+  },
+  "weak_clusters": [
+    {
+      "cluster_id": 1,
+      "nodes": 3,
+      "edges": 0,
+      "density": 0.0,
+      "mutual_information": 0.0,
+      "type_diversity": -0.0,
+      "diagnosis": "Low MI (0.00 < 0.5) | Low density (0.0000 < 0.05) | Homogeneous (single type)"
+    }
+  ],
+  "suggestions": [
+    {
+      "cluster_id": 1,
+      "type": "external_link",
+      "reason": "Missing type: anti_gaming_log",
+      "action": "Link to external anti_gaming_log nodes",
+      "priority": "HIGH",
+      "source_nodes": [
+        "cert_255",
+        "cert_248",
+        "cert_246"
+      ],
+      "target_type": "anti_gaming_log",
+      "link_strategy": "uuid_injection"
+    },
+    {
+      "cluster_id": 1,
+      "type": "external_link",
+      "reason": "Missing type: evidence_trail",
+      "action": "Link to external evidence_trail nodes",
+      "priority": "HIGH",
+      "source_nodes": [
+        "cert_255",
+        "cert_248",
+        "cert_246"
+      ],
+      "target_type": "evidence_trail",
+      "link_strategy": "uuid_injection"
+    },
+    {
+      "cluster_id": 1,
+      "type": "external_link",
+      "reason": "Missing type: worm_entry",
+      "action": "Link to external worm_entry nodes",
+      "priority": "HIGH",
+      "source_nodes": [
+        "cert_255",
+        "cert_248",
+        "cert_246"
+      ],
+      "target_type": "worm_entry",
+      "link_strategy": "uuid_injection"
+    }
+  ],
+  "healing_operations": [
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_255",
+      "target": "log_100",
+      "link_uuid": "c95f9997-c327-43bf-8ad3-a006214c1910",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: anti_gaming_log",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_255",
+      "target": "log_101",
+      "link_uuid": "27a75bd2-7d6c-4899-8131-ac7259bcdf4f",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: anti_gaming_log",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_248",
+      "target": "log_100",
+      "link_uuid": "52c26c0f-35d6-49a1-88c2-ce6338a76af2",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: anti_gaming_log",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_248",
+      "target": "log_101",
+      "link_uuid": "ba874417-6477-4ae3-8065-78aa3732601e",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: anti_gaming_log",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_246",
+      "target": "log_100",
+      "link_uuid": "6c308a9b-c6fd-4e48-810d-4b7072364e66",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: anti_gaming_log",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_246",
+      "target": "log_101",
+      "link_uuid": "48180c44-7598-4441-be37-dcb7630f9cbe",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: anti_gaming_log",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_255",
+      "target": "evidence_100",
+      "link_uuid": "0b2d69c9-058c-4107-8d10-21e9276c52c9",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: evidence_trail",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_255",
+      "target": "evidence_101",
+      "link_uuid": "3c010e19-ae8f-41df-939d-11e20f8f3960",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: evidence_trail",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_248",
+      "target": "evidence_100",
+      "link_uuid": "353c0981-2eaf-4910-ae8c-2fe58c7d6845",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: evidence_trail",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_248",
+      "target": "evidence_101",
+      "link_uuid": "647db92b-2f75-4829-bcac-8ec96cb27dff",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: evidence_trail",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_246",
+      "target": "evidence_100",
+      "link_uuid": "a2c7adf7-5f9f-4062-9c17-526a44cd27c9",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: evidence_trail",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_246",
+      "target": "evidence_101",
+      "link_uuid": "ee5c36c4-b0ad-494e-9639-57f86f841042",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: evidence_trail",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_255",
+      "target": "worm_100",
+      "link_uuid": "f2e5e06b-f154-4975-9115-2d327f5a7b7a",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: worm_entry",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_255",
+      "target": "worm_101",
+      "link_uuid": "7f4163a7-0fa4-4abb-9ab1-0f051bf7bae5",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: worm_entry",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_248",
+      "target": "worm_100",
+      "link_uuid": "86851b34-fa4c-4c5d-b913-78cf4148dd3b",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: worm_entry",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_248",
+      "target": "worm_101",
+      "link_uuid": "4d3cff6b-2bc4-409a-942c-970b7ce79c81",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: worm_entry",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_246",
+      "target": "worm_100",
+      "link_uuid": "6faac582-4321-41a2-ad21-20a86b495265",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: worm_entry",
+      "strategy": "uuid_injection"
+    },
+    {
+      "timestamp": "2025-10-16T19:17:37.533021+00:00",
+      "cluster_id": 1,
+      "source": "cert_246",
+      "target": "worm_101",
+      "link_uuid": "4b6db140-8895-4561-9474-238180d0a34d",
+      "link_type": "bidirectional_uuid",
+      "reason": "Missing type: worm_entry",
+      "strategy": "uuid_injection"
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+name: Forensic Manifest CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '02_audit_logging/evidence/import_resolution/**'
+      - '02_audit_logging/evidence/forensic_manifest_generator.py'
+      - '23_compliance/policies/opa/forensic_manifest_integrity.rego'
+      - '.github/workflows/forensic_manifest_ci.yml'
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  generate-and-validate-manifest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for audit trail
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pytest pytest-json-report
+
+      - name: Generate forensic manifest
+        id: generate_manifest
+        run: |
+          python 02_audit_logging/evidence/forensic_manifest_generator.py
+          echo "manifest_generated=true" >> $GITHUB_OUTPUT
+
+      - name: Verify manifest exists
+        run: |
+          if [ ! -f "02_audit_logging/evidence/forensic_manifest.yaml" ]; then
+            echo "ERROR: Manifest file not generated"
+            exit 1
+          fi
+          echo "✅ Manifest file exists"
+
+      - name: Display manifest summary
+        run: |
+          echo "=== Forensic Manifest Summary ==="
+          python -c "
+          import yaml
+          with open('02_audit_logging/evidence/forensic_manifest.yaml', 'r') as f:
+              data = yaml.safe_load(f)
+          print(f\"Version: {data['version']}\")
+          print(f\"Generated: {data['generated_at']}\")
+          print(f\"Evidence files: {data['total_files']}\")
+          print(f\"Merkle root: {data['merkle_root'][:32]}...\")
+          "
+
+      - name: Install OPA (Open Policy Agent)
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
+
+      - name: Validate manifest with OPA policy
+        id: opa_validate
+        run: |
+          # Convert YAML to JSON for OPA
+          python -c "
+          import yaml, json
+          with open('02_audit_logging/evidence/forensic_manifest.yaml', 'r') as f:
+              data = yaml.safe_load(f)
+          with open('manifest.json', 'w') as f:
+              json.dump(data, f)
+          "
+
+          # Evaluate OPA policy
+          opa eval -d 23_compliance/policies/opa/forensic_manifest_integrity.rego \
+                   -i manifest.json \
+                   --format pretty \
+                   "data.forensic.allow" > opa_result.txt
+
+          cat opa_result.txt
+
+          # Check if policy allows
+          if grep -q "true" opa_result.txt; then
+            echo "✅ OPA Policy: ALLOW"
+            echo "opa_decision=allow" >> $GITHUB_OUTPUT
+          else
+            echo "❌ OPA Policy: DENY"
+            echo "opa_decision=deny" >> $GITHUB_OUTPUT
+
+            # Get denial reasons
+            opa eval -d 23_compliance/policies/opa/forensic_manifest_integrity.rego \
+                     -i manifest.json \
+                     --format pretty \
+                     "data.forensic.deny"
+
+            exit 1
+          fi
+
+      - name: Run pytest validation tests
+        run: |
+          pytest 11_test_simulation/tests_compliance/test_forensic_manifest.py \
+                 -v \
+                 --json-report \
+                 --json-report-file=pytest_report.json \
+                 --json-report-omit=collectors \
+                 || echo "Test execution completed with status: $?"
+
+      - name: Check pytest results
+        run: |
+          if [ -f pytest_report.json ]; then
+            python -c "
+          import json, sys
+          with open('pytest_report.json', 'r') as f:
+              report = json.load(f)
+          passed = report['summary'].get('passed', 0)
+          failed = report['summary'].get('failed', 0)
+          total = report['summary'].get('total', 0)
+          print(f'Tests: {passed}/{total} passed')
+          if failed > 0:
+              print(f'❌ {failed} tests failed')
+              sys.exit(1)
+          print('✅ All tests passed')
+            "
+          else
+            echo "⚠️  Pytest report not found, skipping validation"
+          fi
+
+      - name: Upload manifest as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: forensic-manifest
+          path: |
+            02_audit_logging/evidence/forensic_manifest.yaml
+            23_compliance/reports/forensic_manifest_audit_*.json
+            24_meta_orchestration/registry/forensic_manifest_registry.yaml
+          retention-days: 90
+
+      - name: Upload compliance report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compliance-reports
+          path: 23_compliance/reports/forensic_manifest_audit_*.json
+          retention-days: 365  # Keep compliance reports for 1 year
+
+      - name: Check compliance status
+        run: |
+          # Find the most recent audit report
+          REPORT=$(ls -t 23_compliance/reports/forensic_manifest_audit_*.json | head -1)
+
+          if [ -f "$REPORT" ]; then
+            STATUS=$(python -c "
+          import json
+          with open('$REPORT', 'r') as f:
+              data = json.load(f)
+          print(data['compliance_status'])
+            ")
+
+            echo "Compliance Status: $STATUS"
+
+            if [ "$STATUS" != "COMPLIANT" ]; then
+              echo "❌ Compliance check failed"
+              exit 1
+            fi
+
+            echo "✅ Compliance check passed"
+          else
+            echo "⚠️  No audit report found"
+            exit 1
+          fi
+
+      - name: Post summary
+        if: always()
+        run: |
+          echo "## Forensic Manifest CI Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Manifest Generation" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Manifest generated successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### OPA Policy Validation" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.opa_validate.outputs.opa_decision }}" = "allow" ]; then
+            echo "✅ Policy evaluation: ALLOW" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Policy evaluation: DENY" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Compliance Status" >> $GITHUB_STEP_SUMMARY
+          REPORT=$(ls -t 23_compliance/reports/forensic_manifest_audit_*.json 2>/dev/null | head -1)
+          if [ -f "$REPORT" ]; then
+            STATUS=$(python -c "import json; print(json.load(open('$REPORT'))['compliance_status'])")
+            if [ "$STATUS" = "COMPLIANT" ]; then
+              echo "✅ Status: $STATUS" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ Status: $STATUS" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+  # Optional: Blockchain anchoring job (if enabled)
+  anchor-manifest:
+    runs-on: ubuntu-latest
+    needs: generate-and-validate-manifest
+    if: github.ref == 'refs/heads/main'  # Only on main branch
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Placeholder for blockchain anchoring
+        run: |
+          echo "🔗 Blockchain anchoring would occur here"
+          echo "Merkle root would be anchored to IPFS/blockchain"
+          # Future: Implement actual blockchain anchoring
+          # ipfs add 02_audit_logging/evidence/forensic_manifest.yaml
+          # eth-anchor --merkle-root $MERKLE_ROOT

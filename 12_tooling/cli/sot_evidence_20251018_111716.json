@@ -1,0 +1,157 @@
+{
+  "validation_timestamp": "2025-10-18T11:17:16.420655Z",
+  "total_rules": 6,
+  "priority_breakdown": {
+    "must": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0
+    },
+    "should": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0
+    },
+    "have": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0
+    }
+  },
+  "detailed_results": [
+    {
+      "rule_id": "SOT-001",
+      "priority": "must",
+      "passed": true,
+      "message": "Valid version: 2.0.0"
+    },
+    {
+      "rule_id": "SOT-002",
+      "priority": "must",
+      "passed": true,
+      "message": "Valid date: 2025-10-18"
+    },
+    {
+      "rule_id": "SOT-003",
+      "priority": "must",
+      "passed": true,
+      "message": "Valid deprecated flag: False"
+    },
+    {
+      "rule_id": "SOT-004",
+      "priority": "must",
+      "passed": true,
+      "message": "Valid regulatory basis (77 chars)"
+    },
+    {
+      "rule_id": "SOT-005",
+      "priority": "must",
+      "passed": true,
+      "message": "Valid classification: CONFIDENTIAL - Internal Compliance Matrix"
+    },
+    {
+      "rule_id": "SOT-067",
+      "priority": "must",
+      "passed": true,
+      "message": "SOC2 Entry Marker is set"
+    }
+  ],
+  "evidence_chain": [
+    {
+      "rule_id": "SOT-001",
+      "priority": "must",
+      "passed": true,
+      "evidence": {
+        "version_value": "2.0.0",
+        "version_type": "str",
+        "pattern_matched": true,
+        "expected_pattern": "MAJOR.MINOR.PATCH",
+        "validation_timestamp": "2025-10-18T11:17:16.416634Z"
+      },
+      "message": "Valid version: 2.0.0"
+    },
+    {
+      "rule_id": "SOT-002",
+      "priority": "must",
+      "passed": true,
+      "evidence": {
+        "date_value": "2025-10-18",
+        "date_type": "str",
+        "parse_success": true,
+        "parse_error": null,
+        "expected_format": "YYYY-MM-DD (ISO 8601)",
+        "validation_timestamp": "2025-10-18T11:17:16.420655Z"
+      },
+      "message": "Valid date: 2025-10-18"
+    },
+    {
+      "rule_id": "SOT-003",
+      "priority": "must",
+      "passed": true,
+      "evidence": {
+        "deprecated_value": false,
+        "deprecated_type": "bool",
+        "is_boolean": true,
+        "expected_type": "bool",
+        "validation_timestamp": "2025-10-18T11:17:16.420655Z"
+      },
+      "message": "Valid deprecated flag: False"
+    },
+    {
+      "rule_id": "SOT-004",
+      "priority": "must",
+      "passed": true,
+      "evidence": {
+        "regulatory_basis_value": "FATF Recommendation 16, OECD CARF 2025-07, ISO 24165-2:2025, MiCA, DORA, GDPR",
+        "regulatory_basis_type": "str",
+        "length": 77,
+        "min_length_requirement": 10,
+        "validation_timestamp": "2025-10-18T11:17:16.420655Z"
+      },
+      "message": "Valid regulatory basis (77 chars)"
+    },
+    {
+      "rule_id": "SOT-005",
+      "priority": "must",
+      "passed": true,
+      "evidence": {
+        "classification_value": "CONFIDENTIAL - Internal Compliance Matrix",
+        "classification_type": "str",
+        "valid_classifications": [
+          "PUBLIC",
+          "INTERNAL",
+          "CONFIDENTIAL",
+          "RESTRICTED"
+        ],
+        "matched": true,
+        "validation_timestamp": "2025-10-18T11:17:16.420655Z"
+      },
+      "message": "Valid classification: CONFIDENTIAL - Internal Compliance Matrix"
+    },
+    {
+      "rule_id": "SOT-067",
+      "priority": "must",
+      "passed": true,
+      "evidence": {
+        "soc2_marker_present": true,
+        "input_snapshot": {
+          "version": "2.0.0",
+          "date": "2025-10-18",
+          "deprecated": false,
+          "regulatory_basis": "FATF Recommendation 16, OECD CARF 2025-07, ISO 24165-2:2025, MiCA, DORA, GDPR",
+          "classification": "CONFIDENTIAL - Internal Compliance Matrix",
+          "soc2": {
+            "entry_marker_soc2": "soc2/:",
+            "name": "SOC2 Type II Controls",
+            "path": "23_compliance/global/soc2/",
+            "deprecated": false
+          }
+        },
+        "validation_timestamp": "2025-10-18T11:17:16.420655Z",
+        "rule_priority": "must"
+      },
+      "message": "SOC2 Entry Marker is set"
+    }
+  ],
+  "moscow_score": 100.0
+}

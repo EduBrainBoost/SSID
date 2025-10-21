@@ -1,0 +1,18 @@
+{
+  "version": "5.2",
+  "tenant_id": "did:ssid:acme-001",
+  "tier": "global_proof_suite",
+  "regions": ["DACH", "EN-EU", "US-CAN"],
+  "addons": ["compliance_mesh", "pqc_node", "sla_24_7"],
+  "discount_term_months": 24,
+  "discount_percent": 10,
+  "bundle": "global_bundle",
+  "api": {
+    "rate_class": "premium",
+    "feature_flags": ["proofs", "federation_ready"]
+  },
+  "limits": {
+    "users": 5000,
+    "tenants": 3
+  }
+}

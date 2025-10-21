@@ -1,0 +1,10 @@
+# Invalid Test Data - MUST Rule Failures
+# Should result in Exit Code 2
+
+version: "1.0"  # FAIL: Invalid version format (missing patch)
+date: "2025-10-18"
+deprecated: false
+regulatory_basis: "Short"  # FAIL: Too short (< 10 chars)
+classification: "INVALID CLASS"  # FAIL: Invalid classification
+
+soc2: {}  # FAIL: Missing entry_marker_soc2

@@ -1,0 +1,80 @@
+version: '1.0'
+generated: '2025-10-14T17:15:00+00:00'
+description: |
+  Report Output Manifest - Single Source of Truth for report destinations
+  All reports MUST be written to designated directories, NEVER to repo root
+
+# Core report directories
+reports_root: "05_documentation/reports"
+audit_reports_root: "02_audit_logging/reports"
+forensics_root: "02_audit_logging/worm_storage"
+logs_root: "02_audit_logging/logs"
+evidence_root: "23_compliance/evidence"
+artifacts_root: "24_meta_orchestration/artifacts"
+docs_root: "24_meta_orchestration/docs"
+
+# Specific report paths by category
+report_paths:
+  # Testing
+  pytest_junit: "05_documentation/reports/pytest_junit.xml"
+  pytest_html: "05_documentation/reports/pytest_report.html"
+  pytest_log: "02_audit_logging/logs/pytest_execution.log"
+  coverage_xml: "23_compliance/evidence/coverage/coverage.xml"
+  coverage_html: "23_compliance/evidence/coverage/htmlcov"
+
+  # Security & Compliance
+  root_immunity_scan: "02_audit_logging/reports/root_immunity_scan.json"
+  root_breach_trace: "02_audit_logging/reports/root_breach_trace_report.json"
+  fake_integrity_analysis: "02_audit_logging/worm_storage/fake_integrity/fake_integrity_analysis.json"
+  meta_audit_adversary: "02_audit_logging/forensics/adversarial_tests/adversarial_report.json"
+  root_immunity_selftest: "02_audit_logging/reports/root_immunity_selftest.json"
+
+  # Quality & Metrics
+  score_monitor: "05_documentation/reports/score_dashboard.json"
+  link_density: "12_tooling/quality/reports/link_density_analysis.json"
+
+  # Health Reports
+  system_health: "02_audit_logging/reports/system_health_assessment.md"
+  final_health: "02_audit_logging/reports/FINAL_SYSTEM_HEALTH_ASSESSMENT.md"
+
+  # Blueprint 42
+  blueprint42_technical_dashboard: "05_documentation/reports/blueprint42_technical_dashboard.json"
+  blueprint42_legal_narrative: "05_documentation/reports/blueprint42_legal_narrative.md"
+  blueprint42_sync_metadata: "13_ui_layer/synced_views/sync_metadata.json"
+
+# File naming conventions
+naming_conventions:
+  timestamp_format: "%Y%m%d_%H%M%S"
+  date_format: "%Y%m%d"
+  report_prefix: ""
+  report_suffix: ""
+
+# Validation rules
+validation:
+  max_file_size_mb: 100
+  allowed_extensions:
+    - ".json"
+    - ".jsonl"
+    - ".yaml"
+    - ".yml"
+    - ".md"
+    - ".html"
+    - ".xml"
+    - ".log"
+  forbidden_root_patterns:
+    - "*.log"
+    - "*.md"
+    - "*.json"
+    - "*.xml"
+    - "*_REPORT_*"
+    - "*_report_*"
+    - "SYSTEM_HEALTH_*"
+    - "test_results.*"
+
+notes: |
+  STRICT ENFORCEMENT:
+  - All reports MUST use paths from this manifest
+  - NO reports in repository root
+  - NO temporary files in repository root
+  - All test artifacts in designated directories
+  - Exception: 4-FILE-LOCK (LICENSE, README.md, .gitignore, .github/)

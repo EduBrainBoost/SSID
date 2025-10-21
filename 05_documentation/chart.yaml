@@ -1,0 +1,67 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: documentation
+  version: "0.1.0"
+  description: "Technical documentation, API specs, architecture diagrams, and compliance documentation"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - api_documentation
+    - architecture_diagrams
+    - compliance_documentation
+    - user_guides
+    - developer_onboarding
+    - changelog_management
+
+  interfaces:
+    - name: documentation_portal
+      type: web
+      authentication: optional
+
+    - name: api_specs
+      type: openapi
+      version: "3.0"
+
+    - name: schema_registry
+      type: json_schema
+      authentication: optional
+
+  policies:
+    - name: documentation_versioning
+      enforcement: automated
+      scope: all_docs
+
+    - name: accuracy_validation
+      enforcement: manual_review
+      scope: all_docs
+      frequency: quarterly
+
+    - name: accessibility
+      enforcement: automated
+      scope: web_docs
+      standard: wcag_2_1_aa
+
+  dependencies:
+    internal:
+      - 16_codex  # Structure definitions
+      - 23_compliance  # Compliance mappings
+    external:
+      - markdown: "*"
+      - openapi_generator: ">=6.0"
+
+  governance:
+    maintainer: "Documentation Team"
+    reviewers:
+      - technical_writers
+      - product_team
+    approval_required: false
+    data_classification: public
+
+  compliance:
+    iso_27001:
+      - control_a7_2_2  # Information security awareness
+    accessibility:
+      - wcag_2_1: level_aa

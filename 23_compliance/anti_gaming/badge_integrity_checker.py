@@ -23,11 +23,9 @@ from typing import Dict, List, Tuple, Optional, Iterable
 from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
 
-
 # Legacy function for backward compatibility
 def _sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
 
 def verify_badge_records(records: Iterable[Dict[str, str]]) -> List[Dict[str, str]]:
     """Verify signature integrity of badge records.
@@ -46,7 +44,6 @@ def verify_badge_records(records: Iterable[Dict[str, str]]) -> List[Dict[str, st
             invalid.append({"id": r.get("id", "?"), "error": "bad-signature"})
     return invalid
 
-
 @dataclass
 class BadgeViolation:
     """Represents a badge integrity violation"""
@@ -61,7 +58,6 @@ class BadgeViolation:
 
     def to_dict(self) -> Dict:
         return asdict(self)
-
 
 @dataclass
 class BadgeCheckResult:
@@ -82,7 +78,6 @@ class BadgeCheckResult:
             "violations": [v.to_dict() for v in self.violations],
             "hash_integrity_score": self.hash_integrity_score
         }
-
 
 class BadgeIntegrityChecker:
     """
@@ -416,7 +411,6 @@ class BadgeIntegrityChecker:
             hash_integrity_score=integrity_score
         )
 
-
 def main():
     """CLI entry point"""
     # Find repo root
@@ -443,7 +437,6 @@ def main():
         sys.exit(0)  # Don't block CI on warnings
     else:
         sys.exit(0)
-
 
 if __name__ == "__main__":
     main()

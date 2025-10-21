@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "tool": "entropy_autotuner.py",
+    "version": "1.0.0",
+    "last_updated": "2025-10-16T19:22:44.247576+00:00"
+  },
+  "config": {
+    "target_resilience": 0.7,
+    "K_p": 0.4,
+    "K_i": 0.05,
+    "K_d": 0.1,
+    "max_step": 0.05,
+    "min_threshold": 0.2,
+    "max_threshold": 0.8,
+    "convergence_tolerance": 0.01,
+    "max_integral": 0.15
+  },
+  "state": {
+    "integral_error": 0.05928081401093466,
+    "last_error": 0.05928081401093466,
+    "last_resilience": 0.6407191859890653,
+    "cycle_count": 1
+  },
+  "history": [
+    {
+      "cycle": 1,
+      "timestamp": "2025-10-16T19:22:44.247576+00:00",
+      "resilience": 0.6407191859890653,
+      "target": 0.7,
+      "error": 0.05928081401093466,
+      "integral_error": 0.05928081401093466,
+      "adjustments": {
+        "mi_threshold_delta": 0.01630222385300703,
+        "density_threshold_delta": 0.009781334311804219
+      },
+      "convergence": "LEARNING"
+    }
+  ]
+}

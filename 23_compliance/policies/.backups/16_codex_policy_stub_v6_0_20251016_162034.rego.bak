@@ -1,0 +1,118 @@
+# SSID OPA Policy - 16_codex (FUNCTIONAL v6.3)
+# Auto-generated from 16_codex/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.16codex.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "16_codex",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "16_codex_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "16_codex"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["schema_registry", "structure_definitions", "manifest_registry", "version_control", "json_schema_validation", "openapi_specs"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "16_codex_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 16_codex operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "16_codex_operation"
+  input.request.valid == false
+  msg := "Invalid request for 16_codex - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "16_codex_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: schema_versioning (enforcement: automated, scope: all_schemas)
+deny_schemaversioning[msg] {
+  input.request.type == "16_codex_operation"
+  input.policy_check == "schema_versioning"
+  not input.policy_compliance.schemaversioning
+  msg := "Policy violation: schema_versioning (scope: all_schemas)"
+}
+
+# Policy: backward_compatibility (enforcement: automated, scope: all_changes)
+deny_backwardcompatibility[msg] {
+  input.request.type == "16_codex_operation"
+  input.policy_check == "backward_compatibility"
+  not input.policy_compliance.backwardcompatibility
+  msg := "Policy violation: backward_compatibility (scope: all_changes)"
+}
+
+# Policy: schema_validation (enforcement: automated, scope: all_schemas)
+deny_schemavalidation[msg] {
+  input.request.type == "16_codex_operation"
+  input.policy_check == "schema_validation"
+  not input.policy_compliance.schemavalidation
+  msg := "Policy violation: schema_validation (scope: all_schemas)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "16_codex_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 16_codex"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "16_codex_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 16_codex"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "16_codex",
+  "capabilities": 6,
+  "policies": 3
+}

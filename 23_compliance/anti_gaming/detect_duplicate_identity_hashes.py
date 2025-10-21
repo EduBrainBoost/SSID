@@ -11,7 +11,6 @@ from pathlib import Path
 from typing import Iterable, List, Dict
 from datetime import datetime, timezone
 
-
 def detect_duplicate_identity_hashes(identity_hashes: Iterable[str]) -> List[str]:
     """
     Return a list of duplicate hashes preserving first-seen order.
@@ -32,7 +31,6 @@ def detect_duplicate_identity_hashes(identity_hashes: Iterable[str]) -> List[str
         else:
             seen.add(h)
     return dupes
-
 
 def analyze_hash_dataset(hash_list: List[str]) -> Dict:
     """
@@ -69,7 +67,6 @@ def analyze_hash_dataset(hash_list: List[str]) -> Dict:
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
 
-
 def generate_evidence_report(analysis: Dict, output_path: Path) -> None:
     """
     Generate evidence report for audit trail.
@@ -87,7 +84,6 @@ def generate_evidence_report(analysis: Dict, output_path: Path) -> None:
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(analysis, f, indent=2)
-
 
 if __name__ == "__main__":
     import sys

@@ -31,7 +31,6 @@ except ImportError:
     except Exception as e:
         raise ImportError(f"Could not load policy_engine: {e}")
 
-
 def validate_ai_decision(decision: Dict[str, Any], policy: str = "AI_DECISION_POLICY") -> bool:
     """
     Validate an AI decision against compliance policies.
@@ -49,7 +48,6 @@ def validate_ai_decision(decision: Dict[str, Any], policy: str = "AI_DECISION_PO
     """
     return evaluate_policy(policy, decision)
 
-
 def get_ai_policy_requirements(policy: str = "AI_DECISION_POLICY") -> Dict[str, Any]:
     """
     Retrieve the requirements for AI decision policy.
@@ -61,7 +59,6 @@ def get_ai_policy_requirements(policy: str = "AI_DECISION_POLICY") -> Dict[str, 
         Policy definition dict
     """
     return get_policy(policy)
-
 
 def validate_ai_batch(decisions: list, policy: str = "AI_DECISION_POLICY") -> Dict[str, Any]:
     """
@@ -88,7 +85,6 @@ def validate_ai_batch(decisions: list, policy: str = "AI_DECISION_POLICY") -> Di
         "failed": failed,
         "pass_rate": passed / total if total > 0 else 0.0,
     }
-
 
 if __name__ == "__main__":
     # Self-test

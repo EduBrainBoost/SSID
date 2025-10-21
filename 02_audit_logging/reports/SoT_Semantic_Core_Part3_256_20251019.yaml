@@ -1,0 +1,2156 @@
+metadata:
+  version: 3.0.0-PART3-SEMANTIC-CORE
+  extraction_date: '2025-10-19T14:31:56.000490'
+  source: SoT_Complete_Masterlist_Part3_20251019.yaml
+  total_rules: 256
+  target_rules: 256
+  extraction_method: POLICY_DEPTH_FILTERING_PART3
+  filtering_strategy: Priority-based + Category-weighted semantic scoring (Part3)
+  severity_distribution:
+    CRITICAL: 35
+    HIGH: 14
+    MEDIUM: 5
+    LOW: 195
+    INFO: 7
+  category_distribution:
+    Quarantine/Evidence: 15
+    Quarantine/Evidence Item: 6
+    Regulatory: 5
+    Regulatory Item: 6
+    General: 178
+    General Item: 23
+    Bash Validation: 4
+    Standards: 1
+    Privacy: 1
+    Review/Documentation: 3
+    Review/Documentation Item: 5
+    Integration: 2
+    Metadata: 7
+rules:
+- regel_id: SOT-PART3-SEM-001
+  zeile: 473
+  kategorie: Quarantine/Evidence
+  beschreibung: 'quarantine_processing.auto_quarantine: True'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_processing.auto_quarantine
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-002
+  zeile: 473
+  kategorie: Quarantine/Evidence
+  beschreibung: 'hash_ledger_system.ledger_structure.quarantine_officer: Person responsible
+    for quarantine action'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: hash_ledger_system.ledger_structure.quarantine_officer
+  wert: Person responsible for quarantine action
+- regel_id: SOT-PART3-SEM-003
+  zeile: 473
+  kategorie: Quarantine/Evidence
+  beschreibung: 'quarantine_monitoring.quarantine_metrics: List container'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_monitoring.quarantine_metrics
+  wert: List with 6 items
+- regel_id: SOT-PART3-SEM-004
+  zeile: 473
+  kategorie: Quarantine/Evidence Item
+  beschreibung: 'quarantine_monitoring.quarantine_metrics item 0: Average quarantine
+    duration by category'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_monitoring.quarantine_metrics[0]
+  wert: Average quarantine duration by category
+- regel_id: SOT-PART3-SEM-005
+  zeile: 473
+  kategorie: Quarantine/Evidence Item
+  beschreibung: 'quarantine_monitoring.quarantine_metrics item 1: Release success
+    rate'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_monitoring.quarantine_metrics[1]
+  wert: Release success rate
+- regel_id: SOT-PART3-SEM-006
+  zeile: 473
+  kategorie: Quarantine/Evidence Item
+  beschreibung: 'quarantine_monitoring.quarantine_metrics item 2: Repeat quarantine
+    patterns'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_monitoring.quarantine_metrics[2]
+  wert: Repeat quarantine patterns
+- regel_id: SOT-PART3-SEM-007
+  zeile: 473
+  kategorie: Quarantine/Evidence Item
+  beschreibung: 'quarantine_monitoring.quarantine_metrics item 3: Business impact
+    of quarantined items'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_monitoring.quarantine_metrics[3]
+  wert: Business impact of quarantined items
+- regel_id: SOT-PART3-SEM-008
+  zeile: 473
+  kategorie: Quarantine/Evidence Item
+  beschreibung: 'quarantine_monitoring.quarantine_metrics item 4: Compliance effectiveness
+    scores'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_monitoring.quarantine_metrics[4]
+  wert: Compliance effectiveness scores
+- regel_id: SOT-PART3-SEM-009
+  zeile: 473
+  kategorie: Quarantine/Evidence Item
+  beschreibung: 'quarantine_monitoring.quarantine_metrics item 5: Cost of quarantine
+    operations'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_monitoring.quarantine_metrics[5]
+  wert: Cost of quarantine operations
+- regel_id: SOT-PART3-SEM-010
+  zeile: 473
+  kategorie: Quarantine/Evidence
+  beschreibung: 'anti_gaming_quarantine.quarantine_gaming_detection: Monitor attempts
+    to game quarantine system'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: anti_gaming_quarantine.quarantine_gaming_detection
+  wert: Monitor attempts to game quarantine system
+- regel_id: SOT-PART3-SEM-011
+  zeile: 473
+  kategorie: Quarantine/Evidence
+  beschreibung: 'anti_gaming_quarantine.false_quarantine_prevention: Prevent malicious
+    quarantine triggers'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: anti_gaming_quarantine.false_quarantine_prevention
+  wert: Prevent malicious quarantine triggers
+- regel_id: SOT-PART3-SEM-012
+  zeile: 473
+  kategorie: Quarantine/Evidence
+  beschreibung: 'anti_gaming_quarantine.quarantine_integrity_verification: Regular
+    integrity checks'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: anti_gaming_quarantine.quarantine_integrity_verification
+  wert: Regular integrity checks
+- regel_id: SOT-PART3-SEM-013
+  zeile: 908
+  kategorie: Quarantine/Evidence
+  beschreibung: 'quarantine_structure.subfolders.quarantined: 02_audit_logging/quarantine/singleton/quarantine_store/quarantined/'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_structure.subfolders.quarantined
+  wert: 02_audit_logging/quarantine/singleton/quarantine_store/quarantined/
+- regel_id: SOT-PART3-SEM-014
+  zeile: 908
+  kategorie: Quarantine/Evidence
+  beschreibung: 'retention_policy.quarantined_retention: 30 days'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: retention_policy.quarantined_retention
+  wert: 30 days
+- regel_id: SOT-PART3-SEM-015
+  zeile: 908
+  kategorie: Quarantine/Evidence
+  beschreibung: 'security_controls.read_only_quarantine: True'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: security_controls.read_only_quarantine
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-016
+  zeile: 473
+  kategorie: Regulatory
+  beschreibung: 'quarantine_triggers.compliance_violations: List container'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.compliance_violations
+  wert: List with 6 items
+- regel_id: SOT-PART3-SEM-017
+  zeile: 473
+  kategorie: Regulatory Item
+  beschreibung: 'quarantine_triggers.compliance_violations item 0: Failed structure
+    validation (score < 70)'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.compliance_violations[0]
+  wert: Failed structure validation (score < 70)
+- regel_id: SOT-PART3-SEM-018
+  zeile: 473
+  kategorie: Regulatory Item
+  beschreibung: 'quarantine_triggers.compliance_violations item 1: Circular dependency
+    detection'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.compliance_violations[1]
+  wert: Circular dependency detection
+- regel_id: SOT-PART3-SEM-019
+  zeile: 473
+  kategorie: Regulatory Item
+  beschreibung: 'quarantine_triggers.compliance_violations item 2: Badge integrity
+    violations'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.compliance_violations[2]
+  wert: Badge integrity violations
+- regel_id: SOT-PART3-SEM-020
+  zeile: 473
+  kategorie: Regulatory Item
+  beschreibung: 'quarantine_triggers.compliance_violations item 3: Review deadline
+    overdue (>30 days)'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.compliance_violations[3]
+  wert: Review deadline overdue (>30 days)
+- regel_id: SOT-PART3-SEM-021
+  zeile: 473
+  kategorie: Regulatory Item
+  beschreibung: 'quarantine_triggers.compliance_violations item 4: Business logic
+    gaming detection'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.compliance_violations[4]
+  wert: Business logic gaming detection
+- regel_id: SOT-PART3-SEM-022
+  zeile: 473
+  kategorie: Regulatory Item
+  beschreibung: 'quarantine_triggers.compliance_violations item 5: Confidentiality
+    breach attempts'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.compliance_violations[5]
+  wert: Confidentiality breach attempts
+- regel_id: SOT-PART3-SEM-023
+  zeile: 473
+  kategorie: Regulatory
+  beschreibung: 'quarantine_retention.retention_periods.compliance_violations: 7 years
+    minimum'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_retention.retention_periods.compliance_violations
+  wert: 7 years minimum
+- regel_id: SOT-PART3-SEM-024
+  zeile: 473
+  kategorie: Regulatory
+  beschreibung: 'quarantine_governance.release_criteria.compliance_remediation: All
+    compliance violations addressed'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_governance.release_criteria.compliance_remediation
+  wert: All compliance violations addressed
+- regel_id: SOT-PART3-SEM-025
+  zeile: 473
+  kategorie: Regulatory
+  beschreibung: 'integration_points.compliance_system: 23_compliance/policies/ → quarantine
+    triggers'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: integration_points.compliance_system
+  wert: 23_compliance/policies/ → quarantine triggers
+- regel_id: SOT-PART3-SEM-026
+  zeile: 908
+  kategorie: Regulatory
+  beschreibung: 'security_controls.worm_compliance: True'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: security_controls.worm_compliance
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-027
+  zeile: 225
+  kategorie: General
+  beschreibung: 'regulatory_basis: Global Privacy Landscape 2025 + Emerging Markets'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: regulatory_basis
+  wert: Global Privacy Landscape 2025 + Emerging Markets
+- regel_id: SOT-PART3-SEM-028
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_triggers.regulatory_flags: List container'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.regulatory_flags
+  wert: List with 5 items
+- regel_id: SOT-PART3-SEM-029
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.regulatory_flags item 0: Sanctioned entity interaction'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.regulatory_flags[0]
+  wert: Sanctioned entity interaction
+- regel_id: SOT-PART3-SEM-030
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.regulatory_flags item 1: Jurisdiction exclusion
+    violations'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.regulatory_flags[1]
+  wert: Jurisdiction exclusion violations
+- regel_id: SOT-PART3-SEM-031
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.regulatory_flags item 2: AML/KYC failure patterns'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.regulatory_flags[2]
+  wert: AML/KYC failure patterns
+- regel_id: SOT-PART3-SEM-032
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.regulatory_flags item 3: Regulatory mapping inconsistencies'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.regulatory_flags[3]
+  wert: Regulatory mapping inconsistencies
+- regel_id: SOT-PART3-SEM-033
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.regulatory_flags item 4: Audit trail tampering
+    attempts'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_triggers.regulatory_flags[4]
+  wert: Audit trail tampering attempts
+- regel_id: SOT-PART3-SEM-034
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_retention.retention_periods.regulatory_flags: 10 years
+    minimum'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_retention.retention_periods.regulatory_flags
+  wert: 10 years minimum
+- regel_id: SOT-PART3-SEM-035
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_retention.retention_periods.business_critical: Permanent
+    retention'
+  enforcement: SHOULD
+  priority: CRITICAL
+  feld: quarantine_retention.retention_periods.business_critical
+  wert: Permanent retention
+- regel_id: SOT-PART3-SEM-036
+  zeile: 651
+  kategorie: Bash Validation
+  beschreibung: 'Bash logic: 12_tooling/hooks/pre_commit/confidentiality_check.sh'
+  enforcement: MUST
+  priority: HIGH
+  originaltext: 12_tooling/hooks/pre_commit/confidentiality_check.sh
+- regel_id: SOT-PART3-SEM-037
+  zeile: 669
+  kategorie: Bash Validation
+  beschreibung: 'Bash logic: 23_compliance/anti_gaming/overfitting_detector.py --business-logic-check
+    --enter'
+  enforcement: MUST
+  priority: HIGH
+  originaltext: 23_compliance/anti_gaming/overfitting_detector.py --business-logic-check
+    --enterprise
+- regel_id: SOT-PART3-SEM-038
+  zeile: 670
+  kategorie: Bash Validation
+  beschreibung: 'Bash logic: 23_compliance/anti_gaming/dependency_graph_generator.py
+    --export-all-formats --c'
+  enforcement: MUST
+  priority: HIGH
+  originaltext: 23_compliance/anti_gaming/dependency_graph_generator.py --export-all-formats
+    --confidential
+- regel_id: SOT-PART3-SEM-039
+  zeile: 878
+  kategorie: Bash Validation
+  beschreibung: 'Bash logic: 24_meta_orchestration/triggers/ci/gates/business_compliance_gate.py   #
+    Business'
+  enforcement: MUST
+  priority: HIGH
+  originaltext: '24_meta_orchestration/triggers/ci/gates/business_compliance_gate.py   #
+    Business Confidentiality'
+- regel_id: SOT-PART3-SEM-040
+  zeile: 425
+  kategorie: Quarantine/Evidence
+  beschreibung: 'audit_enhancement.evidence_timestamping: full_blockchain'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: audit_enhancement.evidence_timestamping
+  wert: full_blockchain
+- regel_id: SOT-PART3-SEM-041
+  zeile: 473
+  kategorie: Quarantine/Evidence
+  beschreibung: 'integration_points.audit_logging: 02_audit_logging/storage/ → quarantine
+    evidence'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: integration_points.audit_logging
+  wert: 02_audit_logging/storage/ → quarantine evidence
+- regel_id: SOT-PART3-SEM-042
+  zeile: 908
+  kategorie: Quarantine/Evidence
+  beschreibung: 'quarantine_structure.evidence_path: 23_compliance/evidence/malware_quarantine_hashes/'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: quarantine_structure.evidence_path
+  wert: 23_compliance/evidence/malware_quarantine_hashes/
+- regel_id: SOT-PART3-SEM-043
+  zeile: 908
+  kategorie: Quarantine/Evidence
+  beschreibung: 'quarantine_structure.evidence_path_note: Primary hash-ledger is stored
+    under 02_audit_logging/quarantine/hash_ledger/; a signed, immutable export is
+    mirrored under 23_compliance/evidence/malware_quarantine_hashes/.'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: quarantine_structure.evidence_path_note
+  wert: Primary hash-ledger is stored under 02_audit_logging/quarantine/hash_ledger/;
+    a signed, immutable export is mirrored under 23_compliance/evidence/malware_quarantine_hashes/.
+- regel_id: SOT-PART3-SEM-044
+  zeile: 908
+  kategorie: Quarantine/Evidence
+  beschreibung: 'retention_policy.hash_evidence_retention: permanent'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: retention_policy.hash_evidence_retention
+  wert: permanent
+- regel_id: SOT-PART3-SEM-045
+  zeile: 908
+  kategorie: Quarantine/Evidence
+  beschreibung: 'security_controls.evidence_immutable: True'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: security_controls.evidence_immutable
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-046
+  zeile: 681
+  kategorie: Standards
+  beschreibung: 'deprecated_standards: List container'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: deprecated_standards
+  wert: List with 1 items
+- regel_id: SOT-PART3-SEM-047
+  zeile: 225
+  kategorie: Privacy
+  beschreibung: 'deprecated_privacy: List container'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: deprecated_privacy
+  wert: List with 1 items
+- regel_id: SOT-PART3-SEM-048
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_governance.release_criteria.technical_validation: Technical
+    security clearance'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: quarantine_governance.release_criteria.technical_validation
+  wert: Technical security clearance
+- regel_id: SOT-PART3-SEM-049
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.quarterly.external_validation: Optional external
+    consultant'
+  enforcement: SHOULD
+  priority: HIGH
+  feld: internal_reviews.quarterly.external_validation
+  wert: Optional external consultant
+- regel_id: SOT-PART3-SEM-050
+  zeile: 473
+  kategorie: Review/Documentation
+  beschreibung: 'quarantine_governance.release_criteria.documentation_complete: Full
+    audit trail and lessons learned'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: quarantine_governance.release_criteria.documentation_complete
+  wert: Full audit trail and lessons learned
+- regel_id: SOT-PART3-SEM-051
+  zeile: 473
+  kategorie: Review/Documentation
+  beschreibung: 'quarantine_governance.review_committee: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_committee
+  wert: List with 5 items
+- regel_id: SOT-PART3-SEM-052
+  zeile: 473
+  kategorie: Review/Documentation Item
+  beschreibung: 'quarantine_governance.review_committee item 0: Senior Compliance
+    Officer (Chair)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_committee[0]
+  wert: Senior Compliance Officer (Chair)
+- regel_id: SOT-PART3-SEM-053
+  zeile: 473
+  kategorie: Review/Documentation Item
+  beschreibung: 'quarantine_governance.review_committee item 1: Legal Counsel'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_committee[1]
+  wert: Legal Counsel
+- regel_id: SOT-PART3-SEM-054
+  zeile: 473
+  kategorie: Review/Documentation Item
+  beschreibung: 'quarantine_governance.review_committee item 2: Technical Security
+    Lead'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_committee[2]
+  wert: Technical Security Lead
+- regel_id: SOT-PART3-SEM-055
+  zeile: 473
+  kategorie: Review/Documentation Item
+  beschreibung: 'quarantine_governance.review_committee item 3: Business Risk Manager'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_committee[3]
+  wert: Business Risk Manager
+- regel_id: SOT-PART3-SEM-056
+  zeile: 473
+  kategorie: Review/Documentation Item
+  beschreibung: 'quarantine_governance.review_committee item 4: External Auditor (quarterly
+    reviews)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_committee[4]
+  wert: External Auditor (quarterly reviews)
+- regel_id: SOT-PART3-SEM-057
+  zeile: 731
+  kategorie: Review/Documentation
+  beschreibung: 'internal_reviews.monthly.business_review: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: internal_reviews.monthly.business_review
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-058
+  zeile: 473
+  kategorie: Integration
+  beschreibung: 'quarantine_monitoring.dashboard_integration: Real-time quarantine
+    status monitoring'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_monitoring.dashboard_integration
+  wert: Real-time quarantine status monitoring
+- regel_id: SOT-PART3-SEM-059
+  zeile: 473
+  kategorie: Integration
+  beschreibung: 'quarantine_monitoring.reporting_integration: Quarterly board reporting
+    inclusion'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_monitoring.reporting_integration
+  wert: Quarterly board reporting inclusion
+- regel_id: SOT-PART3-SEM-060
+  zeile: 225
+  kategorie: General
+  beschreibung: 'deprecated_privacy[0].notes: CPRA-Updates 2023/2024 integriert'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: deprecated_privacy[0].notes
+  wert: CPRA-Updates 2023/2024 integriert
+- regel_id: SOT-PART3-SEM-061
+  zeile: 330
+  kategorie: General
+  beschreibung: 'description: Internal regulatory change tracking'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: description
+  wert: Internal regulatory change tracking
+- regel_id: SOT-PART3-SEM-062
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[2].attributes.description: Full name and reference (internal
+    classification)'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: body[2].attributes.description
+  wert: Full name and reference (internal classification)
+- regel_id: SOT-PART3-SEM-063
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[3].attributes.description: Detailed assessment of competitive
+    and operational impact'
+  enforcement: SHOULD
+  priority: MEDIUM
+  feld: body[3].attributes.description
+  wert: Detailed assessment of competitive and operational impact
+- regel_id: SOT-PART3-SEM-064
+  zeile: 225
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-065
+  zeile: 291
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-066
+  zeile: 425
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL - Enterprise Evidence Management'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL - Enterprise Evidence Management
+- regel_id: SOT-PART3-SEM-067
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.blockchain_anchors.classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: storage_tiers.blockchain_anchors.classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-068
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.internal_review_documentation.classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: storage_tiers.internal_review_documentation.classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-069
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.business_evidence.classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: storage_tiers.business_evidence.classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-070
+  zeile: 473
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL - Enterprise Quarantine Management'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL - Enterprise Quarantine Management
+- regel_id: SOT-PART3-SEM-071
+  zeile: 681
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-072
+  zeile: 731
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-073
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.monthly.classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: internal_reviews.monthly.classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-074
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.quarterly.classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: internal_reviews.quarterly.classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-075
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.semi_annual.classification: CONFIDENTIAL'
+  enforcement: MUST
+  priority: LOW
+  feld: internal_reviews.semi_annual.classification
+  wert: CONFIDENTIAL
+- regel_id: SOT-PART3-SEM-076
+  zeile: 908
+  kategorie: General
+  beschreibung: 'classification: CONFIDENTIAL - Security Operations'
+  enforcement: MUST
+  priority: LOW
+  feld: classification
+  wert: CONFIDENTIAL - Security Operations
+- regel_id: SOT-PART3-SEM-077
+  zeile: 225
+  kategorie: Metadata
+  beschreibung: 'version: 2.2'
+  enforcement: MUST
+  priority: INFO
+  feld: version
+  wert: '2.2'
+- regel_id: SOT-PART3-SEM-078
+  zeile: 291
+  kategorie: Metadata
+  beschreibung: 'version: 1.1'
+  enforcement: MUST
+  priority: INFO
+  feld: version
+  wert: '1.1'
+- regel_id: SOT-PART3-SEM-079
+  zeile: 425
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: INFO
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-PART3-SEM-080
+  zeile: 473
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: INFO
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-PART3-SEM-081
+  zeile: 681
+  kategorie: Metadata
+  beschreibung: 'version: 1.5'
+  enforcement: MUST
+  priority: INFO
+  feld: version
+  wert: '1.5'
+- regel_id: SOT-PART3-SEM-082
+  zeile: 731
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: INFO
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-PART3-SEM-083
+  zeile: 908
+  kategorie: Metadata
+  beschreibung: 'version: 1.0'
+  enforcement: MUST
+  priority: INFO
+  feld: version
+  wert: '1.0'
+- regel_id: SOT-PART3-SEM-084
+  zeile: 225
+  kategorie: General
+  beschreibung: 'ccpa_cpra/.name: Kalifornien CCPA/CPRA'
+  enforcement: SHOULD
+  priority: LOW
+  feld: ccpa_cpra/.name
+  wert: Kalifornien CCPA/CPRA
+- regel_id: SOT-PART3-SEM-085
+  zeile: 225
+  kategorie: General
+  beschreibung: 'ccpa_cpra/.path: 23_compliance/privacy/ccpa_cpra/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: ccpa_cpra/.path
+  wert: 23_compliance/privacy/ccpa_cpra/
+- regel_id: SOT-PART3-SEM-086
+  zeile: 225
+  kategorie: General
+  beschreibung: 'ccpa_cpra/.business_priority: HIGH'
+  enforcement: SHOULD
+  priority: LOW
+  feld: ccpa_cpra/.business_priority
+  wert: HIGH
+- regel_id: SOT-PART3-SEM-087
+  zeile: 225
+  kategorie: General
+  beschreibung: 'lgpd_br/.name: Brasilien LGPD'
+  enforcement: SHOULD
+  priority: LOW
+  feld: lgpd_br/.name
+  wert: Brasilien LGPD
+- regel_id: SOT-PART3-SEM-088
+  zeile: 225
+  kategorie: General
+  beschreibung: 'lgpd_br/.path: 23_compliance/privacy/lgpd_br/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: lgpd_br/.path
+  wert: 23_compliance/privacy/lgpd_br/
+- regel_id: SOT-PART3-SEM-089
+  zeile: 225
+  kategorie: General
+  beschreibung: 'lgpd_br/.business_priority: MEDIUM'
+  enforcement: SHOULD
+  priority: LOW
+  feld: lgpd_br/.business_priority
+  wert: MEDIUM
+- regel_id: SOT-PART3-SEM-090
+  zeile: 225
+  kategorie: General
+  beschreibung: 'pdpa_sg/.name: Singapur PDPA'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pdpa_sg/.name
+  wert: Singapur PDPA
+- regel_id: SOT-PART3-SEM-091
+  zeile: 225
+  kategorie: General
+  beschreibung: 'pdpa_sg/.path: 23_compliance/privacy/pdpa_sg/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pdpa_sg/.path
+  wert: 23_compliance/privacy/pdpa_sg/
+- regel_id: SOT-PART3-SEM-092
+  zeile: 225
+  kategorie: General
+  beschreibung: 'pdpa_sg/.business_priority: HIGH'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pdpa_sg/.business_priority
+  wert: HIGH
+- regel_id: SOT-PART3-SEM-093
+  zeile: 225
+  kategorie: General
+  beschreibung: 'appi_jp/.name: Japan APPI'
+  enforcement: SHOULD
+  priority: LOW
+  feld: appi_jp/.name
+  wert: Japan APPI
+- regel_id: SOT-PART3-SEM-094
+  zeile: 225
+  kategorie: General
+  beschreibung: 'appi_jp/.path: 23_compliance/privacy/appi_jp/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: appi_jp/.path
+  wert: 23_compliance/privacy/appi_jp/
+- regel_id: SOT-PART3-SEM-095
+  zeile: 225
+  kategorie: General
+  beschreibung: 'appi_jp/.business_priority: MEDIUM'
+  enforcement: SHOULD
+  priority: LOW
+  feld: appi_jp/.business_priority
+  wert: MEDIUM
+- regel_id: SOT-PART3-SEM-096
+  zeile: 225
+  kategorie: General
+  beschreibung: 'pipl_cn/.name: China PIPL'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pipl_cn/.name
+  wert: China PIPL
+- regel_id: SOT-PART3-SEM-097
+  zeile: 225
+  kategorie: General
+  beschreibung: 'pipl_cn/.path: 23_compliance/privacy/pipl_cn/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pipl_cn/.path
+  wert: 23_compliance/privacy/pipl_cn/
+- regel_id: SOT-PART3-SEM-098
+  zeile: 225
+  kategorie: General
+  beschreibung: 'pipl_cn/.business_priority: LOW'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pipl_cn/.business_priority
+  wert: LOW
+- regel_id: SOT-PART3-SEM-099
+  zeile: 225
+  kategorie: General
+  beschreibung: 'popia_za/.name: Südafrika POPIA'
+  enforcement: SHOULD
+  priority: LOW
+  feld: popia_za/.name
+  wert: Südafrika POPIA
+- regel_id: SOT-PART3-SEM-100
+  zeile: 225
+  kategorie: General
+  beschreibung: 'popia_za/.path: 23_compliance/privacy/popia_za/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: popia_za/.path
+  wert: 23_compliance/privacy/popia_za/
+- regel_id: SOT-PART3-SEM-101
+  zeile: 225
+  kategorie: General
+  beschreibung: 'popia_za/.business_priority: LOW'
+  enforcement: SHOULD
+  priority: LOW
+  feld: popia_za/.business_priority
+  wert: LOW
+- regel_id: SOT-PART3-SEM-102
+  zeile: 225
+  kategorie: General
+  beschreibung: 'pipeda_ca/.name: Kanada PIPEDA + Provinzrecht-Notizen'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pipeda_ca/.name
+  wert: Kanada PIPEDA + Provinzrecht-Notizen
+- regel_id: SOT-PART3-SEM-103
+  zeile: 225
+  kategorie: General
+  beschreibung: 'pipeda_ca/.path: 23_compliance/privacy/pipeda_ca/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pipeda_ca/.path
+  wert: 23_compliance/privacy/pipeda_ca/
+- regel_id: SOT-PART3-SEM-104
+  zeile: 225
+  kategorie: General
+  beschreibung: 'pipeda_ca/.business_priority: MEDIUM'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pipeda_ca/.business_priority
+  wert: MEDIUM
+- regel_id: SOT-PART3-SEM-105
+  zeile: 225
+  kategorie: General
+  beschreibung: 'dpdp_in/.name: Indien DPDP Act 2023'
+  enforcement: SHOULD
+  priority: LOW
+  feld: dpdp_in/.name
+  wert: Indien DPDP Act 2023
+- regel_id: SOT-PART3-SEM-106
+  zeile: 225
+  kategorie: General
+  beschreibung: 'dpdp_in/.path: 23_compliance/privacy/dpdp_in/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: dpdp_in/.path
+  wert: 23_compliance/privacy/dpdp_in/
+- regel_id: SOT-PART3-SEM-107
+  zeile: 225
+  kategorie: General
+  beschreibung: 'dpdp_in/.business_priority: MEDIUM'
+  enforcement: SHOULD
+  priority: LOW
+  feld: dpdp_in/.business_priority
+  wert: MEDIUM
+- regel_id: SOT-PART3-SEM-108
+  zeile: 225
+  kategorie: General
+  beschreibung: 'deprecated_privacy[0].id: ccpa_original'
+  enforcement: SHOULD
+  priority: LOW
+  feld: deprecated_privacy[0].id
+  wert: ccpa_original
+- regel_id: SOT-PART3-SEM-109
+  zeile: 225
+  kategorie: General
+  beschreibung: 'deprecated_privacy[0].status: deprecated'
+  enforcement: SHOULD
+  priority: LOW
+  feld: deprecated_privacy[0].status
+  wert: deprecated
+- regel_id: SOT-PART3-SEM-110
+  zeile: 225
+  kategorie: General
+  beschreibung: 'deprecated_privacy[0].replaced_by: ccpa_cpra'
+  enforcement: SHOULD
+  priority: LOW
+  feld: deprecated_privacy[0].replaced_by
+  wert: ccpa_cpra
+- regel_id: SOT-PART3-SEM-111
+  zeile: 225
+  kategorie: General
+  beschreibung: 'deprecated_privacy[0].deprecation_date: 2023-01-01'
+  enforcement: SHOULD
+  priority: LOW
+  feld: deprecated_privacy[0].deprecation_date
+  wert: '2023-01-01'
+- regel_id: SOT-PART3-SEM-112
+  zeile: 291
+  kategorie: General
+  beschreibung: 'nist_csf_20/.name: NIST CSF 2.0 (Govern/Identify/Protect/Detect/Respond/Recover)
+    - Mapping auf DORA/NIS2'
+  enforcement: SHOULD
+  priority: LOW
+  feld: nist_csf_20/.name
+  wert: NIST CSF 2.0 (Govern/Identify/Protect/Detect/Respond/Recover) - Mapping auf
+    DORA/NIS2
+- regel_id: SOT-PART3-SEM-113
+  zeile: 291
+  kategorie: General
+  beschreibung: 'nist_csf_20/.path: 23_compliance/security/nist_csf_20/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: nist_csf_20/.path
+  wert: 23_compliance/security/nist_csf_20/
+- regel_id: SOT-PART3-SEM-114
+  zeile: 291
+  kategorie: General
+  beschreibung: 'nist_csf_20/.business_priority: HIGH'
+  enforcement: SHOULD
+  priority: LOW
+  feld: nist_csf_20/.business_priority
+  wert: HIGH
+- regel_id: SOT-PART3-SEM-115
+  zeile: 291
+  kategorie: General
+  beschreibung: 'pqc/.name: FIPS 203/204/205: ML-KEM, ML-DSA, SLH-DSA - Krypto-Agilität
+    & Migrationsplan'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pqc/.name
+  wert: 'FIPS 203/204/205: ML-KEM, ML-DSA, SLH-DSA - Krypto-Agilität & Migrationsplan'
+- regel_id: SOT-PART3-SEM-116
+  zeile: 291
+  kategorie: General
+  beschreibung: 'pqc/.path: 23_compliance/security/pqc/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pqc/.path
+  wert: 23_compliance/security/pqc/
+- regel_id: SOT-PART3-SEM-117
+  zeile: 291
+  kategorie: General
+  beschreibung: 'pqc/.business_priority: HIGH'
+  enforcement: SHOULD
+  priority: LOW
+  feld: pqc/.business_priority
+  wert: HIGH
+- regel_id: SOT-PART3-SEM-118
+  zeile: 291
+  kategorie: General
+  beschreibung: 'etsi_trust/.name: eIDAS/Signaturen: EN 319 401/411/421 (Policy/CA/TSL)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: etsi_trust/.name
+  wert: 'eIDAS/Signaturen: EN 319 401/411/421 (Policy/CA/TSL)'
+- regel_id: SOT-PART3-SEM-119
+  zeile: 291
+  kategorie: General
+  beschreibung: 'etsi_trust/.path: 23_compliance/security/etsi_trust/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: etsi_trust/.path
+  wert: 23_compliance/security/etsi_trust/
+- regel_id: SOT-PART3-SEM-120
+  zeile: 291
+  kategorie: General
+  beschreibung: 'etsi_trust/.business_priority: MEDIUM'
+  enforcement: SHOULD
+  priority: LOW
+  feld: etsi_trust/.business_priority
+  wert: MEDIUM
+- regel_id: SOT-PART3-SEM-121
+  zeile: 330
+  kategorie: General
+  beschreibung: 'name: Regulatory Update Request (Internal)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: name
+  wert: Regulatory Update Request (Internal)
+- regel_id: SOT-PART3-SEM-122
+  zeile: 330
+  kategorie: General
+  beschreibung: 'title: [INTERNAL-REGULATORY] '
+  enforcement: SHOULD
+  priority: LOW
+  feld: title
+  wert: '[INTERNAL-REGULATORY] '
+- regel_id: SOT-PART3-SEM-123
+  zeile: 330
+  kategorie: General
+  beschreibung: 'labels: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: labels
+  wert: List with 4 items
+- regel_id: SOT-PART3-SEM-124
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'labels item 0: compliance'
+  enforcement: SHOULD
+  priority: LOW
+  feld: labels[0]
+  wert: compliance
+- regel_id: SOT-PART3-SEM-125
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'labels item 1: regulatory'
+  enforcement: SHOULD
+  priority: LOW
+  feld: labels[1]
+  wert: regulatory
+- regel_id: SOT-PART3-SEM-126
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'labels item 2: internal'
+  enforcement: SHOULD
+  priority: LOW
+  feld: labels[2]
+  wert: internal
+- regel_id: SOT-PART3-SEM-127
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'labels item 3: confidential'
+  enforcement: SHOULD
+  priority: LOW
+  feld: labels[3]
+  wert: confidential
+- regel_id: SOT-PART3-SEM-128
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body
+  wert: List with 5 items
+- regel_id: SOT-PART3-SEM-129
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[0].type: dropdown'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].type
+  wert: dropdown
+- regel_id: SOT-PART3-SEM-130
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[0].id: regulation_type'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].id
+  wert: regulation_type
+- regel_id: SOT-PART3-SEM-131
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[0].attributes.label: Regulation Type'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].attributes.label
+  wert: Regulation Type
+- regel_id: SOT-PART3-SEM-132
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[0].attributes.options: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].attributes.options
+  wert: List with 5 items
+- regel_id: SOT-PART3-SEM-133
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'body[0].attributes.options item 0: New Regulation'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].attributes.options[0]
+  wert: New Regulation
+- regel_id: SOT-PART3-SEM-134
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'body[0].attributes.options item 1: Regulation Update'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].attributes.options[1]
+  wert: Regulation Update
+- regel_id: SOT-PART3-SEM-135
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'body[0].attributes.options item 2: Internal Policy Change'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].attributes.options[2]
+  wert: Internal Policy Change
+- regel_id: SOT-PART3-SEM-136
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'body[0].attributes.options item 3: Deprecation Notice'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].attributes.options[3]
+  wert: Deprecation Notice
+- regel_id: SOT-PART3-SEM-137
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'body[0].attributes.options item 4: Business Impact Assessment'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].attributes.options[4]
+  wert: Business Impact Assessment
+- regel_id: SOT-PART3-SEM-138
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[0].validations.required: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[0].validations.required
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-139
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[1].type: dropdown'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[1].type
+  wert: dropdown
+- regel_id: SOT-PART3-SEM-140
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[1].id: business_priority'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[1].id
+  wert: business_priority
+- regel_id: SOT-PART3-SEM-141
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[1].attributes.label: Business Priority'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[1].attributes.label
+  wert: Business Priority
+- regel_id: SOT-PART3-SEM-142
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[1].attributes.options: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[1].attributes.options
+  wert: List with 4 items
+- regel_id: SOT-PART3-SEM-143
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'body[1].attributes.options item 0: CRITICAL (Market access impact)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[1].attributes.options[0]
+  wert: CRITICAL (Market access impact)
+- regel_id: SOT-PART3-SEM-144
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'body[1].attributes.options item 1: HIGH (Compliance risk)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[1].attributes.options[1]
+  wert: HIGH (Compliance risk)
+- regel_id: SOT-PART3-SEM-145
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'body[1].attributes.options item 2: MEDIUM (Process optimization)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[1].attributes.options[2]
+  wert: MEDIUM (Process optimization)
+- regel_id: SOT-PART3-SEM-146
+  zeile: 330
+  kategorie: General Item
+  beschreibung: 'body[1].attributes.options item 3: LOW (Future consideration)'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[1].attributes.options[3]
+  wert: LOW (Future consideration)
+- regel_id: SOT-PART3-SEM-147
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[1].validations.required: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[1].validations.required
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-148
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[2].type: input'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[2].type
+  wert: input
+- regel_id: SOT-PART3-SEM-149
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[2].id: regulation_name'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[2].id
+  wert: regulation_name
+- regel_id: SOT-PART3-SEM-150
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[2].attributes.label: Regulation/Standard Name'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[2].attributes.label
+  wert: Regulation/Standard Name
+- regel_id: SOT-PART3-SEM-151
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[2].validations.required: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[2].validations.required
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-152
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[3].type: textarea'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[3].type
+  wert: textarea
+- regel_id: SOT-PART3-SEM-153
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[3].id: business_impact'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[3].id
+  wert: business_impact
+- regel_id: SOT-PART3-SEM-154
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[3].attributes.label: Business Impact Assessment'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[3].attributes.label
+  wert: Business Impact Assessment
+- regel_id: SOT-PART3-SEM-155
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[3].validations.required: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[3].validations.required
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-156
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[4].type: checkboxes'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[4].type
+  wert: checkboxes
+- regel_id: SOT-PART3-SEM-157
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[4].id: internal_clearance'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[4].id
+  wert: internal_clearance
+- regel_id: SOT-PART3-SEM-158
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[4].attributes.label: Internal Clearance'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[4].attributes.label
+  wert: Internal Clearance
+- regel_id: SOT-PART3-SEM-159
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[4].attributes.options: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[4].attributes.options
+  wert: List with 4 items
+- regel_id: SOT-PART3-SEM-160
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[4].attributes.options[0].label: Legal team reviewed'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[4].attributes.options[0].label
+  wert: Legal team reviewed
+- regel_id: SOT-PART3-SEM-161
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[4].attributes.options[1].label: Compliance team assessed'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[4].attributes.options[1].label
+  wert: Compliance team assessed
+- regel_id: SOT-PART3-SEM-162
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[4].attributes.options[2].label: Business impact evaluated'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[4].attributes.options[2].label
+  wert: Business impact evaluated
+- regel_id: SOT-PART3-SEM-163
+  zeile: 330
+  kategorie: General
+  beschreibung: 'body[4].attributes.options[3].label: Competitive analysis completed'
+  enforcement: SHOULD
+  priority: LOW
+  feld: body[4].attributes.options[3].label
+  wert: Competitive analysis completed
+- regel_id: SOT-PART3-SEM-164
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.immutable_store.path: 02_audit_logging/storage/worm/immutable_store/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.immutable_store.path
+  wert: 02_audit_logging/storage/worm/immutable_store/
+- regel_id: SOT-PART3-SEM-165
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.immutable_store.retention: permanent'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.immutable_store.retention
+  wert: permanent
+- regel_id: SOT-PART3-SEM-166
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.immutable_store.integrity: sha256_hash'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.immutable_store.integrity
+  wert: sha256_hash
+- regel_id: SOT-PART3-SEM-167
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.immutable_store.encryption: aes256_enterprise'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.immutable_store.encryption
+  wert: aes256_enterprise
+- regel_id: SOT-PART3-SEM-168
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.blockchain_anchors.enabled: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.blockchain_anchors.enabled
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-169
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.blockchain_anchors.path: 02_audit_logging/storage/blockchain_anchors/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.blockchain_anchors.path
+  wert: 02_audit_logging/storage/blockchain_anchors/
+- regel_id: SOT-PART3-SEM-170
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.blockchain_anchors.service: opentimestamp'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.blockchain_anchors.service
+  wert: opentimestamp
+- regel_id: SOT-PART3-SEM-171
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.blockchain_anchors.frequency: weekly'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.blockchain_anchors.frequency
+  wert: weekly
+- regel_id: SOT-PART3-SEM-172
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.evidence_chain.path: 23_compliance/evidence/ci_runs/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.evidence_chain.path
+  wert: 23_compliance/evidence/ci_runs/
+- regel_id: SOT-PART3-SEM-173
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.evidence_chain.retention: 10_years'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.evidence_chain.retention
+  wert: 10_years
+- regel_id: SOT-PART3-SEM-174
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.evidence_chain.encryption: aes256'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.evidence_chain.encryption
+  wert: aes256
+- regel_id: SOT-PART3-SEM-175
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.evidence_chain.backup: encrypted_offsite'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.evidence_chain.backup
+  wert: encrypted_offsite
+- regel_id: SOT-PART3-SEM-176
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.internal_review_documentation.path: 23_compliance/reviews/internal/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.internal_review_documentation.path
+  wert: 23_compliance/reviews/internal/
+- regel_id: SOT-PART3-SEM-177
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.internal_review_documentation.retention: 15_years'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.internal_review_documentation.retention
+  wert: 15_years
+- regel_id: SOT-PART3-SEM-178
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.internal_review_documentation.encryption: aes256'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.internal_review_documentation.encryption
+  wert: aes256
+- regel_id: SOT-PART3-SEM-179
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.business_evidence.path: 23_compliance/evidence/business_assessments/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.business_evidence.path
+  wert: 23_compliance/evidence/business_assessments/
+- regel_id: SOT-PART3-SEM-180
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.business_evidence.retention: permanent'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.business_evidence.retention
+  wert: permanent
+- regel_id: SOT-PART3-SEM-181
+  zeile: 425
+  kategorie: General
+  beschreibung: 'storage_tiers.business_evidence.encryption: aes256'
+  enforcement: SHOULD
+  priority: LOW
+  feld: storage_tiers.business_evidence.encryption
+  wert: aes256
+- regel_id: SOT-PART3-SEM-182
+  zeile: 425
+  kategorie: General
+  beschreibung: 'audit_enhancement.blockchain_anchoring: enabled'
+  enforcement: SHOULD
+  priority: LOW
+  feld: audit_enhancement.blockchain_anchoring
+  wert: enabled
+- regel_id: SOT-PART3-SEM-183
+  zeile: 425
+  kategorie: General
+  beschreibung: 'audit_enhancement.opentimestamp_enabled: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: audit_enhancement.opentimestamp_enabled
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-184
+  zeile: 425
+  kategorie: General
+  beschreibung: 'audit_enhancement.proof_of_existence: sha256+blockchain+timestamp'
+  enforcement: SHOULD
+  priority: LOW
+  feld: audit_enhancement.proof_of_existence
+  wert: sha256+blockchain+timestamp
+- regel_id: SOT-PART3-SEM-185
+  zeile: 425
+  kategorie: General
+  beschreibung: 'audit_enhancement.verification_method: hash_chain+blockchain'
+  enforcement: SHOULD
+  priority: LOW
+  feld: audit_enhancement.verification_method
+  wert: hash_chain+blockchain
+- regel_id: SOT-PART3-SEM-186
+  zeile: 425
+  kategorie: General
+  beschreibung: 'audit_enhancement.enterprise_controls: full_audit_trail'
+  enforcement: SHOULD
+  priority: LOW
+  feld: audit_enhancement.enterprise_controls
+  wert: full_audit_trail
+- regel_id: SOT-PART3-SEM-187
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_singleton.canonical_path: 02_audit_logging/quarantine/singleton/quarantine_store/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_singleton.canonical_path
+  wert: 02_audit_logging/quarantine/singleton/quarantine_store/
+- regel_id: SOT-PART3-SEM-188
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_singleton.principle: Single source of truth for all quarantined
+    items'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_singleton.principle
+  wert: Single source of truth for all quarantined items
+- regel_id: SOT-PART3-SEM-189
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_singleton.access_control: Restricted to compliance officers
+    and senior management'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_singleton.access_control
+  wert: Restricted to compliance officers and senior management
+- regel_id: SOT-PART3-SEM-190
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_singleton.encryption: AES-256 with enterprise key management'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_singleton.encryption
+  wert: AES-256 with enterprise key management
+- regel_id: SOT-PART3-SEM-191
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_triggers.technical_violations: List container'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_triggers.technical_violations
+  wert: List with 5 items
+- regel_id: SOT-PART3-SEM-192
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.technical_violations item 0: Version compatibility
+    failures'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_triggers.technical_violations[0]
+  wert: Version compatibility failures
+- regel_id: SOT-PART3-SEM-193
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.technical_violations item 1: Anti-gaming control
+    bypasses'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_triggers.technical_violations[1]
+  wert: Anti-gaming control bypasses
+- regel_id: SOT-PART3-SEM-194
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.technical_violations item 2: Unauthorized access
+    patterns'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_triggers.technical_violations[2]
+  wert: Unauthorized access patterns
+- regel_id: SOT-PART3-SEM-195
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.technical_violations item 3: Data integrity hash
+    mismatches'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_triggers.technical_violations[3]
+  wert: Data integrity hash mismatches
+- regel_id: SOT-PART3-SEM-196
+  zeile: 473
+  kategorie: General Item
+  beschreibung: 'quarantine_triggers.technical_violations item 4: Enterprise boundary
+    violations'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_triggers.technical_violations[4]
+  wert: Enterprise boundary violations
+- regel_id: SOT-PART3-SEM-197
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_processing.intake_processor: 02_audit_logging/quarantine/processing/quarantine_processor.py'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_processing.intake_processor
+  wert: 02_audit_logging/quarantine/processing/quarantine_processor.py
+- regel_id: SOT-PART3-SEM-198
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_processing.manual_override_required: Compliance Officer
+    + Legal approval'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_processing.manual_override_required
+  wert: Compliance Officer + Legal approval
+- regel_id: SOT-PART3-SEM-199
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_processing.escalation_timeline: 24 hours for critical,
+    72 hours for high priority'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_processing.escalation_timeline
+  wert: 24 hours for critical, 72 hours for high priority
+- regel_id: SOT-PART3-SEM-200
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_retention.policies_file: 02_audit_logging/quarantine/retention/quarantine_policies.yaml'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_retention.policies_file
+  wert: 02_audit_logging/quarantine/retention/quarantine_policies.yaml
+- regel_id: SOT-PART3-SEM-201
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_retention.retention_periods.technical_violations: 5 years
+    minimum'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_retention.retention_periods.technical_violations
+  wert: 5 years minimum
+- regel_id: SOT-PART3-SEM-202
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_retention.retention_periods.legal_hold: Until litigation
+    resolution'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_retention.retention_periods.legal_hold
+  wert: Until litigation resolution
+- regel_id: SOT-PART3-SEM-203
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_retention.purge_automation: False'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_retention.purge_automation
+  wert: 'False'
+- regel_id: SOT-PART3-SEM-204
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_retention.archive_to_cold_storage: After 2 years active
+    retention'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_retention.archive_to_cold_storage
+  wert: After 2 years active retention
+- regel_id: SOT-PART3-SEM-205
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_retention.enterprise_backup: Encrypted offsite + blockchain
+    anchoring'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_retention.enterprise_backup
+  wert: Encrypted offsite + blockchain anchoring
+- regel_id: SOT-PART3-SEM-206
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.ledger_file: 02_audit_logging/quarantine/hash_ledger/quarantine_chain.json'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.ledger_file
+  wert: 02_audit_logging/quarantine/hash_ledger/quarantine_chain.json
+- regel_id: SOT-PART3-SEM-207
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.hash_algorithm: SHA-256'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.hash_algorithm
+  wert: SHA-256
+- regel_id: SOT-PART3-SEM-208
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.chain_integrity: Each entry includes previous
+    hash'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.chain_integrity
+  wert: Each entry includes previous hash
+- regel_id: SOT-PART3-SEM-209
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.immutable_properties: True'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.immutable_properties
+  wert: 'True'
+- regel_id: SOT-PART3-SEM-210
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.blockchain_anchoring: Daily commitment to private
+    enterprise blockchain'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.blockchain_anchoring
+  wert: Daily commitment to private enterprise blockchain
+- regel_id: SOT-PART3-SEM-211
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.ledger_structure.entry_id: UUID v4'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.ledger_structure.entry_id
+  wert: UUID v4
+- regel_id: SOT-PART3-SEM-212
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.ledger_structure.timestamp: ISO 8601 UTC'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.ledger_structure.timestamp
+  wert: ISO 8601 UTC
+- regel_id: SOT-PART3-SEM-213
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.ledger_structure.item_hash: SHA-256 of quarantined
+    item'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.ledger_structure.item_hash
+  wert: SHA-256 of quarantined item
+- regel_id: SOT-PART3-SEM-214
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.ledger_structure.trigger_reason: Classification
+    and details'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.ledger_structure.trigger_reason
+  wert: Classification and details
+- regel_id: SOT-PART3-SEM-215
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.ledger_structure.business_impact: Revenue/compliance
+    risk assessment'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.ledger_structure.business_impact
+  wert: Revenue/compliance risk assessment
+- regel_id: SOT-PART3-SEM-216
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.ledger_structure.previous_hash: Chain integrity
+    verification'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.ledger_structure.previous_hash
+  wert: Chain integrity verification
+- regel_id: SOT-PART3-SEM-217
+  zeile: 473
+  kategorie: General
+  beschreibung: 'hash_ledger_system.ledger_structure.blockchain_anchor: Enterprise
+    blockchain transaction ID'
+  enforcement: SHOULD
+  priority: LOW
+  feld: hash_ledger_system.ledger_structure.blockchain_anchor
+  wert: Enterprise blockchain transaction ID
+- regel_id: SOT-PART3-SEM-218
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_governance.review_schedule.daily: New quarantine items
+    assessment'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_schedule.daily
+  wert: New quarantine items assessment
+- regel_id: SOT-PART3-SEM-219
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_governance.review_schedule.weekly: Pending release evaluations'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_schedule.weekly
+  wert: Pending release evaluations
+- regel_id: SOT-PART3-SEM-220
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_governance.review_schedule.monthly: Quarantine policy
+    effectiveness review'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_schedule.monthly
+  wert: Quarantine policy effectiveness review
+- regel_id: SOT-PART3-SEM-221
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_governance.review_schedule.quarterly: Full quarantine
+    audit with external validation'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.review_schedule.quarterly
+  wert: Full quarantine audit with external validation
+- regel_id: SOT-PART3-SEM-222
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_governance.release_criteria.legal_clearance: Legal team
+    sign-off required'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.release_criteria.legal_clearance
+  wert: Legal team sign-off required
+- regel_id: SOT-PART3-SEM-223
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_governance.release_criteria.business_approval: Business
+    impact assessment completed'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_governance.release_criteria.business_approval
+  wert: Business impact assessment completed
+- regel_id: SOT-PART3-SEM-224
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_monitoring.alert_system: Immediate notification for high-risk
+    quarantines'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_monitoring.alert_system
+  wert: Immediate notification for high-risk quarantines
+- regel_id: SOT-PART3-SEM-225
+  zeile: 473
+  kategorie: General
+  beschreibung: 'quarantine_monitoring.competitive_intelligence: Market impact assessment
+    for quarantined items'
+  enforcement: SHOULD
+  priority: LOW
+  feld: quarantine_monitoring.competitive_intelligence
+  wert: Market impact assessment for quarantined items
+- regel_id: SOT-PART3-SEM-226
+  zeile: 473
+  kategorie: General
+  beschreibung: 'anti_gaming_quarantine.bypass_attempt_logging: Log all quarantine
+    bypass attempts'
+  enforcement: SHOULD
+  priority: LOW
+  feld: anti_gaming_quarantine.bypass_attempt_logging
+  wert: Log all quarantine bypass attempts
+- regel_id: SOT-PART3-SEM-227
+  zeile: 473
+  kategorie: General
+  beschreibung: 'anti_gaming_quarantine.insider_threat_monitoring: Monitor internal
+    quarantine manipulations'
+  enforcement: SHOULD
+  priority: LOW
+  feld: anti_gaming_quarantine.insider_threat_monitoring
+  wert: Monitor internal quarantine manipulations
+- regel_id: SOT-PART3-SEM-228
+  zeile: 473
+  kategorie: General
+  beschreibung: 'integration_points.governance_legal: 07_governance_legal/risk/ →
+    quarantine risk assessment'
+  enforcement: SHOULD
+  priority: LOW
+  feld: integration_points.governance_legal
+  wert: 07_governance_legal/risk/ → quarantine risk assessment
+- regel_id: SOT-PART3-SEM-229
+  zeile: 473
+  kategorie: General
+  beschreibung: 'integration_points.business_intelligence: Competitive impact analysis
+    for quarantined items'
+  enforcement: SHOULD
+  priority: LOW
+  feld: integration_points.business_intelligence
+  wert: Competitive impact analysis for quarantined items
+- regel_id: SOT-PART3-SEM-230
+  zeile: 473
+  kategorie: General
+  beschreibung: 'integration_points.enterprise_dashboard: Real-time quarantine visibility
+    for executives'
+  enforcement: SHOULD
+  priority: LOW
+  feld: integration_points.enterprise_dashboard
+  wert: Real-time quarantine visibility for executives
+- regel_id: SOT-PART3-SEM-231
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.W3C_VC_20.name: W3C Verifiable Credentials 2.0'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.W3C_VC_20.name
+  wert: W3C Verifiable Credentials 2.0
+- regel_id: SOT-PART3-SEM-232
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.W3C_VC_20.path: 10_interoperability/standards/w3c_vc2/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.W3C_VC_20.path
+  wert: 10_interoperability/standards/w3c_vc2/
+- regel_id: SOT-PART3-SEM-233
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.W3C_VC_20.business_priority: HIGH'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.W3C_VC_20.business_priority
+  wert: HIGH
+- regel_id: SOT-PART3-SEM-234
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.OpenID_Connect_4_VC.name: OpenID Connect 4 Verifiable
+    Credentials'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.OpenID_Connect_4_VC.name
+  wert: OpenID Connect 4 Verifiable Credentials
+- regel_id: SOT-PART3-SEM-235
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.OpenID_Connect_4_VC.path: 14_zero_time_auth/sso/protocols/oidc4vc/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.OpenID_Connect_4_VC.path
+  wert: 14_zero_time_auth/sso/protocols/oidc4vc/
+- regel_id: SOT-PART3-SEM-236
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.OpenID_Connect_4_VC.business_priority: HIGH'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.OpenID_Connect_4_VC.business_priority
+  wert: HIGH
+- regel_id: SOT-PART3-SEM-237
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.ISO_IEC_27001_2022.name: ISO/IEC 27001:2022'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.ISO_IEC_27001_2022.name
+  wert: ISO/IEC 27001:2022
+- regel_id: SOT-PART3-SEM-238
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.ISO_IEC_27001_2022.path: 23_compliance/mappings/iso27001/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.ISO_IEC_27001_2022.path
+  wert: 23_compliance/mappings/iso27001/
+- regel_id: SOT-PART3-SEM-239
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.ISO_IEC_27001_2022.business_priority: CRITICAL'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.ISO_IEC_27001_2022.business_priority
+  wert: CRITICAL
+- regel_id: SOT-PART3-SEM-240
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.NIST_SSDF.name: NIST Secure Software Development
+    Framework'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.NIST_SSDF.name
+  wert: NIST Secure Software Development Framework
+- regel_id: SOT-PART3-SEM-241
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.NIST_SSDF.path: 23_compliance/mappings/nist_ssdf/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.NIST_SSDF.path
+  wert: 23_compliance/mappings/nist_ssdf/
+- regel_id: SOT-PART3-SEM-242
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.NIST_SSDF.business_priority: HIGH'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.NIST_SSDF.business_priority
+  wert: HIGH
+- regel_id: SOT-PART3-SEM-243
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.SLSA.name: Supply Chain Levels for Software Artifacts'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.SLSA.name
+  wert: Supply Chain Levels for Software Artifacts
+- regel_id: SOT-PART3-SEM-244
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.SLSA.path: 23_compliance/mappings/slsa/'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.SLSA.path
+  wert: 23_compliance/mappings/slsa/
+- regel_id: SOT-PART3-SEM-245
+  zeile: 681
+  kategorie: General
+  beschreibung: 'active_standards.SLSA.business_priority: MEDIUM'
+  enforcement: SHOULD
+  priority: LOW
+  feld: active_standards.SLSA.business_priority
+  wert: MEDIUM
+- regel_id: SOT-PART3-SEM-246
+  zeile: 681
+  kategorie: General
+  beschreibung: 'deprecated_standards[0].id: ISO27001_2013'
+  enforcement: SHOULD
+  priority: LOW
+  feld: deprecated_standards[0].id
+  wert: ISO27001_2013
+- regel_id: SOT-PART3-SEM-247
+  zeile: 681
+  kategorie: General
+  beschreibung: 'deprecated_standards[0].status: deprecated'
+  enforcement: SHOULD
+  priority: LOW
+  feld: deprecated_standards[0].status
+  wert: deprecated
+- regel_id: SOT-PART3-SEM-248
+  zeile: 681
+  kategorie: General
+  beschreibung: 'deprecated_standards[0].replaced_by: ISO_IEC_27001_2022'
+  enforcement: SHOULD
+  priority: LOW
+  feld: deprecated_standards[0].replaced_by
+  wert: ISO_IEC_27001_2022
+- regel_id: SOT-PART3-SEM-249
+  zeile: 681
+  kategorie: General
+  beschreibung: 'deprecated_standards[0].migration_deadline: 2025-12-31'
+  enforcement: SHOULD
+  priority: LOW
+  feld: deprecated_standards[0].migration_deadline
+  wert: '2025-12-31'
+- regel_id: SOT-PART3-SEM-250
+  zeile: 681
+  kategorie: General
+  beschreibung: 'deprecated_standards[0].business_impact: Migration required for enterprise
+    compliance'
+  enforcement: SHOULD
+  priority: LOW
+  feld: deprecated_standards[0].business_impact
+  wert: Migration required for enterprise compliance
+- regel_id: SOT-PART3-SEM-251
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.monthly.scope: Badge metrics validation, compliance
+    updates, business impact'
+  enforcement: SHOULD
+  priority: LOW
+  feld: internal_reviews.monthly.scope
+  wert: Badge metrics validation, compliance updates, business impact
+- regel_id: SOT-PART3-SEM-252
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.monthly.owner: Compliance Team Lead'
+  enforcement: SHOULD
+  priority: LOW
+  feld: internal_reviews.monthly.owner
+  wert: Compliance Team Lead
+- regel_id: SOT-PART3-SEM-253
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.monthly.deliverable: internal_monthly_YYYY-MM.md'
+  enforcement: SHOULD
+  priority: LOW
+  feld: internal_reviews.monthly.deliverable
+  wert: internal_monthly_YYYY-MM.md
+- regel_id: SOT-PART3-SEM-254
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.quarterly.scope: Full compliance matrix review,
+    threshold validation, competitive analysis'
+  enforcement: SHOULD
+  priority: LOW
+  feld: internal_reviews.quarterly.scope
+  wert: Full compliance matrix review, threshold validation, competitive analysis
+- regel_id: SOT-PART3-SEM-255
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.quarterly.owner: Senior Compliance Officer + Legal'
+  enforcement: SHOULD
+  priority: LOW
+  feld: internal_reviews.quarterly.owner
+  wert: Senior Compliance Officer + Legal
+- regel_id: SOT-PART3-SEM-256
+  zeile: 731
+  kategorie: General
+  beschreibung: 'internal_reviews.quarterly.deliverable: internal_quarterly_YYYY-QX.md'
+  enforcement: SHOULD
+  priority: LOW
+  feld: internal_reviews.quarterly.deliverable
+  wert: internal_quarterly_YYYY-QX.md

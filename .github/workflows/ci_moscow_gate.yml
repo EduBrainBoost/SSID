@@ -1,0 +1,203 @@
+name: CI MoSCoW Gate v1.0
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:  # Manual trigger
+
+env:
+  MIN_SCORE: 75.0  # Minimum required MoSCoW score
+  PYTHON_VERSION: "3.12"
+  CONFIG_FILE: "16_codex/contracts/sot/sot_contract.yaml"
+
+jobs:
+  moscow-validation:
+    name: MoSCoW Priority Scorecard Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for trend analysis
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Generate MoSCoW Scorecard
+        id: scorecard
+        run: |
+          cd 12_tooling/cli
+          python sot_validator.py \
+            --scorecard \
+            --input "../../${{ env.CONFIG_FILE }}" \
+            --export \
+            --verbose
+        continue-on-error: true  # Capture exit code but continue
+
+      - name: Extract Score from JSON
+        id: extract_score
+        run: |
+          SCORECARD_JSON=$(ls 12_tooling/cli/scorecard_*.json | head -n 1)
+          SCORE=$(python -c "import json; print(json.load(open('$SCORECARD_JSON'))['moscow_scorecard']['moscow_score'])")
+          MUST_FAILED=$(python -c "import json; print(json.load(open('$SCORECARD_JSON'))['moscow_scorecard']['ci_blocking_failures'])")
+          OVERALL_STATUS=$(python -c "import json; print(json.load(open('$SCORECARD_JSON'))['moscow_scorecard']['overall_status'])")
+
+          echo "score=$SCORE" >> $GITHUB_OUTPUT
+          echo "must_failed=$MUST_FAILED" >> $GITHUB_OUTPUT
+          echo "overall_status=$OVERALL_STATUS" >> $GITHUB_OUTPUT
+          echo "scorecard_file=$SCORECARD_JSON" >> $GITHUB_OUTPUT
+
+          echo "### MoSCoW Score: $SCORE%" >> $GITHUB_STEP_SUMMARY
+          echo "**Overall Status:** $OVERALL_STATUS" >> $GITHUB_STEP_SUMMARY
+          echo "**CI Blocking Failures:** $MUST_FAILED" >> $GITHUB_STEP_SUMMARY
+
+      - name: Archive Scorecard to Registry
+        run: |
+          TIMESTAMP=$(date -u +"%Y%m%dT%H%M%SZ")
+          COMMIT_SHA=$(git rev-parse --short HEAD)
+          BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+          # Create registry directory structure
+          mkdir -p 02_audit_logging/registry/scorecards/$BRANCH_NAME
+
+          # Copy scorecard files with metadata
+          cp 12_tooling/cli/scorecard_*.json \
+            02_audit_logging/registry/scorecards/$BRANCH_NAME/scorecard_${TIMESTAMP}_${COMMIT_SHA}.json
+          cp 12_tooling/cli/scorecard_*.md \
+            02_audit_logging/registry/scorecards/$BRANCH_NAME/scorecard_${TIMESTAMP}_${COMMIT_SHA}.md
+
+          echo "Scorecard archived to registry: scorecards/$BRANCH_NAME/scorecard_${TIMESTAMP}_${COMMIT_SHA}"
+
+      - name: Upload Scorecard Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: moscow-scorecard-${{ github.sha }}
+          path: |
+            12_tooling/cli/scorecard_*.json
+            12_tooling/cli/scorecard_*.md
+          retention-days: 90
+        if: always()
+
+      - name: Comment Scorecard on Pull Request
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const scorecardMd = fs.readFileSync('12_tooling/cli/scorecard_*.md', 'utf8');
+
+            // Truncate if too long (GitHub has 65536 char limit)
+            const truncatedMd = scorecardMd.length > 60000
+              ? scorecardMd.substring(0, 60000) + '\n\n... (truncated)'
+              : scorecardMd;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🎯 MoSCoW Priority Scorecard\n\n${truncatedMd}`
+            });
+
+      - name: Evaluate Score Threshold
+        run: |
+          SCORE=${{ steps.extract_score.outputs.score }}
+          MIN_SCORE=${{ env.MIN_SCORE }}
+          MUST_FAILED=${{ steps.extract_score.outputs.must_failed }}
+
+          echo "==================================================="
+          echo "MoSCoW Gate Evaluation"
+          echo "==================================================="
+          echo "Score:             $SCORE%"
+          echo "Minimum Required:  $MIN_SCORE%"
+          echo "MUST Failures:     $MUST_FAILED"
+          echo "==================================================="
+
+          if (( $(echo "$SCORE < $MIN_SCORE" | bc -l) )); then
+            echo "❌ FAIL: Score $SCORE% is below minimum $MIN_SCORE%"
+            exit 1
+          fi
+
+          if [ "$MUST_FAILED" -gt 0 ]; then
+            echo "❌ FAIL: $MUST_FAILED critical MUST rule failures detected"
+            exit 24  # ROOT-24-LOCK exit code
+          fi
+
+          echo "✅ PASS: MoSCoW Gate validation successful"
+
+      - name: Generate Trend Report
+        if: success() && github.ref == 'refs/heads/main'
+        run: |
+          python 12_tooling/scripts/analyze_scorecard_trends.py \
+            --registry 02_audit_logging/registry/scorecards/main \
+            --output 02_audit_logging/reports/moscow_trend_report.md
+
+      - name: Commit Registry Updates
+        if: success() && github.ref == 'refs/heads/main'
+        run: |
+          git config --local user.email "ci@ssid-project.local"
+          git config --local user.name "CI MoSCoW Gate"
+          git add 02_audit_logging/registry/scorecards/
+          git add 02_audit_logging/reports/moscow_trend_report.md
+          git diff --staged --quiet || git commit -m "chore(moscow): Update scorecard registry [skip ci]"
+          git push
+
+  # Optional: Badge generation job
+  generate-badge:
+    name: Generate MoSCoW Score Badge
+    needs: moscow-validation
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download Scorecard Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: moscow-scorecard-${{ github.sha }}
+
+      - name: Create Dynamic Badge
+        run: |
+          SCORE=$(python -c "import json; print(json.load(open('scorecard_*.json'))['moscow_scorecard']['moscow_score'])")
+
+          # Determine color based on score
+          if (( $(echo "$SCORE >= 90" | bc -l) )); then
+            COLOR="brightgreen"
+          elif (( $(echo "$SCORE >= 75" | bc -l) )); then
+            COLOR="green"
+          elif (( $(echo "$SCORE >= 60" | bc -l) )); then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+
+          # Create badge JSON for shields.io
+          cat > 02_audit_logging/reports/moscow_badge.json <<EOF
+          {
+            "schemaVersion": 1,
+            "label": "MoSCoW Score",
+            "message": "${SCORE}%",
+            "color": "${COLOR}"
+          }
+          EOF
+
+          echo "Badge created with score $SCORE% and color $COLOR"
+
+      - name: Commit Badge
+        run: |
+          git config --local user.email "ci@ssid-project.local"
+          git config --local user.name "CI MoSCoW Gate"
+          git add 02_audit_logging/reports/moscow_badge.json
+          git diff --staged --quiet || git commit -m "chore(badge): Update MoSCoW score badge [skip ci]"
+          git push

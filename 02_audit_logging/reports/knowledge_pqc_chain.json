@@ -1,0 +1,32 @@
+{
+  "version": "10.0.0",
+  "generated_date": "2025-10-12T18:57:14.493944",
+  "mode": "EPISTEMIC_PROOF_CHAIN",
+  "knowledge_merkle_root": "3dc21e5adc3133600f0d0f37b4b955da183383b8cfa9d648cc7511d7e3b76cdc",
+  "combined_sha512": "4f2836f7a9f6096a5db36808b52a9ed9cfa34d5386eb5636432ea9f9be63e9ddb9855621ab7e7868dcbee20420959348164ca9d558d84e2258a11b126acf2c7c",
+  "pqc_signatures": {
+    "dilithium3": {
+      "algorithm": "CRYSTALS-Dilithium3",
+      "signature": "1912fcbdfdb91884131d85b0979e380130e0d6fa06e542c7e149b441db97b030e2a810f8962319728cb28c53685d6153c69e0fbc1f42b12d903d8e77a1d331b4",
+      "signature_bytes": 3293,
+      "message_hash": "8c1a597cc5e03dc55a18da779a7cf219a21113425b8ebbe178ff44d1205828ff",
+      "mode": "SIMULATION"
+    },
+    "kyber768": {
+      "algorithm": "Kyber768",
+      "ciphertext": "30caef03dc39837f5eb10bdaa50e8dfc38ecb19288380e9ffddaf408b7b9a3283a41d2d94956d2a2e823480506798625429db560e8e0ddcda00aa19e6003b5bc",
+      "ciphertext_bytes": 1088,
+      "shared_secret_bytes": 32,
+      "mode": "SIMULATION"
+    },
+    "security_level": "NIST Level 3",
+    "combined_algorithm": "CRYSTALS-Dilithium3 + Kyber768"
+  },
+  "v9_integration": {
+    "sha512_hash": "26ff893b23dfa0dc561ec043b4ecf1068e40ebc6074f9898dda315d338f5d1972230850770962a27b0191f44b3ede0d8549ecb4f6f0b5afc3e624dbc87c50397",
+    "merkle_root": "93ea18070334379704eb8e873b3973fe9910589fcbff0adc3977fb6614195c30",
+    "module_count": 24,
+    "pqc_proof_verified": true,
+    "inheritance_complete": true
+  }
+}

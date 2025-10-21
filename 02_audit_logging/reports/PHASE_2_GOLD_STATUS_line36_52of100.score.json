@@ -1,0 +1,30 @@
+{
+  "id": "0a54640a-ef6d-4054-b3f5-030c2e7c7795",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 52,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/reports/PHASE_2_GOLD_STATUS.md",
+    "hash": "36fd2e859dc89e4c92c6e93f9fac25dc4ddf703f3466335e3b0b263d2f949ac9250a6456906887264644fe1de17a72b882abd7acea054993364a3dc0177eb95b",
+    "line": 36,
+    "context": "\n## Gap Analysis for GOLD (85+)\n\n### Critical Gaps (Static Analysis: 52/100)\n\n**Missing CI References (-15 pts):**\n1. `structure_policy_opa` → 0/3 refs found (-12 pts)"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "63c48bae-e564-4db6-8d91-613f65111580",
+    "timestamp": "2025-10-16T19:32:02.865538Z"
+  },
+  "worm": {
+    "uuid": "68574ede-27fe-48c2-8f0e-ebd4aaf8e509",
+    "signature": "184979b028579cbfb57c142f9dbb15c1f5bfe135762740d4ad7e2ef59d330fc7695014d5e9ec85cddbe0e41ec6f368b531c201d627b7513d737b7feb9d5d5966",
+    "chain_prev": "53425d41-df04-47f8-922b-98c9fc85d86e"
+  },
+  "metadata": {
+    "label": "GOLD",
+    "component": "Audit & Compliance"
+  }
+}

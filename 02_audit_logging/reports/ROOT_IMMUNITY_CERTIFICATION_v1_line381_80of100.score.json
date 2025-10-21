@@ -1,0 +1,30 @@
+{
+  "id": "d89362d6-b43f-4630-b9c6-8bcc11373f48",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 80,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/reports/ROOT_IMMUNITY_CERTIFICATION_v1.md",
+    "hash": "d7dbce9d4c5e082af00ccec521451b74275716a650a5e1447126da300677265bd02d426d5d53394a09a5539397a7cc1cc6c9e224cafeb7a70eb7e07f17151283",
+    "line": 381,
+    "context": "\nExpected output:\n```\nSoT Enforcement: 80/100 (SILVER)\n[OK] WORM chain intact - all 25 signatures valid\n✅ structure_guard PASS\n```"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "003cf6b8-e58a-4ed4-a1d1-72056a77bca0",
+    "timestamp": "2025-10-16T19:32:36.601806Z"
+  },
+  "worm": {
+    "uuid": "f1b867f5-8936-479c-ad39-19565d238d7c",
+    "signature": "e533004f807e9295b4a59e2426af2f451220ca18eaa139fbad49b7965cdb1cb5053fac847e7016db0102ec90a7a323caabc31cfbf5bb19e230193f60d7e23007",
+    "chain_prev": "35f89640-63ab-4000-9700-1b681c367fb1"
+  },
+  "metadata": {
+    "grade": "SILVER",
+    "component": "Audit & Compliance"
+  }
+}

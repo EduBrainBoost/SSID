@@ -1,0 +1,25 @@
+# Test Inventory Policy (broadened excludes)
+include_globs:
+  - "**/test_*.py"
+  - "**/*_test.py"
+exclude_dirs:
+  - ".git"
+  - "__pycache__"
+  - ".claude"
+  - "node_modules"
+  - "venv"
+  - ".venv"
+  - "dist"
+  - "build"
+  - ".pytest_cache"
+  - "site-packages"
+  - "archives"
+  - "deprecated"
+  - "legacy"
+  - "old"
+exclude_regex:
+  - "(^|/)backups?(/|$)"
+  - "(^|/)archives?(/|$)"
+  - "(^|/)(deprecated|legacy|old)(/|$)"
+  - "_backup\.py$"
+min_pytest_ratio: 0.95

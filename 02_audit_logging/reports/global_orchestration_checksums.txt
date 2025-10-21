@@ -1,0 +1,34 @@
+# SSID Global Orchestration v5.3 - SHA-256 Checksums
+# Generated: 2025-10-12
+# Algorithm: SHA-256
+
+# Governance & Manifest
+# File: 07_governance_legal/orchestration/global_orchestration_manifest.yaml
+# SHA-256: [To be computed during CI/CD]
+
+# File: 07_governance_legal/orchestration/global_governance_matrix.yaml
+# SHA-256: [To be computed during CI/CD]
+
+# Federation Routing
+# File: 09_meta_identity/federation/proof_flow_router.py
+# SHA-256: [To be computed during CI/CD]
+
+# Interoperability
+# File: 10_interoperability/adapters/federation_bridge.yaml
+# SHA-256: [To be computed during CI/CD]
+
+# Observability
+# File: 17_observability/orchestration_metrics_collector.py
+# SHA-256: [To be computed during CI/CD]
+
+# Compliance
+# File: 23_compliance/orchestration/global_orchestration_policy.rego
+# SHA-256: [To be computed during CI/CD]
+
+# Instructions:
+# Run during CI/CD:
+#   find . -name "*orchestration*" -type f | xargs sha256sum
+
+# Verification:
+# Recompute checksums and compare with values above.
+# Any mismatch indicates tampering.

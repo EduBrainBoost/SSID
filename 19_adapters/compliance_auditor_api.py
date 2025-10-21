@@ -20,7 +20,6 @@ import yaml
 from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 
-
 app = Flask(__name__)
 CORS(app)  # Enable CORS for external auditors
 
@@ -33,7 +32,6 @@ BLOCKCHAIN_EVENTS_PATH = REPO_ROOT / "02_audit_logging/evidence/blockchain/compl
 UNIFIED_INDEX_PATH = REPO_ROOT / "23_compliance/mappings/compliance_unified_index.yaml"
 MAPPINGS_DIR = REPO_ROOT / "23_compliance/mappings"
 DASHBOARD_OUTPUT_PATH = REPO_ROOT / "13_ui_layer/compliance_dashboard_output.json"
-
 
 # ============================================================================
 # Health & Info Endpoints
@@ -48,7 +46,6 @@ def health_check():
         "version": "2025-Q4",
         "timestamp": datetime.utcnow().isoformat() + "Z"
     })
-
 
 @app.route('/api/v1/info', methods=['GET'])
 def api_info():
@@ -71,7 +68,6 @@ def api_info():
         "authentication": "none (read-only public API)",
         "rate_limiting": "not implemented (recommended for production)"
     })
-
 
 # ============================================================================
 # Compliance Data Endpoints
@@ -107,7 +103,6 @@ def get_unified_index():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 @app.route('/api/v1/dashboard', methods=['GET'])
 def get_dashboard():
     """
@@ -132,7 +127,6 @@ def get_dashboard():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 @app.route('/api/v1/anchors', methods=['GET'])
 def get_anchors():
@@ -174,7 +168,6 @@ def get_anchors():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 @app.route('/api/v1/anchors/<anchor_id>', methods=['GET'])
 def get_anchor_by_id(anchor_id: str):
     """Get a specific anchor by ID."""
@@ -200,7 +193,6 @@ def get_anchor_by_id(anchor_id: str):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 @app.route('/api/v1/blockchain/events', methods=['GET'])
 def get_blockchain_events():
@@ -243,7 +235,6 @@ def get_blockchain_events():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 @app.route('/api/v1/framework/<framework_name>', methods=['GET'])
 def get_framework(framework_name: str):
     """
@@ -281,7 +272,6 @@ def get_framework(framework_name: str):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 # ============================================================================
 # Verification Endpoints
@@ -337,7 +327,6 @@ def verify_hash(file_type: str, expected_hash: str):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 @app.route('/api/v1/verify/anchor/<anchor_id>', methods=['GET'])
 def verify_anchor(anchor_id: str):
     """
@@ -373,7 +362,6 @@ def verify_anchor(anchor_id: str):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 # ============================================================================
 # Statistics Endpoints
@@ -430,7 +418,6 @@ def get_statistics():
         "timestamp": datetime.utcnow().isoformat() + "Z"
     })
 
-
 # ============================================================================
 # Main
 # ============================================================================
@@ -455,7 +442,6 @@ def main():
     print("\n" + "=" * 80 + "\n")
 
     app.run(debug=True, host='0.0.0.0', port=5000)
-
 
 if __name__ == '__main__':
     main()

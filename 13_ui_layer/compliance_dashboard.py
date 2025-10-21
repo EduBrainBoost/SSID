@@ -18,7 +18,6 @@ from typing import Any, Dict, List, Optional
 
 import yaml
 
-
 class ComplianceDashboard:
     """Dynamic compliance dashboard data provider."""
 
@@ -276,7 +275,6 @@ class ComplianceDashboard:
 
         return "\n".join(report_lines)
 
-
 def main():
     """Main entry point for compliance dashboard."""
     import sys
@@ -302,7 +300,6 @@ def main():
         json.dump(summary, f, indent=2, ensure_ascii=False)
 
     print(f"\n📊 JSON summary saved to: {output_path}\n")
-
 
 if __name__ == "__main__":
     main()

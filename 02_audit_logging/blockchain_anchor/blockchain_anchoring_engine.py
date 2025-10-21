@@ -25,7 +25,6 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, asdict
 
-
 @dataclass
 class AnchorTransaction:
     """Blockchain anchor transaction record."""
@@ -37,7 +36,6 @@ class AnchorTransaction:
     block_number: Optional[int]
     timestamp: str
     status: str  # pending, confirmed, failed
-
 
 class BlockchainAnchoringEngine:
     """
@@ -351,7 +349,6 @@ class BlockchainAnchoringEngine:
 
         raise FileNotFoundError(f"No anchor found for evidence hash {evidence_hash}")
 
-
 def test_blockchain_anchoring():
     """Test blockchain anchoring functionality."""
     print("=" * 70)
@@ -426,7 +423,6 @@ def test_blockchain_anchoring():
     print("=" * 70)
     print("[OK] Blockchain Anchoring Engine - All Tests Passed")
     print("=" * 70)
-
 
 if __name__ == "__main__":
     test_blockchain_anchoring()

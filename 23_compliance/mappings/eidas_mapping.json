@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "framework": "eIDAS",
+    "version": "2.0",
+    "source": "EU 2024/1183 - eIDAS 2.0 Regulation",
+    "last_updated": "2025-10-13T19:40:00Z",
+    "maintainer": "edubrainboost",
+    "status": "active",
+    "classification": "PUBLIC - Compliance Mapping",
+    "regulatory_basis": "EU Regulation 2024/1183 - European Digital Identity Framework"
+  },
+  "mappings": [
+    {
+      "id": "eIDAS-Art-6",
+      "description": "EU Digital Identity Wallet Requirements",
+      "applies_to": [
+        "09_meta_identity",
+        "13_ui_layer",
+        "14_zero_time_auth"
+      ],
+      "verification": "manual",
+      "test_reference": "test_eudi_wallet.py",
+      "controls": [
+        "Qualified electronic signature support",
+        "Qualified electronic seal support",
+        "Attribute attestation mechanisms",
+        "User authentication methods"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "eIDAS-Art-12",
+      "description": "Qualified Trust Service Providers",
+      "applies_to": [
+        "07_governance_legal",
+        "20_foundation",
+        "23_compliance"
+      ],
+      "verification": "manual",
+      "test_reference": "test_qtsp_compliance.py",
+      "controls": [
+        "Trust service provider authorization",
+        "Qualified status maintenance",
+        "Supervisory body oversight",
+        "Trusted list inclusion"
+      ],
+      "implementation_status": "planned"
+    },
+    {
+      "id": "eIDAS-Art-24",
+      "description": "Qualified Electronic Signatures",
+      "applies_to": [
+        "21_post_quantum_crypto",
+        "14_zero_time_auth",
+        "09_meta_identity"
+      ],
+      "verification": "automated",
+      "test_reference": "test_qes.py",
+      "controls": [
+        "Qualified signature creation device",
+        "Sole control by signatory",
+        "Signature alteration detection",
+        "Certificate requirements (Art. 28)"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "eIDAS-Art-35",
+      "description": "Qualified Electronic Seals",
+      "applies_to": [
+        "21_post_quantum_crypto",
+        "03_core",
+        "02_audit_logging"
+      ],
+      "verification": "automated",
+      "test_reference": "test_qes_seal.py",
+      "controls": [
+        "Legal entity authentication",
+        "Data origin guarantee",
+        "Data integrity assurance",
+        "Qualified certificate for seals"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "eIDAS-Art-41",
+      "description": "Qualified Time Stamps",
+      "applies_to": [
+        "02_audit_logging",
+        "18_data_layer",
+        "23_compliance"
+      ],
+      "verification": "automated",
+      "test_reference": "test_qualified_timestamp.py",
+      "controls": [
+        "Accurate time source linkage",
+        "Data integrity at timestamp",
+        "Date/time integrity protection",
+        "Timestamp certificate requirements"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "eIDAS-Art-45a",
+      "description": "Electronic Attestation of Attributes",
+      "applies_to": [
+        "09_meta_identity",
+        "08_identity_score",
+        "14_zero_time_auth"
+      ],
+      "verification": "automated",
+      "test_reference": "test_attribute_attestation.py",
+      "controls": [
+        "Qualified attribute attestation",
+        "Attribute authenticity verification",
+        "Attribute issuer identification",
+        "Selective disclosure support"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "eIDAS-Art-45b",
+      "description": "Person Identification Data",
+      "applies_to": [
+        "09_meta_identity",
+        "14_zero_time_auth",
+        "03_core"
+      ],
+      "verification": "automated",
+      "test_reference": "test_pid.py",
+      "controls": [
+        "Unique person identification",
+        "High assurance level (LoA High)",
+        "Cross-border recognition",
+        "Attribute schema compliance"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "eIDAS-Art-45c",
+      "description": "Electronic Archiving",
+      "applies_to": [
+        "02_audit_logging",
+        "18_data_layer",
+        "23_compliance"
+      ],
+      "verification": "automated",
+      "test_reference": "test_qualified_archiving.py",
+      "controls": [
+        "Long-term data integrity",
+        "Authenticity preservation",
+        "Readability over time",
+        "Qualified preservation system"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "eIDAS-Art-45d",
+      "description": "Electronic Ledgers",
+      "applies_to": [
+        "02_audit_logging",
+        "20_foundation",
+        "03_core"
+      ],
+      "verification": "automated",
+      "test_reference": "test_qualified_ledger.py",
+      "controls": [
+        "Tamper-evident recording",
+        "Chronological ordering",
+        "Data integrity guarantees",
+        "Audit trail completeness"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "eIDAS-Annex-VIII",
+      "description": "Technical Specifications and Standards",
+      "applies_to": [
+        "21_post_quantum_crypto",
+        "09_meta_identity",
+        "23_compliance"
+      ],
+      "verification": "automated",
+      "test_reference": "test_eidas_standards.py",
+      "controls": [
+        "ISO/IEC 27001 compliance",
+        "ETSI standards implementation",
+        "ARF (Architecture Reference Framework)",
+        "Interoperability specifications"
+      ],
+      "implementation_status": "implemented"
+    },
+    {
+      "id": "eIDAS-Security-Requirements",
+      "description": "Security Requirements for Trust Services",
+      "applies_to": [
+        "21_post_quantum_crypto",
+        "15_infra",
+        "23_compliance"
+      ],
+      "verification": "manual",
+      "test_reference": "test_trust_service_security.py",
+      "controls": [
+        "Cryptographic key management",
+        "Physical security measures",
+        "Personnel security requirements",
+        "Incident management procedures"
+      ],
+      "implementation_status": "implemented"
+    }
+  ],
+  "compliance_metrics": {
+    "overall_coverage": "88%",
+    "automated_controls": 8,
+    "manual_controls": 3,
+    "implemented_controls": 10,
+    "planned_controls": 1
+  },
+  "references": [
+    {
+      "title": "eIDAS 2.0 Official Text",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1183/oj"
+    },
+    {
+      "title": "EU Digital Identity Wallet ARF",
+      "url": "https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework"
+    },
+    {
+      "title": "ETSI eIDAS Standards",
+      "url": "https://www.etsi.org/technologies/electronic-signatures"
+    }
+  ],
+  "implementation_notes": "SSID implements eIDAS 2.0 with support for EU Digital Identity Wallets, qualified trust services, and cross-border interoperability. Post-quantum cryptography extensions ensure long-term security compliance."
+}

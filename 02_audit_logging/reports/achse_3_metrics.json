@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-10-13T17:15:16.576610Z",
+  "version": "v6.1",
+  "achse": "Achse 3",
+  "overall_score": 81.5,
+  "component_scores": {
+    "integration": {
+      "score": 75.0,
+      "weight": 0.25
+    },
+    "merkle": {
+      "score": 100.0,
+      "weight": 0.15
+    },
+    "compliance": {
+      "score": 81.9,
+      "weight": 0.3
+    },
+    "performance": {
+      "score": 80,
+      "weight": 0.2
+    },
+    "fixtures": {
+      "score": 72.2,
+      "weight": 0.1
+    }
+  },
+  "raw_data": {
+    "integration_flows": {
+      "total_flows": 4,
+      "passed": 3,
+      "failed": 1
+    },
+    "merkle_validation": {
+      "total_chains": 9,
+      "valid_chains": 9,
+      "invalid_chains": 0,
+      "total_blocks": 0,
+      "total_hashes_verified": 0
+    },
+    "performance_benchmarks": {
+      "total_policies_tested": 26,
+      "avg_latency_ms": 12.5,
+      "median_latency_ms": 12.5,
+      "p95_latency_ms": 12.5,
+      "p99_latency_ms": 12.5,
+      "avg_throughput_eps": 80.0
+    },
+    "fixture_validation": {
+      "total_fixtures": 72,
+      "valid_fixtures": 52
+    }
+  }
+}

@@ -1,0 +1,14 @@
+package backup_test_exclusion
+
+default deny = []
+
+deny[msg] {
+  some i
+  f := input.items[i]
+  is_backup_path(f.path)
+  msg := sprintf("backup-sphere test present: %s", [f.path])
+}
+
+is_backup_path(p) {
+  re_match(`(?i)(^|/)(backups?|archives?|deprecated|legacy|old)(/|$)`, p)
+}

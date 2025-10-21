@@ -1,0 +1,1361 @@
+version: 1.3.0
+generation_date: '2025-10-20T20:35:22.868883'
+generation_method: automatic_list_to_rule_lifting
+total_generated_rules: 61
+source_schema: list_to_rule_schema.yaml
+lifted_rules:
+  JURIS_BL_001:
+    type: MUST
+    rule: 'System MUSS Transaktionen aus Iran (IR) blockieren. Grund: OFAC Comprehensive
+      Sanctions'
+    source: List-to-Rule Lifting - KONS001
+    category: Sanctions Compliance
+    severity: CRITICAL
+    list_metadata:
+      list_name: blacklist_jurisdictions
+      list_source: 23_compliance/policies/sanctions.yaml
+      list_index: 0
+      audit_requirement: MiCA, eIDAS, OFAC
+    item_data:
+      code: IR
+      name: Iran
+      reason: OFAC Comprehensive Sanctions
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_BL_001'
+    - 'Unit Test: test_juris_bl_001()'
+    - 'Audit Trail: Log all JURIS_BL_001-related events'
+    - 'Runtime Check: Block if input.country_code == ''IR'''
+    - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: IR'''
+  JURIS_BL_002:
+    type: MUST
+    rule: 'System MUSS Transaktionen aus North Korea (KP) blockieren. Grund: OFAC
+      Comprehensive Sanctions'
+    source: List-to-Rule Lifting - KONS001
+    category: Sanctions Compliance
+    severity: CRITICAL
+    list_metadata:
+      list_name: blacklist_jurisdictions
+      list_source: 23_compliance/policies/sanctions.yaml
+      list_index: 1
+      audit_requirement: MiCA, eIDAS, OFAC
+    item_data:
+      code: KP
+      name: North Korea
+      reason: OFAC Comprehensive Sanctions
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_BL_002'
+    - 'Unit Test: test_juris_bl_002()'
+    - 'Audit Trail: Log all JURIS_BL_002-related events'
+    - 'Runtime Check: Block if input.country_code == ''KP'''
+    - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: KP'''
+  JURIS_BL_003:
+    type: MUST
+    rule: 'System MUSS Transaktionen aus Syria (SY) blockieren. Grund: OFAC Comprehensive
+      Sanctions'
+    source: List-to-Rule Lifting - KONS001
+    category: Sanctions Compliance
+    severity: CRITICAL
+    list_metadata:
+      list_name: blacklist_jurisdictions
+      list_source: 23_compliance/policies/sanctions.yaml
+      list_index: 2
+      audit_requirement: MiCA, eIDAS, OFAC
+    item_data:
+      code: SY
+      name: Syria
+      reason: OFAC Comprehensive Sanctions
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_BL_003'
+    - 'Unit Test: test_juris_bl_003()'
+    - 'Audit Trail: Log all JURIS_BL_003-related events'
+    - 'Runtime Check: Block if input.country_code == ''SY'''
+    - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: SY'''
+  JURIS_BL_004:
+    type: MUST
+    rule: 'System MUSS Transaktionen aus Cuba (CU) blockieren. Grund: OFAC Sanctions
+      (Limited)'
+    source: List-to-Rule Lifting - KONS001
+    category: Sanctions Compliance
+    severity: HIGH
+    list_metadata:
+      list_name: blacklist_jurisdictions
+      list_source: 23_compliance/policies/sanctions.yaml
+      list_index: 3
+      audit_requirement: MiCA, eIDAS, OFAC
+    item_data:
+      code: CU
+      name: Cuba
+      reason: OFAC Sanctions (Limited)
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_BL_004'
+    - 'Unit Test: test_juris_bl_004()'
+    - 'Audit Trail: Log all JURIS_BL_004-related events'
+    - 'Runtime Check: Block if input.country_code == ''CU'''
+    - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: CU'''
+  JURIS_BL_005:
+    type: MUST
+    rule: 'System MUSS Transaktionen aus Sudan (SD) blockieren. Grund: OFAC Sanctions
+      (Regional)'
+    source: List-to-Rule Lifting - KONS001
+    category: Sanctions Compliance
+    severity: HIGH
+    list_metadata:
+      list_name: blacklist_jurisdictions
+      list_source: 23_compliance/policies/sanctions.yaml
+      list_index: 4
+      audit_requirement: MiCA, eIDAS, OFAC
+    item_data:
+      code: SD
+      name: Sudan
+      reason: OFAC Sanctions (Regional)
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_BL_005'
+    - 'Unit Test: test_juris_bl_005()'
+    - 'Audit Trail: Log all JURIS_BL_005-related events'
+    - 'Runtime Check: Block if input.country_code == ''SD'''
+    - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: SD'''
+  JURIS_BL_006:
+    type: MUST
+    rule: 'System MUSS Transaktionen aus Belarus (BY) blockieren. Grund: EU Sanctions'
+    source: List-to-Rule Lifting - KONS001
+    category: Sanctions Compliance
+    severity: HIGH
+    list_metadata:
+      list_name: blacklist_jurisdictions
+      list_source: 23_compliance/policies/sanctions.yaml
+      list_index: 5
+      audit_requirement: MiCA, eIDAS, OFAC
+    item_data:
+      code: BY
+      name: Belarus
+      reason: EU Sanctions
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_BL_006'
+    - 'Unit Test: test_juris_bl_006()'
+    - 'Audit Trail: Log all JURIS_BL_006-related events'
+    - 'Runtime Check: Block if input.country_code == ''BY'''
+    - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: BY'''
+  JURIS_BL_007:
+    type: MUST
+    rule: 'System MUSS Transaktionen aus Venezuela (VE) blockieren. Grund: OFAC Sectoral
+      Sanctions'
+    source: List-to-Rule Lifting - KONS001
+    category: Sanctions Compliance
+    severity: MEDIUM
+    list_metadata:
+      list_name: blacklist_jurisdictions
+      list_source: 23_compliance/policies/sanctions.yaml
+      list_index: 6
+      audit_requirement: MiCA, eIDAS, OFAC
+    item_data:
+      code: VE
+      name: Venezuela
+      reason: OFAC Sectoral Sanctions
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_BL_007'
+    - 'Unit Test: test_juris_bl_007()'
+    - 'Audit Trail: Log all JURIS_BL_007-related events'
+    - 'Runtime Check: Block if input.country_code == ''VE'''
+    - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: VE'''
+  PROP_TYPE_001:
+    type: MUST
+    rule: System MUSS Proposal-Typ 'System Parameter Change' (parameter_change) unterstützen
+      mit Quorum 10% und Threshold 66%
+    source: List-to-Rule Lifting - GOV001
+    category: DAO Governance
+    severity: HIGH
+    list_metadata:
+      list_name: governance_proposal_types
+      list_source: 20_foundation/governance/dao_proposals.yaml
+      list_index: 0
+      audit_requirement: DAO Governance, Token Holder Rights
+    item_data:
+      type: parameter_change
+      name: System Parameter Change
+      quorum: 10%
+      threshold: 66%
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PROP_TYPE_001'
+    - 'Unit Test: test_prop_type_001()'
+    - 'Audit Trail: Log all PROP_TYPE_001-related events'
+    - 'DAO Contract: Validate proposal type == ''parameter_change'''
+    - 'Quorum Check: Require 10% participation'
+    - 'Threshold Check: Require 66% approval'
+  PROP_TYPE_002:
+    type: MUST
+    rule: System MUSS Proposal-Typ 'Treasury Fund Allocation' (treasury_allocation)
+      unterstützen mit Quorum 15% und Threshold 75%
+    source: List-to-Rule Lifting - GOV001
+    category: DAO Governance
+    severity: CRITICAL
+    list_metadata:
+      list_name: governance_proposal_types
+      list_source: 20_foundation/governance/dao_proposals.yaml
+      list_index: 1
+      audit_requirement: DAO Governance, Token Holder Rights
+    item_data:
+      type: treasury_allocation
+      name: Treasury Fund Allocation
+      quorum: 15%
+      threshold: 75%
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PROP_TYPE_002'
+    - 'Unit Test: test_prop_type_002()'
+    - 'Audit Trail: Log all PROP_TYPE_002-related events'
+    - 'DAO Contract: Validate proposal type == ''treasury_allocation'''
+    - 'Quorum Check: Require 15% participation'
+    - 'Threshold Check: Require 75% approval'
+  PROP_TYPE_003:
+    type: MUST
+    rule: System MUSS Proposal-Typ 'Smart Contract Upgrade' (contract_upgrade) unterstützen
+      mit Quorum 20% und Threshold 80%
+    source: List-to-Rule Lifting - GOV001
+    category: DAO Governance
+    severity: CRITICAL
+    list_metadata:
+      list_name: governance_proposal_types
+      list_source: 20_foundation/governance/dao_proposals.yaml
+      list_index: 2
+      audit_requirement: DAO Governance, Token Holder Rights
+    item_data:
+      type: contract_upgrade
+      name: Smart Contract Upgrade
+      quorum: 20%
+      threshold: 80%
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PROP_TYPE_003'
+    - 'Unit Test: test_prop_type_003()'
+    - 'Audit Trail: Log all PROP_TYPE_003-related events'
+    - 'DAO Contract: Validate proposal type == ''contract_upgrade'''
+    - 'Quorum Check: Require 20% participation'
+    - 'Threshold Check: Require 80% approval'
+  PROP_TYPE_004:
+    type: MUST
+    rule: System MUSS Proposal-Typ 'Community Grant Program' (grant_program) unterstützen
+      mit Quorum 5% und Threshold 50%
+    source: List-to-Rule Lifting - GOV001
+    category: DAO Governance
+    severity: MEDIUM
+    list_metadata:
+      list_name: governance_proposal_types
+      list_source: 20_foundation/governance/dao_proposals.yaml
+      list_index: 3
+      audit_requirement: DAO Governance, Token Holder Rights
+    item_data:
+      type: grant_program
+      name: Community Grant Program
+      quorum: 5%
+      threshold: 50%
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PROP_TYPE_004'
+    - 'Unit Test: test_prop_type_004()'
+    - 'Audit Trail: Log all PROP_TYPE_004-related events'
+    - 'DAO Contract: Validate proposal type == ''grant_program'''
+    - 'Quorum Check: Require 5% participation'
+    - 'Threshold Check: Require 50% approval'
+  PROP_TYPE_005:
+    type: MUST
+    rule: System MUSS Proposal-Typ 'Strategic Partnership' (partnership) unterstützen
+      mit Quorum 10% und Threshold 66%
+    source: List-to-Rule Lifting - GOV001
+    category: DAO Governance
+    severity: MEDIUM
+    list_metadata:
+      list_name: governance_proposal_types
+      list_source: 20_foundation/governance/dao_proposals.yaml
+      list_index: 4
+      audit_requirement: DAO Governance, Token Holder Rights
+    item_data:
+      type: partnership
+      name: Strategic Partnership
+      quorum: 10%
+      threshold: 66%
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PROP_TYPE_005'
+    - 'Unit Test: test_prop_type_005()'
+    - 'Audit Trail: Log all PROP_TYPE_005-related events'
+    - 'DAO Contract: Validate proposal type == ''partnership'''
+    - 'Quorum Check: Require 10% participation'
+    - 'Threshold Check: Require 66% approval'
+  PROP_TYPE_006:
+    type: MUST
+    rule: System MUSS Proposal-Typ 'Emergency Protocol Action' (emergency_action)
+      unterstützen mit Quorum 30% und Threshold 90%
+    source: List-to-Rule Lifting - GOV001
+    category: DAO Governance
+    severity: CRITICAL
+    list_metadata:
+      list_name: governance_proposal_types
+      list_source: 20_foundation/governance/dao_proposals.yaml
+      list_index: 5
+      audit_requirement: DAO Governance, Token Holder Rights
+    item_data:
+      type: emergency_action
+      name: Emergency Protocol Action
+      quorum: 30%
+      threshold: 90%
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PROP_TYPE_006'
+    - 'Unit Test: test_prop_type_006()'
+    - 'Audit Trail: Log all PROP_TYPE_006-related events'
+    - 'DAO Contract: Validate proposal type == ''emergency_action'''
+    - 'Quorum Check: Require 30% participation'
+    - 'Threshold Check: Require 90% approval'
+  PROP_TYPE_007:
+    type: MUST
+    rule: System MUSS Proposal-Typ 'Token Minting (Inflation)' (token_mint) unterstützen
+      mit Quorum 25% und Threshold 85%
+    source: List-to-Rule Lifting - GOV001
+    category: DAO Governance
+    severity: CRITICAL
+    list_metadata:
+      list_name: governance_proposal_types
+      list_source: 20_foundation/governance/dao_proposals.yaml
+      list_index: 6
+      audit_requirement: DAO Governance, Token Holder Rights
+    item_data:
+      type: token_mint
+      name: Token Minting (Inflation)
+      quorum: 25%
+      threshold: 85%
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PROP_TYPE_007'
+    - 'Unit Test: test_prop_type_007()'
+    - 'Audit Trail: Log all PROP_TYPE_007-related events'
+    - 'DAO Contract: Validate proposal type == ''token_mint'''
+    - 'Quorum Check: Require 25% participation'
+    - 'Threshold Check: Require 85% approval'
+  JURIS_T1_001:
+    type: MUST
+    rule: System MUSS Germany (DE) als Tier 1 Market mit eIDAS-Level 'substantial'
+      unterstützen
+    source: List-to-Rule Lifting - S018
+    category: Market Coverage
+    severity: HIGH
+    list_metadata:
+      list_name: covered_jurisdictions_tier1
+      list_source: 07_governance_legal/jurisdictions.yaml
+      list_index: 0
+      audit_requirement: eIDAS 2.0, Local Regulations
+    item_data:
+      code: DE
+      name: Germany
+      tier: 1
+      eidas_level: substantial
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_T1_001'
+    - 'Unit Test: test_juris_t1_001()'
+    - 'Audit Trail: Log all JURIS_T1_001-related events'
+  JURIS_T1_002:
+    type: MUST
+    rule: System MUSS France (FR) als Tier 1 Market mit eIDAS-Level 'substantial'
+      unterstützen
+    source: List-to-Rule Lifting - S018
+    category: Market Coverage
+    severity: HIGH
+    list_metadata:
+      list_name: covered_jurisdictions_tier1
+      list_source: 07_governance_legal/jurisdictions.yaml
+      list_index: 1
+      audit_requirement: eIDAS 2.0, Local Regulations
+    item_data:
+      code: FR
+      name: France
+      tier: 1
+      eidas_level: substantial
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_T1_002'
+    - 'Unit Test: test_juris_t1_002()'
+    - 'Audit Trail: Log all JURIS_T1_002-related events'
+  JURIS_T1_003:
+    type: MUST
+    rule: System MUSS Netherlands (NL) als Tier 1 Market mit eIDAS-Level 'substantial'
+      unterstützen
+    source: List-to-Rule Lifting - S018
+    category: Market Coverage
+    severity: HIGH
+    list_metadata:
+      list_name: covered_jurisdictions_tier1
+      list_source: 07_governance_legal/jurisdictions.yaml
+      list_index: 2
+      audit_requirement: eIDAS 2.0, Local Regulations
+    item_data:
+      code: NL
+      name: Netherlands
+      tier: 1
+      eidas_level: substantial
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_T1_003'
+    - 'Unit Test: test_juris_t1_003()'
+    - 'Audit Trail: Log all JURIS_T1_003-related events'
+  JURIS_T1_004:
+    type: MUST
+    rule: System MUSS Switzerland (CH) als Tier 1 Market mit eIDAS-Level 'high' unterstützen
+    source: List-to-Rule Lifting - S018
+    category: Market Coverage
+    severity: HIGH
+    list_metadata:
+      list_name: covered_jurisdictions_tier1
+      list_source: 07_governance_legal/jurisdictions.yaml
+      list_index: 3
+      audit_requirement: eIDAS 2.0, Local Regulations
+    item_data:
+      code: CH
+      name: Switzerland
+      tier: 1
+      eidas_level: high
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_T1_004'
+    - 'Unit Test: test_juris_t1_004()'
+    - 'Audit Trail: Log all JURIS_T1_004-related events'
+  JURIS_T1_005:
+    type: MUST
+    rule: System MUSS United Kingdom (UK) als Tier 1 Market mit eIDAS-Level 'substantial'
+      unterstützen
+    source: List-to-Rule Lifting - S018
+    category: Market Coverage
+    severity: HIGH
+    list_metadata:
+      list_name: covered_jurisdictions_tier1
+      list_source: 07_governance_legal/jurisdictions.yaml
+      list_index: 4
+      audit_requirement: eIDAS 2.0, Local Regulations
+    item_data:
+      code: UK
+      name: United Kingdom
+      tier: 1
+      eidas_level: substantial
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_T1_005'
+    - 'Unit Test: test_juris_t1_005()'
+    - 'Audit Trail: Log all JURIS_T1_005-related events'
+  JURIS_T1_006:
+    type: MUST
+    rule: System MUSS Singapore (SG) als Tier 1 Market mit eIDAS-Level 'substantial'
+      unterstützen
+    source: List-to-Rule Lifting - S018
+    category: Market Coverage
+    severity: HIGH
+    list_metadata:
+      list_name: covered_jurisdictions_tier1
+      list_source: 07_governance_legal/jurisdictions.yaml
+      list_index: 5
+      audit_requirement: eIDAS 2.0, Local Regulations
+    item_data:
+      code: SG
+      name: Singapore
+      tier: 1
+      eidas_level: substantial
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_T1_006'
+    - 'Unit Test: test_juris_t1_006()'
+    - 'Audit Trail: Log all JURIS_T1_006-related events'
+  JURIS_T1_007:
+    type: MUST
+    rule: System MUSS Japan (JP) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen
+    source: List-to-Rule Lifting - S018
+    category: Market Coverage
+    severity: HIGH
+    list_metadata:
+      list_name: covered_jurisdictions_tier1
+      list_source: 07_governance_legal/jurisdictions.yaml
+      list_index: 6
+      audit_requirement: eIDAS 2.0, Local Regulations
+    item_data:
+      code: JP
+      name: Japan
+      tier: 1
+      eidas_level: substantial
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für JURIS_T1_007'
+    - 'Unit Test: test_juris_t1_007()'
+    - 'Audit Trail: Log all JURIS_T1_007-related events'
+  REWARD_POOL_001:
+    type: MUST
+    rule: System MUSS Reward Pool 'Staking Rewards Pool' (staking_rewards) mit 30%
+      Allocation und Vesting 'none' verwalten
+    source: List-to-Rule Lifting - R020
+    category: Tokenomics
+    severity: HIGH
+    list_metadata:
+      list_name: reward_pools
+      list_source: 20_foundation/tokenomics/rewards.yaml
+      list_index: 0
+      audit_requirement: Tokenomics Transparency, MiCA
+    item_data:
+      pool_id: staking_rewards
+      name: Staking Rewards Pool
+      allocation_percent: 30
+      vesting: none
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für REWARD_POOL_001'
+    - 'Unit Test: test_reward_pool_001()'
+    - 'Audit Trail: Log all REWARD_POOL_001-related events'
+  REWARD_POOL_002:
+    type: MUST
+    rule: System MUSS Reward Pool 'Liquidity Mining Pool' (liquidity_mining) mit 20%
+      Allocation und Vesting 'linear_12m' verwalten
+    source: List-to-Rule Lifting - R020
+    category: Tokenomics
+    severity: HIGH
+    list_metadata:
+      list_name: reward_pools
+      list_source: 20_foundation/tokenomics/rewards.yaml
+      list_index: 1
+      audit_requirement: Tokenomics Transparency, MiCA
+    item_data:
+      pool_id: liquidity_mining
+      name: Liquidity Mining Pool
+      allocation_percent: 20
+      vesting: linear_12m
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für REWARD_POOL_002'
+    - 'Unit Test: test_reward_pool_002()'
+    - 'Audit Trail: Log all REWARD_POOL_002-related events'
+  REWARD_POOL_003:
+    type: MUST
+    rule: System MUSS Reward Pool 'Ecosystem Development Grants' (ecosystem_grants)
+      mit 15% Allocation und Vesting 'milestone_based' verwalten
+    source: List-to-Rule Lifting - R020
+    category: Tokenomics
+    severity: MEDIUM
+    list_metadata:
+      list_name: reward_pools
+      list_source: 20_foundation/tokenomics/rewards.yaml
+      list_index: 2
+      audit_requirement: Tokenomics Transparency, MiCA
+    item_data:
+      pool_id: ecosystem_grants
+      name: Ecosystem Development Grants
+      allocation_percent: 15
+      vesting: milestone_based
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für REWARD_POOL_003'
+    - 'Unit Test: test_reward_pool_003()'
+    - 'Audit Trail: Log all REWARD_POOL_003-related events'
+  REWARD_POOL_004:
+    type: MUST
+    rule: System MUSS Reward Pool 'Team & Advisors Vesting' (team_vesting) mit 20%
+      Allocation und Vesting 'linear_48m_cliff_12m' verwalten
+    source: List-to-Rule Lifting - R020
+    category: Tokenomics
+    severity: CRITICAL
+    list_metadata:
+      list_name: reward_pools
+      list_source: 20_foundation/tokenomics/rewards.yaml
+      list_index: 3
+      audit_requirement: Tokenomics Transparency, MiCA
+    item_data:
+      pool_id: team_vesting
+      name: Team & Advisors Vesting
+      allocation_percent: 20
+      vesting: linear_48m_cliff_12m
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für REWARD_POOL_004'
+    - 'Unit Test: test_reward_pool_004()'
+    - 'Audit Trail: Log all REWARD_POOL_004-related events'
+  REWARD_POOL_005:
+    type: MUST
+    rule: System MUSS Reward Pool 'DAO Treasury Reserve' (treasury_reserve) mit 15%
+      Allocation und Vesting 'dao_controlled' verwalten
+    source: List-to-Rule Lifting - R020
+    category: Tokenomics
+    severity: CRITICAL
+    list_metadata:
+      list_name: reward_pools
+      list_source: 20_foundation/tokenomics/rewards.yaml
+      list_index: 4
+      audit_requirement: Tokenomics Transparency, MiCA
+    item_data:
+      pool_id: treasury_reserve
+      name: DAO Treasury Reserve
+      allocation_percent: 15
+      vesting: dao_controlled
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für REWARD_POOL_005'
+    - 'Unit Test: test_reward_pool_005()'
+    - 'Audit Trail: Log all REWARD_POOL_005-related events'
+  NETWORK_001:
+    type: MUST
+    rule: 'System MUSS Blockchain-Netzwerk Ethereum Mainnet (Chain ID: 1) unterstützen'
+    source: List-to-Rule Lifting - PU005
+    category: Blockchain Integration
+    severity: CRITICAL
+    list_metadata:
+      list_name: supported_networks
+      list_source: 03_core/blockchain/networks.yaml
+      list_index: 0
+      audit_requirement: Multi-Chain Architecture, Security
+    item_data:
+      network_id: ethereum_mainnet
+      name: Ethereum Mainnet
+      chain_id: 1
+      explorer: etherscan.io
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für NETWORK_001'
+    - 'Unit Test: test_network_001()'
+    - 'Audit Trail: Log all NETWORK_001-related events'
+    - 'Network Config: Add Chain ID 1'
+    - 'RPC Endpoint: Configure for Ethereum Mainnet'
+    - 'Block Explorer: Link to etherscan.io'
+  NETWORK_002:
+    type: MUST
+    rule: 'System MUSS Blockchain-Netzwerk Polygon Mainnet (Chain ID: 137) unterstützen'
+    source: List-to-Rule Lifting - PU005
+    category: Blockchain Integration
+    severity: CRITICAL
+    list_metadata:
+      list_name: supported_networks
+      list_source: 03_core/blockchain/networks.yaml
+      list_index: 1
+      audit_requirement: Multi-Chain Architecture, Security
+    item_data:
+      network_id: polygon_mainnet
+      name: Polygon Mainnet
+      chain_id: 137
+      explorer: polygonscan.com
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für NETWORK_002'
+    - 'Unit Test: test_network_002()'
+    - 'Audit Trail: Log all NETWORK_002-related events'
+    - 'Network Config: Add Chain ID 137'
+    - 'RPC Endpoint: Configure for Polygon Mainnet'
+    - 'Block Explorer: Link to polygonscan.com'
+  NETWORK_003:
+    type: MUST
+    rule: 'System MUSS Blockchain-Netzwerk Arbitrum One (Chain ID: 42161) unterstützen'
+    source: List-to-Rule Lifting - PU005
+    category: Blockchain Integration
+    severity: HIGH
+    list_metadata:
+      list_name: supported_networks
+      list_source: 03_core/blockchain/networks.yaml
+      list_index: 2
+      audit_requirement: Multi-Chain Architecture, Security
+    item_data:
+      network_id: arbitrum_one
+      name: Arbitrum One
+      chain_id: 42161
+      explorer: arbiscan.io
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für NETWORK_003'
+    - 'Unit Test: test_network_003()'
+    - 'Audit Trail: Log all NETWORK_003-related events'
+    - 'Network Config: Add Chain ID 42161'
+    - 'RPC Endpoint: Configure for Arbitrum One'
+    - 'Block Explorer: Link to arbiscan.io'
+  NETWORK_004:
+    type: MUST
+    rule: 'System MUSS Blockchain-Netzwerk Optimism Mainnet (Chain ID: 10) unterstützen'
+    source: List-to-Rule Lifting - PU005
+    category: Blockchain Integration
+    severity: HIGH
+    list_metadata:
+      list_name: supported_networks
+      list_source: 03_core/blockchain/networks.yaml
+      list_index: 3
+      audit_requirement: Multi-Chain Architecture, Security
+    item_data:
+      network_id: optimism
+      name: Optimism Mainnet
+      chain_id: 10
+      explorer: optimistic.etherscan.io
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für NETWORK_004'
+    - 'Unit Test: test_network_004()'
+    - 'Audit Trail: Log all NETWORK_004-related events'
+    - 'Network Config: Add Chain ID 10'
+    - 'RPC Endpoint: Configure for Optimism Mainnet'
+    - 'Block Explorer: Link to optimistic.etherscan.io'
+  NETWORK_005:
+    type: MUST
+    rule: 'System MUSS Blockchain-Netzwerk Base Mainnet (Chain ID: 8453) unterstützen'
+    source: List-to-Rule Lifting - PU005
+    category: Blockchain Integration
+    severity: MEDIUM
+    list_metadata:
+      list_name: supported_networks
+      list_source: 03_core/blockchain/networks.yaml
+      list_index: 4
+      audit_requirement: Multi-Chain Architecture, Security
+    item_data:
+      network_id: base
+      name: Base Mainnet
+      chain_id: 8453
+      explorer: basescan.org
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für NETWORK_005'
+    - 'Unit Test: test_network_005()'
+    - 'Audit Trail: Log all NETWORK_005-related events'
+    - 'Network Config: Add Chain ID 8453'
+    - 'RPC Endpoint: Configure for Base Mainnet'
+    - 'Block Explorer: Link to basescan.org'
+  NETWORK_006:
+    type: MUST
+    rule: 'System MUSS Blockchain-Netzwerk Avalanche C-Chain (Chain ID: 43114) unterstützen'
+    source: List-to-Rule Lifting - PU005
+    category: Blockchain Integration
+    severity: MEDIUM
+    list_metadata:
+      list_name: supported_networks
+      list_source: 03_core/blockchain/networks.yaml
+      list_index: 5
+      audit_requirement: Multi-Chain Architecture, Security
+    item_data:
+      network_id: avalanche
+      name: Avalanche C-Chain
+      chain_id: 43114
+      explorer: snowtrace.io
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für NETWORK_006'
+    - 'Unit Test: test_network_006()'
+    - 'Audit Trail: Log all NETWORK_006-related events'
+    - 'Network Config: Add Chain ID 43114'
+    - 'RPC Endpoint: Configure for Avalanche C-Chain'
+    - 'Block Explorer: Link to snowtrace.io'
+  AUTH_METHOD_001:
+    type: MUST
+    rule: System MUSS Authentifizierungsmethode 'DID-based Authentication' (did_auth)
+      mit eIDAS-Level 'high' unterstützen
+    source: List-to-Rule Lifting - R016
+    category: Authentication
+    severity: CRITICAL
+    list_metadata:
+      list_name: supported_auth_methods
+      list_source: 14_zero_time_auth/methods.yaml
+      list_index: 0
+      audit_requirement: eIDAS 2.0, Security Standards
+    item_data:
+      method_id: did_auth
+      name: DID-based Authentication
+      eidas_level: high
+      mfa_required: false
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für AUTH_METHOD_001'
+    - 'Unit Test: test_auth_method_001()'
+    - 'Audit Trail: Log all AUTH_METHOD_001-related events'
+  AUTH_METHOD_002:
+    type: MUST
+    rule: System MUSS Authentifizierungsmethode 'Biometric Authentication (Face/Fingerprint)'
+      (biometric) mit eIDAS-Level 'high' unterstützen
+    source: List-to-Rule Lifting - R016
+    category: Authentication
+    severity: CRITICAL
+    list_metadata:
+      list_name: supported_auth_methods
+      list_source: 14_zero_time_auth/methods.yaml
+      list_index: 1
+      audit_requirement: eIDAS 2.0, Security Standards
+    item_data:
+      method_id: biometric
+      name: Biometric Authentication (Face/Fingerprint)
+      eidas_level: high
+      mfa_required: false
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für AUTH_METHOD_002'
+    - 'Unit Test: test_auth_method_002()'
+    - 'Audit Trail: Log all AUTH_METHOD_002-related events'
+  AUTH_METHOD_003:
+    type: MUST
+    rule: System MUSS Authentifizierungsmethode 'Hardware Security Key (FIDO2)' (hardware_token)
+      mit eIDAS-Level 'high' unterstützen
+    source: List-to-Rule Lifting - R016
+    category: Authentication
+    severity: HIGH
+    list_metadata:
+      list_name: supported_auth_methods
+      list_source: 14_zero_time_auth/methods.yaml
+      list_index: 2
+      audit_requirement: eIDAS 2.0, Security Standards
+    item_data:
+      method_id: hardware_token
+      name: Hardware Security Key (FIDO2)
+      eidas_level: high
+      mfa_required: false
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für AUTH_METHOD_003'
+    - 'Unit Test: test_auth_method_003()'
+    - 'Audit Trail: Log all AUTH_METHOD_003-related events'
+  AUTH_METHOD_004:
+    type: MUST
+    rule: System MUSS Authentifizierungsmethode 'Time-based OTP (TOTP)' (totp) mit
+      eIDAS-Level 'substantial' unterstützen
+    source: List-to-Rule Lifting - R016
+    category: Authentication
+    severity: MEDIUM
+    list_metadata:
+      list_name: supported_auth_methods
+      list_source: 14_zero_time_auth/methods.yaml
+      list_index: 3
+      audit_requirement: eIDAS 2.0, Security Standards
+    item_data:
+      method_id: totp
+      name: Time-based OTP (TOTP)
+      eidas_level: substantial
+      mfa_required: true
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für AUTH_METHOD_004'
+    - 'Unit Test: test_auth_method_004()'
+    - 'Audit Trail: Log all AUTH_METHOD_004-related events'
+  AUTH_METHOD_005:
+    type: MUST
+    rule: System MUSS Authentifizierungsmethode 'SMS-based OTP' (sms_otp) mit eIDAS-Level
+      'low' unterstützen
+    source: List-to-Rule Lifting - R016
+    category: Authentication
+    severity: LOW
+    list_metadata:
+      list_name: supported_auth_methods
+      list_source: 14_zero_time_auth/methods.yaml
+      list_index: 4
+      audit_requirement: eIDAS 2.0, Security Standards
+    item_data:
+      method_id: sms_otp
+      name: SMS-based OTP
+      eidas_level: low
+      mfa_required: true
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für AUTH_METHOD_005'
+    - 'Unit Test: test_auth_method_005()'
+    - 'Audit Trail: Log all AUTH_METHOD_005-related events'
+  AUTH_METHOD_006:
+    type: MUST
+    rule: System MUSS Authentifizierungsmethode 'Email Magic Link' (email_magic_link)
+      mit eIDAS-Level 'low' unterstützen
+    source: List-to-Rule Lifting - R016
+    category: Authentication
+    severity: LOW
+    list_metadata:
+      list_name: supported_auth_methods
+      list_source: 14_zero_time_auth/methods.yaml
+      list_index: 5
+      audit_requirement: eIDAS 2.0, Security Standards
+    item_data:
+      method_id: email_magic_link
+      name: Email Magic Link
+      eidas_level: low
+      mfa_required: true
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für AUTH_METHOD_006'
+    - 'Unit Test: test_auth_method_006()'
+    - 'Audit Trail: Log all AUTH_METHOD_006-related events'
+  PII_CAT_001:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'Name (First, Last, Full)' (name) gemäß Art. 4(1)
+      behandeln
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: HIGH
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 0
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: name
+      name: Name (First, Last, Full)
+      gdpr_article: Art. 4(1)
+      special_category: false
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_001'
+    - 'Unit Test: test_pii_cat_001()'
+    - 'Audit Trail: Log all PII_CAT_001-related events'
+    - 'PII Detector: Recognize name'
+    - 'Hash-Only Storage: Never store raw name'
+    - 'GDPR Compliance: Implement Art. 4(1)'
+  PII_CAT_002:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'Email Address' (email) gemäß Art. 4(1) behandeln
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: HIGH
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 1
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: email
+      name: Email Address
+      gdpr_article: Art. 4(1)
+      special_category: false
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_002'
+    - 'Unit Test: test_pii_cat_002()'
+    - 'Audit Trail: Log all PII_CAT_002-related events'
+    - 'PII Detector: Recognize email'
+    - 'Hash-Only Storage: Never store raw email'
+    - 'GDPR Compliance: Implement Art. 4(1)'
+  PII_CAT_003:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'Phone Number' (phone) gemäß Art. 4(1) behandeln
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: HIGH
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 2
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: phone
+      name: Phone Number
+      gdpr_article: Art. 4(1)
+      special_category: false
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_003'
+    - 'Unit Test: test_pii_cat_003()'
+    - 'Audit Trail: Log all PII_CAT_003-related events'
+    - 'PII Detector: Recognize phone'
+    - 'Hash-Only Storage: Never store raw phone'
+    - 'GDPR Compliance: Implement Art. 4(1)'
+  PII_CAT_004:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'Physical Address' (address) gemäß Art. 4(1) behandeln
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: HIGH
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 3
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: address
+      name: Physical Address
+      gdpr_article: Art. 4(1)
+      special_category: false
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_004'
+    - 'Unit Test: test_pii_cat_004()'
+    - 'Audit Trail: Log all PII_CAT_004-related events'
+    - 'PII Detector: Recognize address'
+    - 'Hash-Only Storage: Never store raw address'
+    - 'GDPR Compliance: Implement Art. 4(1)'
+  PII_CAT_005:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'National ID / SSN' (national_id) gemäß Art. 4(1)
+      behandeln
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: CRITICAL
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 4
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: national_id
+      name: National ID / SSN
+      gdpr_article: Art. 4(1)
+      special_category: false
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_005'
+    - 'Unit Test: test_pii_cat_005()'
+    - 'Audit Trail: Log all PII_CAT_005-related events'
+    - 'PII Detector: Recognize national_id'
+    - 'Hash-Only Storage: Never store raw national_id'
+    - 'GDPR Compliance: Implement Art. 4(1)'
+  PII_CAT_006:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'Biometric Data' (biometric) gemäß Art. 9(1) behandeln
+      (GDPR Special Category)
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: CRITICAL
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 5
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: biometric
+      name: Biometric Data
+      gdpr_article: Art. 9(1)
+      special_category: true
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_006'
+    - 'Unit Test: test_pii_cat_006()'
+    - 'Audit Trail: Log all PII_CAT_006-related events'
+    - 'PII Detector: Recognize biometric'
+    - 'Hash-Only Storage: Never store raw biometric'
+    - 'GDPR Compliance: Implement Art. 9(1)'
+  PII_CAT_007:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'Health Data' (health) gemäß Art. 9(1) behandeln
+      (GDPR Special Category)
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: CRITICAL
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 6
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: health
+      name: Health Data
+      gdpr_article: Art. 9(1)
+      special_category: true
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_007'
+    - 'Unit Test: test_pii_cat_007()'
+    - 'Audit Trail: Log all PII_CAT_007-related events'
+    - 'PII Detector: Recognize health'
+    - 'Hash-Only Storage: Never store raw health'
+    - 'GDPR Compliance: Implement Art. 9(1)'
+  PII_CAT_008:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'Genetic Data' (genetic) gemäß Art. 9(1) behandeln
+      (GDPR Special Category)
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: CRITICAL
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 7
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: genetic
+      name: Genetic Data
+      gdpr_article: Art. 9(1)
+      special_category: true
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_008'
+    - 'Unit Test: test_pii_cat_008()'
+    - 'Audit Trail: Log all PII_CAT_008-related events'
+    - 'PII Detector: Recognize genetic'
+    - 'Hash-Only Storage: Never store raw genetic'
+    - 'GDPR Compliance: Implement Art. 9(1)'
+  PII_CAT_009:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'Religious Beliefs' (religion) gemäß Art. 9(1)
+      behandeln (GDPR Special Category)
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: CRITICAL
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 8
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: religion
+      name: Religious Beliefs
+      gdpr_article: Art. 9(1)
+      special_category: true
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_009'
+    - 'Unit Test: test_pii_cat_009()'
+    - 'Audit Trail: Log all PII_CAT_009-related events'
+    - 'PII Detector: Recognize religion'
+    - 'Hash-Only Storage: Never store raw religion'
+    - 'GDPR Compliance: Implement Art. 9(1)'
+  PII_CAT_010:
+    type: MUST
+    rule: System MUSS PII-Kategorie 'Political Opinions' (political) gemäß Art. 9(1)
+      behandeln (GDPR Special Category)
+    source: List-to-Rule Lifting - KP001
+    category: GDPR Compliance
+    severity: CRITICAL
+    list_metadata:
+      list_name: pii_categories
+      list_source: 23_compliance/gdpr/pii_definitions.yaml
+      list_index: 9
+      audit_requirement: GDPR Art. 5, 6, 9
+    item_data:
+      category_id: political
+      name: Political Opinions
+      gdpr_article: Art. 9(1)
+      special_category: true
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für PII_CAT_010'
+    - 'Unit Test: test_pii_cat_010()'
+    - 'Audit Trail: Log all PII_CAT_010-related events'
+    - 'PII Detector: Recognize political'
+    - 'Hash-Only Storage: Never store raw political'
+    - 'GDPR Compliance: Implement Art. 9(1)'
+  HASH_ALG_001:
+    type: MUST
+    rule: System MUSS Hash-Algorithmus SHA3-256 (256 bits) als 'primary' unterstützen
+    source: List-to-Rule Lifting - KP002
+    category: Cryptography
+    severity: CRITICAL
+    list_metadata:
+      list_name: approved_hash_algorithms
+      list_source: 21_post_quantum_crypto/algorithms.yaml
+      list_index: 0
+      audit_requirement: Cryptographic Standards, Post-Quantum
+    item_data:
+      algorithm_id: sha3_256
+      name: SHA3-256
+      bits: 256
+      quantum_safe: false
+      status: primary
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für HASH_ALG_001'
+    - 'Unit Test: test_hash_alg_001()'
+    - 'Audit Trail: Log all HASH_ALG_001-related events'
+  HASH_ALG_002:
+    type: MUST
+    rule: System MUSS Hash-Algorithmus SHA3-512 (512 bits) als 'approved' unterstützen
+    source: List-to-Rule Lifting - KP002
+    category: Cryptography
+    severity: HIGH
+    list_metadata:
+      list_name: approved_hash_algorithms
+      list_source: 21_post_quantum_crypto/algorithms.yaml
+      list_index: 1
+      audit_requirement: Cryptographic Standards, Post-Quantum
+    item_data:
+      algorithm_id: sha3_512
+      name: SHA3-512
+      bits: 512
+      quantum_safe: false
+      status: approved
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für HASH_ALG_002'
+    - 'Unit Test: test_hash_alg_002()'
+    - 'Audit Trail: Log all HASH_ALG_002-related events'
+  HASH_ALG_003:
+    type: MUST
+    rule: System MUSS Hash-Algorithmus BLAKE3 (256 bits) als 'approved' unterstützen
+    source: List-to-Rule Lifting - KP002
+    category: Cryptography
+    severity: MEDIUM
+    list_metadata:
+      list_name: approved_hash_algorithms
+      list_source: 21_post_quantum_crypto/algorithms.yaml
+      list_index: 2
+      audit_requirement: Cryptographic Standards, Post-Quantum
+    item_data:
+      algorithm_id: blake3
+      name: BLAKE3
+      bits: 256
+      quantum_safe: false
+      status: approved
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für HASH_ALG_003'
+    - 'Unit Test: test_hash_alg_003()'
+    - 'Audit Trail: Log all HASH_ALG_003-related events'
+  HASH_ALG_004:
+    type: MUST
+    rule: System MUSS Hash-Algorithmus SPHINCS+ (256 bits) als 'future' (Quantum-Safe)
+      unterstützen
+    source: List-to-Rule Lifting - KP002
+    category: Cryptography
+    severity: LOW
+    list_metadata:
+      list_name: approved_hash_algorithms
+      list_source: 21_post_quantum_crypto/algorithms.yaml
+      list_index: 3
+      audit_requirement: Cryptographic Standards, Post-Quantum
+    item_data:
+      algorithm_id: sphincs_plus
+      name: SPHINCS+
+      bits: 256
+      quantum_safe: true
+      status: future
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für HASH_ALG_004'
+    - 'Unit Test: test_hash_alg_004()'
+    - 'Audit Trail: Log all HASH_ALG_004-related events'
+  RETENTION_001:
+    type: MUST
+    rule: 'System MUSS Retention Period für ''transaction_hashes'' auf 3650 Tage setzen.
+      Grund: Legal requirement (10 years)'
+    source: List-to-Rule Lifting - KP006
+    category: GDPR Retention
+    severity: CRITICAL
+    list_metadata:
+      list_name: data_retention_periods
+      list_source: 23_compliance/gdpr/retention.yaml
+      list_index: 0
+      audit_requirement: GDPR Art. 5(1)(e)
+    item_data:
+      data_type: transaction_hashes
+      retention_days: 3650
+      reason: Legal requirement (10 years)
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für RETENTION_001'
+    - 'Unit Test: test_retention_001()'
+    - 'Audit Trail: Log all RETENTION_001-related events'
+  RETENTION_002:
+    type: MUST
+    rule: 'System MUSS Retention Period für ''audit_logs'' auf 3650 Tage setzen. Grund:
+      Compliance (10 years)'
+    source: List-to-Rule Lifting - KP006
+    category: GDPR Retention
+    severity: CRITICAL
+    list_metadata:
+      list_name: data_retention_periods
+      list_source: 23_compliance/gdpr/retention.yaml
+      list_index: 1
+      audit_requirement: GDPR Art. 5(1)(e)
+    item_data:
+      data_type: audit_logs
+      retention_days: 3650
+      reason: Compliance (10 years)
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für RETENTION_002'
+    - 'Unit Test: test_retention_002()'
+    - 'Audit Trail: Log all RETENTION_002-related events'
+  RETENTION_003:
+    type: MUST
+    rule: 'System MUSS Retention Period für ''session_tokens'' auf 1 Tage setzen.
+      Grund: Security best practice'
+    source: List-to-Rule Lifting - KP006
+    category: GDPR Retention
+    severity: HIGH
+    list_metadata:
+      list_name: data_retention_periods
+      list_source: 23_compliance/gdpr/retention.yaml
+      list_index: 2
+      audit_requirement: GDPR Art. 5(1)(e)
+    item_data:
+      data_type: session_tokens
+      retention_days: 1
+      reason: Security best practice
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für RETENTION_003'
+    - 'Unit Test: test_retention_003()'
+    - 'Audit Trail: Log all RETENTION_003-related events'
+  RETENTION_004:
+    type: MUST
+    rule: 'System MUSS Retention Period für ''email_verification'' auf 30 Tage setzen.
+      Grund: User onboarding'
+    source: List-to-Rule Lifting - KP006
+    category: GDPR Retention
+    severity: MEDIUM
+    list_metadata:
+      list_name: data_retention_periods
+      list_source: 23_compliance/gdpr/retention.yaml
+      list_index: 3
+      audit_requirement: GDPR Art. 5(1)(e)
+    item_data:
+      data_type: email_verification
+      retention_days: 30
+      reason: User onboarding
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für RETENTION_004'
+    - 'Unit Test: test_retention_004()'
+    - 'Audit Trail: Log all RETENTION_004-related events'
+  RETENTION_005:
+    type: MUST
+    rule: 'System MUSS Retention Period für ''analytics_aggregated'' auf 730 Tage
+      setzen. Grund: Business intelligence (2 years)'
+    source: List-to-Rule Lifting - KP006
+    category: GDPR Retention
+    severity: LOW
+    list_metadata:
+      list_name: data_retention_periods
+      list_source: 23_compliance/gdpr/retention.yaml
+      list_index: 4
+      audit_requirement: GDPR Art. 5(1)(e)
+    item_data:
+      data_type: analytics_aggregated
+      retention_days: 730
+      reason: Business intelligence (2 years)
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für RETENTION_005'
+    - 'Unit Test: test_retention_005()'
+    - 'Audit Trail: Log all RETENTION_005-related events'
+  DID_METHOD_001:
+    type: MUST
+    rule: System MUSS DID-Methode did:ethr (Ethereum DID Method) gemäß Spec https://github.com/decentralized-identity/ethr-did-resolver
+      unterstützen
+    source: List-to-Rule Lifting - PU007
+    category: Identity Standards
+    severity: CRITICAL
+    list_metadata:
+      list_name: supported_did_methods
+      list_source: 09_meta_identity/did_methods.yaml
+      list_index: 0
+      audit_requirement: W3C DID Core 1.0
+    item_data:
+      method_name: did:ethr
+      name: Ethereum DID Method
+      spec: https://github.com/decentralized-identity/ethr-did-resolver
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für DID_METHOD_001'
+    - 'Unit Test: test_did_method_001()'
+    - 'Audit Trail: Log all DID_METHOD_001-related events'
+  DID_METHOD_002:
+    type: MUST
+    rule: System MUSS DID-Methode did:key (Key-based DID Method) gemäß Spec https://w3c-ccg.github.io/did-method-key/
+      unterstützen
+    source: List-to-Rule Lifting - PU007
+    category: Identity Standards
+    severity: HIGH
+    list_metadata:
+      list_name: supported_did_methods
+      list_source: 09_meta_identity/did_methods.yaml
+      list_index: 1
+      audit_requirement: W3C DID Core 1.0
+    item_data:
+      method_name: did:key
+      name: Key-based DID Method
+      spec: https://w3c-ccg.github.io/did-method-key/
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für DID_METHOD_002'
+    - 'Unit Test: test_did_method_002()'
+    - 'Audit Trail: Log all DID_METHOD_002-related events'
+  DID_METHOD_003:
+    type: MUST
+    rule: System MUSS DID-Methode did:web (Web DID Method) gemäß Spec https://w3c-ccg.github.io/did-method-web/
+      unterstützen
+    source: List-to-Rule Lifting - PU007
+    category: Identity Standards
+    severity: MEDIUM
+    list_metadata:
+      list_name: supported_did_methods
+      list_source: 09_meta_identity/did_methods.yaml
+      list_index: 2
+      audit_requirement: W3C DID Core 1.0
+    item_data:
+      method_name: did:web
+      name: Web DID Method
+      spec: https://w3c-ccg.github.io/did-method-web/
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für DID_METHOD_003'
+    - 'Unit Test: test_did_method_003()'
+    - 'Audit Trail: Log all DID_METHOD_003-related events'
+  DID_METHOD_004:
+    type: MUST
+    rule: System MUSS DID-Methode did:ion (ION DID Method (Sidetree)) gemäß Spec https://identity.foundation/ion/
+      unterstützen
+    source: List-to-Rule Lifting - PU007
+    category: Identity Standards
+    severity: MEDIUM
+    list_metadata:
+      list_name: supported_did_methods
+      list_source: 09_meta_identity/did_methods.yaml
+      list_index: 3
+      audit_requirement: W3C DID Core 1.0
+    item_data:
+      method_name: did:ion
+      name: ION DID Method (Sidetree)
+      spec: https://identity.foundation/ion/
+    implementation_requirements:
+    - 'OPA Policy: deny/allow für DID_METHOD_004'
+    - 'Unit Test: test_did_method_004()'
+    - 'Audit Trail: Log all DID_METHOD_004-related events'
+statistics:
+  total_rules: 61
+  rules_by_severity:
+    CRITICAL: 23
+    HIGH: 23
+    MEDIUM: 11
+    LOW: 4
+  rules_by_category:
+    Sanctions Compliance: 7
+    DAO Governance: 7
+    Market Coverage: 7
+    Tokenomics: 5
+    Blockchain Integration: 6
+    Authentication: 6
+    GDPR Compliance: 10
+    Cryptography: 4
+    GDPR Retention: 5
+    Identity Standards: 4

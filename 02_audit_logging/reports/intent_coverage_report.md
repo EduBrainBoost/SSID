@@ -1,0 +1,1 @@
+# Intent Coverage Report\n\n- Required total: 30\n- Required present: 30\n- Required missing: 0\n

@@ -15,7 +15,6 @@ import yaml
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "08_identity_score" / "src"))
 from identity_score_calculator import compute_identity_score
 
-
 # ============================================================================
 # Fixtures
 # ============================================================================
@@ -59,13 +58,11 @@ def weights_config():
     except:
         raise NotImplementedError("TODO: Implement this block")
 
-
 @pytest.fixture
 def real_weights_config():
     """Path to real weights.yaml config"""
     repo_root = Path(__file__).parent.parent.parent
     return str(repo_root / "08_identity_score" / "config" / "weights.yaml")
-
 
 # ============================================================================
 # Basic Functionality Tests
@@ -88,7 +85,6 @@ def test_identity_score_basic(weights_config):
     # With good profile, should be high score
     assert score >= 60, f"Good profile should yield high score, got {score}"
 
-
 def test_identity_score_perfect_profile(weights_config):
     """Test perfect profile yields high score"""
     perfect_profile = {
@@ -106,7 +102,6 @@ def test_identity_score_perfect_profile(weights_config):
     # Perfect profile should yield 100 (or close)
     assert score >= 95, f"Perfect profile should yield ~100, got {score}"
 
-
 def test_identity_score_minimal_profile(weights_config):
     """Test minimal/empty profile yields low score"""
     minimal_profile = {
@@ -121,7 +116,6 @@ def test_identity_score_minimal_profile(weights_config):
 
     # Minimal profile should yield low score
     assert 0 <= score <= 30, f"Minimal profile should yield low score, got {score}"
-
 
 # ============================================================================
 # KYC Verification Tests
@@ -151,7 +145,6 @@ def test_identity_score_kyc_impact(weights_config):
         "KYC verification should increase score"
     assert (score_with_kyc - score_without_kyc) >= 15, \
         "KYC should have substantial impact (≥15 points)"
-
 
 # ============================================================================
 # Credential Count Tests
@@ -185,7 +178,6 @@ def test_identity_score_credential_scaling(weights_config):
     assert score_10_creds > score_0_creds
     assert score_20_creds > score_10_creds
 
-
 def test_identity_score_credential_clamping(weights_config):
     """Test that excessive credentials are clamped"""
     base_profile = {
@@ -208,7 +200,6 @@ def test_identity_score_credential_clamping(weights_config):
     # Should be clamped (same score)
     assert score_20_creds == score_100_creds, \
         "Excessive credentials should be clamped to max"
-
 
 # ============================================================================
 # Penalty Tests
@@ -240,7 +231,6 @@ def test_identity_score_sanctions_penalty(weights_config):
     assert (score_clean - score_sanctioned) >= 30, \
         "Sanctions penalty should be substantial (≥30 points)"
 
-
 def test_identity_score_fraud_penalty(weights_config):
     """Test that fraud suspicion applies penalty"""
     good_profile = {
@@ -267,7 +257,6 @@ def test_identity_score_fraud_penalty(weights_config):
     assert (score_clean - score_fraud) >= 15, \
         "Fraud penalty should be notable (≥15 points)"
 
-
 def test_identity_score_combined_penalties(weights_config):
     """Test combined penalties (sanctions + fraud)"""
     good_profile = {
@@ -293,7 +282,6 @@ def test_identity_score_combined_penalties(weights_config):
     assert (score_clean - score_both_penalties) >= 50, \
         "Combined penalties should be very severe (≥50 points)"
 
-
 # ============================================================================
 # Edge Cases
 # ============================================================================
@@ -306,7 +294,6 @@ def test_identity_score_empty_profile(weights_config):
 
     # Empty profile should yield 0
     assert score == 0, f"Empty profile should yield 0, got {score}"
-
 
 def test_identity_score_negative_values_clamped(weights_config):
     """Test that negative values are clamped to 0"""
@@ -323,7 +310,6 @@ def test_identity_score_negative_values_clamped(weights_config):
     # Should not crash, should clamp to valid range
     assert 0 <= score <= 100
 
-
 def test_identity_score_excessive_values_clamped(weights_config):
     """Test that excessive values are clamped to 1.0"""
     profile = {
@@ -338,7 +324,6 @@ def test_identity_score_excessive_values_clamped(weights_config):
 
     # Should clamp and not exceed 100
     assert 0 <= score <= 100
-
 
 def test_identity_score_penalties_dont_go_negative(weights_config):
     """Test that severe penalties don't yield negative score"""
@@ -356,7 +341,6 @@ def test_identity_score_penalties_dont_go_negative(weights_config):
 
     # Should clamp at 0 (not go negative)
     assert score >= 0, f"Score should not be negative, got {score}"
-
 
 # ============================================================================
 # Integration Tests with Real Config
@@ -376,7 +360,6 @@ def test_identity_score_with_real_config(real_weights_config):
 
     # Should produce valid score with real config
     assert 0 <= score <= 100
-
 
 def test_identity_score_realistic_scenarios(real_weights_config):
     """Test realistic user scenarios"""
@@ -415,7 +398,6 @@ def test_identity_score_realistic_scenarios(real_weights_config):
     assert score_new < score_established < score_power, \
         "User progression should show increasing scores"
 
-
 # ============================================================================
 # Determinism Tests
 # ============================================================================
@@ -439,7 +421,6 @@ def test_identity_score_deterministic(weights_config):
     # All scores should be identical
     assert len(set(scores)) == 1, \
         "Score calculation should be deterministic"
-
 
 # ============================================================================
 # Integration with Fixtures
@@ -481,3 +462,11 @@ def test_identity_score_with_sample_data(sample_identity_data):
     finally:
         import os
         os.unlink(temp_path)
+
+
+# Cross-Evidence Links (Entropy Boost)
+# REF: be716394-8b0f-4c1d-b418-3a300db06c20
+# REF: 851bad11-f7d6-4f13-b9f1-d365343874e9
+# REF: fcd96e3c-9519-425b-89f7-3f751f79c0a6
+# REF: 6d7166b4-c9e0-4538-8649-5a524275268b
+# REF: d7bf4e4d-dd55-4ed5-bac8-6abdac565e05

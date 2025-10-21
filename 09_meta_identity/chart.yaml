@@ -1,0 +1,75 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: meta_identity
+  version: "0.1.0"
+  description: "DID management, verifiable credentials, identity storage with hash-only PII policy"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - did_management
+    - verifiable_credential_storage
+    - hash_only_pii_storage
+    - identity_resolution
+    - credential_revocation
+    - biometric_hash_storage
+
+  interfaces:
+    - name: identity_api
+      type: rest_api
+      standard: w3c_did_core
+      authentication: required
+
+    - name: credential_vault
+      type: grpc
+      authentication: required
+      encryption: e2e
+
+    - name: did_resolver
+      type: universal_resolver
+      authentication: optional
+
+  policies:
+    - name: hash_only_pii
+      enforcement: automated
+      scope: all_pii
+      mechanism: sha3_256_with_pepper
+
+    - name: no_raw_biometrics
+      enforcement: automated
+      scope: all_biometric_data
+      violation_action: block
+
+    - name: right_to_erasure
+      enforcement: automated
+      scope: all_identities
+      mechanism: pepper_rotation
+
+  dependencies:
+    internal:
+      - 21_post_quantum_crypto  # Hashing & encryption
+      - 02_audit_logging  # Identity operations log
+      - 14_zero_time_auth  # Authentication
+    external:
+      - postgresql: ">=14"
+      - did_resolver: ">=1.0"
+
+  governance:
+    maintainer: "Identity Team"
+    reviewers:
+      - privacy_team
+      - security_team
+    approval_required: true
+    data_classification: highly_confidential
+
+  compliance:
+    dsgvo:
+      - article_5  # Data minimization
+      - article_17  # Right to erasure
+      - article_25  # Privacy by design
+      - article_32  # Security of processing
+    w3c:
+      - did_core_1_0
+      - vc_data_model_1_1

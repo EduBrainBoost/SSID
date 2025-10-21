@@ -1,0 +1,65 @@
+version: 1.0.0
+generated_at_utc: '2025-10-14T20:21:30Z'
+bundle: SSID Marketplace Framework
+modules:
+  A_Registry_Discovery:
+    description: On-chain + off-chain Indexierung verifizierter Angebote
+    examples:
+    - marketplace_registry.sol
+    - offer_discovery_engine.py
+    - asset_metadata_index.yaml
+    fee_percent: 0.05
+    fee_type: per_listing
+  B_Settlement:
+    description: Escrow-less Handel via Proof-of-Performance
+    examples:
+    - peer_contract_factory.sol
+    - trustless_trade_engine.py
+    fee_percent: 0.1
+    fee_type: per_trade
+  C_Licensing_Royalties:
+    description: Lizenz- und Royalty-Management mit SSID-Token-Splitting
+    examples:
+    - license_splitter.sol
+    - royalty_policy_manager.py
+    - market_fee_bridge.py
+    fee_percent: 1.0
+    fee_type: per_license_event
+  D_Reputation_Integration:
+    description: Verknüpfung von Seller Scores und Trust Adaptern
+    examples:
+    - seller_score_bridge.py
+    - identity_trust_adapter.py
+    fee_percent: 0.05
+    fee_type: per_evaluation
+  E_Governance_DAO:
+    description: Abstimmungen, Streitbeilegungen, DAO-Governance
+    examples:
+    - market_dao_vote.sol
+    - market_dispute_resolver.py
+    fee_percent: 0.05
+    fee_type: per_vote_or_resolution
+  F_Compliance_KYC_Gate:
+    description: KYC/Compliance-Gate über externe Adapter
+    examples:
+    - market_verification_bridge.py
+    - kyc_adapter_linker.py
+    fee_percent: 0.1
+    fee_type: per_verification
+  G_Analytics_Insights:
+    description: Metriken, Reports und Evidenz-Anker
+    examples:
+    - market_metrics_dashboard.tsx
+    - market_evidence_anchor.sol
+    fee_percent: 0.05
+    fee_type: per_report
+global_fee_model:
+  system_fee: 3.0
+  split:
+    dao_system: 2.0
+    developer_reward: 1.0
+  micro_license_range:
+  - 0.05
+  - 0.2
+  currency: percent
+audit_hash: 1d679b58845673d60c8b9b5e70931678e4841ec39bef08948c8e0308e6946663

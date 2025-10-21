@@ -14,7 +14,6 @@ from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, List, Set
 
-
 class PolicyCentralizer:
     """Centralize all policies to 23_compliance/policies/ with symlink fallback"""
 
@@ -206,7 +205,6 @@ class PolicyCentralizer:
             "errors": self.errors
         }
 
-
 def main():
     """CLI entry point"""
     import sys
@@ -226,7 +224,6 @@ def main():
         sys.exit(0)
     else:
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,79 @@
+# SSID DAO Governance Proposal
+# File: lock_fee_params_v5_4_3.yaml
+# Purpose: Versiegelung der Fee-Parameter v5.4.3 (unveränderbar bis neuer DAO-Beschluss)
+proposal_id: "LOCK-FEE-V5.4.3"
+title: "Fee Distribution & Fairness v5.4.3 – Parameter-Lock"
+version: "v5.4.3"
+created_utc: "2025-10-14T20:42:11Z"
+quorum: 0.67
+approval_threshold: 0.67
+execution_delay_hours: 24
+immutability: true
+
+evidence:
+  production_certificate:
+    path: "/mnt/data/fee_fairness_production_certificate_v5_4_3.json"
+    sha256: "1eb6df986d2f1d01fb0b72de833e433b22de2344a5362674fccb6b776c095dce"
+
+parameters:
+  transaction_fee_total: 0.03         # exakt 3% vom Gesamtbetrag
+  developer_share: 0.01               # exakt 1% vom Gesamtbetrag
+  system_pool: 0.02                   # exakt 2% vom Gesamtbetrag
+
+  # 7-Säulen – exakt normalisierte Anteile als Bruchform und Dezimalform,
+  # jeweils bezogen auf den GESAMTBETRAG (A), nicht "von den 2%".
+  system_pool_formula: "share_k = (gewicht_k / 1.80) * 0.02 * A == (gewicht_k / 90) * A"
+
+  saeulen:
+    legal_compliance:
+      weight: 0.35
+      fraction_of_amount: "7/1800"      # = 0.0038888888888888889
+      decimal_of_amount: 0.0038888888888888889
+    audit_security:
+      weight: 0.30
+      fraction_of_amount: "1/300"       # = 0.0033333333333333333
+      decimal_of_amount: 0.0033333333333333333
+    technical_maintenance:
+      weight: 0.30
+      fraction_of_amount: "1/300"       # = 0.0033333333333333333
+      decimal_of_amount: 0.0033333333333333333
+    dao_treasury:
+      weight: 0.25
+      fraction_of_amount: "1/360"       # = 0.0027777777777777778
+      decimal_of_amount: 0.0027777777777777778
+    community_bonus:
+      weight: 0.20
+      fraction_of_amount: "1/450"       # = 0.0022222222222222222
+      decimal_of_amount: 0.0022222222222222222
+    liquidity_reserve:
+      weight: 0.20
+      fraction_of_amount: "1/450"       # = 0.0022222222222222222
+      decimal_of_amount: 0.0022222222222222222
+    marketing_partnerships:
+      weight: 0.20
+      fraction_of_amount: "1/450"       # = 0.0022222222222222222
+      decimal_of_amount: 0.0022222222222222222
+
+  subscription_revenue_split:
+    system_operational: 0.50
+    dao_treasury: 0.30
+    developer_core: 0.10
+    incentive_reserve: 0.10
+
+governance_controls:
+  # Grenzen für spätere DAO-Änderungen (nur via neuem Proposal)
+  adjustable_ranges:
+    dao_treasury_relative: [0.20, 0.35]           # 20%..35% (relativ für Abo-Verteilung)
+    audit_security_absolute_percent_of_amount: [0.0020, 0.0040]  # 0.20%..0.40% vom Gesamtbetrag
+  change_process: "NEUES_PROPOSAL_MIT_QUORUM"
+  snapshot_period_days: 90
+
+verification:
+  invariants:
+    - "developer_share + system_pool == transaction_fee_total == 0.03"
+    - "sum(saeulen.decimal_of_amount) == 0.02"
+    - "subscription_revenue_split sum == 1.00"
+  audit_requirements:
+    - "Merkle-Proof der Ausschüttungen (monatlich)"
+    - "SHA-256 Manifest aller Parameterdateien (quartalsweise)"
+    - "Externe Audit-Bestätigung mind. 1×/Jahr"

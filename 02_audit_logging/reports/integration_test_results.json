@@ -1,0 +1,107 @@
+{
+  "timestamp": "2025-10-13T17:02:49.749674Z",
+  "flows": [
+    {
+      "flow_name": "DID -> VC -> Transaction",
+      "steps": [
+        {
+          "step": 1,
+          "action": "create_did",
+          "root": "03_core",
+          "status": "failed",
+          "result": {}
+        },
+        {
+          "step": 2,
+          "action": "issue_vc",
+          "root": "03_core",
+          "status": "simulated"
+        },
+        {
+          "step": 3,
+          "action": "process_transaction",
+          "root": "03_core",
+          "status": "simulated"
+        }
+      ],
+      "status": "failed"
+    },
+    {
+      "flow_name": "Identity -> Biometric -> Auth",
+      "steps": [
+        {
+          "step": 1,
+          "action": "store_identity",
+          "root": "09_meta_identity",
+          "status": "simulated"
+        },
+        {
+          "step": 2,
+          "action": "store_biometric",
+          "root": "09_meta_identity",
+          "status": "simulated"
+        },
+        {
+          "step": 3,
+          "action": "authenticate",
+          "root": "14_zero_time_auth",
+          "status": "simulated"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "flow_name": "AI Model -> Audit -> Compliance",
+      "steps": [
+        {
+          "step": 1,
+          "action": "deploy_model",
+          "root": "01_ai_layer",
+          "status": "simulated"
+        },
+        {
+          "step": 2,
+          "action": "write_log",
+          "root": "02_audit_logging",
+          "status": "simulated"
+        },
+        {
+          "step": 3,
+          "action": "check_compliance",
+          "root": "23_compliance",
+          "status": "simulated"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "flow_name": "PQC Keygen -> Sign -> Store",
+      "steps": [
+        {
+          "step": 1,
+          "action": "generate_key",
+          "root": "21_post_quantum_crypto",
+          "status": "simulated"
+        },
+        {
+          "step": 2,
+          "action": "sign_data",
+          "root": "21_post_quantum_crypto",
+          "status": "simulated"
+        },
+        {
+          "step": 3,
+          "action": "store_signature",
+          "root": "02_audit_logging",
+          "status": "simulated"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "summary": {
+    "total_flows": 4,
+    "passed": 3,
+    "failed": 1
+  }
+}

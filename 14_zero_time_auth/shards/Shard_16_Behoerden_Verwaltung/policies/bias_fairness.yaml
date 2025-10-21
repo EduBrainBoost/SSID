@@ -1,0 +1,49 @@
+# Policy: Bias & Fairness
+version: 1.0.0
+policy_id: "bias_fairness_14_16"
+
+scope:
+  - "All AI/ML models in government"
+
+metrics:
+  demographic_parity:
+    enabled: true
+    threshold: 0.05
+    protected_attributes:
+      - "gender"
+      - "age"
+      - "ethnicity"
+  
+  equal_opportunity:
+    enabled: true
+    threshold: 0.05
+  
+  disparate_impact:
+    enabled: true
+    ratio_threshold: 0.8
+
+testing:
+  frequency: "quarterly"
+  datasets:
+    - "production_sample"
+    - "synthetic_adversarial"
+  reporting: "mandatory"
+  reviewer: "ethics_board@example.local"
+
+mitigation:
+  strategies:
+    - "fairness_aware_training"
+    - "adversarial_debiasing"
+    - "threshold_optimization"
+  continuous_monitoring: true
+  alert_on_drift: true
+
+transparency:
+  model_cards: "required"
+  explainability: "mandatory"
+  disclosure: "public"
+
+audit:
+  frequency: "quarterly"
+  external_auditor: true
+  reports_published: true

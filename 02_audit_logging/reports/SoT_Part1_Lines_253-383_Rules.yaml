@@ -1,0 +1,931 @@
+# SoT Manual Extraction - Part 1, Lines 253-383 (48 Rules)
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 253-383
+# Sektion: Internationalization & Multi-Language Framework
+# Anzahl Regeln: 48
+# Datum: 2025-10-18
+# ====================================================================================
+
+rules:
+  # ---------------------------------------------------------------------------
+  # Language Strategy - Metadata (Lines 258-261)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-167
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 258
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "language_strategy.metadata"
+    title: "Language Strategy Version Pflicht"
+    original_text: 'version: "1.0"'
+    category: "internationalization"
+    priority: "must"
+    description: "language_strategy.yaml MUSS version-Feld mit Semver haben"
+    enforcement: "language_strategy.yaml MUSS version-Feld haben"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "version"
+      validation: "MUSS Semver-Format sein (x.y.z oder x.y)"
+
+  - rule_id: SOT-P1-168
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 259
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "language_strategy.metadata"
+    title: "Language Strategy Datum Pflicht"
+    original_text: 'date: "2025-09-15"'
+    category: "internationalization"
+    priority: "must"
+    description: "language_strategy.yaml MUSS date-Feld mit ISO 8601 Datum haben"
+    enforcement: "language_strategy.yaml MUSS date-Feld haben im Format YYYY-MM-DD"
+    evidence_schema:
+      type: "yaml_field_format"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "date"
+      format: "YYYY-MM-DD"
+      validation: "ISO 8601 date format"
+
+  - rule_id: SOT-P1-169
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 260
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "language_strategy.metadata"
+    title: "Language Strategy Deprecated Flag"
+    original_text: 'deprecated: false'
+    category: "internationalization"
+    priority: "must"
+    description: "language_strategy.yaml MUSS deprecated boolean-Feld haben"
+    enforcement: "deprecated MUSS boolean sein (true/false)"
+    evidence_schema:
+      type: "yaml_field_type"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "deprecated"
+      expected_type: "boolean"
+
+  - rule_id: SOT-P1-170
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 261
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "language_strategy.metadata"
+    title: "Classification - PUBLIC Internationalization Standards"
+    original_text: 'classification: "PUBLIC - Internationalization Standards"'
+    category: "internationalization"
+    priority: "must"
+    description: "classification MUSS PUBLIC - Internationalization Standards sein"
+    enforcement: "classification MUSS 'PUBLIC' und 'Internationalization' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "classification"
+      contains_all: ["PUBLIC", "Internationalization"]
+
+  # ---------------------------------------------------------------------------
+  # Primary Language (Lines 263-267)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-171
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 264
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "primary_language"
+    title: "Primary Language - English (en-US)"
+    original_text: 'language: "English (en-US)"'
+    category: "internationalization"
+    priority: "must"
+    description: "primary_language MUSS English (en-US) sein - UNVERÄNDERLICH"
+    enforcement: "primary_language.language MUSS 'English' und 'en-US' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "primary_language.language"
+      contains_all: ["English", "en-US"]
+      validation: "English ist die EINZIGE primary language"
+      immutability: "DARF NIEMALS geändert werden"
+
+  - rule_id: SOT-P1-172
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 265
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "primary_language"
+    title: "Primary Language Scope - ALL Technical/Gov/Legal/Compliance"
+    original_text: 'scope: "ALL technical documentation, governance, legal, compliance files"'
+    category: "internationalization"
+    priority: "must"
+    description: "English MUSS für ALLE technical/governance/legal/compliance docs verwendet werden"
+    enforcement: "scope MUSS 'ALL' und alle 4 Kategorien enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "primary_language.scope"
+      contains_all: ["ALL", "technical", "governance", "legal", "compliance"]
+
+  - rule_id: SOT-P1-173
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 266
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "primary_language"
+    title: "ISO 639-1 Language Standard"
+    original_text: 'standard: "ISO 639-1"'
+    category: "internationalization"
+    priority: "must"
+    description: "Language codes MÜSSEN ISO 639-1 Standard folgen"
+    enforcement: "standard MUSS 'ISO 639-1' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "primary_language.standard"
+      exact_value: "ISO 639-1"
+
+  - rule_id: SOT-P1-174
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 267
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "primary_language"
+    title: "Primary Language Rationale - Global Business Standard"
+    original_text: 'rationale: "Global business standard, regulatory harmonization"'
+    category: "internationalization"
+    priority: "must"
+    description: "rationale MUSS global business standard und regulatory harmonization erwähnen"
+    enforcement: "rationale MUSS beide Gründe enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "primary_language.rationale"
+      contains_all: ["Global business", "regulatory"]
+
+  # ---------------------------------------------------------------------------
+  # Secondary Languages (Lines 269-284)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-175
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [270, 272]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "secondary_languages"
+    title: "German (de-DE) - High Priority EU Market"
+    original_text: 'language: "German (de-DE)" | scope: "README files, contributor onboarding only" | priority: "High (EU market)"'
+    category: "internationalization"
+    priority: "should"
+    description: "German SOLLTE als secondary language für README und onboarding verwendet werden"
+    enforcement: "German SOLLTE mit High priority und EU market scope definiert sein"
+    evidence_schema:
+      type: "yaml_array_item_validation"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "secondary_languages"
+      item_match:
+        language: "German (de-DE)"
+        priority: "High (EU market)"
+        scope: "README files, contributor onboarding only"
+
+  - rule_id: SOT-P1-176
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [274, 276]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "secondary_languages"
+    title: "Chinese Simplified (zh-CN) - Medium Priority APAC"
+    original_text: 'language: "Chinese Simplified (zh-CN)" | scope: "Selected user-facing documentation" | priority: "Medium (APAC expansion)"'
+    category: "internationalization"
+    priority: "should"
+    description: "Chinese SOLLTE als secondary language für selected user docs verwendet werden"
+    enforcement: "Chinese SOLLTE mit Medium priority und APAC scope definiert sein"
+    evidence_schema:
+      type: "yaml_array_item_validation"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "secondary_languages"
+      item_match:
+        language: "Chinese Simplified (zh-CN)"
+        priority: "Medium (APAC expansion)"
+        scope: "Selected user-facing documentation"
+
+  - rule_id: SOT-P1-177
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [278, 280]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "secondary_languages"
+    title: "Spanish (es-ES) - Medium Priority LatAm"
+    original_text: 'language: "Spanish (es-ES)" | scope: "Selected user-facing documentation" | priority: "Medium (LatAm expansion)"'
+    category: "internationalization"
+    priority: "should"
+    description: "Spanish SOLLTE als secondary language für selected user docs verwendet werden"
+    enforcement: "Spanish SOLLTE mit Medium priority und LatAm scope definiert sein"
+    evidence_schema:
+      type: "yaml_array_item_validation"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "secondary_languages"
+      item_match:
+        language: "Spanish (es-ES)"
+        priority: "Medium (LatAm expansion)"
+        scope: "Selected user-facing documentation"
+
+  - rule_id: SOT-P1-178
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [282, 284]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "secondary_languages"
+    title: "French (fr-FR) - Low Priority Francophone Markets"
+    original_text: 'language: "French (fr-FR)" | scope: "Selected regulatory documentation" | priority: "Low (Francophone markets)"'
+    category: "internationalization"
+    priority: "have"
+    description: "French KANN als secondary language für selected regulatory docs verwendet werden"
+    enforcement: "French ist nice-to-have mit Low priority"
+    evidence_schema:
+      type: "yaml_array_item_validation"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "secondary_languages"
+      item_match:
+        language: "French (fr-FR)"
+        priority: "Low (Francophone markets)"
+        scope: "Selected regulatory documentation"
+
+  - rule_id: SOT-P1-179
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [269, 284]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "secondary_languages"
+    title: "Secondary Languages - Exactly 4 Languages Defined"
+    original_text: "secondary_languages: [German, Chinese, Spanish, French]"
+    category: "internationalization"
+    priority: "must"
+    description: "secondary_languages array MUSS EXAKT 4 Sprachen enthalten"
+    enforcement: "EXAKT 4 secondary languages: de-DE, zh-CN, es-ES, fr-FR"
+    evidence_schema:
+      type: "yaml_array_count"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "secondary_languages"
+      expected_count: 4
+      validation: "EXAKT 4 secondary languages"
+
+  # ---------------------------------------------------------------------------
+  # Source of Truth (Line 286)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-180
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 286
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "source_of_truth"
+    title: "English Version is ALWAYS Source of Truth"
+    original_text: "**Source of Truth:** Bei inhaltlichen Konflikten zwischen Übersetzungen gilt immer die englische Originalversion (EN) als verbindlich."
+    category: "internationalization"
+    priority: "must"
+    description: "Bei Konflikten zwischen Übersetzungen gilt IMMER die englische Version als verbindlich"
+    enforcement: "KRITISCH: English version hat ABSOLUTE Priorität bei Konflikten"
+    evidence_schema:
+      type: "policy_enforcement"
+      policy: "english_source_of_truth"
+      validation: "CI MUSS bei Translation-Konflikten English version als authoritative behandeln"
+      conflict_resolution: "English version overrides ALL translations"
+
+  # ---------------------------------------------------------------------------
+  # File Naming Convention (Lines 288-293)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-181
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 289
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "file_naming_convention"
+    title: "BCP-47 Language Tag Pattern"
+    original_text: 'pattern: "filename.{language_tag}.{extension}" # BCP-47 (e.g., en-US, de-DE, zh-CN)'
+    category: "internationalization"
+    priority: "must"
+    description: "File naming MUSS BCP-47 language tags verwenden"
+    enforcement: "file_naming_convention.pattern MUSS BCP-47 Format sein"
+    evidence_schema:
+      type: "yaml_field_format"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "file_naming_convention.pattern"
+      format: "filename.{language_tag}.{extension}"
+      validation: "BCP-47 compliant (ISO 639-1 + ISO 3166-1)"
+
+  - rule_id: SOT-P1-182
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [291, 293]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "file_naming_convention.examples"
+    title: "File Naming Examples - 3 Examples Required"
+    original_text: 'examples: ["README.en-US.md", "README.de-DE.md", "compliance_guide.zh-CN.md"]'
+    category: "internationalization"
+    priority: "should"
+    description: "Mindestens 3 Beispiele für file naming SOLLTEN vorhanden sein"
+    enforcement: "examples array SOLLTE mindestens 3 items haben"
+    evidence_schema:
+      type: "yaml_array_min_count"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "file_naming_convention.examples"
+      min_count: 3
+
+  # ---------------------------------------------------------------------------
+  # Distribution Policy (Line 296)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-183
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 296
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "distribution_policy"
+    title: "Excluded Markets - Docs-Only, No Product Access"
+    original_text: 'excluded_markets_content_availability: "docs-only, no product access"'
+    category: "internationalization"
+    priority: "must"
+    description: "Excluded markets erhalten ONLY documentation, KEIN product access"
+    enforcement: "distribution_policy MUSS 'docs-only' und 'no product access' klarstellen"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "distribution_policy.excluded_markets_content_availability"
+      contains_all: ["docs-only", "no product access"]
+
+  # ---------------------------------------------------------------------------
+  # Translation Management (Lines 298-302)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-184
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 299
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_management"
+    title: "English Files are Source of Truth"
+    original_text: 'primary_files: "English versions are source of truth"'
+    category: "internationalization"
+    priority: "must"
+    description: "English versions MÜSSEN als primary source definiert sein"
+    enforcement: "primary_files MUSS 'English' und 'source of truth' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "translation_management.primary_files"
+      contains_all: ["English", "source of truth"]
+
+  - rule_id: SOT-P1-185
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 300
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_management"
+    title: "Translation Triggers - Major Releases & Compliance Updates"
+    original_text: 'translation_triggers: "Major releases and compliance updates"'
+    category: "internationalization"
+    priority: "must"
+    description: "Translations MÜSSEN bei major releases und compliance updates erfolgen"
+    enforcement: "translation_triggers MUSS beide Trigger enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "translation_management.translation_triggers"
+      contains_all: ["Major releases", "compliance updates"]
+
+  - rule_id: SOT-P1-186
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 301
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_management"
+    title: "Quality Control - Native Speaker Review Required"
+    original_text: 'quality_control: "Native speaker review required"'
+    category: "internationalization"
+    priority: "must"
+    description: "ALLE Übersetzungen MÜSSEN von native speakers reviewed werden"
+    enforcement: "quality_control MUSS 'Native speaker' und 'required' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "translation_management.quality_control"
+      contains_all: ["Native speaker", "required"]
+
+  - rule_id: SOT-P1-187
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 302
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_management"
+    title: "Automation - Machine Translation + Human Validation"
+    original_text: 'automation: "Machine translation + human validation"'
+    category: "internationalization"
+    priority: "must"
+    description: "Translation workflow MUSS machine translation UND human validation kombinieren"
+    enforcement: "automation MUSS beide Komponenten enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "translation_management.automation"
+      contains_all: ["Machine translation", "human validation"]
+
+  # ---------------------------------------------------------------------------
+  # Cultural Localization (Lines 304-308)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-188
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 305
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "cultural_localization"
+    title: "Date Formats - ISO 8601 Universal + Local"
+    original_text: 'date_formats: "ISO 8601 universal + local formatting"'
+    category: "internationalization"
+    priority: "must"
+    description: "Date formats MÜSSEN ISO 8601 universal + locale-specific sein"
+    enforcement: "date_formats MUSS 'ISO 8601' und 'local' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "cultural_localization.date_formats"
+      contains_all: ["ISO 8601", "local"]
+
+  - rule_id: SOT-P1-189
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 306
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "cultural_localization"
+    title: "Number Formats - Locale-Appropriate"
+    original_text: 'number_formats: "Locale-appropriate formatting"'
+    category: "internationalization"
+    priority: "must"
+    description: "Number formats MÜSSEN locale-appropriate sein"
+    enforcement: "number_formats MUSS 'Locale-appropriate' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "cultural_localization.number_formats"
+      contains: "Locale-appropriate"
+
+  - rule_id: SOT-P1-190
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 307
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "cultural_localization"
+    title: "Regulatory Examples - Jurisdiction-Specific"
+    original_text: 'regulatory_examples: "Jurisdiction-specific examples"'
+    category: "internationalization"
+    priority: "must"
+    description: "Regulatory examples MÜSSEN jurisdiction-specific sein"
+    enforcement: "regulatory_examples MUSS 'Jurisdiction-specific' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "cultural_localization.regulatory_examples"
+      contains: "Jurisdiction-specific"
+
+  - rule_id: SOT-P1-191
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 308
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "cultural_localization"
+    title: "Business Context - Local Market Considerations"
+    original_text: 'business_context: "Local market considerations"'
+    category: "internationalization"
+    priority: "must"
+    description: "Business context MUSS local market considerations berücksichtigen"
+    enforcement: "business_context MUSS 'Local market' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field: "cultural_localization.business_context"
+      contains: "Local market"
+
+  # ---------------------------------------------------------------------------
+  # Multi-Jurisdiction Documentation Structure (Lines 312-342)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-192
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [317, 321]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "jurisdiction_structure"
+    title: "English Directory - Global Primary Structure"
+    original_text: "en/ [technical/, governance/, compliance/, business/]"
+    category: "internationalization"
+    priority: "must"
+    description: "en/ directory MUSS mit 4 Subdirectories strukturiert sein"
+    enforcement: "en/ MUSS technical/, governance/, compliance/, business/ enthalten"
+    evidence_schema:
+      type: "directory_structure_validation"
+      base_path: "05_documentation/internationalization/jurisdiction_specific/en"
+      required_subdirs:
+        - "technical"
+        - "governance"
+        - "compliance"
+        - "business"
+      validation: "ALLE 4 Subdirectories MÜSSEN existieren"
+
+  - rule_id: SOT-P1-193
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [323, 326]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "jurisdiction_structure"
+    title: "German Directory - EU Market Structure"
+    original_text: "de/ [einfuehrung/, compliance_eu/, rechtliches/]"
+    category: "internationalization"
+    priority: "should"
+    description: "de/ directory SOLLTE mit 3 Subdirectories strukturiert sein"
+    enforcement: "de/ SOLLTE einfuehrung/, compliance_eu/, rechtliches/ enthalten"
+    evidence_schema:
+      type: "directory_structure_validation"
+      base_path: "05_documentation/internationalization/jurisdiction_specific/de"
+      required_subdirs:
+        - "einfuehrung"
+        - "compliance_eu"
+        - "rechtliches"
+      validation: "SOLLTE alle 3 Subdirectories haben"
+
+  - rule_id: SOT-P1-194
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [328, 331]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "jurisdiction_structure"
+    title: "Chinese Directory - APAC Market Structure"
+    original_text: "zh/ [技术文档/, 合规指南/, 商业文档/]"
+    category: "internationalization"
+    priority: "should"
+    description: "zh/ directory SOLLTE mit 3 Subdirectories strukturiert sein"
+    enforcement: "zh/ SOLLTE 技术文档/, 合规指南/, 商业文档/ enthalten"
+    evidence_schema:
+      type: "directory_structure_validation"
+      base_path: "05_documentation/internationalization/jurisdiction_specific/zh"
+      required_subdirs:
+        - "技术文档"
+        - "合规指南"
+        - "商业文档"
+      validation: "SOLLTE alle 3 Subdirectories haben (Chinese names)"
+
+  - rule_id: SOT-P1-195
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [333, 336]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "jurisdiction_structure"
+    title: "Spanish Directory - LatAm Market Structure"
+    original_text: "es/ [documentacion/, cumplimiento/, negocios/]"
+    category: "internationalization"
+    priority: "should"
+    description: "es/ directory SOLLTE mit 3 Subdirectories strukturiert sein"
+    enforcement: "es/ SOLLTE documentacion/, cumplimiento/, negocios/ enthalten"
+    evidence_schema:
+      type: "directory_structure_validation"
+      base_path: "05_documentation/internationalization/jurisdiction_specific/es"
+      required_subdirs:
+        - "documentacion"
+        - "cumplimiento"
+        - "negocios"
+      validation: "SOLLTE alle 3 Subdirectories haben"
+
+  - rule_id: SOT-P1-196
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [338, 341]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "jurisdiction_structure"
+    title: "French Directory - Francophone Markets Structure"
+    original_text: "fr/ [documentation/, conformite/, affaires/]"
+    category: "internationalization"
+    priority: "have"
+    description: "fr/ directory KANN mit 3 Subdirectories strukturiert sein"
+    enforcement: "fr/ KANN documentation/, conformite/, affaires/ enthalten"
+    evidence_schema:
+      type: "directory_structure_validation"
+      base_path: "05_documentation/internationalization/jurisdiction_specific/fr"
+      required_subdirs:
+        - "documentation"
+        - "conformite"
+        - "affaires"
+      validation: "Nice-to-have - alle 3 Subdirectories"
+
+  # ---------------------------------------------------------------------------
+  # Content Localization Guidelines (Lines 344-350)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-197
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 345
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "content_localization_guidelines"
+    title: "Legal Terms - Local + English Reference"
+    original_text: "**Legal Terms**: Local legal terminology with English reference"
+    category: "internationalization"
+    priority: "must"
+    description: "Legal terms MÜSSEN local terminology + English reference haben"
+    enforcement: "Legal translations MÜSSEN IMMER English reference behalten"
+    evidence_schema:
+      type: "translation_policy"
+      policy: "legal_terms_dual_reference"
+      validation: "JEDER translated legal term MUSS English reference haben"
+
+  - rule_id: SOT-P1-198
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 346
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "content_localization_guidelines"
+    title: "Regulatory Examples - Jurisdiction-Specific"
+    original_text: "**Regulatory Examples**: Jurisdiction-specific compliance examples"
+    category: "internationalization"
+    priority: "must"
+    description: "Regulatory examples MÜSSEN jurisdiction-specific sein"
+    enforcement: "KEINE generic examples - IMMER jurisdiction-specific"
+    evidence_schema:
+      type: "translation_policy"
+      policy: "jurisdiction_specific_examples"
+      validation: "Examples MÜSSEN zur target jurisdiction passen"
+
+  - rule_id: SOT-P1-199
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 347
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "content_localization_guidelines"
+    title: "Business Context - Local Market Conditions"
+    original_text: "**Business Context**: Local market conditions and practices"
+    category: "internationalization"
+    priority: "must"
+    description: "Business context MUSS local market conditions reflektieren"
+    enforcement: "Business content MUSS an local market angepasst sein"
+    evidence_schema:
+      type: "translation_policy"
+      policy: "local_business_context"
+      validation: "Business examples MÜSSEN local market practices zeigen"
+
+  - rule_id: SOT-P1-200
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 348
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "content_localization_guidelines"
+    title: "Cultural Sensitivity - Appropriate Communication Styles"
+    original_text: "**Cultural Sensitivity**: Appropriate business communication styles"
+    category: "internationalization"
+    priority: "must"
+    description: "Communication styles MÜSSEN culturally appropriate sein"
+    enforcement: "Translations MÜSSEN cultural sensitivity beachten"
+    evidence_schema:
+      type: "translation_policy"
+      policy: "cultural_sensitivity"
+      validation: "Native speaker review MUSS cultural appropriateness bestätigen"
+
+  - rule_id: SOT-P1-201
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 349
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "content_localization_guidelines"
+    title: "Technical Standards - Local Requirements"
+    original_text: "**Technical Standards**: Local technical requirements and standards"
+    category: "internationalization"
+    priority: "must"
+    description: "Technical standards MÜSSEN local requirements berücksichtigen"
+    enforcement: "Technical docs MÜSSEN local standards erwähnen"
+    evidence_schema:
+      type: "translation_policy"
+      policy: "local_technical_standards"
+      validation: "Technical content MUSS local standards referenzieren"
+
+  # ---------------------------------------------------------------------------
+  # Translation Quality Framework (Lines 354-383)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-202
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 356
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.metadata"
+    title: "Translation Quality Version Pflicht"
+    original_text: 'version: "1.0"'
+    category: "internationalization"
+    priority: "must"
+    description: "translation_quality.yaml MUSS version-Feld haben"
+    enforcement: "version field MUSS vorhanden sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "version"
+
+  - rule_id: SOT-P1-203
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 357
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.metadata"
+    title: "Translation Quality Datum Pflicht"
+    original_text: 'date: "2025-09-15"'
+    category: "internationalization"
+    priority: "must"
+    description: "translation_quality.yaml MUSS date-Feld haben"
+    enforcement: "date field MUSS ISO 8601 format haben"
+    evidence_schema:
+      type: "yaml_field_format"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "date"
+      format: "YYYY-MM-DD"
+
+  - rule_id: SOT-P1-204
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 358
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.metadata"
+    title: "Translation Quality Deprecated Flag"
+    original_text: 'deprecated: false'
+    category: "internationalization"
+    priority: "must"
+    description: "translation_quality.yaml MUSS deprecated boolean haben"
+    enforcement: "deprecated MUSS boolean sein"
+    evidence_schema:
+      type: "yaml_field_type"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "deprecated"
+      expected_type: "boolean"
+
+  - rule_id: SOT-P1-205
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 360
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.quality_standards"
+    title: "Accuracy Threshold - 95% Minimum"
+    original_text: 'accuracy_threshold: "95% minimum"'
+    category: "internationalization"
+    priority: "must"
+    description: "Translation accuracy MUSS mindestens 95% sein"
+    enforcement: "accuracy_threshold MUSS '95%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "quality_standards.accuracy_threshold"
+      contains: "95%"
+
+  - rule_id: SOT-P1-206
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 361
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.quality_standards"
+    title: "Consistency Score - 90% Minimum"
+    original_text: 'consistency_score: "90% minimum across documents"'
+    category: "internationalization"
+    priority: "must"
+    description: "Consistency score MUSS mindestens 90% sein"
+    enforcement: "consistency_score MUSS '90%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "quality_standards.consistency_score"
+      contains: "90%"
+
+  - rule_id: SOT-P1-207
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 362
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.quality_standards"
+    title: "Cultural Appropriateness - Native Speaker Validation"
+    original_text: 'cultural_appropriateness: "Native speaker validation required"'
+    category: "internationalization"
+    priority: "must"
+    description: "Cultural appropriateness MUSS von native speakers validiert werden"
+    enforcement: "cultural_appropriateness MUSS 'Native speaker' und 'required' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "quality_standards.cultural_appropriateness"
+      contains_all: ["Native speaker", "required"]
+
+  - rule_id: SOT-P1-208
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 363
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.quality_standards"
+    title: "Technical Precision - Zero Tolerance for Errors"
+    original_text: 'technical_precision: "Zero tolerance for technical term errors"'
+    category: "internationalization"
+    priority: "must"
+    description: "Technical term errors haben ZERO tolerance"
+    enforcement: "technical_precision MUSS 'Zero tolerance' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "quality_standards.technical_precision"
+      contains: "Zero tolerance"
+
+  - rule_id: SOT-P1-209
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [366, 370]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.translation_workflow"
+    title: "5-Step Translation Workflow Required"
+    original_text: "translation_workflow: [Machine translation, Technical review, Native validation, Cultural check, QA]"
+    category: "internationalization"
+    priority: "must"
+    description: "Translation workflow MUSS ALLE 5 Steps durchlaufen"
+    enforcement: "ALLE 5 workflow steps MÜSSEN definiert und durchgeführt werden"
+    evidence_schema:
+      type: "yaml_field_count"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "translation_workflow"
+      expected_count: 5
+      validation: "step_1 bis step_5 MÜSSEN vorhanden sein"
+
+  - rule_id: SOT-P1-210
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 373
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.maintenance_schedule"
+    title: "Major Updates - Translation Within 30 Days"
+    original_text: 'major_updates: "Full retranslation within 30 days"'
+    category: "internationalization"
+    priority: "must"
+    description: "Major updates MÜSSEN innerhalb 30 Tagen übersetzt werden"
+    enforcement: "major_updates MUSS '30 days' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "maintenance_schedule.major_updates"
+      contains: "30 days"
+
+  - rule_id: SOT-P1-211
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 374
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.maintenance_schedule"
+    title: "Minor Updates - Translation Within 14 Days"
+    original_text: 'minor_updates: "Translation within 14 days"'
+    category: "internationalization"
+    priority: "must"
+    description: "Minor updates MÜSSEN innerhalb 14 Tagen übersetzt werden"
+    enforcement: "minor_updates MUSS '14 days' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "maintenance_schedule.minor_updates"
+      contains: "14 days"
+
+  - rule_id: SOT-P1-212
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 375
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.maintenance_schedule"
+    title: "Urgent Updates - Translation Within 48 Hours"
+    original_text: 'urgent_updates: "Translation within 48 hours"'
+    category: "internationalization"
+    priority: "must"
+    description: "Urgent updates MÜSSEN innerhalb 48 Stunden übersetzt werden"
+    enforcement: "urgent_updates MUSS '48 hours' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "maintenance_schedule.urgent_updates"
+      contains: "48 hours"
+
+  - rule_id: SOT-P1-213
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 376
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.maintenance_schedule"
+    title: "Quarterly Review - Full Consistency Check"
+    original_text: 'quarterly_review: "Full consistency check"'
+    category: "internationalization"
+    priority: "must"
+    description: "Quarterly review MUSS full consistency check durchführen"
+    enforcement: "quarterly_review MUSS 'Full consistency' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "maintenance_schedule.quarterly_review"
+      contains: "Full consistency"
+
+  - rule_id: SOT-P1-214
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [379, 382]
+    section: "Internationalization & Multi-Language Framework"
+    subsection: "translation_quality.specialized_terminology"
+    title: "4 Categories of Specialized Terminology"
+    original_text: "specialized_terminology: [legal_terms, regulatory_terms, technical_terms, business_terms]"
+    category: "internationalization"
+    priority: "must"
+    description: "specialized_terminology MUSS ALLE 4 Kategorien definieren"
+    enforcement: "ALLE 4 term categories MÜSSEN vorhanden sein mit spezifischen validation requirements"
+    evidence_schema:
+      type: "yaml_field_count"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field: "specialized_terminology"
+      expected_count: 4
+      required_keys:
+        - "legal_terms"
+        - "regulatory_terms"
+        - "technical_terms"
+        - "business_terms"
+
+# ====================================================================================
+# Integration Status
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 48
+  next_step: "Continue mit Lines 385+ (Enterprise Adoption & Disclaimer Framework)"
+  pending_integration:
+    - "16_codex/contracts/sot/sot_contract.yaml"
+    - "03_core/validators/sot/sot_validator_core.py"
+    - "23_compliance/policies/sot/sot_policy.rego"
+    - "12_tooling/cli/sot_validator.py"
+    - "11_test_simulation/tests_compliance/test_sot_validator.py"
+
+# ====================================================================================
+# Running Total
+# ====================================================================================
+
+cumulative_extraction:
+  part1_lines_1_26: 4
+  part1_lines_27_101: 61
+  part1_lines_103_143: 32
+  part1_lines_145_251: 87
+  part1_lines_253_383: 48
+  total_part1_so_far: 232
+  remaining_part1_sections: "Lines 385+"

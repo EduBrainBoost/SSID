@@ -1,0 +1,26 @@
+package ssid.pricing
+
+default allow = false
+
+tiers_order := ["core_access","professional","enterprise_trust","global_proof_suite","interfederation_elite","sovereign_infrastructure"]
+
+allow {
+  valid_monotonic_prices
+  valid_discount_bounds
+}
+
+valid_monotonic_prices {
+  prices := [t.price_eur | t := input.tiers[_]]
+  nprices := [p | p := prices[_]; p := if is_number(p) then p else 25000]
+  every i in [0..count(nprices)-2] {
+    nprices[i] <= nprices[i+1]
+  }
+}
+
+valid_discount_bounds {
+  some d
+  d := input.discounts[_]
+  is_number(d.percent)
+  d.percent >= 0
+  d.percent <= 20
+}

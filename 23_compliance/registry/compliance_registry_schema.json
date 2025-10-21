@@ -1,0 +1,275 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SSID Compliance Meta-Registry",
+  "description": "Self-verifying registry with Merkle trees for all compliance rules. Each rule has 4 manifestations (Python, Rego, YAML, CLI) combined into a Merkle root hash.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["metadata", "standards", "merkle_roots", "verification"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["version", "generated_at", "total_rules", "total_manifestations"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Registry schema version",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of registry generation"
+        },
+        "generated_by": {
+          "type": "string",
+          "description": "Tool/script that generated the registry"
+        },
+        "total_rules": {
+          "type": "integer",
+          "description": "Total number of compliance rules (expected: 19)",
+          "minimum": 1
+        },
+        "total_manifestations": {
+          "type": "integer",
+          "description": "Total number of manifestation files (expected: 76)",
+          "minimum": 1
+        },
+        "compliance_score": {
+          "type": "number",
+          "description": "Overall compliance score (0.0 - 1.0)",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "last_verified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last verification timestamp"
+        }
+      }
+    },
+    "standards": {
+      "type": "object",
+      "description": "Compliance standards and their rules",
+      "properties": {
+        "soc2": {
+          "$ref": "#/definitions/standard"
+        },
+        "gaia_x": {
+          "$ref": "#/definitions/standard"
+        },
+        "etsi_en_319_421": {
+          "$ref": "#/definitions/standard"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/standard"
+      }
+    },
+    "merkle_roots": {
+      "type": "object",
+      "description": "Merkle root hashes for each standard",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "string",
+          "description": "SHA-256 Merkle root of all rules in this standard",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "required": ["global_merkle_root", "signature"],
+      "properties": {
+        "global_merkle_root": {
+          "type": "string",
+          "description": "Root hash of all standard Merkle roots",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "signature": {
+          "type": "string",
+          "description": "Digital signature of global_merkle_root (optional)"
+        },
+        "verification_history": {
+          "type": "array",
+          "description": "Historical verification records",
+          "items": {
+            "$ref": "#/definitions/verification_record"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "standard": {
+      "type": "object",
+      "required": ["name", "rules", "merkle_root"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable standard name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Standard version"
+        },
+        "rules": {
+          "type": "object",
+          "description": "Rules within this standard",
+          "patternProperties": {
+            "^[A-Z0-9_-]+$": {
+              "$ref": "#/definitions/rule"
+            }
+          }
+        },
+        "merkle_root": {
+          "type": "string",
+          "description": "Merkle root of all rules in this standard",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "compliance_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "required": ["rule_id", "name", "manifestations", "merkle_tree"],
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "description": "Unique rule identifier (e.g., CC1.1, GAIA-X-01)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable rule name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Rule description"
+        },
+        "scientific_basis": {
+          "type": "string",
+          "description": "Reference to scientific/regulatory framework"
+        },
+        "manifestations": {
+          "type": "object",
+          "required": ["python", "rego", "yaml", "cli"],
+          "properties": {
+            "python": {
+              "$ref": "#/definitions/manifestation"
+            },
+            "rego": {
+              "$ref": "#/definitions/manifestation"
+            },
+            "yaml": {
+              "$ref": "#/definitions/manifestation"
+            },
+            "cli": {
+              "$ref": "#/definitions/manifestation"
+            }
+          }
+        },
+        "merkle_tree": {
+          "type": "object",
+          "required": ["leaf_hashes", "intermediate_hashes", "root_hash"],
+          "properties": {
+            "leaf_hashes": {
+              "type": "array",
+              "description": "SHA-256 hashes of the 4 manifestation files (Python, Rego, YAML, CLI)",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "intermediate_hashes": {
+              "type": "array",
+              "description": "Intermediate node hashes in Merkle tree",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "root_hash": {
+              "type": "string",
+              "description": "Merkle root hash of this rule's 4 manifestations",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["compliant", "partial", "non_compliant", "missing"],
+          "description": "Compliance status of this rule"
+        },
+        "last_modified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last modification to any manifestation"
+        }
+      }
+    },
+    "manifestation": {
+      "type": "object",
+      "required": ["path", "hash", "exists"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative path to manifestation file"
+        },
+        "hash": {
+          "type": "string",
+          "description": "SHA-256 hash of file contents",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "size": {
+          "type": "integer",
+          "description": "File size in bytes",
+          "minimum": 0
+        },
+        "exists": {
+          "type": "boolean",
+          "description": "Whether file exists"
+        },
+        "last_modified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "File modification timestamp"
+        },
+        "validation_status": {
+          "type": "string",
+          "enum": ["valid", "invalid", "unknown"],
+          "description": "Validation status"
+        }
+      }
+    },
+    "verification_record": {
+      "type": "object",
+      "required": ["timestamp", "merkle_root", "verified_by"],
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "merkle_root": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "verified_by": {
+          "type": "string",
+          "description": "Person or system that performed verification"
+        },
+        "result": {
+          "type": "string",
+          "enum": ["pass", "fail"]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

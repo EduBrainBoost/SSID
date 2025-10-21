@@ -1,0 +1,101 @@
+version: "1.0"
+mode: "SPEC_ONLY_SINGLE_SYSTEM"
+author: "edubrainboost"
+system_user: "bibel"
+timestamp: "2025-10-12T00:00:00Z"
+
+description: |
+  Meta-Continuum Readiness Certification Policy for SSID v11.0.
+  Single-system scope, no interfederation, no bidirectional claims.
+  Deterministic, CI-safe, ROOT-24-LOCK enforced.
+
+weights:
+  policies: 25
+  schemas: 20
+  hash_merkle: 20
+  tests_ci: 20
+  compliance_legal: 15
+
+gates:
+  - id: "G1_SINGLE_SYSTEM_SCOPE"
+    description: "No OpenCore paths or second-system references"
+    required: true
+  - id: "G2_NO_BIDIRECTIONAL_CLAIMS"
+    description: "No mutual truth or co-truth certification claims"
+    required: true
+  - id: "G3_DETERMINISTIC_HASHING"
+    description: "SHA-512 hashing with stable Merkle root generation"
+    required: true
+  - id: "G4_CI_CLEAN_EXIT"
+    description: "All tests pass with exit code 0"
+    required: true
+  - id: "G5_EVIDENCE_COMPLETENESS"
+    description: "All required artifacts and evidence files present"
+    required: true
+
+required_files:
+  - "23_compliance/policies/meta_continuum_guard.rego"
+  - "12_tooling/meta_continuum_sealer.py"
+  - "11_test_simulation/test_meta_continuum_readiness.py"
+  - "02_audit_logging/config/meta_continuum_readiness_policy.yaml"
+  - "05_documentation/V11_META_CONTINUUM_READINESS_CERTIFICATION.md"
+
+hashing:
+  algorithm: "SHA-512"
+  normalize_line_endings: true
+  encoding: "UTF-8"
+  trim_trailing_spaces: true
+  stable_sort: true
+  canonicalization:
+    line_ending: "LF"
+    bom: false
+
+pqc:
+  enabled: false
+  reason: "SPEC-ONLY certification; no key generation required"
+
+scope:
+  included_roots:
+    - "02_audit_logging"
+    - "05_documentation"
+    - "11_test_simulation"
+    - "12_tooling"
+    - "23_compliance"
+  excluded_patterns:
+    - "**/open-core/**"
+    - "**/opencore/**"
+    - "**/second_system/**"
+    - "**/*.backup"
+    - "**/__pycache__/**"
+    - "**/.pytest_cache/**"
+
+compliance:
+  gdpr:
+    enabled: true
+    mode: "hash_only"
+    no_pii: true
+  mica:
+    applicable: false
+    reason: "Non-custodial, utility token model, no asset custody"
+  eidas:
+    trust_services: "external_providers"
+    ssid_role: "proof_storage_only"
+
+legal_posture:
+  certification_type: "READINESS"
+  system_scope: "SINGLE_SYSTEM"
+  interfederation_status: "BLOCKED"
+  bidirectional_claims: false
+  custodial_services: false
+
+target_scores:
+  policies_guards: 25
+  schemas_config: 20
+  hash_merkle_integrity: 20
+  tests_ci_behavior: 20
+  compliance_legal_posture: 15
+  total: 100
+
+thresholds:
+  minimum_pass_score: 100
+  gate_failures_allowed: 0

@@ -1,0 +1,1751 @@
+contract_id: sot_contract
+version: 2.0.0
+severity_scale:
+- CRITICAL
+- HIGH
+- MEDIUM
+- LOW
+- INFO
+generator: SSID Codex Engine (deterministic list-lifting)
+source_file: SSID_structure_level3_part1_MAX.md
+source_line_range: 1-349
+rules:
+- rule_id: SOT-V2-0001
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'business_model'.
+- rule_id: SOT-V2-0002
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.data_custody
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'business_model.data_custody'.
+- rule_id: SOT-V2-0003
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.kyc_responsibility
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'business_model.kyc_responsibility'.
+- rule_id: SOT-V2-0004
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.not_role
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'business_model.not_role'.
+- rule_id: SOT-V2-0005
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.role
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'business_model.role'.
+- rule_id: SOT-V2-0006
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: business_model.user_interactions
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'business_model.user_interactions'.
+- rule_id: SOT-V2-0007
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: classification
+  category: METADATA
+  severity: INFO
+  enforcement: policy+test
+  description: Semantic rule for 'classification'.
+- rule_id: SOT-V2-0008
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: compliance_utilities
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'compliance_utilities'.
+- rule_id: SOT-V2-0009
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: compliance_utilities.audit_payments
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'compliance_utilities.audit_payments'.
+- rule_id: SOT-V2-0010
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: compliance_utilities.legal_attestations
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'compliance_utilities.legal_attestations'.
+- rule_id: SOT-V2-0011
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: compliance_utilities.regulatory_reporting
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'compliance_utilities.regulatory_reporting'.
+- rule_id: SOT-V2-0012
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: date
+  category: METADATA
+  severity: INFO
+  enforcement: policy+test
+  description: Semantic rule for 'date'.
+- rule_id: SOT-V2-0013
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: deprecated
+  category: METADATA
+  severity: INFO
+  enforcement: policy+test
+  description: Semantic rule for 'deprecated'.
+- rule_id: SOT-V2-0014
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing'.
+- rule_id: SOT-V2-0015
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees'.
+- rule_id: SOT-V2-0016
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.allocation
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.allocation'.
+- rule_id: SOT-V2-0017
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.allocation.dev_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.allocation.dev_fee'.
+- rule_id: SOT-V2-0018
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.allocation.system_treasury
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.allocation.system_treasury'.
+- rule_id: SOT-V2-0019
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee'.
+- rule_id: SOT-V2-0020
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.base
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.base'.
+- rule_id: SOT-V2-0021
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ'.
+- rule_id: SOT-V2-0022
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ'.
+- rule_id: SOT-V2-0023
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.oracle_source
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.oracle_source'.
+- rule_id: SOT-V2-0024
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.policy
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.policy'.
+- rule_id: SOT-V2-0025
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc'.
+- rule_id: SOT-V2-0026
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.note
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.note'.
+- rule_id: SOT-V2-0027
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.scope
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.scope'.
+- rule_id: SOT-V2-0028
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.system_fees.total_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.system_fees.total_fee'.
+- rule_id: SOT-V2-0029
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.validator_rewards
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.validator_rewards'.
+- rule_id: SOT-V2-0030
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.validator_rewards.no_per_transaction_split
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.validator_rewards.no_per_transaction_split'.
+- rule_id: SOT-V2-0031
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.validator_rewards.note
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.validator_rewards.note'.
+- rule_id: SOT-V2-0032
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: fee_routing.validator_rewards.source
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_routing.validator_rewards.source'.
+- rule_id: SOT-V2-0033
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_structure'.
+- rule_id: SOT-V2-0034
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.allocation
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_structure.allocation'.
+- rule_id: SOT-V2-0035
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.burn_from_system_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_structure.burn_from_system_fee'.
+- rule_id: SOT-V2-0036
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.fee_collection
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_structure.fee_collection'.
+- rule_id: SOT-V2-0037
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.no_manual_intervention
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_structure.no_manual_intervention'.
+- rule_id: SOT-V2-0038
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.scope
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_structure.scope'.
+- rule_id: SOT-V2-0039
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: fee_structure.total_fee
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'fee_structure.total_fee'.
+- rule_id: SOT-V2-0040
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_controls
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_controls'.
+- rule_id: SOT-V2-0041
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_controls.authority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_controls.authority'.
+- rule_id: SOT-V2-0042
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_controls.note
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_controls.note'.
+- rule_id: SOT-V2-0043
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_controls.reference
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_controls.reference'.
+- rule_id: SOT-V2-0044
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_fees
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_fees'.
+- rule_id: SOT-V2-0045
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_fees.proposal_deposits
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_fees.proposal_deposits'.
+- rule_id: SOT-V2-0046
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_fees.voting_gas
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_fees.voting_gas'.
+- rule_id: SOT-V2-0047
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_framework'.
+- rule_id: SOT-V2-0048
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.dao_ready
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_framework.dao_ready'.
+- rule_id: SOT-V2-0049
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.emergency_procedures
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_framework.emergency_procedures'.
+- rule_id: SOT-V2-0050
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.proposal_system
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_framework.proposal_system'.
+- rule_id: SOT-V2-0051
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.reference
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_framework.reference'.
+- rule_id: SOT-V2-0052
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.upgrade_authority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_framework.upgrade_authority'.
+- rule_id: SOT-V2-0053
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: governance_framework.voting_mechanism
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_framework.voting_mechanism'.
+- rule_id: SOT-V2-0054
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters'.
+- rule_id: SOT-V2-0055
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.delegation_system'.
+- rule_id: SOT-V2-0056
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system.delegation_changes
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.delegation_system.delegation_changes'.
+- rule_id: SOT-V2-0057
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system.delegation_enabled
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.delegation_system.delegation_enabled'.
+- rule_id: SOT-V2-0058
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system.self_delegation_default
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.delegation_system.self_delegation_default'.
+- rule_id: SOT-V2-0059
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.delegation_system.vote_weight_calculation
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.delegation_system.vote_weight_calculation'.
+- rule_id: SOT-V2-0060
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.governance_rewards'.
+- rule_id: SOT-V2-0061
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards.delegate_rewards
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.governance_rewards.delegate_rewards'.
+- rule_id: SOT-V2-0062
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards.minimum_participation
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.governance_rewards.minimum_participation'.
+- rule_id: SOT-V2-0063
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards.proposal_creator_rewards
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.governance_rewards.proposal_creator_rewards'.
+- rule_id: SOT-V2-0064
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.governance_rewards.voter_participation_rewards
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.governance_rewards.voter_participation_rewards'.
+- rule_id: SOT-V2-0065
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.proposal_framework'.
+- rule_id: SOT-V2-0066
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_deposit
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_deposit'.
+- rule_id: SOT-V2-0067
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_threshold
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_threshold'.
+- rule_id: SOT-V2-0068
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_types
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types'.
+- rule_id: SOT-V2-0069
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_types
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Emergency
+    proposals (expedited process)'.
+  rule_origin: list-item
+  parent_rule: governance_parameters.proposal_framework.proposal_types
+- rule_id: SOT-V2-0070
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_types
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Parameter
+    changes (requires simple majority)'.
+  rule_origin: list-item
+  parent_rule: governance_parameters.proposal_framework.proposal_types
+- rule_id: SOT-V2-0071
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_types
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Protocol
+    upgrades (requires supermajority)'.
+  rule_origin: list-item
+  parent_rule: governance_parameters.proposal_framework.proposal_types
+- rule_id: SOT-V2-0072
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.proposal_framework.proposal_types
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Treasury
+    allocation (requires quorum + majority)'.
+  rule_origin: list-item
+  parent_rule: governance_parameters.proposal_framework.proposal_types
+- rule_id: SOT-V2-0073
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.timelock_framework'.
+- rule_id: SOT-V2-0074
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.emergency_proposals
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.timelock_framework.emergency_proposals'.
+- rule_id: SOT-V2-0075
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.parameter_changes
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.timelock_framework.parameter_changes'.
+- rule_id: SOT-V2-0076
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.protocol_upgrades
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.timelock_framework.protocol_upgrades'.
+- rule_id: SOT-V2-0077
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.standard_proposals
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.timelock_framework.standard_proposals'.
+- rule_id: SOT-V2-0078
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.timelock_framework.treasury_allocations
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.timelock_framework.treasury_allocations'.
+- rule_id: SOT-V2-0079
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_periods'.
+- rule_id: SOT-V2-0080
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods.emergency_voting
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_periods.emergency_voting'.
+- rule_id: SOT-V2-0081
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods.parameter_voting
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_periods.parameter_voting'.
+- rule_id: SOT-V2-0082
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods.protocol_upgrade_voting
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_periods.protocol_upgrade_voting'.
+- rule_id: SOT-V2-0083
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_periods.standard_voting
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_periods.standard_voting'.
+- rule_id: SOT-V2-0084
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_requirements'.
+- rule_id: SOT-V2-0085
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.emergency_supermajority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_requirements.emergency_supermajority'.
+- rule_id: SOT-V2-0086
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.quorum_emergency
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_requirements.quorum_emergency'.
+- rule_id: SOT-V2-0087
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.quorum_protocol_upgrade
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_requirements.quorum_protocol_upgrade'.
+- rule_id: SOT-V2-0088
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.quorum_standard
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_requirements.quorum_standard'.
+- rule_id: SOT-V2-0089
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.simple_majority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_requirements.simple_majority'.
+- rule_id: SOT-V2-0090
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: governance_parameters.voting_requirements.supermajority
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'governance_parameters.voting_requirements.supermajority'.
+- rule_id: SOT-V2-0091
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 1-120
+    path: grundprinzipien.ausnahmen.allowed_root_files
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: policy+test
+  description: Semantic rule for 'grundprinzipien.ausnahmen.allowed_root_files'.
+- rule_id: SOT-V2-0092
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 1-120
+    path: grundprinzipien.critical.structure_exceptions_yaml
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: policy+test
+  description: Semantic rule for 'grundprinzipien.critical.structure_exceptions_yaml'.
+- rule_id: SOT-V2-0093
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 1-120
+    path: grundprinzipien.root_level_ausnahmen
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: policy+test
+  description: Semantic rule for 'grundprinzipien.root_level_ausnahmen'.
+- rule_id: SOT-V2-0094
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 1-120
+    path: grundprinzipien.verbindliche_root_module
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: policy+test
+  description: Semantic rule for 'grundprinzipien.verbindliche_root_module'.
+- rule_id: SOT-V2-0095
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance'.
+- rule_id: SOT-V2-0096
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.blacklist_jurisdictions
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions'.
+- rule_id: SOT-V2-0097
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.blacklist_jurisdictions
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::CU'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.blacklist_jurisdictions
+- rule_id: SOT-V2-0098
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.blacklist_jurisdictions
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::IR'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.blacklist_jurisdictions
+- rule_id: SOT-V2-0099
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.blacklist_jurisdictions
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::KP'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.blacklist_jurisdictions
+- rule_id: SOT-V2-0100
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.blacklist_jurisdictions
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::SY'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.blacklist_jurisdictions
+- rule_id: SOT-V2-0101
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.compliance_basis
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.compliance_basis'.
+- rule_id: SOT-V2-0102
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_entities
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.excluded_entities'.
+- rule_id: SOT-V2-0103
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_entities
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.excluded_entities::Belarus_designated_entities'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.excluded_entities
+- rule_id: SOT-V2-0104
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_entities
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.excluded_entities::RU_designated_entities'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.excluded_entities
+- rule_id: SOT-V2-0105
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_entities
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.excluded_entities::Venezuela_government_entities'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.excluded_entities
+- rule_id: SOT-V2-0106
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_markets
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.excluded_markets'.
+- rule_id: SOT-V2-0107
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_markets
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.excluded_markets::India'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.excluded_markets
+- rule_id: SOT-V2-0108
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_markets
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.excluded_markets::Myanmar'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.excluded_markets
+- rule_id: SOT-V2-0109
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.excluded_markets
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.excluded_markets::Pakistan'.
+  rule_origin: list-item
+  parent_rule: jurisdictional_compliance.excluded_markets
+- rule_id: SOT-V2-0110
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.reference
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.reference'.
+- rule_id: SOT-V2-0111
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: jurisdictional_compliance.regulatory_exemptions
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'jurisdictional_compliance.regulatory_exemptions'.
+- rule_id: SOT-V2-0112
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor'.
+- rule_id: SOT-V2-0113
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.admin_controls
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor.admin_controls'.
+- rule_id: SOT-V2-0114
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.e_money_token
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor.e_money_token'.
+- rule_id: SOT-V2-0115
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.investment_contract
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor.investment_contract'.
+- rule_id: SOT-V2-0116
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.passive_income
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor.passive_income'.
+- rule_id: SOT-V2-0117
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.redemption_rights
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor.redemption_rights'.
+- rule_id: SOT-V2-0118
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.security_token
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor.security_token'.
+- rule_id: SOT-V2-0119
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.stablecoin
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor.stablecoin'.
+- rule_id: SOT-V2-0120
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.upgrade_mechanism
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor.upgrade_mechanism'.
+- rule_id: SOT-V2-0121
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: legal_safe_harbor.yield_bearing
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'legal_safe_harbor.yield_bearing'.
+- rule_id: SOT-V2-0122
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities'.
+- rule_id: SOT-V2-0123
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards'.
+- rule_id: SOT-V2-0124
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards.description
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.description'.
+- rule_id: SOT-V2-0125
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards.distribution_method
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.distribution_method'.
+- rule_id: SOT-V2-0126
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards.reward_pools
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools'.
+- rule_id: SOT-V2-0127
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards.reward_pools
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools::community'.
+  rule_origin: list-item
+  parent_rule: primary_utilities.ecosystem_rewards.reward_pools
+- rule_id: SOT-V2-0128
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards.reward_pools
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools::development'.
+  rule_origin: list-item
+  parent_rule: primary_utilities.ecosystem_rewards.reward_pools
+- rule_id: SOT-V2-0129
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.ecosystem_rewards.reward_pools
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools::validation'.
+  rule_origin: list-item
+  parent_rule: primary_utilities.ecosystem_rewards.reward_pools
+- rule_id: SOT-V2-0130
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.governance_participation
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.governance_participation'.
+- rule_id: SOT-V2-0131
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.governance_participation.description
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.governance_participation.description'.
+- rule_id: SOT-V2-0132
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.governance_participation.proposal_threshold
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.governance_participation.proposal_threshold'.
+- rule_id: SOT-V2-0133
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.governance_participation.voting_weight
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.governance_participation.voting_weight'.
+- rule_id: SOT-V2-0134
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.identity_verification'.
+- rule_id: SOT-V2-0135
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.burn_clarification
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.identity_verification.burn_clarification'.
+- rule_id: SOT-V2-0136
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.burn_source_note
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.identity_verification.burn_source_note'.
+- rule_id: SOT-V2-0137
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.description
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.identity_verification.description'.
+- rule_id: SOT-V2-0138
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.fee_burn_mechanism
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.identity_verification.fee_burn_mechanism'.
+- rule_id: SOT-V2-0139
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.identity_verification.smart_contract
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.identity_verification.smart_contract'.
+- rule_id: SOT-V2-0140
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.staking_utility
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.staking_utility'.
+- rule_id: SOT-V2-0141
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.staking_utility.description
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.staking_utility.description'.
+- rule_id: SOT-V2-0142
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.staking_utility.slashing_conditions
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.staking_utility.slashing_conditions'.
+- rule_id: SOT-V2-0143
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: primary_utilities.staking_utility.staking_rewards
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'primary_utilities.staking_utility.staking_rewards'.
+- rule_id: SOT-V2-0144
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'risk_mitigation'.
+- rule_id: SOT-V2-0145
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.clear_utility_purpose
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'risk_mitigation.clear_utility_purpose'.
+- rule_id: SOT-V2-0146
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.no_fiat_pegging
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'risk_mitigation.no_fiat_pegging'.
+- rule_id: SOT-V2-0147
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.no_marketing_investment
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'risk_mitigation.no_marketing_investment'.
+- rule_id: SOT-V2-0148
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.no_redemption_mechanism
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'risk_mitigation.no_redemption_mechanism'.
+- rule_id: SOT-V2-0149
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.no_yield_promises
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'risk_mitigation.no_yield_promises'.
+- rule_id: SOT-V2-0150
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: risk_mitigation.open_source_license
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'risk_mitigation.open_source_license'.
+- rule_id: SOT-V2-0151
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'secondary_utilities'.
+- rule_id: SOT-V2-0152
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities.api_access
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'secondary_utilities.api_access'.
+- rule_id: SOT-V2-0153
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities.data_portability
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'secondary_utilities.data_portability'.
+- rule_id: SOT-V2-0154
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities.marketplace_access
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'secondary_utilities.marketplace_access'.
+- rule_id: SOT-V2-0155
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 104-142
+    path: secondary_utilities.premium_features
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'secondary_utilities.premium_features'.
+- rule_id: SOT-V2-0156
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'staking_mechanics'.
+- rule_id: SOT-V2-0157
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.discount_applies_to
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'staking_mechanics.discount_applies_to'.
+- rule_id: SOT-V2-0158
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.maximum_discount
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'staking_mechanics.maximum_discount'.
+- rule_id: SOT-V2-0159
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.minimum_stake
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'staking_mechanics.minimum_stake'.
+- rule_id: SOT-V2-0160
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.slashing_penalty
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'staking_mechanics.slashing_penalty'.
+- rule_id: SOT-V2-0161
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.system_fee_invariance
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'staking_mechanics.system_fee_invariance'.
+- rule_id: SOT-V2-0162
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: staking_mechanics.unstaking_period
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'staking_mechanics.unstaking_period'.
+- rule_id: SOT-V2-0163
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics'.
+- rule_id: SOT-V2-0164
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.circulation_controls'.
+- rule_id: SOT-V2-0165
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls.max_annual_inflation
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.circulation_controls.max_annual_inflation'.
+- rule_id: SOT-V2-0166
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls.partnership_unlock
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.circulation_controls.partnership_unlock'.
+- rule_id: SOT-V2-0167
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls.reserve_governance
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.circulation_controls.reserve_governance'.
+- rule_id: SOT-V2-0168
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.circulation_controls.team_vesting_schedule
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.circulation_controls.team_vesting_schedule'.
+- rule_id: SOT-V2-0169
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.deflationary_mechanisms
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.deflationary_mechanisms'.
+- rule_id: SOT-V2-0170
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.deflationary_mechanisms.governance_burning
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.deflationary_mechanisms.governance_burning'.
+- rule_id: SOT-V2-0171
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.deflationary_mechanisms.staking_slashing
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.deflationary_mechanisms.staking_slashing'.
+- rule_id: SOT-V2-0172
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.initial_distribution'.
+- rule_id: SOT-V2-0173
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.community_rewards
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.initial_distribution.community_rewards'.
+- rule_id: SOT-V2-0174
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.ecosystem_development
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.initial_distribution.ecosystem_development'.
+- rule_id: SOT-V2-0175
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.partnerships
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.initial_distribution.partnerships'.
+- rule_id: SOT-V2-0176
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.reserve_fund
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.initial_distribution.reserve_fund'.
+- rule_id: SOT-V2-0177
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.initial_distribution.team_development
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.initial_distribution.team_development'.
+- rule_id: SOT-V2-0178
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: supply_mechanics.total_supply
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'supply_mechanics.total_supply'.
+- rule_id: SOT-V2-0179
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'technical_specification'.
+- rule_id: SOT-V2-0180
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.blockchain
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'technical_specification.blockchain'.
+- rule_id: SOT-V2-0181
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.custody_model
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'technical_specification.custody_model'.
+- rule_id: SOT-V2-0182
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.smart_contract_automation
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'technical_specification.smart_contract_automation'.
+- rule_id: SOT-V2-0183
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.standard
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'technical_specification.standard'.
+- rule_id: SOT-V2-0184
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: technical_specification.supply_model
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'technical_specification.supply_model'.
+- rule_id: SOT-V2-0185
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: token_definition
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'token_definition'.
+- rule_id: SOT-V2-0186
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: token_definition.explicit_exclusions
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'token_definition.explicit_exclusions'.
+- rule_id: SOT-V2-0187
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: token_definition.legal_position
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: policy+test
+  description: Semantic rule for 'token_definition.legal_position'.
+- rule_id: SOT-V2-0188
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 30-100
+    path: token_definition.purpose
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: policy+test
+  description: Semantic rule for 'token_definition.purpose'.
+- rule_id: SOT-V2-0189
+  source:
+    file: SSID_structure_level3_part1_MAX.md
+    lines: 146-250
+    path: version
+  category: METADATA
+  severity: INFO
+  enforcement: policy+test
+  description: Semantic rule for 'version'.

@@ -1,0 +1,168 @@
+name: CI - Operational Proof v6.2 Full Compliance Lock
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compliance-framework-mapping:
+    name: Map Compliance Frameworks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Run compliance framework mapper
+        run: |
+          python 12_tooling/compliance/map_compliance_frameworks.py
+
+      - name: Verify framework mappings
+        run: |
+          test -f 02_audit_logging/reports/compliance_mapping_dsgvo.json
+          test -f 02_audit_logging/reports/compliance_mapping_dora.json
+          test -f 02_audit_logging/reports/compliance_mapping_mica.json
+          echo "[OK] All framework mappings generated"
+
+      - name: Upload compliance mappings
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-mappings
+          path: |
+            02_audit_logging/reports/compliance_mapping_*.json
+
+  unified-control-mapping:
+    name: Generate Unified Control Matrix
+    runs-on: ubuntu-latest
+    needs: compliance-framework-mapping
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Download compliance mappings
+        uses: actions/download-artifact@v4
+        with:
+          name: compliance-mappings
+          path: 02_audit_logging/reports/
+
+      - name: Run unified control mapper
+        run: |
+          python 12_tooling/compliance/unified_control_mapping.py
+
+      - name: Verify unified matrix
+        run: |
+          test -f 02_audit_logging/reports/unified_control_matrix.json
+          echo "[OK] Unified control matrix generated"
+
+      - name: Upload unified matrix
+        uses: actions/upload-artifact@v4
+        with:
+          name: unified-control-matrix
+          path: 02_audit_logging/reports/unified_control_matrix.json
+
+  compliance-lock:
+    name: Full Compliance Lock (main only)
+    runs-on: ubuntu-latest
+    needs: unified-control-mapping
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Download compliance artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: compliance-mappings
+          path: 02_audit_logging/reports/
+
+      - name: Download unified matrix
+        uses: actions/download-artifact@v4
+        with:
+          name: unified-control-matrix
+          path: 02_audit_logging/reports/
+
+      - name: Run Full Compliance Lock
+        run: |
+          python 12_tooling/compliance/lock_full_compliance_v6_2.py
+
+      - name: Verify compliance lock
+        run: |
+          if [ -f "23_compliance/registry/compliance_status.yaml" ]; then
+            echo "[OK] Compliance status locked"
+            cat 23_compliance/registry/compliance_status.yaml
+          else
+            echo "[WARN] Compliance not locked (score may be below 100%)"
+          fi
+
+      - name: Verify certification report
+        run: |
+          if [ -f "02_audit_logging/reports/operational_proof_v6_2_FULL_COMPLIANCE_LOCK.md" ]; then
+            echo "[OK] Certification report generated"
+            head -n 20 02_audit_logging/reports/operational_proof_v6_2_FULL_COMPLIANCE_LOCK.md
+          else
+            echo "[WARN] Certification report not generated"
+          fi
+
+      - name: Upload compliance lock artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-lock-artifacts
+          path: |
+            23_compliance/registry/compliance_status.yaml
+            02_audit_logging/reports/operational_proof_v6_2_FULL_COMPLIANCE_LOCK.md
+
+  summary:
+    name: Compliance Summary
+    runs-on: ubuntu-latest
+    needs: [compliance-framework-mapping, unified-control-mapping, compliance-lock]
+    if: always()
+    steps:
+      - name: Print summary
+        run: |
+          echo "=================================================="
+          echo "Operational Proof v6.2 - CI Summary"
+          echo "=================================================="
+          echo ""
+          echo "Jobs completed:"
+          echo "  - Compliance Framework Mapping: ${{ needs.compliance-framework-mapping.result }}"
+          echo "  - Unified Control Mapping: ${{ needs.unified-control-mapping.result }}"
+          echo "  - Compliance Lock: ${{ needs.compliance-lock.result }}"
+          echo ""
+          echo "=================================================="

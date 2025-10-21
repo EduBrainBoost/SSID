@@ -1,0 +1,1433 @@
+# SoT Manual Extraction - Part 1, Lines 145-251 (87 Rules)
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 145-251
+# Sektion: Token Economics & Distribution
+# Anzahl Regeln: 87
+# Datum: 2025-10-18
+# ====================================================================================
+
+rules:
+  # ---------------------------------------------------------------------------
+  # Token Economics - Metadata (Lines 148-150)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-093
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 148
+    section: "Token Economics & Distribution"
+    subsection: "metadata"
+    title: "Token Economics Version Pflicht"
+    original_text: 'version: "1.0"'
+    category: "token_framework"
+    priority: "must"
+    description: "token_economics.yaml MUSS version-Feld mit Semver haben"
+    enforcement: "token_economics.yaml MUSS version-Feld haben"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "version"
+      validation: "MUSS Semver-Format sein (x.y.z oder x.y)"
+
+  - rule_id: SOT-P1-094
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 149
+    section: "Token Economics & Distribution"
+    subsection: "metadata"
+    title: "Token Economics Datum Pflicht"
+    original_text: 'date: "2025-09-21"'
+    category: "token_framework"
+    priority: "must"
+    description: "token_economics.yaml MUSS date-Feld mit ISO 8601 Datum haben"
+    enforcement: "token_economics.yaml MUSS date-Feld haben im Format YYYY-MM-DD"
+    evidence_schema:
+      type: "yaml_field_format"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "date"
+      format: "YYYY-MM-DD"
+      validation: "ISO 8601 date format"
+
+  - rule_id: SOT-P1-095
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 150
+    section: "Token Economics & Distribution"
+    subsection: "metadata"
+    title: "Token Economics Deprecated Flag"
+    original_text: 'deprecated: false'
+    category: "token_framework"
+    priority: "must"
+    description: "token_economics.yaml MUSS deprecated boolean-Feld haben"
+    enforcement: "deprecated MUSS boolean sein (true/false)"
+    evidence_schema:
+      type: "yaml_field_type"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "deprecated"
+      expected_type: "boolean"
+
+  # ---------------------------------------------------------------------------
+  # Supply Mechanics - Total Supply (Line 153)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-096
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 153
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics"
+    title: "Total Supply - 1 Billion SSID Fixed"
+    original_text: 'total_supply: "1,000,000,000 SSID"'
+    category: "token_framework"
+    priority: "must"
+    description: "total_supply MUSS EXAKT 1,000,000,000 SSID sein - UNVERÄNDERLICH"
+    enforcement: "total_supply MUSS '1,000,000,000' sein - KEINE Änderung erlaubt"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.total_supply"
+      exact_value: "1,000,000,000 SSID"
+      validation: "EXAKT dieser Wert - KEINE Abweichung"
+      immutability: "KRITISCH - DARF NIEMALS geändert werden"
+
+  # ---------------------------------------------------------------------------
+  # Supply Mechanics - Initial Distribution (Lines 154-159)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-097
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 155
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    title: "Ecosystem Development - 40% Allocation"
+    original_text: 'ecosystem_development: "40%" # 400M tokens'
+    category: "token_framework"
+    priority: "must"
+    description: "ecosystem_development MUSS 40% (400M tokens) sein"
+    enforcement: "initial_distribution.ecosystem_development MUSS '40%' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.initial_distribution.ecosystem_development"
+      exact_value: "40%"
+      equivalent_value: "400000000"
+      validation: "40% = 400M tokens"
+
+  - rule_id: SOT-P1-098
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 156
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    title: "Community Rewards - 25% Allocation"
+    original_text: 'community_rewards: "25%" # 250M tokens'
+    category: "token_framework"
+    priority: "must"
+    description: "community_rewards MUSS 25% (250M tokens) sein"
+    enforcement: "initial_distribution.community_rewards MUSS '25%' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.initial_distribution.community_rewards"
+      exact_value: "25%"
+      equivalent_value: "250000000"
+      validation: "25% = 250M tokens"
+
+  - rule_id: SOT-P1-099
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 157
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    title: "Team Development - 15% with 4-Year Vesting"
+    original_text: 'team_development: "15%" # 150M tokens (4-year vesting)'
+    category: "token_framework"
+    priority: "must"
+    description: "team_development MUSS 15% (150M tokens) mit 4-year vesting sein"
+    enforcement: "initial_distribution.team_development MUSS '15%' sein + vesting reference"
+    evidence_schema:
+      type: "yaml_field_exact_value_with_constraint"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.initial_distribution.team_development"
+      exact_value: "15%"
+      equivalent_value: "150000000"
+      required_constraint: "4-year vesting (see team_vesting_schedule)"
+      validation: "15% = 150M tokens MIT 4-year vesting"
+
+  - rule_id: SOT-P1-100
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 158
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    title: "Partnerships - 10% Allocation"
+    original_text: 'partnerships: "10%" # 100M tokens'
+    category: "token_framework"
+    priority: "must"
+    description: "partnerships MUSS 10% (100M tokens) sein"
+    enforcement: "initial_distribution.partnerships MUSS '10%' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.initial_distribution.partnerships"
+      exact_value: "10%"
+      equivalent_value: "100000000"
+      validation: "10% = 100M tokens"
+
+  - rule_id: SOT-P1-101
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 159
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    title: "Reserve Fund - 10% Allocation"
+    original_text: 'reserve_fund: "10%" # 100M tokens'
+    category: "token_framework"
+    priority: "must"
+    description: "reserve_fund MUSS 10% (100M tokens) sein"
+    enforcement: "initial_distribution.reserve_fund MUSS '10%' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.initial_distribution.reserve_fund"
+      exact_value: "10%"
+      equivalent_value: "100000000"
+      validation: "10% = 100M tokens"
+
+  - rule_id: SOT-P1-102
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [154, 159]
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.initial_distribution"
+    title: "Initial Distribution - 100% Sum Validation"
+    original_text: "initial_distribution: [40% + 25% + 15% + 10% + 10% = 100%]"
+    category: "token_framework"
+    priority: "must"
+    description: "Summe aller initial_distribution Werte MUSS EXAKT 100% sein"
+    enforcement: "MATHEMATISCHE VALIDIERUNG: Summe MUSS 100% sein"
+    evidence_schema:
+      type: "yaml_sum_validation"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      fields:
+        - "supply_mechanics.initial_distribution.ecosystem_development"
+        - "supply_mechanics.initial_distribution.community_rewards"
+        - "supply_mechanics.initial_distribution.team_development"
+        - "supply_mechanics.initial_distribution.partnerships"
+        - "supply_mechanics.initial_distribution.reserve_fund"
+      expected_sum: "100%"
+      validation: "EXAKT 100% - KEIN Rundungsfehler erlaubt"
+
+  # ---------------------------------------------------------------------------
+  # Deflationary Mechanisms (Lines 161-163)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-103
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 162
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.deflationary_mechanisms"
+    title: "Governance Burning - Failed Proposal Deposits"
+    original_text: 'governance_burning: "Unsuccessful proposals burn deposit"'
+    category: "token_framework"
+    priority: "must"
+    description: "Failed proposals MÜSSEN deposit burnen - KRITISCH für Anti-Spam"
+    enforcement: "governance_burning MUSS definiert sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.deflationary_mechanisms.governance_burning"
+      validation: "MUSS 'burn' und 'unsuccessful' enthalten"
+
+  - rule_id: SOT-P1-104
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 163
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.deflationary_mechanisms"
+    title: "Staking Slashing - False Verification Penalties"
+    original_text: 'staking_slashing: "Penalties for false verification or equivocation"'
+    category: "token_framework"
+    priority: "must"
+    description: "Staking slashing bei false verification MUSS implementiert sein"
+    enforcement: "staking_slashing MUSS definiert sein"
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.deflationary_mechanisms.staking_slashing"
+      validation: "MUSS 'false verification' erwähnen"
+
+  # ---------------------------------------------------------------------------
+  # Circulation Controls (Lines 165-169)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-105
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 166
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.circulation_controls"
+    title: "Zero Inflation - Fixed Supply Policy"
+    original_text: 'max_annual_inflation: "0%" # Fixed supply'
+    category: "token_framework"
+    priority: "must"
+    description: "max_annual_inflation MUSS 0% sein - KEINE Inflation erlaubt"
+    enforcement: "max_annual_inflation MUSS EXAKT '0%' sein - UNVERÄNDERLICH"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.circulation_controls.max_annual_inflation"
+      exact_value: "0%"
+      validation: "EXAKT 0% - Fixed Supply Policy - KEINE Änderung erlaubt"
+      immutability: "KRITISCH - DARF NIEMALS geändert werden"
+
+  - rule_id: SOT-P1-106
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 167
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.circulation_controls"
+    title: "Team Vesting - 25% Per Year Over 4 Years"
+    original_text: 'team_vesting_schedule: "25% per year over 4 years"'
+    category: "token_framework"
+    priority: "must"
+    description: "Team vesting MUSS 25% pro Jahr über 4 Jahre sein"
+    enforcement: "team_vesting_schedule MUSS '25% per year over 4 years' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.circulation_controls.team_vesting_schedule"
+      contains: "25% per year"
+      additional_contains: "4 years"
+      validation: "Linear vesting: 25% Year 1, 50% Year 2, 75% Year 3, 100% Year 4"
+
+  - rule_id: SOT-P1-107
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 168
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.circulation_controls"
+    title: "Partnership Unlock - Milestone-Based"
+    original_text: 'partnership_unlock: "Milestone-based"'
+    category: "token_framework"
+    priority: "must"
+    description: "Partnership tokens MÜSSEN milestone-based unlocked werden"
+    enforcement: "partnership_unlock MUSS 'Milestone-based' sein - KEIN time-based unlock"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.circulation_controls.partnership_unlock"
+      contains: "Milestone-based"
+      forbidden_strings: ["time-based", "automatic unlock"]
+
+  - rule_id: SOT-P1-108
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 169
+    section: "Token Economics & Distribution"
+    subsection: "supply_mechanics.circulation_controls"
+    title: "Reserve Governance - DAO-Controlled Only"
+    original_text: 'reserve_governance: "DAO-controlled release only"'
+    category: "token_framework"
+    priority: "must"
+    description: "Reserve Fund MUSS ausschließlich DAO-controlled sein"
+    enforcement: "reserve_governance MUSS 'DAO-controlled' enthalten - KEINE admin/team Kontrolle"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "supply_mechanics.circulation_controls.reserve_governance"
+      contains: "DAO-controlled"
+      forbidden_strings: ["admin-controlled", "team-controlled", "founder-controlled"]
+
+  # ---------------------------------------------------------------------------
+  # Fee Routing - System Fees (Lines 172-185)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-109
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 173
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees"
+    title: "System Fee Scope - Identity Verification Only"
+    original_text: 'scope: "identity_verification_payments_only"'
+    category: "token_framework"
+    priority: "must"
+    description: "System fee MUSS NUR auf identity verification transactions angewendet werden"
+    enforcement: "scope MUSS 'identity_verification_payments_only' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.scope"
+      exact_value: "identity_verification_payments_only"
+      validation: "KEINE anderen transaction types dürfen system fee zahlen"
+
+  - rule_id: SOT-P1-110
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 174
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees"
+    title: "System Fee Scope Clarification Note"
+    original_text: 'note: "3% system fee applies to identity verification transactions only"'
+    category: "token_framework"
+    priority: "must"
+    description: "Note MUSS klarstellen: 3% ONLY auf identity verification"
+    enforcement: "note MUSS 'identity verification transactions only' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.note"
+      contains: "identity verification transactions only"
+
+  - rule_id: SOT-P1-111
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 175
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees"
+    title: "Total Fee - 3% of Verification Transaction"
+    original_text: 'total_fee: "3% of verification transaction value"'
+    category: "token_framework"
+    priority: "must"
+    description: "total_fee MUSS EXAKT 3% sein - UNVERÄNDERLICH"
+    enforcement: "total_fee MUSS '3%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.total_fee"
+      contains: "3%"
+      validation: "EXAKT 3% - KEINE variablen Fees"
+
+  - rule_id: SOT-P1-112
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 177
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.allocation"
+    title: "Developer Fee - 1% Direct Reward"
+    original_text: 'dev_fee: "1% direct developer reward"'
+    category: "token_framework"
+    priority: "must"
+    description: "dev_fee MUSS 1% des 3% total fee sein"
+    enforcement: "allocation.dev_fee MUSS '1%' sein"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.allocation.dev_fee"
+      contains: "1%"
+      validation: "1% geht direkt an Developer"
+
+  - rule_id: SOT-P1-113
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 178
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.allocation"
+    title: "System Treasury - 2% Allocation"
+    original_text: 'system_treasury: "2% system treasury"'
+    category: "token_framework"
+    priority: "must"
+    description: "system_treasury MUSS 2% des 3% total fee sein"
+    enforcement: "allocation.system_treasury MUSS '2%' sein"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.allocation.system_treasury"
+      contains: "2%"
+      validation: "2% geht in System Treasury (davon 50% burned)"
+
+  - rule_id: SOT-P1-114
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [177, 178]
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.allocation"
+    title: "Fee Allocation - 3% Sum Validation"
+    original_text: "allocation: [1% dev_fee + 2% system_treasury = 3% total]"
+    category: "token_framework"
+    priority: "must"
+    description: "Summe von dev_fee + system_treasury MUSS EXAKT 3% sein"
+    enforcement: "MATHEMATISCHE VALIDIERUNG: 1% + 2% = 3%"
+    evidence_schema:
+      type: "yaml_sum_validation"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      fields:
+        - "fee_routing.system_fees.allocation.dev_fee"
+        - "fee_routing.system_fees.allocation.system_treasury"
+      expected_sum: "3%"
+      validation: "EXAKT 3% total - KEIN Rundungsfehler"
+
+  - rule_id: SOT-P1-115
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 180
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    title: "Burn Policy - 50% of Treasury Share"
+    original_text: 'policy: "50% of treasury share burned"'
+    category: "token_framework"
+    priority: "must"
+    description: "50% der 2% treasury share MÜSSEN geburned werden (= 1% des total fee)"
+    enforcement: "burn_from_system_fee.policy MUSS '50%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.burn_from_system_fee.policy"
+      contains: "50%"
+      validation: "50% von 2% treasury = 1% des total 3% fee wird geburned"
+
+  - rule_id: SOT-P1-116
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 181
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    title: "Burn Base - Circulating Supply Snapshot"
+    original_text: 'base: "circulating_supply_snapshot"'
+    category: "token_framework"
+    priority: "must"
+    description: "Burn caps MÜSSEN auf circulating_supply_snapshot basieren"
+    enforcement: "base MUSS 'circulating_supply_snapshot' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.burn_from_system_fee.base"
+      exact_value: "circulating_supply_snapshot"
+
+  - rule_id: SOT-P1-117
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 182
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    title: "Snapshot Time - Daily 00:00:00 UTC"
+    original_text: 'snapshot_time_utc: "00:00:00"'
+    category: "token_framework"
+    priority: "must"
+    description: "Circulating supply snapshot MUSS täglich um 00:00:00 UTC genommen werden"
+    enforcement: "snapshot_time_utc MUSS '00:00:00' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc"
+      exact_value: "00:00:00"
+      validation: "Täglich exakt um Mitternacht UTC"
+
+  - rule_id: SOT-P1-118
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 183
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    title: "Daily Burn Cap - 0.5% of Circulating Supply"
+    original_text: 'daily_cap_percent_of_circ: "0.5"'
+    category: "token_framework"
+    priority: "must"
+    description: "Daily burn cap MUSS 0.5% des circulating supply sein"
+    enforcement: "daily_cap_percent_of_circ MUSS '0.5' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ"
+      exact_value: "0.5"
+      validation: "Max 0.5% des circulating supply pro Tag"
+
+  - rule_id: SOT-P1-119
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 184
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    title: "Monthly Burn Cap - 2.0% of Circulating Supply"
+    original_text: 'monthly_cap_percent_of_circ: "2.0"'
+    category: "token_framework"
+    priority: "must"
+    description: "Monthly burn cap MUSS 2.0% des circulating supply sein"
+    enforcement: "monthly_cap_percent_of_circ MUSS '2.0' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ"
+      exact_value: "2.0"
+      validation: "Max 2.0% des circulating supply pro Monat"
+
+  - rule_id: SOT-P1-120
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 185
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.system_fees.burn_from_system_fee"
+    title: "Oracle Source - DAO-Controlled On-Chain"
+    original_text: 'oracle_source: "on-chain circulating supply oracle (DAO-controlled)"'
+    category: "token_framework"
+    priority: "must"
+    description: "oracle_source MUSS on-chain UND DAO-controlled sein"
+    enforcement: "oracle_source MUSS 'on-chain' und 'DAO-controlled' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.system_fees.burn_from_system_fee.oracle_source"
+      contains_all: ["on-chain", "DAO-controlled"]
+      forbidden_strings: ["off-chain", "centralized", "admin-controlled"]
+
+  # ---------------------------------------------------------------------------
+  # Validator Rewards (Lines 187-190)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-121
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 188
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.validator_rewards"
+    title: "Validator Rewards Source - Treasury Budget"
+    original_text: 'source: "Treasury budget (DAO-decided monthly allocation)"'
+    category: "token_framework"
+    priority: "must"
+    description: "Validator rewards MÜSSEN aus Treasury Budget kommen, DAO-decided"
+    enforcement: "source MUSS 'Treasury budget' und 'DAO-decided' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.validator_rewards.source"
+      contains_all: ["Treasury budget", "DAO-decided"]
+
+  - rule_id: SOT-P1-122
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 189
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.validator_rewards"
+    title: "No Per-Transaction Split for Validators"
+    original_text: 'no_per_transaction_split: true'
+    category: "token_framework"
+    priority: "must"
+    description: "Validators erhalten KEINE per-transaction splits - nur Treasury budget"
+    enforcement: "no_per_transaction_split MUSS true sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.validator_rewards.no_per_transaction_split"
+      exact_value: true
+      validation: "boolean true - verhindert per-tx validator fees"
+
+  - rule_id: SOT-P1-123
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 190
+    section: "Token Economics & Distribution"
+    subsection: "fee_routing.validator_rewards"
+    title: "Old Fee Split Deprecated Note"
+    original_text: 'note: "Old fee split (50/25/15/10) is deprecated and replaced by fixed 3% system fee."'
+    category: "token_framework"
+    priority: "must"
+    description: "Alte fee split policy ist deprecated - nur 3% system fee gültig"
+    enforcement: "note MUSS 'deprecated' und '3% system fee' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "fee_routing.validator_rewards.note"
+      contains_all: ["deprecated", "3% system fee"]
+
+  # ---------------------------------------------------------------------------
+  # Governance Fees (Lines 192-194)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-124
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 193
+    section: "Token Economics & Distribution"
+    subsection: "governance_fees"
+    title: "Failed Proposal Deposits - 100% Burned"
+    original_text: 'proposal_deposits: "100% burned if proposal fails"'
+    category: "token_framework"
+    priority: "must"
+    description: "Failed proposal deposits MÜSSEN 100% geburned werden - Anti-Spam"
+    enforcement: "proposal_deposits MUSS '100% burned' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_fees.proposal_deposits"
+      contains: "100% burned"
+      validation: "VOLLSTÄNDIGES Burn bei failure - KEIN partial refund"
+
+  - rule_id: SOT-P1-125
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 194
+    section: "Token Economics & Distribution"
+    subsection: "governance_fees"
+    title: "Voting Gas Subsidized from Treasury"
+    original_text: 'voting_gas: "Subsidized from treasury fund"'
+    category: "token_framework"
+    priority: "must"
+    description: "Voting gas costs MÜSSEN aus Treasury subsidized werden"
+    enforcement: "voting_gas MUSS 'Subsidized' und 'treasury' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_fees.voting_gas"
+      contains_all: ["Subsidized", "treasury"]
+
+  # ---------------------------------------------------------------------------
+  # Governance Controls (Lines 196-199)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-126
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 197
+    section: "Token Economics & Distribution"
+    subsection: "governance_controls"
+    title: "DAO-Only Authority"
+    original_text: 'authority: "DAO_only"'
+    category: "token_framework"
+    priority: "must"
+    description: "Governance authority MUSS ausschließlich bei DAO liegen"
+    enforcement: "authority MUSS 'DAO_only' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_controls.authority"
+      exact_value: "DAO_only"
+      forbidden_values: ["admin", "team", "founder", "multisig"]
+
+  - rule_id: SOT-P1-127
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 198
+    section: "Token Economics & Distribution"
+    subsection: "governance_controls"
+    title: "Governance Defaults Reference File"
+    original_text: 'reference: "07_governance_legal/governance_defaults.yaml"'
+    category: "token_framework"
+    priority: "must"
+    description: "reference MUSS auf governance_defaults.yaml zeigen"
+    enforcement: "reference MUSS exakten Pfad enthalten"
+    evidence_schema:
+      type: "yaml_field_path_reference"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_controls.reference"
+      exact_path: "07_governance_legal/governance_defaults.yaml"
+      validation: "Datei MUSS existieren an diesem Pfad"
+
+  - rule_id: SOT-P1-128
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 199
+    section: "Token Economics & Distribution"
+    subsection: "governance_controls"
+    title: "Centrally Defined Parameters Note"
+    original_text: 'note: "All governance parameters centrally defined - see governance_parameters section"'
+    category: "token_framework"
+    priority: "must"
+    description: "Note MUSS auf governance_parameters section verweisen"
+    enforcement: "note MUSS 'centrally defined' und 'governance_parameters' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_controls.note"
+      contains_all: ["centrally defined", "governance_parameters"]
+
+  # ---------------------------------------------------------------------------
+  # Staking Mechanics (Lines 201-207)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-129
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 202
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    title: "Minimum Stake - 1000 SSID"
+    original_text: 'minimum_stake: "1000 SSID"'
+    category: "token_framework"
+    priority: "must"
+    description: "minimum_stake MUSS 1000 SSID sein"
+    enforcement: "minimum_stake MUSS '1000 SSID' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "staking_mechanics.minimum_stake"
+      exact_value: "1000 SSID"
+
+  - rule_id: SOT-P1-130
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 203
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    title: "Maximum Discount - 50% Fee Reduction"
+    original_text: 'maximum_discount: "50% fee reduction"'
+    category: "token_framework"
+    priority: "must"
+    description: "maximum_discount MUSS 50% fee reduction sein"
+    enforcement: "maximum_discount MUSS '50%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "staking_mechanics.maximum_discount"
+      contains: "50%"
+
+  - rule_id: SOT-P1-131
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 204
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    title: "Slashing Penalty - 5% of Staked Amount"
+    original_text: 'slashing_penalty: "5% of staked amount"'
+    category: "token_framework"
+    priority: "must"
+    description: "slashing_penalty MUSS 5% of staked amount sein"
+    enforcement: "slashing_penalty MUSS '5%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "staking_mechanics.slashing_penalty"
+      contains: "5%"
+
+  - rule_id: SOT-P1-132
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 205
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    title: "Unstaking Period - 14 Days"
+    original_text: 'unstaking_period: "14 days"'
+    category: "token_framework"
+    priority: "must"
+    description: "unstaking_period MUSS 14 days sein"
+    enforcement: "unstaking_period MUSS '14 days' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "staking_mechanics.unstaking_period"
+      contains: "14 days"
+
+  - rule_id: SOT-P1-133
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 206
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    title: "Discount Applies to User Service Price Only"
+    original_text: 'discount_applies_to: "user_service_price_only"'
+    category: "token_framework"
+    priority: "must"
+    description: "Staking discount MUSS NUR auf user service price angewendet werden"
+    enforcement: "discount_applies_to MUSS 'user_service_price_only' sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "staking_mechanics.discount_applies_to"
+      exact_value: "user_service_price_only"
+      validation: "NICHT auf system fee - nur auf base service price"
+
+  - rule_id: SOT-P1-134
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 207
+    section: "Token Economics & Distribution"
+    subsection: "staking_mechanics"
+    title: "System Fee Invariance - No Staking Impact"
+    original_text: 'system_fee_invariance: true'
+    category: "token_framework"
+    priority: "must"
+    description: "System fee (3%) MUSS unverändert bleiben trotz staking"
+    enforcement: "system_fee_invariance MUSS true sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "staking_mechanics.system_fee_invariance"
+      exact_value: true
+      validation: "3% system fee IMMER erhoben, unabhängig von staking discount"
+
+  # ---------------------------------------------------------------------------
+  # Governance Parameters - Proposal Framework (Lines 210-217)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-135
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 211
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework"
+    title: "Proposal Threshold - 1% of Total Supply"
+    original_text: 'proposal_threshold: "1% of total supply (10,000,000 SSID)"'
+    category: "token_framework"
+    priority: "must"
+    description: "proposal_threshold MUSS 1% (10M SSID) sein"
+    enforcement: "proposal_threshold MUSS '1%' und '10,000,000 SSID' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.proposal_framework.proposal_threshold"
+      contains_all: ["1%", "10,000,000 SSID"]
+
+  - rule_id: SOT-P1-136
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 212
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework"
+    title: "Proposal Deposit - 10,000 SSID Burned if Fails"
+    original_text: 'proposal_deposit: "10,000 SSID (burned if proposal fails)"'
+    category: "token_framework"
+    priority: "must"
+    description: "proposal_deposit MUSS 10,000 SSID sein, burned bei failure"
+    enforcement: "proposal_deposit MUSS '10,000 SSID' und 'burned' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.proposal_framework.proposal_deposit"
+      contains_all: ["10,000 SSID", "burned"]
+
+  - rule_id: SOT-P1-137
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [214, 217]
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.proposal_framework.proposal_types"
+    title: "4 Proposal Types Defined"
+    original_text: 'proposal_types: ["Protocol upgrades", "Parameter changes", "Treasury allocation", "Emergency proposals"]'
+    category: "token_framework"
+    priority: "must"
+    description: "proposal_types MUSS EXAKT 4 Types definieren"
+    enforcement: "proposal_types MUSS array mit 4 items sein"
+    evidence_schema:
+      type: "yaml_array_count"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.proposal_framework.proposal_types"
+      expected_count: 4
+      validation: "EXAKT 4 proposal types"
+
+  # ---------------------------------------------------------------------------
+  # Governance Parameters - Voting Requirements (Lines 220-225)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-138
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 220
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    title: "Standard Quorum - 4% of Circulating Supply"
+    original_text: 'quorum_standard: "4% of circulating supply"'
+    category: "token_framework"
+    priority: "must"
+    description: "quorum_standard MUSS 4% sein"
+    enforcement: "quorum_standard MUSS '4%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_requirements.quorum_standard"
+      contains: "4%"
+
+  - rule_id: SOT-P1-139
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 221
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    title: "Protocol Upgrade Quorum - 8% of Circulating Supply"
+    original_text: 'quorum_protocol_upgrade: "8% of circulating supply"'
+    category: "token_framework"
+    priority: "must"
+    description: "quorum_protocol_upgrade MUSS 8% sein"
+    enforcement: "quorum_protocol_upgrade MUSS '8%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_requirements.quorum_protocol_upgrade"
+      contains: "8%"
+
+  - rule_id: SOT-P1-140
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 222
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    title: "Emergency Quorum - 2% of Circulating Supply"
+    original_text: 'quorum_emergency: "2% of circulating supply"'
+    category: "token_framework"
+    priority: "must"
+    description: "quorum_emergency MUSS 2% sein"
+    enforcement: "quorum_emergency MUSS '2%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_requirements.quorum_emergency"
+      contains: "2%"
+
+  - rule_id: SOT-P1-141
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 223
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    title: "Simple Majority - 50% + 1"
+    original_text: 'simple_majority: "50% + 1 of votes cast"'
+    category: "token_framework"
+    priority: "must"
+    description: "simple_majority MUSS 50% + 1 sein"
+    enforcement: "simple_majority MUSS '50% + 1' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_requirements.simple_majority"
+      contains: "50% + 1"
+
+  - rule_id: SOT-P1-142
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 224
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    title: "Supermajority - 66.7%"
+    original_text: 'supermajority: "66.7% of votes cast"'
+    category: "token_framework"
+    priority: "must"
+    description: "supermajority MUSS 66.7% sein"
+    enforcement: "supermajority MUSS '66.7%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_requirements.supermajority"
+      contains: "66.7%"
+
+  - rule_id: SOT-P1-143
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 225
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_requirements"
+    title: "Emergency Supermajority - 75%"
+    original_text: 'emergency_supermajority: "75% of votes cast"'
+    category: "token_framework"
+    priority: "must"
+    description: "emergency_supermajority MUSS 75% sein"
+    enforcement: "emergency_supermajority MUSS '75%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_requirements.emergency_supermajority"
+      contains: "75%"
+
+  # ---------------------------------------------------------------------------
+  # Governance Parameters - Timelock Framework (Lines 228-232)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-144
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 228
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    title: "Standard Proposals - 48 Hours Delay"
+    original_text: 'standard_proposals: "48 hours minimum execution delay"'
+    category: "token_framework"
+    priority: "must"
+    description: "standard_proposals MUSS 48 hours delay haben"
+    enforcement: "standard_proposals MUSS '48 hours' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.timelock_framework.standard_proposals"
+      contains: "48 hours"
+
+  - rule_id: SOT-P1-145
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 229
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    title: "Protocol Upgrades - 168 Hours (7 Days) Delay"
+    original_text: 'protocol_upgrades: "168 hours (7 days) execution delay"'
+    category: "token_framework"
+    priority: "must"
+    description: "protocol_upgrades MUSS 168 hours (7 days) delay haben"
+    enforcement: "protocol_upgrades MUSS '168 hours' oder '7 days' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.timelock_framework.protocol_upgrades"
+      contains_any: ["168 hours", "7 days"]
+
+  - rule_id: SOT-P1-146
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 230
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    title: "Parameter Changes - 24 Hours Delay"
+    original_text: 'parameter_changes: "24 hours execution delay"'
+    category: "token_framework"
+    priority: "must"
+    description: "parameter_changes MUSS 24 hours delay haben"
+    enforcement: "parameter_changes MUSS '24 hours' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.timelock_framework.parameter_changes"
+      contains: "24 hours"
+
+  - rule_id: SOT-P1-147
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 231
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    title: "Emergency Proposals - 6 Hours Delay (Security Only)"
+    original_text: 'emergency_proposals: "6 hours execution delay (security only)"'
+    category: "token_framework"
+    priority: "must"
+    description: "emergency_proposals MUSS 6 hours delay haben, security only"
+    enforcement: "emergency_proposals MUSS '6 hours' und 'security' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.timelock_framework.emergency_proposals"
+      contains_all: ["6 hours", "security"]
+
+  - rule_id: SOT-P1-148
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 232
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.timelock_framework"
+    title: "Treasury Allocations - 72 Hours Delay"
+    original_text: 'treasury_allocations: "72 hours execution delay"'
+    category: "token_framework"
+    priority: "must"
+    description: "treasury_allocations MUSS 72 hours delay haben"
+    enforcement: "treasury_allocations MUSS '72 hours' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.timelock_framework.treasury_allocations"
+      contains: "72 hours"
+
+  # ---------------------------------------------------------------------------
+  # Governance Parameters - Voting Periods (Lines 235-238)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-149
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 235
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_periods"
+    title: "Standard Voting - 7 Days"
+    original_text: 'standard_voting: "7 days (168 hours)"'
+    category: "token_framework"
+    priority: "must"
+    description: "standard_voting MUSS 7 days (168 hours) sein"
+    enforcement: "standard_voting MUSS '7 days' oder '168 hours' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_periods.standard_voting"
+      contains_any: ["7 days", "168 hours"]
+
+  - rule_id: SOT-P1-150
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 236
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_periods"
+    title: "Protocol Upgrade Voting - 14 Days"
+    original_text: 'protocol_upgrade_voting: "14 days (336 hours)"'
+    category: "token_framework"
+    priority: "must"
+    description: "protocol_upgrade_voting MUSS 14 days (336 hours) sein"
+    enforcement: "protocol_upgrade_voting MUSS '14 days' oder '336 hours' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_periods.protocol_upgrade_voting"
+      contains_any: ["14 days", "336 hours"]
+
+  - rule_id: SOT-P1-151
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 237
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_periods"
+    title: "Emergency Voting - 24 Hours (Security Only)"
+    original_text: 'emergency_voting: "24 hours (security issues only)"'
+    category: "token_framework"
+    priority: "must"
+    description: "emergency_voting MUSS 24 hours sein, security only"
+    enforcement: "emergency_voting MUSS '24 hours' und 'security' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_periods.emergency_voting"
+      contains_all: ["24 hours", "security"]
+
+  - rule_id: SOT-P1-152
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 238
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.voting_periods"
+    title: "Parameter Voting - 5 Days"
+    original_text: 'parameter_voting: "5 days (120 hours)"'
+    category: "token_framework"
+    priority: "must"
+    description: "parameter_voting MUSS 5 days (120 hours) sein"
+    enforcement: "parameter_voting MUSS '5 days' oder '120 hours' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.voting_periods.parameter_voting"
+      contains_any: ["5 days", "120 hours"]
+
+  # ---------------------------------------------------------------------------
+  # Governance Parameters - Delegation System (Lines 241-244)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-153
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 241
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.delegation_system"
+    title: "Delegation Enabled"
+    original_text: 'delegation_enabled: true'
+    category: "token_framework"
+    priority: "must"
+    description: "delegation_enabled MUSS true sein"
+    enforcement: "delegation_enabled MUSS boolean true sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.delegation_system.delegation_enabled"
+      exact_value: true
+
+  - rule_id: SOT-P1-154
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 242
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.delegation_system"
+    title: "Self-Delegation Default"
+    original_text: 'self_delegation_default: true'
+    category: "token_framework"
+    priority: "must"
+    description: "self_delegation_default MUSS true sein"
+    enforcement: "self_delegation_default MUSS boolean true sein"
+    evidence_schema:
+      type: "yaml_field_exact_value"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.delegation_system.self_delegation_default"
+      exact_value: true
+      validation: "User delegiert default an sich selbst"
+
+  - rule_id: SOT-P1-155
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 243
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.delegation_system"
+    title: "Delegation Changes - Immediate Effect"
+    original_text: 'delegation_changes: "Immediate effect"'
+    category: "token_framework"
+    priority: "must"
+    description: "delegation_changes MÜSSEN sofort wirksam sein"
+    enforcement: "delegation_changes MUSS 'Immediate' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.delegation_system.delegation_changes"
+      contains: "Immediate"
+
+  - rule_id: SOT-P1-156
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 244
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.delegation_system"
+    title: "Vote Weight Calculation - Token Balance + Delegated"
+    original_text: 'vote_weight_calculation: "Token balance + delegated tokens"'
+    category: "token_framework"
+    priority: "must"
+    description: "vote_weight MUSS balance + delegated sein"
+    enforcement: "vote_weight_calculation MUSS beide Komponenten enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.delegation_system.vote_weight_calculation"
+      contains_all: ["balance", "delegated"]
+
+  # ---------------------------------------------------------------------------
+  # Governance Parameters - Governance Rewards (Lines 247-250)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-157
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 247
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.governance_rewards"
+    title: "Voter Participation Rewards - 0.1% of Treasury per Quarter"
+    original_text: 'voter_participation_rewards: "0.1% of treasury per quarter"'
+    category: "token_framework"
+    priority: "must"
+    description: "voter_participation_rewards MUSS 0.1% treasury per quarter sein"
+    enforcement: "voter_participation_rewards MUSS '0.1%' und 'quarter' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.governance_rewards.voter_participation_rewards"
+      contains_all: ["0.1%", "quarter"]
+
+  - rule_id: SOT-P1-158
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 248
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.governance_rewards"
+    title: "Proposal Creator Rewards - 1000 SSID"
+    original_text: 'proposal_creator_rewards: "1000 SSID for successful proposals"'
+    category: "token_framework"
+    priority: "must"
+    description: "proposal_creator_rewards MUSS 1000 SSID sein für successful proposals"
+    enforcement: "proposal_creator_rewards MUSS '1000 SSID' und 'successful' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.governance_rewards.proposal_creator_rewards"
+      contains_all: ["1000 SSID", "successful"]
+
+  - rule_id: SOT-P1-159
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 249
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.governance_rewards"
+    title: "Delegate Rewards - Participation & Performance Based"
+    original_text: 'delegate_rewards: "Based on participation and performance"'
+    category: "token_framework"
+    priority: "must"
+    description: "delegate_rewards MÜSSEN auf participation und performance basieren"
+    enforcement: "delegate_rewards MUSS beide Kriterien enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_multiple_strings"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.governance_rewards.delegate_rewards"
+      contains_all: ["participation", "performance"]
+
+  - rule_id: SOT-P1-160
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 250
+    section: "Token Economics & Distribution"
+    subsection: "governance_parameters.governance_rewards"
+    title: "Minimum Participation - 10% Voting Power"
+    original_text: 'minimum_participation: "10% of voting power for rewards"'
+    category: "token_framework"
+    priority: "must"
+    description: "minimum_participation MUSS 10% voting power sein für rewards"
+    enforcement: "minimum_participation MUSS '10%' enthalten"
+    evidence_schema:
+      type: "yaml_field_contains_string"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      field: "governance_parameters.governance_rewards.minimum_participation"
+      contains: "10%"
+
+  # ---------------------------------------------------------------------------
+  # Summary Rules - Token Economics Completeness (Line 251)
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-161
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [145, 251]
+    section: "Token Economics & Distribution"
+    subsection: "completeness_check"
+    title: "Token Economics Vollständigkeit - 6 Major Sections"
+    original_text: "### Token Economics & Distribution [gesamter Block Lines 145-251]"
+    category: "token_framework"
+    priority: "must"
+    description: "token_economics.yaml MUSS ALLE 6 major sections enthalten"
+    enforcement: "VOLLSTÄNDIGKEITS-CHECK: supply_mechanics, fee_routing, governance_fees, governance_controls, staking_mechanics, governance_parameters MÜSSEN vorhanden sein"
+    evidence_schema:
+      type: "structural_completeness"
+      file: "20_foundation/tokenomics/token_economics.yaml"
+      required_sections:
+        - "supply_mechanics"
+        - "fee_routing"
+        - "governance_fees"
+        - "governance_controls"
+        - "staking_mechanics"
+        - "governance_parameters"
+      validation: "ALLE 6 sections MÜSSEN vorhanden sein"
+
+  - rule_id: SOT-P1-162
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 146
+    section: "Token Economics & Distribution"
+    subsection: "file_location"
+    title: "Token Economics File Location Enforcement"
+    original_text: "# 20_foundation/tokenomics/token_economics.yaml"
+    category: "token_framework"
+    priority: "must"
+    description: "token_economics.yaml MUSS exakt unter 20_foundation/tokenomics/ liegen"
+    enforcement: "Datei MUSS an EXAKT diesem Pfad existieren - KEINE alternativen Locations"
+    evidence_schema:
+      type: "file_location_enforcement"
+      exact_path: "20_foundation/tokenomics/token_economics.yaml"
+      forbidden_locations:
+        - "20_foundation/token_economics.yaml"
+        - "tokenomics/token_economics.yaml"
+        - "*/tokenomics/token_economics.yaml"
+      validation: "EXAKT dieser Pfad MUSS existieren"
+
+  # ---------------------------------------------------------------------------
+  # Cross-Validation Rules
+  # ---------------------------------------------------------------------------
+
+  - rule_id: SOT-P1-163
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [27, 251]
+    section: "Token Economics & Distribution"
+    subsection: "cross_validation"
+    title: "Token Framework Konsistenz - Custody Model Cross-Reference"
+    original_text: "[Cross-Ref: Lines 27-101 Token Framework + Lines 145-251 Token Economics]"
+    category: "token_framework"
+    priority: "must"
+    description: "Non-custodial Policy MUSS konsistent sein zwischen token_framework.yaml und token_economics.yaml"
+    enforcement: "CROSS-VALIDATION: Custody model consistency check"
+    evidence_schema:
+      type: "cross_file_validation"
+      files:
+        - "20_foundation/tokenomics/ssid_token_framework.yaml"
+        - "20_foundation/tokenomics/token_economics.yaml"
+      validation: "Beide Dateien MÜSSEN Non-custodial policy bestätigen"
+
+  - rule_id: SOT-P1-164
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [103, 251]
+    section: "Token Economics & Distribution"
+    subsection: "cross_validation"
+    title: "Utility & Economics Burn Mechanism Consistency"
+    original_text: "[Cross-Ref: Lines 103-143 Utility Framework + Lines 145-251 Economics]"
+    category: "token_framework"
+    priority: "must"
+    description: "Burn mechanisms MÜSSEN konsistent sein zwischen utility_definitions und token_economics"
+    enforcement: "CROSS-VALIDATION: Burn policy consistency"
+    evidence_schema:
+      type: "cross_file_validation"
+      files:
+        - "20_foundation/tokenomics/utility_definitions.yaml"
+        - "20_foundation/tokenomics/token_economics.yaml"
+      fields_to_match:
+        - "deflationary burn mechanisms"
+        - "governance burn policies"
+      validation: "KEINE Widersprüche zwischen Dateien erlaubt"
+
+  - rule_id: SOT-P1-165
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: [27, 251]
+    section: "Token Economics & Distribution"
+    subsection: "cross_validation"
+    title: "Legal Safe Harbor & Economics Compliance Consistency"
+    original_text: "[Cross-Ref: Lines 27-101 Legal Safe Harbor + Lines 145-251 Economics]"
+    category: "token_framework"
+    priority: "must"
+    description: "Legal safe harbor claims MÜSSEN mit token economics policies übereinstimmen"
+    enforcement: "CROSS-VALIDATION: Legal compliance consistency"
+    evidence_schema:
+      type: "cross_file_validation"
+      files:
+        - "20_foundation/tokenomics/ssid_token_framework.yaml"
+        - "20_foundation/tokenomics/token_economics.yaml"
+      validation_points:
+        - "no_yield_promises consistency"
+        - "no_redemption_mechanism consistency"
+        - "utility_only token classification"
+      validation: "Legal claims MÜSSEN durch economics implementiert sein"
+
+  - rule_id: SOT-P1-166
+    source_file: SSID_structure_level3_part1_MAX.md
+    line_number: 198
+    section: "Token Economics & Distribution"
+    subsection: "governance_reference_integrity"
+    title: "Governance Defaults File Existence Requirement"
+    original_text: 'reference: "07_governance_legal/governance_defaults.yaml"'
+    category: "token_framework"
+    priority: "must"
+    description: "Referenced governance_defaults.yaml MUSS existieren und gültig sein"
+    enforcement: "FILE EXISTENCE CHECK: governance_defaults.yaml MUSS existieren"
+    evidence_schema:
+      type: "file_reference_integrity"
+      source_file: "20_foundation/tokenomics/token_economics.yaml"
+      source_field: "governance_controls.reference"
+      referenced_file: "07_governance_legal/governance_defaults.yaml"
+      validation: "Referenced file MUSS existieren, MUSS valid YAML sein, MUSS governance_parameters enthalten"
+
+# ====================================================================================
+# Integration Status
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 87
+  next_step: "Continue mit Lines 253-383 (Internationalization & Multi-Language Framework)"
+  pending_integration:
+    - "16_codex/contracts/sot/sot_contract.yaml"
+    - "03_core/validators/sot/sot_validator_core.py"
+    - "23_compliance/policies/sot/sot_policy.rego"
+    - "12_tooling/cli/sot_validator.py"
+    - "11_test_simulation/tests_compliance/test_sot_validator.py"
+
+# ====================================================================================
+# Running Total
+# ====================================================================================
+
+cumulative_extraction:
+  part1_lines_1_26: 4
+  part1_lines_27_101: 61
+  part1_lines_103_143: 32
+  part1_lines_145_251: 87
+  total_part1_so_far: 184
+  remaining_part1_sections: "Lines 253-383, 385+"

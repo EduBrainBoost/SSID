@@ -1,0 +1,1124 @@
+C:\Users\bibel\Documents\Github\SSID\12_tooling\cli\sot_audit_verifier.py:466: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  'timestamp': datetime.datetime.utcnow().isoformat()+"Z",
+{
+  "timestamp": "2025-10-17T11:57:57.481662Z",
+  "overall_score": 83.81,
+  "verdict": "PARTIAL",
+  "enhanced_mode": true,
+  "rules": {
+    "version": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/global_foundations_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 175,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3017b3c73191c36894e23e1929982571148ededfcafd2c4a25a50d5cdacaa80b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/global_foundations_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 96,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "988d3c611a5e503eb41e8b5cc3e5d73b4b87adeb9d2c4ecd9ad824b721c613d8"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_foundations.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 174,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1b72d2e97d9d1791568d80d56919c6c7924373f1b80924a395dbb62c77a7db4c"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "1 error occurred during loading: .\\23_compliance/policies/sot/global_foundations_policy.rego:91: rego_parse_error: unexpected identifier token: expected \\n or ; or }\n\t    input.deprecated == true or input.deprecated == false\n\t                             ^\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": false,
+          "error": "Tests failed: -303\n23_compliance\\anti_gaming\\scan_unexpected_activity_windows.py     161    161     0%   15-357\n---------------------------------------------------------------------------------------------\nTOTAL                                                            1255   1255     0%\nCoverage XML written to file 23_compliance/evidence/coverage/coverage.xml\nFAIL Required test coverage of 80% not reached. Total coverage: 0.00%\n====================== 5 passed, 32 deselected in 0.66s =======================\n"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "date": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/global_foundations_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 175,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3017b3c73191c36894e23e1929982571148ededfcafd2c4a25a50d5cdacaa80b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/global_foundations_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 96,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "988d3c611a5e503eb41e8b5cc3e5d73b4b87adeb9d2c4ecd9ad824b721c613d8"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_foundations.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 174,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1b72d2e97d9d1791568d80d56919c6c7924373f1b80924a395dbb62c77a7db4c"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "1 error occurred during loading: .\\23_compliance/policies/sot/global_foundations_policy.rego:91: rego_parse_error: unexpected identifier token: expected \\n or ; or }\n\t    input.deprecated == true or input.deprecated == false\n\t                             ^\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": false,
+          "error": "Tests failed: -303\n23_compliance\\anti_gaming\\scan_unexpected_activity_windows.py     161    161     0%   15-357\n---------------------------------------------------------------------------------------------\nTOTAL                                                            1255   1255     0%\nCoverage XML written to file 23_compliance/evidence/coverage/coverage.xml\nFAIL Required test coverage of 80% not reached. Total coverage: 0.00%\n====================== 5 passed, 32 deselected in 0.68s =======================\n"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "deprecated": {
+      "score": 78.95,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/deprecation_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 133,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "2b1b05f1752d5d7d3682bdfd7f8fbffb17fb813197882dc7c90ef7a082f8d6ad"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/deprecation_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 91,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "73c5d2008ed18dded1197b6eccaeab0b8638b1ac3de11fef29013e1495ca0ffb"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/deprecation_tracking.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 47,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ab60b1930a75bc450b8b62f0afbdd534d6c22acbae864e49648f4c2db550eac0"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": false,
+          "function_callable": false,
+          "returns_valid_tuple": false,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "16 errors occurred during loading:\n.\\23_compliance/policies/sot/deprecation_policy.rego:16: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:16: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:24: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:24: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:31: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:31: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:38: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:38: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:45: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:45: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:52: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:52: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:59: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:59: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:66: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:66: rego_parse_error: `contains` keyword is required for partial set rules\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": false,
+          "error": "Tests failed: -303\n23_compliance\\anti_gaming\\scan_unexpected_activity_windows.py     161    161     0%   15-357\n---------------------------------------------------------------------------------------------\nTOTAL                                                            1255   1255     0%\nCoverage XML written to file 23_compliance/evidence/coverage/coverage.xml\nFAIL Required test coverage of 80% not reached. Total coverage: 0.00%\n====================== 6 passed, 31 deselected in 0.64s =======================\n"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "regulatory_basis": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/global_foundations_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 175,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3017b3c73191c36894e23e1929982571148ededfcafd2c4a25a50d5cdacaa80b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/global_foundations_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 96,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "988d3c611a5e503eb41e8b5cc3e5d73b4b87adeb9d2c4ecd9ad824b721c613d8"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_foundations.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 174,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1b72d2e97d9d1791568d80d56919c6c7924373f1b80924a395dbb62c77a7db4c"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "1 error occurred during loading: .\\23_compliance/policies/sot/global_foundations_policy.rego:91: rego_parse_error: unexpected identifier token: expected \\n or ; or }\n\t    input.deprecated == true or input.deprecated == false\n\t                             ^\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": false,
+          "error": "Tests failed: -303\n23_compliance\\anti_gaming\\scan_unexpected_activity_windows.py     161    161     0%   15-357\n---------------------------------------------------------------------------------------------\nTOTAL                                                            1255   1255     0%\nCoverage XML written to file 23_compliance/evidence/coverage/coverage.xml\nFAIL Required test coverage of 80% not reached. Total coverage: 0.00%\n====================== 5 passed, 32 deselected in 0.66s =======================\n"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "classification": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/global_foundations_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 175,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3017b3c73191c36894e23e1929982571148ededfcafd2c4a25a50d5cdacaa80b"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/global_foundations_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 96,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "988d3c611a5e503eb41e8b5cc3e5d73b4b87adeb9d2c4ecd9ad824b721c613d8"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_foundations.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 174,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "1b72d2e97d9d1791568d80d56919c6c7924373f1b80924a395dbb62c77a7db4c"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "1 error occurred during loading: .\\23_compliance/policies/sot/global_foundations_policy.rego:91: rego_parse_error: unexpected identifier token: expected \\n or ; or }\n\t    input.deprecated == true or input.deprecated == false\n\t                             ^\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": false,
+          "error": "Tests failed: -303\n23_compliance\\anti_gaming\\scan_unexpected_activity_windows.py     161    161     0%   15-357\n---------------------------------------------------------------------------------------------\nTOTAL                                                            1255   1255     0%\nCoverage XML written to file 23_compliance/evidence/coverage/coverage.xml\nFAIL Required test coverage of 80% not reached. Total coverage: 0.00%\n====================== 5 passed, 32 deselected in 0.66s =======================\n"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "ivms101_2023": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/fatf_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 135,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3246b9fef6861de61fbc32c694894d8ae785de49365e4247e241427463779893"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/fatf_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 75,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "128a7896fb8997f3b514d534cb04829f8867e494577040bbdbf85a74db14f621"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/fatf_travel_rule.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "2beb0173796caa67ca6e0c4659ce42f1abf2ada9efb085bfb5a4bc1b16f574e6"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "16 errors occurred during loading:\n.\\23_compliance/policies/sot/fatf_policy.rego:14: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:14: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:20: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:20: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:26: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:26: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:32: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:32: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:39: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:39: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:45: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:45: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:51: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:51: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:57: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:57: rego_parse_error: `contains` keyword is required for partial set rules\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": false,
+          "error": "Tests failed: -303\n23_compliance\\anti_gaming\\scan_unexpected_activity_windows.py     161    161     0%   15-357\n---------------------------------------------------------------------------------------------\nTOTAL                                                            1255   1255     0%\nCoverage XML written to file 23_compliance/evidence/coverage/coverage.xml\nFAIL Required test coverage of 80% not reached. Total coverage: 0.00%\n====================== 3 passed, 34 deselected in 0.65s =======================\n"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "fatf_rec16_2025_update": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/fatf_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 135,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "3246b9fef6861de61fbc32c694894d8ae785de49365e4247e241427463779893"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/fatf_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 75,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "128a7896fb8997f3b514d534cb04829f8867e494577040bbdbf85a74db14f621"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/fatf_travel_rule.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "2beb0173796caa67ca6e0c4659ce42f1abf2ada9efb085bfb5a4bc1b16f574e6"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "16 errors occurred during loading:\n.\\23_compliance/policies/sot/fatf_policy.rego:14: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:14: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:20: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:20: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:26: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:26: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:32: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:32: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:39: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:39: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:45: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:45: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:51: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:51: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/fatf_policy.rego:57: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/fatf_policy.rego:57: rego_parse_error: `contains` keyword is required for partial set rules\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": false,
+          "error": "Tests failed: -303\n23_compliance\\anti_gaming\\scan_unexpected_activity_windows.py     161    161     0%   15-357\n---------------------------------------------------------------------------------------------\nTOTAL                                                            1255   1255     0%\nCoverage XML written to file 23_compliance/evidence/coverage/coverage.xml\nFAIL Required test coverage of 80% not reached. Total coverage: 0.00%\n====================== 2 passed, 35 deselected in 0.67s =======================\n"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "xml_schema_2025_07": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/oecd_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 89,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "5cdc4382b66ab231ab94ef8aae73523f023d0958c897ecc861916dae8b69c281"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/oecd_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 44,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "6dc05c1f7068d22978e505fffe5493f5de66e9afdd56105e8ee2d0e57488740c"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/oecd_carf.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 33,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "5a0f3db932a556e3ba9602c01a45f9cd4ee050037955c8bd72e16dfbf059d439"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "8 errors occurred during loading:\n.\\23_compliance/policies/sot/oecd_policy.rego:13: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/oecd_policy.rego:13: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/oecd_policy.rego:19: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/oecd_policy.rego:19: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/oecd_policy.rego:25: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/oecd_policy.rego:25: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/oecd_policy.rego:31: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/oecd_policy.rego:31: rego_parse_error: `contains` keyword is required for partial set rules\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": false,
+          "test_runs": false,
+          "test_passes": false,
+          "error": "Test class TestOECD_CARF not found"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "iso24165_dti": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/iso_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 89,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "c6974e6b050eca1da653143d4860dd90fe5979cc9ca89fe575b4f98cfd4fd42d"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/iso_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 44,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "0acf28f442d7bf7aa6b8df254ee90a2c6c78a32e0e13f0586adc1c0deb7a03c6"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/iso_standards.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 33,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "9a30abf1f69f2d467efacb066e458f3c462a22f24aa5e333ab5fcef0fd35e3c6"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "8 errors occurred during loading:\n.\\23_compliance/policies/sot/iso_policy.rego:13: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/iso_policy.rego:13: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/iso_policy.rego:19: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/iso_policy.rego:19: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/iso_policy.rego:25: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/iso_policy.rego:25: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/iso_policy.rego:31: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/iso_policy.rego:31: rego_parse_error: `contains` keyword is required for partial set rules\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": false,
+          "test_runs": false,
+          "test_passes": false,
+          "error": "Test class TestISO24165 not found"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "fsb_stablecoins_2023": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/standards_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 197,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "f7346e9e0bcb80642a1ed2a865d396e76f2316b92c29b61e78175bb15e0ac2d8"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/standards_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "720bcb66be30bbdc9f6799148f756802ffe5d990e7be879cfff9cb739a1d1779"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_standards.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 56,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e557498b23c1f1214f983bdbf7e2e038e13b90233c88cb7d9635331e238d8819"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "24 errors occurred during loading:\n.\\23_compliance/policies/sot/standards_policy.rego:13: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:13: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:19: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:19: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:25: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:25: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:31: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:31: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:38: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:38: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:44: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:44: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:50: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:50: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:56: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:56: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:63: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:63: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:69: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:69: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:75: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:75: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:81: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:81: rego_parse_error: `contains` keyword is required for partial set rules\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": false,
+          "test_runs": false,
+          "test_passes": false,
+          "error": "Test class TestFSB_Stablecoins not found"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "iosco_crypto_markets_2023": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/standards_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 197,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "f7346e9e0bcb80642a1ed2a865d396e76f2316b92c29b61e78175bb15e0ac2d8"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/standards_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "720bcb66be30bbdc9f6799148f756802ffe5d990e7be879cfff9cb739a1d1779"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_standards.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 56,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e557498b23c1f1214f983bdbf7e2e038e13b90233c88cb7d9635331e238d8819"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "24 errors occurred during loading:\n.\\23_compliance/policies/sot/standards_policy.rego:13: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:13: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:19: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:19: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:25: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:25: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:31: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:31: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:38: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:38: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:44: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:44: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:50: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:50: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:56: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:56: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:63: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:63: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:69: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:69: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:75: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:75: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:81: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:81: rego_parse_error: `contains` keyword is required for partial set rules\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": false,
+          "test_runs": false,
+          "test_passes": false,
+          "error": "Test class TestIOSCO_Crypto not found"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "nist_ai_rmf_1_0": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/standards_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 197,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "f7346e9e0bcb80642a1ed2a865d396e76f2316b92c29b61e78175bb15e0ac2d8"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/standards_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 101,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "720bcb66be30bbdc9f6799148f756802ffe5d990e7be879cfff9cb739a1d1779"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/global_standards.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 56,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "e557498b23c1f1214f983bdbf7e2e038e13b90233c88cb7d9635331e238d8819"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "24 errors occurred during loading:\n.\\23_compliance/policies/sot/standards_policy.rego:13: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:13: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:19: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:19: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:25: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:25: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:31: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:31: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:38: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:38: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:44: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:44: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:50: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:50: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:56: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:56: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:63: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:63: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:69: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:69: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:75: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:75: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/standards_policy.rego:81: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/standards_policy.rego:81: rego_parse_error: `contains` keyword is required for partial set rules\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": false,
+          "test_runs": false,
+          "test_passes": false,
+          "error": "Test class TestNIST_AI_RMF not found"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    },
+    "deprecated_standards_tracking": {
+      "score": 84.21,
+      "artifacts": [
+        {
+          "path": ".\\03_core/validators/sot/deprecation_validators.py",
+          "type": "python",
+          "exists": true,
+          "lines": 133,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "2b1b05f1752d5d7d3682bdfd7f8fbffb17fb813197882dc7c90ef7a082f8d6ad"
+        },
+        {
+          "path": ".\\23_compliance/policies/sot/deprecation_policy.rego",
+          "type": "rego",
+          "exists": true,
+          "lines": 91,
+          "min_lines": 20,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "73c5d2008ed18dded1197b6eccaeab0b8638b1ac3de11fef29013e1495ca0ffb"
+        },
+        {
+          "path": ".\\16_codex/contracts/sot/deprecation_tracking.yaml",
+          "type": "yaml",
+          "exists": true,
+          "lines": 47,
+          "min_lines": 15,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "ab60b1930a75bc450b8b62f0afbdd534d6c22acbae864e49648f4c2db550eac0"
+        },
+        {
+          "path": ".\\12_tooling/cli/sot_validator.py",
+          "type": "cli",
+          "exists": true,
+          "lines": 393,
+          "min_lines": 50,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "99391539dfd63306b6e90697ab4a6cc30af9d76ba0b6f9537842d426f55f01d6"
+        },
+        {
+          "path": ".\\11_test_simulation/tests_compliance/test_sot_rules.py",
+          "type": "tests",
+          "exists": true,
+          "lines": 439,
+          "min_lines": 40,
+          "ok_lines": true,
+          "ok_tokens": true,
+          "sha256": "611ce99df235cb812421db0cd033601ce746cdb90b341bef9cece9de48a83ad2"
+        }
+      ],
+      "enhanced_checks": {
+        "python_functional": {
+          "importable": true,
+          "function_exists": true,
+          "function_callable": true,
+          "returns_valid_tuple": true,
+          "error": null
+        },
+        "rego_correctness": {
+          "opa_available": true,
+          "syntax_valid": false,
+          "has_package": true,
+          "has_rules": true,
+          "error": "16 errors occurred during loading:\n.\\23_compliance/policies/sot/deprecation_policy.rego:16: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:16: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:24: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:24: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:31: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:31: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:38: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:38: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:45: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:45: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:52: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:52: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:59: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:59: rego_parse_error: `contains` keyword is required for partial set rules\n.\\23_compliance/policies/sot/deprecation_policy.rego:66: rego_parse_error: `if` keyword is required before rule body\n.\\23_compliance/policies/sot/deprecation_policy.rego:66: rego_parse_error: `contains` keyword is required for partial set rules\n"
+        },
+        "test_coverage": {
+          "pytest_available": true,
+          "test_exists": true,
+          "test_runs": true,
+          "test_passes": false,
+          "error": "Tests failed: -303\n23_compliance\\anti_gaming\\scan_unexpected_activity_windows.py     161    161     0%   15-357\n---------------------------------------------------------------------------------------------\nTOTAL                                                            1255   1255     0%\nCoverage XML written to file 23_compliance/evidence/coverage/coverage.xml\nFAIL Required test coverage of 80% not reached. Total coverage: 0.00%\n====================== 3 passed, 34 deselected in 0.65s =======================\n"
+        },
+        "integration": {
+          "python_imports": true,
+          "cli_references_function": false,
+          "cli_has_command": false,
+          "integration_valid": false,
+          "error": "CLI check failed: 'charmap' codec can't decode byte 0x9d in position 5776: character maps to <undefined>"
+        }
+      }
+    }
+  }
+}
+Traceback (most recent call last):
+  File "C:\Users\bibel\Documents\Github\SSID\12_tooling\cli\sot_audit_verifier.py", line 536, in <module>
+    main()
+  File "C:\Users\bibel\Documents\Github\SSID\12_tooling\cli\sot_audit_verifier.py", line 525, in main
+    print(f"\n\U0001f4c4 Full report saved: {outp}")
+  File "C:\Users\bibel\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f4c4' in position 2: character maps to <undefined>

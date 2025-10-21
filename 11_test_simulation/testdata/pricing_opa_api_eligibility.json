@@ -1,0 +1,178 @@
+{
+  "description": "API Rate Limit Tier Eligibility Validation",
+  "api_tier_requirements": {
+    "basic": {"min_tier": "S1", "max_requests_per_min": 100},
+    "standard": {"min_tier": "S2", "max_requests_per_min": 1000},
+    "premium": {"min_tier": "S3", "max_requests_per_min": 5000},
+    "enterprise": {"min_tier": "E2", "max_requests_per_min": 10000},
+    "enterprise_plus": {"min_tier": "E5", "max_requests_per_min": 200000}
+  },
+  "test_scenarios": [
+    {
+      "name": "S1 Basic API - Valid",
+      "input": {
+        "model": {
+          "tier_id": "S1",
+          "base_price_eur": 500,
+          "api_access_level": "basic"
+        },
+        "rate_limit": {
+          "tier": "S1",
+          "requests_per_minute": 100
+        }
+      },
+      "expected_allow": true,
+      "expected_result": {
+        "api_tier_eligible": true,
+        "rate_limit_within_bounds": true
+      }
+    },
+    {
+      "name": "S2 Standard API - Valid",
+      "input": {
+        "model": {
+          "tier_id": "S2",
+          "base_price_eur": 2000,
+          "api_access_level": "standard"
+        },
+        "rate_limit": {
+          "tier": "S2",
+          "requests_per_minute": 1000
+        }
+      },
+      "expected_allow": true,
+      "expected_result": {
+        "api_tier_eligible": true,
+        "rate_limit_within_bounds": true
+      }
+    },
+    {
+      "name": "E2 Enterprise API - Valid",
+      "input": {
+        "model": {
+          "tier_id": "E2",
+          "base_price_eur": 50000,
+          "api_access_level": "enterprise"
+        },
+        "rate_limit": {
+          "tier": "E2",
+          "requests_per_minute": 10000,
+          "overage_price_per_1k_eur": 0.15
+        }
+      },
+      "expected_allow": true,
+      "expected_result": {
+        "api_tier_eligible": true,
+        "rate_limit_within_bounds": true,
+        "overage_pricing_enabled": true
+      }
+    },
+    {
+      "name": "E5 Enterprise Plus API - Valid",
+      "input": {
+        "model": {
+          "tier_id": "E5",
+          "base_price_eur": 500000,
+          "api_access_level": "enterprise_plus"
+        },
+        "rate_limit": {
+          "tier": "E5",
+          "requests_per_minute": 200000,
+          "overage_price_per_1k_eur": 0.05,
+          "dynamic_overage": true
+        }
+      },
+      "expected_allow": true,
+      "expected_result": {
+        "api_tier_eligible": true,
+        "rate_limit_within_bounds": true,
+        "overage_pricing_enabled": true,
+        "dynamic_overage_enabled": true
+      }
+    },
+    {
+      "name": "S1 Attempting Enterprise API - Invalid",
+      "input": {
+        "model": {
+          "tier_id": "S1",
+          "base_price_eur": 500,
+          "api_access_level": "enterprise"
+        },
+        "rate_limit": {
+          "tier": "S1",
+          "requests_per_minute": 10000
+        }
+      },
+      "expected_allow": false,
+      "expected_result": {
+        "api_tier_eligible": false,
+        "violation": "api_tier_not_eligible",
+        "current_tier": "S1",
+        "minimum_required_tier": "E2"
+      }
+    },
+    {
+      "name": "S2 Exceeding Rate Limit - Invalid",
+      "input": {
+        "model": {
+          "tier_id": "S2",
+          "base_price_eur": 2000,
+          "api_access_level": "standard"
+        },
+        "rate_limit": {
+          "tier": "S2",
+          "requests_per_minute": 5000
+        }
+      },
+      "expected_allow": false,
+      "expected_result": {
+        "api_tier_eligible": true,
+        "rate_limit_within_bounds": false,
+        "violation": "rate_limit_exceeds_tier_max",
+        "max_allowed": 1000,
+        "requested": 5000
+      }
+    },
+    {
+      "name": "E3 Missing Overage Pricing - Invalid",
+      "input": {
+        "model": {
+          "tier_id": "E3",
+          "base_price_eur": 150000,
+          "api_access_level": "enterprise"
+        },
+        "rate_limit": {
+          "tier": "E3",
+          "requests_per_minute": 50000
+        }
+      },
+      "expected_allow": false,
+      "expected_result": {
+        "api_tier_eligible": true,
+        "violation": "overage_pricing_required_for_enterprise_tier",
+        "tier": "E3"
+      }
+    },
+    {
+      "name": "S3 Attempting Enterprise Plus API - Invalid",
+      "input": {
+        "model": {
+          "tier_id": "S3",
+          "base_price_eur": 5000,
+          "api_access_level": "enterprise_plus"
+        },
+        "rate_limit": {
+          "tier": "S3",
+          "requests_per_minute": 200000
+        }
+      },
+      "expected_allow": false,
+      "expected_result": {
+        "api_tier_eligible": false,
+        "violation": "api_tier_not_eligible",
+        "current_tier": "S3",
+        "minimum_required_tier": "E5"
+      }
+    }
+  ]
+}

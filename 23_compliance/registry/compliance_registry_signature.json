@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "signature_type": "compliance_registry_pqc",
+  "signed_at": "2025-10-17T10:29:44.428625+00:00",
+  "payload": {
+    "global_merkle_root": "b1869b8ac88d3bda08cebb7c0d5e9e736e23fc13cce889bd3cdddae47528499c",
+    "metadata": {
+      "total_rules": 19,
+      "total_manifestations": 76,
+      "compliance_score": 0.0,
+      "generated_at": "2025-10-17T10:14:06.150634Z",
+      "registry_version": "1.0.0"
+    },
+    "standard_merkle_roots": {
+      "soc2": "c88323ada6a0b163d19275f2b344d66e69bc6e34c23e50acc86a7183abcef8af",
+      "gaia_x": "da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851",
+      "etsi_en_319_421": "da520a02b84e3fee0a08cbfe25d942e71412eddf3023c83eba68d61c6d5aa851"
+    }
+  },
+  "message_hash": "628b28ba8f1cd11e9103e36edab71e5496b10f2747619f5ae0b48ae154602bdd",
+  "signature": {
+    "algorithm": "Dilithium2",
+    "backend": "placeholder-hmac-sha256",
+    "signature_bytes": "5e88f24009712aedb0c0670b67921f4dd25cb59b257db2d97c4cefbf5829b3f7",
+    "signature_size": 32,
+    "created_at": "2025-10-17T10:29:44.419468+00:00"
+  },
+  "public_key": {
+    "algorithm": "Dilithium2",
+    "backend": "placeholder-hmac-sha256",
+    "key_bytes": "e89443c7a009b9fde1c6ea14b993d31dfafc74333f5f25670edd96eef993189a",
+    "key_type": "public",
+    "created_at": "2025-10-17T10:29:44.409341+00:00"
+  },
+  "verification": {
+    "can_verify_with": "python 23_compliance/registry/verify_pqc_signature.py",
+    "public_key_path": "21_post_quantum_crypto\\keys\\compliance_registry.pub",
+    "registry_path": "23_compliance/registry/compliance_registry.json"
+  }
+}

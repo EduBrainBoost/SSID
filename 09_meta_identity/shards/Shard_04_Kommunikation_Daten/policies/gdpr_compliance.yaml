@@ -1,0 +1,118 @@
+# Policy: GDPR Compliance
+version: 1.0.0
+policy_id: "gdpr_09_04"
+
+scope:
+  - "EU Data Subjects"
+  - "communication domain"
+
+rights:
+  right_to_access:
+    enabled: true
+    response_time_days: 30
+    format: "JSON"
+    includes:
+      - "all_hashes"
+      - "metadata"
+      - "audit_trail"
+  
+  right_to_erasure:
+    enabled: true
+    mechanism: "hash_rotation"
+    implementation: "new_pepper_invalidates_old_hashes"
+    retention_override: "legal_hold_only"
+  
+  right_to_portability:
+    enabled: true
+    format: "JSON"
+    scope: "all_user_hashes"
+  
+  right_to_rectification:
+    enabled: true
+    mechanism: "new_hash_generation"
+
+purpose_limitation:
+  allowed_purposes:
+    - "Nachrichten, APIs processing"
+    - "audit_trail"
+    - "compliance_reporting"
+  forbidden_purposes:
+    - "marketing"
+    - "profiling_without_consent"
+
+data_minimization:
+  principle: "hash_only_no_raw_data"
+  enforcement: "automatic"
+
+consent:
+  required_for:
+    - "data_processing"
+    - "hash_storage"
+  granularity: "per_purpose"
+  withdrawal: "immediate_effect"
+
+breach_notification:
+  authority_notification_hours: 72
+  data_subject_notification: "without_undue_delay"
+  documentation_required: true
+
+# International Regulatory Compliance Extensions
+international_compliance:
+
+  # Singapore - MAS PDPA (Monetary Authority of Singapore - Personal Data Protection Act)
+  singapore_mas_pdpa:
+    reference: "PDPA 2012 (amended 2020)"
+    authority: "Personal Data Protection Commission (PDPC)"
+    key_requirements:
+      consent_management: true
+      purpose_limitation: true
+      breach_notification_hours: 72
+      breach_threshold: "500+ individuals OR significant harm likely"
+      cross_border_transfers: "adequacy or consent required"
+      data_portability: true
+    contact: "dpo-sg@ssid.eu"
+
+  # Japan - JFSA APPI (Japan Financial Services Agency - Act on Protection of Personal Information)
+  japan_jfsa_appi:
+    reference: "APPI (amended 2020, effective 2022)"
+    authority: "Personal Information Protection Commission (PPC)"
+    key_requirements:
+      pseudonymization: "encouraged for secondary purposes"
+      cross_border_transfers: "consent or adequacy required"
+      breach_notification: "without delay if high risk"
+      record_keeping: "mandatory for data handling practices"
+      third_party_provision: "track and notify users"
+    contact: "dpo-jp@ssid.eu"
+
+  # Australia - Privacy Act 1988
+  australia_privacy_act:
+    reference: "Privacy Act 1988 (Cth)"
+    authority: "Office of the Australian Information Commissioner (OAIC)"
+    key_principles:
+      app1: "Open and transparent management of personal information"
+      app3: "Collection of solicited personal information"
+      app5: "Notification of collection"
+      app6: "Use or disclosure of personal information"
+      app8: "Cross-border disclosure with protections"
+      app11: "Security of personal information - ISO 27001 controls"
+      app12: "Access to personal information"
+      app13: "Correction of personal information"
+    app11_security_standard: "ISO/IEC 27001:2022"
+    breach_notification:
+      trigger: "likely serious harm"
+      timeline: "as soon as practicable"
+      notify_oaic: true
+      notify_individuals: true
+    contact: "privacy-au@ssid.eu"
+
+# Cross-Border Data Transfer Mechanisms
+cross_border_transfers:
+  enabled: true
+  mechanisms:
+    - "EU-Japan adequacy decision"
+    - "EU-Singapore adequacy assessment"
+    - "Standard contractual clauses (SCCs)"
+    - "Binding corporate rules (BCRs)"
+    - "Explicit user consent"
+  assessment_required: true
+  documentation: "Transfer impact assessments in 07_governance_legal/"

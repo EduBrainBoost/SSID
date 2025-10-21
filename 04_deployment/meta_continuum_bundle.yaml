@@ -1,0 +1,33 @@
+version: "1.0"
+name: "v11_meta_continuum_readiness_bundle"
+mode: "SPEC_ONLY_SINGLE_SYSTEM"
+inputs:
+  policy: "02_audit_logging/config/meta_continuum_readiness_policy.yaml"
+  rego: "23_compliance/policies/meta_continuum_guard.rego"
+  tooling: "12_tooling/meta_continuum_certification.py"
+  tests:
+    - "11_test_simulation/test_meta_continuum_readiness.py"
+  pytest_conf: "11_test_simulation/pytest_conf.yaml"
+outputs:
+  report_md: "02_audit_logging/reports/meta_continuum_readiness_report.md"
+  score_json: "02_audit_logging/reports/meta_continuum_readiness_score.json"
+  artifact_hashes: "02_audit_logging/reports/meta_continuum_artifact_hashes.json"
+  merkle_root: "02_audit_logging/reports/meta_continuum_merkle_root.json"
+  registry_entry: "23_compliance/registry/v11_meta_continuum_readiness_entry.json"
+  evidence: "23_compliance/evidence/v11_meta_continuum_readiness_evidence.json"
+ci:
+  steps:
+    - run: "python 12_tooling/meta_continuum_certification.py"
+    - run: "pytest -q 11_test_simulation/test_meta_continuum_readiness.py -c 11_test_simulation/pytest_conf.yaml"
+gates:
+  - "G1_SINGLE_SYSTEM_SCOPE"
+  - "G2_NO_BIDIRECTIONAL_CLAIMS"
+  - "G3_DETERMINISTIC_HASHING"
+  - "G4_CI_CLEAN_EXIT"
+  - "G5_EVIDENCE_COMPLETENESS"
+hashing:
+  algorithm: "SHA-512"
+  canonicalize:
+    line_endings: "LF"
+    trim_trailing_spaces: true
+    stable_sort: true

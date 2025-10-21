@@ -1,0 +1,25 @@
+# Meta-Interfederation Proof Oracles
+version: 11.0.0
+oracle_type: BIDIRECTIONAL_CO_TRUTH
+generation_date: 2025-10-12T18:24:47.338182+00:00
+
+oracles:
+  SSID_to_OpenCore:
+    trust_score: 0.95
+    semantic_alignment: 95.0
+    status: ACTIVE
+  
+  SSID_to_GovChain:
+    trust_score: 0.92
+    semantic_alignment: 92.0
+    status: ACTIVE
+  
+  SSID_to_TrustNet:
+    trust_score: 0.97
+    semantic_alignment: 97.0
+    status: ACTIVE
+
+reflexive_symmetry:
+  enabled: true
+  symmetry_score: 0.948
+  validation: PASSED

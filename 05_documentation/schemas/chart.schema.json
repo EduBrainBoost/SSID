@@ -1,0 +1,322 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ssid.dev/schemas/chart.v1.json",
+  "title": "RootChart",
+  "description": "Schema for SSID Root Chart governance files (chart.yaml)",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": {
+      "type": "string",
+      "const": "ssid/root/v1",
+      "description": "API version identifier"
+    },
+    "kind": {
+      "type": "string",
+      "const": "RootChart",
+      "description": "Resource kind"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["name", "version", "description", "created", "status"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z_]+$",
+          "description": "Root name (lowercase with underscores)"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Semantic version"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Human-readable description"
+        },
+        "created": {
+          "type": "string",
+          "format": "date",
+          "description": "Creation date (YYYY-MM-DD)"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["bootstrap", "active", "deprecated", "archived"],
+          "description": "Current lifecycle status"
+        }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "required": ["capabilities", "interfaces", "policies", "dependencies", "governance", "compliance"],
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "description": "List of capabilities provided by this root"
+        },
+        "interfaces": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "type"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Interface name"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["rest_api", "grpc", "websocket", "async_queue", "cli", "web", "database", "git", "internal", "terraform", "gitops", "prometheus", "opentelemetry", "fluentd", "kafka", "airflow", "pytest", "locust", "opa", "didcomm", "command_line", "template_engine", "universal_resolver", "sqlalchemy", "alembic", "openapi", "json_schema", "smart_contract", "wasm", "oauth2_oidc", "postgresql", "redis", "worm_storage", "webhook", "react"],
+                "description": "Interface type"
+              },
+              "authentication": {
+                "type": "string",
+                "enum": ["required", "optional", "none", "internal", "developer", "ci_only", "session_based", "client_side", "token_based", "api_key", "password", "sasl", "github_app", "wallet", "e2e"],
+                "description": "Authentication requirement"
+              },
+              "authorization": {
+                "type": "string",
+                "description": "Authorization mechanism (e.g., rbac)"
+              },
+              "standard": {
+                "type": "string",
+                "description": "Standard compliance (e.g., w3c_did_core, oauth2_oidc)"
+              },
+              "rate_limit": {
+                "type": "string",
+                "description": "Rate limit specification"
+              },
+              "encryption": {
+                "type": "string",
+                "enum": ["e2e", "tls"],
+                "description": "Encryption requirement"
+              },
+              "version": {
+                "type": "string",
+                "description": "Interface version"
+              },
+              "blockchain": {
+                "type": "string",
+                "description": "Blockchain network (for smart contracts)"
+              }
+            }
+          },
+          "description": "External and internal interfaces"
+        },
+        "policies": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "enforcement", "scope"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Policy name"
+              },
+              "enforcement": {
+                "type": "string",
+                "enum": ["automated", "manual", "manual_review", "continuous"],
+                "description": "Enforcement type"
+              },
+              "scope": {
+                "type": "string",
+                "description": "Policy scope"
+              },
+              "mechanism": {
+                "type": "string",
+                "description": "Implementation mechanism"
+              },
+              "action": {
+                "type": "string",
+                "description": "Action on violation"
+              },
+              "violation_action": {
+                "type": "string",
+                "description": "Action on violation"
+              },
+              "threshold": {
+                "type": "string",
+                "description": "Threshold value"
+              },
+              "frequency": {
+                "type": "string",
+                "description": "Check frequency"
+              },
+              "duration_years": {
+                "type": "integer",
+                "description": "Duration in years"
+              },
+              "duration_days": {
+                "type": "integer",
+                "description": "Duration in days"
+              },
+              "duration_minutes": {
+                "type": "integer",
+                "description": "Duration in minutes"
+              },
+              "approvers": {
+                "type": "integer",
+                "description": "Number of approvers required"
+              },
+              "approvers_required": {
+                "type": "integer",
+                "description": "Number of approvers required"
+              },
+              "min_entropy": {
+                "type": "string",
+                "description": "Minimum entropy requirement"
+              },
+              "standard": {
+                "type": "string",
+                "description": "Standard compliance"
+              },
+              "strategy": {
+                "type": "string",
+                "description": "Strategy used"
+              },
+              "level": {
+                "type": "string",
+                "description": "Policy level"
+              },
+              "language": {
+                "type": "string",
+                "description": "Implementation language"
+              },
+              "algorithms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Allowed algorithms"
+              },
+              "frequency_days": {
+                "type": "integer",
+                "description": "Frequency in days"
+              },
+              "max_retries": {
+                "type": "integer",
+                "description": "Maximum retry attempts"
+              },
+              "max_seconds": {
+                "type": "integer",
+                "description": "Maximum duration in seconds"
+              },
+              "max_connections": {
+                "type": "integer",
+                "description": "Maximum connections"
+              },
+              "min_k": {
+                "type": "integer",
+                "description": "Minimum k-anonymity"
+              },
+              "rate": {
+                "type": "string",
+                "description": "Rate specification"
+              },
+              "disclosure_required": {
+                "type": "boolean",
+                "description": "Whether disclosure is required"
+              },
+              "min_participation": {
+                "type": "string",
+                "description": "Minimum participation requirement"
+              }
+            }
+          },
+          "description": "Governance policies"
+        },
+        "dependencies": {
+          "type": "object",
+          "required": ["internal"],
+          "properties": {
+            "internal": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^\\d{2}_[a-z_]+$"
+                  },
+                  {
+                    "type": "string",
+                    "const": "all_roots"
+                  }
+                ]
+              },
+              "description": "Internal root dependencies"
+            },
+            "external": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "description": "External dependencies with version constraints"
+            }
+          },
+          "description": "Dependency specifications"
+        },
+        "governance": {
+          "type": "object",
+          "required": ["maintainer", "reviewers", "approval_required", "data_classification"],
+          "properties": {
+            "maintainer": {
+              "type": "string",
+              "description": "Primary maintainer team"
+            },
+            "reviewers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Required reviewer teams"
+            },
+            "approval_required": {
+              "type": "boolean",
+              "description": "Whether approval is required for changes"
+            },
+            "data_classification": {
+              "type": "string",
+              "enum": ["public", "internal", "confidential", "highly_confidential"],
+              "description": "Data classification level"
+            }
+          },
+          "description": "Governance structure"
+        },
+        "compliance": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": true,
+          "description": "Regulatory compliance mappings (DSGVO, DORA, MiCA, etc.)"
+        }
+      }
+    }
+  }
+}

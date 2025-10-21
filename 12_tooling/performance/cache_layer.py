@@ -28,13 +28,11 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
 class CacheTier(Enum):
     """Cache tier enumeration"""
     L1_MEMORY = "l1_memory"
     L2_REDIS = "l2_redis"
     L3_DATABASE = "l3_database"
-
 
 class CacheEvictionPolicy(Enum):
     """Cache eviction policy"""
@@ -42,7 +40,6 @@ class CacheEvictionPolicy(Enum):
     LFU = "lfu"  # Least Frequently Used
     FIFO = "fifo"  # First In First Out
     TTL = "ttl"  # Time To Live
-
 
 @dataclass
 class CacheEntry:
@@ -73,7 +70,6 @@ class CacheEntry:
             "tier": self.tier.value
         }
 
-
 class CacheBackend(ABC):
     """Abstract cache backend interface"""
 
@@ -101,7 +97,6 @@ class CacheBackend(ABC):
     def get_stats(self) -> Dict[str, Any]:
         """Get cache statistics"""
         pass
-
 
 class L1MemoryCache(CacheBackend):
     """L1 in-memory LRU cache"""
@@ -224,7 +219,6 @@ class L1MemoryCache(CacheBackend):
             self.evictions += 1
             logger.info(f"L1 cache EVICTED (FIFO): {fifo_key}")
 
-
 class MultiTierCache:
     """Multi-tier caching system with fallback"""
 
@@ -310,10 +304,8 @@ class MultiTierCache:
             "timestamp": datetime.utcnow().isoformat()
         }
 
-
 # Global cache instance
 _cache_instance: Optional[MultiTierCache] = None
-
 
 def get_cache() -> MultiTierCache:
     """Get global cache instance (singleton)"""
@@ -321,7 +313,6 @@ def get_cache() -> MultiTierCache:
     if _cache_instance is None:
         _cache_instance = MultiTierCache()
     return _cache_instance
-
 
 def cached(ttl_seconds: int = 3600, key_prefix: str = ""):
     """
@@ -364,7 +355,6 @@ def cached(ttl_seconds: int = 3600, key_prefix: str = ""):
         return wrapper
     return decorator
 
-
 # Example usage function
 @cached(ttl_seconds=300, key_prefix="anti_gaming")
 def check_proof_reuse(proof_hash: str) -> Dict[str, Any]:
@@ -382,7 +372,6 @@ def check_proof_reuse(proof_hash: str) -> Dict[str, Any]:
         "last_seen": None,
         "is_suspicious": False
     }
-
 
 if __name__ == "__main__":
     # Demonstration

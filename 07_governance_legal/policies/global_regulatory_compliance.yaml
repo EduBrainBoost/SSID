@@ -1,0 +1,212 @@
+# Global Regulatory Compliance Policy
+# Covers all international regulatory frameworks applicable to SSID
+
+version: "1.0.0"
+last_updated: "2025-10-21"
+owner: "Legal & Compliance Team"
+scope: "All SSID Components"
+
+compliance_frameworks:
+  # Singapore Regulations
+  singapore:
+    mas_pdpa:
+      name: "Monetary Authority of Singapore - Personal Data Protection Act"
+      reference: "PDPA 2012 (amended 2020)"
+      authority: "Personal Data Protection Commission (PDPC)"
+      applicability: "All Singapore operations and data subjects"
+      key_requirements:
+        - consent_management: "Obtain valid consent before collection"
+        - purpose_limitation: "Use data only for disclosed purposes"
+        - breach_notification: "Notify PDPC within 3 days of awareness"
+        - cross_border: "Ensure adequate level of protection for transfers"
+        - data_portability: "Enable data subject portability requests"
+      implementation:
+        - "Consent tracking in all APIs"
+        - "Purpose declarations in policies/"
+        - "Breach notification procedures documented"
+        - "Cross-border transfer assessments"
+      contacts:
+        dpo_singapore: "dpo-sg@ssid.eu"
+
+    breach_notification:
+      timeline: "72 hours to PDPC"
+      threshold: "500+ individuals affected OR significant harm likely"
+      documentation: "Incident response plan per DORA"
+
+    consent_purposes:
+      documented: true
+      granular: true
+      withdrawable: true
+      locations:
+        - "*/shards/*/policies/consent_management.yaml"
+        - "*/shards/*/contracts/*.openapi.yaml"
+
+  # Japan Regulations
+  japan:
+    jfsa_appi:
+      name: "Japan Financial Services Agency - Act on Protection of Personal Information"
+      reference: "APPI (amended 2020, effective 2022)"
+      authority: "Personal Information Protection Commission (PPC)"
+      applicability: "All Japan operations and data subjects"
+      key_requirements:
+        - pseudonymization: "Encourage use for secondary purposes"
+        - cross_border: "Consent or adequacy required for transfers"
+        - breach_notification: "Notify PPC without delay if high risk"
+        - record_keeping: "Maintain records of data handling practices"
+        - third_party_provision: "Track and notify users"
+      implementation:
+        - "Hash-based pseudonymization (SHA3-256 + pepper)"
+        - "Cross-border transfer assessments"
+        - "Breach notification procedures (DORA)"
+        - "Audit trail via blockchain anchoring"
+      contacts:
+        dpo_japan: "dpo-jp@ssid.eu"
+
+    cross_border_transfers:
+      mechanisms:
+        - "EU-Japan adequacy decision"
+        - "Standard contractual clauses"
+        - "Explicit user consent"
+      documentation: "*/docs/cross_border_assessments/"
+
+    jfsa_oversight:
+      reporting: "Annual compliance reports"
+      audits: "Third-party audits every 2 years"
+
+  # Australia Regulations
+  australia:
+    privacy_act_1988:
+      name: "Privacy Act 1988 (Cth)"
+      reference: "Privacy Act 1988 as amended"
+      authority: "Office of the Australian Information Commissioner (OAIC)"
+      applicability: "All Australian operations and data subjects"
+      key_principles:
+        - app1: "Open and transparent management of personal information"
+        - app3: "Collection of solicited personal information"
+        - app5: "Notification of collection"
+        - app6: "Use or disclosure of personal information"
+        - app8: "Cross-border disclosure"
+        - app11: "Security of personal information"
+        - app12: "Access to personal information"
+        - app13: "Correction of personal information"
+      implementation:
+        - "Privacy policy published and accessible"
+        - "Collection notices on all forms/APIs"
+        - "Purpose limitation enforced"
+        - "Cross-border assessments"
+        - "Security controls per ISO 27001"
+        - "Data subject access request procedures"
+      contacts:
+        privacy_officer_au: "privacy-au@ssid.eu"
+
+    app11_security:
+      standard: "ISO/IEC 27001:2022"
+      controls:
+        - "Encryption at rest (AES-256)"
+        - "Encryption in transit (TLS 1.3+)"
+        - "Access controls (RBAC, MFA)"
+        - "Audit logging (WORM storage)"
+        - "Incident response (DORA)"
+        - "Business continuity"
+      breach_response:
+        - "Assess likelihood of serious harm"
+        - "Notify OAIC if likely"
+        - "Notify affected individuals if likely"
+        - "Timeline: As soon as practicable"
+      evidence:
+        - "Security certifications: ISO 27001"
+        - "Penetration test reports: Annual"
+        - "Audit logs: Blockchain-anchored"
+
+# Cross-Framework Requirements
+cross_framework:
+  data_subject_rights:
+    access: "30 days maximum response time"
+    rectification: "30 days maximum"
+    erasure: "Via hash rotation (tenant pepper change)"
+    portability: "Structured JSON/XML export"
+    objection: "Opt-out mechanisms"
+
+  technical_measures:
+    encryption:
+      at_rest: "AES-256-GCM"
+      in_transit: "TLS 1.3+ only"
+      key_management: "HSM or KMS"
+    pseudonymization:
+      method: "SHA3-256 + tenant-specific pepper"
+      rotation: "Pepper rotation for erasure"
+    access_control:
+      authentication: "MFA mandatory"
+      authorization: "RBAC + ABAC"
+      least_privilege: true
+
+  organizational_measures:
+    training: "Annual privacy training for all staff"
+    dpia: "Required for high-risk processing"
+    contracts: "Data processing agreements with vendors"
+    audits: "Annual compliance audits"
+
+  breach_notification:
+    detection: "SIEM monitoring 24/7"
+    assessment: "< 24 hours"
+    notification:
+      - singapore: "72 hours to PDPC (if 500+ affected)"
+      - japan: "Without delay to PPC (if high risk)"
+      - australia: "As soon as practicable to OAIC (if serious harm likely)"
+    documentation: "All breaches logged (breach register)"
+
+  cross_border_transfers:
+    mechanisms:
+      - "Adequacy decisions (EU-Japan)"
+      - "Standard contractual clauses"
+      - "Binding corporate rules"
+      - "Explicit consent"
+    assessment: "Required for each new jurisdiction"
+    documentation: "Transfer impact assessments"
+
+# Monitoring and Enforcement
+enforcement:
+  opa_policies:
+    enabled: true
+    location: "03_core/opa/*.rego"
+    validation: "Continuous (on every API call)"
+
+  compliance_monitoring:
+    frequency: "Continuous"
+    tools:
+      - "OPA policy engine"
+      - "Validator suite (259 validators)"
+      - "Blockchain evidence anchoring"
+    reporting: "Monthly compliance dashboards"
+
+  penalties:
+    singapore: "Up to SGD 1M fine"
+    japan: "Up to JPY 100M fine or 1 year imprisonment"
+    australia: "Up to AUD 2.5M fine (APP 11 breach)"
+
+  dpo_contacts:
+    global_dpo: "dpo@ssid.eu"
+    singapore: "dpo-sg@ssid.eu"
+    japan: "dpo-jp@ssid.eu"
+    australia: "privacy-au@ssid.eu"
+
+# References
+references:
+  singapore:
+    - "https://www.pdpc.gov.sg/Overview-of-PDPA/The-Legislation/Personal-Data-Protection-Act"
+    - "MAS Technology Risk Management Guidelines"
+  japan:
+    - "https://www.ppc.go.jp/en/"
+    - "APPI Guidelines (2022 amendments)"
+  australia:
+    - "https://www.oaic.gov.au/privacy/the-privacy-act"
+    - "APP Guidelines (2019)"
+    - "Notifiable Data Breaches scheme"
+
+# Audit Trail
+audit:
+  policy_hash: "SHA3-256 of this document"
+  blockchain_anchor: "Ethereum mainnet"
+  last_audit: "2025-10-21"
+  next_review: "2026-01-21"
+  approved_by: "Legal Team"

@@ -1,0 +1,33 @@
+# Minimal SoT Test Data for CLI Scorecard Testing
+# Version: 3.2.0
+
+version: "3.2.0"
+status: "production"
+layer: "03_core"
+purpose: "Testing MoSCoW Priority Scorecard"
+hierarchy: "flat"
+
+# YAML block marker for SOT-018 (SHOULD rule)
+yaml_block_marker: "```yaml"
+
+# Instance properties (minimal - will fail some rules intentionally)
+instances:
+  - name: "test_instance_1"
+    path: "/test/path/1"
+    deprecated: false
+    business_priority: "high"
+
+  - name: "test_instance_2"
+    path: "/test/path/2"
+    deprecated: false
+    business_priority: "medium"
+
+# Deprecated list
+deprecated_list:
+  - item: "old_feature_1"
+    replaced_by: "new_feature_1"
+    removal_date: "2025-12-31"
+
+  - item: "old_feature_2"
+    replaced_by: "new_feature_2"
+    removal_date: "2026-01-31"

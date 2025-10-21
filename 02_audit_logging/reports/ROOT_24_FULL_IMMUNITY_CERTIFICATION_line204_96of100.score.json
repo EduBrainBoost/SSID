@@ -1,0 +1,31 @@
+{
+  "id": "d49c22cc-d00a-43b1-9826-5c1cb42189b4",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 96,
+  "status": "actual",
+  "source": {
+    "file": "02_audit_logging/reports/ROOT_24_FULL_IMMUNITY_CERTIFICATION.md",
+    "hash": "64b4e94ea0e6c499c6be2baa7d4d6135f43ab40882372ce7625f759aa6a8f95898a5c1ab00bf43f4e5dcdeca60394b124e6316b610380d9d17005ac7b3c413fa",
+    "line": 204,
+    "context": "\n| Timestamp | Tool | Score | Violations | Status |\n|-----------|------|-------|------------|--------|\n| 2025-10-12 17:21:15 | root_structure_audit.py | 96/100 | 1 | ⚠️ (mitigated) |\n| 2025-10-12 17:3"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "a8d4a1ab-3606-405a-99ce-3ea724c57b4b",
+    "timestamp": "2025-10-16T19:32:34.879646Z"
+  },
+  "worm": {
+    "uuid": "4218bfaa-01cf-4ef4-8634-5a0f012b4384",
+    "signature": "8e6cfb3a428aed854aa89b202401fdabd76a399897c0c4d8c296e8f063b518cd890512e824d9ba0ff739fd1c55f919295deaa45a7d5fef50d69021e9ceda5fd7",
+    "chain_prev": "b6e4248b-0c5a-43da-ab41-ed065eb626fd"
+  },
+  "metadata": {
+    "grade": "PLATINUM",
+    "label": "Forensic",
+    "component": "Audit & Compliance"
+  }
+}

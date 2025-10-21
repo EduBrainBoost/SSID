@@ -1,0 +1,51 @@
+# Backup Retention Policy
+# Version: 1
+# Date: 2025-10-14
+# Purpose: Automated backup rotation with OPA governance gate
+
+version: 1
+date: 2025-10-14
+
+retention:
+  keep_last: 3  # Keep last N backups (currently 3 per analysis)
+  archive_before_delete: true
+  dry_run_default: true  # Safety: requires explicit --execute flag
+
+scope:
+  # Whitelist ONLY backup directories; everything else never deleted
+  include_globs:
+    - "02_audit_logging/backups/**"
+    - "23_compliance/backups/**"
+    - "12_tooling/backups/**"
+
+  # Explicit exclusions (safety layer)
+  exclude_globs:
+    - "**/live/**"
+    - "**/policies/**"
+    - "**/charts/**"
+    - "**/shards/**"
+    - "**/.git/**"
+
+guardrails:
+  min_total_backups: 1  # Never delete all backups (at least 1 must remain)
+  max_delete_per_run: 5000  # Safety cap: abort if deletion count exceeds this
+  require_clean_git: true  # Refuse to run with uncommitted changes
+  require_branch: "main"  # Only run on main branch (prevent accidental runs)
+
+opa_gate:
+  policy: "23_compliance/policies/opa/yaml_governance.rego"
+  min_diversity_pct: 90  # Require ≥90% semantic diversity
+  max_duplication_pct: 10  # Deny if >10% duplication
+  max_backup_ratio: 5  # Backups should not exceed live files by >5x
+
+audit_trail:
+  enabled: true
+  report_directory: "02_audit_logging/evidence"
+  report_format: "rotation_{timestamp}.json"
+  retention_days: 365
+
+metadata:
+  created_by: automation
+  last_updated: 2025-10-14T12:00:00Z
+  maintained_by: ci_workflow
+  review_frequency: quarterly

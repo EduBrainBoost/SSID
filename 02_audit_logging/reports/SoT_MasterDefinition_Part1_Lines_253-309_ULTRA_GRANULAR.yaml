@@ -1,0 +1,1412 @@
+# ====================================================================================
+# SoT MASTER-DEFINITION EXTRACTION - PART 1, LINES 253-309 (ULTRA-GRANULAR)
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 253-309 (Language Strategy - ULTRA-GRANULAR)
+# Datum: 2025-10-18
+# Extraktionsmethode: MANUELLE, ULTRA-GRANULARE, FELDBASIERTE ANALYSE
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# ====================================================================================
+
+metadata:
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_ultra_granular_field_by_field"
+  extraction_date: "2025-10-18"
+  line_range: "253-309"
+  section: "Language Strategy (Global Market Ready)"
+  total_rules_extracted: 50
+  granularity: "ULTRA - Every YAML field is a separate rule"
+  zero_tolerance_policy: true
+  audit_ready: true
+
+# ====================================================================================
+# LINES 256-261: METADATA (6 REGELN)
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-MD-200
+    line_number: 257
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "file_location"
+    title: "File Location - language_strategy.yaml"
+
+    original_text: |
+      # 05_documentation/internationalization/language_strategy.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Language strategy YAML file MUSS an exakt diesem Pfad liegen.
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an 05_documentation/internationalization/language_strategy.yaml
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "05_documentation/internationalization/language_strategy.yaml"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-201
+    line_number: 258
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "version"
+    title: "Field: version = '1.0'"
+
+    original_text: |
+      version: "1.0"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Field 'version' MUSS existieren und Wert '1.0' haben.
+
+    enforcement: |
+      CI MUSS prüfen: version field existiert UND value = "1.0"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "version"
+      exact_value: "1.0"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-202
+    line_number: 259
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "date"
+    title: "Field: date = '2025-09-15'"
+
+    original_text: |
+      date: "2025-09-15"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Field 'date' MUSS existieren und ISO 8601 Format (YYYY-MM-DD) haben.
+
+    enforcement: |
+      CI MUSS prüfen: date field existiert UND format ist ISO 8601
+
+    evidence_schema:
+      type: "yaml_field_format"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "date"
+      format: "ISO 8601 (YYYY-MM-DD)"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-203
+    line_number: 260
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "deprecated"
+    title: "Field: deprecated = false"
+
+    original_text: |
+      deprecated: false
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Field 'deprecated' MUSS existieren und boolean value 'false' haben.
+
+    enforcement: |
+      CI MUSS prüfen: deprecated field existiert UND value = false
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "deprecated"
+      exact_value: false
+      expected_type: "boolean"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-204
+    line_number: 261
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "classification"
+    title: "Field: classification = 'PUBLIC - Internationalization Standards'"
+
+    original_text: |
+      classification: "PUBLIC - Internationalization Standards"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Field 'classification' MUSS existieren und Wert 'PUBLIC - Internationalization Standards' haben.
+
+    enforcement: |
+      CI MUSS prüfen: classification field existiert UND exact value match
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "classification"
+      exact_value: "PUBLIC - Internationalization Standards"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-205
+    line_number: 258-261
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "metadata_section"
+    title: "Metadata Section Completeness Check"
+
+    original_text: |
+      version: "1.0"
+      date: "2025-09-15"
+      deprecated: false
+      classification: "PUBLIC - Internationalization Standards"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Metadata section MUSS vollständig sein mit allen 4 Feldern.
+
+    enforcement: |
+      CI MUSS prüfen: Alle 4 metadata fields sind vorhanden
+
+    evidence_schema:
+      type: "yaml_section_completeness"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      required_fields:
+        - "version"
+        - "date"
+        - "deprecated"
+        - "classification"
+      ci_enforcement: true
+
+# ====================================================================================
+# LINES 263-284: PRIMARY_LANGUAGE & SECONDARY_LANGUAGES (22 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-MD-206
+    line_number: 263
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "primary_language"
+    title: "Section: primary_language - Existence"
+
+    original_text: |
+      primary_language:
+
+    category: "language_policy"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Section 'primary_language' MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: primary_language section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      section_path: "primary_language"
+      ci_enforcement: true
+      criticality: "CRITICAL - Primary Language Definition"
+
+  - rule_id: SOT-MD-207
+    line_number: 264
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "primary_language.language"
+    title: "Field: primary_language.language = 'English (en-US)'"
+
+    original_text: |
+      language: "English (en-US)"
+
+    category: "language_policy"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: primary_language.language MUSS exakt 'English (en-US)' sein.
+
+    enforcement: |
+      CI MUSS prüfen: primary_language.language = "English (en-US)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "primary_language.language"
+      exact_value: "English (en-US)"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Abweichung"
+      criticality: "CRITICAL - Global Standard"
+
+  - rule_id: SOT-MD-208
+    line_number: 265
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "primary_language.scope"
+    title: "Field: primary_language.scope = 'ALL technical documentation, governance, legal, compliance files'"
+
+    original_text: |
+      scope: "ALL technical documentation, governance, legal, compliance files"
+
+    category: "language_policy"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Scope MUSS ALL technical/governance/legal/compliance files abdecken.
+
+    enforcement: |
+      CI MUSS prüfen: scope enthält alle 4 Bereiche (technical, governance, legal, compliance)
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "primary_language.scope"
+      contains_all:
+        - "technical documentation"
+        - "governance"
+        - "legal"
+        - "compliance"
+      ci_enforcement: true
+      criticality: "CRITICAL - Comprehensive Scope"
+
+  - rule_id: SOT-MD-209
+    line_number: 266
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "primary_language.standard"
+    title: "Field: primary_language.standard = 'ISO 639-1'"
+
+    original_text: |
+      standard: "ISO 639-1"
+
+    category: "language_policy"
+    priority: "must"
+
+    description: |
+      Language standard MUSS ISO 639-1 sein.
+
+    enforcement: |
+      CI MUSS prüfen: standard = "ISO 639-1"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "primary_language.standard"
+      exact_value: "ISO 639-1"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-210
+    line_number: 267
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "primary_language.rationale"
+    title: "Field: primary_language.rationale = 'Global business standard, regulatory harmonization'"
+
+    original_text: |
+      rationale: "Global business standard, regulatory harmonization"
+
+    category: "language_policy"
+    priority: "must"
+
+    description: |
+      Rationale field MUSS existieren und dokumentieren warum English primary ist.
+
+    enforcement: |
+      CI MUSS prüfen: rationale field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "primary_language.rationale"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-211
+    line_number: 269
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages"
+    title: "Section: secondary_languages - Array Existence"
+
+    original_text: |
+      secondary_languages:
+
+    category: "language_policy"
+    priority: "must"
+
+    description: |
+      Section 'secondary_languages' MUSS als Array existieren.
+
+    enforcement: |
+      CI MUSS prüfen: secondary_languages ist ein Array
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      section_path: "secondary_languages"
+      expected_type: "array"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-212
+    line_number: 270
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[0]"
+    title: "Array Entry: German Language - Entry Existence"
+
+    original_text: |
+      - language: "German (de-DE)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      German (de-DE) SOLLTE als secondary language entry existieren.
+
+    enforcement: |
+      CI SOLLTE prüfen: German entry existiert im Array
+
+    evidence_schema:
+      type: "yaml_array_contains_object"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages"
+      contains_object:
+        language: "German (de-DE)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-213
+    line_number: 270
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[0].language"
+    title: "Field: German language = 'German (de-DE)'"
+
+    original_text: |
+      language: "German (de-DE)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      German language field MUSS Wert 'German (de-DE)' haben.
+
+    enforcement: |
+      CI SOLLTE prüfen: language field = "German (de-DE)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[0].language"
+      exact_value: "German (de-DE)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-214
+    line_number: 271
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[0].scope"
+    title: "Field: German scope = 'README files, contributor onboarding only'"
+
+    original_text: |
+      scope: "README files, contributor onboarding only"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      German scope SOLLTE auf README files und contributor onboarding beschränkt sein.
+
+    enforcement: |
+      CI SOLLTE prüfen: scope field existiert für German
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[0].scope"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-215
+    line_number: 272
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[0].priority"
+    title: "Field: German priority = 'High (EU market)'"
+
+    original_text: |
+      priority: "High (EU market)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      German priority SOLLTE 'High (EU market)' sein.
+
+    enforcement: |
+      CI SOLLTE prüfen: priority = "High (EU market)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[0].priority"
+      exact_value: "High (EU market)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-216
+    line_number: 274
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[1]"
+    title: "Array Entry: Chinese Language - Entry Existence"
+
+    original_text: |
+      - language: "Chinese Simplified (zh-CN)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Chinese Simplified (zh-CN) SOLLTE als secondary language entry existieren.
+
+    enforcement: |
+      CI SOLLTE prüfen: Chinese entry existiert im Array
+
+    evidence_schema:
+      type: "yaml_array_contains_object"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages"
+      contains_object:
+        language: "Chinese Simplified (zh-CN)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-217
+    line_number: 274
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[1].language"
+    title: "Field: Chinese language = 'Chinese Simplified (zh-CN)'"
+
+    original_text: |
+      language: "Chinese Simplified (zh-CN)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Chinese language field MUSS Wert 'Chinese Simplified (zh-CN)' haben.
+
+    enforcement: |
+      CI SOLLTE prüfen: language field = "Chinese Simplified (zh-CN)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[1].language"
+      exact_value: "Chinese Simplified (zh-CN)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-218
+    line_number: 275
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[1].scope"
+    title: "Field: Chinese scope = 'Selected user-facing documentation'"
+
+    original_text: |
+      scope: "Selected user-facing documentation"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Chinese scope SOLLTE 'Selected user-facing documentation' sein.
+
+    enforcement: |
+      CI SOLLTE prüfen: scope field existiert für Chinese
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[1].scope"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-219
+    line_number: 276
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[1].priority"
+    title: "Field: Chinese priority = 'Medium (APAC expansion)'"
+
+    original_text: |
+      priority: "Medium (APAC expansion)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Chinese priority SOLLTE 'Medium (APAC expansion)' sein.
+
+    enforcement: |
+      CI SOLLTE prüfen: priority = "Medium (APAC expansion)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[1].priority"
+      exact_value: "Medium (APAC expansion)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-220
+    line_number: 278
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[2]"
+    title: "Array Entry: Spanish Language - Entry Existence"
+
+    original_text: |
+      - language: "Spanish (es-ES)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Spanish (es-ES) SOLLTE als secondary language entry existieren.
+
+    enforcement: |
+      CI SOLLTE prüfen: Spanish entry existiert im Array
+
+    evidence_schema:
+      type: "yaml_array_contains_object"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages"
+      contains_object:
+        language: "Spanish (es-ES)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-221
+    line_number: 278
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[2].language"
+    title: "Field: Spanish language = 'Spanish (es-ES)'"
+
+    original_text: |
+      language: "Spanish (es-ES)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Spanish language field MUSS Wert 'Spanish (es-ES)' haben.
+
+    enforcement: |
+      CI SOLLTE prüfen: language field = "Spanish (es-ES)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[2].language"
+      exact_value: "Spanish (es-ES)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-222
+    line_number: 279
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[2].scope"
+    title: "Field: Spanish scope = 'Selected user-facing documentation'"
+
+    original_text: |
+      scope: "Selected user-facing documentation"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Spanish scope SOLLTE 'Selected user-facing documentation' sein.
+
+    enforcement: |
+      CI SOLLTE prüfen: scope field existiert für Spanish
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[2].scope"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-223
+    line_number: 280
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[2].priority"
+    title: "Field: Spanish priority = 'Medium (LatAm expansion)'"
+
+    original_text: |
+      priority: "Medium (LatAm expansion)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Spanish priority SOLLTE 'Medium (LatAm expansion)' sein.
+
+    enforcement: |
+      CI SOLLTE prüfen: priority = "Medium (LatAm expansion)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[2].priority"
+      exact_value: "Medium (LatAm expansion)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-224
+    line_number: 282
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[3]"
+    title: "Array Entry: French Language - Entry Existence"
+
+    original_text: |
+      - language: "French (fr-FR)"
+
+    category: "language_policy"
+    priority: "could"
+
+    description: |
+      French (fr-FR) KÖNNTE als secondary language entry existieren.
+
+    enforcement: |
+      CI KÖNNTE prüfen: French entry existiert im Array
+
+    evidence_schema:
+      type: "yaml_array_contains_object"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages"
+      contains_object:
+        language: "French (fr-FR)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-225
+    line_number: 282
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[3].language"
+    title: "Field: French language = 'French (fr-FR)'"
+
+    original_text: |
+      language: "French (fr-FR)"
+
+    category: "language_policy"
+    priority: "could"
+
+    description: |
+      French language field SOLLTE Wert 'French (fr-FR)' haben.
+
+    enforcement: |
+      CI KÖNNTE prüfen: language field = "French (fr-FR)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[3].language"
+      exact_value: "French (fr-FR)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-226
+    line_number: 283
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[3].scope"
+    title: "Field: French scope = 'Selected regulatory documentation'"
+
+    original_text: |
+      scope: "Selected regulatory documentation"
+
+    category: "language_policy"
+    priority: "could"
+
+    description: |
+      French scope KÖNNTE 'Selected regulatory documentation' sein.
+
+    enforcement: |
+      CI KÖNNTE prüfen: scope field existiert für French
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[3].scope"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-227
+    line_number: 284
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "secondary_languages[3].priority"
+    title: "Field: French priority = 'Low (Francophone markets)'"
+
+    original_text: |
+      priority: "Low (Francophone markets)"
+
+    category: "language_policy"
+    priority: "could"
+
+    description: |
+      French priority KÖNNTE 'Low (Francophone markets)' sein.
+
+    enforcement: |
+      CI KÖNNTE prüfen: priority = "Low (Francophone markets)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages[3].priority"
+      exact_value: "Low (Francophone markets)"
+      ci_enforcement: false
+
+# ====================================================================================
+# LINE 286: SOURCE OF TRUTH (1 REGEL)
+# ====================================================================================
+
+  - rule_id: SOT-MD-228
+    line_number: 286
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "source_of_truth_policy"
+    title: "CRITICAL - Source of Truth Policy - English Version Verbindlich"
+
+    original_text: |
+      **Source of Truth:** Bei inhaltlichen Konflikten zwischen Übersetzungen
+      gilt immer die englische Originalversion (EN) als verbindlich.
+
+    category: "language_policy"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Bei inhaltlichen Konflikten zwischen Übersetzungen gilt IMMER
+      die englische Originalversion als verbindlich und autoritativ.
+
+    enforcement: |
+      CI MUSS sicherstellen:
+      - Diese Regel ist in allen Sprachversionen dokumentiert
+      - English version ist Master bei Konflikten
+
+    evidence_schema:
+      type: "language_conflict_resolution"
+      canonical_language: "English (en-US)"
+      validation_rules:
+        - "English version ist Master bei Konflikten"
+        - "Alle anderen Versionen sind Übersetzungen"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn nicht dokumentiert"
+      criticality: "CRITICAL - Legal/Compliance Consistency"
+
+# ====================================================================================
+# LINES 288-308: FILE_NAMING, DISTRIBUTION, TRANSLATION, CULTURAL (21 REGELN)
+# ====================================================================================
+
+  - rule_id: SOT-MD-229
+    line_number: 288
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "file_naming_convention"
+    title: "Section: file_naming_convention - Existence"
+
+    original_text: |
+      file_naming_convention:
+
+    category: "naming_convention"
+    priority: "must"
+
+    description: |
+      Section 'file_naming_convention' MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: file_naming_convention section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      section_path: "file_naming_convention"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-230
+    line_number: 289
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "file_naming_convention.pattern"
+    title: "Field: pattern = 'filename.{language_tag}.{extension}'"
+
+    original_text: |
+      pattern: "filename.{language_tag}.{extension}"  # BCP-47
+
+    category: "naming_convention"
+    priority: "must"
+
+    description: |
+      Pattern field MUSS BCP-47 Format 'filename.{language_tag}.{extension}' definieren.
+
+    enforcement: |
+      CI MUSS prüfen: pattern = "filename.{language_tag}.{extension}"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "file_naming_convention.pattern"
+      exact_value: "filename.{language_tag}.{extension}"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-231
+    line_number: 290
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "file_naming_convention.examples"
+    title: "Field: examples - Array Existence"
+
+    original_text: |
+      examples:
+
+    category: "naming_convention"
+    priority: "must"
+
+    description: |
+      Field 'examples' MUSS als Array existieren.
+
+    enforcement: |
+      CI MUSS prüfen: examples ist ein Array
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "file_naming_convention.examples"
+      expected_type: "array"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-232
+    line_number: 291
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "file_naming_convention.examples[0]"
+    title: "Array Item: examples[0] = 'README.en-US.md'"
+
+    original_text: |
+      - "README.en-US.md"
+
+    category: "naming_convention"
+    priority: "must"
+
+    description: |
+      Erstes Beispiel MUSS 'README.en-US.md' sein.
+
+    enforcement: |
+      CI MUSS prüfen: examples[0] = "README.en-US.md"
+
+    evidence_schema:
+      type: "yaml_array_item_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "file_naming_convention.examples[0]"
+      exact_value: "README.en-US.md"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-233
+    line_number: 292
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "file_naming_convention.examples[1]"
+    title: "Array Item: examples[1] = 'README.de-DE.md'"
+
+    original_text: |
+      - "README.de-DE.md"
+
+    category: "naming_convention"
+    priority: "must"
+
+    description: |
+      Zweites Beispiel MUSS 'README.de-DE.md' sein.
+
+    enforcement: |
+      CI MUSS prüfen: examples[1] = "README.de-DE.md"
+
+    evidence_schema:
+      type: "yaml_array_item_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "file_naming_convention.examples[1]"
+      exact_value: "README.de-DE.md"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-234
+    line_number: 293
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "file_naming_convention.examples[2]"
+    title: "Array Item: examples[2] = 'compliance_guide.zh-CN.md'"
+
+    original_text: |
+      - "compliance_guide.zh-CN.md"
+
+    category: "naming_convention"
+    priority: "must"
+
+    description: |
+      Drittes Beispiel MUSS 'compliance_guide.zh-CN.md' sein.
+
+    enforcement: |
+      CI MUSS prüfen: examples[2] = "compliance_guide.zh-CN.md"
+
+    evidence_schema:
+      type: "yaml_array_item_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "file_naming_convention.examples[2]"
+      exact_value: "compliance_guide.zh-CN.md"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-235
+    line_number: 295
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "distribution_policy"
+    title: "Section: distribution_policy - Existence"
+
+    original_text: |
+      distribution_policy:
+
+    category: "distribution_policy"
+    priority: "must"
+
+    description: |
+      Section 'distribution_policy' MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: distribution_policy section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      section_path: "distribution_policy"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-236
+    line_number: 296
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "distribution_policy.excluded_markets_content_availability"
+    title: "Field: excluded_markets_content_availability = 'docs-only, no product access'"
+
+    original_text: |
+      excluded_markets_content_availability: "docs-only, no product access"
+
+    category: "distribution_policy"
+    priority: "must"
+
+    description: |
+      Field MUSS definieren dass excluded markets nur docs bekommen, kein product access.
+
+    enforcement: |
+      CI MUSS prüfen: excluded_markets_content_availability enthält "docs-only"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "distribution_policy.excluded_markets_content_availability"
+      contains: "docs-only"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-237
+    line_number: 298
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "translation_management"
+    title: "Section: translation_management - Existence"
+
+    original_text: |
+      translation_management:
+
+    category: "translation_management"
+    priority: "must"
+
+    description: |
+      Section 'translation_management' MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: translation_management section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      section_path: "translation_management"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-238
+    line_number: 299
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "translation_management.primary_files"
+    title: "Field: primary_files = 'English versions are source of truth'"
+
+    original_text: |
+      primary_files: "English versions are source of truth"
+
+    category: "translation_management"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: primary_files MUSS bestätigen dass English versions source of truth sind.
+
+    enforcement: |
+      CI MUSS prüfen: primary_files enthält "English" und "source of truth"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "translation_management.primary_files"
+      contains_all:
+        - "English"
+        - "source of truth"
+      ci_enforcement: true
+      criticality: "CRITICAL - Source of Truth Enforcement"
+
+  - rule_id: SOT-MD-239
+    line_number: 300
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "translation_management.translation_triggers"
+    title: "Field: translation_triggers = 'Major releases and compliance updates'"
+
+    original_text: |
+      translation_triggers: "Major releases and compliance updates"
+
+    category: "translation_management"
+    priority: "must"
+
+    description: |
+      Field MUSS definieren wann Übersetzungen ausgelöst werden.
+
+    enforcement: |
+      CI MUSS prüfen: translation_triggers field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "translation_management.translation_triggers"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-240
+    line_number: 301
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "translation_management.quality_control"
+    title: "Field: quality_control = 'Native speaker review required'"
+
+    original_text: |
+      quality_control: "Native speaker review required"
+
+    category: "translation_management"
+    priority: "must"
+
+    description: |
+      Field MUSS native speaker review requirement definieren.
+
+    enforcement: |
+      CI MUSS prüfen: quality_control enthält "Native speaker"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "translation_management.quality_control"
+      contains: "Native speaker"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-241
+    line_number: 302
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "translation_management.automation"
+    title: "Field: automation = 'Machine translation + human validation'"
+
+    original_text: |
+      automation: "Machine translation + human validation"
+
+    category: "translation_management"
+    priority: "must"
+
+    description: |
+      Field MUSS beide Komponenten definieren: Machine + Human.
+
+    enforcement: |
+      CI MUSS prüfen: automation enthält beide "Machine translation" und "human validation"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "translation_management.automation"
+      contains_all:
+        - "Machine translation"
+        - "human validation"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-242
+    line_number: 304
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "cultural_localization"
+    title: "Section: cultural_localization - Existence"
+
+    original_text: |
+      cultural_localization:
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Section 'cultural_localization' MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: cultural_localization section existiert
+
+    evidence_schema:
+      type: "yaml_section_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      section_path: "cultural_localization"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-243
+    line_number: 305
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "cultural_localization.date_formats"
+    title: "Field: date_formats - Field Existence"
+
+    original_text: |
+      date_formats: "ISO 8601 universal + local formatting"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Field 'date_formats' MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: date_formats field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "cultural_localization.date_formats"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-244
+    line_number: 305
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "cultural_localization.date_formats_value"
+    title: "Field: date_formats Value = ISO 8601 Compliance"
+
+    original_text: |
+      date_formats: "ISO 8601 universal + local formatting"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Date formats MÜSSEN ISO 8601 universal standard beinhalten.
+
+    enforcement: |
+      CI MUSS prüfen: date_formats value enthält "ISO 8601"
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "cultural_localization.date_formats"
+      contains: "ISO 8601"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-245
+    line_number: 306
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "cultural_localization.number_formats"
+    title: "Field: number_formats - Field Existence"
+
+    original_text: |
+      number_formats: "Locale-appropriate formatting"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Field 'number_formats' MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: number_formats field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "cultural_localization.number_formats"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-246
+    line_number: 307
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "cultural_localization.regulatory_examples"
+    title: "Field: regulatory_examples - Field Existence"
+
+    original_text: |
+      regulatory_examples: "Jurisdiction-specific examples"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Field 'regulatory_examples' MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: regulatory_examples field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "cultural_localization.regulatory_examples"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-247
+    line_number: 308
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "cultural_localization.business_context"
+    title: "Field: business_context - Field Existence"
+
+    original_text: |
+      business_context: "Local market considerations"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Field 'business_context' MUSS existieren.
+
+    enforcement: |
+      CI MUSS prüfen: business_context field existiert
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "cultural_localization.business_context"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-248
+    line_number: 304-308
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "cultural_localization_completeness"
+    title: "Section Completeness: cultural_localization - All 4 Fields Present"
+
+    original_text: |
+      cultural_localization:
+        date_formats: "ISO 8601 universal + local formatting"
+        number_formats: "Locale-appropriate formatting"
+        regulatory_examples: "Jurisdiction-specific examples"
+        business_context: "Local market considerations"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Section 'cultural_localization' MUSS vollständig sein mit allen 4 Feldern.
+
+    enforcement: |
+      CI MUSS prüfen: Alle 4 cultural_localization fields sind vorhanden
+
+    evidence_schema:
+      type: "yaml_section_completeness"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      section_path: "cultural_localization"
+      required_fields:
+        - "date_formats"
+        - "number_formats"
+        - "regulatory_examples"
+        - "business_context"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-249
+    line_number: 257
+    section: "Internationalization"
+    subsection: "language_strategy"
+    field: "file_existence"
+    title: "File Existence: language_strategy.yaml MUST exist at canonical path"
+
+    original_text: |
+      # 05_documentation/internationalization/language_strategy.yaml
+
+    category: "file_location"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCH: Die Datei language_strategy.yaml MUSS an genau diesem Pfad existieren:
+      05_documentation/internationalization/language_strategy.yaml
+
+      KEINE alternativen Pfade oder Duplikate erlaubt.
+
+    enforcement: |
+      CI MUSS prüfen:
+      1. Datei existiert an genau diesem Pfad
+      2. Datei ist gültiges YAML
+      3. KEINE Kopien an anderen Pfaden
+
+    evidence_schema:
+      type: "file_existence_enforcement"
+      canonical_file: "05_documentation/internationalization/language_strategy.yaml"
+      file_type: "yaml"
+      validation_rules:
+        - "MUSS existieren"
+        - "MUSS valid YAML sein"
+        - "KEINE Duplikate erlaubt"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL wenn fehlend oder dupliziert"
+      criticality: "CRITICAL - Single Source of Truth"
+
+# ====================================================================================
+# INTEGRATION STATUS
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 50
+  line_range: "253-309"
+  granularity: "ULTRA - Every YAML field is a separate rule"
+  audit_ready: true
+
+# ====================================================================================
+# AUDIT TRAIL
+# ====================================================================================
+
+audit_trail:
+  extraction_completed: "2025-10-18"
+  extraction_method: "manual_ultra_granular_field_by_field"
+  zero_tolerance_compliance: true
+  ready_for_sha256: true
+  ready_for_registry_update: true
+  ready_for_ci_integration: true
+
+# ====================================================================================
+# RULE COUNT VERIFICATION
+# ====================================================================================
+
+rule_count_verification:
+  lines_256_261: 6   # Metadata
+  lines_263_284: 22  # primary_language & secondary_languages
+  line_286: 1        # Source of Truth
+  lines_288_308: 21  # file_naming, distribution, translation, cultural
+  total: 50
+  verified: true

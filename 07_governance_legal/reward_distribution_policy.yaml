@@ -1,0 +1,12 @@
+# Reward Distribution Policy (Hybrid Fiat/Token with Opt-out)
+default_cash_cap: 100
+excess_policy:
+  default_action: "convert_to_token"
+  user_override_allowed: true
+  legal_basis:
+    - "§22 EStG (sonstige Einkünfte)"
+    - "§11a SGB II (Aufwandsentschädigung)"
+token_incentives:
+  multiplier: 1.10
+  governance_bonus: true
+  hold_reward_days: 90

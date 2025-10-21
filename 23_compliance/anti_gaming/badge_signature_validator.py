@@ -12,7 +12,6 @@ from pathlib import Path
 from typing import List, Dict
 from datetime import datetime, timezone
 
-
 def _sha256_text(txt: str) -> str:
     """
     Compute SHA-256 hash of text.
@@ -24,7 +23,6 @@ def _sha256_text(txt: str) -> str:
         Hexadecimal hash string
     """
     return hashlib.sha256(txt.encode("utf-8")).hexdigest()
-
 
 def verify_badges(records: List[Dict[str, str]]) -> List[Dict[str, str]]:
     """
@@ -60,7 +58,6 @@ def verify_badges(records: List[Dict[str, str]]) -> List[Dict[str, str]]:
             })
 
     return invalid
-
 
 def analyze_badge_batch(records: List[Dict[str, str]]) -> Dict:
     """
@@ -98,7 +95,6 @@ def analyze_badge_batch(records: List[Dict[str, str]]) -> Dict:
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
 
-
 def generate_evidence_report(analysis: Dict, output_path: Path) -> None:
     """
     Generate evidence report for audit trail.
@@ -116,7 +112,6 @@ def generate_evidence_report(analysis: Dict, output_path: Path) -> None:
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(analysis, f, indent=2)
-
 
 if __name__ == "__main__":
     import sys

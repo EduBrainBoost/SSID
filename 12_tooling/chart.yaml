@@ -1,0 +1,66 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: tooling
+  version: "0.1.0"
+  description: "Development tools, scripts, CLI utilities, and automation helpers"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - cli_tools
+    - automation_scripts
+    - code_generation
+    - migration_tools
+    - debugging_utilities
+    - performance_profiling
+
+  interfaces:
+    - name: cli
+      type: command_line
+      authentication: developer
+
+    - name: automation_api
+      type: rest_api
+      authentication: ci_only
+
+    - name: code_generator
+      type: template_engine
+      authentication: developer
+
+  policies:
+    - name: script_validation
+      enforcement: automated
+      scope: all_scripts
+      mechanism: shellcheck
+
+    - name: tool_versioning
+      enforcement: automated
+      scope: all_tools
+
+    - name: safe_execution
+      enforcement: automated
+      scope: all_scripts
+      mechanism: dry_run_default
+
+  dependencies:
+    internal:
+      - 16_codex  # Schema definitions
+      - 23_compliance  # Policy compilation
+    external:
+      - python: ">=3.11"
+      - bash: ">=5.0"
+      - jq: ">=1.6"
+      - yq: ">=4.35"
+
+  governance:
+    maintainer: "DevOps Team"
+    reviewers:
+      - engineering_team
+    approval_required: false
+    data_classification: internal
+
+  compliance:
+    iso_27001:
+      - control_a12_4_3  # Administrator logs

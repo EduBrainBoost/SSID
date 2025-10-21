@@ -1,0 +1,1517 @@
+# ====================================================================================
+# SoT MASTER-DEFINITION EXTRACTION - PART 1, LINES 253-384
+# ====================================================================================
+# Quelle: SSID_structure_level3_part1_MAX.md
+# Zeilen: 253-384 (Internationalization & Multi-Language Framework)
+# Datum: 2025-10-18
+# Extraktionsmethode: MANUELLE, ZEILENBASIERTE ANALYSE
+# Status: PRODUCTION-READY AUDIT ARTIFACT
+# ====================================================================================
+
+metadata:
+  source_file: "16_codex/structure/SSID_structure_level3_part1_MAX.md"
+  extraction_method: "manual_line_by_line"
+  extraction_date: "2025-10-18"
+  line_range: "253-384"
+  section: "Internationalization & Multi-Language Framework"
+  total_rules_extracted: 50
+  zero_tolerance_policy: true
+  audit_ready: true
+
+# ====================================================================================
+# SECTION 1: Language Strategy (Lines 257-309)
+# ====================================================================================
+
+rules:
+  - rule_id: SOT-MD-200
+    line_number: 257
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "File Location - language_strategy.yaml"
+
+    original_text: |
+      # 05_documentation/internationalization/language_strategy.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Language strategy MUSS in dieser spezifischen Datei definiert sein.
+      Exakter Pfad: 05_documentation/internationalization/language_strategy.yaml
+
+    enforcement: |
+      CI MUSS prüfen:
+      - Datei existiert an diesem exakten Pfad
+      - KEINE Duplikate erlaubt
+      - KEINE alternativen Locations
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "05_documentation/internationalization/language_strategy.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+        - "KEINE Kopien"
+      ci_enforcement: true
+      failure_mode: "FAIL bei fehlender Datei oder falscher Location"
+
+  - rule_id: SOT-MD-201
+    line_number: 258
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Version - 1.0"
+
+    original_text: |
+      version: "1.0"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Version field MUSS vorhanden sein.
+
+    enforcement: |
+      CI MUSS prüfen: Field 'version' existiert und hat gültiges Semver-Format.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "version"
+      validation_rules:
+        - "Field MUSS existieren"
+        - "Format: Semver (X.Y or X.Y.Z)"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-202
+    line_number: 259
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Date - 2025-09-15"
+
+    original_text: |
+      date: "2025-09-15"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Date field MUSS vorhanden sein im ISO 8601 Format.
+
+    enforcement: |
+      CI MUSS prüfen: Field 'date' existiert und hat ISO 8601 Format (YYYY-MM-DD).
+
+    evidence_schema:
+      type: "yaml_field_format"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "date"
+      format: "ISO 8601 (YYYY-MM-DD)"
+      validation_rules:
+        - "Field MUSS existieren"
+        - "Format MUSS ISO 8601 sein"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-203
+    line_number: 260
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Deprecated - False"
+
+    original_text: |
+      deprecated: false
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Deprecated field MUSS vorhanden sein.
+
+    enforcement: |
+      CI MUSS prüfen: Field 'deprecated' existiert und ist boolean.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "deprecated"
+      expected_type: "boolean"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-204
+    line_number: 261
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Classification - PUBLIC - Internationalization Standards"
+
+    original_text: |
+      classification: "PUBLIC - Internationalization Standards"
+
+    category: "metadata"
+    priority: "must"
+
+    description: |
+      Classification field MUSS vorhanden sein.
+
+    enforcement: |
+      CI MUSS prüfen: Field 'classification' existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "classification"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-205
+    line_number: 264
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Primary Language - English (en-US)"
+
+    original_text: |
+      primary_language:
+        language: "English (en-US)"
+
+    category: "language_policy"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Primary language MUSS English (en-US) sein.
+      Diese Regel ist KRITISCH für globale Interoperabilität.
+
+    enforcement: |
+      CI MUSS prüfen:
+      - Field primary_language.language existiert
+      - Wert ist EXAKT "English (en-US)"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "primary_language.language"
+      exact_value: "English (en-US)"
+      validation_rules:
+        - "MUSS EXAKT dieser Wert sein"
+        - "Keine Abweichungen erlaubt"
+      ci_enforcement: true
+      failure_mode: "HARD FAIL bei Abweichung"
+
+  - rule_id: SOT-MD-206
+    line_number: 265
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Primary Language Scope - ALL Technical/Governance/Legal/Compliance"
+
+    original_text: |
+      scope: "ALL technical documentation, governance, legal, compliance files"
+
+    category: "language_policy"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Primary language scope MUSS ALLE kritischen Dokumente umfassen:
+      - Technical documentation
+      - Governance
+      - Legal
+      - Compliance files
+
+    enforcement: |
+      CI MUSS prüfen: primary_language.scope enthält die erforderlichen Begriffe.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "primary_language.scope"
+      contains_all:
+        - "technical documentation"
+        - "governance"
+        - "legal"
+        - "compliance"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn nicht alle Begriffe enthalten"
+
+  - rule_id: SOT-MD-207
+    line_number: 266
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Primary Language Standard - ISO 639-1"
+
+    original_text: |
+      standard: "ISO 639-1"
+
+    category: "language_policy"
+    priority: "must"
+
+    description: |
+      Language standard MUSS ISO 639-1 sein.
+
+    enforcement: |
+      CI MUSS prüfen: primary_language.standard = "ISO 639-1"
+
+    evidence_schema:
+      type: "yaml_field_exact"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "primary_language.standard"
+      exact_value: "ISO 639-1"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-208
+    line_number: 270
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Secondary Language - German (de-DE)"
+
+    original_text: |
+      - language: "German (de-DE)"
+        scope: "README files, contributor onboarding only"
+        priority: "High (EU market)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      German (de-DE) SOLLTE als Secondary Language unterstützt werden.
+      Scope: README files, contributor onboarding
+      Priority: High (EU market)
+
+    enforcement: |
+      CI SOLLTE prüfen: German in secondary_languages Array vorhanden.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages"
+      contains_item:
+        language: "German (de-DE)"
+        scope: "README files, contributor onboarding only"
+        priority: "High (EU market)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-209
+    line_number: 274
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Secondary Language - Chinese Simplified (zh-CN)"
+
+    original_text: |
+      - language: "Chinese Simplified (zh-CN)"
+        scope: "Selected user-facing documentation"
+        priority: "Medium (APAC expansion)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Chinese Simplified (zh-CN) SOLLTE als Secondary Language unterstützt werden.
+      Scope: Selected user-facing documentation
+      Priority: Medium (APAC expansion)
+
+    enforcement: |
+      CI SOLLTE prüfen: Chinese in secondary_languages Array vorhanden.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages"
+      contains_item:
+        language: "Chinese Simplified (zh-CN)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-210
+    line_number: 278
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Secondary Language - Spanish (es-ES)"
+
+    original_text: |
+      - language: "Spanish (es-ES)"
+        scope: "Selected user-facing documentation"
+        priority: "Medium (LatAm expansion)"
+
+    category: "language_policy"
+    priority: "should"
+
+    description: |
+      Spanish (es-ES) SOLLTE als Secondary Language unterstützt werden.
+      Scope: Selected user-facing documentation
+      Priority: Medium (LatAm expansion)
+
+    enforcement: |
+      CI SOLLTE prüfen: Spanish in secondary_languages Array vorhanden.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages"
+      contains_item:
+        language: "Spanish (es-ES)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-211
+    line_number: 282
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Secondary Language - French (fr-FR)"
+
+    original_text: |
+      - language: "French (fr-FR)"
+        scope: "Selected regulatory documentation"
+        priority: "Low (Francophone markets)"
+
+    category: "language_policy"
+    priority: "could"
+
+    description: |
+      French (fr-FR) KÖNNTE als Secondary Language unterstützt werden.
+      Scope: Selected regulatory documentation
+      Priority: Low (Francophone markets)
+
+    enforcement: |
+      CI KÖNNTE prüfen: French in secondary_languages Array vorhanden.
+
+    evidence_schema:
+      type: "yaml_array_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "secondary_languages"
+      contains_item:
+        language: "French (fr-FR)"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-212
+    line_number: 286
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "CRITICAL - Source of Truth - English Version Verbindlich"
+
+    original_text: |
+      **Source of Truth:** Bei inhaltlichen Konflikten zwischen Übersetzungen
+      gilt immer die englische Originalversion (EN) als verbindlich.
+
+    category: "language_policy"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      KRITISCHE REGEL:
+      Bei inhaltlichen Konflikten zwischen Übersetzungen gilt IMMER die
+      englische Originalversion als verbindlich und autoritativ.
+
+      Diese Regel verhindert Compliance-Konflikte zwischen verschiedenen
+      Sprachversionen.
+
+    enforcement: |
+      CI MUSS sicherstellen:
+      - Diese Regel ist in allen Sprachversionen dokumentiert
+      - Konfliktlösungsmechanismus ist implementiert
+      - English version ist immer Master
+
+    evidence_schema:
+      type: "language_conflict_resolution"
+      canonical_language: "English (en-US)"
+      validation_rules:
+        - "English version ist Master bei Konflikten"
+        - "Alle anderen Versionen sind Übersetzungen"
+        - "Bei Widersprüchen gilt English"
+      ci_enforcement: true
+      failure_mode: "FAIL wenn nicht dokumentiert"
+      criticality: "CRITICAL - Legal/Compliance Consistency"
+
+  - rule_id: SOT-MD-213
+    line_number: 289
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "File Naming Convention - filename.{language_tag}.{extension}"
+
+    original_text: |
+      file_naming_convention:
+        pattern: "filename.{language_tag}.{extension}"  # BCP-47
+
+    category: "naming_convention"
+    priority: "must"
+
+    description: |
+      File naming MUSS dem BCP-47 Standard folgen:
+      Pattern: filename.{language_tag}.{extension}
+      Beispiele: README.en-US.md, README.de-DE.md
+
+    enforcement: |
+      CI MUSS prüfen:
+      - Alle mehrsprachigen Dateien folgen diesem Pattern
+      - Language tags sind BCP-47 konform (en-US, de-DE, zh-CN, etc.)
+
+    evidence_schema:
+      type: "naming_convention_enforcement"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "file_naming_convention.pattern"
+      expected_pattern: "filename.{language_tag}.{extension}"
+      standard: "BCP-47"
+      validation_rules:
+        - "Pattern MUSS diesem Format folgen"
+        - "Language tags MÜSSEN BCP-47 konform sein"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-214
+    line_number: 296
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Distribution Policy - Excluded Markets Content Availability"
+
+    original_text: |
+      distribution_policy:
+        excluded_markets_content_availability: "docs-only, no product access"
+
+    category: "distribution_policy"
+    priority: "must"
+
+    description: |
+      Für ausgeschlossene Märkte gilt:
+      - Dokumentation verfügbar (docs-only)
+      - KEIN Produktzugang (no product access)
+
+    enforcement: |
+      CI MUSS prüfen: distribution_policy.excluded_markets_content_availability
+      ist definiert.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "distribution_policy.excluded_markets_content_availability"
+      contains: "docs-only"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-215
+    line_number: 299
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Translation Management - English Versions are Source of Truth"
+
+    original_text: |
+      translation_management:
+        primary_files: "English versions are source of truth"
+
+    category: "translation_management"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      English versions sind IMMER die Source of Truth für Übersetzungen.
+      Alle Übersetzungen werden von English-Versionen abgeleitet.
+
+    enforcement: |
+      CI MUSS prüfen: translation_management.primary_files bestätigt English
+      als Source of Truth.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "translation_management.primary_files"
+      contains: "English"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-216
+    line_number: 300
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Translation Triggers - Major Releases and Compliance Updates"
+
+    original_text: |
+      translation_triggers: "Major releases and compliance updates"
+
+    category: "translation_management"
+    priority: "must"
+
+    description: |
+      Übersetzungen werden ausgelöst durch:
+      - Major releases
+      - Compliance updates
+
+    enforcement: |
+      CI MUSS prüfen: translation_triggers definiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "translation_management.translation_triggers"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-217
+    line_number: 301
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Quality Control - Native Speaker Review Required"
+
+    original_text: |
+      quality_control: "Native speaker review required"
+
+    category: "translation_management"
+    priority: "must"
+
+    description: |
+      Quality control MUSS native speaker review beinhalten.
+      Keine maschinelle Übersetzung ohne menschliche Validierung.
+
+    enforcement: |
+      CI MUSS prüfen: quality_control enthält "Native speaker".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "translation_management.quality_control"
+      contains: "Native speaker"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-218
+    line_number: 302
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Automation - Machine Translation + Human Validation"
+
+    original_text: |
+      automation: "Machine translation + human validation"
+
+    category: "translation_management"
+    priority: "must"
+
+    description: |
+      Automation strategy: Machine translation + human validation.
+      Nie rein maschinelle Übersetzung ohne menschliche Überprüfung.
+
+    enforcement: |
+      CI MUSS prüfen: automation enthält beide Komponenten.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "translation_management.automation"
+      contains_all:
+        - "Machine translation"
+        - "human validation"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-219
+    line_number: 305
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Cultural Localization - Date Formats - ISO 8601"
+
+    original_text: |
+      cultural_localization:
+        date_formats: "ISO 8601 universal + local formatting"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Date formats MÜSSEN ISO 8601 unterstützen (universal standard)
+      plus lokale Formatierung für Benutzerfreundlichkeit.
+
+    enforcement: |
+      CI MUSS prüfen: date_formats enthält "ISO 8601".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "cultural_localization.date_formats"
+      contains: "ISO 8601"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-220
+    line_number: 306
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Cultural Localization - Number Formats - Locale-Appropriate"
+
+    original_text: |
+      number_formats: "Locale-appropriate formatting"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Number formats MÜSSEN locale-appropriate sein (z.B. 1,000.00 vs 1.000,00).
+
+    enforcement: |
+      CI MUSS prüfen: number_formats field existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "cultural_localization.number_formats"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-221
+    line_number: 307
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Cultural Localization - Regulatory Examples - Jurisdiction-Specific"
+
+    original_text: |
+      regulatory_examples: "Jurisdiction-specific examples"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Regulatory examples MÜSSEN jurisdiction-specific sein.
+      Keine generischen Beispiele in regulatorischen Dokumenten.
+
+    enforcement: |
+      CI MUSS prüfen: regulatory_examples field existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "cultural_localization.regulatory_examples"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-222
+    line_number: 308
+    section: "Internationalization"
+    subsection: "language_strategy"
+    title: "Cultural Localization - Business Context - Local Market Considerations"
+
+    original_text: |
+      business_context: "Local market considerations"
+
+    category: "localization"
+    priority: "must"
+
+    description: |
+      Business context MUSS lokale Marktbedingungen berücksichtigen.
+
+    enforcement: |
+      CI MUSS prüfen: business_context field existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/language_strategy.yaml"
+      field_path: "cultural_localization.business_context"
+      ci_enforcement: true
+
+# ====================================================================================
+# SECTION 2: Multi-Jurisdiction Documentation Structure (Lines 311-350)
+# ====================================================================================
+
+  - rule_id: SOT-MD-223
+    line_number: 313
+    section: "Internationalization"
+    subsection: "documentation_structure"
+    title: "Directory Location - jurisdiction_specific/"
+
+    original_text: |
+      # 05_documentation/internationalization/jurisdiction_specific/
+
+    category: "directory_structure"
+    priority: "must"
+
+    description: |
+      Multi-jurisdiction documentation MUSS in diesem Verzeichnis liegen:
+      05_documentation/internationalization/jurisdiction_specific/
+
+    enforcement: |
+      CI MUSS prüfen:
+      - Verzeichnis existiert
+      - Keine alternativen Locations für jurisdiction-specific docs
+
+    evidence_schema:
+      type: "directory_existence_check"
+      canonical_directory: "05_documentation/internationalization/jurisdiction_specific"
+      validation_rules:
+        - "Verzeichnis MUSS existieren"
+        - "KEINE Duplikate"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-224
+    line_number: 317
+    section: "Internationalization"
+    subsection: "documentation_structure"
+    title: "Language Directory - en/ (English - Global Primary)"
+
+    original_text: |
+      en/     # English - Global Primary
+      ├── technical/          # Technical documentation
+      ├── governance/         # Governance and legal
+      ├── compliance/         # Regulatory compliance
+      └── business/          # Business documentation
+
+    category: "directory_structure"
+    priority: "must"
+
+    description: |
+      English (en/) MUSS als Primary language directory existieren mit:
+      - technical/
+      - governance/
+      - compliance/
+      - business/
+
+    enforcement: |
+      CI MUSS prüfen:
+      - en/ directory existiert
+      - Alle 4 Subdirectories vorhanden
+
+    evidence_schema:
+      type: "directory_structure_check"
+      base_directory: "05_documentation/internationalization/jurisdiction_specific/en"
+      required_subdirectories:
+        - "technical"
+        - "governance"
+        - "compliance"
+        - "business"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-225
+    line_number: 323
+    section: "Internationalization"
+    subsection: "documentation_structure"
+    title: "Language Directory - de/ (German - EU Market Focus)"
+
+    original_text: |
+      de/     # German - EU Market Focus
+      ├── einfuehrung/       # Introduction materials
+      ├── compliance_eu/     # EU-specific compliance
+      └── rechtliches/       # Legal documentation
+
+    category: "directory_structure"
+    priority: "should"
+
+    description: |
+      German (de/) SOLLTE als Secondary language directory existieren mit:
+      - einfuehrung/
+      - compliance_eu/
+      - rechtliches/
+
+    enforcement: |
+      CI SOLLTE prüfen: de/ directory und Subdirectories.
+
+    evidence_schema:
+      type: "directory_structure_check"
+      base_directory: "05_documentation/internationalization/jurisdiction_specific/de"
+      required_subdirectories:
+        - "einfuehrung"
+        - "compliance_eu"
+        - "rechtliches"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-226
+    line_number: 328
+    section: "Internationalization"
+    subsection: "documentation_structure"
+    title: "Language Directory - zh/ (Chinese - APAC Market Focus)"
+
+    original_text: |
+      zh/     # Chinese - APAC Market Focus
+      ├── 技术文档/           # Technical docs
+      ├── 合规指南/           # Compliance guides
+      └── 商业文档/           # Business docs
+
+    category: "directory_structure"
+    priority: "should"
+
+    description: |
+      Chinese (zh/) SOLLTE als Secondary language directory existieren mit
+      lokalisierten Subdirectories.
+
+    enforcement: |
+      CI SOLLTE prüfen: zh/ directory existiert.
+
+    evidence_schema:
+      type: "directory_existence_check"
+      canonical_directory: "05_documentation/internationalization/jurisdiction_specific/zh"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-227
+    line_number: 333
+    section: "Internationalization"
+    subsection: "documentation_structure"
+    title: "Language Directory - es/ (Spanish - LatAm Market Focus)"
+
+    original_text: |
+      es/     # Spanish - LatAm Market Focus
+      ├── documentacion/     # General documentation
+      ├── cumplimiento/      # Compliance
+      └── negocios/         # Business
+
+    category: "directory_structure"
+    priority: "should"
+
+    description: |
+      Spanish (es/) SOLLTE als Secondary language directory existieren.
+
+    enforcement: |
+      CI SOLLTE prüfen: es/ directory existiert.
+
+    evidence_schema:
+      type: "directory_existence_check"
+      canonical_directory: "05_documentation/internationalization/jurisdiction_specific/es"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-228
+    line_number: 338
+    section: "Internationalization"
+    subsection: "documentation_structure"
+    title: "Language Directory - fr/ (French - Francophone Markets)"
+
+    original_text: |
+      fr/     # French - Francophone Markets
+      ├── documentation/     # General documentation
+      ├── conformite/       # Compliance
+      └── affaires/         # Business
+
+    category: "directory_structure"
+    priority: "could"
+
+    description: |
+      French (fr/) KÖNNTE als Secondary language directory existieren.
+
+    enforcement: |
+      CI KÖNNTE prüfen: fr/ directory existiert.
+
+    evidence_schema:
+      type: "directory_existence_check"
+      canonical_directory: "05_documentation/internationalization/jurisdiction_specific/fr"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-229
+    line_number: 345
+    section: "Internationalization"
+    subsection: "localization_guidelines"
+    title: "Content Localization - Legal Terms"
+
+    original_text: |
+      - **Legal Terms**: Local legal terminology with English reference
+
+    category: "localization_guidelines"
+    priority: "must"
+
+    description: |
+      Legal terms MÜSSEN lokalisiert sein mit English reference.
+      Beispiel: "GmbH (Limited Liability Company)"
+
+    enforcement: |
+      Peer review MUSS prüfen: Legal terms haben English reference.
+
+    evidence_schema:
+      type: "documentation_quality"
+      validation_rules:
+        - "Lokale legal terms mit English reference"
+        - "Keine unübersetzten Fachbegriffe ohne Erklärung"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-230
+    line_number: 346
+    section: "Internationalization"
+    subsection: "localization_guidelines"
+    title: "Content Localization - Regulatory Examples"
+
+    original_text: |
+      - **Regulatory Examples**: Jurisdiction-specific compliance examples
+
+    category: "localization_guidelines"
+    priority: "must"
+
+    description: |
+      Regulatory examples MÜSSEN jurisdiction-specific sein.
+      KEINE generischen "one-size-fits-all" Beispiele in Compliance-Dokumenten.
+
+    enforcement: |
+      Peer review MUSS prüfen: Regulatory examples sind jurisdiction-specific.
+
+    evidence_schema:
+      type: "documentation_quality"
+      validation_rules:
+        - "Beispiele sind jurisdiction-specific"
+        - "Keine generischen Compliance-Beispiele"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-231
+    line_number: 347
+    section: "Internationalization"
+    subsection: "localization_guidelines"
+    title: "Content Localization - Business Context"
+
+    original_text: |
+      - **Business Context**: Local market conditions and practices
+
+    category: "localization_guidelines"
+    priority: "must"
+
+    description: |
+      Business context MUSS lokale Marktbedingungen reflektieren.
+
+    enforcement: |
+      Peer review MUSS prüfen: Business context ist lokalisiert.
+
+    evidence_schema:
+      type: "documentation_quality"
+      validation_rules:
+        - "Business context reflektiert lokale Bedingungen"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-232
+    line_number: 348
+    section: "Internationalization"
+    subsection: "localization_guidelines"
+    title: "Content Localization - Cultural Sensitivity"
+
+    original_text: |
+      - **Cultural Sensitivity**: Appropriate business communication styles
+
+    category: "localization_guidelines"
+    priority: "must"
+
+    description: |
+      Cultural sensitivity MUSS in business communication berücksichtigt werden.
+      Unterschiedliche Kommunikationsstile je nach Markt.
+
+    enforcement: |
+      Peer review MUSS prüfen: Kulturelle Angemessenheit.
+
+    evidence_schema:
+      type: "documentation_quality"
+      validation_rules:
+        - "Kulturell angemessene Kommunikation"
+      ci_enforcement: false
+
+  - rule_id: SOT-MD-233
+    line_number: 349
+    section: "Internationalization"
+    subsection: "localization_guidelines"
+    title: "Content Localization - Technical Standards"
+
+    original_text: |
+      - **Technical Standards**: Local technical requirements and standards
+
+    category: "localization_guidelines"
+    priority: "must"
+
+    description: |
+      Technical standards MÜSSEN lokale Anforderungen berücksichtigen.
+      Beispiel: EU vs US electrical standards, date formats, etc.
+
+    enforcement: |
+      Peer review MUSS prüfen: Lokale technical standards sind dokumentiert.
+
+    evidence_schema:
+      type: "documentation_quality"
+      validation_rules:
+        - "Lokale technical standards dokumentiert"
+      ci_enforcement: false
+
+# ====================================================================================
+# SECTION 3: Translation Quality Framework (Lines 352-383)
+# ====================================================================================
+
+  - rule_id: SOT-MD-234
+    line_number: 354
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "File Location - translation_quality.yaml"
+
+    original_text: |
+      # 05_documentation/internationalization/translation_quality.yaml
+
+    category: "file_location"
+    priority: "must"
+
+    description: |
+      Translation quality framework MUSS in dieser Datei definiert sein.
+      Exakter Pfad: 05_documentation/internationalization/translation_quality.yaml
+
+    enforcement: |
+      CI MUSS prüfen: Datei existiert an diesem exakten Pfad.
+
+    evidence_schema:
+      type: "file_location_enforcement"
+      canonical_file: "05_documentation/internationalization/translation_quality.yaml"
+      validation_rules:
+        - "Datei MUSS existieren"
+        - "EXAKT dieser Pfad"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-235
+    line_number: 360
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Quality Standards - Accuracy Threshold - 95% Minimum"
+
+    original_text: |
+      quality_standards:
+        accuracy_threshold: "95% minimum"
+
+    category: "quality_standards"
+    priority: "must"
+
+    description: |
+      Accuracy threshold MUSS mindestens 95% sein.
+      Übersetzungen unter 95% Genauigkeit sind nicht akzeptabel.
+
+    enforcement: |
+      CI MUSS prüfen: accuracy_threshold >= 95%.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "quality_standards.accuracy_threshold"
+      contains: "95%"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-236
+    line_number: 361
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Quality Standards - Consistency Score - 90% Minimum"
+
+    original_text: |
+      consistency_score: "90% minimum across documents"
+
+    category: "quality_standards"
+    priority: "must"
+
+    description: |
+      Consistency score MUSS mindestens 90% sein über alle Dokumente hinweg.
+      Terminology MUSS konsistent verwendet werden.
+
+    enforcement: |
+      CI MUSS prüfen: consistency_score >= 90%.
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "quality_standards.consistency_score"
+      contains: "90%"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-237
+    line_number: 362
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Quality Standards - Cultural Appropriateness - Native Speaker Validation"
+
+    original_text: |
+      cultural_appropriateness: "Native speaker validation required"
+
+    category: "quality_standards"
+    priority: "must"
+
+    description: |
+      Cultural appropriateness MUSS durch native speaker validiert werden.
+      Keine Übersetzung ohne native speaker review.
+
+    enforcement: |
+      CI MUSS prüfen: cultural_appropriateness enthält "Native speaker".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "quality_standards.cultural_appropriateness"
+      contains: "Native speaker"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-238
+    line_number: 363
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Quality Standards - Technical Precision - Zero Tolerance"
+
+    original_text: |
+      technical_precision: "Zero tolerance for technical term errors"
+
+    category: "quality_standards"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      ZERO TOLERANCE für technische Term-Fehler.
+      Technische Fachbegriffe MÜSSEN 100% korrekt sein.
+
+    enforcement: |
+      CI MUSS prüfen: technical_precision enthält "Zero tolerance".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "quality_standards.technical_precision"
+      contains: "Zero tolerance"
+      ci_enforcement: true
+      criticality: "CRITICAL - Technical Accuracy"
+
+  - rule_id: SOT-MD-239
+    line_number: 366
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Translation Workflow - Step 1 - Machine Translation"
+
+    original_text: |
+      translation_workflow:
+        step_1: "Machine translation (DeepL/Google)"
+
+    category: "translation_workflow"
+    priority: "must"
+
+    description: |
+      Step 1 des Translation Workflow: Machine translation (DeepL/Google).
+
+    enforcement: |
+      CI MUSS prüfen: step_1 field existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "translation_workflow.step_1"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-240
+    line_number: 367
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Translation Workflow - Step 2 - Technical Review by Bilingual Expert"
+
+    original_text: |
+      step_2: "Technical review by bilingual expert"
+
+    category: "translation_workflow"
+    priority: "must"
+
+    description: |
+      Step 2: Technical review durch bilingual expert.
+      NICHT durch generische Übersetzer, sondern Fachexperten.
+
+    enforcement: |
+      CI MUSS prüfen: step_2 field existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "translation_workflow.step_2"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-241
+    line_number: 368
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Translation Workflow - Step 3 - Native Speaker Validation"
+
+    original_text: |
+      step_3: "Native speaker validation"
+
+    category: "translation_workflow"
+    priority: "must"
+
+    description: |
+      Step 3: Native speaker validation.
+      MUSS durch Muttersprachler validiert werden.
+
+    enforcement: |
+      CI MUSS prüfen: step_3 field existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "translation_workflow.step_3"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-242
+    line_number: 369
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Translation Workflow - Step 4 - Cultural Appropriateness Check"
+
+    original_text: |
+      step_4: "Cultural appropriateness check"
+
+    category: "translation_workflow"
+    priority: "must"
+
+    description: |
+      Step 4: Cultural appropriateness check.
+      Kulturelle Angemessenheit MUSS geprüft werden.
+
+    enforcement: |
+      CI MUSS prüfen: step_4 field existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "translation_workflow.step_4"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-243
+    line_number: 370
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Translation Workflow - Step 5 - Final Quality Assurance"
+
+    original_text: |
+      step_5: "Final quality assurance"
+
+    category: "translation_workflow"
+    priority: "must"
+
+    description: |
+      Step 5: Final quality assurance.
+      Abschließende QA vor Release.
+
+    enforcement: |
+      CI MUSS prüfen: step_5 field existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "translation_workflow.step_5"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-244
+    line_number: 373
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Maintenance Schedule - Major Updates - 30 Days"
+
+    original_text: |
+      maintenance_schedule:
+        major_updates: "Full retranslation within 30 days"
+
+    category: "maintenance_schedule"
+    priority: "must"
+
+    description: |
+      Major updates MÜSSEN innerhalb 30 Tagen vollständig übersetzt werden.
+
+    enforcement: |
+      CI MUSS prüfen: major_updates enthält "30 days".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "maintenance_schedule.major_updates"
+      contains: "30 days"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-245
+    line_number: 374
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Maintenance Schedule - Minor Updates - 14 Days"
+
+    original_text: |
+      minor_updates: "Translation within 14 days"
+
+    category: "maintenance_schedule"
+    priority: "must"
+
+    description: |
+      Minor updates MÜSSEN innerhalb 14 Tagen übersetzt werden.
+
+    enforcement: |
+      CI MUSS prüfen: minor_updates enthält "14 days".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "maintenance_schedule.minor_updates"
+      contains: "14 days"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-246
+    line_number: 375
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Maintenance Schedule - Urgent Updates - 48 Hours"
+
+    original_text: |
+      urgent_updates: "Translation within 48 hours"
+
+    category: "maintenance_schedule"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Urgent updates (z.B. Sicherheitswarnungen) MÜSSEN innerhalb 48 Stunden
+      übersetzt werden.
+
+    enforcement: |
+      CI MUSS prüfen: urgent_updates enthält "48 hours".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "maintenance_schedule.urgent_updates"
+      contains: "48 hours"
+      ci_enforcement: true
+      criticality: "CRITICAL - Urgent Communication"
+
+  - rule_id: SOT-MD-247
+    line_number: 376
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Maintenance Schedule - Quarterly Review"
+
+    original_text: |
+      quarterly_review: "Full consistency check"
+
+    category: "maintenance_schedule"
+    priority: "must"
+
+    description: |
+      Quarterly review MUSS full consistency check beinhalten.
+      Alle 3 Monate vollständige Konsistenzprüfung.
+
+    enforcement: |
+      CI MUSS prüfen: quarterly_review field existiert.
+
+    evidence_schema:
+      type: "yaml_field_existence"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "maintenance_schedule.quarterly_review"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-248
+    line_number: 379
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Specialized Terminology - Legal Terms - Certified Legal Translator"
+
+    original_text: |
+      specialized_terminology:
+        legal_terms: "Certified legal translator required"
+
+    category: "specialized_terminology"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Legal terms MÜSSEN durch certified legal translator übersetzt werden.
+      KEINE generischen Übersetzer für legal content.
+
+    enforcement: |
+      CI MUSS prüfen: legal_terms enthält "Certified".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "specialized_terminology.legal_terms"
+      contains: "Certified"
+      ci_enforcement: true
+      criticality: "CRITICAL - Legal Accuracy"
+
+  - rule_id: SOT-MD-249
+    line_number: 380
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Specialized Terminology - Regulatory Terms - Compliance Expert Validation"
+
+    original_text: |
+      regulatory_terms: "Compliance expert validation"
+
+    category: "specialized_terminology"
+    priority: "must"
+    criticality: "CRITICAL"
+
+    description: |
+      Regulatory terms MÜSSEN durch Compliance expert validiert werden.
+      KEINE Übersetzung regulatorischer Inhalte ohne Compliance-Expertise.
+
+    enforcement: |
+      CI MUSS prüfen: regulatory_terms enthält "Compliance expert".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "specialized_terminology.regulatory_terms"
+      contains: "Compliance expert"
+      ci_enforcement: true
+      criticality: "CRITICAL - Regulatory Accuracy"
+
+  - rule_id: SOT-MD-250
+    line_number: 381
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Specialized Terminology - Technical Terms - Subject Matter Expert Review"
+
+    original_text: |
+      technical_terms: "Technical subject matter expert review"
+
+    category: "specialized_terminology"
+    priority: "must"
+
+    description: |
+      Technical terms MÜSSEN durch technical subject matter expert
+      reviewed werden. KEINE generischen Übersetzungen für technische Fachbegriffe.
+
+    enforcement: |
+      CI MUSS prüfen: technical_terms enthält "subject matter expert".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "specialized_terminology.technical_terms"
+      contains: "subject matter expert"
+      ci_enforcement: true
+
+  - rule_id: SOT-MD-251
+    line_number: 382
+    section: "Internationalization"
+    subsection: "translation_quality"
+    title: "Specialized Terminology - Business Terms - Local Business Context Validation"
+
+    original_text: |
+      business_terms: "Local business context validation"
+
+    category: "specialized_terminology"
+    priority: "must"
+
+    description: |
+      Business terms MÜSSEN im lokalen Business-Kontext validiert werden.
+      Business-Terminologie variiert stark zwischen Märkten.
+
+    enforcement: |
+      CI MUSS prüfen: business_terms enthält "Local business context".
+
+    evidence_schema:
+      type: "yaml_field_contains"
+      file: "05_documentation/internationalization/translation_quality.yaml"
+      field_path: "specialized_terminology.business_terms"
+      contains: "Local business context"
+      ci_enforcement: true
+
+# ====================================================================================
+# INTEGRATION STATUS
+# ====================================================================================
+
+integration_status:
+  extracted: true
+  date: "2025-10-18"
+  rules_count: 52
+  line_range: "253-384"
+  audit_ready: true
+
+  pending_integration:
+    - "16_codex/contracts/sot/sot_contract.yaml"
+    - "03_core/validators/sot/sot_validator_core.py"
+    - "23_compliance/policies/sot/sot_policy.rego"
+    - "12_tooling/cli/sot_validator.py"
+    - "11_test_simulation/tests_compliance/test_sot_validator.py"
+
+  next_step: "Integration in alle 5 SoT-Artefakte + Coverage-Check"
+
+# ====================================================================================
+# AUDIT TRAIL
+# ====================================================================================
+
+audit_trail:
+  extraction_completed: "2025-10-18"
+  extraction_method: "manual_line_by_line"
+  zero_tolerance_compliance: true
+  ready_for_sha256: true
+  ready_for_registry_update: true
+  ready_for_ci_integration: true
+
+# ====================================================================================
+# CUMULATIVE EXTRACTION STATUS
+# ====================================================================================
+
+cumulative_extraction:
+  lines_001_026: 4    # SOT-MD-001 to SOT-MD-004
+  lines_027_101: 61   # SOT-MD-005 to SOT-MD-065
+  lines_103_143: 34   # SOT-MD-066 to SOT-MD-099
+  lines_145_251: 100  # SOT-MD-100 to SOT-MD-199
+  lines_253_384: 52   # SOT-MD-200 to SOT-MD-251
+  total_so_far: 251
+  remaining_sections: "Lines 385+"

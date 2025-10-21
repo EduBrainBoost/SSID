@@ -18,7 +18,6 @@ from typing import Any, Dict, List, Optional
 
 import yaml
 
-
 class ComplianceChainTrigger:
     """
     Automated blockchain anchoring trigger for compliance evidence.
@@ -237,7 +236,6 @@ class ComplianceChainTrigger:
 
         return stats
 
-
 class BlockchainSubmissionHandler:
     """
     Handler for actual blockchain submission.
@@ -301,7 +299,6 @@ class BlockchainSubmissionHandler:
             "proof_hash": proof_hash
         }
 
-
 def main():
     """Main entry point for compliance chain trigger."""
     print("\n🔗 SSID Compliance Chain Trigger\n")
@@ -352,7 +349,6 @@ def main():
 
     except Exception as e:
         print(f"❌ Error: {e}")
-
 
 if __name__ == "__main__":
     main()

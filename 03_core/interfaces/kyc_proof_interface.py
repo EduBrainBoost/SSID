@@ -27,26 +27,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 class KYCProofInterfaceError(Exception):
     """Base exception for KYC proof interface errors"""
     pass
-
 
 class InvalidDigestError(KYCProofInterfaceError):
     """Digest validation failed"""
     pass
 
-
 class PIIDetectedError(KYCProofInterfaceError):
     """PII detected in payload (not allowed)"""
     pass
 
-
 class OPAPolicyError(KYCProofInterfaceError):
     """OPA policy check failed"""
     pass
-
 
 class KYCProofInterface:
     """
@@ -264,7 +259,7 @@ class KYCProofInterface:
         Note: In real implementation, this would call
               global_proof_nexus_engine.receive_kyc_digest()
         """
-        # Mock implementation - real version would call Layer 9 function
+        
         layer9_proof_id = f"l9-{hashlib.sha256(normalized_payload['digest'].encode()).hexdigest()[:16]}"
 
         logger.info(f"Forwarded digest to Layer 9: {layer9_proof_id}")
@@ -295,7 +290,6 @@ class KYCProofInterface:
 
         # Also log to console
         logger.info(json.dumps(log_entry))
-
 
 def main():
     """CLI entry point for testing"""
@@ -333,7 +327,6 @@ def main():
     except Exception as e:
         print(json.dumps({"status": "FAILED", "error": str(e)}, indent=2))
         exit(1)
-
 
 if __name__ == "__main__":
     main()

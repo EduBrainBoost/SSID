@@ -1,0 +1,118 @@
+# SSID OPA Policy - 17_observability (FUNCTIONAL v6.3)
+# Auto-generated from 17_observability/chart.yaml
+# Mode: HONEST COMPLIANCE + ROOT-24-LOCK STRICT + SAFE-FIX
+# Status: FUNCTIONAL
+
+package ssid.17observability.v6_0
+
+# FUNCTIONAL POLICY - ready = true
+default ready := true
+
+# Metadata
+metadata := {
+  "root": "17_observability",
+  "version": "v6.0",
+  "status": "functional",
+  "capabilities_count": 6,
+  "policies_count": 3,
+  "interfaces_count": 3
+}
+
+# ============================================================
+# FUNCTIONAL ENFORCEMENT RULES
+# ============================================================
+
+default allow := false
+
+# ALLOW RULE 1: Valid authenticated operations
+allow {
+  input.request.type == "17_observability_operation"
+  input.request.valid == true
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 2: Read operations (less restrictive)
+allow {
+  input.request.type == "read"
+  input.resource.root == "17_observability"
+  input.auth.authenticated == true
+}
+
+# ALLOW RULE 3: Capability-based operations
+allow {
+  input.request.type == "capability_check"
+  input.capability in ["metrics_collection", "distributed_tracing", "log_aggregation", "alerting", "sla_monitoring", "performance_profiling"]
+  input.auth.authorized == true
+}
+
+# DENY RULE 1: Missing authentication
+deny[msg] {
+  input.request.type == "17_observability_operation"
+  not input.auth.authenticated
+  msg := "Authentication required for 17_observability operations"
+}
+
+# DENY RULE 2: Invalid request
+deny[msg] {
+  input.request.type == "17_observability_operation"
+  input.request.valid == false
+  msg := "Invalid request for 17_observability - validation failed"
+}
+
+# DENY RULE 3: Missing required fields
+deny[msg] {
+  input.request.type == "17_observability_operation"
+  not input.request.action
+  msg := "Missing required field: action"
+}
+
+# Policy-specific enforcement rules
+
+# Policy: metrics_retention (enforcement: automated, scope: all_metrics)
+deny_metricsretention[msg] {
+  input.request.type == "17_observability_operation"
+  input.policy_check == "metrics_retention"
+  not input.policy_compliance.metricsretention
+  msg := "Policy violation: metrics_retention (scope: all_metrics)"
+}
+
+# Policy: trace_sampling (enforcement: automated, scope: all_traces)
+deny_tracesampling[msg] {
+  input.request.type == "17_observability_operation"
+  input.policy_check == "trace_sampling"
+  not input.policy_compliance.tracesampling
+  msg := "Policy violation: trace_sampling (scope: all_traces)"
+}
+
+# Policy: alert_routing (enforcement: automated, scope: all_alerts)
+deny_alertrouting[msg] {
+  input.request.type == "17_observability_operation"
+  input.policy_check == "alert_routing"
+  not input.policy_compliance.alertrouting
+  msg := "Policy violation: alert_routing (scope: all_alerts)"
+}
+
+# BOUNDARY CHECK 1: Resource limits
+deny[msg] {
+  input.request.type == "17_observability_operation"
+  input.resource.size > 10485760  # 10MB limit
+  msg := "Resource size exceeds limit (10MB) for 17_observability"
+}
+
+# BOUNDARY CHECK 2: Rate limiting
+deny[msg] {
+  input.request.type == "17_observability_operation"
+  input.request.count > 1000  # Max 1000 requests
+  msg := "Request count exceeds rate limit (1000) for 17_observability"
+}
+
+# Health check
+health_check := {
+  "ready": ready,
+  "implemented": true,
+  "enforcement_enabled": true,
+  "version": "v6.0",
+  "root": "17_observability",
+  "capabilities": 6,
+  "policies": 3
+}

@@ -10,7 +10,6 @@ import hashlib
 import datetime
 from typing import Dict, List, Any
 
-
 def push_evidence_to_compliance(
     hash_chain_path: str = "02_audit_logging/storage/worm/hash_chain.json"
 ) -> Dict[str, str]:
@@ -57,7 +56,6 @@ def push_evidence_to_compliance(
     except IOError as e:
         return {"status": "error", "message": str(e)}
 
-
 def create_audit_entry(event: str, data: Dict[str, Any]) -> Dict[str, Any]:
     """
     Create a new audit log entry.
@@ -82,7 +80,6 @@ def create_audit_entry(event: str, data: Dict[str, Any]) -> Dict[str, Any]:
 
     return entry
 
-
 def append_to_hash_chain(
     entry: Dict[str, Any],
     hash_chain_path: str = "02_audit_logging/storage/worm/hash_chain.json"
@@ -105,7 +102,6 @@ def append_to_hash_chain(
         return True
     except IOError:
         return False
-
 
 def verify_hash_chain(
     hash_chain_path: str = "02_audit_logging/storage/worm/hash_chain.json"
@@ -143,7 +139,6 @@ def verify_hash_chain(
     except (IOError, json.JSONDecodeError):
         return False
 
-
 def get_audit_stats(
     hash_chain_path: str = "02_audit_logging/storage/worm/hash_chain.json"
 ) -> Dict[str, Any]:
@@ -173,7 +168,6 @@ def get_audit_stats(
         }
     except IOError:
         return {"count": 0, "size_bytes": 0, "integrity": False}
-
 
 if __name__ == "__main__":
     # Self-test

@@ -1,0 +1,13 @@
+# DAO Treasury Policy (v5.4.3)
+# Includes Global Aid Sub-Pool for micro grants through governance.
+treasury_structure:
+  base_pools:
+    operations: 0.40
+    grants: 0.30
+    global_aid: 0.10
+    research_innovation: 0.10
+    contingency: 0.10
+governance_rules:
+  param_changes_require_quorum: 0.67
+  snapshot_period_days: 90
+  treasury_reports_quarterly: true

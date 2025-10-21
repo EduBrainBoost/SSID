@@ -1,0 +1,48 @@
+# SSID Federation Bridge Configuration v5.3
+# Cross-Chain and Cross-Federation Endpoint Mapping
+
+version: "5.3.0"
+bridge_type: "multi_chain_multi_federation"
+
+# Blockchain Bridge Configurations
+blockchain_bridges:
+  ethereum_mainnet:
+    chain_id: 1
+    rpc_endpoint: "${ETHEREUM_MAINNET_RPC}"
+    proof_emitter_address: "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb0"
+    gas_oracle: "https://etherscan.io/gastracker"
+    max_gas_price_gwei: 100
+
+  polygon:
+    chain_id: 137
+    rpc_endpoint: "${POLYGON_RPC}"
+    proof_emitter_address: "0x9876543210abcdef9876543210abcdef98765432"
+    bridge_type: "pos_bridge"
+
+  arbitrum:
+    chain_id: 42161
+    rpc_endpoint: "${ARBITRUM_RPC}"
+    proof_emitter_address: "0xabcdef1234567890abcdef1234567890abcdef12"
+    bridge_type: "optimistic_rollup"
+
+# Federation API Bridges
+federation_bridges:
+  opencore:
+    api_base: "https://opencore.ssid.network"
+    auth_type: "bearer_token"
+    rate_limit: 1000
+
+  trustnet:
+    api_base: "https://trustnet.ssid.eu"
+    auth_type: "mutual_tls"
+    rate_limit: 500
+
+  govchain:
+    api_base: "https://govchain.ssid.gov"
+    auth_type: "government_credential"
+    rate_limit: 200
+
+  eudi:
+    api_base: "https://eudi.ssid.eu"
+    auth_type: "eidas_signature"
+    rate_limit: 1000

@@ -1,0 +1,326 @@
+{
+  "audit_version": "v12.4",
+  "status": "READ_ONLY_CLASSIFICATION_COMPLETE",
+  "timestamp": "2025-10-14T01:38:04.775655",
+  "summary": {
+    "total_artifacts": 52217,
+    "total_size_bytes": 125886337,
+    "total_size_mb": 120.05,
+    "unique_extensions": 11,
+    "unique_root_modules": 24
+  },
+  "extension_distribution": [
+    {
+      "extension": ".yaml",
+      "count": 26603,
+      "percentage": 50.95,
+      "total_size": 64396590,
+      "avg_size": 2420.65
+    },
+    {
+      "extension": ".py",
+      "count": 21729,
+      "percentage": 41.61,
+      "total_size": 22100901,
+      "avg_size": 1017.12
+    },
+    {
+      "extension": ".md",
+      "count": 1854,
+      "percentage": 3.55,
+      "total_size": 3423232,
+      "avg_size": 1846.4
+    },
+    {
+      "extension": ".json",
+      "count": 1200,
+      "percentage": 2.3,
+      "total_size": 32066815,
+      "avg_size": 26722.35
+    },
+    {
+      "extension": ".rego",
+      "count": 360,
+      "percentage": 0.69,
+      "total_size": 1583615,
+      "avg_size": 4398.93
+    },
+    {
+      "extension": ".yml",
+      "count": 178,
+      "percentage": 0.34,
+      "total_size": 1459150,
+      "avg_size": 8197.47
+    },
+    {
+      "extension": ".sh",
+      "count": 168,
+      "percentage": 0.32,
+      "total_size": 538811,
+      "avg_size": 3207.21
+    },
+    {
+      "extension": ".sha256",
+      "count": 49,
+      "percentage": 0.09,
+      "total_size": 8551,
+      "avg_size": 174.51
+    },
+    {
+      "extension": ".ts",
+      "count": 48,
+      "percentage": 0.09,
+      "total_size": 294355,
+      "avg_size": 6132.4
+    },
+    {
+      "extension": ".wasm",
+      "count": 25,
+      "percentage": 0.05,
+      "total_size": 1714,
+      "avg_size": 68.56
+    },
+    {
+      "extension": ".tsx",
+      "count": 3,
+      "percentage": 0.01,
+      "total_size": 12603,
+      "avg_size": 4201.0
+    }
+  ],
+  "category_distribution": [
+    {
+      "category": "MODELS",
+      "count": 27981,
+      "percentage": 53.59,
+      "total_size": 97922555,
+      "size_percentage": 77.79
+    },
+    {
+      "category": "CODE",
+      "count": 21948,
+      "percentage": 42.03,
+      "total_size": 22946670,
+      "size_percentage": 18.23
+    },
+    {
+      "category": "REPORTS",
+      "count": 1854,
+      "percentage": 3.55,
+      "total_size": 3423232,
+      "size_percentage": 2.72
+    },
+    {
+      "category": "POLICIES",
+      "count": 360,
+      "percentage": 0.69,
+      "total_size": 1583615,
+      "size_percentage": 1.26
+    },
+    {
+      "category": "WASM/HASH",
+      "count": 74,
+      "percentage": 0.14,
+      "total_size": 10265,
+      "size_percentage": 0.01
+    }
+  ],
+  "top_10_largest_files": [
+    {
+      "path": "23_compliance/evidence/structure_validator/2025-10-05/file_hashes.json",
+      "size_bytes": 8606320,
+      "size_mb": 8.21
+    },
+    {
+      "path": "02_audit_logging/reports/knowledge_map.json",
+      "size_bytes": 5116815,
+      "size_mb": 4.88
+    },
+    {
+      "path": "23_compliance/evidence/structure_validator/2025-10-06/file_hashes.json",
+      "size_bytes": 2991421,
+      "size_mb": 2.85
+    },
+    {
+      "path": "23_compliance/evidence/depth_limit/depth_validation_20251009T212551Z.json",
+      "size_bytes": 2056949,
+      "size_mb": 1.96
+    },
+    {
+      "path": "23_compliance/evidence/depth_limit/depth_validation_20251009T232633Z.json",
+      "size_bytes": 2056939,
+      "size_mb": 1.96
+    },
+    {
+      "path": "02_audit_logging/evidence/deps/dependency_graph.json",
+      "size_bytes": 1172193,
+      "size_mb": 1.12
+    },
+    {
+      "path": "02_audit_logging/reports/coverage_advice_20251009_203331.json",
+      "size_bytes": 635760,
+      "size_mb": 0.61
+    },
+    {
+      "path": "02_audit_logging/reports/coverage_advice_latest.json",
+      "size_bytes": 635760,
+      "size_mb": 0.61
+    },
+    {
+      "path": "02_audit_logging/reports/coverage_advice_20251009_203222.json",
+      "size_bytes": 635668,
+      "size_mb": 0.61
+    },
+    {
+      "path": "02_audit_logging/reports/coverage_advice_20251009_203317.json",
+      "size_bytes": 635668,
+      "size_mb": 0.61
+    }
+  ],
+  "root_module_stats": [
+    {
+      "root": "02_audit_logging",
+      "count": 37753,
+      "size_bytes": 83295668
+    },
+    {
+      "root": "23_compliance",
+      "count": 1318,
+      "size_bytes": 19982460
+    },
+    {
+      "root": "11_test_simulation",
+      "count": 763,
+      "size_bytes": 1994035
+    },
+    {
+      "root": "12_tooling",
+      "count": 675,
+      "size_bytes": 1928447
+    },
+    {
+      "root": "05_documentation",
+      "count": 668,
+      "size_bytes": 1802011
+    },
+    {
+      "root": "24_meta_orchestration",
+      "count": 661,
+      "size_bytes": 1329633
+    },
+    {
+      "root": "13_ui_layer",
+      "count": 606,
+      "size_bytes": 967244
+    },
+    {
+      "root": "16_codex",
+      "count": 598,
+      "size_bytes": 1169113
+    },
+    {
+      "root": "07_governance_legal",
+      "count": 589,
+      "size_bytes": 962234
+    },
+    {
+      "root": "03_core",
+      "count": 588,
+      "size_bytes": 937712
+    },
+    {
+      "root": "14_zero_time_auth",
+      "count": 588,
+      "size_bytes": 943920
+    },
+    {
+      "root": "20_foundation",
+      "count": 580,
+      "size_bytes": 821226
+    },
+    {
+      "root": "04_deployment",
+      "count": 575,
+      "size_bytes": 842005
+    },
+    {
+      "root": "10_interoperability",
+      "count": 574,
+      "size_bytes": 815337
+    },
+    {
+      "root": "09_meta_identity",
+      "count": 573,
+      "size_bytes": 850882
+    },
+    {
+      "root": "01_ai_layer",
+      "count": 572,
+      "size_bytes": 803439
+    },
+    {
+      "root": "08_identity_score",
+      "count": 572,
+      "size_bytes": 830666
+    },
+    {
+      "root": "17_observability",
+      "count": 572,
+      "size_bytes": 843067
+    },
+    {
+      "root": "19_adapters",
+      "count": 571,
+      "size_bytes": 866612
+    },
+    {
+      "root": "21_post_quantum_crypto",
+      "count": 565,
+      "size_bytes": 785853
+    },
+    {
+      "root": "06_data_pipeline",
+      "count": 564,
+      "size_bytes": 781933
+    },
+    {
+      "root": "15_infra",
+      "count": 564,
+      "size_bytes": 776369
+    },
+    {
+      "root": "18_data_layer",
+      "count": 564,
+      "size_bytes": 778553
+    },
+    {
+      "root": "22_datasets",
+      "count": 564,
+      "size_bytes": 777918
+    }
+  ],
+  "root_anomalies": [
+    {
+      "root": "02_audit_logging",
+      "count": 37753,
+      "size": 83295668
+    },
+    {
+      "root": "23_compliance",
+      "count": 1318,
+      "size": 19982460
+    }
+  ],
+  "pareto_analysis": {
+    "types_causing_80_percent": [
+      ".yaml",
+      ".py"
+    ],
+    "count": 2
+  },
+  "generated_files_estimate": {
+    "count": 411,
+    "percentage": 0.79,
+    "note": "Estimated based on extensions and path patterns"
+  }
+}

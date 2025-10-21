@@ -23,7 +23,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "02_audit_logging"))
 from interconnect.BRIDGE_MODULE import BRIDGE_CLASS
 
-
 # ============================================================================
 # Fixtures
 # ============================================================================
@@ -41,7 +40,6 @@ def bridge():
         timeout=5.0
     )
 
-
 @pytest.fixture
 def bridge_with_auth():
     """Create bridge with authentication"""
@@ -50,7 +48,6 @@ def bridge_with_auth():
         endpoint="http://localhost:8080/api",
         api_key="test_api_key_123"
     )
-
 
 # ============================================================================
 # Successful Push Tests
@@ -72,7 +69,6 @@ def test_bridge_push_success(bridge):
         assert result["success"] is True, "Successful push should return success=True"
         assert mock_post.called, "HTTP POST should be called"
 
-
 def test_bridge_push_with_response_data(bridge):
     """Test that push returns response data"""
     with patch('requests.post') as mock_post:
@@ -87,7 +83,6 @@ def test_bridge_push_with_response_data(bridge):
 
         assert result["success"] is True
         assert "id" in result or "response" in result
-
 
 def test_bridge_push_multiple_events(bridge):
     """Test pushing multiple events"""
@@ -107,7 +102,6 @@ def test_bridge_push_multiple_events(bridge):
         # Should have called POST 3 times
         assert mock_post.call_count == 3
 
-
 # ============================================================================
 # Failed Push Tests
 # ============================================================================
@@ -123,7 +117,6 @@ def test_bridge_push_connection_error(bridge):
         assert "error" in result
         assert "connect" in str(result["error"]).lower()
 
-
 def test_bridge_push_timeout(bridge):
     """Test push failure due to timeout"""
     with patch('requests.post', side_effect=TimeoutError("Request timeout")):
@@ -132,7 +125,6 @@ def test_bridge_push_timeout(bridge):
         assert result["success"] is False
         assert "error" in result
         assert "timeout" in str(result["error"]).lower()
-
 
 def test_bridge_push_http_error(bridge):
     """Test push failure with HTTP error status"""
@@ -145,7 +137,6 @@ def test_bridge_push_http_error(bridge):
         assert result["success"] is False
         assert "error" in result
 
-
 def test_bridge_push_404_not_found(bridge):
     """Test push failure with 404 Not Found"""
     with patch('requests.post') as mock_post:
@@ -154,7 +145,6 @@ def test_bridge_push_404_not_found(bridge):
         result = bridge.push({"event": "test"})
 
         assert result["success"] is False
-
 
 def test_bridge_push_unauthorized(bridge_with_auth):
     """Test push failure with 401 Unauthorized"""
@@ -166,7 +156,6 @@ def test_bridge_push_unauthorized(bridge_with_auth):
 
         assert result["success"] is False
         assert "error" in result
-
 
 # ============================================================================
 # Data Transformation Tests
@@ -189,7 +178,6 @@ def test_bridge_data_transformation(bridge):
         assert "timestamp" in transformed or "ts" in transformed
         # Add more specific assertions based on transformation
 
-
 def test_bridge_preserves_required_fields(bridge):
     """Test that bridge preserves required fields"""
     data = {
@@ -210,7 +198,6 @@ def test_bridge_preserves_required_fields(bridge):
         # Required fields should be present
         assert "id" in posted_data or "critical_field" in str(posted_data)
 
-
 # ============================================================================
 # Authentication Tests
 # ============================================================================
@@ -227,7 +214,6 @@ def test_bridge_includes_auth_header(bridge_with_auth):
         headers = call_args.kwargs.get('headers', {})
 
         assert "Authorization" in headers or "X-API-Key" in headers
-
 
 # ============================================================================
 # Retry Logic Tests (if applicable)
@@ -264,7 +250,6 @@ def test_bridge_retry_on_failure():
         assert result["success"] is True
         assert call_count == 3  # Should have tried 3 times
 
-
 # ============================================================================
 # Edge Cases
 # ============================================================================
@@ -279,7 +264,6 @@ def test_bridge_empty_data(bridge):
         # Should handle gracefully
         assert "success" in result or "error" in result
 
-
 def test_bridge_null_data(bridge):
     """Test pushing None data"""
     with patch('requests.post') as mock_post:
@@ -289,7 +273,6 @@ def test_bridge_null_data(bridge):
 
         # Should handle gracefully (might error or skip)
         assert "success" in result or "error" in result
-
 
 def test_bridge_large_payload(bridge):
     """Test pushing large payload"""
@@ -304,7 +287,6 @@ def test_bridge_large_payload(bridge):
 
         # Should handle large payloads
         assert result["success"] is True
-
 
 # ============================================================================
 # Endpoint Configuration Tests
@@ -327,7 +309,6 @@ def test_bridge_custom_endpoint():
         url = call_args.args[0] if call_args.args else call_args.kwargs.get('url')
         assert "custom-endpoint.com" in str(url)
 
-
 # ============================================================================
 # Error Handling Tests
 # ============================================================================
@@ -343,7 +324,6 @@ def test_bridge_malformed_response(bridge):
         # Should handle gracefully
         assert "success" in result
 
-
 def test_bridge_network_error(bridge):
     """Test handling of network errors"""
     with patch('requests.post', side_effect=OSError("Network unreachable")):
@@ -351,7 +331,6 @@ def test_bridge_network_error(bridge):
 
         assert result["success"] is False
         assert "error" in result
-
 
 # ============================================================================
 # Performance Tests (Optional)

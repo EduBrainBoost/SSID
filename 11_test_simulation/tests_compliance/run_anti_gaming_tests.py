@@ -15,7 +15,6 @@ import hashlib
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 sys.path.insert(0, PROJECT_ROOT)
 
-
 def load_module_from_path(module_name, file_path):
     """Dynamically load a module from a file path."""
     spec = importlib.util.spec_from_file_location(module_name, file_path)
@@ -24,7 +23,6 @@ def load_module_from_path(module_name, file_path):
         spec.loader.exec_module(module)
         return module
     raise NotImplementedError("TODO: Implement this function")
-
 
 def test_duplicate_hashes():
     """Test duplicate identity hash detection."""
@@ -62,7 +60,6 @@ def test_duplicate_hashes():
 
     print("[PASS] Duplicate hash detection")
     return True
-
 
 def test_badge_integrity():
     """Test badge integrity checker."""
@@ -117,7 +114,6 @@ def test_badge_integrity():
     print("[PASS] Badge integrity checker")
     return True
 
-
 def test_overfitting_detector():
     """Test overfitting detection."""
     print("\n[TEST] Overfitting Detector")
@@ -161,7 +157,6 @@ def test_overfitting_detector():
 
     print("[PASS] Overfitting detector")
     return True
-
 
 def test_circular_dependencies():
     """Test circular dependency detection."""
@@ -209,7 +204,6 @@ def test_circular_dependencies():
     print("[PASS] Circular dependency detector")
     return True
 
-
 def generate_evidence_report(test_results):
     """Generate anti-gaming evidence report."""
     evidence_dir = os.path.join(PROJECT_ROOT, "23_compliance/evidence/anti_gaming")
@@ -251,7 +245,6 @@ def generate_evidence_report(test_results):
         f.write(f"{datetime.datetime.utcnow().isoformat()}Z - Test run completed - Status: {'PASS' if all(test_results.values()) else 'FAIL'}\n")
 
     return report
-
 
 def main():
     """Run all anti-gaming tests."""
@@ -297,7 +290,6 @@ def main():
     else:
         print("\n[FAILURE] Some anti-gaming tests failed")
         return 1
-
 
 if __name__ == "__main__":
     sys.exit(main())

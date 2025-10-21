@@ -1,0 +1,595 @@
+metadata:
+  version: 5.3.0
+  generated: '2025-10-20T20:30:36.127248'
+  total_rules: 47
+  source: AUTO-GENERATED from all_384_rules.json
+  generator_version: 1.0.0
+  note: These are the MISSING rules to reach 100% coverage
+missing_categories:
+- category: CHART_STRUCTURE
+  total_rules: 11
+  description: chart.yaml structure requirements
+- category: MANIFEST_STRUCTURE
+  total_rules: 6
+  description: manifest.yaml structure requirements
+- category: CORE_PRINCIPLES
+  total_rules: 10
+  description: Core architectural principles
+- category: CONSOLIDATED_EXTENSIONS
+  total_rules: 8
+  description: Extensions v1.1.1
+- category: TECHNOLOGY_STANDARDS
+  total_rules: 5
+  description: Technology standards compliance
+- category: DEPLOYMENT_CICD
+  total_rules: 4
+  description: Deployment and CI/CD requirements
+- category: MATRIX_REGISTRY
+  total_rules: 3
+  description: Matrix architecture and registry
+rules:
+- rule_id: CS001
+  description: chart.yaml MUSS metadata Sektion enthalten
+  severity: CRITICAL
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs001
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS002
+  description: chart.yaml MUSS governance Sektion enthalten
+  severity: CRITICAL
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs002
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS003
+  description: chart.yaml MUSS capabilities Sektion enthalten mit MUST/SHOULD/HAVE
+  severity: CRITICAL
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs003
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS004
+  description: chart.yaml MUSS constraints Sektion enthalten
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs004
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS005
+  description: chart.yaml MUSS enforcement Sektion enthalten
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs005
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS006
+  description: chart.yaml MUSS interfaces Sektion enthalten
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs006
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS007
+  description: chart.yaml MUSS dependencies Sektion enthalten
+  severity: MEDIUM
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs007
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS008
+  description: chart.yaml MUSS compatibility Sektion enthalten mit semver
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs008
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS009
+  description: chart.yaml MUSS implementations Sektion enthalten
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs009
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS010
+  description: chart.yaml MUSS observability Sektion enthalten
+  severity: MEDIUM
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs010
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CS011
+  description: chart.yaml MUSS security Sektion enthalten
+  severity: CRITICAL
+  category: CHART_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_cs011
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: MS001
+  description: manifest.yaml MUSS metadata mit implementation_id enthalten
+  severity: CRITICAL
+  category: MANIFEST_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_ms001
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: MS002
+  description: manifest.yaml MUSS technology_stack Sektion enthalten
+  severity: HIGH
+  category: MANIFEST_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_ms002
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: MS003
+  description: manifest.yaml MUSS artifacts Sektion enthalten
+  severity: HIGH
+  category: MANIFEST_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_ms003
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: MS004
+  description: manifest.yaml MUSS dependencies Sektion enthalten
+  severity: HIGH
+  category: MANIFEST_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_ms004
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: MS005
+  description: manifest.yaml MUSS testing Sektion enthalten
+  severity: HIGH
+  category: MANIFEST_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_ms005
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: MS006
+  description: manifest.yaml MUSS observability Sektion enthalten
+  severity: MEDIUM
+  category: MANIFEST_STRUCTURE
+  implementation_status: pending
+  validation:
+    validator: validate_ms006
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP001
+  description: 'Contract-First Development: API-Contract VOR Implementierung'
+  severity: CRITICAL
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp001
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP002
+  description: 'Separation of Concerns: SoT (chart.yaml) vs Implementation (manifest.yaml)'
+  severity: CRITICAL
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp002
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP003
+  description: 'Multi-Implementation Support: Ein Shard, mehrere Implementierungen
+    möglich'
+  severity: HIGH
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp003
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP004
+  description: 'Deterministic Architecture: 24 × 16 = 384 Chart-Dateien, keine Ausnahmen'
+  severity: CRITICAL
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp004
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP005
+  description: 'Evidence-Based Compliance: Alles relevant wird gehasht, geloggt, geanchort'
+  severity: CRITICAL
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp005
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP006
+  description: 'Zero-Trust Security: Niemandem vertrauen, alles verifizieren'
+  severity: CRITICAL
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp006
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP007
+  description: 'Observability by Design: Metrics, Tracing, Logging von Anfang an'
+  severity: HIGH
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp007
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP008
+  description: 'Bias-Aware AI/ML: Alle AI/ML-Modelle müssen auf Bias getestet werden'
+  severity: HIGH
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp008
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP009
+  description: 'Scalability & Performance: Jeder Shard muss skalieren können'
+  severity: HIGH
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp009
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: KP010
+  description: 'Documentation as Code: Dokumentation aus Code/Contracts generiert'
+  severity: MEDIUM
+  category: CORE_PRINCIPLES
+  implementation_status: pending
+  validation:
+    validator: validate_kp010
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CE001
+  description: 'Regulatory Matrix: UK ICO/GDPR alignment mandatory'
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: pending
+  validation:
+    validator: validate_ce001
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CE002
+  description: 'Regulatory Matrix: Singapore MAS/PDPA mandatory'
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: pending
+  validation:
+    validator: validate_ce002
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CE003
+  description: 'Regulatory Matrix: Japan JFSA/APPI mandatory'
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: pending
+  validation:
+    validator: validate_ce003
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CE004
+  description: 'Regulatory Matrix: Australia Privacy Act 1988 mandatory'
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: pending
+  validation:
+    validator: validate_ce004
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CE005
+  description: 'OPA Substring-Helper renamed: has_substr() statt contains()'
+  severity: MEDIUM
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: pending
+  validation:
+    validator: validate_ce005
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CE006
+  description: Fuzzy-Matching aktiviert für Sanctions-Prüfungen
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: pending
+  validation:
+    validator: validate_ce006
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CE007
+  description: CI Workflows MÜSSEN daily sanctions schedule haben
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: pending
+  validation:
+    validator: validate_ce007
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: CE008
+  description: 'DORA: Pro Root MUSS incident_response_plan.md existieren'
+  severity: CRITICAL
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: pending
+  validation:
+    validator: validate_ce008
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: TS001
+  description: W3C DID Core 1.0 compliance mandatory
+  severity: CRITICAL
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: pending
+  validation:
+    validator: validate_ts001
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: TS002
+  description: OpenAPI 3.1 für alle Contracts mandatory
+  severity: CRITICAL
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: pending
+  validation:
+    validator: validate_ts002
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: TS003
+  description: JSON-Schema Draft 2020-12 für alle Schemas
+  severity: HIGH
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: pending
+  validation:
+    validator: validate_ts003
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: TS004
+  description: ISO/IEC 27001 compliance für Security
+  severity: HIGH
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: pending
+  validation:
+    validator: validate_ts004
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: TS005
+  description: eIDAS 2.0 compliance für Identity
+  severity: CRITICAL
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: pending
+  validation:
+    validator: validate_ts005
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: DC001
+  description: CI/CD MUSS auf push/pull_request triggern
+  severity: HIGH
+  category: DEPLOYMENT_CICD
+  implementation_status: pending
+  validation:
+    validator: validate_dc001
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: DC002
+  description: CI/CD MUSS scheduled runs für sanctions/audit haben
+  severity: HIGH
+  category: DEPLOYMENT_CICD
+  implementation_status: pending
+  validation:
+    validator: validate_dc002
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: DC003
+  description: Artifacts upload MUSS actions/upload-artifact@v4 nutzen
+  severity: MEDIUM
+  category: DEPLOYMENT_CICD
+  implementation_status: pending
+  validation:
+    validator: validate_dc003
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: DC004
+  description: Deployment strategy MUSS blue-green oder canary sein
+  severity: HIGH
+  category: DEPLOYMENT_CICD
+  implementation_status: pending
+  validation:
+    validator: validate_dc004
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: MR001
+  description: 24 Root-Ordner MÜSSEN exakt vorhanden sein
+  severity: CRITICAL
+  category: MATRIX_REGISTRY
+  implementation_status: pending
+  validation:
+    validator: validate_mr001
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: MR002
+  description: Jeder Root MUSS exakt 16 Shards enthalten
+  severity: CRITICAL
+  category: MATRIX_REGISTRY
+  implementation_status: pending
+  validation:
+    validator: validate_mr002
+    enforcement: MANDATORY
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1
+- rule_id: MR003
+  description: Registry MUSS repo_scan.json für OPA-Checks generieren
+  severity: HIGH
+  category: MATRIX_REGISTRY
+  implementation_status: pending
+  validation:
+    validator: validate_mr003
+    enforcement: RECOMMENDED
+  compliance:
+    applicable: true
+    frameworks:
+    - SSID Master Definition v1.1.1

@@ -1,0 +1,16 @@
+# Test Data - SHOULD Rule Failures Only
+# Should result in Exit Code 1 (warnings)
+
+# All MUST rules pass
+version: "2.0.0"
+date: "2025-10-18"
+deprecated: false
+regulatory_basis: "FATF Recommendation 16, OECD CARF 2025-07"
+classification: "CONFIDENTIAL"
+
+soc2:
+  entry_marker_soc2: "soc2/:"
+  name: "SOC2 Controls"
+  path: "23_compliance/global/soc2/"
+  deprecated: false
+  # Note: In full implementation, add SHOULD-level violations here

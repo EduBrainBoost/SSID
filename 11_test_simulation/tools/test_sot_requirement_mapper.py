@@ -15,12 +15,10 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-
 def test_sot_mapper_exists():
     """Test that SoT mapper tool exists."""
     tool_path = Path(__file__).parents[2] / "24_meta_orchestration" / "registry" / "tools" / "sot_requirement_mapper.py"
     assert tool_path.exists(), f"Tool not found: {tool_path}"
-
 
 def test_sot_mapper_executes():
     """Test that SoT mapper executes successfully."""
@@ -38,7 +36,6 @@ def test_sot_mapper_executes():
     # Always returns 0 (evidence generation regardless of compliance)
     assert result.returncode == 0, f"Unexpected exit code: {result.returncode}"
     assert "SSID SoT Requirement Mapper" in result.stdout
-
 
 def test_sot_mapper_generates_manifest():
     """Test that manifest is generated."""
@@ -69,7 +66,6 @@ def test_sot_mapper_generates_manifest():
     assert "tool" in manifest
     assert manifest["tool"] == "sot_requirement_mapper"
     assert "requirements" in manifest
-
 
 def test_sot_mapper_generates_score():
     """Test that score report is generated."""
@@ -110,7 +106,6 @@ def test_sot_mapper_generates_score():
     # Score should be 0-100
     assert 0 <= score["score"] <= 100
 
-
 def test_sot_mapper_generates_report():
     """Test that markdown report is generated."""
     import subprocess
@@ -139,13 +134,12 @@ def test_sot_mapper_generates_report():
     assert "Compliance Score" in content
     assert "MUST" in content or "SHOULD" in content or "HAVE" in content
 
-
 def test_sot_score_breakdown_structure():
     """Test score breakdown has correct structure."""
     score_path = Path(__file__).parents[2] / "02_audit_logging" / "scores" / "sot_requirement_score.json"
 
     if not score_path.exists():
-        pytest.skip("Score not found - run mapper first")
+        pytest.skip("Fixture file not found")
 
     with open(score_path, "r", encoding="utf-8") as f:
         score_report = json.load(f)
@@ -164,7 +158,6 @@ def test_sot_score_breakdown_structure():
         assert breakdown[req_type]["total"] >= 0
         assert breakdown[req_type]["satisfied"] >= 0
         assert breakdown[req_type]["satisfied"] <= breakdown[req_type]["total"]
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

@@ -1,0 +1,75 @@
+apiVersion: ssid/root/v1
+kind: RootChart
+metadata:
+  name: audit_logging
+  version: "0.1.0"
+  description: "Immutable audit logging with WORM storage, blockchain anchoring, and forensic chain-of-custody"
+  created: "2025-10-13"
+  status: bootstrap
+
+spec:
+  capabilities:
+    - immutable_audit_logs
+    - worm_storage
+    - blockchain_anchoring
+    - forensic_evidence_collection
+    - compliance_reporting
+    - merkle_tree_verification
+
+  interfaces:
+    - name: log_ingestion
+      type: grpc
+      authentication: required
+      rate_limit: 10000_per_second
+
+    - name: log_query
+      type: rest_api
+      authentication: required
+      authorization: rbac
+
+    - name: blockchain_anchor
+      type: async_queue
+      authentication: internal
+
+  policies:
+    - name: immutability
+      enforcement: automated
+      scope: all_logs
+      mechanism: worm
+
+    - name: retention
+      enforcement: automated
+      scope: all_logs
+      duration_years: 10
+
+    - name: integrity_verification
+      enforcement: continuous
+      scope: all_logs
+      mechanism: merkle_tree
+
+  dependencies:
+    internal:
+      - 21_post_quantum_crypto  # PQC signatures
+      - 15_infra  # Storage infrastructure
+    external:
+      - ethereum: mainnet
+      - polygon: mainnet
+      - postgresql: ">=14"
+
+  governance:
+    maintainer: "Compliance Team"
+    reviewers:
+      - legal_team
+      - security_team
+    approval_required: true
+    data_classification: highly_confidential
+
+  compliance:
+    dsgvo:
+      - article_5  # Processing principles
+      - article_32  # Security of processing
+    dora:
+      - article_10  # Detection and monitoring
+      - article_11  # Incident response
+    iso_27001:
+      - control_a12_4_1  # Event logging

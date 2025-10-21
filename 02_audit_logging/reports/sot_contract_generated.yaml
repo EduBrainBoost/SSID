@@ -1,0 +1,2272 @@
+metadata:
+  version: 5.2.0
+  generated: '2025-10-20T20:11:49.027942'
+  total_rules: 145
+  matrix_alignment: 24x16 (24 Root-Ordner x 16 Shards = 384 Rules)
+  source: AUTO-GENERATED from sot_validator_core.py
+  generator_version: 1.0.0
+  previous_version: 5.2.0
+rule_categories:
+- category: ARCHITECTURE
+  total_rules: 10
+  severity_breakdown:
+    CRITICAL: 6
+    HIGH: 4
+    MEDIUM: 0
+    LOW: 0
+- category: CHART_STRUCTURE
+  total_rules: 11
+  severity_breakdown:
+    CRITICAL: 1
+    HIGH: 6
+    MEDIUM: 4
+    LOW: 0
+- category: CONSOLIDATED_EXTENSIONS
+  total_rules: 8
+  severity_breakdown:
+    CRITICAL: 1
+    HIGH: 4
+    MEDIUM: 2
+    LOW: 1
+- category: CORE_PRINCIPLES
+  total_rules: 10
+  severity_breakdown:
+    CRITICAL: 1
+    HIGH: 4
+    MEDIUM: 5
+    LOW: 0
+- category: CRITICAL_POLICIES
+  total_rules: 12
+  severity_breakdown:
+    CRITICAL: 7
+    HIGH: 5
+    MEDIUM: 0
+    LOW: 0
+- category: DEPLOYMENT_CICD
+  total_rules: 4
+  severity_breakdown:
+    CRITICAL: 0
+    HIGH: 4
+    MEDIUM: 0
+    LOW: 0
+- category: JURISDICTIONS
+  total_rules: 7
+  severity_breakdown:
+    CRITICAL: 3
+    HIGH: 3
+    MEDIUM: 1
+    LOW: 0
+- category: MANIFEST_STRUCTURE
+  total_rules: 6
+  severity_breakdown:
+    CRITICAL: 1
+    HIGH: 2
+    MEDIUM: 3
+    LOW: 0
+- category: MASTER_DEF_CHART
+  total_rules: 5
+  severity_breakdown:
+    CRITICAL: 1
+    HIGH: 1
+    MEDIUM: 2
+    LOW: 1
+- category: MASTER_DEF_EXTENSIONS
+  total_rules: 4
+  severity_breakdown:
+    CRITICAL: 0
+    HIGH: 1
+    MEDIUM: 2
+    LOW: 1
+- category: MASTER_DEF_GOVERNANCE
+  total_rules: 7
+  severity_breakdown:
+    CRITICAL: 0
+    HIGH: 7
+    MEDIUM: 0
+    LOW: 0
+- category: MASTER_DEF_MANIFEST
+  total_rules: 28
+  severity_breakdown:
+    CRITICAL: 4
+    HIGH: 13
+    MEDIUM: 11
+    LOW: 0
+- category: MASTER_DEF_POLICIES
+  total_rules: 5
+  severity_breakdown:
+    CRITICAL: 5
+    HIGH: 0
+    MEDIUM: 0
+    LOW: 0
+- category: MASTER_DEF_PRINCIPLES
+  total_rules: 6
+  severity_breakdown:
+    CRITICAL: 1
+    HIGH: 3
+    MEDIUM: 2
+    LOW: 0
+- category: MASTER_DEF_STRUCTURE
+  total_rules: 2
+  severity_breakdown:
+    CRITICAL: 2
+    HIGH: 0
+    MEDIUM: 0
+    LOW: 0
+- category: MATRIX_REGISTRY
+  total_rules: 3
+  severity_breakdown:
+    CRITICAL: 0
+    HIGH: 1
+    MEDIUM: 2
+    LOW: 0
+- category: SOT_CONTRACT_V2
+  total_rules: 4
+  severity_breakdown:
+    CRITICAL: 4
+    HIGH: 0
+    MEDIUM: 0
+    LOW: 0
+- category: TECHNOLOGY_STANDARDS
+  total_rules: 5
+  severity_breakdown:
+    CRITICAL: 1
+    HIGH: 2
+    MEDIUM: 2
+    LOW: 0
+- category: VERSIONING_GOVERNANCE
+  total_rules: 8
+  severity_breakdown:
+    CRITICAL: 0
+    HIGH: 6
+    MEDIUM: 2
+    LOW: 0
+rules:
+- rule_id: AR001
+  description: Das System MUSS aus exakt 24 Root-Ordnern bestehen.
+  severity: CRITICAL
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar001
+  metadata:
+    source_function: validate_ar001
+    auto_generated: true
+- rule_id: AR002
+  description: Jeder Root-Ordner MUSS exakt 16 Shards enthalten.
+  severity: CRITICAL
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar002
+  metadata:
+    source_function: validate_ar002
+    auto_generated: true
+- rule_id: AR003
+  description: Das System MUSS eine Matrix von 24×16=384 Shard-Ordnern bilden.
+  severity: CRITICAL
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - structure_validation
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar003
+  metadata:
+    source_function: validate_ar003
+    auto_generated: true
+- rule_id: AR004
+  description: Jeder Shard MUSS ein Chart.yaml mit Chart-Definition enthalten.
+  severity: CRITICAL
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar004
+  metadata:
+    source_function: validate_ar004
+    auto_generated: true
+- rule_id: AR005
+  description: Jeder Shard MUSS ein values.yaml mit Werte-Definitionen enthalten.
+  severity: CRITICAL
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar005
+  metadata:
+    source_function: validate_ar005
+    auto_generated: true
+- rule_id: AR006
+  description: Jeder Root-Ordner MUSS eine README.md mit Modul-Dokumentation enthalten.
+  severity: HIGH
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar006
+  metadata:
+    source_function: validate_ar006
+    auto_generated: true
+- rule_id: AR007
+  description: Die 16 Shards MÜSSEN identisch über alle Root-Ordner repliziert werden.
+  severity: CRITICAL
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar007
+  metadata:
+    source_function: validate_ar007
+    auto_generated: true
+- rule_id: AR008
+  description: Shard-Namen MÜSSEN dem Pattern NN_name folgen (NN = 01-16).
+  severity: HIGH
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar008
+  metadata:
+    source_function: validate_ar008
+    auto_generated: true
+- rule_id: AR009
+  description: Root-Namen MÜSSEN dem Pattern NN_name folgen (NN = 01-24).
+  severity: HIGH
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar009
+  metadata:
+    source_function: validate_ar009
+    auto_generated: true
+- rule_id: AR010
+  description: Jeder Shard MUSS ein templates/ Verzeichnis mit Helm-Templates enthalten.
+  severity: HIGH
+  category: ARCHITECTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ar010
+  metadata:
+    source_function: validate_ar010
+    auto_generated: true
+- rule_id: CE001
+  description: UK/APAC-spezifische Regeln MÜSSEN in country_specific definiert sein
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.ce001
+  metadata:
+    source_function: validate_ce001
+    auto_generated: true
+- rule_id: CE002
+  description: Substring-Helper MUSS has_substr() heißen (nicht contains())
+  severity: LOW
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.ce002
+  metadata:
+    source_function: validate_ce002
+    auto_generated: true
+- rule_id: CE003
+  description: 'Sanctions-Workflow MUSS täglich laufen (cron: ''15 3 * * *'')'
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.ce003
+  metadata:
+    source_function: validate_ce003
+    auto_generated: true
+- rule_id: CE004
+  description: Build-Step MUSS entities_to_check.json vor OPA-Check erstellen
+  severity: MEDIUM
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.ce004
+  metadata:
+    source_function: validate_ce004
+    auto_generated: true
+- rule_id: CE005
+  description: 'Sanctions-Daten MÜSSEN max_age_hours: 24 erfüllen'
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - matrix_alignment
+  test_coverage: true
+  opa_policy: sot.rules.ce005
+  metadata:
+    source_function: validate_ce005
+    auto_generated: true
+- rule_id: CE006
+  description: Jeder Root MUSS docs/incident_response_plan.md haben
+  severity: HIGH
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.ce006
+  metadata:
+    source_function: validate_ce006
+    auto_generated: true
+- rule_id: CE007
+  description: NIEMALS .ipynb, .parquet, .sqlite, .db-Dateien committen
+  severity: CRITICAL
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.ce007
+  metadata:
+    source_function: validate_ce007
+    auto_generated: true
+- rule_id: CE008
+  description: OPA MUSS 24_meta_orchestration/registry/generated/repo_scan.json verwenden
+  severity: MEDIUM
+  category: CONSOLIDATED_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+  test_coverage: true
+  opa_policy: sot.rules.ce008
+  metadata:
+    source_function: validate_ce008
+    auto_generated: true
+- rule_id: CP001
+  description: NIEMALS Rohdaten von PII oder biometrischen Daten speichern.
+  severity: CRITICAL
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp001
+  metadata:
+    source_function: validate_cp001
+    auto_generated: true
+- rule_id: CP002
+  description: Alle Daten MÜSSEN als SHA3-256 Hashes gespeichert werden.
+  severity: CRITICAL
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp002
+  metadata:
+    source_function: validate_cp002
+    auto_generated: true
+- rule_id: CP003
+  description: Tenant-spezifische Peppers MÜSSEN verwendet werden.
+  severity: CRITICAL
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp003
+  metadata:
+    source_function: validate_cp003
+    auto_generated: true
+- rule_id: CP004
+  description: Raw Data Retention MUSS '0 seconds' sein (Immediate Discard).
+  severity: CRITICAL
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp004
+  metadata:
+    source_function: validate_cp004
+    auto_generated: true
+- rule_id: CP005
+  description: Right to Erasure MUSS via Hash-Rotation implementiert sein.
+  severity: HIGH
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp005
+  metadata:
+    source_function: validate_cp005
+    auto_generated: true
+- rule_id: CP006
+  description: Data Portability MUSS JSON-Export aller Hashes + Metadaten bieten.
+  severity: HIGH
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp006
+  metadata:
+    source_function: validate_cp006
+    auto_generated: true
+- rule_id: CP007
+  description: PII Redaction MUSS automatisch in Logs & Traces erfolgen.
+  severity: HIGH
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp007
+  metadata:
+    source_function: validate_cp007
+    auto_generated: true
+- rule_id: CP008
+  description: Alle AI/ML-Modelle MÜSSEN auf Bias getestet werden.
+  severity: HIGH
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp008
+  metadata:
+    source_function: validate_cp008
+    auto_generated: true
+- rule_id: CP009
+  description: Hash-Ledger mit Blockchain-Anchoring MUSS verwendet werden.
+  severity: CRITICAL
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp009
+  metadata:
+    source_function: validate_cp009
+    auto_generated: true
+- rule_id: CP010
+  description: WORM-Storage mit 10 Jahren Retention MUSS verwendet werden.
+  severity: CRITICAL
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp010
+  metadata:
+    source_function: validate_cp010
+    auto_generated: true
+- rule_id: CP011
+  description: NIEMALS Secrets in Git committen.
+  severity: CRITICAL
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp011
+  metadata:
+    source_function: validate_cp011
+    auto_generated: true
+- rule_id: CP012
+  description: Secrets MÜSSEN alle 90 Tage rotiert werden.
+  severity: HIGH
+  category: CRITICAL_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cp012
+  metadata:
+    source_function: validate_cp012
+    auto_generated: true
+- rule_id: CS001
+  description: chart.yaml MUSS metadata.shard_id, version, status enthalten
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs001
+  metadata:
+    source_function: validate_cs001
+    auto_generated: true
+- rule_id: CS002
+  description: chart.yaml MUSS governance.owner mit team, lead, contact haben
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs002
+  metadata:
+    source_function: validate_cs002
+    auto_generated: true
+- rule_id: CS003
+  description: chart.yaml MUSS capabilities mit MUST/SHOULD/HAVE kategorisieren
+  severity: MEDIUM
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs003
+  metadata:
+    source_function: validate_cs003
+    auto_generated: true
+- rule_id: CS004
+  description: chart.yaml MUSS constraints für pii_storage, data_policy, custody definieren
+  severity: CRITICAL
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs004
+  metadata:
+    source_function: validate_cs004
+    auto_generated: true
+- rule_id: CS005
+  description: chart.yaml MUSS enforcement mit static_analysis, runtime_checks, audit
+    haben
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs005
+  metadata:
+    source_function: validate_cs005
+    auto_generated: true
+- rule_id: CS006
+  description: chart.yaml MUSS interfaces.contracts mit OpenAPI-Specs referenzieren
+  severity: MEDIUM
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs006
+  metadata:
+    source_function: validate_cs006
+    auto_generated: true
+- rule_id: CS007
+  description: chart.yaml MUSS dependencies.required auflisten
+  severity: MEDIUM
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs007
+  metadata:
+    source_function: validate_cs007
+    auto_generated: true
+- rule_id: CS008
+  description: chart.yaml MUSS implementations.default und available definieren
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs008
+  metadata:
+    source_function: validate_cs008
+    auto_generated: true
+- rule_id: CS009
+  description: chart.yaml MUSS conformance.contract_tests definieren
+  severity: MEDIUM
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs009
+  metadata:
+    source_function: validate_cs009
+    auto_generated: true
+- rule_id: CS010
+  description: chart.yaml MUSS observability mit metrics, tracing, logging definieren
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs010
+  metadata:
+    source_function: validate_cs010
+    auto_generated: true
+- rule_id: CS011
+  description: chart.yaml MUSS security.threat_model referenzieren
+  severity: HIGH
+  category: CHART_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.cs011
+  metadata:
+    source_function: validate_cs011
+    auto_generated: true
+- rule_id: DC001
+  description: Deployments MÜSSEN Blue-Green oder Canary-Strategie verwenden
+  severity: HIGH
+  category: DEPLOYMENT_CICD
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.dc001
+  metadata:
+    source_function: validate_dc001
+    auto_generated: true
+- rule_id: DC002
+  description: Environments dev, staging, production MÜSSEN existieren
+  severity: HIGH
+  category: DEPLOYMENT_CICD
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.dc002
+  metadata:
+    source_function: validate_dc002
+    auto_generated: true
+- rule_id: DC003
+  description: CI MUSS alle 7 Change-Process-Gates durchlaufen
+  severity: HIGH
+  category: DEPLOYMENT_CICD
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.dc003
+  metadata:
+    source_function: validate_dc003
+    auto_generated: true
+- rule_id: DC004
+  description: Alle Tests MÜSSEN grün sein vor Deployment
+  severity: HIGH
+  category: DEPLOYMENT_CICD
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.dc004
+  metadata:
+    source_function: validate_dc004
+    auto_generated: true
+- rule_id: JURIS_BL_001
+  description: 'JURIS_BL_001: System MUSS Transaktionen aus Iran (IR) blockieren.'
+  severity: CRITICAL
+  category: JURISDICTIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.juris_bl_001
+  metadata:
+    source_function: validate_juris_bl_001
+    auto_generated: true
+- rule_id: JURIS_BL_002
+  description: 'JURIS_BL_002: System MUSS Transaktionen aus North Korea (KP) blockieren.'
+  severity: CRITICAL
+  category: JURISDICTIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.juris_bl_002
+  metadata:
+    source_function: validate_juris_bl_002
+    auto_generated: true
+- rule_id: JURIS_BL_003
+  description: 'JURIS_BL_003: System MUSS Transaktionen aus Syria (SY) blockieren.'
+  severity: CRITICAL
+  category: JURISDICTIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.juris_bl_003
+  metadata:
+    source_function: validate_juris_bl_003
+    auto_generated: true
+- rule_id: JURIS_BL_004
+  description: 'JURIS_BL_004: System MUSS Transaktionen aus Cuba (CU) blockieren.'
+  severity: HIGH
+  category: JURISDICTIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.juris_bl_004
+  metadata:
+    source_function: validate_juris_bl_004
+    auto_generated: true
+- rule_id: JURIS_BL_005
+  description: 'JURIS_BL_005: System MUSS Transaktionen aus Sudan (SD) blockieren.'
+  severity: HIGH
+  category: JURISDICTIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.juris_bl_005
+  metadata:
+    source_function: validate_juris_bl_005
+    auto_generated: true
+- rule_id: JURIS_BL_006
+  description: 'JURIS_BL_006: System MUSS Transaktionen aus Belarus (BY) blockieren.'
+  severity: HIGH
+  category: JURISDICTIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.juris_bl_006
+  metadata:
+    source_function: validate_juris_bl_006
+    auto_generated: true
+- rule_id: JURIS_BL_007
+  description: 'JURIS_BL_007: System MUSS Transaktionen aus Venezuela (VE) blockieren.'
+  severity: MEDIUM
+  category: JURISDICTIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.juris_bl_007
+  metadata:
+    source_function: validate_juris_bl_007
+    auto_generated: true
+- rule_id: KP001
+  description: API-Contract (OpenAPI/JSON-Schema) MUSS VOR Implementierung existieren
+  severity: HIGH
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.kp001
+  metadata:
+    source_function: validate_kp001
+    auto_generated: true
+- rule_id: KP002
+  description: SoT (chart.yaml) und Implementierung (manifest.yaml) MÜSSEN getrennt
+    sein
+  severity: HIGH
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.kp002
+  metadata:
+    source_function: validate_kp002
+    auto_generated: true
+- rule_id: KP003
+  description: Ein Shard MUSS mehrere Implementierungen unterstützen können
+  severity: MEDIUM
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.kp003
+  metadata:
+    source_function: validate_kp003
+    auto_generated: true
+- rule_id: KP004
+  description: 24×16 = 384 Chart-Dateien, keine Ausnahmen
+  severity: MEDIUM
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.kp004
+  dependencies:
+  - AR003
+  metadata:
+    source_function: validate_kp004
+    auto_generated: true
+- rule_id: KP005
+  description: Alles relevante MUSS gehasht, geloggt und geanchort werden
+  severity: CRITICAL
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.kp005
+  metadata:
+    source_function: validate_kp005
+    auto_generated: true
+- rule_id: KP006
+  description: mTLS MUSS für alle internen Verbindungen verwendet werden
+  severity: HIGH
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.kp006
+  metadata:
+    source_function: validate_kp006
+    auto_generated: true
+- rule_id: KP007
+  description: Metrics, Tracing, Logging MÜSSEN von Anfang an eingebaut sein
+  severity: HIGH
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.kp007
+  metadata:
+    source_function: validate_kp007
+    auto_generated: true
+- rule_id: KP008
+  description: Alle AI/ML-Modelle MÜSSEN auf Bias getestet werden
+  severity: MEDIUM
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.kp008
+  dependencies:
+  - CP008
+  metadata:
+    source_function: validate_kp008
+    auto_generated: true
+- rule_id: KP009
+  description: Jeder Shard MUSS horizontal skalieren können
+  severity: MEDIUM
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.kp009
+  metadata:
+    source_function: validate_kp009
+    auto_generated: true
+- rule_id: KP010
+  description: Dokumentation MUSS aus Code/Contracts generiert werden
+  severity: MEDIUM
+  category: CORE_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.kp010
+  metadata:
+    source_function: validate_kp010
+    auto_generated: true
+- rule_id: MD-CHART-024
+  description: chart.yaml MUSS compatibility.core_min_version definieren
+  severity: HIGH
+  category: MASTER_DEF_CHART
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_chart_024
+  metadata:
+    source_function: validate_md_chart_024
+    auto_generated: true
+- rule_id: MD-CHART-029
+  description: chart.yaml SOLLTE orchestration.workflows definieren
+  severity: MEDIUM
+  category: MASTER_DEF_CHART
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_chart_029
+  metadata:
+    source_function: validate_md_chart_029
+    auto_generated: true
+- rule_id: MD-CHART-045
+  description: chart.yaml MUSS security.encryption (at_rest, in_transit) definieren
+  severity: CRITICAL
+  category: MASTER_DEF_CHART
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_chart_045
+  metadata:
+    source_function: validate_md_chart_045
+    auto_generated: true
+- rule_id: MD-CHART-048
+  description: chart.yaml MUSS resources.compute definieren
+  severity: MEDIUM
+  category: MASTER_DEF_CHART
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_chart_048
+  metadata:
+    source_function: validate_md_chart_048
+    auto_generated: true
+- rule_id: MD-CHART-050
+  description: chart.yaml SOLLTE roadmap.upcoming definieren
+  severity: LOW
+  category: MASTER_DEF_CHART
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_chart_050
+  metadata:
+    source_function: validate_md_chart_050
+    auto_generated: true
+- rule_id: MD-EXT-012
+  description: OPA MUSS string_similarity() helper function haben
+  severity: MEDIUM
+  category: MASTER_DEF_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_ext_012
+  metadata:
+    source_function: validate_md_ext_012
+    auto_generated: true
+- rule_id: MD-EXT-014
+  description: CI MUSS schedule 0 0 1 */3 * quarterly audit haben
+  severity: MEDIUM
+  category: MASTER_DEF_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_ext_014
+  metadata:
+    source_function: validate_md_ext_014
+    auto_generated: true
+- rule_id: MD-EXT-015
+  description: CI MUSS actions/upload-artifact@v4 verwenden
+  severity: LOW
+  category: MASTER_DEF_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_ext_015
+  metadata:
+    source_function: validate_md_ext_015
+    auto_generated: true
+- rule_id: MD-EXT-018
+  description: Sanctions MUSS sha256 Hash verwenden
+  severity: HIGH
+  category: MASTER_DEF_EXTENSIONS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_ext_018
+  metadata:
+    source_function: validate_md_ext_018
+    auto_generated: true
+- rule_id: MD-GOV-005
+  description: Compliance Team MUSS Policies prüfen
+  severity: HIGH
+  category: MASTER_DEF_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_gov_005
+  metadata:
+    source_function: validate_md_gov_005
+    auto_generated: true
+- rule_id: MD-GOV-006
+  description: Compliance Team MUSS Constraints genehmigen
+  severity: HIGH
+  category: MASTER_DEF_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_gov_006
+  metadata:
+    source_function: validate_md_gov_006
+    auto_generated: true
+- rule_id: MD-GOV-007
+  description: Security Team MUSS Threat Modeling durchführen
+  severity: HIGH
+  category: MASTER_DEF_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_gov_007
+  metadata:
+    source_function: validate_md_gov_007
+    auto_generated: true
+- rule_id: MD-GOV-008
+  description: Change-Prozess MUSS 7 Schritte haben
+  severity: HIGH
+  category: MASTER_DEF_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_gov_008
+  metadata:
+    source_function: validate_md_gov_008
+    auto_generated: true
+- rule_id: MD-GOV-009
+  description: SHOULD->MUST promotion MUSS 90d + 99.5% SLA erfüllen
+  severity: HIGH
+  category: MASTER_DEF_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_gov_009
+  metadata:
+    source_function: validate_md_gov_009
+    auto_generated: true
+- rule_id: MD-GOV-010
+  description: SHOULD->MUST promotion MUSS 95% Contract Test Coverage erfüllen
+  severity: HIGH
+  category: MASTER_DEF_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_gov_010
+  metadata:
+    source_function: validate_md_gov_010
+    auto_generated: true
+- rule_id: MD-GOV-011
+  description: HAVE->SHOULD promotion MUSS Feature complete + Beta + Doku erfüllen
+  severity: HIGH
+  category: MASTER_DEF_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_gov_011
+  metadata:
+    source_function: validate_md_gov_011
+    auto_generated: true
+- rule_id: MD-MANIFEST-004
+  description: manifest.yaml MUSS metadata.maturity definieren
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_004
+  metadata:
+    source_function: validate_md_manifest_004
+    auto_generated: true
+- rule_id: MD-MANIFEST-009
+  description: manifest.yaml MUSS technology_stack.linting_formatting definieren
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_009
+  metadata:
+    source_function: validate_md_manifest_009
+    auto_generated: true
+- rule_id: MD-MANIFEST-012
+  description: manifest.yaml MUSS artifacts.configuration.location definieren
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_012
+  metadata:
+    source_function: validate_md_manifest_012
+    auto_generated: true
+- rule_id: MD-MANIFEST-013
+  description: manifest.yaml SOLLTE artifacts.models.location definieren (AI/ML)
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_013
+  metadata:
+    source_function: validate_md_manifest_013
+    auto_generated: true
+- rule_id: MD-MANIFEST-014
+  description: manifest.yaml SOLLTE artifacts.protocols.location definieren (gRPC)
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_014
+  metadata:
+    source_function: validate_md_manifest_014
+    auto_generated: true
+- rule_id: MD-MANIFEST-015
+  description: manifest.yaml MUSS artifacts.tests.location definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_015
+  metadata:
+    source_function: validate_md_manifest_015
+    auto_generated: true
+- rule_id: MD-MANIFEST-016
+  description: manifest.yaml MUSS artifacts.documentation.location definieren
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_016
+  metadata:
+    source_function: validate_md_manifest_016
+    auto_generated: true
+- rule_id: MD-MANIFEST-017
+  description: manifest.yaml MUSS artifacts.scripts.location definieren
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_017
+  metadata:
+    source_function: validate_md_manifest_017
+    auto_generated: true
+- rule_id: MD-MANIFEST-018
+  description: manifest.yaml MUSS artifacts.docker.files=[Dockerfile,docker-compose.yml]
+    definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_018
+  metadata:
+    source_function: validate_md_manifest_018
+    auto_generated: true
+- rule_id: MD-MANIFEST-023
+  description: manifest.yaml MUSS build.commands definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_023
+  metadata:
+    source_function: validate_md_manifest_023
+    auto_generated: true
+- rule_id: MD-MANIFEST-024
+  description: manifest.yaml MUSS build.docker definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - matrix_alignment
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_024
+  metadata:
+    source_function: validate_md_manifest_024
+    auto_generated: true
+- rule_id: MD-MANIFEST-025
+  description: manifest.yaml MUSS deployment.kubernetes.manifests_location definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_025
+  metadata:
+    source_function: validate_md_manifest_025
+    auto_generated: true
+- rule_id: MD-MANIFEST-026
+  description: manifest.yaml MUSS deployment.helm.chart_location definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_026
+  metadata:
+    source_function: validate_md_manifest_026
+    auto_generated: true
+- rule_id: MD-MANIFEST-027
+  description: manifest.yaml MUSS deployment.environment_variables definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_027
+  metadata:
+    source_function: validate_md_manifest_027
+    auto_generated: true
+- rule_id: MD-MANIFEST-029
+  description: manifest.yaml MUSS testing.unit_tests.coverage_target>=80 definieren
+  severity: CRITICAL
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_029
+  metadata:
+    source_function: validate_md_manifest_029
+    auto_generated: true
+- rule_id: MD-MANIFEST-032
+  description: manifest.yaml MUSS testing.security_tests definieren
+  severity: CRITICAL
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_032
+  metadata:
+    source_function: validate_md_manifest_032
+    auto_generated: true
+- rule_id: MD-MANIFEST-033
+  description: manifest.yaml MUSS testing.performance_tests definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_033
+  metadata:
+    source_function: validate_md_manifest_033
+    auto_generated: true
+- rule_id: MD-MANIFEST-036
+  description: manifest.yaml MUSS observability.logging.format=json definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_036
+  metadata:
+    source_function: validate_md_manifest_036
+    auto_generated: true
+- rule_id: MD-MANIFEST-038
+  description: manifest.yaml MUSS observability.health_checks.liveness definieren
+  severity: CRITICAL
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_038
+  metadata:
+    source_function: validate_md_manifest_038
+    auto_generated: true
+- rule_id: MD-MANIFEST-039
+  description: manifest.yaml MUSS observability.health_checks.readiness definieren
+  severity: CRITICAL
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_039
+  metadata:
+    source_function: validate_md_manifest_039
+    auto_generated: true
+- rule_id: MD-MANIFEST-040
+  description: manifest.yaml MUSS development.setup definieren
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_040
+  metadata:
+    source_function: validate_md_manifest_040
+    auto_generated: true
+- rule_id: MD-MANIFEST-041
+  description: manifest.yaml MUSS development.local_development definieren
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_041
+  metadata:
+    source_function: validate_md_manifest_041
+    auto_generated: true
+- rule_id: MD-MANIFEST-042
+  description: manifest.yaml MUSS development.pre_commit_hooks definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_042
+  metadata:
+    source_function: validate_md_manifest_042
+    auto_generated: true
+- rule_id: MD-MANIFEST-046
+  description: manifest.yaml MUSS performance.baseline_benchmarks definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_046
+  metadata:
+    source_function: validate_md_manifest_046
+    auto_generated: true
+- rule_id: MD-MANIFEST-047
+  description: manifest.yaml MUSS performance.optimization_targets definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_047
+  metadata:
+    source_function: validate_md_manifest_047
+    auto_generated: true
+- rule_id: MD-MANIFEST-048
+  description: manifest.yaml MUSS performance.resource_requirements definieren
+  severity: HIGH
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_048
+  metadata:
+    source_function: validate_md_manifest_048
+    auto_generated: true
+- rule_id: MD-MANIFEST-049
+  description: manifest.yaml MUSS changelog.location=CHANGELOG.md definieren
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_049
+  metadata:
+    source_function: validate_md_manifest_049
+    auto_generated: true
+- rule_id: MD-MANIFEST-050
+  description: manifest.yaml MUSS support.contacts definieren
+  severity: MEDIUM
+  category: MASTER_DEF_MANIFEST
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_manifest_050
+  metadata:
+    source_function: validate_md_manifest_050
+    auto_generated: true
+- rule_id: MD-POLICY-009
+  description: Hashing MUSS deterministisch sein
+  severity: CRITICAL
+  category: MASTER_DEF_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_policy_009
+  metadata:
+    source_function: validate_md_policy_009
+    auto_generated: true
+- rule_id: MD-POLICY-012
+  description: Purpose Limitation MUSS erzwungen werden
+  severity: CRITICAL
+  category: MASTER_DEF_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_policy_012
+  metadata:
+    source_function: validate_md_policy_012
+    auto_generated: true
+- rule_id: MD-POLICY-023
+  description: Hourly Anchoring MUSS implementiert sein
+  severity: CRITICAL
+  category: MASTER_DEF_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_policy_023
+  metadata:
+    source_function: validate_md_policy_023
+    auto_generated: true
+- rule_id: MD-POLICY-027
+  description: Encryption MUSS AES-256-GCM verwenden
+  severity: CRITICAL
+  category: MASTER_DEF_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_policy_027
+  metadata:
+    source_function: validate_md_policy_027
+    auto_generated: true
+- rule_id: MD-POLICY-028
+  description: TLS 1.3 MUSS für in-transit encryption verwendet werden
+  severity: CRITICAL
+  category: MASTER_DEF_POLICIES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_policy_028
+  metadata:
+    source_function: validate_md_policy_028
+    auto_generated: true
+- rule_id: MD-PRINC-007
+  description: RBAC MUSS für alle Zugriffe implementiert sein
+  severity: CRITICAL
+  category: MASTER_DEF_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_princ_007
+  metadata:
+    source_function: validate_md_princ_007
+    auto_generated: true
+- rule_id: MD-PRINC-009
+  description: Continuous Vulnerability Scanning MUSS implementiert sein
+  severity: HIGH
+  category: MASTER_DEF_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_princ_009
+  metadata:
+    source_function: validate_md_princ_009
+    auto_generated: true
+- rule_id: MD-PRINC-013
+  description: AlertManager MUSS für Alerting integriert sein
+  severity: HIGH
+  category: MASTER_DEF_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_princ_013
+  metadata:
+    source_function: validate_md_princ_013
+    auto_generated: true
+- rule_id: MD-PRINC-018
+  description: Load Balancing MUSS konfiguriert sein
+  severity: MEDIUM
+  category: MASTER_DEF_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.md_princ_018
+  metadata:
+    source_function: validate_md_princ_018
+    auto_generated: true
+- rule_id: MD-PRINC-019
+  description: Caching-Strategien MÜSSEN definiert sein
+  severity: MEDIUM
+  category: MASTER_DEF_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_princ_019
+  metadata:
+    source_function: validate_md_princ_019
+    auto_generated: true
+- rule_id: MD-PRINC-020
+  description: Performance-Benchmarks MÜSSEN als Gates definiert sein
+  severity: HIGH
+  category: MASTER_DEF_PRINCIPLES
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_princ_020
+  metadata:
+    source_function: validate_md_princ_020
+    auto_generated: true
+- rule_id: MD-STRUCT-009
+  description: Pfad {ROOT}/shards/{SHARD}/chart.yaml MUSS existieren
+  severity: CRITICAL
+  category: MASTER_DEF_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_struct_009
+  metadata:
+    source_function: validate_md_struct_009
+    auto_generated: true
+- rule_id: MD-STRUCT-010
+  description: Pfad .../implementations/{IMPL}/manifest.yaml MUSS existieren
+  severity: CRITICAL
+  category: MASTER_DEF_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.md_struct_010
+  metadata:
+    source_function: validate_md_struct_010
+    auto_generated: true
+- rule_id: MR001
+  description: Jede Root-Shard-Kombination MUSS eindeutig adressierbar sein
+  severity: MEDIUM
+  category: MATRIX_REGISTRY
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.mr001
+  dependencies:
+  - AR003
+  metadata:
+    source_function: validate_mr001
+    auto_generated: true
+- rule_id: MR002
+  description: Hash-Ledger MUSS über alle 384 Felder geführt werden
+  severity: HIGH
+  category: MATRIX_REGISTRY
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.mr002
+  metadata:
+    source_function: validate_mr002
+    auto_generated: true
+- rule_id: MR003
+  description: Jedes Root-Shard-Paar MUSS isoliert entwickelbar sein
+  severity: MEDIUM
+  category: MATRIX_REGISTRY
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.mr003
+  metadata:
+    source_function: validate_mr003
+    auto_generated: true
+- rule_id: MS001
+  description: manifest.yaml MUSS implementation_id, implementation_version, chart_version
+    haben
+  severity: HIGH
+  category: MANIFEST_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ms001
+  metadata:
+    source_function: validate_ms001
+    auto_generated: true
+- rule_id: MS002
+  description: manifest.yaml MUSS technology_stack.language mit name und version definieren
+  severity: MEDIUM
+  category: MANIFEST_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ms002
+  metadata:
+    source_function: validate_ms002
+    auto_generated: true
+- rule_id: MS003
+  description: manifest.yaml MUSS artifacts.source_code.location definieren
+  severity: MEDIUM
+  category: MANIFEST_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ms003
+  metadata:
+    source_function: validate_ms003
+    auto_generated: true
+- rule_id: MS004
+  description: manifest.yaml MUSS dependencies mit Packages und Services auflisten
+  severity: MEDIUM
+  category: MANIFEST_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ms004
+  metadata:
+    source_function: validate_ms004
+    auto_generated: true
+- rule_id: MS005
+  description: manifest.yaml MUSS testing mit unit, integration, contract Tests definieren
+  severity: HIGH
+  category: MANIFEST_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ms005
+  metadata:
+    source_function: validate_ms005
+    auto_generated: true
+- rule_id: MS006
+  description: 'manifest.yaml MUSS observability.logging.pii_redaction: true setzen'
+  severity: CRITICAL
+  category: MANIFEST_STRUCTURE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.ms006
+  metadata:
+    source_function: validate_ms006
+    auto_generated: true
+- rule_id: SOT-V2-0091
+  description: 'SOT-V2-0091: grundprinzipien.ausnahmen.allowed_root_files'
+  severity: CRITICAL
+  category: SOT_CONTRACT_V2
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - structure_validation
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.sot_v2_0091
+  metadata:
+    source_function: validate_sot_v2_0091
+    auto_generated: true
+- rule_id: SOT-V2-0092
+  description: 'SOT-V2-0092: grundprinzipien.critical.structure_exceptions_yaml'
+  severity: CRITICAL
+  category: SOT_CONTRACT_V2
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - structure_validation
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.sot_v2_0092
+  metadata:
+    source_function: validate_sot_v2_0092
+    auto_generated: true
+- rule_id: SOT-V2-0093
+  description: 'SOT-V2-0093: grundprinzipien.root_level_ausnahmen'
+  severity: CRITICAL
+  category: SOT_CONTRACT_V2
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - structure_validation
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.sot_v2_0093
+  metadata:
+    source_function: validate_sot_v2_0093
+    auto_generated: true
+- rule_id: SOT-V2-0094
+  description: 'SOT-V2-0094: grundprinzipien.verbindliche_root_module'
+  severity: CRITICAL
+  category: SOT_CONTRACT_V2
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - structure_validation
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.sot_v2_0094
+  metadata:
+    source_function: validate_sot_v2_0094
+    auto_generated: true
+- rule_id: TS001
+  description: Hash-Anchoring MUSS Ethereum Mainnet + Polygon verwenden
+  severity: HIGH
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.ts001
+  metadata:
+    source_function: validate_ts001
+    auto_generated: true
+- rule_id: TS002
+  description: System MUSS W3C DID + Verifiable Credentials implementieren
+  severity: HIGH
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.ts002
+  metadata:
+    source_function: validate_ts002
+    auto_generated: true
+- rule_id: TS003
+  description: System MUSS IPFS für dezentralen Storage verwenden
+  severity: MEDIUM
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.ts003
+  metadata:
+    source_function: validate_ts003
+    auto_generated: true
+- rule_id: TS004
+  description: Smart Contracts MÜSSEN in Solidity oder Rust geschrieben sein
+  severity: MEDIUM
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.ts004
+  metadata:
+    source_function: validate_ts004
+    auto_generated: true
+- rule_id: TS005
+  description: System MUSS GDPR, eIDAS 2.0, EU AI Act, MiCA erfüllen
+  severity: CRITICAL
+  category: TECHNOLOGY_STANDARDS
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.ts005
+  metadata:
+    source_function: validate_ts005
+    auto_generated: true
+- rule_id: VG_001
+  description: Alle Versionen MÜSSEN Semver (MAJOR.MINOR.PATCH) verwenden
+  severity: HIGH
+  category: VERSIONING_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.vg_001
+  metadata:
+    source_function: validate_vg001
+    auto_generated: true
+- rule_id: VG_002
+  description: Breaking Changes MÜSSEN Migration Guide + Compatibility Layer haben
+  severity: HIGH
+  category: VERSIONING_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.vg_002
+  metadata:
+    source_function: validate_vg002
+    auto_generated: true
+- rule_id: VG_003
+  description: Deprecations MÜSSEN 180 Tage Notice Period haben
+  severity: HIGH
+  category: VERSIONING_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.vg_003
+  metadata:
+    source_function: validate_vg003
+    auto_generated: true
+- rule_id: VG_004
+  description: Alle MUST-Capability-Änderungen MÜSSEN RFC-Prozess durchlaufen
+  severity: HIGH
+  category: VERSIONING_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.vg_004
+  metadata:
+    source_function: validate_vg004
+    auto_generated: true
+- rule_id: VG_005
+  description: Jeder Shard MUSS einen Owner haben
+  severity: MEDIUM
+  category: VERSIONING_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+  test_coverage: true
+  opa_policy: sot.rules.vg_005
+  metadata:
+    source_function: validate_vg005
+    auto_generated: true
+- rule_id: VG_006
+  description: Architecture Board MUSS alle chart.yaml-Änderungen reviewen
+  severity: HIGH
+  category: VERSIONING_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - mandatory_compliance
+    - yaml_schema_validation
+  test_coverage: true
+  opa_policy: sot.rules.vg_006
+  metadata:
+    source_function: validate_vg006
+    auto_generated: true
+- rule_id: VG_007
+  description: Architecture Board Approval-Pflicht
+  severity: HIGH
+  category: VERSIONING_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.vg_007
+  metadata:
+    source_function: validate_vg007
+    auto_generated: true
+- rule_id: VG_008
+  description: Governance Roles Definition
+  severity: MEDIUM
+  category: VERSIONING_GOVERNANCE
+  implementation_status: implemented
+  validation:
+    type: structural
+    checks:
+    - general_validation
+  test_coverage: true
+  opa_policy: sot.rules.vg_008
+  metadata:
+    source_function: validate_vg008
+    auto_generated: true

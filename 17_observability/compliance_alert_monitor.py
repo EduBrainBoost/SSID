@@ -20,7 +20,6 @@ from typing import Any, Dict, List, Optional
 
 import yaml
 
-
 class ComplianceAlertMonitor:
     """
     Monitors compliance metrics and triggers alerts on anomalies.
@@ -322,7 +321,6 @@ SSID Compliance Monitoring Alert
             "alerts": all_alerts
         }
 
-
 def main():
     """Main entry point for compliance alert monitoring."""
     monitor = ComplianceAlertMonitor()
@@ -338,7 +336,6 @@ def main():
         json.dump(results, f, indent=2, ensure_ascii=False)
 
     print(f"📊 Results saved to: {results_path}\n")
-
 
 if __name__ == "__main__":
     main()

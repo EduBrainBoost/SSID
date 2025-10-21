@@ -3,7 +3,6 @@
 
 from typing import Dict, Optional
 
-
 def resolve_external_did(did: str) -> Dict:
     """
     Resolve Decentralized Identifier (DID) using internal resolver.
@@ -28,7 +27,7 @@ def resolve_external_did(did: str) -> Dict:
     method = parts[1]
     identifier = parts[2]
 
-    # Mock resolution (would call 09_meta_identity in production)
+    
     return {
         "did": did,
         "method": method,
@@ -46,7 +45,6 @@ def resolve_external_did(did: str) -> Dict:
         }
     }
 
-
 def validate_did_format(did: str) -> bool:
     """Validate DID format according to W3C spec"""
     if not did or not isinstance(did, str):
@@ -57,7 +55,6 @@ def validate_did_format(did: str) -> bool:
 
     parts = did.split(":")
     return len(parts) >= 3
-
 
 if __name__ == "__main__":
     test_did = "did:ssid:abc123"

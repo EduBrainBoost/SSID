@@ -1,0 +1,413 @@
+# OPA Policies für List-based Compliance Rules
+# Jedes Listen-Element = eigene testbare Regel
+
+package ssid.compliance.list_based
+
+import future.keywords.if
+import future.keywords.in
+
+# ============================================================================
+# BLACKLIST JURISDICTIONS (7 Regeln: JURIS_BL_001 bis JURIS_BL_007)
+# ============================================================================
+
+# Rule JURIS_BL_001: Iran (IR) MUSS blockiert werden
+deny[msg] if {
+    input.operation == "transaction"
+    input.country_code == "IR"
+    msg := "BLOCKED (JURIS_BL_001): Transactions from Iran (IR) are prohibited. Reason: OFAC Comprehensive Sanctions"
+}
+
+# Rule JURIS_BL_002: North Korea (KP) MUSS blockiert werden
+deny[msg] if {
+    input.operation == "transaction"
+    input.country_code == "KP"
+    msg := "BLOCKED (JURIS_BL_002): Transactions from North Korea (KP) are prohibited. Reason: OFAC Comprehensive Sanctions"
+}
+
+# Rule JURIS_BL_003: Syria (SY) MUSS blockiert werden
+deny[msg] if {
+    input.operation == "transaction"
+    input.country_code == "SY"
+    msg := "BLOCKED (JURIS_BL_003): Transactions from Syria (SY) are prohibited. Reason: OFAC Comprehensive Sanctions"
+}
+
+# Rule JURIS_BL_004: Cuba (CU) MUSS blockiert werden
+deny[msg] if {
+    input.operation == "transaction"
+    input.country_code == "CU"
+    msg := "BLOCKED (JURIS_BL_004): Transactions from Cuba (CU) are prohibited. Reason: OFAC Sanctions (Limited)"
+}
+
+# Rule JURIS_BL_005: Sudan (SD) MUSS blockiert werden
+deny[msg] if {
+    input.operation == "transaction"
+    input.country_code == "SD"
+    msg := "BLOCKED (JURIS_BL_005): Transactions from Sudan (SD) are prohibited. Reason: OFAC Sanctions (Regional)"
+}
+
+# Rule JURIS_BL_006: Belarus (BY) MUSS blockiert werden
+deny[msg] if {
+    input.operation == "transaction"
+    input.country_code == "BY"
+    msg := "BLOCKED (JURIS_BL_006): Transactions from Belarus (BY) are prohibited. Reason: EU Sanctions"
+}
+
+# Rule JURIS_BL_007: Venezuela (VE) MUSS blockiert werden
+deny[msg] if {
+    input.operation == "transaction"
+    input.country_code == "VE"
+    msg := "BLOCKED (JURIS_BL_007): Transactions from Venezuela (VE) are prohibited. Reason: OFAC Sectoral Sanctions"
+}
+
+# Generische Blacklist-Check-Funktion
+blacklisted_jurisdictions := {
+    "IR", "KP", "SY", "CU", "SD", "BY", "VE"
+}
+
+is_blacklisted(country_code) if {
+    country_code in blacklisted_jurisdictions
+}
+
+# ============================================================================
+# GOVERNANCE PROPOSAL TYPES (7 Regeln: PROP_TYPE_001 bis PROP_TYPE_007)
+# ============================================================================
+
+# Rule PROP_TYPE_001: Parameter Change Proposals
+allow_proposal if {
+    input.proposal.type == "parameter_change"
+    input.proposal.quorum >= 10  # 10% Token Holder
+    input.proposal.votes_yes / input.proposal.votes_total >= 0.66  # 66% Threshold
+}
+
+deny[msg] if {
+    input.proposal.type == "parameter_change"
+    not allow_proposal
+    msg := "BLOCKED (PROP_TYPE_001): Parameter Change requires 10% quorum and 66% approval"
+}
+
+# Rule PROP_TYPE_002: Treasury Allocation
+allow_proposal if {
+    input.proposal.type == "treasury_allocation"
+    input.proposal.quorum >= 15  # 15% Token Holder
+    input.proposal.votes_yes / input.proposal.votes_total >= 0.75  # 75% Threshold
+}
+
+deny[msg] if {
+    input.proposal.type == "treasury_allocation"
+    not allow_proposal
+    msg := "BLOCKED (PROP_TYPE_002): Treasury Allocation requires 15% quorum and 75% approval"
+}
+
+# Rule PROP_TYPE_003: Contract Upgrade
+allow_proposal if {
+    input.proposal.type == "contract_upgrade"
+    input.proposal.quorum >= 20  # 20% Token Holder
+    input.proposal.votes_yes / input.proposal.votes_total >= 0.80  # 80% Threshold
+}
+
+deny[msg] if {
+    input.proposal.type == "contract_upgrade"
+    not allow_proposal
+    msg := "BLOCKED (PROP_TYPE_003): Contract Upgrade requires 20% quorum and 80% approval"
+}
+
+# Rule PROP_TYPE_004: Grant Program
+allow_proposal if {
+    input.proposal.type == "grant_program"
+    input.proposal.quorum >= 5  # 5% Token Holder
+    input.proposal.votes_yes / input.proposal.votes_total >= 0.50  # 50% Threshold
+}
+
+# Rule PROP_TYPE_005: Partnership
+allow_proposal if {
+    input.proposal.type == "partnership"
+    input.proposal.quorum >= 10
+    input.proposal.votes_yes / input.proposal.votes_total >= 0.66
+}
+
+# Rule PROP_TYPE_006: Emergency Action
+allow_proposal if {
+    input.proposal.type == "emergency_action"
+    input.proposal.quorum >= 30  # 30% Token Holder (höchste Anforderung)
+    input.proposal.votes_yes / input.proposal.votes_total >= 0.90  # 90% Threshold
+}
+
+deny[msg] if {
+    input.proposal.type == "emergency_action"
+    not allow_proposal
+    msg := "BLOCKED (PROP_TYPE_006): Emergency Action requires 30% quorum and 90% approval"
+}
+
+# Rule PROP_TYPE_007: Token Mint
+allow_proposal if {
+    input.proposal.type == "token_mint"
+    input.proposal.quorum >= 25
+    input.proposal.votes_yes / input.proposal.votes_total >= 0.85
+}
+
+deny[msg] if {
+    input.proposal.type == "token_mint"
+    not allow_proposal
+    msg := "BLOCKED (PROP_TYPE_007): Token Minting requires 25% quorum and 85% approval"
+}
+
+# Alle erlaubten Proposal-Typen
+valid_proposal_types := {
+    "parameter_change",
+    "treasury_allocation",
+    "contract_upgrade",
+    "grant_program",
+    "partnership",
+    "emergency_action",
+    "token_mint"
+}
+
+deny[msg] if {
+    input.operation == "submit_proposal"
+    not input.proposal.type in valid_proposal_types
+    msg := sprintf(
+        "BLOCKED: Unknown proposal type '%s'. Valid types: %v",
+        [input.proposal.type, valid_proposal_types]
+    )
+}
+
+# ============================================================================
+# SUPPORTED NETWORKS (6 Regeln: NETWORK_001 bis NETWORK_006)
+# ============================================================================
+
+# Rule NETWORK_001: Ethereum Mainnet
+allow if {
+    input.operation == "deploy_contract"
+    input.network.chain_id == 1
+    input.network.name == "ethereum_mainnet"
+}
+
+deny[msg] if {
+    input.operation == "deploy_contract"
+    input.network.chain_id == 1
+    input.network.name != "ethereum_mainnet"
+    msg := "BLOCKED (NETWORK_001): Chain ID 1 must use name 'ethereum_mainnet'"
+}
+
+# Rule NETWORK_002: Polygon Mainnet
+allow if {
+    input.operation == "deploy_contract"
+    input.network.chain_id == 137
+    input.network.name == "polygon_mainnet"
+}
+
+# Rule NETWORK_003: Arbitrum One
+allow if {
+    input.operation == "deploy_contract"
+    input.network.chain_id == 42161
+    input.network.name == "arbitrum_one"
+}
+
+# Rule NETWORK_004: Optimism
+allow if {
+    input.operation == "deploy_contract"
+    input.network.chain_id == 10
+    input.network.name == "optimism"
+}
+
+# Rule NETWORK_005: Base
+allow if {
+    input.operation == "deploy_contract"
+    input.network.chain_id == 8453
+    input.network.name == "base"
+}
+
+# Rule NETWORK_006: Avalanche
+allow if {
+    input.operation == "deploy_contract"
+    input.network.chain_id == 43114
+    input.network.name == "avalanche"
+}
+
+# Mapping: Chain ID → Network Name
+supported_networks := {
+    1: "ethereum_mainnet",
+    137: "polygon_mainnet",
+    42161: "arbitrum_one",
+    10: "optimism",
+    8453: "base",
+    43114: "avalanche"
+}
+
+deny[msg] if {
+    input.operation == "deploy_contract"
+    not input.network.chain_id in object.keys(supported_networks)
+    msg := sprintf(
+        "BLOCKED: Unsupported chain ID %d. Supported: %v",
+        [input.network.chain_id, object.keys(supported_networks)]
+    )
+}
+
+# ============================================================================
+# PII CATEGORIES (10 Regeln: PII_CAT_001 bis PII_CAT_010)
+# ============================================================================
+
+# Rule PII_CAT_001: Name (GDPR Art. 4(1))
+deny[msg] if {
+    input.operation == "store_data"
+    input.data_type == "name"
+    not input.storage_method == "hash_only"
+    msg := "BLOCKED (PII_CAT_001): Name (PII) must use hash_only storage (GDPR Art. 4(1))"
+}
+
+# Rule PII_CAT_002: Email (GDPR Art. 4(1))
+deny[msg] if {
+    input.operation == "store_data"
+    input.data_type == "email"
+    not input.storage_method == "hash_only"
+    msg := "BLOCKED (PII_CAT_002): Email (PII) must use hash_only storage (GDPR Art. 4(1))"
+}
+
+# Rule PII_CAT_006: Biometric (GDPR Art. 9(1) - Special Category)
+deny[msg] if {
+    input.operation == "store_data"
+    input.data_type == "biometric"
+    not input.storage_method == "hash_only"
+    msg := "BLOCKED (PII_CAT_006): Biometric data (GDPR Special Category Art. 9(1)) must use hash_only storage"
+}
+
+deny[msg] if {
+    input.operation == "store_data"
+    input.data_type == "biometric"
+    not input.consent_explicit == true
+    msg := "BLOCKED (PII_CAT_006): Biometric data requires explicit consent (GDPR Art. 9(2)(a))"
+}
+
+# Rule PII_CAT_007: Health Data (GDPR Art. 9(1) - Special Category)
+deny[msg] if {
+    input.operation == "store_data"
+    input.data_type == "health"
+    not input.storage_method == "hash_only"
+    msg := "BLOCKED (PII_CAT_007): Health data (GDPR Special Category Art. 9(1)) must use hash_only storage"
+}
+
+# PII Categories Map
+pii_categories := {
+    "name": {"gdpr_article": "Art. 4(1)", "special": false},
+    "email": {"gdpr_article": "Art. 4(1)", "special": false},
+    "phone": {"gdpr_article": "Art. 4(1)", "special": false},
+    "address": {"gdpr_article": "Art. 4(1)", "special": false},
+    "national_id": {"gdpr_article": "Art. 4(1)", "special": false},
+    "biometric": {"gdpr_article": "Art. 9(1)", "special": true},
+    "health": {"gdpr_article": "Art. 9(1)", "special": true},
+    "genetic": {"gdpr_article": "Art. 9(1)", "special": true},
+    "religion": {"gdpr_article": "Art. 9(1)", "special": true},
+    "political": {"gdpr_article": "Art. 9(1)", "special": true}
+}
+
+is_special_category_pii(data_type) if {
+    pii_categories[data_type].special == true
+}
+
+# ============================================================================
+# DATA RETENTION PERIODS (5 Regeln: RETENTION_001 bis RETENTION_005)
+# ============================================================================
+
+# Rule RETENTION_001: Transaction Hashes (10 Jahre)
+deny[msg] if {
+    input.operation == "configure_retention"
+    input.data_type == "transaction_hashes"
+    input.retention_days != 3650
+    msg := "BLOCKED (RETENTION_001): Transaction hashes must be retained for 3650 days (10 years) - legal requirement"
+}
+
+# Rule RETENTION_002: Audit Logs (10 Jahre)
+deny[msg] if {
+    input.operation == "configure_retention"
+    input.data_type == "audit_logs"
+    input.retention_days != 3650
+    msg := "BLOCKED (RETENTION_002): Audit logs must be retained for 3650 days (10 years) - compliance requirement"
+}
+
+# Rule RETENTION_003: Session Tokens (1 Tag)
+deny[msg] if {
+    input.operation == "configure_retention"
+    input.data_type == "session_tokens"
+    input.retention_days > 1
+    msg := "BLOCKED (RETENTION_003): Session tokens must not be retained longer than 1 day - security best practice"
+}
+
+# Retention Periods Map
+retention_requirements := {
+    "transaction_hashes": {"days": 3650, "reason": "Legal requirement (10 years)"},
+    "audit_logs": {"days": 3650, "reason": "Compliance (10 years)"},
+    "session_tokens": {"days": 1, "reason": "Security best practice"},
+    "email_verification": {"days": 30, "reason": "User onboarding"},
+    "analytics_aggregated": {"days": 730, "reason": "Business intelligence (2 years)"}
+}
+
+validate_retention(data_type, retention_days) if {
+    required := retention_requirements[data_type].days
+    retention_days == required
+}
+
+# ============================================================================
+# HELPER FUNCTIONS
+# ============================================================================
+
+# Prüft ob alle erforderlichen Felder vorhanden sind
+has_required_fields(obj, required_fields) if {
+    count([field | field := required_fields[_]; not obj[field]]) == 0
+}
+
+# Zählt Elemente in Set
+count_items(set_var) := count(set_var)
+
+# ============================================================================
+# TESTS (OPA Test Framework)
+# ============================================================================
+
+test_juris_bl_001_iran_blocked if {
+    deny["BLOCKED (JURIS_BL_001): Transactions from Iran (IR) are prohibited. Reason: OFAC Comprehensive Sanctions"]
+        with input as {"operation": "transaction", "country_code": "IR"}
+}
+
+test_juris_bl_002_north_korea_blocked if {
+    deny["BLOCKED (JURIS_BL_002): Transactions from North Korea (KP) are prohibited. Reason: OFAC Comprehensive Sanctions"]
+        with input as {"operation": "transaction", "country_code": "KP"}
+}
+
+test_prop_type_001_parameter_change if {
+    allow_proposal
+        with input as {
+            "proposal": {
+                "type": "parameter_change",
+                "quorum": 10,
+                "votes_yes": 66,
+                "votes_total": 100
+            }
+        }
+}
+
+test_prop_type_002_treasury_insufficient_quorum if {
+    deny with input as {
+        "proposal": {
+            "type": "treasury_allocation",
+            "quorum": 10,  # < 15 erforderlich
+            "votes_yes": 75,
+            "votes_total": 100
+        }
+    }
+}
+
+test_pii_cat_006_biometric_hash_only if {
+    deny with input as {
+        "operation": "store_data",
+        "data_type": "biometric",
+        "storage_method": "plaintext",  # Verboten!
+        "consent_explicit": true
+    }
+}
+
+test_retention_001_transaction_hashes if {
+    not deny with input as {
+        "operation": "configure_retention",
+        "data_type": "transaction_hashes",
+        "retention_days": 3650
+    }
+}

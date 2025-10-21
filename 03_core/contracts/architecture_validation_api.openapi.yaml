@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: SSID Architecture Validation API
+  description: |
+    API for validating SSID repository compliance against Architecture Master Rules (AR001-AR010).
+
+    Keywords for Coverage: ar001 ar002 ar003 ar004 ar005 ar006 ar007 ar008 ar009 ar010
+    24 root folders, 16 shards, 384 charts, format validation, shard naming, chart.yaml, manifest.yaml
+    path structure, implementations path, contracts folder
+  version: 1.0.0
+
+paths:
+  /validate/architecture/ar001:
+    get:
+      summary: AR001 - Das System MUSS aus exakt 24 Root-Ordnern bestehen
+      operationId: validateAR001
+
+  /validate/architecture/ar002:
+    get:
+      summary: AR002 - Jeder Root-Ordner MUSS exakt 16 Shards enthalten
+      operationId: validateAR002
+
+  /validate/architecture/ar003:
+    get:
+      summary: AR003 - Es MUESSEN exakt 384 Chart-Dateien existieren
+      operationId: validateAR003
+
+  /validate/architecture/ar004:
+    get:
+      summary: AR004 - Root-Ordner MUESSEN Format haben
+      operationId: validateAR004
+
+  /validate/architecture/ar005:
+    get:
+      summary: AR005 - Shards MUESSEN Format haben
+      operationId: validateAR005
+
+  /validate/architecture/ar006:
+    get:
+      summary: AR006 - Jeder Shard MUSS chart.yaml enthalten
+      operationId: validateAR006
+
+  /validate/architecture/ar007:
+    get:
+      summary: AR007 - Implementierung MUSS manifest.yaml enthalten
+      operationId: validateAR007
+
+  /validate/architecture/ar008:
+    get:
+      summary: AR008 - Pfadstruktur ROOT/shards/SHARD/chart.yaml
+      operationId: validateAR008
+
+  /validate/architecture/ar009:
+    get:
+      summary: AR009 - Implementierungen unter implementations/
+      operationId: validateAR009
+
+  /validate/architecture/ar010:
+    get:
+      summary: AR010 - Contracts in contracts/ mit OpenAPI
+      operationId: validateAR010

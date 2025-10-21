@@ -1,0 +1,4169 @@
+metadata:
+  version: 5.0.0
+  level: SEMANTIC_COMPLETE
+  generated: '2025-10-20T12:29:33.375522'
+  source: COMPLETE_MANUAL_INTEGRATION
+  extraction_method: AUTOMATED_FROM_AUTHORITATIVE_SOURCES
+  total_rules: 280
+  source_files:
+  - master_rules_combined.yaml (91 rules)
+  - master_rules_lifted.yaml (61 rules)
+  - sot_contract_v2.yaml (189 rules)
+rules:
+- rule_id: AR001
+  source: master_rules_combined.yaml
+  category: Matrix Architecture
+  severity: CRITICAL
+  enforcement: MUST
+  description: Das System MUSS aus exakt 24 Root-Ordnern bestehen
+  implementation_requirements:
+  - Validator prüft exakte Anzahl Root-Ordner
+  - Registry führt Liste aller 24 Roots
+  - CLI blockiert Abweichungen
+  - Exit Code != 0 bei Violation
+  sot_artefacts:
+    python: validate_ar001() in sot_validator_core.py
+    rego: AR001 deny rule in sot_policy.rego
+    cli: --rules AR001 flag supported
+    test: test_ar001() in test_sot_validator.py
+- rule_id: AR002
+  source: master_rules_combined.yaml
+  category: Matrix Architecture
+  severity: CRITICAL
+  enforcement: MUST
+  description: Jeder Root-Ordner MUSS exakt 16 Shards enthalten
+  implementation_requirements:
+  - Validator prüft 16 Shards pro Root
+  - 'Matrix-Berechnung: 24×16 = 384 Chart-Dateien'
+  sot_artefacts:
+    python: validate_ar002() in sot_validator_core.py
+    rego: AR002 deny rule in sot_policy.rego
+    cli: --rules AR002 flag supported
+    test: test_ar002() in test_sot_validator.py
+- rule_id: AR003
+  source: master_rules_combined.yaml
+  category: Matrix Architecture
+  severity: CRITICAL
+  enforcement: MUST
+  description: Es MÜSSEN exakt 384 Chart-Dateien existieren (24×16)
+  implementation_requirements:
+  - Validator zählt alle chart.yaml-Dateien
+  - Exit Code != 0 bei Abweichung
+  sot_artefacts:
+    python: validate_ar003() in sot_validator_core.py
+    rego: AR003 deny rule in sot_policy.rego
+    cli: --rules AR003 flag supported
+    test: test_ar003() in test_sot_validator.py
+- rule_id: AR004
+  source: master_rules_combined.yaml
+  category: Naming Convention
+  severity: HIGH
+  enforcement: MUST
+  description: Root-Ordner MÜSSEN Format '{NR}_{NAME}' haben (z.B. 01_ai_layer)
+  implementation_requirements:
+  - 'Regex: ^\d{2}_[a-z_]+$'
+  - CLI validiert Namen bei Erstellung
+  sot_artefacts:
+    python: validate_ar004() in sot_validator_core.py
+    rego: AR004 deny rule in sot_policy.rego
+    cli: --rules AR004 flag supported
+    test: test_ar004() in test_sot_validator.py
+- rule_id: AR005
+  source: master_rules_combined.yaml
+  category: Naming Convention
+  severity: HIGH
+  enforcement: MUST
+  description: Shards MÜSSEN Format 'Shard_{NR}_{NAME}' haben
+  implementation_requirements:
+  - 'Regex: ^Shard_\d{2}_[A-Za-z_]+$'
+  - Eindeutige Nummerierung 01-16
+  sot_artefacts:
+    python: validate_ar005() in sot_validator_core.py
+    rego: AR005 deny rule in sot_policy.rego
+    cli: --rules AR005 flag supported
+    test: test_ar005() in test_sot_validator.py
+- rule_id: AR006
+  source: master_rules_combined.yaml
+  category: File Structure
+  severity: CRITICAL
+  enforcement: MUST
+  description: Jeder Shard MUSS eine chart.yaml (SoT) enthalten
+  implementation_requirements:
+  - Validator prüft Existenz von chart.yaml
+  - SHA256-Hash in Registry
+  sot_artefacts:
+    python: validate_ar006() in sot_validator_core.py
+    rego: AR006 deny rule in sot_policy.rego
+    cli: --rules AR006 flag supported
+    test: test_ar006() in test_sot_validator.py
+- rule_id: AR007
+  source: master_rules_combined.yaml
+  category: File Structure
+  severity: HIGH
+  enforcement: MUST
+  description: Jede Implementierung MUSS eine manifest.yaml enthalten
+  implementation_requirements:
+  - Validator prüft implementations/*/manifest.yaml
+  - Link zur chart.yaml via chart_version
+  sot_artefacts:
+    python: validate_ar007() in sot_validator_core.py
+    rego: AR007 deny rule in sot_policy.rego
+    cli: --rules AR007 flag supported
+    test: test_ar007() in test_sot_validator.py
+- rule_id: AR008
+  source: master_rules_combined.yaml
+  category: Directory Structure
+  severity: HIGH
+  enforcement: MUST
+  description: 'Pfadstruktur MUSS sein: {ROOT}/shards/{SHARD}/chart.yaml'
+  implementation_requirements:
+  - Validator prüft exakte Pfadstruktur
+  - Keine abweichenden Hierarchien erlaubt
+  sot_artefacts:
+    python: validate_ar008() in sot_validator_core.py
+    rego: AR008 deny rule in sot_policy.rego
+    cli: --rules AR008 flag supported
+    test: test_ar008() in test_sot_validator.py
+- rule_id: AR009
+  source: master_rules_combined.yaml
+  category: Directory Structure
+  severity: HIGH
+  enforcement: MUST
+  description: Implementierungen MÜSSEN unter implementations/{IMPL_ID}/ liegen
+  implementation_requirements:
+  - Validator prüft implementations/-Subordner
+  - Jede Impl. hat eigenen Namespace
+  sot_artefacts:
+    python: validate_ar009() in sot_validator_core.py
+    rego: AR009 deny rule in sot_policy.rego
+    cli: --rules AR009 flag supported
+    test: test_ar009() in test_sot_validator.py
+- rule_id: AR010
+  source: master_rules_combined.yaml
+  category: Contracts
+  severity: HIGH
+  enforcement: MUST
+  description: Contracts MÜSSEN in contracts/-Ordner mit OpenAPI/JSON-Schema liegen
+  implementation_requirements:
+  - Validator prüft contracts/*.openapi.yaml
+  - Validator prüft contracts/schemas/*.schema.json
+  sot_artefacts:
+    python: validate_ar010() in sot_validator_core.py
+    rego: AR010 deny rule in sot_policy.rego
+    cli: --rules AR010 flag supported
+    test: test_ar010() in test_sot_validator.py
+- rule_id: CP001
+  source: master_rules_combined.yaml
+  category: Non-Custodial
+  severity: CRITICAL
+  enforcement: NIEMALS
+  description: NIEMALS Rohdaten von PII oder biometrischen Daten speichern
+  implementation_requirements:
+  - 'OPA Policy: deny_pii_storage.rego'
+  - 'Semgrep Ruleset: no-pii-storage.yaml'
+  - 'Runtime: pii_detector.py'
+  sot_artefacts:
+    python: validate_cp001() in sot_validator_core.py
+    rego: CP001 deny rule in sot_policy.rego
+    cli: --rules CP001 flag supported
+    test: test_cp001() in test_sot_validator.py
+- rule_id: CP002
+  source: master_rules_combined.yaml
+  category: Hash-Only Data Policy
+  severity: CRITICAL
+  enforcement: MUST
+  description: Alle Daten MÜSSEN als SHA3-256 Hashes gespeichert werden
+  implementation_requirements:
+  - data_policy.storage_type = 'hash_only'
+  - hash_algorithm = 'SHA3-256'
+  - Validator prüft Hashformat
+  sot_artefacts:
+    python: validate_cp002() in sot_validator_core.py
+    rego: CP002 deny rule in sot_policy.rego
+    cli: --rules CP002 flag supported
+    test: test_cp002() in test_sot_validator.py
+- rule_id: CP003
+  source: master_rules_combined.yaml
+  category: Hash-Only Data Policy
+  severity: CRITICAL
+  enforcement: MUST
+  description: Tenant-spezifische Peppers MÜSSEN verwendet werden
+  implementation_requirements:
+  - pepper_strategy = 'per_tenant'
+  - Secrets Management via 15_infra/vault
+  sot_artefacts:
+    python: validate_cp003() in sot_validator_core.py
+    rego: CP003 deny rule in sot_policy.rego
+    cli: --rules CP003 flag supported
+    test: test_cp003() in test_sot_validator.py
+- rule_id: CP004
+  source: master_rules_combined.yaml
+  category: Non-Custodial
+  severity: CRITICAL
+  enforcement: MUST
+  description: Raw Data Retention MUSS '0 seconds' sein (Immediate Discard)
+  implementation_requirements:
+  - raw_data_retention = '0 seconds'
+  - In-memory processing only
+  - Kein Dateisystem-Cache für PII
+  sot_artefacts:
+    python: validate_cp004() in sot_validator_core.py
+    rego: CP004 deny rule in sot_policy.rego
+    cli: --rules CP004 flag supported
+    test: test_cp004() in test_sot_validator.py
+- rule_id: CP005
+  source: master_rules_combined.yaml
+  category: GDPR Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: Right to Erasure MUSS via Hash-Rotation implementiert sein
+  implementation_requirements:
+  - Neuer Pepper macht alte Hashes unbrauchbar
+  - Pepper-Rotation-API vorhanden
+  sot_artefacts:
+    python: validate_cp005() in sot_validator_core.py
+    rego: CP005 deny rule in sot_policy.rego
+    cli: --rules CP005 flag supported
+    test: test_cp005() in test_sot_validator.py
+- rule_id: CP006
+  source: master_rules_combined.yaml
+  category: GDPR Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: Data Portability MUSS JSON-Export aller Hashes + Metadaten bieten
+  implementation_requirements:
+  - Export-API in 03_core
+  - JSON-Format mit Timestamps
+  sot_artefacts:
+    python: validate_cp006() in sot_validator_core.py
+    rego: CP006 deny rule in sot_policy.rego
+    cli: --rules CP006 flag supported
+    test: test_cp006() in test_sot_validator.py
+- rule_id: CP007
+  source: master_rules_combined.yaml
+  category: GDPR Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: PII Redaction MUSS automatisch in Logs & Traces erfolgen
+  implementation_requirements:
+  - 'Logging-Config: pii_redaction: true'
+  - Regex-basierte Redaction-Engine
+  sot_artefacts:
+    python: validate_cp007() in sot_validator_core.py
+    rego: CP007 deny rule in sot_policy.rego
+    cli: --rules CP007 flag supported
+    test: test_cp007() in test_sot_validator.py
+- rule_id: CP008
+  source: master_rules_combined.yaml
+  category: Bias & Fairness
+  severity: HIGH
+  enforcement: MUST
+  description: Alle AI/ML-Modelle MÜSSEN auf Bias getestet werden
+  implementation_requirements:
+  - 'Bias Testing: Demographic Parity, Equal Opportunity'
+  - Quarterly Bias Audits
+  - Transparent Model Cards
+  sot_artefacts:
+    python: validate_cp008() in sot_validator_core.py
+    rego: CP008 deny rule in sot_policy.rego
+    cli: --rules CP008 flag supported
+    test: test_cp008() in test_sot_validator.py
+- rule_id: CP009
+  source: master_rules_combined.yaml
+  category: Evidence & Audit
+  severity: CRITICAL
+  enforcement: MUST
+  description: Hash-Ledger mit Blockchain-Anchoring MUSS verwendet werden
+  implementation_requirements:
+  - 'Strategy: hash_ledger_with_anchoring'
+  - 'Chains: Ethereum Mainnet, Polygon'
+  - 'Frequency: Hourly Anchoring'
+  sot_artefacts:
+    python: validate_cp009() in sot_validator_core.py
+    rego: CP009 deny rule in sot_policy.rego
+    cli: --rules CP009 flag supported
+    test: test_cp009() in test_sot_validator.py
+- rule_id: CP010
+  source: master_rules_combined.yaml
+  category: Evidence & Audit
+  severity: CRITICAL
+  enforcement: MUST
+  description: WORM-Storage mit 10 Jahren Retention MUSS verwendet werden
+  implementation_requirements:
+  - 'Storage: Write-Once-Read-Many'
+  - 'Retention: 10 Jahre'
+  - Immutable Backup-Strategie
+  sot_artefacts:
+    python: validate_cp010() in sot_validator_core.py
+    rego: CP010 deny rule in sot_policy.rego
+    cli: --rules CP010 flag supported
+    test: test_cp010() in test_sot_validator.py
+- rule_id: CP011
+  source: master_rules_combined.yaml
+  category: Secrets Management
+  severity: CRITICAL
+  enforcement: NIEMALS
+  description: NIEMALS Secrets in Git committen
+  implementation_requirements:
+  - Secrets via 15_infra/vault
+  - AES-256-GCM at-rest, TLS 1.3 in-transit
+  sot_artefacts:
+    python: validate_cp011() in sot_validator_core.py
+    rego: CP011 deny rule in sot_policy.rego
+    cli: --rules CP011 flag supported
+    test: test_cp011() in test_sot_validator.py
+- rule_id: CP012
+  source: master_rules_combined.yaml
+  category: Secrets Management
+  severity: HIGH
+  enforcement: MUST
+  description: Secrets MÜSSEN alle 90 Tage rotiert werden
+  implementation_requirements:
+  - 'Rotation Policy: 90 Tage'
+  - Automatisierte Rotation via Vault
+  sot_artefacts:
+    python: validate_cp012() in sot_validator_core.py
+    rego: CP012 deny rule in sot_policy.rego
+    cli: --rules CP012 flag supported
+    test: test_cp012() in test_sot_validator.py
+- rule_id: VG001
+  source: master_rules_combined.yaml
+  category: Semantic Versioning
+  severity: HIGH
+  enforcement: MUST
+  description: Alle Versionen MÜSSEN Semver (MAJOR.MINOR.PATCH) verwenden
+  implementation_requirements:
+  - Validator prüft Semver-Format
+  - Automatischer Bump via CI
+  sot_artefacts:
+    python: validate_vg001() in sot_validator_core.py
+    rego: VG001 deny rule in sot_policy.rego
+    cli: --rules VG001 flag supported
+    test: test_vg001() in test_sot_validator.py
+- rule_id: VG002
+  source: master_rules_combined.yaml
+  category: Breaking Changes
+  severity: HIGH
+  enforcement: MUST
+  description: Breaking Changes MÜSSEN Migration Guide + Compatibility Layer haben
+  implementation_requirements:
+  - Migration Guide in docs/migrations/
+  - Compatibility Layer für 1 Major-Version
+  sot_artefacts:
+    python: validate_vg002() in sot_validator_core.py
+    rego: VG002 deny rule in sot_policy.rego
+    cli: --rules VG002 flag supported
+    test: test_vg002() in test_sot_validator.py
+- rule_id: VG003
+  source: master_rules_combined.yaml
+  category: Deprecation
+  severity: HIGH
+  enforcement: MUST
+  description: Deprecations MÜSSEN 180 Tage Notice Period haben
+  implementation_requirements:
+  - Deprecation Notice in CHANGELOG.md
+  - Automated Deprecation Warnings
+  sot_artefacts:
+    python: validate_vg003() in sot_validator_core.py
+    rego: VG003 deny rule in sot_policy.rego
+    cli: --rules VG003 flag supported
+    test: test_vg003() in test_sot_validator.py
+- rule_id: VG004
+  source: master_rules_combined.yaml
+  category: RFC Process
+  severity: HIGH
+  enforcement: MUST
+  description: Alle MUST-Capability-Änderungen MÜSSEN RFC-Prozess durchlaufen
+  implementation_requirements:
+  - RFC Template in 05_documentation/templates/
+  - Approval von Architecture Board
+  sot_artefacts:
+    python: validate_vg004() in sot_validator_core.py
+    rego: VG004 deny rule in sot_policy.rego
+    cli: --rules VG004 flag supported
+    test: test_vg004() in test_sot_validator.py
+- rule_id: VG005
+  source: master_rules_combined.yaml
+  category: Governance Roles
+  severity: MEDIUM
+  enforcement: MUST
+  description: Jeder Shard MUSS einen Owner haben
+  implementation_requirements:
+  - Owner in chart.yaml.governance.owner
+  - Kontaktdaten in Registry
+  sot_artefacts:
+    python: validate_vg005() in sot_validator_core.py
+    rego: VG005 deny rule in sot_policy.rego
+    cli: --rules VG005 flag supported
+    test: test_vg005() in test_sot_validator.py
+- rule_id: VG006
+  source: master_rules_combined.yaml
+  category: Governance Roles
+  severity: HIGH
+  enforcement: MUST
+  description: Architecture Board MUSS alle chart.yaml-Änderungen reviewen
+  implementation_requirements:
+  - 'Dual Review: Architecture + Compliance'
+  - Approval-Log in 02_audit_logging
+  sot_artefacts:
+    python: validate_vg006() in sot_validator_core.py
+    rego: VG006 deny rule in sot_policy.rego
+    cli: --rules VG006 flag supported
+    test: test_vg006() in test_sot_validator.py
+- rule_id: VG007
+  source: master_rules_combined.yaml
+  category: Change Process
+  severity: HIGH
+  enforcement: MUST
+  description: Change-Prozess MUSS 7 Stufen durchlaufen (RFC bis Monitoring)
+  implementation_requirements:
+  - CI Pipeline prüft alle 7 Gates
+  - Rollback-Plan erforderlich
+  sot_artefacts:
+    python: validate_vg007() in sot_validator_core.py
+    rego: VG007 deny rule in sot_policy.rego
+    cli: --rules VG007 flag supported
+    test: test_vg007() in test_sot_validator.py
+- rule_id: VG008
+  source: master_rules_combined.yaml
+  category: Promotion Rules
+  severity: MEDIUM
+  enforcement: MUST
+  description: SHOULD→MUST Promotion MUSS 90 Tage Production + 99.5% SLA erfüllen
+  implementation_requirements:
+  - SLA-Tracking in 17_observability
+  - Contract Test Coverage ≥95%
+  sot_artefacts:
+    python: validate_vg008() in sot_validator_core.py
+    rego: VG008 deny rule in sot_policy.rego
+    cli: --rules VG008 flag supported
+    test: test_vg008() in test_sot_validator.py
+- rule_id: JURIS_BL_001
+  source: master_rules_lifted.yaml
+  category: Sanctions Compliance
+  severity: CRITICAL
+  enforcement: MUST
+  description: 'System MUSS Transaktionen aus Iran (IR) blockieren. Grund: OFAC Comprehensive
+    Sanctions'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_BL_001'
+  - 'Unit Test: test_juris_bl_001()'
+  - 'Audit Trail: Log all JURIS_BL_001-related events'
+  - 'Runtime Check: Block if input.country_code == ''IR'''
+  - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: IR'''
+  sot_artefacts:
+    python: validate_juris_bl_001() in sot_validator_core.py
+    rego: JURIS_BL_001 deny rule in sot_policy.rego
+    cli: --rules JURIS_BL_001 flag supported
+    test: test_juris_bl_001() in test_sot_validator.py
+  metadata:
+    list_name: blacklist_jurisdictions
+    list_source: 23_compliance/policies/sanctions.yaml
+    list_index: 0
+    audit_requirement: MiCA, eIDAS, OFAC
+  data:
+    code: IR
+    name: Iran
+    reason: OFAC Comprehensive Sanctions
+- rule_id: JURIS_BL_002
+  source: master_rules_lifted.yaml
+  category: Sanctions Compliance
+  severity: CRITICAL
+  enforcement: MUST
+  description: 'System MUSS Transaktionen aus North Korea (KP) blockieren. Grund:
+    OFAC Comprehensive Sanctions'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_BL_002'
+  - 'Unit Test: test_juris_bl_002()'
+  - 'Audit Trail: Log all JURIS_BL_002-related events'
+  - 'Runtime Check: Block if input.country_code == ''KP'''
+  - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: KP'''
+  sot_artefacts:
+    python: validate_juris_bl_002() in sot_validator_core.py
+    rego: JURIS_BL_002 deny rule in sot_policy.rego
+    cli: --rules JURIS_BL_002 flag supported
+    test: test_juris_bl_002() in test_sot_validator.py
+  metadata:
+    list_name: blacklist_jurisdictions
+    list_source: 23_compliance/policies/sanctions.yaml
+    list_index: 1
+    audit_requirement: MiCA, eIDAS, OFAC
+  data:
+    code: KP
+    name: North Korea
+    reason: OFAC Comprehensive Sanctions
+- rule_id: JURIS_BL_003
+  source: master_rules_lifted.yaml
+  category: Sanctions Compliance
+  severity: CRITICAL
+  enforcement: MUST
+  description: 'System MUSS Transaktionen aus Syria (SY) blockieren. Grund: OFAC Comprehensive
+    Sanctions'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_BL_003'
+  - 'Unit Test: test_juris_bl_003()'
+  - 'Audit Trail: Log all JURIS_BL_003-related events'
+  - 'Runtime Check: Block if input.country_code == ''SY'''
+  - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: SY'''
+  sot_artefacts:
+    python: validate_juris_bl_003() in sot_validator_core.py
+    rego: JURIS_BL_003 deny rule in sot_policy.rego
+    cli: --rules JURIS_BL_003 flag supported
+    test: test_juris_bl_003() in test_sot_validator.py
+  metadata:
+    list_name: blacklist_jurisdictions
+    list_source: 23_compliance/policies/sanctions.yaml
+    list_index: 2
+    audit_requirement: MiCA, eIDAS, OFAC
+  data:
+    code: SY
+    name: Syria
+    reason: OFAC Comprehensive Sanctions
+- rule_id: JURIS_BL_004
+  source: master_rules_lifted.yaml
+  category: Sanctions Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: 'System MUSS Transaktionen aus Cuba (CU) blockieren. Grund: OFAC Sanctions
+    (Limited)'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_BL_004'
+  - 'Unit Test: test_juris_bl_004()'
+  - 'Audit Trail: Log all JURIS_BL_004-related events'
+  - 'Runtime Check: Block if input.country_code == ''CU'''
+  - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: CU'''
+  sot_artefacts:
+    python: validate_juris_bl_004() in sot_validator_core.py
+    rego: JURIS_BL_004 deny rule in sot_policy.rego
+    cli: --rules JURIS_BL_004 flag supported
+    test: test_juris_bl_004() in test_sot_validator.py
+  metadata:
+    list_name: blacklist_jurisdictions
+    list_source: 23_compliance/policies/sanctions.yaml
+    list_index: 3
+    audit_requirement: MiCA, eIDAS, OFAC
+  data:
+    code: CU
+    name: Cuba
+    reason: OFAC Sanctions (Limited)
+- rule_id: JURIS_BL_005
+  source: master_rules_lifted.yaml
+  category: Sanctions Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: 'System MUSS Transaktionen aus Sudan (SD) blockieren. Grund: OFAC Sanctions
+    (Regional)'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_BL_005'
+  - 'Unit Test: test_juris_bl_005()'
+  - 'Audit Trail: Log all JURIS_BL_005-related events'
+  - 'Runtime Check: Block if input.country_code == ''SD'''
+  - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: SD'''
+  sot_artefacts:
+    python: validate_juris_bl_005() in sot_validator_core.py
+    rego: JURIS_BL_005 deny rule in sot_policy.rego
+    cli: --rules JURIS_BL_005 flag supported
+    test: test_juris_bl_005() in test_sot_validator.py
+  metadata:
+    list_name: blacklist_jurisdictions
+    list_source: 23_compliance/policies/sanctions.yaml
+    list_index: 4
+    audit_requirement: MiCA, eIDAS, OFAC
+  data:
+    code: SD
+    name: Sudan
+    reason: OFAC Sanctions (Regional)
+- rule_id: JURIS_BL_006
+  source: master_rules_lifted.yaml
+  category: Sanctions Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: 'System MUSS Transaktionen aus Belarus (BY) blockieren. Grund: EU Sanctions'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_BL_006'
+  - 'Unit Test: test_juris_bl_006()'
+  - 'Audit Trail: Log all JURIS_BL_006-related events'
+  - 'Runtime Check: Block if input.country_code == ''BY'''
+  - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: BY'''
+  sot_artefacts:
+    python: validate_juris_bl_006() in sot_validator_core.py
+    rego: JURIS_BL_006 deny rule in sot_policy.rego
+    cli: --rules JURIS_BL_006 flag supported
+    test: test_juris_bl_006() in test_sot_validator.py
+  metadata:
+    list_name: blacklist_jurisdictions
+    list_source: 23_compliance/policies/sanctions.yaml
+    list_index: 5
+    audit_requirement: MiCA, eIDAS, OFAC
+  data:
+    code: BY
+    name: Belarus
+    reason: EU Sanctions
+- rule_id: JURIS_BL_007
+  source: master_rules_lifted.yaml
+  category: Sanctions Compliance
+  severity: MEDIUM
+  enforcement: MUST
+  description: 'System MUSS Transaktionen aus Venezuela (VE) blockieren. Grund: OFAC
+    Sectoral Sanctions'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_BL_007'
+  - 'Unit Test: test_juris_bl_007()'
+  - 'Audit Trail: Log all JURIS_BL_007-related events'
+  - 'Runtime Check: Block if input.country_code == ''VE'''
+  - 'API Response: 403 Forbidden with reason ''Sanctioned jurisdiction: VE'''
+  sot_artefacts:
+    python: validate_juris_bl_007() in sot_validator_core.py
+    rego: JURIS_BL_007 deny rule in sot_policy.rego
+    cli: --rules JURIS_BL_007 flag supported
+    test: test_juris_bl_007() in test_sot_validator.py
+  metadata:
+    list_name: blacklist_jurisdictions
+    list_source: 23_compliance/policies/sanctions.yaml
+    list_index: 6
+    audit_requirement: MiCA, eIDAS, OFAC
+  data:
+    code: VE
+    name: Venezuela
+    reason: OFAC Sectoral Sanctions
+- rule_id: PROP_TYPE_001
+  source: master_rules_lifted.yaml
+  category: DAO Governance
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Proposal-Typ 'System Parameter Change' (parameter_change)
+    unterstützen mit Quorum 10% und Threshold 66%
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PROP_TYPE_001'
+  - 'Unit Test: test_prop_type_001()'
+  - 'Audit Trail: Log all PROP_TYPE_001-related events'
+  - 'DAO Contract: Validate proposal type == ''parameter_change'''
+  - 'Quorum Check: Require 10% participation'
+  - 'Threshold Check: Require 66% approval'
+  sot_artefacts:
+    python: validate_prop_type_001() in sot_validator_core.py
+    rego: PROP_TYPE_001 deny rule in sot_policy.rego
+    cli: --rules PROP_TYPE_001 flag supported
+    test: test_prop_type_001() in test_sot_validator.py
+  metadata:
+    list_name: governance_proposal_types
+    list_source: 20_foundation/governance/dao_proposals.yaml
+    list_index: 0
+    audit_requirement: DAO Governance, Token Holder Rights
+  data:
+    type: parameter_change
+    name: System Parameter Change
+    quorum: 10%
+    threshold: 66%
+- rule_id: PROP_TYPE_002
+  source: master_rules_lifted.yaml
+  category: DAO Governance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS Proposal-Typ 'Treasury Fund Allocation' (treasury_allocation)
+    unterstützen mit Quorum 15% und Threshold 75%
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PROP_TYPE_002'
+  - 'Unit Test: test_prop_type_002()'
+  - 'Audit Trail: Log all PROP_TYPE_002-related events'
+  - 'DAO Contract: Validate proposal type == ''treasury_allocation'''
+  - 'Quorum Check: Require 15% participation'
+  - 'Threshold Check: Require 75% approval'
+  sot_artefacts:
+    python: validate_prop_type_002() in sot_validator_core.py
+    rego: PROP_TYPE_002 deny rule in sot_policy.rego
+    cli: --rules PROP_TYPE_002 flag supported
+    test: test_prop_type_002() in test_sot_validator.py
+  metadata:
+    list_name: governance_proposal_types
+    list_source: 20_foundation/governance/dao_proposals.yaml
+    list_index: 1
+    audit_requirement: DAO Governance, Token Holder Rights
+  data:
+    type: treasury_allocation
+    name: Treasury Fund Allocation
+    quorum: 15%
+    threshold: 75%
+- rule_id: PROP_TYPE_003
+  source: master_rules_lifted.yaml
+  category: DAO Governance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS Proposal-Typ 'Smart Contract Upgrade' (contract_upgrade)
+    unterstützen mit Quorum 20% und Threshold 80%
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PROP_TYPE_003'
+  - 'Unit Test: test_prop_type_003()'
+  - 'Audit Trail: Log all PROP_TYPE_003-related events'
+  - 'DAO Contract: Validate proposal type == ''contract_upgrade'''
+  - 'Quorum Check: Require 20% participation'
+  - 'Threshold Check: Require 80% approval'
+  sot_artefacts:
+    python: validate_prop_type_003() in sot_validator_core.py
+    rego: PROP_TYPE_003 deny rule in sot_policy.rego
+    cli: --rules PROP_TYPE_003 flag supported
+    test: test_prop_type_003() in test_sot_validator.py
+  metadata:
+    list_name: governance_proposal_types
+    list_source: 20_foundation/governance/dao_proposals.yaml
+    list_index: 2
+    audit_requirement: DAO Governance, Token Holder Rights
+  data:
+    type: contract_upgrade
+    name: Smart Contract Upgrade
+    quorum: 20%
+    threshold: 80%
+- rule_id: PROP_TYPE_004
+  source: master_rules_lifted.yaml
+  category: DAO Governance
+  severity: MEDIUM
+  enforcement: MUST
+  description: System MUSS Proposal-Typ 'Community Grant Program' (grant_program)
+    unterstützen mit Quorum 5% und Threshold 50%
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PROP_TYPE_004'
+  - 'Unit Test: test_prop_type_004()'
+  - 'Audit Trail: Log all PROP_TYPE_004-related events'
+  - 'DAO Contract: Validate proposal type == ''grant_program'''
+  - 'Quorum Check: Require 5% participation'
+  - 'Threshold Check: Require 50% approval'
+  sot_artefacts:
+    python: validate_prop_type_004() in sot_validator_core.py
+    rego: PROP_TYPE_004 deny rule in sot_policy.rego
+    cli: --rules PROP_TYPE_004 flag supported
+    test: test_prop_type_004() in test_sot_validator.py
+  metadata:
+    list_name: governance_proposal_types
+    list_source: 20_foundation/governance/dao_proposals.yaml
+    list_index: 3
+    audit_requirement: DAO Governance, Token Holder Rights
+  data:
+    type: grant_program
+    name: Community Grant Program
+    quorum: 5%
+    threshold: 50%
+- rule_id: PROP_TYPE_005
+  source: master_rules_lifted.yaml
+  category: DAO Governance
+  severity: MEDIUM
+  enforcement: MUST
+  description: System MUSS Proposal-Typ 'Strategic Partnership' (partnership) unterstützen
+    mit Quorum 10% und Threshold 66%
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PROP_TYPE_005'
+  - 'Unit Test: test_prop_type_005()'
+  - 'Audit Trail: Log all PROP_TYPE_005-related events'
+  - 'DAO Contract: Validate proposal type == ''partnership'''
+  - 'Quorum Check: Require 10% participation'
+  - 'Threshold Check: Require 66% approval'
+  sot_artefacts:
+    python: validate_prop_type_005() in sot_validator_core.py
+    rego: PROP_TYPE_005 deny rule in sot_policy.rego
+    cli: --rules PROP_TYPE_005 flag supported
+    test: test_prop_type_005() in test_sot_validator.py
+  metadata:
+    list_name: governance_proposal_types
+    list_source: 20_foundation/governance/dao_proposals.yaml
+    list_index: 4
+    audit_requirement: DAO Governance, Token Holder Rights
+  data:
+    type: partnership
+    name: Strategic Partnership
+    quorum: 10%
+    threshold: 66%
+- rule_id: PROP_TYPE_006
+  source: master_rules_lifted.yaml
+  category: DAO Governance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS Proposal-Typ 'Emergency Protocol Action' (emergency_action)
+    unterstützen mit Quorum 30% und Threshold 90%
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PROP_TYPE_006'
+  - 'Unit Test: test_prop_type_006()'
+  - 'Audit Trail: Log all PROP_TYPE_006-related events'
+  - 'DAO Contract: Validate proposal type == ''emergency_action'''
+  - 'Quorum Check: Require 30% participation'
+  - 'Threshold Check: Require 90% approval'
+  sot_artefacts:
+    python: validate_prop_type_006() in sot_validator_core.py
+    rego: PROP_TYPE_006 deny rule in sot_policy.rego
+    cli: --rules PROP_TYPE_006 flag supported
+    test: test_prop_type_006() in test_sot_validator.py
+  metadata:
+    list_name: governance_proposal_types
+    list_source: 20_foundation/governance/dao_proposals.yaml
+    list_index: 5
+    audit_requirement: DAO Governance, Token Holder Rights
+  data:
+    type: emergency_action
+    name: Emergency Protocol Action
+    quorum: 30%
+    threshold: 90%
+- rule_id: PROP_TYPE_007
+  source: master_rules_lifted.yaml
+  category: DAO Governance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS Proposal-Typ 'Token Minting (Inflation)' (token_mint) unterstützen
+    mit Quorum 25% und Threshold 85%
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PROP_TYPE_007'
+  - 'Unit Test: test_prop_type_007()'
+  - 'Audit Trail: Log all PROP_TYPE_007-related events'
+  - 'DAO Contract: Validate proposal type == ''token_mint'''
+  - 'Quorum Check: Require 25% participation'
+  - 'Threshold Check: Require 85% approval'
+  sot_artefacts:
+    python: validate_prop_type_007() in sot_validator_core.py
+    rego: PROP_TYPE_007 deny rule in sot_policy.rego
+    cli: --rules PROP_TYPE_007 flag supported
+    test: test_prop_type_007() in test_sot_validator.py
+  metadata:
+    list_name: governance_proposal_types
+    list_source: 20_foundation/governance/dao_proposals.yaml
+    list_index: 6
+    audit_requirement: DAO Governance, Token Holder Rights
+  data:
+    type: token_mint
+    name: Token Minting (Inflation)
+    quorum: 25%
+    threshold: 85%
+- rule_id: JURIS_T1_001
+  source: master_rules_lifted.yaml
+  category: Market Coverage
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Germany (DE) als Tier 1 Market mit eIDAS-Level 'substantial'
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_T1_001'
+  - 'Unit Test: test_juris_t1_001()'
+  - 'Audit Trail: Log all JURIS_T1_001-related events'
+  sot_artefacts:
+    python: validate_juris_t1_001() in sot_validator_core.py
+    rego: JURIS_T1_001 deny rule in sot_policy.rego
+    cli: --rules JURIS_T1_001 flag supported
+    test: test_juris_t1_001() in test_sot_validator.py
+  metadata:
+    list_name: covered_jurisdictions_tier1
+    list_source: 07_governance_legal/jurisdictions.yaml
+    list_index: 0
+    audit_requirement: eIDAS 2.0, Local Regulations
+  data:
+    code: DE
+    name: Germany
+    tier: 1
+    eidas_level: substantial
+- rule_id: JURIS_T1_002
+  source: master_rules_lifted.yaml
+  category: Market Coverage
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS France (FR) als Tier 1 Market mit eIDAS-Level 'substantial'
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_T1_002'
+  - 'Unit Test: test_juris_t1_002()'
+  - 'Audit Trail: Log all JURIS_T1_002-related events'
+  sot_artefacts:
+    python: validate_juris_t1_002() in sot_validator_core.py
+    rego: JURIS_T1_002 deny rule in sot_policy.rego
+    cli: --rules JURIS_T1_002 flag supported
+    test: test_juris_t1_002() in test_sot_validator.py
+  metadata:
+    list_name: covered_jurisdictions_tier1
+    list_source: 07_governance_legal/jurisdictions.yaml
+    list_index: 1
+    audit_requirement: eIDAS 2.0, Local Regulations
+  data:
+    code: FR
+    name: France
+    tier: 1
+    eidas_level: substantial
+- rule_id: JURIS_T1_003
+  source: master_rules_lifted.yaml
+  category: Market Coverage
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Netherlands (NL) als Tier 1 Market mit eIDAS-Level 'substantial'
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_T1_003'
+  - 'Unit Test: test_juris_t1_003()'
+  - 'Audit Trail: Log all JURIS_T1_003-related events'
+  sot_artefacts:
+    python: validate_juris_t1_003() in sot_validator_core.py
+    rego: JURIS_T1_003 deny rule in sot_policy.rego
+    cli: --rules JURIS_T1_003 flag supported
+    test: test_juris_t1_003() in test_sot_validator.py
+  metadata:
+    list_name: covered_jurisdictions_tier1
+    list_source: 07_governance_legal/jurisdictions.yaml
+    list_index: 2
+    audit_requirement: eIDAS 2.0, Local Regulations
+  data:
+    code: NL
+    name: Netherlands
+    tier: 1
+    eidas_level: substantial
+- rule_id: JURIS_T1_004
+  source: master_rules_lifted.yaml
+  category: Market Coverage
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Switzerland (CH) als Tier 1 Market mit eIDAS-Level 'high'
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_T1_004'
+  - 'Unit Test: test_juris_t1_004()'
+  - 'Audit Trail: Log all JURIS_T1_004-related events'
+  sot_artefacts:
+    python: validate_juris_t1_004() in sot_validator_core.py
+    rego: JURIS_T1_004 deny rule in sot_policy.rego
+    cli: --rules JURIS_T1_004 flag supported
+    test: test_juris_t1_004() in test_sot_validator.py
+  metadata:
+    list_name: covered_jurisdictions_tier1
+    list_source: 07_governance_legal/jurisdictions.yaml
+    list_index: 3
+    audit_requirement: eIDAS 2.0, Local Regulations
+  data:
+    code: CH
+    name: Switzerland
+    tier: 1
+    eidas_level: high
+- rule_id: JURIS_T1_005
+  source: master_rules_lifted.yaml
+  category: Market Coverage
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS United Kingdom (UK) als Tier 1 Market mit eIDAS-Level 'substantial'
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_T1_005'
+  - 'Unit Test: test_juris_t1_005()'
+  - 'Audit Trail: Log all JURIS_T1_005-related events'
+  sot_artefacts:
+    python: validate_juris_t1_005() in sot_validator_core.py
+    rego: JURIS_T1_005 deny rule in sot_policy.rego
+    cli: --rules JURIS_T1_005 flag supported
+    test: test_juris_t1_005() in test_sot_validator.py
+  metadata:
+    list_name: covered_jurisdictions_tier1
+    list_source: 07_governance_legal/jurisdictions.yaml
+    list_index: 4
+    audit_requirement: eIDAS 2.0, Local Regulations
+  data:
+    code: UK
+    name: United Kingdom
+    tier: 1
+    eidas_level: substantial
+- rule_id: JURIS_T1_006
+  source: master_rules_lifted.yaml
+  category: Market Coverage
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Singapore (SG) als Tier 1 Market mit eIDAS-Level 'substantial'
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_T1_006'
+  - 'Unit Test: test_juris_t1_006()'
+  - 'Audit Trail: Log all JURIS_T1_006-related events'
+  sot_artefacts:
+    python: validate_juris_t1_006() in sot_validator_core.py
+    rego: JURIS_T1_006 deny rule in sot_policy.rego
+    cli: --rules JURIS_T1_006 flag supported
+    test: test_juris_t1_006() in test_sot_validator.py
+  metadata:
+    list_name: covered_jurisdictions_tier1
+    list_source: 07_governance_legal/jurisdictions.yaml
+    list_index: 5
+    audit_requirement: eIDAS 2.0, Local Regulations
+  data:
+    code: SG
+    name: Singapore
+    tier: 1
+    eidas_level: substantial
+- rule_id: JURIS_T1_007
+  source: master_rules_lifted.yaml
+  category: Market Coverage
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Japan (JP) als Tier 1 Market mit eIDAS-Level 'substantial'
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für JURIS_T1_007'
+  - 'Unit Test: test_juris_t1_007()'
+  - 'Audit Trail: Log all JURIS_T1_007-related events'
+  sot_artefacts:
+    python: validate_juris_t1_007() in sot_validator_core.py
+    rego: JURIS_T1_007 deny rule in sot_policy.rego
+    cli: --rules JURIS_T1_007 flag supported
+    test: test_juris_t1_007() in test_sot_validator.py
+  metadata:
+    list_name: covered_jurisdictions_tier1
+    list_source: 07_governance_legal/jurisdictions.yaml
+    list_index: 6
+    audit_requirement: eIDAS 2.0, Local Regulations
+  data:
+    code: JP
+    name: Japan
+    tier: 1
+    eidas_level: substantial
+- rule_id: REWARD_POOL_001
+  source: master_rules_lifted.yaml
+  category: Tokenomics
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Reward Pool 'Staking Rewards Pool' (staking_rewards) mit
+    30% Allocation und Vesting 'none' verwalten
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für REWARD_POOL_001'
+  - 'Unit Test: test_reward_pool_001()'
+  - 'Audit Trail: Log all REWARD_POOL_001-related events'
+  sot_artefacts:
+    python: validate_reward_pool_001() in sot_validator_core.py
+    rego: REWARD_POOL_001 deny rule in sot_policy.rego
+    cli: --rules REWARD_POOL_001 flag supported
+    test: test_reward_pool_001() in test_sot_validator.py
+  metadata:
+    list_name: reward_pools
+    list_source: 20_foundation/tokenomics/rewards.yaml
+    list_index: 0
+    audit_requirement: Tokenomics Transparency, MiCA
+  data:
+    pool_id: staking_rewards
+    name: Staking Rewards Pool
+    allocation_percent: 30
+    vesting: none
+- rule_id: REWARD_POOL_002
+  source: master_rules_lifted.yaml
+  category: Tokenomics
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Reward Pool 'Liquidity Mining Pool' (liquidity_mining)
+    mit 20% Allocation und Vesting 'linear_12m' verwalten
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für REWARD_POOL_002'
+  - 'Unit Test: test_reward_pool_002()'
+  - 'Audit Trail: Log all REWARD_POOL_002-related events'
+  sot_artefacts:
+    python: validate_reward_pool_002() in sot_validator_core.py
+    rego: REWARD_POOL_002 deny rule in sot_policy.rego
+    cli: --rules REWARD_POOL_002 flag supported
+    test: test_reward_pool_002() in test_sot_validator.py
+  metadata:
+    list_name: reward_pools
+    list_source: 20_foundation/tokenomics/rewards.yaml
+    list_index: 1
+    audit_requirement: Tokenomics Transparency, MiCA
+  data:
+    pool_id: liquidity_mining
+    name: Liquidity Mining Pool
+    allocation_percent: 20
+    vesting: linear_12m
+- rule_id: REWARD_POOL_003
+  source: master_rules_lifted.yaml
+  category: Tokenomics
+  severity: MEDIUM
+  enforcement: MUST
+  description: System MUSS Reward Pool 'Ecosystem Development Grants' (ecosystem_grants)
+    mit 15% Allocation und Vesting 'milestone_based' verwalten
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für REWARD_POOL_003'
+  - 'Unit Test: test_reward_pool_003()'
+  - 'Audit Trail: Log all REWARD_POOL_003-related events'
+  sot_artefacts:
+    python: validate_reward_pool_003() in sot_validator_core.py
+    rego: REWARD_POOL_003 deny rule in sot_policy.rego
+    cli: --rules REWARD_POOL_003 flag supported
+    test: test_reward_pool_003() in test_sot_validator.py
+  metadata:
+    list_name: reward_pools
+    list_source: 20_foundation/tokenomics/rewards.yaml
+    list_index: 2
+    audit_requirement: Tokenomics Transparency, MiCA
+  data:
+    pool_id: ecosystem_grants
+    name: Ecosystem Development Grants
+    allocation_percent: 15
+    vesting: milestone_based
+- rule_id: REWARD_POOL_004
+  source: master_rules_lifted.yaml
+  category: Tokenomics
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS Reward Pool 'Team & Advisors Vesting' (team_vesting) mit
+    20% Allocation und Vesting 'linear_48m_cliff_12m' verwalten
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für REWARD_POOL_004'
+  - 'Unit Test: test_reward_pool_004()'
+  - 'Audit Trail: Log all REWARD_POOL_004-related events'
+  sot_artefacts:
+    python: validate_reward_pool_004() in sot_validator_core.py
+    rego: REWARD_POOL_004 deny rule in sot_policy.rego
+    cli: --rules REWARD_POOL_004 flag supported
+    test: test_reward_pool_004() in test_sot_validator.py
+  metadata:
+    list_name: reward_pools
+    list_source: 20_foundation/tokenomics/rewards.yaml
+    list_index: 3
+    audit_requirement: Tokenomics Transparency, MiCA
+  data:
+    pool_id: team_vesting
+    name: Team & Advisors Vesting
+    allocation_percent: 20
+    vesting: linear_48m_cliff_12m
+- rule_id: REWARD_POOL_005
+  source: master_rules_lifted.yaml
+  category: Tokenomics
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS Reward Pool 'DAO Treasury Reserve' (treasury_reserve) mit
+    15% Allocation und Vesting 'dao_controlled' verwalten
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für REWARD_POOL_005'
+  - 'Unit Test: test_reward_pool_005()'
+  - 'Audit Trail: Log all REWARD_POOL_005-related events'
+  sot_artefacts:
+    python: validate_reward_pool_005() in sot_validator_core.py
+    rego: REWARD_POOL_005 deny rule in sot_policy.rego
+    cli: --rules REWARD_POOL_005 flag supported
+    test: test_reward_pool_005() in test_sot_validator.py
+  metadata:
+    list_name: reward_pools
+    list_source: 20_foundation/tokenomics/rewards.yaml
+    list_index: 4
+    audit_requirement: Tokenomics Transparency, MiCA
+  data:
+    pool_id: treasury_reserve
+    name: DAO Treasury Reserve
+    allocation_percent: 15
+    vesting: dao_controlled
+- rule_id: NETWORK_001
+  source: master_rules_lifted.yaml
+  category: Blockchain Integration
+  severity: CRITICAL
+  enforcement: MUST
+  description: 'System MUSS Blockchain-Netzwerk Ethereum Mainnet (Chain ID: 1) unterstützen'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für NETWORK_001'
+  - 'Unit Test: test_network_001()'
+  - 'Audit Trail: Log all NETWORK_001-related events'
+  - 'Network Config: Add Chain ID 1'
+  - 'RPC Endpoint: Configure for Ethereum Mainnet'
+  - 'Block Explorer: Link to etherscan.io'
+  sot_artefacts:
+    python: validate_network_001() in sot_validator_core.py
+    rego: NETWORK_001 deny rule in sot_policy.rego
+    cli: --rules NETWORK_001 flag supported
+    test: test_network_001() in test_sot_validator.py
+  metadata:
+    list_name: supported_networks
+    list_source: 03_core/blockchain/networks.yaml
+    list_index: 0
+    audit_requirement: Multi-Chain Architecture, Security
+  data:
+    network_id: ethereum_mainnet
+    name: Ethereum Mainnet
+    chain_id: 1
+    explorer: etherscan.io
+- rule_id: NETWORK_002
+  source: master_rules_lifted.yaml
+  category: Blockchain Integration
+  severity: CRITICAL
+  enforcement: MUST
+  description: 'System MUSS Blockchain-Netzwerk Polygon Mainnet (Chain ID: 137) unterstützen'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für NETWORK_002'
+  - 'Unit Test: test_network_002()'
+  - 'Audit Trail: Log all NETWORK_002-related events'
+  - 'Network Config: Add Chain ID 137'
+  - 'RPC Endpoint: Configure for Polygon Mainnet'
+  - 'Block Explorer: Link to polygonscan.com'
+  sot_artefacts:
+    python: validate_network_002() in sot_validator_core.py
+    rego: NETWORK_002 deny rule in sot_policy.rego
+    cli: --rules NETWORK_002 flag supported
+    test: test_network_002() in test_sot_validator.py
+  metadata:
+    list_name: supported_networks
+    list_source: 03_core/blockchain/networks.yaml
+    list_index: 1
+    audit_requirement: Multi-Chain Architecture, Security
+  data:
+    network_id: polygon_mainnet
+    name: Polygon Mainnet
+    chain_id: 137
+    explorer: polygonscan.com
+- rule_id: NETWORK_003
+  source: master_rules_lifted.yaml
+  category: Blockchain Integration
+  severity: HIGH
+  enforcement: MUST
+  description: 'System MUSS Blockchain-Netzwerk Arbitrum One (Chain ID: 42161) unterstützen'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für NETWORK_003'
+  - 'Unit Test: test_network_003()'
+  - 'Audit Trail: Log all NETWORK_003-related events'
+  - 'Network Config: Add Chain ID 42161'
+  - 'RPC Endpoint: Configure for Arbitrum One'
+  - 'Block Explorer: Link to arbiscan.io'
+  sot_artefacts:
+    python: validate_network_003() in sot_validator_core.py
+    rego: NETWORK_003 deny rule in sot_policy.rego
+    cli: --rules NETWORK_003 flag supported
+    test: test_network_003() in test_sot_validator.py
+  metadata:
+    list_name: supported_networks
+    list_source: 03_core/blockchain/networks.yaml
+    list_index: 2
+    audit_requirement: Multi-Chain Architecture, Security
+  data:
+    network_id: arbitrum_one
+    name: Arbitrum One
+    chain_id: 42161
+    explorer: arbiscan.io
+- rule_id: NETWORK_004
+  source: master_rules_lifted.yaml
+  category: Blockchain Integration
+  severity: HIGH
+  enforcement: MUST
+  description: 'System MUSS Blockchain-Netzwerk Optimism Mainnet (Chain ID: 10) unterstützen'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für NETWORK_004'
+  - 'Unit Test: test_network_004()'
+  - 'Audit Trail: Log all NETWORK_004-related events'
+  - 'Network Config: Add Chain ID 10'
+  - 'RPC Endpoint: Configure for Optimism Mainnet'
+  - 'Block Explorer: Link to optimistic.etherscan.io'
+  sot_artefacts:
+    python: validate_network_004() in sot_validator_core.py
+    rego: NETWORK_004 deny rule in sot_policy.rego
+    cli: --rules NETWORK_004 flag supported
+    test: test_network_004() in test_sot_validator.py
+  metadata:
+    list_name: supported_networks
+    list_source: 03_core/blockchain/networks.yaml
+    list_index: 3
+    audit_requirement: Multi-Chain Architecture, Security
+  data:
+    network_id: optimism
+    name: Optimism Mainnet
+    chain_id: 10
+    explorer: optimistic.etherscan.io
+- rule_id: NETWORK_005
+  source: master_rules_lifted.yaml
+  category: Blockchain Integration
+  severity: MEDIUM
+  enforcement: MUST
+  description: 'System MUSS Blockchain-Netzwerk Base Mainnet (Chain ID: 8453) unterstützen'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für NETWORK_005'
+  - 'Unit Test: test_network_005()'
+  - 'Audit Trail: Log all NETWORK_005-related events'
+  - 'Network Config: Add Chain ID 8453'
+  - 'RPC Endpoint: Configure for Base Mainnet'
+  - 'Block Explorer: Link to basescan.org'
+  sot_artefacts:
+    python: validate_network_005() in sot_validator_core.py
+    rego: NETWORK_005 deny rule in sot_policy.rego
+    cli: --rules NETWORK_005 flag supported
+    test: test_network_005() in test_sot_validator.py
+  metadata:
+    list_name: supported_networks
+    list_source: 03_core/blockchain/networks.yaml
+    list_index: 4
+    audit_requirement: Multi-Chain Architecture, Security
+  data:
+    network_id: base
+    name: Base Mainnet
+    chain_id: 8453
+    explorer: basescan.org
+- rule_id: NETWORK_006
+  source: master_rules_lifted.yaml
+  category: Blockchain Integration
+  severity: MEDIUM
+  enforcement: MUST
+  description: 'System MUSS Blockchain-Netzwerk Avalanche C-Chain (Chain ID: 43114)
+    unterstützen'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für NETWORK_006'
+  - 'Unit Test: test_network_006()'
+  - 'Audit Trail: Log all NETWORK_006-related events'
+  - 'Network Config: Add Chain ID 43114'
+  - 'RPC Endpoint: Configure for Avalanche C-Chain'
+  - 'Block Explorer: Link to snowtrace.io'
+  sot_artefacts:
+    python: validate_network_006() in sot_validator_core.py
+    rego: NETWORK_006 deny rule in sot_policy.rego
+    cli: --rules NETWORK_006 flag supported
+    test: test_network_006() in test_sot_validator.py
+  metadata:
+    list_name: supported_networks
+    list_source: 03_core/blockchain/networks.yaml
+    list_index: 5
+    audit_requirement: Multi-Chain Architecture, Security
+  data:
+    network_id: avalanche
+    name: Avalanche C-Chain
+    chain_id: 43114
+    explorer: snowtrace.io
+- rule_id: AUTH_METHOD_001
+  source: master_rules_lifted.yaml
+  category: Authentication
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS Authentifizierungsmethode 'DID-based Authentication' (did_auth)
+    mit eIDAS-Level 'high' unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für AUTH_METHOD_001'
+  - 'Unit Test: test_auth_method_001()'
+  - 'Audit Trail: Log all AUTH_METHOD_001-related events'
+  sot_artefacts:
+    python: validate_auth_method_001() in sot_validator_core.py
+    rego: AUTH_METHOD_001 deny rule in sot_policy.rego
+    cli: --rules AUTH_METHOD_001 flag supported
+    test: test_auth_method_001() in test_sot_validator.py
+  metadata:
+    list_name: supported_auth_methods
+    list_source: 14_zero_time_auth/methods.yaml
+    list_index: 0
+    audit_requirement: eIDAS 2.0, Security Standards
+  data:
+    method_id: did_auth
+    name: DID-based Authentication
+    eidas_level: high
+    mfa_required: false
+- rule_id: AUTH_METHOD_002
+  source: master_rules_lifted.yaml
+  category: Authentication
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS Authentifizierungsmethode 'Biometric Authentication (Face/Fingerprint)'
+    (biometric) mit eIDAS-Level 'high' unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für AUTH_METHOD_002'
+  - 'Unit Test: test_auth_method_002()'
+  - 'Audit Trail: Log all AUTH_METHOD_002-related events'
+  sot_artefacts:
+    python: validate_auth_method_002() in sot_validator_core.py
+    rego: AUTH_METHOD_002 deny rule in sot_policy.rego
+    cli: --rules AUTH_METHOD_002 flag supported
+    test: test_auth_method_002() in test_sot_validator.py
+  metadata:
+    list_name: supported_auth_methods
+    list_source: 14_zero_time_auth/methods.yaml
+    list_index: 1
+    audit_requirement: eIDAS 2.0, Security Standards
+  data:
+    method_id: biometric
+    name: Biometric Authentication (Face/Fingerprint)
+    eidas_level: high
+    mfa_required: false
+- rule_id: AUTH_METHOD_003
+  source: master_rules_lifted.yaml
+  category: Authentication
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Authentifizierungsmethode 'Hardware Security Key (FIDO2)'
+    (hardware_token) mit eIDAS-Level 'high' unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für AUTH_METHOD_003'
+  - 'Unit Test: test_auth_method_003()'
+  - 'Audit Trail: Log all AUTH_METHOD_003-related events'
+  sot_artefacts:
+    python: validate_auth_method_003() in sot_validator_core.py
+    rego: AUTH_METHOD_003 deny rule in sot_policy.rego
+    cli: --rules AUTH_METHOD_003 flag supported
+    test: test_auth_method_003() in test_sot_validator.py
+  metadata:
+    list_name: supported_auth_methods
+    list_source: 14_zero_time_auth/methods.yaml
+    list_index: 2
+    audit_requirement: eIDAS 2.0, Security Standards
+  data:
+    method_id: hardware_token
+    name: Hardware Security Key (FIDO2)
+    eidas_level: high
+    mfa_required: false
+- rule_id: AUTH_METHOD_004
+  source: master_rules_lifted.yaml
+  category: Authentication
+  severity: MEDIUM
+  enforcement: MUST
+  description: System MUSS Authentifizierungsmethode 'Time-based OTP (TOTP)' (totp)
+    mit eIDAS-Level 'substantial' unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für AUTH_METHOD_004'
+  - 'Unit Test: test_auth_method_004()'
+  - 'Audit Trail: Log all AUTH_METHOD_004-related events'
+  sot_artefacts:
+    python: validate_auth_method_004() in sot_validator_core.py
+    rego: AUTH_METHOD_004 deny rule in sot_policy.rego
+    cli: --rules AUTH_METHOD_004 flag supported
+    test: test_auth_method_004() in test_sot_validator.py
+  metadata:
+    list_name: supported_auth_methods
+    list_source: 14_zero_time_auth/methods.yaml
+    list_index: 3
+    audit_requirement: eIDAS 2.0, Security Standards
+  data:
+    method_id: totp
+    name: Time-based OTP (TOTP)
+    eidas_level: substantial
+    mfa_required: true
+- rule_id: AUTH_METHOD_005
+  source: master_rules_lifted.yaml
+  category: Authentication
+  severity: LOW
+  enforcement: MUST
+  description: System MUSS Authentifizierungsmethode 'SMS-based OTP' (sms_otp) mit
+    eIDAS-Level 'low' unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für AUTH_METHOD_005'
+  - 'Unit Test: test_auth_method_005()'
+  - 'Audit Trail: Log all AUTH_METHOD_005-related events'
+  sot_artefacts:
+    python: validate_auth_method_005() in sot_validator_core.py
+    rego: AUTH_METHOD_005 deny rule in sot_policy.rego
+    cli: --rules AUTH_METHOD_005 flag supported
+    test: test_auth_method_005() in test_sot_validator.py
+  metadata:
+    list_name: supported_auth_methods
+    list_source: 14_zero_time_auth/methods.yaml
+    list_index: 4
+    audit_requirement: eIDAS 2.0, Security Standards
+  data:
+    method_id: sms_otp
+    name: SMS-based OTP
+    eidas_level: low
+    mfa_required: true
+- rule_id: AUTH_METHOD_006
+  source: master_rules_lifted.yaml
+  category: Authentication
+  severity: LOW
+  enforcement: MUST
+  description: System MUSS Authentifizierungsmethode 'Email Magic Link' (email_magic_link)
+    mit eIDAS-Level 'low' unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für AUTH_METHOD_006'
+  - 'Unit Test: test_auth_method_006()'
+  - 'Audit Trail: Log all AUTH_METHOD_006-related events'
+  sot_artefacts:
+    python: validate_auth_method_006() in sot_validator_core.py
+    rego: AUTH_METHOD_006 deny rule in sot_policy.rego
+    cli: --rules AUTH_METHOD_006 flag supported
+    test: test_auth_method_006() in test_sot_validator.py
+  metadata:
+    list_name: supported_auth_methods
+    list_source: 14_zero_time_auth/methods.yaml
+    list_index: 5
+    audit_requirement: eIDAS 2.0, Security Standards
+  data:
+    method_id: email_magic_link
+    name: Email Magic Link
+    eidas_level: low
+    mfa_required: true
+- rule_id: PII_CAT_001
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'Name (First, Last, Full)' (name) gemäß Art.
+    4(1) behandeln
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_001'
+  - 'Unit Test: test_pii_cat_001()'
+  - 'Audit Trail: Log all PII_CAT_001-related events'
+  - 'PII Detector: Recognize name'
+  - 'Hash-Only Storage: Never store raw name'
+  - 'GDPR Compliance: Implement Art. 4(1)'
+  sot_artefacts:
+    python: validate_pii_cat_001() in sot_validator_core.py
+    rego: PII_CAT_001 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_001 flag supported
+    test: test_pii_cat_001() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 0
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: name
+    name: Name (First, Last, Full)
+    gdpr_article: Art. 4(1)
+    special_category: false
+- rule_id: PII_CAT_002
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'Email Address' (email) gemäß Art. 4(1) behandeln
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_002'
+  - 'Unit Test: test_pii_cat_002()'
+  - 'Audit Trail: Log all PII_CAT_002-related events'
+  - 'PII Detector: Recognize email'
+  - 'Hash-Only Storage: Never store raw email'
+  - 'GDPR Compliance: Implement Art. 4(1)'
+  sot_artefacts:
+    python: validate_pii_cat_002() in sot_validator_core.py
+    rego: PII_CAT_002 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_002 flag supported
+    test: test_pii_cat_002() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 1
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: email
+    name: Email Address
+    gdpr_article: Art. 4(1)
+    special_category: false
+- rule_id: PII_CAT_003
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'Phone Number' (phone) gemäß Art. 4(1) behandeln
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_003'
+  - 'Unit Test: test_pii_cat_003()'
+  - 'Audit Trail: Log all PII_CAT_003-related events'
+  - 'PII Detector: Recognize phone'
+  - 'Hash-Only Storage: Never store raw phone'
+  - 'GDPR Compliance: Implement Art. 4(1)'
+  sot_artefacts:
+    python: validate_pii_cat_003() in sot_validator_core.py
+    rego: PII_CAT_003 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_003 flag supported
+    test: test_pii_cat_003() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 2
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: phone
+    name: Phone Number
+    gdpr_article: Art. 4(1)
+    special_category: false
+- rule_id: PII_CAT_004
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'Physical Address' (address) gemäß Art. 4(1)
+    behandeln
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_004'
+  - 'Unit Test: test_pii_cat_004()'
+  - 'Audit Trail: Log all PII_CAT_004-related events'
+  - 'PII Detector: Recognize address'
+  - 'Hash-Only Storage: Never store raw address'
+  - 'GDPR Compliance: Implement Art. 4(1)'
+  sot_artefacts:
+    python: validate_pii_cat_004() in sot_validator_core.py
+    rego: PII_CAT_004 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_004 flag supported
+    test: test_pii_cat_004() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 3
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: address
+    name: Physical Address
+    gdpr_article: Art. 4(1)
+    special_category: false
+- rule_id: PII_CAT_005
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'National ID / SSN' (national_id) gemäß Art.
+    4(1) behandeln
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_005'
+  - 'Unit Test: test_pii_cat_005()'
+  - 'Audit Trail: Log all PII_CAT_005-related events'
+  - 'PII Detector: Recognize national_id'
+  - 'Hash-Only Storage: Never store raw national_id'
+  - 'GDPR Compliance: Implement Art. 4(1)'
+  sot_artefacts:
+    python: validate_pii_cat_005() in sot_validator_core.py
+    rego: PII_CAT_005 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_005 flag supported
+    test: test_pii_cat_005() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 4
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: national_id
+    name: National ID / SSN
+    gdpr_article: Art. 4(1)
+    special_category: false
+- rule_id: PII_CAT_006
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'Biometric Data' (biometric) gemäß Art. 9(1)
+    behandeln (GDPR Special Category)
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_006'
+  - 'Unit Test: test_pii_cat_006()'
+  - 'Audit Trail: Log all PII_CAT_006-related events'
+  - 'PII Detector: Recognize biometric'
+  - 'Hash-Only Storage: Never store raw biometric'
+  - 'GDPR Compliance: Implement Art. 9(1)'
+  sot_artefacts:
+    python: validate_pii_cat_006() in sot_validator_core.py
+    rego: PII_CAT_006 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_006 flag supported
+    test: test_pii_cat_006() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 5
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: biometric
+    name: Biometric Data
+    gdpr_article: Art. 9(1)
+    special_category: true
+- rule_id: PII_CAT_007
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'Health Data' (health) gemäß Art. 9(1) behandeln
+    (GDPR Special Category)
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_007'
+  - 'Unit Test: test_pii_cat_007()'
+  - 'Audit Trail: Log all PII_CAT_007-related events'
+  - 'PII Detector: Recognize health'
+  - 'Hash-Only Storage: Never store raw health'
+  - 'GDPR Compliance: Implement Art. 9(1)'
+  sot_artefacts:
+    python: validate_pii_cat_007() in sot_validator_core.py
+    rego: PII_CAT_007 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_007 flag supported
+    test: test_pii_cat_007() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 6
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: health
+    name: Health Data
+    gdpr_article: Art. 9(1)
+    special_category: true
+- rule_id: PII_CAT_008
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'Genetic Data' (genetic) gemäß Art. 9(1)
+    behandeln (GDPR Special Category)
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_008'
+  - 'Unit Test: test_pii_cat_008()'
+  - 'Audit Trail: Log all PII_CAT_008-related events'
+  - 'PII Detector: Recognize genetic'
+  - 'Hash-Only Storage: Never store raw genetic'
+  - 'GDPR Compliance: Implement Art. 9(1)'
+  sot_artefacts:
+    python: validate_pii_cat_008() in sot_validator_core.py
+    rego: PII_CAT_008 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_008 flag supported
+    test: test_pii_cat_008() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 7
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: genetic
+    name: Genetic Data
+    gdpr_article: Art. 9(1)
+    special_category: true
+- rule_id: PII_CAT_009
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'Religious Beliefs' (religion) gemäß Art.
+    9(1) behandeln (GDPR Special Category)
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_009'
+  - 'Unit Test: test_pii_cat_009()'
+  - 'Audit Trail: Log all PII_CAT_009-related events'
+  - 'PII Detector: Recognize religion'
+  - 'Hash-Only Storage: Never store raw religion'
+  - 'GDPR Compliance: Implement Art. 9(1)'
+  sot_artefacts:
+    python: validate_pii_cat_009() in sot_validator_core.py
+    rego: PII_CAT_009 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_009 flag supported
+    test: test_pii_cat_009() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 8
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: religion
+    name: Religious Beliefs
+    gdpr_article: Art. 9(1)
+    special_category: true
+- rule_id: PII_CAT_010
+  source: master_rules_lifted.yaml
+  category: GDPR Compliance
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS PII-Kategorie 'Political Opinions' (political) gemäß Art.
+    9(1) behandeln (GDPR Special Category)
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für PII_CAT_010'
+  - 'Unit Test: test_pii_cat_010()'
+  - 'Audit Trail: Log all PII_CAT_010-related events'
+  - 'PII Detector: Recognize political'
+  - 'Hash-Only Storage: Never store raw political'
+  - 'GDPR Compliance: Implement Art. 9(1)'
+  sot_artefacts:
+    python: validate_pii_cat_010() in sot_validator_core.py
+    rego: PII_CAT_010 deny rule in sot_policy.rego
+    cli: --rules PII_CAT_010 flag supported
+    test: test_pii_cat_010() in test_sot_validator.py
+  metadata:
+    list_name: pii_categories
+    list_source: 23_compliance/gdpr/pii_definitions.yaml
+    list_index: 9
+    audit_requirement: GDPR Art. 5, 6, 9
+  data:
+    category_id: political
+    name: Political Opinions
+    gdpr_article: Art. 9(1)
+    special_category: true
+- rule_id: HASH_ALG_001
+  source: master_rules_lifted.yaml
+  category: Cryptography
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS Hash-Algorithmus SHA3-256 (256 bits) als 'primary' unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für HASH_ALG_001'
+  - 'Unit Test: test_hash_alg_001()'
+  - 'Audit Trail: Log all HASH_ALG_001-related events'
+  sot_artefacts:
+    python: validate_hash_alg_001() in sot_validator_core.py
+    rego: HASH_ALG_001 deny rule in sot_policy.rego
+    cli: --rules HASH_ALG_001 flag supported
+    test: test_hash_alg_001() in test_sot_validator.py
+  metadata:
+    list_name: approved_hash_algorithms
+    list_source: 21_post_quantum_crypto/algorithms.yaml
+    list_index: 0
+    audit_requirement: Cryptographic Standards, Post-Quantum
+  data:
+    algorithm_id: sha3_256
+    name: SHA3-256
+    bits: 256
+    quantum_safe: false
+    status: primary
+- rule_id: HASH_ALG_002
+  source: master_rules_lifted.yaml
+  category: Cryptography
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS Hash-Algorithmus SHA3-512 (512 bits) als 'approved' unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für HASH_ALG_002'
+  - 'Unit Test: test_hash_alg_002()'
+  - 'Audit Trail: Log all HASH_ALG_002-related events'
+  sot_artefacts:
+    python: validate_hash_alg_002() in sot_validator_core.py
+    rego: HASH_ALG_002 deny rule in sot_policy.rego
+    cli: --rules HASH_ALG_002 flag supported
+    test: test_hash_alg_002() in test_sot_validator.py
+  metadata:
+    list_name: approved_hash_algorithms
+    list_source: 21_post_quantum_crypto/algorithms.yaml
+    list_index: 1
+    audit_requirement: Cryptographic Standards, Post-Quantum
+  data:
+    algorithm_id: sha3_512
+    name: SHA3-512
+    bits: 512
+    quantum_safe: false
+    status: approved
+- rule_id: HASH_ALG_003
+  source: master_rules_lifted.yaml
+  category: Cryptography
+  severity: MEDIUM
+  enforcement: MUST
+  description: System MUSS Hash-Algorithmus BLAKE3 (256 bits) als 'approved' unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für HASH_ALG_003'
+  - 'Unit Test: test_hash_alg_003()'
+  - 'Audit Trail: Log all HASH_ALG_003-related events'
+  sot_artefacts:
+    python: validate_hash_alg_003() in sot_validator_core.py
+    rego: HASH_ALG_003 deny rule in sot_policy.rego
+    cli: --rules HASH_ALG_003 flag supported
+    test: test_hash_alg_003() in test_sot_validator.py
+  metadata:
+    list_name: approved_hash_algorithms
+    list_source: 21_post_quantum_crypto/algorithms.yaml
+    list_index: 2
+    audit_requirement: Cryptographic Standards, Post-Quantum
+  data:
+    algorithm_id: blake3
+    name: BLAKE3
+    bits: 256
+    quantum_safe: false
+    status: approved
+- rule_id: HASH_ALG_004
+  source: master_rules_lifted.yaml
+  category: Cryptography
+  severity: LOW
+  enforcement: MUST
+  description: System MUSS Hash-Algorithmus SPHINCS+ (256 bits) als 'future' (Quantum-Safe)
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für HASH_ALG_004'
+  - 'Unit Test: test_hash_alg_004()'
+  - 'Audit Trail: Log all HASH_ALG_004-related events'
+  sot_artefacts:
+    python: validate_hash_alg_004() in sot_validator_core.py
+    rego: HASH_ALG_004 deny rule in sot_policy.rego
+    cli: --rules HASH_ALG_004 flag supported
+    test: test_hash_alg_004() in test_sot_validator.py
+  metadata:
+    list_name: approved_hash_algorithms
+    list_source: 21_post_quantum_crypto/algorithms.yaml
+    list_index: 3
+    audit_requirement: Cryptographic Standards, Post-Quantum
+  data:
+    algorithm_id: sphincs_plus
+    name: SPHINCS+
+    bits: 256
+    quantum_safe: true
+    status: future
+- rule_id: RETENTION_001
+  source: master_rules_lifted.yaml
+  category: GDPR Retention
+  severity: CRITICAL
+  enforcement: MUST
+  description: 'System MUSS Retention Period für ''transaction_hashes'' auf 3650 Tage
+    setzen. Grund: Legal requirement (10 years)'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für RETENTION_001'
+  - 'Unit Test: test_retention_001()'
+  - 'Audit Trail: Log all RETENTION_001-related events'
+  sot_artefacts:
+    python: validate_retention_001() in sot_validator_core.py
+    rego: RETENTION_001 deny rule in sot_policy.rego
+    cli: --rules RETENTION_001 flag supported
+    test: test_retention_001() in test_sot_validator.py
+  metadata:
+    list_name: data_retention_periods
+    list_source: 23_compliance/gdpr/retention.yaml
+    list_index: 0
+    audit_requirement: GDPR Art. 5(1)(e)
+  data:
+    data_type: transaction_hashes
+    retention_days: 3650
+    reason: Legal requirement (10 years)
+- rule_id: RETENTION_002
+  source: master_rules_lifted.yaml
+  category: GDPR Retention
+  severity: CRITICAL
+  enforcement: MUST
+  description: 'System MUSS Retention Period für ''audit_logs'' auf 3650 Tage setzen.
+    Grund: Compliance (10 years)'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für RETENTION_002'
+  - 'Unit Test: test_retention_002()'
+  - 'Audit Trail: Log all RETENTION_002-related events'
+  sot_artefacts:
+    python: validate_retention_002() in sot_validator_core.py
+    rego: RETENTION_002 deny rule in sot_policy.rego
+    cli: --rules RETENTION_002 flag supported
+    test: test_retention_002() in test_sot_validator.py
+  metadata:
+    list_name: data_retention_periods
+    list_source: 23_compliance/gdpr/retention.yaml
+    list_index: 1
+    audit_requirement: GDPR Art. 5(1)(e)
+  data:
+    data_type: audit_logs
+    retention_days: 3650
+    reason: Compliance (10 years)
+- rule_id: RETENTION_003
+  source: master_rules_lifted.yaml
+  category: GDPR Retention
+  severity: HIGH
+  enforcement: MUST
+  description: 'System MUSS Retention Period für ''session_tokens'' auf 1 Tage setzen.
+    Grund: Security best practice'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für RETENTION_003'
+  - 'Unit Test: test_retention_003()'
+  - 'Audit Trail: Log all RETENTION_003-related events'
+  sot_artefacts:
+    python: validate_retention_003() in sot_validator_core.py
+    rego: RETENTION_003 deny rule in sot_policy.rego
+    cli: --rules RETENTION_003 flag supported
+    test: test_retention_003() in test_sot_validator.py
+  metadata:
+    list_name: data_retention_periods
+    list_source: 23_compliance/gdpr/retention.yaml
+    list_index: 2
+    audit_requirement: GDPR Art. 5(1)(e)
+  data:
+    data_type: session_tokens
+    retention_days: 1
+    reason: Security best practice
+- rule_id: RETENTION_004
+  source: master_rules_lifted.yaml
+  category: GDPR Retention
+  severity: MEDIUM
+  enforcement: MUST
+  description: 'System MUSS Retention Period für ''email_verification'' auf 30 Tage
+    setzen. Grund: User onboarding'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für RETENTION_004'
+  - 'Unit Test: test_retention_004()'
+  - 'Audit Trail: Log all RETENTION_004-related events'
+  sot_artefacts:
+    python: validate_retention_004() in sot_validator_core.py
+    rego: RETENTION_004 deny rule in sot_policy.rego
+    cli: --rules RETENTION_004 flag supported
+    test: test_retention_004() in test_sot_validator.py
+  metadata:
+    list_name: data_retention_periods
+    list_source: 23_compliance/gdpr/retention.yaml
+    list_index: 3
+    audit_requirement: GDPR Art. 5(1)(e)
+  data:
+    data_type: email_verification
+    retention_days: 30
+    reason: User onboarding
+- rule_id: RETENTION_005
+  source: master_rules_lifted.yaml
+  category: GDPR Retention
+  severity: LOW
+  enforcement: MUST
+  description: 'System MUSS Retention Period für ''analytics_aggregated'' auf 730
+    Tage setzen. Grund: Business intelligence (2 years)'
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für RETENTION_005'
+  - 'Unit Test: test_retention_005()'
+  - 'Audit Trail: Log all RETENTION_005-related events'
+  sot_artefacts:
+    python: validate_retention_005() in sot_validator_core.py
+    rego: RETENTION_005 deny rule in sot_policy.rego
+    cli: --rules RETENTION_005 flag supported
+    test: test_retention_005() in test_sot_validator.py
+  metadata:
+    list_name: data_retention_periods
+    list_source: 23_compliance/gdpr/retention.yaml
+    list_index: 4
+    audit_requirement: GDPR Art. 5(1)(e)
+  data:
+    data_type: analytics_aggregated
+    retention_days: 730
+    reason: Business intelligence (2 years)
+- rule_id: DID_METHOD_001
+  source: master_rules_lifted.yaml
+  category: Identity Standards
+  severity: CRITICAL
+  enforcement: MUST
+  description: System MUSS DID-Methode did:ethr (Ethereum DID Method) gemäß Spec https://github.com/decentralized-identity/ethr-did-resolver
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für DID_METHOD_001'
+  - 'Unit Test: test_did_method_001()'
+  - 'Audit Trail: Log all DID_METHOD_001-related events'
+  sot_artefacts:
+    python: validate_did_method_001() in sot_validator_core.py
+    rego: DID_METHOD_001 deny rule in sot_policy.rego
+    cli: --rules DID_METHOD_001 flag supported
+    test: test_did_method_001() in test_sot_validator.py
+  metadata:
+    list_name: supported_did_methods
+    list_source: 09_meta_identity/did_methods.yaml
+    list_index: 0
+    audit_requirement: W3C DID Core 1.0
+  data:
+    method_name: did:ethr
+    name: Ethereum DID Method
+    spec: https://github.com/decentralized-identity/ethr-did-resolver
+- rule_id: DID_METHOD_002
+  source: master_rules_lifted.yaml
+  category: Identity Standards
+  severity: HIGH
+  enforcement: MUST
+  description: System MUSS DID-Methode did:key (Key-based DID Method) gemäß Spec https://w3c-ccg.github.io/did-method-key/
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für DID_METHOD_002'
+  - 'Unit Test: test_did_method_002()'
+  - 'Audit Trail: Log all DID_METHOD_002-related events'
+  sot_artefacts:
+    python: validate_did_method_002() in sot_validator_core.py
+    rego: DID_METHOD_002 deny rule in sot_policy.rego
+    cli: --rules DID_METHOD_002 flag supported
+    test: test_did_method_002() in test_sot_validator.py
+  metadata:
+    list_name: supported_did_methods
+    list_source: 09_meta_identity/did_methods.yaml
+    list_index: 1
+    audit_requirement: W3C DID Core 1.0
+  data:
+    method_name: did:key
+    name: Key-based DID Method
+    spec: https://w3c-ccg.github.io/did-method-key/
+- rule_id: DID_METHOD_003
+  source: master_rules_lifted.yaml
+  category: Identity Standards
+  severity: MEDIUM
+  enforcement: MUST
+  description: System MUSS DID-Methode did:web (Web DID Method) gemäß Spec https://w3c-ccg.github.io/did-method-web/
+    unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für DID_METHOD_003'
+  - 'Unit Test: test_did_method_003()'
+  - 'Audit Trail: Log all DID_METHOD_003-related events'
+  sot_artefacts:
+    python: validate_did_method_003() in sot_validator_core.py
+    rego: DID_METHOD_003 deny rule in sot_policy.rego
+    cli: --rules DID_METHOD_003 flag supported
+    test: test_did_method_003() in test_sot_validator.py
+  metadata:
+    list_name: supported_did_methods
+    list_source: 09_meta_identity/did_methods.yaml
+    list_index: 2
+    audit_requirement: W3C DID Core 1.0
+  data:
+    method_name: did:web
+    name: Web DID Method
+    spec: https://w3c-ccg.github.io/did-method-web/
+- rule_id: DID_METHOD_004
+  source: master_rules_lifted.yaml
+  category: Identity Standards
+  severity: MEDIUM
+  enforcement: MUST
+  description: System MUSS DID-Methode did:ion (ION DID Method (Sidetree)) gemäß Spec
+    https://identity.foundation/ion/ unterstützen
+  implementation_requirements:
+  - 'OPA Policy: deny/allow für DID_METHOD_004'
+  - 'Unit Test: test_did_method_004()'
+  - 'Audit Trail: Log all DID_METHOD_004-related events'
+  sot_artefacts:
+    python: validate_did_method_004() in sot_validator_core.py
+    rego: DID_METHOD_004 deny rule in sot_policy.rego
+    cli: --rules DID_METHOD_004 flag supported
+    test: test_did_method_004() in test_sot_validator.py
+  metadata:
+    list_name: supported_did_methods
+    list_source: 09_meta_identity/did_methods.yaml
+    list_index: 3
+    audit_requirement: W3C DID Core 1.0
+  data:
+    method_name: did:ion
+    name: ION DID Method (Sidetree)
+    spec: https://identity.foundation/ion/
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'business_model'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'business_model.data_custody'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'business_model.kyc_responsibility'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'business_model.not_role'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'business_model.role'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'business_model.user_interactions'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: METADATA
+  severity: INFO
+  enforcement: MUST
+  description: Semantic rule for 'classification'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'compliance_utilities'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'compliance_utilities.audit_payments'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'compliance_utilities.legal_attestations'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'compliance_utilities.regulatory_reporting'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: METADATA
+  severity: INFO
+  enforcement: MUST
+  description: Semantic rule for 'date'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: METADATA
+  severity: INFO
+  enforcement: MUST
+  description: Semantic rule for 'deprecated'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.allocation'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.allocation.dev_fee'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.allocation.system_treasury'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.base'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.daily_cap_percent_of_circ'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.monthly_cap_percent_of_circ'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.oracle_source'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.policy'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.burn_from_system_fee.snapshot_time_utc'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.note'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.scope'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.system_fees.total_fee'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.validator_rewards'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.validator_rewards.no_per_transaction_split'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.validator_rewards.note'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_routing.validator_rewards.source'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_structure'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_structure.allocation'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_structure.burn_from_system_fee'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_structure.fee_collection'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_structure.no_manual_intervention'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_structure.scope'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'fee_structure.total_fee'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_controls'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_controls.authority'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_controls.note'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_controls.reference'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_fees'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_fees.proposal_deposits'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_fees.voting_gas'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_framework'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_framework.dao_ready'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_framework.emergency_procedures'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_framework.proposal_system'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_framework.reference'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_framework.upgrade_authority'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_framework.voting_mechanism'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.delegation_system'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.delegation_system.delegation_changes'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.delegation_system.delegation_enabled'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.delegation_system.self_delegation_default'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.delegation_system.vote_weight_calculation'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.governance_rewards'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.governance_rewards.delegate_rewards'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.governance_rewards.minimum_participation'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.governance_rewards.proposal_creator_rewards'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.governance_rewards.voter_participation_rewards'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.proposal_framework'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_deposit'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_threshold'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Emergency
+    proposals (expedited process)'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Parameter
+    changes (requires simple majority)'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Protocol
+    upgrades (requires supermajority)'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.proposal_framework.proposal_types::Treasury
+    allocation (requires quorum + majority)'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.timelock_framework'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.timelock_framework.emergency_proposals'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.timelock_framework.parameter_changes'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.timelock_framework.protocol_upgrades'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.timelock_framework.standard_proposals'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.timelock_framework.treasury_allocations'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_periods'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_periods.emergency_voting'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_periods.parameter_voting'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_periods.protocol_upgrade_voting'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_periods.standard_voting'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_requirements'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_requirements.emergency_supermajority'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_requirements.quorum_emergency'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_requirements.quorum_protocol_upgrade'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_requirements.quorum_standard'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_requirements.simple_majority'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'governance_parameters.voting_requirements.supermajority'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: Semantic rule for 'grundprinzipien.ausnahmen.allowed_root_files'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: Semantic rule for 'grundprinzipien.critical.structure_exceptions_yaml'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: Semantic rule for 'grundprinzipien.root_level_ausnahmen'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: STRUCTURE
+  severity: CRITICAL
+  enforcement: MUST
+  description: Semantic rule for 'grundprinzipien.verbindliche_root_module'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::CU'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::IR'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::KP'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.blacklist_jurisdictions::SY'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.compliance_basis'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.excluded_entities'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.excluded_entities::Belarus_designated_entities'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.excluded_entities::RU_designated_entities'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.excluded_entities::Venezuela_government_entities'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.excluded_markets'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.excluded_markets::India'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.excluded_markets::Myanmar'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.excluded_markets::Pakistan'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.reference'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'jurisdictional_compliance.regulatory_exemptions'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor.admin_controls'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor.e_money_token'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor.investment_contract'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor.passive_income'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor.redemption_rights'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor.security_token'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor.stablecoin'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor.upgrade_mechanism'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'legal_safe_harbor.yield_bearing'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.description'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.distribution_method'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools::community'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools::development'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.ecosystem_rewards.reward_pools::validation'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.governance_participation'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.governance_participation.description'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.governance_participation.proposal_threshold'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GOVERNANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.governance_participation.voting_weight'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.identity_verification'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.identity_verification.burn_clarification'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.identity_verification.burn_source_note'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.identity_verification.description'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.identity_verification.fee_burn_mechanism'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.identity_verification.smart_contract'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.staking_utility'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.staking_utility.description'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.staking_utility.slashing_conditions'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'primary_utilities.staking_utility.staking_rewards'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'risk_mitigation'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'risk_mitigation.clear_utility_purpose'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'risk_mitigation.no_fiat_pegging'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'risk_mitigation.no_marketing_investment'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'risk_mitigation.no_redemption_mechanism'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'risk_mitigation.no_yield_promises'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'risk_mitigation.open_source_license'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'secondary_utilities'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'secondary_utilities.api_access'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'secondary_utilities.data_portability'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'secondary_utilities.marketplace_access'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'secondary_utilities.premium_features'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'staking_mechanics'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'staking_mechanics.discount_applies_to'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'staking_mechanics.maximum_discount'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'staking_mechanics.minimum_stake'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'staking_mechanics.slashing_penalty'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'staking_mechanics.system_fee_invariance'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'staking_mechanics.unstaking_period'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.circulation_controls'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.circulation_controls.max_annual_inflation'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.circulation_controls.partnership_unlock'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.circulation_controls.reserve_governance'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.circulation_controls.team_vesting_schedule'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.deflationary_mechanisms'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.deflationary_mechanisms.governance_burning'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.deflationary_mechanisms.staking_slashing'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.initial_distribution'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.initial_distribution.community_rewards'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.initial_distribution.ecosystem_development'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.initial_distribution.partnerships'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.initial_distribution.reserve_fund'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.initial_distribution.team_development'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'supply_mechanics.total_supply'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'technical_specification'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'technical_specification.blockchain'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'technical_specification.custody_model'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'technical_specification.smart_contract_automation'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'technical_specification.standard'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: ECONOMICS
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'technical_specification.supply_model'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'token_definition'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'token_definition.explicit_exclusions'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: COMPLIANCE
+  severity: HIGH
+  enforcement: MUST
+  description: Semantic rule for 'token_definition.legal_position'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: GENERAL
+  severity: MEDIUM
+  enforcement: MUST
+  description: Semantic rule for 'token_definition.purpose'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py
+- rule_id: UNKNOWN
+  source: sot_contract_v2.yaml
+  category: METADATA
+  severity: INFO
+  enforcement: MUST
+  description: Semantic rule for 'version'.
+  sot_artefacts:
+    python: validate_sot_v2(UNKNOWN) in sot_validator_core.py
+    rego: UNKNOWN deny rule in sot_policy.rego
+    cli: --rules UNKNOWN flag supported
+    test: test_sot_v2_UNKNOWN() in test_sot_validator.py

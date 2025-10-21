@@ -18,7 +18,6 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 
-
 class ComplianceAnomalyDetector:
     """
     AI-driven anomaly detection for compliance violations.
@@ -413,7 +412,6 @@ Recommendation: {prediction.get('recommendation', '')}
 
         return "\n".join(lines)
 
-
 def main():
     """Main entry point for predictive compliance AI."""
     print("\n🤖 SSID Predictive Compliance AI\n")
@@ -433,7 +431,6 @@ def main():
         json.dump(prediction, f, indent=2, ensure_ascii=False)
 
     print(f"\n📊 Prediction data saved to: {output_path}\n")
-
 
 if __name__ == "__main__":
     main()

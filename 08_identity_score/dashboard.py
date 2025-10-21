@@ -42,7 +42,6 @@ from datetime import datetime, timezone, timedelta
 from dataclasses import dataclass, asdict
 from collections import defaultdict
 
-
 try:
     import matplotlib
     matplotlib.use('Agg')  # Non-interactive backend
@@ -52,7 +51,6 @@ try:
 except ImportError:
     MATPLOTLIB_AVAILABLE = False
     print("Warning: matplotlib not available. Charts will not be generated.")
-
 
 @dataclass
 class ScoreTrend:
@@ -72,7 +70,6 @@ class ScoreTrend:
 
     def to_dict(self) -> Dict:
         return asdict(self)
-
 
 class ScoreTrendDashboard:
     """
@@ -590,7 +587,6 @@ class ScoreTrendDashboard:
 
         return output_html
 
-
 def main():
     """CLI entry point"""
     repo_root = Path(__file__).resolve().parents[1]
@@ -606,7 +602,6 @@ def main():
         print(f"   Open in browser: {output_path}")
     else:
         print("\n⚠️  No data available for dashboard generation")
-
 
 if __name__ == "__main__":
     main()

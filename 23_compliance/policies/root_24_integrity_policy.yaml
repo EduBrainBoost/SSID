@@ -1,0 +1,283 @@
+version: "1.0.0"
+policy_name: "Root-24-LOCK Integrity Policy"
+description: "Structural integrity enforcement for SSID project - 24 authorized root modules only"
+effective_date: "2025-10-12"
+enforcement_level: "strict"
+
+# Reference
+source_of_truth: "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md"
+compliance_framework: "SSID Root-24-LOCK"
+cost: 0  # Local enforcement, zero cost
+
+# Authorized Root Modules (24)
+# These are the ONLY permitted top-level directories in the SSID project
+authorized_root_modules:
+  - "01_ai_layer"
+  - "02_audit_logging"
+  - "03_core"
+  - "04_deployment"
+  - "05_documentation"
+  - "06_data_pipeline"
+  - "07_governance_legal"
+  - "08_identity_score"
+  - "09_meta_identity"
+  - "10_interoperability"
+  - "11_test_simulation"
+  - "12_tooling"
+  - "13_ui_layer"
+  - "14_zero_time_auth"
+  - "15_infra"
+  - "16_codex"
+  - "17_observability"
+  - "18_data_layer"
+  - "19_adapters"
+  - "20_foundation"
+  - "21_post_quantum_crypto"
+  - "22_datasets"
+  - "23_compliance"
+  - "24_meta_orchestration"
+
+# Module Purposes (for reference)
+module_purposes:
+  "01_ai_layer": "AI/ML integration and model management"
+  "02_audit_logging": "Security audit trails and compliance logging"
+  "03_core": "Core protocol and cryptographic primitives"
+  "04_deployment": "Deployment scripts, CI/CD, infrastructure-as-code"
+  "05_documentation": "All project documentation, specs, reports"
+  "06_data_pipeline": "Data processing and ETL pipelines"
+  "07_governance_legal": "Governance frameworks, legal documents, DAO structures"
+  "08_identity_score": "Identity scoring algorithms and reputation systems"
+  "09_meta_identity": "Meta-identity orchestration and cross-chain identity"
+  "10_interoperability": "Cross-chain bridges and interoperability adapters"
+  "11_test_simulation": "Test suites, simulations, test vectors"
+  "12_tooling": "Developer tools, scripts, utilities"
+  "13_ui_layer": "User interfaces and frontend components"
+  "14_zero_time_auth": "Zero-knowledge authentication and privacy protocols"
+  "15_infra": "Infrastructure configuration and orchestration"
+  "16_codex": "Project codex, registries, schemas"
+  "17_observability": "Monitoring, metrics, telemetry"
+  "18_data_layer": "Data models, storage, persistence"
+  "19_adapters": "Protocol adapters and integrations"
+  "20_foundation": "Foundational components and base libraries"
+  "21_post_quantum_crypto": "Post-quantum cryptography implementations"
+  "22_datasets": "Reference datasets, test data, benchmarks"
+  "23_compliance": "Compliance policies, OPA rules, audit frameworks"
+  "24_meta_orchestration": "Meta-level orchestration and coordination"
+
+# Authorized Exceptions (Infrastructure/Config Files)
+# These files are permitted at project root for technical/infrastructure reasons
+authorized_exceptions:
+  files:
+    - name: "README.md"
+      purpose: "Project overview and documentation entry point"
+      required: true
+
+    - name: "LICENSE"
+      purpose: "Project license file"
+      required: true
+
+    - name: ".gitignore"
+      purpose: "Git ignore patterns"
+      required: false
+
+    - name: ".gitattributes"
+      purpose: "Git attributes configuration"
+      required: false
+
+    - name: ".pre-commit-config.yaml"
+      purpose: "Pre-commit hooks configuration"
+      required: false
+
+    - name: "pytest.ini"
+      purpose: "Pytest configuration"
+      required: false
+
+  directories:
+    - name: ".git"
+      purpose: "Git repository metadata"
+      required: true
+
+    - name: ".github"
+      purpose: "GitHub-specific configuration (workflows, issue templates)"
+      required: false
+      note: "Should contain only CI/CD workflows and GitHub metadata"
+
+# Prohibited Root Items
+# These patterns are NEVER allowed at project root
+prohibited_patterns:
+  # Temporary/cache directories
+  - pattern: "*.cache"
+    reason: "Cache directories should not be in version control"
+
+  - pattern: "__pycache__"
+    reason: "Python cache should not be in version control"
+
+  - pattern: ".pytest_cache"
+    reason: "Test cache should not be in version control"
+
+  - pattern: "node_modules"
+    reason: "Dependencies should not be in version control"
+
+  - pattern: "venv"
+    reason: "Virtual environments should not be in version control"
+
+  - pattern: ".venv"
+    reason: "Virtual environments should not be in version control"
+
+  # Build artifacts
+  - pattern: "dist"
+    reason: "Build artifacts should not be in version control"
+
+  - pattern: "build"
+    reason: "Build artifacts should not be in version control"
+
+  - pattern: "*.egg-info"
+    reason: "Python package metadata should not be in version control"
+
+  # IDE/Editor directories
+  - pattern: ".vscode"
+    reason: "IDE configurations are user-specific"
+
+  - pattern: ".idea"
+    reason: "IDE configurations are user-specific"
+
+  - pattern: ".eclipse"
+    reason: "IDE configurations are user-specific"
+
+  # OS-specific
+  - pattern: ".DS_Store"
+    reason: "OS metadata should not be in version control"
+
+  - pattern: "Thumbs.db"
+    reason: "OS metadata should not be in version control"
+
+# Migration Rules
+# Files that commonly violate Root-24 and where they should go
+migration_rules:
+  deployment_docs:
+    pattern: "DEPLOYMENT_*.md"
+    target_directory: "05_documentation/deployment/"
+    reason: "Deployment documentation belongs in documentation module"
+
+  transition_docs:
+    pattern: "TRANSITION_*.md"
+    target_directory: "05_documentation/transitions/"
+    reason: "Version transition docs belong in documentation module"
+
+  architecture_diagrams:
+    pattern: "*.drawio"
+    target_directory: "05_documentation/diagrams/"
+    reason: "Architecture diagrams belong in documentation module"
+
+  scripts:
+    pattern: "*.sh"
+    target_directory: "12_tooling/scripts/"
+    reason: "Scripts belong in tooling module"
+
+  notebooks:
+    pattern: "*.ipynb"
+    target_directory: "11_test_simulation/notebooks/"
+    reason: "Jupyter notebooks belong in test/simulation module"
+
+# Enforcement Configuration
+enforcement:
+  # Audit scanner
+  audit_scanner:
+    enabled: true
+    script: "12_tooling/root_structure_audit.py"
+    frequency: "on_commit"
+    report_path: "02_audit_logging/reports/root_structure_audit_report.md"
+
+  # OPA Policy
+  opa_policy:
+    enabled: true
+    policy_file: "23_compliance/policies/activation_guard.rego"
+    enforcement_mode: "deny"  # Deny violations by default
+
+  # CI/CD Guard
+  ci_guard:
+    enabled: true
+    workflow_file: ".github/workflows/ci_structure_guard.yml"
+    fail_on_critical: true
+    fail_on_warning: false  # Warnings don't fail CI, but are reported
+
+# Violation Severity Levels
+severity_levels:
+  critical:
+    description: "Unauthorized root directory or file that violates Root-24-LOCK"
+    action: "BLOCK"
+    examples:
+      - "New root-level directory outside Root-24"
+      - "Executable files at root level"
+
+  warning:
+    description: "Root-level file that should be migrated but doesn't break structure"
+    action: "WARN"
+    examples:
+      - "DEPLOYMENT_*.md files"
+      - "TRANSITION_*.md files"
+
+  info:
+    description: "Authorized exception (infrastructure file)"
+    action: "LOG"
+    examples:
+      - "README.md"
+      - "LICENSE"
+      - ".gitignore"
+
+# Metrics and Scoring
+metrics:
+  # Target compliance score
+  target_score: 100
+
+  # Scoring formula
+  scoring:
+    architecture_weight: 0.30  # 30%
+    security_weight: 0.25      # 25%
+    policy_weight: 0.25        # 25%
+    ci_cd_weight: 0.20         # 20%
+
+  # Deductions
+  deductions:
+    critical_violation: -20  # Each critical violation
+    warning_violation: -5    # Each warning violation
+    missing_root_module: -10  # Each missing required module
+
+# Compliance Thresholds
+compliance_thresholds:
+  pass: 100       # Perfect compliance
+  acceptable: 90  # Some warnings acceptable
+  warning: 70     # Needs attention
+  fail: 50        # Critical violations present
+
+# Remediation
+remediation:
+  critical_violations:
+    timeline: "immediate"
+    actions:
+      - "Remove unauthorized root directories"
+      - "Delete cache/build artifacts"
+      - "Migrate files to proper locations"
+
+  warning_violations:
+    timeline: "within_sprint"
+    actions:
+      - "Migrate deployment docs to 05_documentation/deployment/"
+      - "Migrate transition docs to 05_documentation/transitions/"
+      - "Update references after migration"
+
+  prevention:
+    - "Enable pre-commit hooks"
+    - "Activate CI structure guard"
+    - "Regular automated audits"
+    - "Developer training on Root-24-LOCK"
+
+# Metadata
+metadata:
+  version: "1.0.0"
+  created: "2025-10-12"
+  author: "SSID Core Team"
+  license: "Proprietary"
+  compliance_framework: "SSID Root-24-LOCK"
+  cost: "$0 (local enforcement)"
+  next_review: "2026-01-12"

@@ -29,36 +29,29 @@ try:
 except ImportError:
     raise ImportError("Install dependencies: pip install PyJWT cryptography")
 
-
 class ProofVerifierError(Exception):
     """Base exception for proof verification errors"""
     pass
-
 
 class InvalidSignatureError(ProofVerifierError):
     """JWT signature validation failed"""
     pass
 
-
 class InvalidIssuerError(ProofVerifierError):
     """Issuer claim mismatch"""
     pass
-
 
 class InvalidAudienceError(ProofVerifierError):
     """Audience claim mismatch"""
     pass
 
-
 class ExpiredTokenError(ProofVerifierError):
     """Token expired"""
     pass
 
-
 class PIIDetectedError(ProofVerifierError):
     """PII detected in claims (not allowed)"""
     pass
-
 
 # PII field blacklist (enforce no-PII policy)
 PII_FORBIDDEN_FIELDS: Set[str] = {
@@ -72,7 +65,6 @@ PII_FORBIDDEN_FIELDS: Set[str] = {
     "drivers_license", "id_number", "document_number",
     "picture", "photo",
 }
-
 
 class ProofVerifier:
     """
@@ -289,7 +281,6 @@ class ProofVerifier:
     def _mark_jti_seen(self, jti: str) -> None:
         """Mark jti as seen (replay protection)"""
         self._jti_cache[jti] = time.time()
-
 
 def create_proof_record(
     proof_id: str,

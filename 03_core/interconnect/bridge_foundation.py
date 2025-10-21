@@ -31,7 +31,6 @@ except ImportError:
         else:
             raise ImportError("Could not load SSIDTokenModel")
 
-
 def get_token_info() -> Dict[str, str]:
     """
     Retrieve current SSID Token model metadata.
@@ -46,7 +45,6 @@ def get_token_info() -> Dict[str, str]:
         "governance": SSIDTokenModel.governance_contract,
         "treasury": SSIDTokenModel.treasury_address,
     }
-
 
 def validate_token_operation(operation: str, amount: int) -> bool:
     """
@@ -70,7 +68,6 @@ def validate_token_operation(operation: str, amount: int) -> bool:
         return False
 
     return True
-
 
 if __name__ == "__main__":
     # Self-test

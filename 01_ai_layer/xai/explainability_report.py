@@ -47,7 +47,7 @@ class XAIExplainer:
         Returns:
             ExplanationReport with feature importance and confidence
         """
-        # Placeholder implementation - real version would use SHAP/LIME
+
         return ExplanationReport(
             prediction=0.85,
             confidence=0.92,

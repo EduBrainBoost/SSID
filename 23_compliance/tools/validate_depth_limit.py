@@ -23,7 +23,6 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Any
 from datetime import datetime
 
-
 class DepthLimitValidator:
     """Validates directory structure against maximum depth policy."""
 
@@ -279,7 +278,6 @@ class DepthLimitValidator:
         print(f"[OK] Evidence saved: {evidence_file}", file=sys.stderr)
         return evidence_file
 
-
 def main():
     """Main entry point."""
     import argparse
@@ -338,7 +336,6 @@ def main():
         import traceback
         traceback.print_exc(file=sys.stderr)
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()

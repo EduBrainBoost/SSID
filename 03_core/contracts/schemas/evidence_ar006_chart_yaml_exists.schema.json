@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ssid.local/schemas/evidence_ar006_chart_yaml_exists.json",
+  "title": "AR006 Evidence - chart.yaml Exists",
+  "description": "Evidence structure for AR006: Jeder Shard MUSS eine chart.yaml (SoT) enthalten",
+  "type": "object",
+  "required": [
+    "missing_count"
+  ],
+  "properties": {
+    "missing_count": {
+      "type": "integer",
+      "description": "Number of shards missing chart.yaml",
+      "minimum": 0,
+      "maximum": 384,
+      "examples": [0, 5]
+    },
+    "total_shards_scanned": {
+      "type": "integer",
+      "description": "Total number of shards scanned",
+      "minimum": 0,
+      "maximum": 384
+    },
+    "missing_charts": {
+      "type": "array",
+      "description": "List of shard paths missing chart.yaml (limited to first 20)",
+      "items": {
+        "type": "string",
+        "pattern": ".*\\/shards\\/.*"
+      },
+      "maxItems": 20
+    },
+    "coverage_percent": {
+      "type": "number",
+      "description": "Percentage of shards with chart.yaml",
+      "minimum": 0,
+      "maximum": 100
+    }
+  },
+  "examples": [
+    {
+      "missing_count": 0,
+      "total_shards_scanned": 384,
+      "coverage_percent": 100.0
+    },
+    {
+      "missing_count": 5,
+      "total_shards_scanned": 384,
+      "missing_charts": [
+        "01_ai_layer/shards/Shard_15_X/chart.yaml missing",
+        "03_core/shards/Shard_10_Y/chart.yaml missing"
+      ],
+      "coverage_percent": 98.7
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "597ccd75-21e8-4ad4-88f1-a4fd72152cbe",
+  "kind": "cert",
+  "scale": {
+    "max": 100,
+    "min": 0
+  },
+  "value": 100,
+  "status": "actual",
+  "source": {
+    "file": "24_meta_orchestration/promotion_rules.yaml",
+    "hash": "92da5c410b00f16e41834a2024837cd6b4e977a41748fb16def2e87514fcb47612904a22ff09791f994beeb17f43c03f25c7c8d173ba2d93aa93d605502b5652",
+    "line": 162,
+    "context": "        - \"Check violation status\"\n      completion_criteria:\n        - \"Compliance reviewer approval\"\n        - \"Compliance score: 100/100\"\n        - \"Zero violations detected\"\n\n    - step: 5"
+  },
+  "ci": {
+    "commit": "a6e6d2a7711cb9b3261c0c624ba2556444e4dc16",
+    "run_id": "1737b0ee-cb2f-4537-ada6-24b89570b233",
+    "timestamp": "2025-10-16T19:32:41.804139Z"
+  },
+  "worm": {
+    "uuid": "b0d5fceb-1b7a-45a6-b7ca-91d68dff87db",
+    "signature": "be92699ea23fe4043a722a1db60eeb74bfbbf3223e65e9168c7f4ab75e22457524d3190973b4e667de9cb2f92083405814c7c2ddd80c312b04da417ffd33da27",
+    "chain_prev": "9a7b7a94-1661-430e-85eb-3e0767a8f324"
+  },
+  "metadata": {
+    "grade": "PLATINUM",
+    "component": "Meta Orchestration"
+  }
+}

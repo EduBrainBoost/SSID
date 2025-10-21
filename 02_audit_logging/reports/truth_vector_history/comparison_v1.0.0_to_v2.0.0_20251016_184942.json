@@ -1,0 +1,59 @@
+{
+  "comparison_metadata": {
+    "tool": "truth_vector_compare.py",
+    "version": "1.0.0",
+    "timestamp": "2025-10-16T18:49:42.794248+00:00",
+    "baseline_version": "v1.0.0",
+    "new_version": "v2.0.0"
+  },
+  "baseline": {
+    "version": "v1.0.0",
+    "magnitude": 0.7064024764470159,
+    "vector": {
+      "x": 0.95,
+      "y": 0.3,
+      "z": 0.710291,
+      "magnitude": 0.706402
+    },
+    "timestamp": "2025-10-16T18:38:39.133019+00:00"
+  },
+  "new": {
+    "version": "v2.0.0",
+    "magnitude": 0.8991477446263582,
+    "vector": {
+      "x": 0.95,
+      "y": 0.98,
+      "z": 0.75
+    },
+    "timestamp": "2025-10-16T18:49:32.050021+00:00"
+  },
+  "delta": {
+    "magnitude": 0.19274526817934223,
+    "percent": 27.28547458508226,
+    "dimensions": {
+      "x": 0.0,
+      "y": 0.6799999999999999,
+      "z": 0.039708999999999994
+    }
+  },
+  "interpretation": {
+    "status": "IMPROVEMENT",
+    "category": "Significant Integrity Gain",
+    "explanation": "Δ|V| = +0.192745 (+27.29%) indicates significant improvement. The release has enhanced system integrity across multiple dimensions. This represents measurable progress in compliance and trust.",
+    "severity": "POSITIVE",
+    "delta": 0.19274526817934223,
+    "percent": 27.28547458508226
+  },
+  "recommendation": {
+    "action": "APPROVE",
+    "reason": "Release improves system integrity",
+    "severity": "POSITIVE",
+    "next_steps": [
+      "Document improvements in release notes",
+      "Update baseline for future comparisons",
+      "Continue monitoring in production"
+    ],
+    "focus_dimension": "Content",
+    "focus_delta": 0.6799999999999999
+  }
+}

@@ -1,0 +1,42 @@
+# Policy: Versioning & Breaking Changes
+version: 1.0.0
+policy_id: "versioning_02_04"
+
+versioning_scheme: "semver"
+format: "MAJOR.MINOR.PATCH"
+
+breaking_changes:
+  notice_period_days: 180
+  requirements:
+    - migration_guide: "mandatory"
+    - compatibility_layer: "mandatory"
+    - rfc_approval: "architecture_board"
+  
+  examples:
+    - "API endpoint removal"
+    - "Schema field removal"
+    - "Response format change"
+
+deprecation_process:
+  steps:
+    - announcement: "180 days before removal"
+    - warnings: "in responses + documentation"
+    - compatibility_layer: "maintained during period"
+    - removal: "after notice period"
+  
+  communication:
+    - "changelog"
+    - "email_notification"
+    - "api_headers"
+
+compatibility:
+  backward_compatibility: "preferred"
+  forward_compatibility: "when_possible"
+  version_support: "N-1 major versions"
+
+release_process:
+  rfc_required_for: ["MAJOR", "breaking_MINOR"]
+  approval_quorum: 2
+  reviewers:
+    - "architecture_board"
+    - "affected_teams"

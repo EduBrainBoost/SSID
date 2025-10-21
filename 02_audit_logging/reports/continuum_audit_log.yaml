@@ -1,0 +1,41 @@
+audit_metadata:
+  version: 10.0.0
+  transition_date: '2025-10-12T18:18:08.885778+00:00'
+  framework: Root-24-LOCK Continuum v10.0
+  audit_type: CONTINUUM_TRANSITION
+  mode: AUTOPOIETIC_VALIDATION
+  reproducible: true
+  deterministic: true
+transition_details:
+  from_version: 9.0.0
+  to_version: 10.0.0
+  transition_type: AUTOPOIETIC_CONTINUUM
+  base_certification_score: 100
+  continuum_score: 100
+  violations: 0
+final_scores:
+  structural_integrity: 20.0
+  epistemic_coherence: 25.0
+  reflexive_autonomy: 20.0
+  policy_continuity: 20.0
+  proof_stability: 15.0
+  overall: 100
+  status: CERTIFIED_PERFECT
+cryptographic_proofs:
+  base_merkle_root_sha256: a7166bcf0f9b36a055ded508f91f3bd7e16a499f92dce458ae731b697fd84309
+  base_merkle_root_sha512: 5b831181d73b1ed041a5c6a05059e3e350f42dd9d65a1020bd41ba9a7faa9840
+  pqc_algorithm: CRYSTALS-Dilithium3 + Kyber768
+  security_level: NIST Level 3
+continuum_capabilities:
+  autopoietic_validation: true
+  epistemic_proof_chain: true
+  reflexive_autonomy: true
+  policy_continuity: true
+  self_healing: true
+  mutation_detection: true
+system_state:
+  state: CONTINUUM_ACTIVE
+  immutable: false
+  deterministic: true
+  operational_ready: true
+  cost_usd: 0.0

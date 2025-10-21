@@ -1,0 +1,62 @@
+name: Minimal Surface Guard
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  surface-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build OPA (optional)
+        run: |
+          echo "Using hosted OPA if available"; exit 0
+
+      - name: Gather changes
+        id: gather
+        run: |
+          python 12_tooling/static_checks/detect_unreferenced_artifacts.py > /tmp/opa_input.json
+          cat /tmp/opa_input.json
+
+      - name: Evaluate Minimal Surface Policy
+        run: |
+          # If opa is available in runner; else do simple Python fallback
+          if command -v opa >/dev/null 2>&1; then
+            opa eval --format=json -i /tmp/opa_input.json -d 23_compliance/policies/opa/minimal_surface_guard.rego 'data.ssid.minimal_surface' > /tmp/opa_out.json
+            cat /tmp/opa_out.json
+            python - << 'PY'
+import json, sys
+d=json.load(open("/tmp/opa_out.json"))
+allow = d["result"][0]["expressions"][0]["value"]["allow"]
+denies = d["result"][0]["expressions"][0]["value"].get("deny",[])
+if not allow:
+    print("Minimal Surface Guard: DENY")
+    [print(" -", m) for m in denies]
+    sys.exit(2)
+print("Minimal Surface Guard: ALLOW")
+PY
+          else
+            echo "WARN: opa not found; enforce via path filters"
+            python - << 'PY'
+import json, sys, fnmatch
+inp=json.load(open("/tmp/opa_input.json"))
+bad=[p for p in inp["changed"] if not any(fnmatch.fnmatch(p, g) for g in inp["budget"]["allowed_paths"])]
+if bad or inp["stats"]["new_files"]>inp["budget"]["max_new_files_per_pr"]:
+    print("Minimal Surface Guard: DENY (fallback)")
+    [print(" -", b) for b in bad]
+    sys.exit(2)
+print("Minimal Surface Guard: ALLOW (fallback)")
+PY
+          fi

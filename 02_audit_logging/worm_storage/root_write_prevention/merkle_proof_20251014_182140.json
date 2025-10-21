@@ -1,0 +1,90 @@
+{
+  "version": "5.3.0",
+  "timestamp": "2025-10-14T18:20:16.289378+00:00",
+  "merkle_root": "9d113606f31fb03434dd25b2231c23da7387a04c76b0cd59c0bcc7e9592b8e82",
+  "tree_depth": 3,
+  "total_validations": 3,
+  "leaf_hashes": [
+    "f6340bc2b8f8b71e767b5dcffb5d4e0c86c29d05fcb57246f44f4e6ae237600d",
+    "af40a55c00ab27d24d53cd4ed6267dead6822bd8741c02905edade7902efd3ab",
+    "de65dd4e30f5bc36f74f656d61b071ad93105ca09c489795dfe3daf1d5bd3827"
+  ],
+  "proofs": [
+    {
+      "validation_type": "prevention_validation",
+      "leaf_hash": "f6340bc2b8f8b71e767b5dcffb5d4e0c86c29d05fcb57246f44f4e6ae237600d",
+      "proof": {
+        "leaf_index": 0,
+        "leaf_hash": "f6340bc2b8f8b71e767b5dcffb5d4e0c86c29d05fcb57246f44f4e6ae237600d",
+        "proof_path": [
+          {
+            "hash": "af40a55c00ab27d24d53cd4ed6267dead6822bd8741c02905edade7902efd3ab",
+            "position": "right"
+          },
+          {
+            "hash": "cc8e1bc64629bf47a64d0ed55e58b9a4560452053b16f5bdfa759db9d26fa624",
+            "position": "right"
+          }
+        ],
+        "root_hash": "9d113606f31fb03434dd25b2231c23da7387a04c76b0cd59c0bcc7e9592b8e82"
+      },
+      "verified": true
+    },
+    {
+      "validation_type": "scanner_analysis",
+      "leaf_hash": "af40a55c00ab27d24d53cd4ed6267dead6822bd8741c02905edade7902efd3ab",
+      "proof": {
+        "leaf_index": 1,
+        "leaf_hash": "af40a55c00ab27d24d53cd4ed6267dead6822bd8741c02905edade7902efd3ab",
+        "proof_path": [
+          {
+            "hash": "f6340bc2b8f8b71e767b5dcffb5d4e0c86c29d05fcb57246f44f4e6ae237600d",
+            "position": "left"
+          },
+          {
+            "hash": "cc8e1bc64629bf47a64d0ed55e58b9a4560452053b16f5bdfa759db9d26fa624",
+            "position": "right"
+          }
+        ],
+        "root_hash": "9d113606f31fb03434dd25b2231c23da7387a04c76b0cd59c0bcc7e9592b8e82"
+      },
+      "verified": true
+    },
+    {
+      "validation_type": "immunity_scan",
+      "leaf_hash": "de65dd4e30f5bc36f74f656d61b071ad93105ca09c489795dfe3daf1d5bd3827",
+      "proof": {
+        "leaf_index": 2,
+        "leaf_hash": "de65dd4e30f5bc36f74f656d61b071ad93105ca09c489795dfe3daf1d5bd3827",
+        "proof_path": [
+          {
+            "hash": "de65dd4e30f5bc36f74f656d61b071ad93105ca09c489795dfe3daf1d5bd3827",
+            "position": "right"
+          },
+          {
+            "hash": "6baa61bcd0f2aaf8423073d40f0c3ab7e6dfe43fd639f54950044b1888394221",
+            "position": "left"
+          }
+        ],
+        "root_hash": "9d113606f31fb03434dd25b2231c23da7387a04c76b0cd59c0bcc7e9592b8e82"
+      },
+      "verified": true
+    }
+  ],
+  "blockchain_anchored": false,
+  "blockchain_tx": null,
+  "validation_summary": {
+    "prevention_validation": {
+      "passed": true,
+      "violations": 0
+    },
+    "scanner_analysis": {
+      "passed": true,
+      "violations": 40
+    },
+    "immunity_scan": {
+      "passed": true,
+      "violations": 0
+    }
+  }
+}

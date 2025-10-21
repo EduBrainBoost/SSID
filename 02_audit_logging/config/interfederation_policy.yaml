@@ -1,0 +1,31 @@
+version: v11.0
+mode: SPEC_ONLY
+policy_framework: Meta-Continuum Interfederation
+rego_policies:
+  interfederation_guard: 23_compliance/policies/interfederation_guard.rego
+  mutual_truth_validator: 23_compliance/policies/mutual_truth_validator.rego
+schemas:
+  cross_merkle_verification: 10_interoperability/schemas/cross_merkle_verification.schema.json
+execution_gate:
+  status: BLOCKED
+  reason: SPEC_ONLY mode - awaiting partner system certification
+  unblock_conditions:
+  - Second Root-24 certified system available
+  - Distinct PQC keys verified
+  - Distinct merkle roots validated
+  - SoT definitions loaded for both systems
+thresholds:
+  semantic_resonance_min: 0.95
+  semantic_resonance_target: 0.97
+  reflexive_symmetry_min: 0.95
+  reflexive_symmetry_target: 0.97
+  epistemic_equivalence_min: 0.95
+  epistemic_equivalence_target: 0.97
+  policy_coherence_min: 0.9
+  policy_coherence_target: 0.95
+audit_requirements:
+  bidirectional_proof_logging: true
+  semantic_analysis_logging: true
+  policy_evaluation_logging: true
+  cryptographic_proof_archival: true
+created: '2025-10-12T18:45:17.880452+00:00'

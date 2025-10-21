@@ -1,0 +1,48 @@
+{
+  "timestamp_utc": "2025-10-12T20:04:36Z",
+  "version": "10.0",
+  "mode": "CONTINUUM_ACTIVE",
+  "state": "SELF_VALIDATING",
+  "total_score": 100.0,
+  "categories": {
+    "structural_continuity": {
+      "weight": 25,
+      "score": 25,
+      "status": "PERFECT"
+    },
+    "epistemic_autonomy": {
+      "weight": 25,
+      "score": 25,
+      "status": "PERFECT"
+    },
+    "continuous_validation": {
+      "weight": 25,
+      "score": 25,
+      "status": "PERFECT"
+    },
+    "policy_persistence": {
+      "weight": 15,
+      "score": 15,
+      "status": "PERFECT"
+    },
+    "proof_stability": {
+      "weight": 10,
+      "score": 10,
+      "status": "PERFECT"
+    }
+  },
+  "gates": {
+    "G1_STRUCTURE_CONTINUITY": "PASS",
+    "G2_AUTONOMY_VERIFICATION": "PASS",
+    "G3_PQC_CHAIN_STABILITY": "PASS",
+    "G4_CI_CLEAN_EXIT": "PASS",
+    "G5_EVIDENCE_COMPLETE": "PASS"
+  },
+  "compliance": {
+    "root_24_lock": "ENFORCED",
+    "safe_fix": "ENFORCED",
+    "gdpr": "COMPLIANT",
+    "mica": "COMPLIANT",
+    "eidas": "COMPLIANT"
+  }
+}

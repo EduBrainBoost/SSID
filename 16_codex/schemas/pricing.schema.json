@@ -1,0 +1,178 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ssid.org/schemas/pricing.schema.json",
+  "title": "SSID Enterprise Pricing Model Schema",
+  "description": "JSON Schema for SSID enterprise subscription pricing model with OPA policy validation",
+  "type": "object",
+  "required": ["version", "tiers", "regional_zones", "discounts"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "description": "Schema version (e.g., '5.0')"
+    },
+    "tiers": {
+      "type": "array",
+      "description": "Subscription tiers with pricing",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "price_eur", "dids_included"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "core_access",
+              "professional",
+              "enterprise_trust",
+              "global_proof_suite",
+              "interfederation_elite",
+              "sovereign_infrastructure"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "price_eur": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "description": "Fixed price in EUR"
+              },
+              {
+                "type": "string",
+                "pattern": "^custom_min_[0-9]+$",
+                "description": "Custom pricing with minimum (e.g., 'custom_min_25000')"
+              }
+            ]
+          },
+          "dids_included": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Number of DIDs included"
+              },
+              {
+                "type": "string",
+                "enum": ["unlimited"],
+                "description": "Unlimited DIDs"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "regional_zones": {
+      "type": "object",
+      "description": "Regional activation zones with surcharges",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["surcharge_percent"],
+        "properties": {
+          "language": {
+            "type": "string",
+            "pattern": "^[a-z]{2}$",
+            "description": "ISO 639-1 language code"
+          },
+          "surcharge_percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Regional surcharge percentage (0-100)"
+          }
+        }
+      },
+      "propertyNames": {
+        "enum": [
+          "DACH",
+          "EN-EU",
+          "US-CAN",
+          "LATAM",
+          "APAC-EN",
+          "MENA",
+          "AFRICA-EN"
+        ]
+      }
+    },
+    "addons": {
+      "type": "array",
+      "description": "Optional add-on services",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "price_eur"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "compliance_mesh",
+              "private_pqc_node",
+              "sla_247",
+              "dao_seat",
+              "govchain_bridge"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "price_eur": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "bundles": {
+      "type": "array",
+      "description": "Service bundles",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "price_eur"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": ["eu_bundle", "global_bundle"]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "price_eur": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "discounts": {
+      "type": "array",
+      "description": "Token-lock discounts",
+      "items": {
+        "type": "object",
+        "required": ["id", "months", "percent"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "months": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Commitment period in months"
+          },
+          "percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 20,
+            "description": "Discount percentage (0-20%, enforced by OPA)"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

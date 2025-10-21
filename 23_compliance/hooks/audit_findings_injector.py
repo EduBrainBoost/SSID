@@ -30,7 +30,6 @@ from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
 from dataclasses import dataclass
 
-
 @dataclass
 class AuditFinding:
     """
@@ -45,7 +44,6 @@ class AuditFinding:
     recommendation: str
     remediation_deadline: str
     status: str  # open, in_progress, resolved
-
 
 class AuditFindingsInjector:
     """
@@ -356,7 +354,6 @@ class AuditFindingsInjector:
 
             print(f"Governance alert created: {alert_file}")
 
-
 def main():
     """CLI entry point"""
     repo_root = Path(__file__).resolve().parents[2]
@@ -379,7 +376,6 @@ def main():
             )
     else:
         print("No findings to inject")
-
 
 if __name__ == "__main__":
     main()

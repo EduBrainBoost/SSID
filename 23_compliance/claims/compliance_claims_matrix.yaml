@@ -1,0 +1,19 @@
+# 23_compliance/claims/compliance_claims_matrix.yaml
+version: "2025-Q4"
+scope: "Declarative mapping only (non-assertive). Legal review required."
+frameworks:
+  GDPR:
+    status: "Declarative"
+    notes: "Hash-only design; no PII on-chain. Controller/Processor roles need legal review."
+  eIDAS:
+    status: "Declarative"
+    notes: "Qualified trust service assertions out-of-scope; mapping requires QTSP counsel."
+  MiCA:
+    status: "Declarative"
+    notes: "Token treated as utility/reward; classification requires legal confirmation."
+  DORA:
+    status: "Declarative"
+    notes: "Operational resilience processes to be evidenced by tests & runbooks."
+  AMLD6:
+    status: "Declarative"
+    notes: "Cross-border audit trail design present; obligations require policy and provider agreements."

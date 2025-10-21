@@ -1,0 +1,56 @@
+apiVersion: ssid/v1
+kind: RateLimitPolicy
+metadata:
+  name: ssid-enterprise-subscription
+  version: v5.2.0
+  created_at: "2025-10-13T10:00:00Z"
+spec:
+  tiers:
+    - id: FREE
+      requests_per_minute: 60
+      burst: 120
+      monthly_quota: 100000
+      price_per_1k_overage_eur: 5.00
+      eligible_apis: ["read_only"]
+      notes: "Trial / community tier. No partner discounts. No multi-tenancy."
+    - id: DEV
+      requests_per_minute: 300
+      burst: 600
+      monthly_quota: 2000000
+      price_per_1k_overage_eur: 4.00
+      eligible_apis: ["read_only","write_basic"]
+      notes: "Developer tier. No production SLA."
+    - id: PRO
+      requests_per_minute: 1200
+      burst: 2400
+      monthly_quota: 10000000
+      price_per_1k_overage_eur: 3.00
+      eligible_apis: ["read_only","write_basic","identity_ops"]
+      notes: "Business tier for SMEs. SLA 99.95% optional."
+    - id: ENTERPRISE
+      requests_per_minute: 6000
+      burst: 12000
+      monthly_quota: 75000000
+      price_per_1k_overage_eur: 2.20
+      eligible_apis: ["read_only","write_basic","identity_ops","governance","proof_nexus"]
+      notes: "Enterprise tier. SLA bundle 99.99% or higher."
+    - id: ENTERPRISE_PLUS
+      requests_per_minute: 24000
+      burst: 48000
+      monthly_quota: 300000000
+      price_per_1k_overage_eur: 1.60
+      eligible_apis: ["read_only","write_basic","identity_ops","governance","proof_nexus","interfederation"]
+      notes: "Enterprise+ with Multi-Tenancy (E6) and premium SLA up to 99.9999%."
+  rules:
+    - name: uniform-bucket
+      algorithm: token_bucket
+      window_seconds: 60
+      enforce: true
+      safe_fix: true
+  compliance:
+    root_24_lock: true
+    safe_fix: true
+    regulatory:
+      - "GDPR/DSGVO non-custodial"
+      - "eIDAS conformant (attestation by providers)"
+      - "MiCA-free (utility/governance token, non-custodial)"

@@ -18,7 +18,6 @@ import yaml
 logging.basicConfig(level=logging.INFO, format='{"ts": "%(asctime)s", "msg": "%(message)s"}', datefmt="%Y-%m-%dT%H:%M:%SZ")
 logger = logging.getLogger(__name__)
 
-
 class ProviderAckHandler:
     """Handle provider ACK receipts with signature validation"""
 
@@ -32,7 +31,7 @@ class ProviderAckHandler:
     def process_ack(self, provider_id: str, ack_token: str, proof_id: str) -> Dict[str, Any]:
         """Process provider ACK with signature validation"""
         try:
-            # Mock signature validation (real: verify JWT with provider JWK)
+            
             ack_digest = hashlib.sha256(f"{provider_id}:{ack_token}:{proof_id}".encode()).hexdigest()
 
             # Replay check

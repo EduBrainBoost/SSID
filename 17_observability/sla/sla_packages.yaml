@@ -1,0 +1,23 @@
+
+version: "1.0"
+slas:
+  - id: "sla_247"
+    name: "24/7 Enterprise SLA"
+    availability_target: "99.999%"
+    rto_minutes: 15
+    rpo_minutes: 5
+    metrics:
+      - name: "proof_node_uptime"
+        objective: ">= 99.999% monthly"
+      - name: "audit_log_latency_ms"
+        objective: "<= 500"
+    penalties:
+      - threshold: "99.9%"
+        credit_percent: 5
+      - threshold: "99.5%"
+        credit_percent: 10
+  - id: "compliance_mesh"
+    name: "Dedicated Compliance Mesh"
+    scope: "RegTech cluster + audit APIs"
+    response_time_minutes: 60
+    change_window: "24h rolling"

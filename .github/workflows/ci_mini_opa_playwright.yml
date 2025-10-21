@@ -1,0 +1,82 @@
+name: ssid-ci-mini (OPA + Playwright)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  policy_and_e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm ci || npm i
+
+      - name: Cache OPA
+        id: cache-opa
+        uses: actions/cache@v4
+        with:
+          path: ~/.opa
+          key: opa-0.64.0
+
+      - name: Download OPA
+        if: steps.cache-opa.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.opa
+          curl -L -o ~/.opa/opa https://openpolicyagent.org/downloads/v0.64.0/opa_linux_amd64_static
+          chmod +x ~/.opa/opa
+          echo "~/.opa" >> $GITHUB_PATH
+
+      - name: Add OPA to PATH
+        run: echo "~/.opa" >> $GITHUB_PATH
+
+      - name: Policy Check (pricing_enforcement.rego)
+        run: |
+          ~/.opa/opa eval             --format pretty             --data 23_compliance/policies/pricing_enforcement.rego             --input 07_governance_legal/docs/pricing/enterprise_subscription_model_v5.json             'data.ssid.pricing.allow'
+
+      - name: Policy Check (rat_enforcement.rego)
+        run: |
+          cat <<'JSON' > /tmp/rat_input.json
+          {
+            "model": $(cat 07_governance_legal/docs/pricing/enterprise_subscription_model_v5.json),
+            "request": { "tier": "global_proof_suite", "regions": ["DACH","EN-EU"], "bundles": ["global_bundle"] }
+          }
+          JSON
+          ~/.opa/opa eval             --format pretty             --data 23_compliance/policies/rat_enforcement.rego             --input /tmp/rat_input.json             'data.ssid.rat.allow'
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
+      - name: Build Static Preview (stub)
+        run: |
+          mkdir -p dist/07_governance_legal/docs/pricing
+          mkdir -p dist/13_ui_layer/i18n/regions
+          cp 07_governance_legal/docs/pricing/enterprise_subscription_model_v5.json dist/07_governance_legal/docs/pricing/enterprise_subscription_model_v5.json
+          # provide a minimal registry to unblock UI
+          echo '{"did_regions":{"did:ssid:company-123":["DACH","EN-EU"]}}' > dist/13_ui_layer/i18n/regions/region_activation_registry.json
+          # lightweight file server
+          npx http-server dist -p 8080 &
+          echo $! > /tmp/http_pid
+          sleep 2
+
+      - name: Run Playwright E2E
+        run: npx playwright test
+        env:
+          BASE_URL: http://127.0.0.1:8080
+
+      - name: Stop Preview
+        if: always()
+        run: |
+          if [ -f /tmp/http_pid ]; then kill $(cat /tmp/http_pid) || true; fi

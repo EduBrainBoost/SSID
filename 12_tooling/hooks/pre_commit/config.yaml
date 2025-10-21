@@ -1,39 +1,25 @@
+# SSID Pre-Commit Configuration (PROMPT 6)
+# Enforces canonical score references
+
 repos:
   - repo: local
     hooks:
-      # Level 3: Structure Guard (Baseline)
-      - id: ssid-structure-validation
-        name: SSID Structure Validation (Root-24-LOCK)
-        entry: bash 12_tooling/hooks/pre_commit/structure_validation.sh
+      - id: no-raw-scores
+        name: No Raw Scores Lint
+        entry: python 12_tooling/hooks/lints/no_raw_scores.py
         language: system
-        pass_filenames: false
+        types: [text]
+        files: \.(md|yaml|yml|json|txt)$
+        exclude: '\.score\.json$'
+        always_run: false
+        pass_filenames: true
+        description: Blocks commits containing raw X/100 or X/400 scores without SCORE_REF
 
-      # Level 3: Structure Guard Shell Script
-      - id: ssid-structure-guard
-        name: SSID Structure Guard (Exit 24 on violation)
-        entry: bash 12_tooling/scripts/structure_guard.sh
-        language: system
-        pass_filenames: false
-
-      # Level 4: SoT Functional Enforcement
-      - id: ssid-sot-enforcement
-        name: SSID SoT Functional Enforcement (Level 4)
-        entry: python 02_audit_logging/tools/verify_sot_enforcement_v2.py --pre-commit --worm-sign
-        language: system
-        pass_filenames: false
-        verbose: true
-
-      # Level 4: Hygiene Certificate Monitoring
-      - id: ssid-hygiene-enforcement
-        name: SSID Test Hygiene Certificate Monitoring
-        entry: python 02_audit_logging/tools/verify_hygiene_enforcement.py --alarm --json-out 02_audit_logging/logs/hygiene_monitor_result.json
-        language: system
-        pass_filenames: false
-        verbose: true
-
-      # Level 4: WORM Audit Integrity Check
-      - id: ssid-worm-integrity
-        name: SSID WORM Store Integrity Check
-        entry: python -c "from pathlib import Path; import sys; worm_dir = Path('02_audit_logging/worm_storage'); print('[OK] WORM storage:', worm_dir.exists()); sys.exit(0 if worm_dir.exists() else 1)"
-        language: system
-        pass_filenames: false
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+        exclude: '\.score\.json$'

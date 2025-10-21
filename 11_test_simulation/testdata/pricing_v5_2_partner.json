@@ -1,0 +1,300 @@
+{
+  "_comment": "SSID Pricing v5.2 Partner Program Test Fixtures",
+  "_version": "v5.2.0",
+  "_created": "2025-10-13",
+  "_purpose": "Test BRONZE/SILVER/GOLD partner tiers with discounts",
+  "test_cases": [
+    {
+      "name": "Bronze partner (5% discount, 2 tenants minimum)",
+      "description": "Bronze tier with exactly 2 tenants",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {"T4_ENTERPRISE": 10}
+        },
+        "partner_program": {
+          "tiers": {
+            "BRONZE": {"discount_percent": 5, "min_tenants": 2}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "partner_tier": "BRONZE",
+        "tenants": 2,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "calculated_discount": {
+        "base_price": 4990,
+        "discount_percent": 5,
+        "discount_amount": 249.5,
+        "final_price": 4740.5
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Bronze partner with 5 tenants",
+      "description": "Bronze tier with more than minimum tenants",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {"T4_ENTERPRISE": 10}
+        },
+        "partner_program": {
+          "tiers": {
+            "BRONZE": {"discount_percent": 5, "min_tenants": 2}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "partner_tier": "BRONZE",
+        "tenants": 5,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Silver partner (10% discount, 5 tenants minimum)",
+      "description": "Silver tier with exactly 5 tenants",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {"T4_ENTERPRISE": 10}
+        },
+        "partner_program": {
+          "tiers": {
+            "SILVER": {"discount_percent": 10, "min_tenants": 5}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "partner_tier": "SILVER",
+        "tenants": 5,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "calculated_discount": {
+        "base_price": 4990,
+        "discount_percent": 10,
+        "discount_amount": 499,
+        "final_price": 4491
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Gold partner (15% discount, 10 tenants minimum)",
+      "description": "Gold tier with exactly 10 tenants",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise_plus": {"price_eur": 14990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {"T4B_ENTERPRISE_PLUS": 100}
+        },
+        "partner_program": {
+          "tiers": {
+            "GOLD": {"discount_percent": 15, "min_tenants": 10}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4B_ENTERPRISE_PLUS",
+        "partner_tier": "GOLD",
+        "tenants": 10,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "calculated_discount": {
+        "base_price": 14990,
+        "discount_percent": 15,
+        "discount_amount": 2248.5,
+        "final_price": 12741.5
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Gold partner with 50 tenants",
+      "description": "Gold tier with well above minimum tenants",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise_plus": {"price_eur": 14990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {"T4B_ENTERPRISE_PLUS": 100}
+        },
+        "partner_program": {
+          "tiers": {
+            "GOLD": {"discount_percent": 15, "min_tenants": 10}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4B_ENTERPRISE_PLUS",
+        "partner_tier": "GOLD",
+        "tenants": 50,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "allow"
+    },
+    {
+      "name": "Bronze partner with insufficient tenants",
+      "description": "Bronze tier with only 1 tenant (requires 2)",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {"T4_ENTERPRISE": 10}
+        },
+        "partner_program": {
+          "tiers": {
+            "BRONZE": {"discount_percent": 5, "min_tenants": 2}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "partner_tier": "BRONZE",
+        "tenants": 1,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Partner tier.*requires minimum.*tenants"
+    },
+    {
+      "name": "Silver partner with insufficient tenants",
+      "description": "Silver tier with 3 tenants (requires 5)",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {"T4_ENTERPRISE": 10}
+        },
+        "partner_program": {
+          "tiers": {
+            "SILVER": {"discount_percent": 10, "min_tenants": 5}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "partner_tier": "SILVER",
+        "tenants": 3,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Partner tier.*requires minimum.*tenants"
+    },
+    {
+      "name": "Gold partner with insufficient tenants",
+      "description": "Gold tier with 7 tenants (requires 10)",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise_plus": {"price_eur": 14990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {"T4B_ENTERPRISE_PLUS": 100}
+        },
+        "partner_program": {
+          "tiers": {
+            "GOLD": {"discount_percent": 15, "min_tenants": 10}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4B_ENTERPRISE_PLUS",
+        "partner_tier": "GOLD",
+        "tenants": 7,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Partner tier.*requires minimum.*tenants"
+    },
+    {
+      "name": "Invalid partner tier (PLATINUM)",
+      "description": "Non-existent partner tier",
+      "model": {
+        "revenue_bands": {
+          "S2_prime_min_eur": 3000000,
+          "S3_prime_min_eur": 6670000
+        },
+        "tiers": {
+          "enterprise": {"price_eur": 4990}
+        },
+        "multi_tenancy": {
+          "enabled": true,
+          "max_tenants_by_tier": {"T4_ENTERPRISE": 10}
+        },
+        "partner_program": {
+          "tiers": {
+            "BRONZE": {"discount_percent": 5, "min_tenants": 2}
+          }
+        },
+        "regions": {"EU_CENTRAL": {"surcharge_percentage": 0}}
+      },
+      "context": {
+        "tier": "T4_ENTERPRISE",
+        "partner_tier": "PLATINUM",
+        "tenants": 10,
+        "region": {"id": "EU_CENTRAL"}
+      },
+      "expected_result": "deny",
+      "expected_error": "Invalid partner tier"
+    }
+  ]
+}

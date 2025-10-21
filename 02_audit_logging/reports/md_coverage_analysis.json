@@ -1,0 +1,958 @@
+{
+  "total_md_rules": 201,
+  "mapped_to_existing": 144,
+  "not_mapped": 57,
+  "coverage_percentage": 71.64,
+  "mapped_rules": [
+    {
+      "md_rule": "MD-CHART-001",
+      "maps_to": "CS001",
+      "desc": "chart.yaml metadata.shard_id"
+    },
+    {
+      "md_rule": "MD-CHART-002",
+      "maps_to": "CS001",
+      "desc": "chart.yaml metadata.version"
+    },
+    {
+      "md_rule": "MD-CHART-003",
+      "maps_to": "CS001",
+      "desc": "chart.yaml metadata.status"
+    },
+    {
+      "md_rule": "MD-CHART-004",
+      "maps_to": "CS002",
+      "desc": "chart.yaml governance.owner.team"
+    },
+    {
+      "md_rule": "MD-CHART-005",
+      "maps_to": "CS002",
+      "desc": "chart.yaml governance.owner.lead"
+    },
+    {
+      "md_rule": "MD-CHART-006",
+      "maps_to": "CS002",
+      "desc": "chart.yaml governance.owner.contact"
+    },
+    {
+      "md_rule": "MD-CHART-007",
+      "maps_to": "CS002",
+      "desc": "chart.yaml governance.reviewers"
+    },
+    {
+      "md_rule": "MD-CHART-008",
+      "maps_to": "CS002",
+      "desc": "chart.yaml governance.change_process"
+    },
+    {
+      "md_rule": "MD-CHART-009",
+      "maps_to": "CS003",
+      "desc": "chart.yaml capabilities.MUST"
+    },
+    {
+      "md_rule": "MD-CHART-010",
+      "maps_to": "CS003",
+      "desc": "chart.yaml capabilities.SHOULD"
+    },
+    {
+      "md_rule": "MD-CHART-011",
+      "maps_to": "CS003",
+      "desc": "chart.yaml capabilities.HAVE"
+    },
+    {
+      "md_rule": "MD-CHART-012",
+      "maps_to": "CS004",
+      "desc": "chart.yaml constraints.pii_storage=forbidden"
+    },
+    {
+      "md_rule": "MD-CHART-013",
+      "maps_to": "CS004",
+      "desc": "chart.yaml constraints.data_policy=hash_only"
+    },
+    {
+      "md_rule": "MD-CHART-014",
+      "maps_to": "CS004",
+      "desc": "chart.yaml constraints.custody=non_custodial"
+    },
+    {
+      "md_rule": "MD-CHART-015",
+      "maps_to": "CS005",
+      "desc": "chart.yaml enforcement.static_analysis"
+    },
+    {
+      "md_rule": "MD-CHART-016",
+      "maps_to": "CS005",
+      "desc": "chart.yaml enforcement.runtime_checks"
+    },
+    {
+      "md_rule": "MD-CHART-017",
+      "maps_to": "CS005",
+      "desc": "chart.yaml enforcement.audit"
+    },
+    {
+      "md_rule": "MD-CHART-018",
+      "maps_to": "CS006",
+      "desc": "chart.yaml interfaces.contracts (OpenAPI)"
+    },
+    {
+      "md_rule": "MD-CHART-019",
+      "maps_to": "CS006",
+      "desc": "chart.yaml interfaces.data_schemas (JSON)"
+    },
+    {
+      "md_rule": "MD-CHART-020",
+      "maps_to": "KP006",
+      "desc": "chart.yaml interfaces.authentication=mTLS"
+    },
+    {
+      "md_rule": "MD-CHART-021",
+      "maps_to": "CS007",
+      "desc": "chart.yaml dependencies.required"
+    },
+    {
+      "md_rule": "MD-CHART-022",
+      "maps_to": "CS007",
+      "desc": "chart.yaml dependencies.optional"
+    },
+    {
+      "md_rule": "MD-CHART-023",
+      "maps_to": "VG001",
+      "desc": "chart.yaml compatibility.semver"
+    },
+    {
+      "md_rule": "MD-CHART-025",
+      "maps_to": "CS008",
+      "desc": "chart.yaml implementations.default"
+    },
+    {
+      "md_rule": "MD-CHART-026",
+      "maps_to": "CS008",
+      "desc": "chart.yaml implementations.available"
+    },
+    {
+      "md_rule": "MD-CHART-027",
+      "maps_to": "CS009",
+      "desc": "chart.yaml conformance.test_framework"
+    },
+    {
+      "md_rule": "MD-CHART-028",
+      "maps_to": "CS009",
+      "desc": "chart.yaml conformance.contract_tests"
+    },
+    {
+      "md_rule": "MD-CHART-030",
+      "maps_to": "CS009",
+      "desc": "chart.yaml testing.unit"
+    },
+    {
+      "md_rule": "MD-CHART-031",
+      "maps_to": "CS009",
+      "desc": "chart.yaml testing.integration"
+    },
+    {
+      "md_rule": "MD-CHART-032",
+      "maps_to": "CS009",
+      "desc": "chart.yaml testing.contract"
+    },
+    {
+      "md_rule": "MD-CHART-033",
+      "maps_to": "CS009",
+      "desc": "chart.yaml testing.e2e"
+    },
+    {
+      "md_rule": "MD-CHART-034",
+      "maps_to": "KP010",
+      "desc": "chart.yaml documentation.auto_generate"
+    },
+    {
+      "md_rule": "MD-CHART-035",
+      "maps_to": "KP010",
+      "desc": "chart.yaml documentation.manual"
+    },
+    {
+      "md_rule": "MD-CHART-036",
+      "maps_to": "CS010",
+      "desc": "chart.yaml observability.metrics.prometheus"
+    },
+    {
+      "md_rule": "MD-CHART-037",
+      "maps_to": "CS010",
+      "desc": "chart.yaml observability.tracing.jaeger"
+    },
+    {
+      "md_rule": "MD-CHART-038",
+      "maps_to": "CS010",
+      "desc": "chart.yaml observability.logging.loki"
+    },
+    {
+      "md_rule": "MD-CHART-039",
+      "maps_to": "MS006",
+      "desc": "chart.yaml observability.logging.pii_redaction=true"
+    },
+    {
+      "md_rule": "MD-CHART-040",
+      "maps_to": "CS010",
+      "desc": "chart.yaml observability.alerting"
+    },
+    {
+      "md_rule": "MD-CHART-041",
+      "maps_to": "KP005",
+      "desc": "chart.yaml evidence.strategy=hash_ledger_with_anchoring"
+    },
+    {
+      "md_rule": "MD-CHART-042",
+      "maps_to": "TS001",
+      "desc": "chart.yaml evidence.anchoring.chains=[ethereum,polygon]"
+    },
+    {
+      "md_rule": "MD-CHART-043",
+      "maps_to": "CS011",
+      "desc": "chart.yaml security.threat_model"
+    },
+    {
+      "md_rule": "MD-CHART-044",
+      "maps_to": "CP012",
+      "desc": "chart.yaml security.secrets_management=15_infra/vault"
+    },
+    {
+      "md_rule": "MD-CHART-046",
+      "maps_to": "DC001",
+      "desc": "chart.yaml deployment.strategy=blue-green|canary"
+    },
+    {
+      "md_rule": "MD-CHART-047",
+      "maps_to": "DC002",
+      "desc": "chart.yaml deployment.environments=[dev,staging,production]"
+    },
+    {
+      "md_rule": "MD-CHART-049",
+      "maps_to": "KP009",
+      "desc": "chart.yaml resources.autoscaling"
+    },
+    {
+      "md_rule": "MD-EXT-001",
+      "maps_to": "CE001",
+      "desc": "UK ICO GDPR mandatory"
+    },
+    {
+      "md_rule": "MD-EXT-002",
+      "maps_to": "CE001",
+      "desc": "UK DPA 2018 alignment"
+    },
+    {
+      "md_rule": "MD-EXT-003",
+      "maps_to": "CE001",
+      "desc": "UK DPO contact records"
+    },
+    {
+      "md_rule": "MD-EXT-004",
+      "maps_to": "CE001",
+      "desc": "Singapore MAS PDPA mandatory"
+    },
+    {
+      "md_rule": "MD-EXT-005",
+      "maps_to": "CE001",
+      "desc": "Singapore data_breach_notification"
+    },
+    {
+      "md_rule": "MD-EXT-006",
+      "maps_to": "CE001",
+      "desc": "Singapore consent_purposes_documented"
+    },
+    {
+      "md_rule": "MD-EXT-007",
+      "maps_to": "CE001",
+      "desc": "Japan JFSA APPI mandatory"
+    },
+    {
+      "md_rule": "MD-EXT-008",
+      "maps_to": "CE001",
+      "desc": "Japan cross_border_transfer_rules"
+    },
+    {
+      "md_rule": "MD-EXT-009",
+      "maps_to": "CE001",
+      "desc": "Australia Privacy Act mandatory"
+    },
+    {
+      "md_rule": "MD-EXT-010",
+      "maps_to": "CE001",
+      "desc": "Australia APP11 security"
+    },
+    {
+      "md_rule": "MD-EXT-011",
+      "maps_to": "CE002",
+      "desc": "OPA has_substr()"
+    },
+    {
+      "md_rule": "MD-EXT-013",
+      "maps_to": "CE003",
+      "desc": "CI schedule 15 3 * * * daily sanctions"
+    },
+    {
+      "md_rule": "MD-EXT-016",
+      "maps_to": "CE004",
+      "desc": "Build entities_to_check.json vor OPA"
+    },
+    {
+      "md_rule": "MD-EXT-017",
+      "maps_to": "CE005",
+      "desc": "Sanctions max_age_hours: 24"
+    },
+    {
+      "md_rule": "MD-EXT-019",
+      "maps_to": "CE006",
+      "desc": "incident_response_plan.md pro Root"
+    },
+    {
+      "md_rule": "MD-EXT-020",
+      "maps_to": "CE007",
+      "desc": "NIEMALS .ipynb committen"
+    },
+    {
+      "md_rule": "MD-EXT-021",
+      "maps_to": "CE007",
+      "desc": "NIEMALS .parquet committen"
+    },
+    {
+      "md_rule": "MD-EXT-022",
+      "maps_to": "CE007",
+      "desc": "NIEMALS .sqlite committen"
+    },
+    {
+      "md_rule": "MD-EXT-023",
+      "maps_to": "CE007",
+      "desc": "NIEMALS .db committen"
+    },
+    {
+      "md_rule": "MD-EXT-024",
+      "maps_to": "CE008",
+      "desc": "OPA repo_scan.json"
+    },
+    {
+      "md_rule": "MD-GOV-001",
+      "maps_to": "VG005",
+      "desc": "Jeder Shard Owner"
+    },
+    {
+      "md_rule": "MD-GOV-002",
+      "maps_to": "VG005",
+      "desc": "Owner verantwortlich"
+    },
+    {
+      "md_rule": "MD-GOV-003",
+      "maps_to": "VG006",
+      "desc": "Architecture Board review chart.yaml"
+    },
+    {
+      "md_rule": "MD-GOV-004",
+      "maps_to": "VG007",
+      "desc": "Architecture Board genehmigt Breaking Changes"
+    },
+    {
+      "md_rule": "MD-GOV-012",
+      "maps_to": "VG003",
+      "desc": "MUST→Deprecated 180d + Migration + Compat"
+    },
+    {
+      "md_rule": "MD-MANIFEST-001",
+      "maps_to": "MS001",
+      "desc": "manifest.yaml metadata.implementation_id"
+    },
+    {
+      "md_rule": "MD-MANIFEST-002",
+      "maps_to": "MS001",
+      "desc": "manifest.yaml metadata.implementation_version"
+    },
+    {
+      "md_rule": "MD-MANIFEST-003",
+      "maps_to": "MS001",
+      "desc": "manifest.yaml metadata.chart_version"
+    },
+    {
+      "md_rule": "MD-MANIFEST-005",
+      "maps_to": "MS002",
+      "desc": "manifest.yaml technology_stack.language.name"
+    },
+    {
+      "md_rule": "MD-MANIFEST-006",
+      "maps_to": "MS002",
+      "desc": "manifest.yaml technology_stack.language.version"
+    },
+    {
+      "md_rule": "MD-MANIFEST-007",
+      "maps_to": "MS002",
+      "desc": "manifest.yaml technology_stack.frameworks"
+    },
+    {
+      "md_rule": "MD-MANIFEST-008",
+      "maps_to": "MS002",
+      "desc": "manifest.yaml technology_stack.testing"
+    },
+    {
+      "md_rule": "MD-MANIFEST-010",
+      "maps_to": "MS003",
+      "desc": "manifest.yaml artifacts.source_code.location"
+    },
+    {
+      "md_rule": "MD-MANIFEST-011",
+      "maps_to": "MS003",
+      "desc": "manifest.yaml artifacts.source_code.structure"
+    },
+    {
+      "md_rule": "MD-MANIFEST-019",
+      "maps_to": "MS004",
+      "desc": "manifest.yaml dependencies.python_packages=requirements.txt"
+    },
+    {
+      "md_rule": "MD-MANIFEST-020",
+      "maps_to": "MS004",
+      "desc": "manifest.yaml dependencies.development_packages"
+    },
+    {
+      "md_rule": "MD-MANIFEST-021",
+      "maps_to": "MS004",
+      "desc": "manifest.yaml dependencies.system_dependencies"
+    },
+    {
+      "md_rule": "MD-MANIFEST-022",
+      "maps_to": "MS004",
+      "desc": "manifest.yaml dependencies.external_services"
+    },
+    {
+      "md_rule": "MD-MANIFEST-028",
+      "maps_to": "MS005",
+      "desc": "manifest.yaml testing.unit_tests.command"
+    },
+    {
+      "md_rule": "MD-MANIFEST-030",
+      "maps_to": "MS005",
+      "desc": "manifest.yaml testing.integration_tests"
+    },
+    {
+      "md_rule": "MD-MANIFEST-031",
+      "maps_to": "MS005",
+      "desc": "manifest.yaml testing.contract_tests"
+    },
+    {
+      "md_rule": "MD-MANIFEST-034",
+      "maps_to": "KP007",
+      "desc": "manifest.yaml observability.metrics.exporter=prometheus"
+    },
+    {
+      "md_rule": "MD-MANIFEST-035",
+      "maps_to": "KP007",
+      "desc": "manifest.yaml observability.tracing.exporter=jaeger"
+    },
+    {
+      "md_rule": "MD-MANIFEST-037",
+      "maps_to": "MS006",
+      "desc": "manifest.yaml observability.logging.pii_redaction=true"
+    },
+    {
+      "md_rule": "MD-MANIFEST-043",
+      "maps_to": "CP001",
+      "desc": "manifest.yaml compliance.non_custodial_enforcement"
+    },
+    {
+      "md_rule": "MD-MANIFEST-044",
+      "maps_to": "CP005",
+      "desc": "manifest.yaml compliance.gdpr_compliance"
+    },
+    {
+      "md_rule": "MD-MANIFEST-045",
+      "maps_to": "CP008",
+      "desc": "manifest.yaml compliance.bias_fairness (AI/ML)"
+    },
+    {
+      "md_rule": "MD-POLICY-001",
+      "maps_to": "CP001",
+      "desc": "NIEMALS Rohdaten von PII speichern"
+    },
+    {
+      "md_rule": "MD-POLICY-002",
+      "maps_to": "CP002",
+      "desc": "Nur Hash SHA3-256"
+    },
+    {
+      "md_rule": "MD-POLICY-003",
+      "maps_to": "CP003",
+      "desc": "Tenant-spezifische Peppers"
+    },
+    {
+      "md_rule": "MD-POLICY-004",
+      "maps_to": "CP004",
+      "desc": "Raw Data Retention=0s"
+    },
+    {
+      "md_rule": "MD-POLICY-005",
+      "maps_to": "CP001",
+      "desc": "Semgrep blockiert PII-Storage"
+    },
+    {
+      "md_rule": "MD-POLICY-006",
+      "maps_to": "CP007",
+      "desc": "Runtime PII-Detector blockiert"
+    },
+    {
+      "md_rule": "MD-POLICY-007",
+      "maps_to": "CP002",
+      "desc": "Hash-Algorithmus=SHA3-256"
+    },
+    {
+      "md_rule": "MD-POLICY-008",
+      "maps_to": "CP003",
+      "desc": "Pepper-Strategie=per_tenant"
+    },
+    {
+      "md_rule": "MD-POLICY-010",
+      "maps_to": "CP005",
+      "desc": "Right to Erasure via Hash-Rotation"
+    },
+    {
+      "md_rule": "MD-POLICY-011",
+      "maps_to": "CP006",
+      "desc": "Data Portability JSON-Export"
+    },
+    {
+      "md_rule": "MD-POLICY-013",
+      "maps_to": "CP007",
+      "desc": "PII Redaction in Logs"
+    },
+    {
+      "md_rule": "MD-POLICY-014",
+      "maps_to": "CP008",
+      "desc": "Bias Testing für AI/ML"
+    },
+    {
+      "md_rule": "MD-POLICY-015",
+      "maps_to": "CP008",
+      "desc": "Fairness-Metrics"
+    },
+    {
+      "md_rule": "MD-POLICY-016",
+      "maps_to": "CP008",
+      "desc": "Quarterly Bias Audits"
+    },
+    {
+      "md_rule": "MD-POLICY-017",
+      "maps_to": "CP008",
+      "desc": "Model Cards transparent"
+    },
+    {
+      "md_rule": "MD-POLICY-018",
+      "maps_to": "CP008",
+      "desc": "Bias-Mitigation verpflichtend"
+    },
+    {
+      "md_rule": "MD-POLICY-019",
+      "maps_to": "CP009",
+      "desc": "Evidence Hash-Ledger + Blockchain"
+    },
+    {
+      "md_rule": "MD-POLICY-020",
+      "maps_to": "CP010",
+      "desc": "WORM-Storage"
+    },
+    {
+      "md_rule": "MD-POLICY-021",
+      "maps_to": "CP010",
+      "desc": "Retention 10 Jahre"
+    },
+    {
+      "md_rule": "MD-POLICY-022",
+      "maps_to": "TS001",
+      "desc": "Ethereum + Polygon Anchoring"
+    },
+    {
+      "md_rule": "MD-POLICY-024",
+      "maps_to": "CP012",
+      "desc": "Vault für Secrets"
+    },
+    {
+      "md_rule": "MD-POLICY-025",
+      "maps_to": "CP012",
+      "desc": "Secrets Rotation 90d"
+    },
+    {
+      "md_rule": "MD-POLICY-026",
+      "maps_to": "CP011",
+      "desc": "NIEMALS Secrets in Git"
+    },
+    {
+      "md_rule": "MD-POLICY-029",
+      "maps_to": "VG001",
+      "desc": "Semver"
+    },
+    {
+      "md_rule": "MD-POLICY-030",
+      "maps_to": "VG002",
+      "desc": "Breaking Changes Migration Guide"
+    },
+    {
+      "md_rule": "MD-POLICY-031",
+      "maps_to": "VG003",
+      "desc": "Deprecations 180d notice"
+    },
+    {
+      "md_rule": "MD-POLICY-032",
+      "maps_to": "VG004",
+      "desc": "RFC für MUST-Changes"
+    },
+    {
+      "md_rule": "MD-PRINC-001",
+      "maps_to": "KP001",
+      "desc": "Contract-First"
+    },
+    {
+      "md_rule": "MD-PRINC-002",
+      "maps_to": "KP002",
+      "desc": "Separation of Concerns (SoT vs Impl)"
+    },
+    {
+      "md_rule": "MD-PRINC-003",
+      "maps_to": "KP003",
+      "desc": "Multi-Implementation Support"
+    },
+    {
+      "md_rule": "MD-PRINC-004",
+      "maps_to": "KP004",
+      "desc": "384 Charts deterministisch"
+    },
+    {
+      "md_rule": "MD-PRINC-005",
+      "maps_to": "KP005",
+      "desc": "Hash, Log, Anchor alles"
+    },
+    {
+      "md_rule": "MD-PRINC-006",
+      "maps_to": "KP006",
+      "desc": "mTLS für intern"
+    },
+    {
+      "md_rule": "MD-PRINC-008",
+      "maps_to": "CP007",
+      "desc": "PII-Detection Laufzeit"
+    },
+    {
+      "md_rule": "MD-PRINC-010",
+      "maps_to": "KP007",
+      "desc": "Prometheus Metrics"
+    },
+    {
+      "md_rule": "MD-PRINC-011",
+      "maps_to": "KP007",
+      "desc": "Jaeger Tracing"
+    },
+    {
+      "md_rule": "MD-PRINC-012",
+      "maps_to": "KP007",
+      "desc": "Loki Logging + PII-Redaction"
+    },
+    {
+      "md_rule": "MD-PRINC-014",
+      "maps_to": "KP008",
+      "desc": "Fairness-Metrics"
+    },
+    {
+      "md_rule": "MD-PRINC-015",
+      "maps_to": "KP008",
+      "desc": "Quarterly Bias Audits"
+    },
+    {
+      "md_rule": "MD-PRINC-016",
+      "maps_to": "KP008",
+      "desc": "Model Cards"
+    },
+    {
+      "md_rule": "MD-PRINC-017",
+      "maps_to": "KP009",
+      "desc": "HPA"
+    },
+    {
+      "md_rule": "MD-PRINC-021",
+      "maps_to": "KP010",
+      "desc": "Doku aus Contracts generiert"
+    },
+    {
+      "md_rule": "MD-PRINC-022",
+      "maps_to": "KP010",
+      "desc": "OpenAPI → Swagger UI"
+    },
+    {
+      "md_rule": "MD-PRINC-023",
+      "maps_to": "KP010",
+      "desc": "JSON-Schema → json-schema-for-humans"
+    },
+    {
+      "md_rule": "MD-STRUCT-001",
+      "maps_to": "AR001",
+      "desc": "24 Root-Ordner"
+    },
+    {
+      "md_rule": "MD-STRUCT-002",
+      "maps_to": "AR002",
+      "desc": "16 Shards pro Root"
+    },
+    {
+      "md_rule": "MD-STRUCT-003",
+      "maps_to": "AR003",
+      "desc": "24×16=384 Charts"
+    },
+    {
+      "md_rule": "MD-STRUCT-004",
+      "maps_to": "AR004",
+      "desc": "chart.yaml MUSS existieren"
+    },
+    {
+      "md_rule": "MD-STRUCT-005",
+      "maps_to": "AR005",
+      "desc": "values.yaml MUSS existieren"
+    },
+    {
+      "md_rule": "MD-STRUCT-006",
+      "maps_to": "AR006",
+      "desc": "README.md MUSS existieren"
+    },
+    {
+      "md_rule": "MD-STRUCT-007",
+      "maps_to": "AR009",
+      "desc": "Root-Namen Pattern {NR}_{NAME}"
+    },
+    {
+      "md_rule": "MD-STRUCT-008",
+      "maps_to": "AR008",
+      "desc": "Shard-Namen Pattern Shard_{NR}_{NAME}"
+    }
+  ],
+  "unmapped_rules": [
+    {
+      "md_rule": "MD-CHART-024",
+      "desc": "chart.yaml compatibility.core_min_version"
+    },
+    {
+      "md_rule": "MD-CHART-029",
+      "desc": "chart.yaml orchestration.workflows"
+    },
+    {
+      "md_rule": "MD-CHART-045",
+      "desc": "chart.yaml security.encryption (at_rest, in_transit)"
+    },
+    {
+      "md_rule": "MD-CHART-048",
+      "desc": "chart.yaml resources.compute"
+    },
+    {
+      "md_rule": "MD-CHART-050",
+      "desc": "chart.yaml roadmap.upcoming"
+    },
+    {
+      "md_rule": "MD-EXT-012",
+      "desc": "OPA string_similarity()"
+    },
+    {
+      "md_rule": "MD-EXT-014",
+      "desc": "CI schedule 0 0 1 */3 * quarterly audit"
+    },
+    {
+      "md_rule": "MD-EXT-015",
+      "desc": "CI actions/upload-artifact@v4"
+    },
+    {
+      "md_rule": "MD-EXT-018",
+      "desc": "Sanctions sha256 Hash"
+    },
+    {
+      "md_rule": "MD-GOV-005",
+      "desc": "Compliance Team prüft Policies"
+    },
+    {
+      "md_rule": "MD-GOV-006",
+      "desc": "Compliance Team genehmigt Constraints"
+    },
+    {
+      "md_rule": "MD-GOV-007",
+      "desc": "Security Team Threat Modeling"
+    },
+    {
+      "md_rule": "MD-GOV-008",
+      "desc": "Change-Prozess 7 Schritte"
+    },
+    {
+      "md_rule": "MD-GOV-009",
+      "desc": "SHOULD→MUST 90d + 99.5% SLA"
+    },
+    {
+      "md_rule": "MD-GOV-010",
+      "desc": "SHOULD→MUST 95% Contract Test Coverage"
+    },
+    {
+      "md_rule": "MD-GOV-011",
+      "desc": "HAVE→SHOULD Feature complete + Beta + Doku"
+    },
+    {
+      "md_rule": "MD-MANIFEST-004",
+      "desc": "manifest.yaml metadata.maturity"
+    },
+    {
+      "md_rule": "MD-MANIFEST-009",
+      "desc": "manifest.yaml technology_stack.linting_formatting"
+    },
+    {
+      "md_rule": "MD-MANIFEST-012",
+      "desc": "manifest.yaml artifacts.configuration.location"
+    },
+    {
+      "md_rule": "MD-MANIFEST-013",
+      "desc": "manifest.yaml artifacts.models.location (AI/ML)"
+    },
+    {
+      "md_rule": "MD-MANIFEST-014",
+      "desc": "manifest.yaml artifacts.protocols.location (gRPC)"
+    },
+    {
+      "md_rule": "MD-MANIFEST-015",
+      "desc": "manifest.yaml artifacts.tests.location"
+    },
+    {
+      "md_rule": "MD-MANIFEST-016",
+      "desc": "manifest.yaml artifacts.documentation.location"
+    },
+    {
+      "md_rule": "MD-MANIFEST-017",
+      "desc": "manifest.yaml artifacts.scripts.location"
+    },
+    {
+      "md_rule": "MD-MANIFEST-018",
+      "desc": "manifest.yaml artifacts.docker.files=[Dockerfile,docker-compose.yml]"
+    },
+    {
+      "md_rule": "MD-MANIFEST-023",
+      "desc": "manifest.yaml build.commands"
+    },
+    {
+      "md_rule": "MD-MANIFEST-024",
+      "desc": "manifest.yaml build.docker"
+    },
+    {
+      "md_rule": "MD-MANIFEST-025",
+      "desc": "manifest.yaml deployment.kubernetes.manifests_location"
+    },
+    {
+      "md_rule": "MD-MANIFEST-026",
+      "desc": "manifest.yaml deployment.helm.chart_location"
+    },
+    {
+      "md_rule": "MD-MANIFEST-027",
+      "desc": "manifest.yaml deployment.environment_variables"
+    },
+    {
+      "md_rule": "MD-MANIFEST-029",
+      "desc": "manifest.yaml testing.unit_tests.coverage_target>=80"
+    },
+    {
+      "md_rule": "MD-MANIFEST-032",
+      "desc": "manifest.yaml testing.security_tests"
+    },
+    {
+      "md_rule": "MD-MANIFEST-033",
+      "desc": "manifest.yaml testing.performance_tests"
+    },
+    {
+      "md_rule": "MD-MANIFEST-036",
+      "desc": "manifest.yaml observability.logging.format=json"
+    },
+    {
+      "md_rule": "MD-MANIFEST-038",
+      "desc": "manifest.yaml observability.health_checks.liveness"
+    },
+    {
+      "md_rule": "MD-MANIFEST-039",
+      "desc": "manifest.yaml observability.health_checks.readiness"
+    },
+    {
+      "md_rule": "MD-MANIFEST-040",
+      "desc": "manifest.yaml development.setup"
+    },
+    {
+      "md_rule": "MD-MANIFEST-041",
+      "desc": "manifest.yaml development.local_development"
+    },
+    {
+      "md_rule": "MD-MANIFEST-042",
+      "desc": "manifest.yaml development.pre_commit_hooks"
+    },
+    {
+      "md_rule": "MD-MANIFEST-046",
+      "desc": "manifest.yaml performance.baseline_benchmarks"
+    },
+    {
+      "md_rule": "MD-MANIFEST-047",
+      "desc": "manifest.yaml performance.optimization_targets"
+    },
+    {
+      "md_rule": "MD-MANIFEST-048",
+      "desc": "manifest.yaml performance.resource_requirements"
+    },
+    {
+      "md_rule": "MD-MANIFEST-049",
+      "desc": "manifest.yaml changelog.location=CHANGELOG.md"
+    },
+    {
+      "md_rule": "MD-MANIFEST-050",
+      "desc": "manifest.yaml support.contacts"
+    },
+    {
+      "md_rule": "MD-POLICY-009",
+      "desc": "Hashing deterministisch"
+    },
+    {
+      "md_rule": "MD-POLICY-012",
+      "desc": "Purpose Limitation erzwingen"
+    },
+    {
+      "md_rule": "MD-POLICY-023",
+      "desc": "Hourly Anchoring"
+    },
+    {
+      "md_rule": "MD-POLICY-027",
+      "desc": "Encryption AES-256-GCM"
+    },
+    {
+      "md_rule": "MD-POLICY-028",
+      "desc": "TLS 1.3 in-transit"
+    },
+    {
+      "md_rule": "MD-PRINC-007",
+      "desc": "RBAC für Zugriffe"
+    },
+    {
+      "md_rule": "MD-PRINC-009",
+      "desc": "Continuous Vuln Scanning"
+    },
+    {
+      "md_rule": "MD-PRINC-013",
+      "desc": "AlertManager"
+    },
+    {
+      "md_rule": "MD-PRINC-018",
+      "desc": "Load Balancing"
+    },
+    {
+      "md_rule": "MD-PRINC-019",
+      "desc": "Caching-Strategien"
+    },
+    {
+      "md_rule": "MD-PRINC-020",
+      "desc": "Performance-Benchmarks Gates"
+    },
+    {
+      "md_rule": "MD-STRUCT-009",
+      "desc": "Pfad {ROOT}/shards/{SHARD}/chart.yaml"
+    },
+    {
+      "md_rule": "MD-STRUCT-010",
+      "desc": "Pfad .../implementations/{IMPL}/manifest.yaml"
+    }
+  ]
+}

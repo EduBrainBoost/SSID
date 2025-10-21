@@ -29,7 +29,6 @@ from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
 from dataclasses import dataclass, asdict
 
-
 @dataclass
 class ScoreAlgorithmEvent:
     """
@@ -69,7 +68,6 @@ class ScoreAlgorithmEvent:
         }, sort_keys=True)
 
         return hashlib.sha256(canonical.encode('utf-8')).hexdigest()
-
 
 class ScoreAlgorithmLogger:
     """
@@ -434,7 +432,6 @@ class ScoreAlgorithmLogger:
 
         return report
 
-
 def main():
     """CLI entry point for testing"""
     repo_root = Path(__file__).resolve().parents[2]
@@ -457,7 +454,6 @@ def main():
     print(json.dumps(event.to_dict(), indent=2))
     print(f"\nEvent logged to: {logger.log_file}")
     print(f"Evidence registry updated: {logger.evidence_registry}")
-
 
 if __name__ == "__main__":
     main()

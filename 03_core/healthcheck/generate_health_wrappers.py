@@ -13,9 +13,7 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-
 ROOT = Path(__file__).resolve().parents[2]
-
 
 # Service configuration: maps root module to port ranges
 SERVICE_CONFIG = {
@@ -28,7 +26,6 @@ SERVICE_CONFIG = {
     "09_meta_identity": {"base_port": 8900, "endpoint": "/health"},
     "10_interoperability": {"base_port": 9000, "endpoint": "/health"},
 }
-
 
 # Shard mapping to port offsets
 SHARD_OFFSETS = {
@@ -49,7 +46,6 @@ SHARD_OFFSETS = {
     "15_handel_transaktionen": 15,
     "16_behoerden_verwaltung": 16,
 }
-
 
 def extract_service_info(health_file: Path) -> Tuple[str, str, int, str]:
     """
@@ -89,7 +85,6 @@ def extract_service_info(health_file: Path) -> Tuple[str, str, int, str]:
 
     return service_name, root_module, port, endpoint
 
-
 def generate_health_wrapper(service_name: str, port: int, endpoint: str) -> str:
     """
     Generate health.py wrapper content.
@@ -123,7 +118,6 @@ if str(CORE_PATH) not in sys.path:
 
 from healthcheck.health_check_core import HealthChecker, run_checks
 
-
 def check_health() -> bool:
     """
     Execute health checks for {service_name}.
@@ -142,18 +136,15 @@ def check_health() -> bool:
 
     return run_checks(checkers)
 
-
 def main():
     """CLI entry point."""
     success = check_health()
     print(f"{{'{service_name}'}}: {{'PASS' if success else 'FAIL'}}")
     sys.exit(0 if success else 1)
 
-
 if __name__ == "__main__":
     main()
 '''
-
 
 def process_all_health_files() -> Dict[str, int]:
     """
@@ -198,7 +189,6 @@ def process_all_health_files() -> Dict[str, int]:
 
     return stats
 
-
 def main():
     """Main entry point."""
     print("SSID Health Wrapper Generator")
@@ -222,7 +212,6 @@ def main():
     else:
         print("[ERROR] Some errors occurred")
         return 1
-
 
 if __name__ == "__main__":
     sys.exit(main())

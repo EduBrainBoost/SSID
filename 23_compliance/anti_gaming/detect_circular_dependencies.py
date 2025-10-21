@@ -13,7 +13,6 @@ from datetime import datetime, timezone
 
 Edge = Tuple[str, str]
 
-
 def detect_cycles(edges: List[Edge]) -> List[List[str]]:
     """
     Detect simple cycles in a directed graph defined by edges.
@@ -63,7 +62,6 @@ def detect_cycles(edges: List[Edge]) -> List[List[str]]:
             dfs(n)
     return cycles
 
-
 def analyze_dependency_graph(edges: List[Edge]) -> Dict:
     """
     Comprehensive dependency graph analysis for gaming detection.
@@ -107,7 +105,6 @@ def analyze_dependency_graph(edges: List[Edge]) -> Dict:
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
 
-
 def generate_evidence_report(analysis: Dict, output_path: Path) -> None:
     """
     Generate evidence report for audit trail.
@@ -125,7 +122,6 @@ def generate_evidence_report(analysis: Dict, output_path: Path) -> None:
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(analysis, f, indent=2)
-
 
 if __name__ == "__main__":
     import sys

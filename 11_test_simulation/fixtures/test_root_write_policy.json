@@ -1,0 +1,25 @@
+{
+  "validation_result": {
+    "summary": {
+      "violations_total": 2,
+      "violations_critical": 2,
+      "violations_high": 0,
+      "violations_medium": 0,
+      "violations_low": 0
+    },
+    "items": [
+      {
+        "path": "README.md",
+        "op": "write",
+        "severity": "CRITICAL",
+        "rule": "ROOT_WRITE_BLOCK"
+      },
+      {
+        "path": "random.txt",
+        "op": "create",
+        "severity": "CRITICAL",
+        "rule": "ROOT_CREATE_BLOCK"
+      }
+    ]
+  }
+}

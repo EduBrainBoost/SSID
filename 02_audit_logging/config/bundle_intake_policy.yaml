@@ -1,0 +1,24 @@
+version: "1.0"
+mode: "REPAIR_AND_INTAKE"
+source_root: "."
+allowed_extensions: [".zip"]
+target_layout:
+  v9:  "04_deployment/bundles/v9/"
+  v10: "04_deployment/bundles/v10/"
+  v11: "04_deployment/bundles/v11/"
+  v12: "04_deployment/bundles/v12/"
+  misc:"04_deployment/bundles/_misc/"
+naming_rules:
+  accept_patterns:
+    - "root_24_*_bundle*"
+    - "meta_continuum_*_bundle*"
+    - "interfederated_*_bundle*"
+  deny_root_drop: true
+hashing:
+  algorithms: ["SHA-256","SHA-512"]
+evidence:
+  registry_file: "23_compliance/registry/bundle_intake_registry.json"
+  report_md:     "02_audit_logging/reports/bundle_intake_repair_report.md"
+  score_json:    "02_audit_logging/reports/bundle_intake_repair_score.json"
+  hashes_json:   "02_audit_logging/reports/bundle_intake_hashes.json"
+  merkle_json:   "02_audit_logging/reports/bundle_intake_merkle.json"
