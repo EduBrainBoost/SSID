@@ -1,0 +1,821 @@
+[
+  {
+    "rule_id": "AR001",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Das System MUSS aus exakt 24 Root-Ordnern bestehen",
+    "source": "Die 24 Root-Ordner",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "AR002",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Jeder Root-Ordner MUSS exakt 16 Shards enthalten",
+    "source": "Die 16 Shards (Oberkategorien)",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "AR003",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Es MÜSSEN exakt 384 Chart-Dateien existieren (24×16)",
+    "source": "Matrix-Architektur (24×16)",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "AR004",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Root-Ordner MÜSSEN Format '{NR}_{NAME}' haben (z.B. 01_ai_layer)",
+    "source": "Naming Conventions",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "AR005",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Shards MÜSSEN Format 'Shard_{NR}_{NAME}' haben",
+    "source": "Naming Conventions",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "AR006",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Jeder Shard MUSS eine chart.yaml (SoT) enthalten",
+    "source": "Hybrid-Struktur: SoT + Implementierung",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "AR007",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Jede Implementierung MUSS eine manifest.yaml enthalten",
+    "source": "Hybrid-Struktur: SoT + Implementierung",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "AR008",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Pfadstruktur MUSS sein: {ROOT}/shards/{SHARD}/chart.yaml",
+    "source": "Naming Conventions - Pfade",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "AR009",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Implementierungen MÜSSEN unter implementations/{IMPL_ID}/ liegen",
+    "source": "Ordnerstruktur Beispiele",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "AR010",
+    "section": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Contracts MÜSSEN in contracts/-Ordner mit OpenAPI/JSON-Schema liegen",
+    "source": "Ordnerstruktur Beispiele",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP001",
+    "section": "critical_policies",
+    "type": "NIEMALS",
+    "severity": "CRITICAL",
+    "rule": "NIEMALS Rohdaten von PII oder biometrischen Daten speichern",
+    "source": "Kritische Policies - Non-Custodial",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP002",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Alle Daten MÜSSEN als SHA3-256 Hashes gespeichert werden",
+    "source": "Kritische Policies - Hash-Only Data Policy",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP003",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Tenant-spezifische Peppers MÜSSEN verwendet werden",
+    "source": "Kritische Policies - Hash-Only Data Policy",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP004",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Raw Data Retention MUSS '0 seconds' sein (Immediate Discard)",
+    "source": "Kritische Policies - Non-Custodial",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP005",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Right to Erasure MUSS via Hash-Rotation implementiert sein",
+    "source": "Kritische Policies - GDPR Compliance",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP006",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Data Portability MUSS JSON-Export aller Hashes + Metadaten bieten",
+    "source": "Kritische Policies - GDPR Compliance",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP007",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "PII Redaction MUSS automatisch in Logs & Traces erfolgen",
+    "source": "Kritische Policies - GDPR Compliance",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP008",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Alle AI/ML-Modelle MÜSSEN auf Bias getestet werden",
+    "source": "Kritische Policies - Bias & Fairness",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP009",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Hash-Ledger mit Blockchain-Anchoring MUSS verwendet werden",
+    "source": "Kritische Policies - Evidence & Audit",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP010",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "WORM-Storage mit 10 Jahren Retention MUSS verwendet werden",
+    "source": "Kritische Policies - Evidence & Audit",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP011",
+    "section": "critical_policies",
+    "type": "NIEMALS",
+    "severity": "CRITICAL",
+    "rule": "NIEMALS Secrets in Git committen",
+    "source": "Kritische Policies - Secrets Management",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "CP012",
+    "section": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Secrets MÜSSEN alle 90 Tage rotiert werden",
+    "source": "Kritische Policies - Secrets Management",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "VG001",
+    "section": "versioning_governance",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Alle Versionen MÜSSEN Semver (MAJOR.MINOR.PATCH) verwenden",
+    "source": "Kritische Policies - Versioning & Breaking Changes",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "VG002",
+    "section": "versioning_governance",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Breaking Changes MÜSSEN Migration Guide + Compatibility Layer haben",
+    "source": "Kritische Policies - Versioning & Breaking Changes",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "VG003",
+    "section": "versioning_governance",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Deprecations MÜSSEN 180 Tage Notice Period haben",
+    "source": "Kritische Policies - Versioning & Breaking Changes",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "VG004",
+    "section": "versioning_governance",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Alle MUST-Capability-Änderungen MÜSSEN RFC-Prozess durchlaufen",
+    "source": "Kritische Policies - Versioning & Breaking Changes",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "VG005",
+    "section": "versioning_governance",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "Jeder Shard MUSS einen Owner haben",
+    "source": "Governance-Modell - Rollen",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "VG006",
+    "section": "versioning_governance",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Architecture Board MUSS alle chart.yaml-Änderungen reviewen",
+    "source": "Governance-Modell - Rollen",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "VG007",
+    "section": "versioning_governance",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Change-Prozess MUSS 7 Stufen durchlaufen (RFC bis Monitoring)",
+    "source": "Governance-Modell - Change-Prozess",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "VG008",
+    "section": "versioning_governance",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "SHOULD→MUST Promotion MUSS 90 Tage Production + 99.5% SLA erfüllen",
+    "source": "Governance-Modell - Promotion-Regeln",
+    "has_sot_mapping": true
+  },
+  {
+    "rule_id": "JURIS_BL_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Transaktionen aus Iran (IR) blockieren. Grund: OFAC Comprehensive Sanctions",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_BL_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Transaktionen aus North Korea (KP) blockieren. Grund: OFAC Comprehensive Sanctions",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_BL_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Transaktionen aus Syria (SY) blockieren. Grund: OFAC Comprehensive Sanctions",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_BL_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Transaktionen aus Cuba (CU) blockieren. Grund: OFAC Sanctions (Limited)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_BL_005",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Transaktionen aus Sudan (SD) blockieren. Grund: OFAC Sanctions (Regional)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_BL_006",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Transaktionen aus Belarus (BY) blockieren. Grund: EU Sanctions",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_BL_007",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS Transaktionen aus Venezuela (VE) blockieren. Grund: OFAC Sectoral Sanctions",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PROP_TYPE_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Proposal-Typ 'System Parameter Change' (parameter_change) unterstützen mit Quorum 10% und Threshold 66%",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PROP_TYPE_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Proposal-Typ 'Treasury Fund Allocation' (treasury_allocation) unterstützen mit Quorum 15% und Threshold 75%",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PROP_TYPE_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Proposal-Typ 'Smart Contract Upgrade' (contract_upgrade) unterstützen mit Quorum 20% und Threshold 80%",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PROP_TYPE_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS Proposal-Typ 'Community Grant Program' (grant_program) unterstützen mit Quorum 5% und Threshold 50%",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PROP_TYPE_005",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS Proposal-Typ 'Strategic Partnership' (partnership) unterstützen mit Quorum 10% und Threshold 66%",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PROP_TYPE_006",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Proposal-Typ 'Emergency Protocol Action' (emergency_action) unterstützen mit Quorum 30% und Threshold 90%",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PROP_TYPE_007",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Proposal-Typ 'Token Minting (Inflation)' (token_mint) unterstützen mit Quorum 25% und Threshold 85%",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_T1_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Germany (DE) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_T1_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS France (FR) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_T1_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Netherlands (NL) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_T1_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Switzerland (CH) als Tier 1 Market mit eIDAS-Level 'high' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_T1_005",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS United Kingdom (UK) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_T1_006",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Singapore (SG) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "JURIS_T1_007",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Japan (JP) als Tier 1 Market mit eIDAS-Level 'substantial' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "REWARD_POOL_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Reward Pool 'Staking Rewards Pool' (staking_rewards) mit 30% Allocation und Vesting 'none' verwalten",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "REWARD_POOL_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Reward Pool 'Liquidity Mining Pool' (liquidity_mining) mit 20% Allocation und Vesting 'linear_12m' verwalten",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "REWARD_POOL_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS Reward Pool 'Ecosystem Development Grants' (ecosystem_grants) mit 15% Allocation und Vesting 'milestone_based' verwalten",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "REWARD_POOL_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Reward Pool 'Team & Advisors Vesting' (team_vesting) mit 20% Allocation und Vesting 'linear_48m_cliff_12m' verwalten",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "REWARD_POOL_005",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Reward Pool 'DAO Treasury Reserve' (treasury_reserve) mit 15% Allocation und Vesting 'dao_controlled' verwalten",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "NETWORK_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Blockchain-Netzwerk Ethereum Mainnet (Chain ID: 1) unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "NETWORK_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Blockchain-Netzwerk Polygon Mainnet (Chain ID: 137) unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "NETWORK_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Blockchain-Netzwerk Arbitrum One (Chain ID: 42161) unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "NETWORK_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Blockchain-Netzwerk Optimism Mainnet (Chain ID: 10) unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "NETWORK_005",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS Blockchain-Netzwerk Base Mainnet (Chain ID: 8453) unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "NETWORK_006",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS Blockchain-Netzwerk Avalanche C-Chain (Chain ID: 43114) unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "AUTH_METHOD_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Authentifizierungsmethode 'DID-based Authentication' (did_auth) mit eIDAS-Level 'high' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "AUTH_METHOD_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Authentifizierungsmethode 'Biometric Authentication (Face/Fingerprint)' (biometric) mit eIDAS-Level 'high' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "AUTH_METHOD_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Authentifizierungsmethode 'Hardware Security Key (FIDO2)' (hardware_token) mit eIDAS-Level 'high' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "AUTH_METHOD_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS Authentifizierungsmethode 'Time-based OTP (TOTP)' (totp) mit eIDAS-Level 'substantial' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "AUTH_METHOD_005",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "LOW",
+    "rule": "System MUSS Authentifizierungsmethode 'SMS-based OTP' (sms_otp) mit eIDAS-Level 'low' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "AUTH_METHOD_006",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "LOW",
+    "rule": "System MUSS Authentifizierungsmethode 'Email Magic Link' (email_magic_link) mit eIDAS-Level 'low' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS PII-Kategorie 'Name (First, Last, Full)' (name) gemäß Art. 4(1) behandeln",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS PII-Kategorie 'Email Address' (email) gemäß Art. 4(1) behandeln",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS PII-Kategorie 'Phone Number' (phone) gemäß Art. 4(1) behandeln",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS PII-Kategorie 'Physical Address' (address) gemäß Art. 4(1) behandeln",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_005",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS PII-Kategorie 'National ID / SSN' (national_id) gemäß Art. 4(1) behandeln",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_006",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS PII-Kategorie 'Biometric Data' (biometric) gemäß Art. 9(1) behandeln (GDPR Special Category)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_007",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS PII-Kategorie 'Health Data' (health) gemäß Art. 9(1) behandeln (GDPR Special Category)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_008",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS PII-Kategorie 'Genetic Data' (genetic) gemäß Art. 9(1) behandeln (GDPR Special Category)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_009",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS PII-Kategorie 'Religious Beliefs' (religion) gemäß Art. 9(1) behandeln (GDPR Special Category)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "PII_CAT_010",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS PII-Kategorie 'Political Opinions' (political) gemäß Art. 9(1) behandeln (GDPR Special Category)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "HASH_ALG_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Hash-Algorithmus SHA3-256 (256 bits) als 'primary' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "HASH_ALG_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Hash-Algorithmus SHA3-512 (512 bits) als 'approved' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "HASH_ALG_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS Hash-Algorithmus BLAKE3 (256 bits) als 'approved' unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "HASH_ALG_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "LOW",
+    "rule": "System MUSS Hash-Algorithmus SPHINCS+ (256 bits) als 'future' (Quantum-Safe) unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "RETENTION_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Retention Period für 'transaction_hashes' auf 3650 Tage setzen. Grund: Legal requirement (10 years)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "RETENTION_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS Retention Period für 'audit_logs' auf 3650 Tage setzen. Grund: Compliance (10 years)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "RETENTION_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS Retention Period für 'session_tokens' auf 1 Tage setzen. Grund: Security best practice",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "RETENTION_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS Retention Period für 'email_verification' auf 30 Tage setzen. Grund: User onboarding",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "RETENTION_005",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "LOW",
+    "rule": "System MUSS Retention Period für 'analytics_aggregated' auf 730 Tage setzen. Grund: Business intelligence (2 years)",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "DID_METHOD_001",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "System MUSS DID-Methode did:ethr (Ethereum DID Method) gemäß Spec https://github.com/decentralized-identity/ethr-did-resolver unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "DID_METHOD_002",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "System MUSS DID-Methode did:key (Key-based DID Method) gemäß Spec https://w3c-ccg.github.io/did-method-key/ unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "DID_METHOD_003",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS DID-Methode did:web (Web DID Method) gemäß Spec https://w3c-ccg.github.io/did-method-web/ unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  },
+  {
+    "rule_id": "DID_METHOD_004",
+    "section": "lifted_rules",
+    "type": "MUST",
+    "severity": "MEDIUM",
+    "rule": "System MUSS DID-Methode did:ion (ION DID Method (Sidetree)) gemäß Spec https://identity.foundation/ion/ unterstützen",
+    "source": "",
+    "has_sot_mapping": false
+  }
+]
