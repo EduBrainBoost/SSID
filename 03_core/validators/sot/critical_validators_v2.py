@@ -58,14 +58,24 @@ class CriticalValidatorsV2:
         return ValidationResult('FOLDER-001', True, f"All {len(shards)} shards have chart.yaml", [])
 
     def validate_naming_001_root_format(self) -> ValidationResult:
-        """NAMING-001: Root folders MUST follow {NR}_{NAME} format"""
+        """NAMING-001: Root folders MUST follow {NR}_{NAME} format (Master Definition line 628)"""
+        # Master Definition says: Format: {NR}_{NAME}
+        # Example: 01_ai_layer, 24_meta_orchestration
+        # Exclude utility directories and archives from validation
+        EXCLUDED_DIRS = {'docs', 'git_hooks', 'tests', 'tools', 'node_modules', 'venv', '.venv'}
+
         pattern = re.compile(r'^\d{2}_[a-z_]+$')
-        roots = [d for d in self.repo_root.iterdir() if d.is_dir() and not d.name.startswith('.')]
+        roots = [d for d in self.repo_root.iterdir()
+                if d.is_dir()
+                and not d.name.startswith('.')
+                and not d.name.startswith('_')  # Exclude archives like _ARCHIVE_...
+                and d.name not in EXCLUDED_DIRS]
+
         invalid = [r.name for r in roots if not pattern.match(r.name)]
-        
+
         if invalid:
             return ValidationResult('NAMING-001', False, f"{len(invalid)} roots with wrong naming", invalid)
-        return ValidationResult('NAMING-001', True, f"All {len(roots)} roots correctly named", [])
+        return ValidationResult('NAMING-001', True, f"All {len(roots)} roots correctly named (NR_NAME format)", [])
 
     def validate_gdpr_002_data_portability(self) -> ValidationResult:
         """GDPR-002: Data Portability via Structured Export"""
@@ -266,14 +276,16 @@ class CriticalValidatorsV2:
         return ValidationResult('FOLDER-007', True, f"All {len(impls)} implementations have helm/", [])
 
     def validate_naming_002_shard_format(self) -> ValidationResult:
-        """NAMING-002: Shard folders MUST follow {NR}_{NAME} format"""
-        pattern = re.compile(r'^\d{2}_[a-z_]+$')
+        """NAMING-002: Shard folders MUST follow Shard_{NR}_{NAME} format (Master Definition line 634)"""
+        # Master Definition says: Format: Shard_{NR}_{NAME}
+        # Example: Shard_01_Identitaet_Personen, Shard_16_Behoerden_Verwaltung
+        pattern = re.compile(r'^Shard_\d{2}_[A-Z][A-Za-z_]*$')
         shards = [d.name for root in self.repo_root.iterdir() if root.is_dir() and (root / "shards").exists() for d in (root / "shards").iterdir() if d.is_dir()]
         invalid = [s for s in shards if not pattern.match(s)]
 
         if invalid:
-            return ValidationResult('NAMING-002', False, f"{len(invalid)} shards with wrong naming", invalid[:10])
-        return ValidationResult('NAMING-002', True, f"All shards correctly named", [])
+            return ValidationResult('NAMING-002', False, f"{len(invalid)} shards with wrong naming (must be Shard_NR_Name)", invalid[:10])
+        return ValidationResult('NAMING-002', True, f"All {len(shards)} shards correctly named (Shard_NR_Name format)", [])
 
     def validate_naming_003_contract_files(self) -> ValidationResult:
         """NAMING-003: Contract files MUST follow {domain}_{operation}.openapi.yaml"""

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: realestate-service
+  namespace: ssid-data_pipeline
+spec:
+  selector:
+    app: realestate
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+  - name: metrics
+    port: 9090
+    targetPort: 9090
+  type: ClusterIP
