@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-10-21 17:16:41",
+  "repo_root": "C:\\Users\\bibel\\Documents\\Github\\SSID",
+  "results": [
+    {
+      "name": "Sequential (CachedSoTValidator)",
+      "workers": 1,
+      "total_time": 2497.8108699321747,
+      "total_rules": 327,
+      "passed_count": 221,
+      "failed_count": 106,
+      "batch_times": [],
+      "throughput": 0.13091463566610204
+    },
+    {
+      "name": "Parallel (2 workers)",
+      "workers": 2,
+      "total_time": 2030.1705317497253,
+      "total_rules": 379,
+      "passed_count": 225,
+      "failed_count": 154,
+      "batch_times": [
+        0.023331642150878906,
+        0.001207590103149414,
+        0.0,
+        0.0010259151458740234,
+        117.57116723060608,
+        167.35046672821045,
+        109.89316582679749,
+        208.7962794303894,
+        1426.533887386322
+      ],
+      "throughput": 0.18668382486733986
+    },
+    {
+      "name": "Parallel (4 workers)",
+      "workers": 4,
+      "total_time": 1949.7255957126617,
+      "total_rules": 379,
+      "passed_count": 225,
+      "failed_count": 154,
+      "batch_times": [
+        0.023439645767211914,
+        0.0009813308715820312,
+        0.0,
+        0.000904083251953125,
+        113.39482688903809,
+        182.9100501537323,
+        92.1882164478302,
+        169.87545728683472,
+        1391.3295521736145
+      ],
+      "throughput": 0.19438632843175468
+    }
+  ]
+}

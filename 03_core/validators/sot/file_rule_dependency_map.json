@@ -1,0 +1,204 @@
+{
+  "_comment": "SoT Validator File→Rule Dependency Map - Incremental Validation Support",
+  "_description": "Maps file patterns to rule IDs that need re-validation when those files change",
+  "_total_rules": 384,
+  "_version": "1.0.0",
+  "_generated": "2025-10-21",
+
+  "file_patterns": {
+    "**/**/Chart.yaml": {
+      "description": "Helm Chart metadata files",
+      "affects_rules": [
+        "AR004",
+        "CS001", "CS002", "CS003", "CS004", "CS005", "CS006", "CS007", "CS008", "CS009", "CS010", "CS011",
+        "MD-CHART-024", "MD-CHART-029", "MD-CHART-045", "MD-CHART-048", "MD-CHART-050",
+        "VG001", "VG002", "VG003", "VG004", "VG005"
+      ],
+      "reason": "Chart.yaml changes affect chart structure and versioning rules"
+    },
+
+    "**/**/values.yaml": {
+      "description": "Helm values files",
+      "affects_rules": [
+        "AR005",
+        "CP001", "CP002", "CP003", "CP004", "CP005", "CP006", "CP007", "CP008", "CP009", "CP010", "CP011", "CP012",
+        "JURIS_BL_001", "JURIS_BL_002", "JURIS_BL_003", "JURIS_BL_004", "JURIS_BL_005", "JURIS_BL_006", "JURIS_BL_007",
+        "PII_CAT_001", "PII_CAT_002", "PII_CAT_003", "PII_CAT_004", "PII_CAT_005", "PII_CAT_006", "PII_CAT_007", "PII_CAT_008", "PII_CAT_009", "PII_CAT_010",
+        "HASH_ALG_001", "HASH_ALG_002", "HASH_ALG_003", "HASH_ALG_004",
+        "NETWORK_001", "NETWORK_002", "NETWORK_003", "NETWORK_004", "NETWORK_005", "NETWORK_006",
+        "AUTH_METHOD_001", "AUTH_METHOD_002", "AUTH_METHOD_003", "AUTH_METHOD_004", "AUTH_METHOD_005", "AUTH_METHOD_006",
+        "DID_METHOD_001", "DID_METHOD_002", "DID_METHOD_003", "DID_METHOD_004"
+      ],
+      "reason": "values.yaml changes affect content policies and enumerated value rules"
+    },
+
+    "**/**/manifest.yaml": {
+      "description": "Shard manifest files",
+      "affects_rules": [
+        "MS001", "MS002", "MS003", "MS004", "MS005", "MS006",
+        "MD-MANIFEST-004", "MD-MANIFEST-009", "MD-MANIFEST-012", "MD-MANIFEST-013", "MD-MANIFEST-014",
+        "MD-MANIFEST-015", "MD-MANIFEST-016", "MD-MANIFEST-017", "MD-MANIFEST-018", "MD-MANIFEST-023",
+        "MD-MANIFEST-024", "MD-MANIFEST-025", "MD-MANIFEST-026", "MD-MANIFEST-027", "MD-MANIFEST-029",
+        "MD-MANIFEST-032", "MD-MANIFEST-033", "MD-MANIFEST-036", "MD-MANIFEST-038", "MD-MANIFEST-039",
+        "MD-MANIFEST-040", "MD-MANIFEST-041", "MD-MANIFEST-042", "MD-MANIFEST-046", "MD-MANIFEST-047",
+        "MD-MANIFEST-048", "MD-MANIFEST-049", "MD-MANIFEST-050",
+        "PROP_TYPE_001", "PROP_TYPE_002", "PROP_TYPE_003", "PROP_TYPE_004", "PROP_TYPE_005", "PROP_TYPE_006", "PROP_TYPE_007",
+        "TIER1_MKT_001", "TIER1_MKT_002", "TIER1_MKT_003", "TIER1_MKT_004", "TIER1_MKT_005", "TIER1_MKT_006", "TIER1_MKT_007",
+        "REWARD_POOL_001", "REWARD_POOL_002", "REWARD_POOL_003", "REWARD_POOL_004", "REWARD_POOL_005",
+        "RETENTION_001", "RETENTION_002", "RETENTION_003", "RETENTION_004", "RETENTION_005"
+      ],
+      "reason": "manifest.yaml changes affect manifest structure and property type rules"
+    },
+
+    "**/**/README.md": {
+      "description": "Documentation files (root-level)",
+      "affects_rules": [
+        "AR006",
+        "KP001", "KP002", "KP003", "KP004", "KP005", "KP006", "KP007", "KP008", "KP009", "KP010"
+      ],
+      "reason": "README.md changes affect documentation and core principles rules"
+    },
+
+    "**/templates/**/*.yaml": {
+      "description": "Helm template files",
+      "affects_rules": [
+        "AR010",
+        "TS001", "TS002", "TS003", "TS004", "TS005",
+        "DC001", "DC002", "DC003", "DC004"
+      ],
+      "reason": "Template changes affect template structure, technology standards, and deployment rules"
+    },
+
+    "**/*.rego": {
+      "description": "OPA policy files",
+      "affects_rules": [
+        "MD-POLICY-009", "MD-POLICY-012", "MD-POLICY-023", "MD-POLICY-027", "MD-POLICY-028"
+      ],
+      "reason": "Policy file changes affect policy validation rules"
+    },
+
+    "**/.gitignore": {
+      "description": "Git ignore files",
+      "affects_rules": [
+        "CE001", "CE002", "CE003", "CE004", "CE005", "CE006", "CE007", "CE008"
+      ],
+      "reason": "Extension files affect consolidated extension rules"
+    },
+
+    "**/governance/**/*.yaml": {
+      "description": "Governance configuration files",
+      "affects_rules": [
+        "MD-GOV-005", "MD-GOV-006", "MD-GOV-007", "MD-GOV-008", "MD-GOV-009", "MD-GOV-010", "MD-GOV-011"
+      ],
+      "reason": "Governance changes affect governance rules"
+    },
+
+    "**": {
+      "description": "Any file change (structure changes)",
+      "affects_rules": [
+        "AR001", "AR002", "AR003", "AR007", "AR008", "AR009",
+        "MD-STRUCT-009", "MD-STRUCT-010",
+        "MR001", "MR002", "MR003",
+        "VG006", "VG007", "VG008"
+      ],
+      "reason": "Structural changes (new/deleted directories) affect root/shard counting and naming rules"
+    }
+  },
+
+  "rule_to_files": {
+    "AR001": ["**"],
+    "AR002": ["**"],
+    "AR003": ["**"],
+    "AR004": ["**/**/Chart.yaml"],
+    "AR005": ["**/**/values.yaml"],
+    "AR006": ["**/**/README.md"],
+    "AR007": ["**"],
+    "AR008": ["**"],
+    "AR009": ["**"],
+    "AR010": ["**/templates/**/*.yaml"],
+
+    "CP001": ["**/**/values.yaml"],
+    "CP002": ["**/**/values.yaml"],
+    "CP003": ["**/**/values.yaml"],
+    "CP004": ["**/**/values.yaml"],
+    "CP005": ["**/**/values.yaml"],
+    "CP006": ["**/**/values.yaml"],
+    "CP007": ["**/**/values.yaml"],
+    "CP008": ["**/**/values.yaml"],
+    "CP009": ["**/**/values.yaml"],
+    "CP010": ["**/**/values.yaml"],
+    "CP011": ["**/**/values.yaml"],
+    "CP012": ["**/**/values.yaml"],
+
+    "CS001": ["**/**/Chart.yaml"],
+    "CS002": ["**/**/Chart.yaml"],
+    "CS003": ["**/**/Chart.yaml"],
+    "CS004": ["**/**/Chart.yaml"],
+    "CS005": ["**/**/Chart.yaml"],
+    "CS006": ["**/**/Chart.yaml"],
+    "CS007": ["**/**/Chart.yaml"],
+    "CS008": ["**/**/Chart.yaml"],
+    "CS009": ["**/**/Chart.yaml"],
+    "CS010": ["**/**/Chart.yaml"],
+    "CS011": ["**/**/Chart.yaml"],
+
+    "MS001": ["**/**/manifest.yaml"],
+    "MS002": ["**/**/manifest.yaml"],
+    "MS003": ["**/**/manifest.yaml"],
+    "MS004": ["**/**/manifest.yaml"],
+    "MS005": ["**/**/manifest.yaml"],
+    "MS006": ["**/**/manifest.yaml"]
+  },
+
+  "always_run_rules": {
+    "description": "Critical rules that always run regardless of file changes",
+    "rules": [
+      "AR001", "AR002", "AR003"
+    ],
+    "reason": "Foundation rules ensure structural integrity - must always validate"
+  },
+
+  "quick_patterns": {
+    "description": "Fast patterns for common change scenarios",
+    "single_chart_change": {
+      "pattern": "*/*/Chart.yaml",
+      "expected_rules": 20,
+      "description": "Single Chart.yaml modification"
+    },
+    "single_values_change": {
+      "pattern": "*/*/values.yaml",
+      "expected_rules": 55,
+      "description": "Single values.yaml modification"
+    },
+    "single_manifest_change": {
+      "pattern": "*/*/manifest.yaml",
+      "expected_rules": 65,
+      "description": "Single manifest.yaml modification"
+    },
+    "template_change": {
+      "pattern": "*/*/templates/*.yaml",
+      "expected_rules": 15,
+      "description": "Template file modification"
+    },
+    "readme_change": {
+      "pattern": "*/README.md",
+      "expected_rules": 12,
+      "description": "Root README.md modification"
+    }
+  },
+
+  "transitive_dependencies": {
+    "description": "Rules that trigger other rules when affected",
+    "AR001": ["AR002", "AR003", "AR006", "AR007", "AR008", "AR009"],
+    "AR002": ["AR003", "AR004", "AR005", "AR007", "AR008", "AR010"],
+    "AR004": ["CP001", "CP002", "CP003", "CP004", "CP005", "CP006", "CP007", "CP008", "CP009", "CP010", "CP011", "CP012"],
+    "AR005": ["CP001", "CP002", "CP003", "CP004", "CP005", "CP006", "CP007", "CP008", "CP009", "CP010", "CP011", "CP012"]
+  },
+
+  "optimization_hints": {
+    "typical_commit_files": "5-10 files",
+    "typical_affected_rules": "20-50 rules (95% reduction from 384)",
+    "expected_speedup": "14-35x for typical commits",
+    "cache_strategy": "Combine with result caching for maximum performance"
+  }
+}

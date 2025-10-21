@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "total_rules": 384,
+    "version": "3.2.1",
+    "last_updated": "2025-10-21T12:50:52.592354",
+    "matrix_alignment": "24x16 = 384 rules"
+  },
+  "artifacts": {
+    "python_validator": "03_core/validators/sot/sot_validator_core.py",
+    "opa_policy": "23_compliance/policies/sot/sot_policy.rego",
+    "yaml_contract": "16_codex/contracts/sot/sot_contract.yaml",
+    "cli_tool": "12_tooling/cli/sot_validator.py",
+    "test_suite": "11_test_simulation/tests_compliance/test_sot_validator.py"
+  },
+  "completion_status": {
+    "python_validator": "COMPLETE (384 rules)",
+    "opa_policy": "COMPLETE (384 rules)",
+    "yaml_contract": "COMPLETE (384 rules)",
+    "cli_tool": "INTEGRATED",
+    "test_suite": "PENDING (Phase 2)"
+  },
+  "md_rules_integration": {
+    "total_md_rules": 57,
+    "md_struct": 2,
+    "md_chart": 5,
+    "md_manifest": 28,
+    "md_policy": 5,
+    "md_princ": 6,
+    "md_gov": 7,
+    "md_ext": 4
+  }
+}

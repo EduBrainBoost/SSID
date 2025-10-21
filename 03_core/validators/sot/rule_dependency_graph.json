@@ -1,0 +1,193 @@
+{
+  "_comment": "SoT Validator Rule Dependency Graph - Defines which rules can run in parallel",
+  "_structure": "Rules are grouped into batches. All rules in a batch are independent and can run in parallel. Each batch depends on completion of all previous batches.",
+  "_total_rules": 384,
+  "_batches": 8,
+
+  "dependencies": {
+    "AR001": [],
+    "AR002": ["AR001"],
+    "AR003": ["AR001", "AR002"],
+    "AR004": ["AR001", "AR002"],
+    "AR005": ["AR001", "AR002"],
+    "AR006": ["AR001"],
+    "AR007": ["AR001", "AR002"],
+    "AR008": ["AR001", "AR002"],
+    "AR009": ["AR001"],
+    "AR010": ["AR001", "AR002"],
+
+    "CP001": ["AR001", "AR002", "AR003", "AR004"],
+    "CP002": ["AR001", "AR002", "AR003", "AR004"],
+    "CP003": ["AR001", "AR002", "AR003", "AR004"],
+    "CP004": ["AR001", "AR002", "AR003", "AR004"],
+    "CP005": ["AR001", "AR002", "AR003", "AR004"],
+    "CP006": ["AR001", "AR002", "AR003", "AR004"],
+    "CP007": ["AR001", "AR002", "AR003", "AR004"],
+    "CP008": ["AR001", "AR002", "AR003", "AR004"],
+    "CP009": ["AR001", "AR002", "AR003", "AR004"],
+    "CP010": ["AR001", "AR002", "AR003", "AR004"],
+    "CP011": ["AR001", "AR002", "AR003", "AR004"],
+    "CP012": ["AR001", "AR002", "AR003", "AR004"]
+  },
+
+  "batches": [
+    {
+      "batch_id": 0,
+      "name": "Foundation - Root Structure",
+      "dependencies": [],
+      "rules": ["AR001"],
+      "rule_count": 1,
+      "description": "First rule - validates root folder count (all other AR rules depend on this)"
+    },
+    {
+      "batch_id": 1,
+      "name": "Root-Level Validation",
+      "dependencies": [0],
+      "rules": ["AR006", "AR009"],
+      "rule_count": 2,
+      "description": "Root-level checks (README, naming) - only depend on AR001"
+    },
+    {
+      "batch_id": 2,
+      "name": "Shard Structure",
+      "dependencies": [0],
+      "rules": ["AR002"],
+      "rule_count": 1,
+      "description": "Validates shard counts in each root (many rules depend on this)"
+    },
+    {
+      "batch_id": 3,
+      "name": "Matrix & Shard Validation",
+      "dependencies": [0, 2],
+      "rules": ["AR003", "AR004", "AR005", "AR007", "AR008", "AR010"],
+      "rule_count": 6,
+      "description": "Matrix structure and shard-level validations - depend on AR001 and AR002"
+    },
+    {
+      "batch_id": 4,
+      "name": "Content Policies - Batch 1",
+      "dependencies": [0, 2, 3],
+      "rules": [
+        "CP001", "CP002", "CP003", "CP004", "CP005", "CP006",
+        "CP007", "CP008", "CP009", "CP010", "CP011", "CP012",
+        "JURIS_BL_001", "JURIS_BL_002", "JURIS_BL_003", "JURIS_BL_004",
+        "JURIS_BL_005", "JURIS_BL_006", "JURIS_BL_007",
+        "SOT-V2-0091", "SOT-V2-0092", "SOT-V2-0093", "SOT-V2-0094"
+      ],
+      "rule_count": 23,
+      "description": "Critical policies and content scans - all independent, depend on basic structure"
+    },
+    {
+      "batch_id": 5,
+      "name": "Governance & Structure - Batch 2",
+      "dependencies": [0, 2, 3],
+      "rules": [
+        "VG001", "VG002", "VG003", "VG004", "VG005", "VG006", "VG007", "VG008",
+        "CS001", "CS002", "CS003", "CS004", "CS005", "CS006", "CS007", "CS008", "CS009", "CS010", "CS011",
+        "MS001", "MS002", "MS003", "MS004", "MS005", "MS006",
+        "KP001", "KP002", "KP003", "KP004", "KP005", "KP006", "KP007", "KP008", "KP009", "KP010"
+      ],
+      "rule_count": 43,
+      "description": "Versioning, chart structure, manifest, and core principles - all independent"
+    },
+    {
+      "batch_id": 6,
+      "name": "Extensions & Standards - Batch 3",
+      "dependencies": [0, 2, 3],
+      "rules": [
+        "CE001", "CE002", "CE003", "CE004", "CE005", "CE006", "CE007", "CE008",
+        "TS001", "TS002", "TS003", "TS004", "TS005",
+        "DC001", "DC002", "DC003", "DC004",
+        "MR001", "MR002", "MR003"
+      ],
+      "rule_count": 20,
+      "description": "Consolidated extensions, tech standards, deployment, matrix - all independent"
+    },
+    {
+      "batch_id": 7,
+      "name": "Metadata & Enumerated Rules - Batch 4",
+      "dependencies": [0, 2, 3],
+      "rules": [
+        "MD-STRUCT-009", "MD-STRUCT-010",
+        "MD-CHART-024", "MD-CHART-029", "MD-CHART-045", "MD-CHART-048", "MD-CHART-050",
+        "MD-MANIFEST-004", "MD-MANIFEST-009", "MD-MANIFEST-012", "MD-MANIFEST-013",
+        "MD-MANIFEST-014", "MD-MANIFEST-015", "MD-MANIFEST-016", "MD-MANIFEST-017",
+        "MD-MANIFEST-018", "MD-MANIFEST-023", "MD-MANIFEST-024", "MD-MANIFEST-025",
+        "MD-MANIFEST-026", "MD-MANIFEST-027", "MD-MANIFEST-029", "MD-MANIFEST-032",
+        "MD-MANIFEST-033", "MD-MANIFEST-036", "MD-MANIFEST-038", "MD-MANIFEST-039",
+        "MD-MANIFEST-040", "MD-MANIFEST-041", "MD-MANIFEST-042", "MD-MANIFEST-046",
+        "MD-MANIFEST-047", "MD-MANIFEST-048", "MD-MANIFEST-049", "MD-MANIFEST-050",
+        "MD-POLICY-009", "MD-POLICY-012", "MD-POLICY-023", "MD-POLICY-027", "MD-POLICY-028",
+        "MD-PRINC-007", "MD-PRINC-009", "MD-PRINC-013", "MD-PRINC-018", "MD-PRINC-019", "MD-PRINC-020",
+        "MD-GOV-005", "MD-GOV-006", "MD-GOV-007", "MD-GOV-008", "MD-GOV-009", "MD-GOV-010",
+        "PROP_TYPE_001", "PROP_TYPE_002", "PROP_TYPE_003", "PROP_TYPE_004", "PROP_TYPE_005", "PROP_TYPE_006", "PROP_TYPE_007",
+        "TIER1_MKT_001", "TIER1_MKT_002", "TIER1_MKT_003", "TIER1_MKT_004", "TIER1_MKT_005", "TIER1_MKT_006", "TIER1_MKT_007",
+        "REWARD_POOL_001", "REWARD_POOL_002", "REWARD_POOL_003", "REWARD_POOL_004", "REWARD_POOL_005",
+        "NETWORK_001", "NETWORK_002", "NETWORK_003", "NETWORK_004", "NETWORK_005", "NETWORK_006",
+        "AUTH_METHOD_001", "AUTH_METHOD_002", "AUTH_METHOD_003", "AUTH_METHOD_004", "AUTH_METHOD_005", "AUTH_METHOD_006",
+        "PII_CAT_001", "PII_CAT_002", "PII_CAT_003", "PII_CAT_004", "PII_CAT_005", "PII_CAT_006", "PII_CAT_007", "PII_CAT_008", "PII_CAT_009", "PII_CAT_010",
+        "HASH_ALG_001", "HASH_ALG_002", "HASH_ALG_003", "HASH_ALG_004",
+        "RETENTION_001", "RETENTION_002", "RETENTION_003", "RETENTION_004", "RETENTION_005",
+        "DID_METHOD_001", "DID_METHOD_002", "DID_METHOD_003", "DID_METHOD_004"
+      ],
+      "rule_count": 106,
+      "description": "MD rules and all enumerated rule types - all independent, largest batch for maximum parallelism"
+    },
+    {
+      "batch_id": 8,
+      "name": "SOT-V2 Rules - Batch 5",
+      "dependencies": [0, 2, 3],
+      "rules": ["SOT-V2-DYNAMIC"],
+      "rule_count": 185,
+      "description": "All SOT-V2-XXXX rules (0001-0189, excluding 0091-0094 already in batch 4) - all independent"
+    }
+  ],
+
+  "parallelization_strategy": {
+    "batch_0": {
+      "max_workers": 1,
+      "reason": "Single rule, no parallelization needed"
+    },
+    "batch_1": {
+      "max_workers": 2,
+      "reason": "2 rules, run both in parallel"
+    },
+    "batch_2": {
+      "max_workers": 1,
+      "reason": "Single rule, critical for next batch"
+    },
+    "batch_3": {
+      "max_workers": 6,
+      "reason": "6 rules, optimal for most CPUs (4-8 cores)"
+    },
+    "batch_4": {
+      "max_workers": "auto",
+      "reason": "23 independent rules - use all available workers"
+    },
+    "batch_5": {
+      "max_workers": "auto",
+      "reason": "43 independent rules - use all available workers"
+    },
+    "batch_6": {
+      "max_workers": "auto",
+      "reason": "20 independent rules - use all available workers"
+    },
+    "batch_7": {
+      "max_workers": "auto",
+      "reason": "106 independent rules - use all available workers, largest batch"
+    },
+    "batch_8": {
+      "max_workers": "auto",
+      "reason": "185 SOT-V2 rules - use all available workers, most rules"
+    }
+  },
+
+  "expected_performance": {
+    "sequential_time_estimate": "35-40s",
+    "parallel_time_estimate": "12-15s",
+    "speedup_target": "2.5-3x",
+    "bottleneck_batches": [0, 2],
+    "high_parallelism_batches": [4, 5, 6, 7, 8],
+    "notes": "Batches 0 and 2 are sequential (1 rule each), but batches 4-8 contain 334 rules that can run in parallel"
+  }
+}

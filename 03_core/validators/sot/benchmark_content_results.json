@@ -1,0 +1,40 @@
+{
+  "timestamp": "2025-10-21T11:29:06.385926",
+  "repository": "C:\\Users\\bibel\\Documents\\Github\\SSID",
+  "results": {
+    "file_filtering": {
+      "unfiltered_count": 23407,
+      "filtered_count": 6123,
+      "reduction_count": 17284,
+      "reduction_percent": 73.8,
+      "unfiltered_time": 5.3614935874938965,
+      "filtered_time": 6.846164226531982
+    },
+    "baseline": {
+      "execution_time": 13.163896083831787,
+      "violation_count": 10,
+      "speedup": 1.0
+    },
+    "optimized_python": {
+      "execution_time": 8.820898056030273,
+      "scan_time": 8.821,
+      "violation_count": 5,
+      "files_scanned": 6123,
+      "files_skipped": 17280,
+      "cache_hits": 0,
+      "cache_misses": 6123,
+      "cache_hit_rate": 0.0,
+      "speedup": 1.4923532728997462
+    },
+    "optimized_ripgrep": {
+      "available": false,
+      "note": "ripgrep not installed on system"
+    },
+    "warm_cache": {
+      "execution_time": 7.66141152381897,
+      "violation_count": 5,
+      "cache_hit_rate": 50.0,
+      "speedup": 1.7182076752966278
+    }
+  }
+}
