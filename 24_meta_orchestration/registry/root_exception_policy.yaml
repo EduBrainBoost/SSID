@@ -16,6 +16,10 @@ exceptions:
     reason: Git ignore rules
     allow_in_roots: []
 
+  - path: .gitattributes
+    reason: Git LFS and line ending configuration
+    allow_in_roots: []
+
   - path: .github/
     reason: GitHub Actions workflows
     allow_in_roots: []
