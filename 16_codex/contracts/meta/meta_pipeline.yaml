@@ -1,0 +1,29 @@
+
+version: "1.0"
+name: "SSID Meta Orchestration Pipeline"
+description: "Deterministische Orchestrierung der SoT-Subsysteme"
+cycles:
+  - id: validation
+    steps:
+      - id: validate_sot_artifacts_presence
+        must: true
+      - id: validate_state_schema
+        must: true
+  - id: compliance
+    steps:
+      - id: opa_policy_gate_orchestrator
+        must: true
+  - id: testing
+    steps:
+      - id: run_pytest_suite
+        must: true
+  - id: registry_update
+    steps:
+      - id: update_meta_registry
+        must: true
+  - id: audit
+    steps:
+      - id: write_boot_report
+        must: true
+      - id: update_audit_diff
+        must: true

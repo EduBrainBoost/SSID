@@ -1,0 +1,79 @@
+{
+  "timestamp": "2025-10-24T16:40:50.919714+00:00",
+  "overall_status": "SUCCESS",
+  "overall_score": 100.0,
+  "total_duration_seconds": 21.296287059783936,
+  "phases": [
+    {
+      "phase": "Phase 1: 6-Layer Security Check",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 20.853070735931396,
+      "details": {
+        "status": "SUCCESS",
+        "score": 100.0,
+        "errors": []
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:40:50.476497+00:00"
+    },
+    {
+      "phase": "Phase 3: Change Detection & Quarantine",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 0.4385502338409424,
+      "details": {
+        "status": "SUCCESS",
+        "score": 100.0,
+        "errors": []
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:40:50.919714+00:00"
+    },
+    {
+      "phase": "Phase 5: Validation & Verification",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 0.0,
+      "details": {
+        "registry_exists": true,
+        "artefacts_exist": true,
+        "worm_intact": true,
+        "shards_valid": true
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:40:50.919714+00:00"
+    },
+    {
+      "phase": "Phase 6: Self-Healing & Recovery",
+      "status": "NONE_REQUIRED",
+      "score": 100.0,
+      "duration_seconds": 0.0,
+      "details": {
+        "actions": []
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:40:50.919714+00:00"
+    },
+    {
+      "phase": "Phase 8: Reporting & Audit",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 0.0,
+      "details": {
+        "report_generated": true
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:40:50.919714+00:00"
+    }
+  ],
+  "summary": {
+    "total_phases": 5,
+    "successful_phases": 4,
+    "partial_phases": 0,
+    "failed_phases": 0,
+    "average_score": 100.0,
+    "total_errors": 0
+  },
+  "next_run": "2025-10-24T16:45:50.919714+00:00"
+}

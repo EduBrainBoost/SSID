@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "timestamp": "2025-10-22T17:45:54.273300+00:00",
+    "mode": "standard",
+    "total_duration": 1.23
+  },
+  "summary": {
+    "overall_score": 100.0,
+    "passed": 3,
+    "failed": 0,
+    "total_layers": 3,
+    "threshold": 95.0,
+    "meets_threshold": true
+  },
+  "layers": {
+    "10": {
+      "name": "Meta-Control",
+      "success": true,
+      "duration": 0.09305572509765625,
+      "output": "[Layer 10] Evaluating SoT update v3.2.1...\n  Audit score: 100.0%\n  Signatures valid: True\n  Merkle verified: True\n  → PROMOTE: Meets all criteria\n\n✅ SoT update v3.2.1 APPROVED for promotion\n",
+      "critical": true
+    },
+    "9": {
+      "name": "Cross-Federation",
+      "success": true,
+      "duration": 0.430652379989624,
+      "output": "[Layer 9] Anchoring SoT v3.2.0 to proof chain...\n  → Transaction hash: e6409da588653a97...\n  ✅ Anchored successfully\n[Layer 9] Verifying cross-federation signature from EUDI...\n  ✅ Federation EUDI signature verified\n",
+      "critical": false
+    },
+    "8": {
+      "name": "Behavior & Anomaly",
+      "success": true,
+      "duration": 1.1391544342041016,
+      "output": "[Layer 8] Generating behavioral fingerprint for build_1761155153...\n  ✅ Fingerprint normal: CPU 6.4%\n",
+      "critical": false
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

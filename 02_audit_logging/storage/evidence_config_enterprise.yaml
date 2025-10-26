@@ -1,0 +1,41 @@
+# Auto-generated from validator expectations
+# Source: unified_content_validators.py
+# Fields: 37
+
+version: '1.0'
+deprecated: false
+classification: CONFIDENTIAL - Enterprise Evidence Management
+storage_tiers:
+  immutable_store:
+    path: 02_audit_logging/storage/worm/immutable_store/
+    retention: permanent
+    integrity: sha256_hash
+    encryption: aes256_enterprise
+  blockchain_anchors:
+    enabled: true
+    path: 02_audit_logging/storage/blockchain_anchors/
+    service: opentimestamp
+    frequency: weekly
+    classification: CONFIDENTIAL
+  evidence_chain:
+    path: 23_compliance/evidence/ci_runs/
+    retention: 10_years
+    encryption: aes256
+    backup: encrypted_offsite
+  internal_review_documentation:
+    path: 23_compliance/reviews/internal/
+    retention: 15_years
+    encryption: aes256
+    classification: CONFIDENTIAL
+  business_evidence:
+    path: 23_compliance/evidence/business_assessments/
+    retention: permanent
+    encryption: aes256
+    classification: CONFIDENTIAL
+audit_enhancement:
+  blockchain_anchoring: enabled
+  opentimestamp_enabled: true
+  evidence_timestamping: full_blockchain
+  proof_of_existence: sha256+blockchain+timestamp
+  verification_method: hash_chain+blockchain
+  enterprise_controls: full_audit_trail

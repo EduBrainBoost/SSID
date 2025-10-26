@@ -1,0 +1,216 @@
+name: SOT System Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  validate-shard-matrix:
+    name: Validate 24x16 Shard Matrix
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyyaml
+
+    - name: Verify all 384 shards exist
+      run: |
+        python 12_tooling/scripts/verify_shard_matrix.py
+
+    - name: Upload shard verification report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: shard-verification
+        path: 02_audit_logging/reports/shard_*.json
+
+  validate-master-index:
+    name: Validate Master SOT Index
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Check master index exists
+      run: |
+        if [ ! -f "24_meta_orchestration/registry/sot_master_index.json" ]; then
+          echo "Error: Master index not found!"
+          exit 1
+        fi
+        echo "Master index found"
+
+    - name: Validate master index integrity
+      run: |
+        python -c "
+        import json
+        import sys
+
+        with open('24_meta_orchestration/registry/sot_master_index.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        required_keys = ['version', 'source_artifacts', 'rules', 'statistics']
+        for key in required_keys:
+            if key not in data:
+                print(f'Error: Missing key {key}')
+                sys.exit(1)
+
+        if len(data['source_artifacts']) != 5:
+            print(f'Error: Expected 5 artifacts, found {len(data[\"source_artifacts\"])}')
+            sys.exit(1)
+
+        if data['statistics']['unique_semantic_rules'] < 50000:
+            print(f'Warning: Only {data[\"statistics\"][\"unique_semantic_rules\"]} rules')
+
+        print(f'Master index valid: {data[\"statistics\"][\"unique_semantic_rules\"]} rules from {len(data[\"source_artifacts\"])} artifacts')
+        "
+
+  validate-sot-references:
+    name: Validate Chart.yaml SOT References
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyyaml
+
+    - name: Test chart.yaml SOT references
+      run: |
+        python 12_tooling/scripts/test_chart_yaml_sot_references.py
+
+  run-complete-tests:
+    name: Run Complete System Tests
+    runs-on: ubuntu-latest
+    needs: [validate-shard-matrix, validate-master-index, validate-sot-references]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyyaml
+
+    - name: Run SOT system tests
+      run: |
+        python 12_tooling/scripts/test_sot_system.py
+
+    - name: Upload test reports
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-reports
+        path: 02_audit_logging/reports/
+
+  check-synchronization:
+    name: Check 5 SOT Artifacts Synchronization
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyyaml
+
+    - name: Check 5 SOT artifacts exist
+      run: |
+        python -c "
+        from pathlib import Path
+        import sys
+
+        artifacts = [
+            '16_codex/structure/level3/sot_contract_expanded_TRUE.yaml',
+            '16_codex/contracts/sot/sot_contract_COMPLETE.yaml',
+            '16_codex/contracts/sot/sot_contract.yaml',
+            '16_codex/contracts/sot/sot_contract_part2.yaml',
+            '16_codex/contracts/sot/sot_contract_part3.yaml'
+        ]
+
+        missing = []
+        for artifact in artifacts:
+            if not Path(artifact).exists():
+                missing.append(artifact)
+
+        if missing:
+            print(f'Error: Missing artifacts:')
+            for m in missing:
+                print(f'  - {m}')
+            sys.exit(1)
+
+        print(f'All 5 SOT artifacts found')
+        "
+
+    - name: Verify synchronization (dry run)
+      run: |
+        python 12_tooling/scripts/synchronize_5_sot_artifacts.py
+
+    - name: Upload sync report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: sync-report
+        path: 02_audit_logging/reports/sot_5_artifacts_*.json
+
+  generate-status-badge:
+    name: Generate Status Badge
+    runs-on: ubuntu-latest
+    needs: [run-complete-tests]
+    if: always()
+
+    steps:
+    - name: Create badge
+      run: |
+        if [ "${{ needs.run-complete-tests.result }}" == "success" ]; then
+          echo "STATUS=passing" >> $GITHUB_ENV
+          echo "COLOR=brightgreen" >> $GITHUB_ENV
+        else
+          echo "STATUS=failing" >> $GITHUB_ENV
+          echo "COLOR=red" >> $GITHUB_ENV
+        fi
+
+    - name: Update status
+      run: |
+        echo "SOT System Status: ${{ env.STATUS }}"

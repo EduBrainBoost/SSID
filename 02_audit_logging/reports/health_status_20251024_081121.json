@@ -1,0 +1,243 @@
+{
+  "timestamp": "2025-10-24T08:11:21.149512+00:00",
+  "overall_status": "PASS",
+  "total_checks": 22,
+  "passed": 22,
+  "warned": 0,
+  "failed": 0,
+  "checks": [
+    {
+      "component": "contract",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: sot_contract.yaml",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\16_codex\\contracts\\sot\\sot_contract.yaml"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "policy",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: sot_policy.rego",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\23_compliance\\policies\\sot\\sot_policy.rego"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "validator",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: sot_validator_core.py",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\03_core\\validators\\sot\\sot_validator_core.py"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "cli",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: sot_validator.py",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\12_tooling\\cli\\sot_validator.py"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "tests",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: test_sot_validator.py",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\11_test_simulation\\tests_compliance\\test_sot_validator.py"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "registry",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: sot_registry.json",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\24_meta_orchestration\\registry\\sot_registry.json"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "parser",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: sot_rule_parser_v3.py",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\03_core\\validators\\sot\\sot_rule_parser_v3.py"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "extractor",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: sot_extractor.py",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\03_core\\validators\\sot\\sot_extractor.py"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "audit_report",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: SOT_MOSCOW_ENFORCEMENT_V4.0.0.md",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\reports\\SOT_MOSCOW_ENFORCEMENT_V4.0.0.md"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "ci_autopilot",
+      "check_name": "file_exists",
+      "status": "PASS",
+      "message": "File exists: sot_autopilot.yml",
+      "details": {
+        "path": "C:\\Users\\bibel\\Documents\\Github\\SSID\\.github\\workflows\\sot_autopilot.yml"
+      },
+      "timestamp": "2025-10-24T08:11:11.217551+00:00"
+    },
+    {
+      "component": "contract",
+      "check_name": "yaml_structure",
+      "status": "PASS",
+      "message": "YAML structure valid",
+      "details": {
+        "version": "4.0.0",
+        "rule_count": 4723
+      },
+      "timestamp": "2025-10-24T08:11:14.472030+00:00"
+    },
+    {
+      "component": "validator",
+      "check_name": "python_syntax",
+      "status": "PASS",
+      "message": "Python syntax valid",
+      "details": {},
+      "timestamp": "2025-10-24T08:11:14.676939+00:00"
+    },
+    {
+      "component": "registry",
+      "check_name": "json_structure",
+      "status": "PASS",
+      "message": "JSON structure valid",
+      "details": {
+        "version": "4.0.0",
+        "rule_count": 4723
+      },
+      "timestamp": "2025-10-24T08:11:14.694348+00:00"
+    },
+    {
+      "component": "system",
+      "check_name": "version_consistency",
+      "status": "PASS",
+      "message": "All versions consistent: 4.0.0",
+      "details": {
+        "contract": "4.0.0",
+        "registry": "4.0.0"
+      },
+      "timestamp": "2025-10-24T08:11:17.916357+00:00"
+    },
+    {
+      "component": "system",
+      "check_name": "rule_count_consistency",
+      "status": "PASS",
+      "message": "All rule counts consistent: 4723",
+      "details": {
+        "contract": 4723,
+        "registry": 4723,
+        "validator": 4723
+      },
+      "timestamp": "2025-10-24T08:11:21.142500+00:00"
+    },
+    {
+      "component": "contract",
+      "check_name": "hash_integrity",
+      "status": "PASS",
+      "message": "Hash computed successfully",
+      "details": {
+        "hash": "71a14b76a8da1309..."
+      },
+      "timestamp": "2025-10-24T08:11:21.146511+00:00"
+    },
+    {
+      "component": "policy",
+      "check_name": "hash_integrity",
+      "status": "PASS",
+      "message": "Hash computed successfully",
+      "details": {
+        "hash": "0d73fbb7c9d7188b..."
+      },
+      "timestamp": "2025-10-24T08:11:21.147502+00:00"
+    },
+    {
+      "component": "validator",
+      "check_name": "hash_integrity",
+      "status": "PASS",
+      "message": "Hash computed successfully",
+      "details": {
+        "hash": "0c86481c3c2f3da2..."
+      },
+      "timestamp": "2025-10-24T08:11:21.149512+00:00"
+    },
+    {
+      "component": "system",
+      "check_name": "cross_artifact_mapping",
+      "status": "PASS",
+      "message": "All artifacts properly mapped",
+      "details": {
+        "total_unique_rules": 0,
+        "rules_by_artifact": {},
+        "duplicates_found": 0,
+        "missing_in_artifacts": {},
+        "is_consistent": true,
+        "errors": [
+          "Parser not available"
+        ]
+      },
+      "timestamp": "2025-10-24T08:11:21.149512+00:00"
+    },
+    {
+      "component": "validator",
+      "check_name": "execution_health",
+      "status": "PASS",
+      "message": "Validator can be imported",
+      "details": {},
+      "timestamp": "2025-10-24T08:11:21.149512+00:00"
+    },
+    {
+      "component": "ci_autopilot",
+      "check_name": "pipeline_config",
+      "status": "PASS",
+      "message": "All required pipeline steps found",
+      "details": {
+        "steps_found": 3
+      },
+      "timestamp": "2025-10-24T08:11:21.149512+00:00"
+    },
+    {
+      "component": "system",
+      "check_name": "recent_activity",
+      "status": "PASS",
+      "message": "10 files updated in last 7 days",
+      "details": {
+        "recent_count": 10
+      },
+      "timestamp": "2025-10-24T08:11:21.149512+00:00"
+    }
+  ],
+  "summary": {
+    "repository": "C:\\Users\\bibel\\Documents\\Github\\SSID",
+    "components_checked": 10,
+    "health_status": "PASS"
+  }
+}

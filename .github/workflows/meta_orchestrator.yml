@@ -1,0 +1,68 @@
+
+name: meta_orchestrator_ci
+on:
+  push:
+    paths:
+      - "24_meta_orchestration/**"
+      - "16_codex/contracts/meta/**"
+      - "23_compliance/policies/orchestrator/**"
+      - "03_core/validators/**"
+      - "11_test_simulation/tests_meta/**"
+      - ".github/workflows/meta_orchestrator.yml"
+  workflow_dispatch: {}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run meta boot
+        run: |
+          export SSID_REPO_ROOT=$GITHUB_WORKSPACE
+          python 12_tooling/cli/meta_cli.py --boot
+      - name: Pytest
+        run: |
+          pip install pytest
+          export SSID_REPO_ROOT=$GITHUB_WORKSPACE
+          pytest -q
+      - name: Archive reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: meta-reports
+          path: |
+            02_audit_logging/reports/*
+            24_meta_orchestration/meta_state_matrix.json
+            24_meta_orchestration/meta_global_scorecard.md
+
+
+opa_eval:
+  runs-on: ubuntu-latest
+  needs: test
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Prepare OPA Input
+      run: |
+        export SSID_REPO_ROOT=$GITHUB_WORKSPACE
+        python 23_compliance/policies/orchestrator/orchestrator_input_mapper.py > input.json
+        cat input.json
+    - name: Download OPA
+      run: |
+        curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+        chmod +x opa
+    - name: Evaluate Policy
+      run: |
+        ./opa eval -f pretty -i input.json -d 23_compliance/policies/orchestrator/orchestrator_policy.rego "data.ssid.meta.orchestrator.deny" > deny.txt
+        ./opa eval -f pretty -i input.json -d 23_compliance/policies/orchestrator/orchestrator_policy.rego "data.ssid.meta.orchestrator.warn" > warn.txt || true
+        echo "Warn count: $(wc -l < warn.txt)"
+    - name: Upload OPA Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: opa-results
+        path: |
+          deny.txt
+          warn.txt

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "SSID SoT Contract (Autopilot)",
+  "description": "Auto-generated from extracted_all_91_rules.json",
+  "type": "object",
+  "generated": "2025-10-22T17:52:35.532594+00:00",
+  "rules": {
+    "total": 91,
+    "by_severity": {
+      "CRITICAL": 34,
+      "HIGH": 40,
+      "MEDIUM": 13,
+      "LOW": 4
+    },
+    "by_type": {
+      "MUST": 89,
+      "NIEMALS": 2
+    }
+  },
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "compliance_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    }
+  },
+  "required": [
+    "version",
+    "timestamp",
+    "compliance_score"
+  ],
+  "additionalProperties": false
+}

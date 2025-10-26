@@ -1,0 +1,153 @@
+name: SoT Complete Automation
+
+# Tägliche Ausführung + bei jedem Push
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Täglich um 3:00 UTC
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:  # Manuelle Trigger-Option
+
+jobs:
+  sot-full-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for delta detection
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pytest pytest-cov networkx
+
+      - name: Run Master Orchestrator
+        id: orchestrator
+        run: |
+          python 24_meta_orchestration/master_orchestrator.py --full
+        continue-on-error: true
+
+      - name: Upload Orchestration Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: orchestration-results
+          path: |
+            24_meta_orchestration/runs/latest.json
+            02_audit_logging/proof/*.json
+            11_test_simulation/proof/*.json
+            24_meta_orchestration/concordance/*.json
+            01_ai_layer/anomaly/reports/*.json
+          retention-days: 90
+
+      - name: Check Orchestration Status
+        run: |
+          if [ -f "24_meta_orchestration/runs/latest.json" ]; then
+            STATUS=$(jq -r '.overall_status' 24_meta_orchestration/runs/latest.json)
+            echo "Orchestration Status: $STATUS"
+
+            if [ "$STATUS" = "FAIL" ]; then
+              echo "::error::Orchestration FAILED"
+              exit 2
+            elif [ "$STATUS" = "WARN" ]; then
+              echo "::warning::Orchestration has WARNINGS"
+              exit 1
+            else
+              echo "::notice::Orchestration PASSED"
+              exit 0
+            fi
+          else
+            echo "::error::No orchestration result found"
+            exit 2
+          fi
+
+      - name: Post Results to PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            if (!fs.existsSync('24_meta_orchestration/runs/latest.json')) {
+              return;
+            }
+
+            const result = JSON.parse(fs.readFileSync('24_meta_orchestration/runs/latest.json', 'utf8'));
+
+            const statusEmoji = {
+              'PASS': '✅',
+              'WARN': '⚠️',
+              'FAIL': '❌',
+              'SKIP': '⏭️'
+            };
+
+            let comment = `## SoT Orchestration Results\n\n`;
+            comment += `**Overall Status:** ${statusEmoji[result.overall_status] || '❓'} ${result.overall_status}\n`;
+            comment += `**Duration:** ${result.total_duration_seconds.toFixed(2)}s\n\n`;
+            comment += `### Stages\n\n`;
+            comment += `| Stage | Status | Duration | Exit Code |\n`;
+            comment += `|-------|--------|----------|--------|\n`;
+
+            for (const stage of result.stages) {
+              const emoji = statusEmoji[stage.status] || '❓';
+              comment += `| ${stage.stage_name} | ${emoji} ${stage.status} | ${stage.duration_seconds.toFixed(2)}s | ${stage.exit_code} |\n`;
+            }
+
+            if (result.failures.length > 0) {
+              comment += `\n### ❌ Failures\n\n`;
+              for (const failure of result.failures) {
+                comment += `- ${failure}\n`;
+              }
+            }
+
+            if (result.warnings.length > 0) {
+              comment += `\n### ⚠️ Warnings\n\n`;
+              for (const warning of result.warnings) {
+                comment += `- ${warning}\n`;
+              }
+            }
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Create GitHub Deployment Status
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          if [ -f "24_meta_orchestration/runs/latest.json" ]; then
+            STATUS=$(jq -r '.overall_status' 24_meta_orchestration/runs/latest.json)
+
+            if [ "$STATUS" = "PASS" ]; then
+              echo "::notice::Deployment approved - All SoT checks passed"
+            else
+              echo "::error::Deployment blocked - SoT checks failed"
+              exit 1
+            fi
+          fi
+
+  notification:
+    runs-on: ubuntu-latest
+    needs: sot-full-pipeline
+    if: always() && github.event_name == 'schedule'
+
+    steps:
+      - name: Send Notification on Failure
+        if: needs.sot-full-pipeline.result == 'failure'
+        run: |
+          echo "Daily SoT orchestration FAILED"
+          # TODO: Integrate with Slack/Email/Discord
+          # curl -X POST $SLACK_WEBHOOK_URL -d '{"text":"SoT Daily Run FAILED"}'

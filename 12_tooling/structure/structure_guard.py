@@ -9,7 +9,9 @@ ALLOWED_ROOTS = [
  "14_zero_time_auth","15_infra","16_codex","17_observability","18_data_layer",
  "19_adapters","20_foundation","21_post_quantum_crypto","22_datasets",
  "23_compliance","24_meta_orchestration",".github",".git",".gitattributes",
- ".gitmodules",".LICENSE",".README",".claude","ssid_validator",".pytest"
+ ".gitmodules",".gitignore","LICENSE","README.md",".claude","ssid_validator",
+ ".pytest",".pytest_cache",".coverage","__pycache__",".venv","venv",
+ "pytest.ini",".ssid_cache"
 ]
 
 PLACEHOLDER_PATTERNS = re.compile(r"\b(TODO|FIXME|PLACEHOLDER|STUB|MOCK|XXX)\b", re.I)

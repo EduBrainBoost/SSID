@@ -1,0 +1,4739 @@
+{
+  "metadata": {
+    "extraction_date": "2025-10-23T19:55:34.268256",
+    "total_rules": 537,
+    "source_files": [
+      "ssid_master_definition_corrected_v1.1.1.md",
+      "SSID_structure_level3_part1_MAX.md",
+      "SSID_structure_level3_part2_MAX.md",
+      "SSID_structure_level3_part3_MAX.md"
+    ],
+    "extraction_version": "4.0.0 ULTIMATE"
+  },
+  "rules": [
+    {
+      "rule_id": "YAML-5636b264",
+      "type": "yaml_block",
+      "content": "metadata:\n  shard_id: \"01_identitaet_personen\"\n  version: \"2.1.0\"\n  status: \"production\"\n  \ngovernance:\n  owner: { team, lead, contact }\n  reviewers: { architecture, compliance, security }\n  change_pr",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 438,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-ff3d4c7b",
+      "type": "yaml_block",
+      "content": "metadata:\n  implementation_id: \"python-tensorflow\"\n  implementation_version: \"2.1.3\"\n  chart_version: \"2.1.0\"\n  maturity: \"production\"\n  \ntechnology_stack:\n  language: { name: \"python\", version: \"3.11",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 533,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-540394e9",
+      "type": "yaml_block",
+      "content": "data_policy:\n  storage_type: \"hash_only\"\n  hash_algorithm: \"SHA3-256\"\n  pepper_strategy: \"per_tenant\"\n  deterministic: true\n  raw_data_retention: \"0 seconds\"",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 679,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-c8249bbd",
+      "type": "yaml_block",
+      "content": "country_specific:\n  uk:\n    ico_uk_gdpr:\n      mandatory: true\n      requirements:\n        - dpa_2018_alignment: true\n        - dpo_contact_records: true\n  singapore:\n    mas_pdpa:\n      mandatory: tr",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 976,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-46dc6d9d",
+      "type": "yaml_block",
+      "content": "on:\n  push:\n    branches: [ main, develop ]\n  pull_request:\n    branches: [ main, develop ]\n  schedule:\n    - cron: '15 3 * * *'      # daily sanctions\n    - cron: '0 0 1 */3 *'     # quarterly audit ",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1009,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-be86d6e5",
+      "type": "yaml_block",
+      "content": "- name: Build entities_to_check.json\n  run: |\n    python 23_compliance/scripts/build_entities_list.py       --registry 24_meta_orchestration/registry/endpoints.yaml       --out /tmp/entities_to_check.",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1025,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-3012bad0",
+      "type": "yaml_block",
+      "content": "# 23_compliance/evidence/sanctions/sources.yaml\nversion: 1.0.0\nlast_updated: \"<ISO8601>\"\nsources:\n  ofac_sdn:\n    url: \"https://www.treasury.gov/ofac\"\n    sha256: \"<hash>\"\n  eu_consolidated:\n    url: ",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1032,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "HEADER-1-46901c64",
+      "type": "header",
+      "level": 1,
+      "content": "SSID Project - Master Definition v1.0",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-10-4cfa8d64",
+      "type": "header",
+      "level": 2,
+      "content": "📋 Inhaltsverzeichnis",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 10,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-28-334de634",
+      "type": "header",
+      "level": 2,
+      "content": "Projektübersicht",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 28,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-32-13d9ede3",
+      "type": "header",
+      "level": 3,
+      "content": "Vision",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 32,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-35-f3fa7c0a",
+      "type": "header",
+      "level": 3,
+      "content": "Architektur-Paradigma",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 35,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-41-c7f32467",
+      "type": "header",
+      "level": 3,
+      "content": "Technologie-Stack",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 41,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-50-718e907b",
+      "type": "header",
+      "level": 2,
+      "content": "Die 24 Root-Ordner",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 50,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-54-00be95b9",
+      "type": "header",
+      "level": 3,
+      "content": "01. ai_layer",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 54,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-61-09d3ac3b",
+      "type": "header",
+      "level": 3,
+      "content": "02. audit_logging",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 61,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-67-83ba7f57",
+      "type": "header",
+      "level": 3,
+      "content": "03. core",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 67,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-74-9de6a8a6",
+      "type": "header",
+      "level": 3,
+      "content": "04. deployment",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 74,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-80-99eac20f",
+      "type": "header",
+      "level": 3,
+      "content": "05. documentation",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 80,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-86-41444861",
+      "type": "header",
+      "level": 3,
+      "content": "06. data_pipeline",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 86,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-92-6f820855",
+      "type": "header",
+      "level": 3,
+      "content": "07. governance_legal",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 92,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-98-bf8b8d4d",
+      "type": "header",
+      "level": 3,
+      "content": "08. identity_score",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 98,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-104-de825911",
+      "type": "header",
+      "level": 3,
+      "content": "09. meta_identity",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 104,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-110-9dce96e9",
+      "type": "header",
+      "level": 3,
+      "content": "10. interoperability",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 110,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-116-82df7ab5",
+      "type": "header",
+      "level": 3,
+      "content": "11. test_simulation",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 116,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-122-ddfafb75",
+      "type": "header",
+      "level": 3,
+      "content": "12. tooling",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 122,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-128-bc734847",
+      "type": "header",
+      "level": 3,
+      "content": "13. ui_layer",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 128,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-134-61cdb6ec",
+      "type": "header",
+      "level": 3,
+      "content": "14. zero_time_auth",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 134,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-140-4cce51a4",
+      "type": "header",
+      "level": 3,
+      "content": "15. infra",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 140,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-146-5fb88592",
+      "type": "header",
+      "level": 3,
+      "content": "16. codex",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 146,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-152-2c6324aa",
+      "type": "header",
+      "level": 3,
+      "content": "17. observability",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 152,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-158-36301651",
+      "type": "header",
+      "level": 3,
+      "content": "18. data_layer",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 158,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-164-1966d58f",
+      "type": "header",
+      "level": 3,
+      "content": "19. adapters",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 164,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-170-038653d4",
+      "type": "header",
+      "level": 3,
+      "content": "20. foundation",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 170,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-176-c85fc649",
+      "type": "header",
+      "level": 3,
+      "content": "21. post_quantum_crypto",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 176,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-182-46243ade",
+      "type": "header",
+      "level": 3,
+      "content": "22. datasets",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 182,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-188-5bd511db",
+      "type": "header",
+      "level": 3,
+      "content": "23. compliance",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 188,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-194-42d08099",
+      "type": "header",
+      "level": 3,
+      "content": "24. meta_orchestration",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 194,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-202-9ac9114c",
+      "type": "header",
+      "level": 2,
+      "content": "Die 16 Shards (Oberkategorien)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 202,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-206-21c45168",
+      "type": "header",
+      "level": 3,
+      "content": "🔐 Block 1: IDENTITÄT & BASIS (Shards 01-04)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 206,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-208-ea9e53c6",
+      "type": "header",
+      "level": 4,
+      "content": "**01. Identität & Personen**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 208,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-212-e7209693",
+      "type": "header",
+      "level": 4,
+      "content": "**02. Dokumente & Nachweise**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 212,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-216-f98cb40f",
+      "type": "header",
+      "level": 4,
+      "content": "**03. Zugang & Berechtigungen**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 216,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-220-c129c808",
+      "type": "header",
+      "level": 4,
+      "content": "**04. Kommunikation & Daten**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 220,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-226-5cabf489",
+      "type": "header",
+      "level": 3,
+      "content": "👤 Block 2: PRIVATLEBEN (Shards 05-08)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 226,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-228-ff7991ef",
+      "type": "header",
+      "level": 4,
+      "content": "**05. Gesundheit & Medizin**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 228,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-232-2da3709b",
+      "type": "header",
+      "level": 4,
+      "content": "**06. Bildung & Qualifikationen**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 232,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-236-8fc24b28",
+      "type": "header",
+      "level": 4,
+      "content": "**07. Familie & Soziales**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 236,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-241-b305befc",
+      "type": "header",
+      "level": 4,
+      "content": "**08. Mobilität & Fahrzeuge**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 241,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-248-61f13ff2",
+      "type": "header",
+      "level": 3,
+      "content": "💼 Block 3: WIRTSCHAFT & VERMÖGEN (Shards 09-12)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 248,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-250-96114fdf",
+      "type": "header",
+      "level": 4,
+      "content": "**09. Arbeit & Karriere**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 250,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-254-d837d458",
+      "type": "header",
+      "level": 4,
+      "content": "**10. Finanzen & Banking**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 254,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-259-8cd150af",
+      "type": "header",
+      "level": 4,
+      "content": "**11. Versicherungen & Risiken**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 259,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-263-e11a4062",
+      "type": "header",
+      "level": 4,
+      "content": "**12. Immobilien & Grundstücke**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 263,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-269-e80fb150",
+      "type": "header",
+      "level": 3,
+      "content": "🏛️ Block 4: GESCHÄFT & ÖFFENTLICH (Shards 13-16)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 269,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-271-51e4c63e",
+      "type": "header",
+      "level": 4,
+      "content": "**13. Unternehmen & Gewerbe**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 271,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-275-18047d1b",
+      "type": "header",
+      "level": 4,
+      "content": "**14. Verträge & Vereinbarungen**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 275,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-279-47ec100a",
+      "type": "header",
+      "level": 4,
+      "content": "**15. Handel & Transaktionen**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 279,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-284-55f7d677",
+      "type": "header",
+      "level": 4,
+      "content": "**16. Behörden & Verwaltung**",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 284,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-290-10f27c38",
+      "type": "header",
+      "level": 2,
+      "content": "Matrix-Architektur (24×16)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 290,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-292-d4acf90b",
+      "type": "header",
+      "level": 3,
+      "content": "Prinzip",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 292,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-305-6c5b5dad",
+      "type": "header",
+      "level": 3,
+      "content": "Berechnung",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 305,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-310-db0b2483",
+      "type": "header",
+      "level": 3,
+      "content": "Beispiel-Mapping",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 310,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-320-4f282113",
+      "type": "header",
+      "level": 3,
+      "content": "Vorteile",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 320,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-329-80d42747",
+      "type": "header",
+      "level": 2,
+      "content": "Hybrid-Struktur: SoT + Implementierung",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 329,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-331-f47757ce",
+      "type": "header",
+      "level": 3,
+      "content": "Konzept",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 331,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-336-80aabef0",
+      "type": "header",
+      "level": 3,
+      "content": "Warum Hybrid?",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 336,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-343-0618e4b2",
+      "type": "header",
+      "level": 3,
+      "content": "Vergleich",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 343,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-356-d2e051f3",
+      "type": "header",
+      "level": 2,
+      "content": "Ordnerstruktur Beispiele",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 356,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-358-35edd687",
+      "type": "header",
+      "level": 3,
+      "content": "Vollständige Struktur eines Shards",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 358,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-434-afaeba9a",
+      "type": "header",
+      "level": 2,
+      "content": "chart.yaml Struktur",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 434,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-436-c209547c",
+      "type": "header",
+      "level": 3,
+      "content": "Hauptsektionen",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 436,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-524-2f9f5d88",
+      "type": "header",
+      "level": 3,
+      "content": "Vollständige Referenz",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 524,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-529-18b0b2ec",
+      "type": "header",
+      "level": 2,
+      "content": "manifest.yaml Struktur",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 529,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-531-c209547c",
+      "type": "header",
+      "level": 3,
+      "content": "Hauptsektionen",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 531,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-619-2f9f5d88",
+      "type": "header",
+      "level": 3,
+      "content": "Vollständige Referenz",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 619,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-624-30a62b7f",
+      "type": "header",
+      "level": 2,
+      "content": "Naming Conventions",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 624,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-626-b0450611",
+      "type": "header",
+      "level": 3,
+      "content": "Root-Ordner",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 626,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-632-80fde27f",
+      "type": "header",
+      "level": 3,
+      "content": "Shards",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 632,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-639-8ab412df",
+      "type": "header",
+      "level": 3,
+      "content": "Dateien",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 639,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-647-613d08d8",
+      "type": "header",
+      "level": 3,
+      "content": "Pfade",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 647,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-655-c277d30a",
+      "type": "header",
+      "level": 3,
+      "content": "Beispiele",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 655,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-664-a9811cbc",
+      "type": "header",
+      "level": 2,
+      "content": "Kritische Policies",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 664,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-666-724c7fe2",
+      "type": "header",
+      "level": 3,
+      "content": "1. Non-Custodial (KRITISCH!)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 666,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-678-fba7c77a",
+      "type": "header",
+      "level": 3,
+      "content": "2. Hash-Only Data Policy",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 678,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-688-fb2543dd",
+      "type": "header",
+      "level": 3,
+      "content": "3. GDPR Compliance",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 688,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-694-184f008b",
+      "type": "header",
+      "level": 3,
+      "content": "4. Bias & Fairness",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 694,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-700-0ccea3a7",
+      "type": "header",
+      "level": 3,
+      "content": "5. Evidence & Audit",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 700,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-707-b59fd09e",
+      "type": "header",
+      "level": 3,
+      "content": "6. Secrets Management",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 707,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-713-14175a5b",
+      "type": "header",
+      "level": 3,
+      "content": "7. Versioning & Breaking Changes",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 713,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-721-f39625f3",
+      "type": "header",
+      "level": 2,
+      "content": "Governance-Modell",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 721,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-723-4f48f5c0",
+      "type": "header",
+      "level": 3,
+      "content": "Rollen",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 723,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-725-f47bd9f2",
+      "type": "header",
+      "level": 4,
+      "content": "Owner (Pro Shard)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 725,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-730-25a190b0",
+      "type": "header",
+      "level": 4,
+      "content": "Architecture Board",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 730,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-735-8e08cab2",
+      "type": "header",
+      "level": 4,
+      "content": "Compliance Team",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 735,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-740-adb7da5e",
+      "type": "header",
+      "level": 4,
+      "content": "Security Team",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 740,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-745-d712936b",
+      "type": "header",
+      "level": 3,
+      "content": "Change-Prozess",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 745,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-763-d5120f3b",
+      "type": "header",
+      "level": 3,
+      "content": "Promotion-Regeln",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 763,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-765-ba484a4e",
+      "type": "header",
+      "level": 4,
+      "content": "SHOULD → MUST",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 765,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-773-45bd45f7",
+      "type": "header",
+      "level": 4,
+      "content": "HAVE → SHOULD",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 773,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-781-132f5261",
+      "type": "header",
+      "level": 4,
+      "content": "MUST → Deprecated",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 781,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-791-48fed270",
+      "type": "header",
+      "level": 2,
+      "content": "Kernprinzipien",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 791,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-793-f5727147",
+      "type": "header",
+      "level": 3,
+      "content": "1. Contract-First Development",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 793,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-802-31d44f65",
+      "type": "header",
+      "level": 3,
+      "content": "2. Separation of Concerns",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 802,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-813-77e59f13",
+      "type": "header",
+      "level": 3,
+      "content": "3. Multi-Implementation Support",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 813,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-823-3f5457bc",
+      "type": "header",
+      "level": 3,
+      "content": "4. Deterministic Architecture",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 823,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-832-453a44bd",
+      "type": "header",
+      "level": 3,
+      "content": "5. Evidence-Based Compliance",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 832,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-841-1d1ae05c",
+      "type": "header",
+      "level": 3,
+      "content": "6. Zero-Trust Security",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 841,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-850-98709362",
+      "type": "header",
+      "level": 3,
+      "content": "7. Observability by Design",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 850,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-859-bdcf07c4",
+      "type": "header",
+      "level": 3,
+      "content": "8. Bias-Aware AI/ML",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 859,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-868-0701f0ce",
+      "type": "header",
+      "level": 3,
+      "content": "9. Scalability & Performance",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 868,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-877-ac017675",
+      "type": "header",
+      "level": 3,
+      "content": "10. Documentation as Code",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 877,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-888-1d53549e",
+      "type": "header",
+      "level": 2,
+      "content": "Nächste Schritte",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 888,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-890-634c1ebc",
+      "type": "header",
+      "level": 3,
+      "content": "Phase 1: Foundation Setup ✅ (Aktuell)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 890,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-898-bd27d027",
+      "type": "header",
+      "level": 3,
+      "content": "Phase 2: Shard_01 Vollständig Implementieren",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 898,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-906-f741a153",
+      "type": "header",
+      "level": 3,
+      "content": "Phase 3: Alle 16 Shards für Root 01 (ai_layer)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 906,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-912-9746d600",
+      "type": "header",
+      "level": 3,
+      "content": "Phase 4: Alle Roots durcharbeiten",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 912,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-917-3b5fa2d5",
+      "type": "header",
+      "level": 3,
+      "content": "Phase 5: Cross-Root Orchestration",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 917,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-922-00a2f5d4",
+      "type": "header",
+      "level": 3,
+      "content": "Phase 6: Production Readiness",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 922,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-930-921055e2",
+      "type": "header",
+      "level": 2,
+      "content": "Anhang",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 930,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-932-56a0d24a",
+      "type": "header",
+      "level": 3,
+      "content": "Wichtige Links",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 932,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-938-a3c318de",
+      "type": "header",
+      "level": 3,
+      "content": "Standards & Spezifikationen",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 938,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-948-914703b1",
+      "type": "header",
+      "level": 3,
+      "content": "Tools & Frameworks",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 948,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-970-2e8e0b16",
+      "type": "header",
+      "level": 2,
+      "content": "🔧 Konsolidierte Ergänzungen v1.1.1 (Konvergenz auf Maximalstand)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 970,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-974-d6b6d7ed",
+      "type": "header",
+      "level": 3,
+      "content": "1) Regulatory Matrix – UK/APAC (country_specific)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 974,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1002-eb403432",
+      "type": "header",
+      "level": 3,
+      "content": "2) OPA-Regeln – Präzisierungen",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1002,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1007-a556847c",
+      "type": "header",
+      "level": 3,
+      "content": "3) CI/Workflows – Schedules & Artifacts",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1007,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1022-02789eae",
+      "type": "header",
+      "level": 3,
+      "content": "4) Sanctions Workflow – Entities & Freshness",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1022,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1033-2c93c8b5",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/evidence/sanctions/sources.yaml",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1033,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1047-07c541d1",
+      "type": "header",
+      "level": 3,
+      "content": "5) DORA – Incident Response",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1047,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1052-f848831c",
+      "type": "header",
+      "level": 3,
+      "content": "6) Root‑Struktur – Verbotene Dateiendungen (Erweiterung)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1052,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1059-f2646ef8",
+      "type": "header",
+      "level": 3,
+      "content": "7) OPA‑Inputs – Vereinheitlichung",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1059,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "LIST-717-bc0eb158",
+      "type": "policy_list_item",
+      "content": "**RFC-Prozess:** Für alle MUST-Capability-Änderungen",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 717,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "LIST-727-07ef7e5a",
+      "type": "policy_list_item",
+      "content": "Entscheidet über SHOULD/HAVE-Promotions",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 727,
+      "priority": "SHOULD"
+    },
+    {
+      "rule_id": "LIST-804-9864ec1b",
+      "type": "policy_list_item",
+      "content": "WAS soll getan werden",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 804,
+      "priority": "SHOULD"
+    },
+    {
+      "rule_id": "LIST-1049-6b40f4f8",
+      "type": "policy_list_item",
+      "content": "Pro Root muss `docs/incident_response_plan.md` existieren. Vorlage:",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1049,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "TABLE-312-c458a5c4",
+      "type": "table_row",
+      "content": "Root | Shard 01 | Shard 02 | ... | Shard 16",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 312,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-314-5faa039b",
+      "type": "table_row",
+      "content": "01_ai_layer | AI für Identity | AI für Dokumente | ... | AI für Behörden",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 314,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-315-f3d8bf09",
+      "type": "table_row",
+      "content": "02_audit_logging | Audit Identity | Audit Dokumente | ... | Audit Behörden",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 315,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-316-927f2c57",
+      "type": "table_row",
+      "content": "03_core | Core Identity | Core Dokumente | ... | Core Behörden",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 316,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-317-e1f2f26a",
+      "type": "table_row",
+      "content": "... | ... | ... | ... | ...",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 317,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-318-82e3e1f6",
+      "type": "table_row",
+      "content": "24_meta_orchestration | Orch. Identity | Orch. Dokumente | ... | Orch. Behörden",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 318,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-345-000774c6",
+      "type": "table_row",
+      "content": "Aspekt | chart.yaml (SoT) | manifest.yaml (Impl.)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 345,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-347-2a6b1bf1",
+      "type": "table_row",
+      "content": "Ebene | Abstrakt | Konkret",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 347,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-348-40258360",
+      "type": "table_row",
+      "content": "Inhalt | Capabilities, Policies, Interfaces | Dateien, Dependencies, Artefakte",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 348,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-349-edb61a51",
+      "type": "table_row",
+      "content": "Änderungsrate | Langsam | Häufiger",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 349,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-350-987c6974",
+      "type": "table_row",
+      "content": "Versionierung | Semver, Breaking Changes | Patches, Bugfixes",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 350,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-351-0bdc8650",
+      "type": "table_row",
+      "content": "Sprache | Sprachunabhängig | Python, Rust, Go, etc.",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 351,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-352-7efacde6",
+      "type": "table_row",
+      "content": "Governance | Architecture Board | Development Team",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 352,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-12-ee60d2c1",
+      "type": "numbered_list",
+      "number": "1",
+      "content": "[Projektübersicht](#projektübersicht)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 12,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-13-2100679e",
+      "type": "numbered_list",
+      "number": "2",
+      "content": "[Die 24 Root-Ordner](#die-24-root-ordner)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 13,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-14-b7589731",
+      "type": "numbered_list",
+      "number": "3",
+      "content": "[Die 16 Shards (Oberkategorien)](#die-16-shards-oberkategorien)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 14,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-15-e942c5e7",
+      "type": "numbered_list",
+      "number": "4",
+      "content": "[Matrix-Architektur (24×16)](#matrix-architektur-24×16)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 15,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-16-01e900a0",
+      "type": "numbered_list",
+      "number": "5",
+      "content": "[Hybrid-Struktur: SoT + Implementierung](#hybrid-struktur-sot--implementierung)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 16,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-17-ea310f64",
+      "type": "numbered_list",
+      "number": "6",
+      "content": "[Ordnerstruktur Beispiele](#ordnerstruktur-beispiele)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 17,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-18-dd0adf19",
+      "type": "numbered_list",
+      "number": "7",
+      "content": "[chart.yaml Struktur](#chartyaml-struktur)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 18,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-19-2cc61a14",
+      "type": "numbered_list",
+      "number": "8",
+      "content": "[manifest.yaml Struktur](#manifestyaml-struktur)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 19,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-20-3590b934",
+      "type": "numbered_list",
+      "number": "9",
+      "content": "[Naming Conventions](#naming-conventions)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 20,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-21-2e95de37",
+      "type": "numbered_list",
+      "number": "10",
+      "content": "[Kritische Policies](#kritische-policies)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 21,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-22-63f5852d",
+      "type": "numbered_list",
+      "number": "11",
+      "content": "[Governance-Modell](#governance-modell)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 22,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-23-5d00981e",
+      "type": "numbered_list",
+      "number": "12",
+      "content": "[Kernprinzipien](#kernprinzipien)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 23,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-24-e19f340a",
+      "type": "numbered_list",
+      "number": "13",
+      "content": "[Nächste Schritte](#nächste-schritte)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 24,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-333-ab4b377e",
+      "type": "numbered_list",
+      "number": "1",
+      "content": "**chart.yaml (SoT)** - Abstrakt: WAS (Capabilities, Policies, Interfaces)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 333,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-334-c5725148",
+      "type": "numbered_list",
+      "number": "2",
+      "content": "**manifest.yaml (Impl.)** - Konkret: WIE (Dateien, Tech-Stack, Artefakte)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 334,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-748-cff9aa40",
+      "type": "numbered_list",
+      "number": "1",
+      "content": "RFC erstellen (für MUST-Changes)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 748,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-750-685c2079",
+      "type": "numbered_list",
+      "number": "2",
+      "content": "Contract-Tests implementieren",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 750,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-752-bde9c4af",
+      "type": "numbered_list",
+      "number": "3",
+      "content": "Dual Review (Architecture + Compliance)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 752,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-754-a85f1114",
+      "type": "numbered_list",
+      "number": "4",
+      "content": "Semver-Bump + Changelog",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 754,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-756-e190448c",
+      "type": "numbered_list",
+      "number": "5",
+      "content": "CI/CD Pipeline (alle Tests grün)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 756,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-758-4d534a99",
+      "type": "numbered_list",
+      "number": "6",
+      "content": "Canary Deployment (5% → 25% → 50% → 100%)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 758,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-760-793d8785",
+      "type": "numbered_list",
+      "number": "7",
+      "content": "Monitoring & Alerting (Error Rate < 0.5%)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 760,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "CHECK-891-a6d7c3e0",
+      "type": "checkbox",
+      "checked": true,
+      "content": "16 Shards definiert",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 891,
+      "priority": "COMPLETED"
+    },
+    {
+      "rule_id": "CHECK-892-9802aaf7",
+      "type": "checkbox",
+      "checked": true,
+      "content": "24 Roots definiert",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 892,
+      "priority": "COMPLETED"
+    },
+    {
+      "rule_id": "CHECK-893-c928439c",
+      "type": "checkbox",
+      "checked": true,
+      "content": "Matrix-Architektur (24×16) festgelegt",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 893,
+      "priority": "COMPLETED"
+    },
+    {
+      "rule_id": "CHECK-894-d8803f15",
+      "type": "checkbox",
+      "checked": true,
+      "content": "chart.yaml Struktur für Shard_01 erstellt",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 894,
+      "priority": "COMPLETED"
+    },
+    {
+      "rule_id": "CHECK-895-ac17d263",
+      "type": "checkbox",
+      "checked": true,
+      "content": "manifest.yaml Struktur für Shard_01 erstellt",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 895,
+      "priority": "COMPLETED"
+    },
+    {
+      "rule_id": "CHECK-896-bedefcb5",
+      "type": "checkbox",
+      "checked": true,
+      "content": "Master-Dokument erstellt",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 896,
+      "priority": "COMPLETED"
+    },
+    {
+      "rule_id": "CHECK-899-347b834b",
+      "type": "checkbox",
+      "checked": false,
+      "content": "OpenAPI-Contracts erstellen (identity_risk_scoring, biometric_matching)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 899,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-900-4c222267",
+      "type": "checkbox",
+      "checked": false,
+      "content": "JSON-Schemas erstellen (did_document, identity_evidence)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 900,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-901-00c94e8d",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Python-Implementation schreiben (src/, tests/)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 901,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-902-bc0ef434",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Contract-Tests implementieren (conformance/)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 902,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-903-c519de87",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Deployment-Manifeste (k8s/, helm/)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 903,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-904-bd97cc84",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Dokumentation (docs/)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 904,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-907-2e35c0f3",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Shard_02_Dokumente_Nachweise",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 907,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-908-e2c1cfa2",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Shard_03_Zugang_Berechtigungen",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 908,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-909-d756802e",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Shard_04_Kommunikation_Daten",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 909,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-910-0da77250",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Shard_05 bis Shard_16",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 910,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-913-1724863c",
+      "type": "checkbox",
+      "checked": false,
+      "content": "02_audit_logging (alle 16 Shards)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 913,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-914-f1fb1970",
+      "type": "checkbox",
+      "checked": false,
+      "content": "03_core (alle 16 Shards)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 914,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-915-136195cd",
+      "type": "checkbox",
+      "checked": false,
+      "content": "04 bis 24",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 915,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-918-dcfca7e5",
+      "type": "checkbox",
+      "checked": false,
+      "content": "24_meta_orchestration als Service Registry",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 918,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-919-1f8785a1",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Workflow-Definitionen (z.B. full_kyc_flow)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 919,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-920-f9d349ed",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Saga-Pattern für Multi-Shard-Transaktionen",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 920,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-923-0d425bcf",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Load Testing (11_test_simulation)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 923,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-924-faac3b28",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Security Audits",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 924,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-925-d2898834",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Compliance-Zertifizierung (GDPR, eIDAS)",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 925,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "CHECK-926-17a71402",
+      "type": "checkbox",
+      "checked": false,
+      "content": "Deployment auf Production",
+      "source_file": "ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 926,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-f604da3d",
+      "type": "yaml_block",
+      "content": "# 20_foundation/tokenomics/ssid_token_framework.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"PUBLIC - Token Framework Standards\"\n\ntoken_definition:\n  purpose: [\"utility\", ",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 30,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-0552f323",
+      "type": "yaml_block",
+      "content": "# 20_foundation/tokenomics/utility_definitions.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\n\nprimary_utilities:\n  identity_verification:\n    description: \"Pay for identity score calculatio",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 104,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-5fb9a53d",
+      "type": "yaml_block",
+      "content": "# 20_foundation/tokenomics/token_economics.yaml\nversion: \"1.0\"\ndate: \"2025-09-21\"\ndeprecated: false\n\nsupply_mechanics:\n  total_supply: \"1,000,000,000 SSID\"\n  initial_distribution:\n    ecosystem_develo",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 146,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-935fcb94",
+      "type": "yaml_block",
+      "content": "# 05_documentation/internationalization/language_strategy.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"PUBLIC - Internationalization Standards\"\n\nprimary_language:\n  langua",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 256,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-2c58b0b3",
+      "type": "yaml_block",
+      "content": "# 05_documentation/internationalization/translation_quality.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\n\nquality_standards:\n  accuracy_threshold: \"95% minimum\"\n  consistency_score: \"90% m",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 353,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-be3474b9",
+      "type": "yaml_block",
+      "content": "# 07_governance_legal/stakeholder_protection/investment_disclaimers.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"PUBLIC - Legal Disclaimers\"\n\ninvestment_disclaimers:\n  no_",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 461,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-8334c775",
+      "type": "yaml_block",
+      "content": "# 07_governance_legal/partnerships/enterprise_partnerships.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Partnership Strategy\"\n\npartnership_tiers:\n  tier_1_s",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 511,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-629616c1",
+      "type": "yaml_block",
+      "content": "# 24_meta_orchestration/version_management/version_strategy.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"PUBLIC - Version Management\"\n\nversioning_scheme:\n  format: \"MAJOR.",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 550,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-e6499c65",
+      "type": "yaml_block",
+      "content": "# 24_meta_orchestration/releases/release_management.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\n\nrelease_schedule:\n  major_releases: \"Annual (Q4)\"\n  minor_releases: \"Quarterly\"\n  patch_re",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 610,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-669d5e28",
+      "type": "yaml_block",
+      "content": "# 24_meta_orchestration/version_management/deprecation_strategy.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\n\ndeprecation_framework:\n  deprecation_notice_period: \"6 months minimum\"\n  suppo",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 655,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-4410ee34",
+      "type": "yaml_block",
+      "content": "# 23_compliance/jurisdictions/coverage_matrix.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"PUBLIC - Market Coverage\"\n\ncovered_jurisdictions:\n  tier_1_markets: # Full compl",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 692,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-02a72bf2",
+      "type": "yaml_block",
+      "content": "# 23_compliance/market_entry/expansion_strategy.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Business Strategy\"\n\nmarket_prioritization:\n  immediate_focus: \n",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 821,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-b224454d",
+      "type": "yaml_block",
+      "content": "# 23_compliance/regulatory_intelligence/monitoring_framework.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Regulatory Intelligence\"\n\nmonitoring_scope:\n  tier",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 897,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-d2fba4fd",
+      "type": "yaml_block",
+      "content": "# 23_compliance/ai_ml_ready/compliance_ai_config.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nai_compatible: true\nllm_interpretable: true\nclassification: \"CONFIDENTIAL - Enterprise AI Inte",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 979,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-bf01c1ae",
+      "type": "yaml_block",
+      "content": "# 10_interoperability/api_portability/export_import_config.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Enterprise Data Strategy\"\n\nexport_formats:\n  openapi",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1045,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-5938c921",
+      "type": "yaml_block",
+      "content": "# 02_audit_logging/next_gen_audit/audit_chain_config.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nexperimental: true\nclassification: \"CONFIDENTIAL - Enterprise Audit Innovation\"\n\nblockchai",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1112,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "HEADER-2-06c3bd89",
+      "type": "header",
+      "level": 1,
+      "content": "SSID — Finale Optimal-Struktur v4.1 (Complete Enhanced + OpenCore Integration + Global Market Ready)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 2,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-6-05826357",
+      "type": "header",
+      "level": 2,
+      "content": "Grundprinzipien (KOMPAKT)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 6,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-10-83ce55cb",
+      "type": "header",
+      "level": 3,
+      "content": "Root-Struktur",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 10,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-27-304cff52",
+      "type": "header",
+      "level": 2,
+      "content": "SSID Token Enterprise Framework (Utility/Governance/Reward)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 27,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-29-67fc6bbc",
+      "type": "header",
+      "level": 3,
+      "content": "Token Architecture & Legal Safe Harbor",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 29,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-31-679c9c03",
+      "type": "header",
+      "level": 1,
+      "content": "20_foundation/tokenomics/ssid_token_framework.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 31,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-103-6b0a44e6",
+      "type": "header",
+      "level": 3,
+      "content": "Token Utility Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 103,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-105-aa81afc7",
+      "type": "header",
+      "level": 1,
+      "content": "20_foundation/tokenomics/utility_definitions.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 105,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-145-8ee26924",
+      "type": "header",
+      "level": 3,
+      "content": "Token Economics & Distribution",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 145,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-147-4d72f0b8",
+      "type": "header",
+      "level": 1,
+      "content": "20_foundation/tokenomics/token_economics.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 147,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-253-0f5290e8",
+      "type": "header",
+      "level": 2,
+      "content": "Internationalization & Multi-Language Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 253,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-255-18f23b4b",
+      "type": "header",
+      "level": 3,
+      "content": "Language Strategy (Global Market Ready)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 255,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-257-4e9bfb7c",
+      "type": "header",
+      "level": 1,
+      "content": "05_documentation/internationalization/language_strategy.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 257,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-311-6ca7a0bb",
+      "type": "header",
+      "level": 3,
+      "content": "Multi-Jurisdiction Documentation Structure",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 311,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-313-4242b9d6",
+      "type": "header",
+      "level": 1,
+      "content": "05_documentation/internationalization/jurisdiction_specific/",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 313,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-315-57ef9409",
+      "type": "header",
+      "level": 2,
+      "content": "Documentation Structure by Language/Market",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 315,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-344-7f8a1569",
+      "type": "header",
+      "level": 2,
+      "content": "Content Localization Guidelines",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 344,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-352-c8569fde",
+      "type": "header",
+      "level": 3,
+      "content": "Translation Quality Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 352,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-354-bf3118ff",
+      "type": "header",
+      "level": 1,
+      "content": "05_documentation/internationalization/translation_quality.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 354,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-385-c5376635",
+      "type": "header",
+      "level": 2,
+      "content": "Enterprise Adoption & Disclaimer Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 385,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-387-fe34734a",
+      "type": "header",
+      "level": 3,
+      "content": "Enterprise Adoption Notice",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 387,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-389-f048e4b2",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/enterprise_adoption/adoption_disclaimer.md",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 389,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-391-2a5b3b5c",
+      "type": "header",
+      "level": 2,
+      "content": "Enterprise Adoption Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 391,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-396-53cca914",
+      "type": "header",
+      "level": 3,
+      "content": "Adoption Status & Warranty Disclaimer",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 396,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-412-e5eceb3f",
+      "type": "header",
+      "level": 3,
+      "content": "Recommended Use Cases",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 412,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-429-2a0326ec",
+      "type": "header",
+      "level": 3,
+      "content": "Enterprise Success Stories",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 429,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-438-3e683bf1",
+      "type": "header",
+      "level": 3,
+      "content": "Support & Professional Services",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 438,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-460-727d73ef",
+      "type": "header",
+      "level": 3,
+      "content": "Stakeholder & Investor Protection",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 460,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-462-5257caf8",
+      "type": "header",
+      "level": 1,
+      "content": "07_governance_legal/stakeholder_protection/investment_disclaimers.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 462,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-510-2eb7d4b5",
+      "type": "header",
+      "level": 3,
+      "content": "Enterprise Partnership Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 510,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-512-5394b1b6",
+      "type": "header",
+      "level": 1,
+      "content": "07_governance_legal/partnerships/enterprise_partnerships.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 512,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-547-dd7a6c90",
+      "type": "header",
+      "level": 2,
+      "content": "Version Management & Release Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 547,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-549-5dfddc65",
+      "type": "header",
+      "level": 3,
+      "content": "Version Control & Deprecation Strategy",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 549,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-551-d88c8fcb",
+      "type": "header",
+      "level": 1,
+      "content": "24_meta_orchestration/version_management/version_strategy.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 551,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-609-93f9e838",
+      "type": "header",
+      "level": 3,
+      "content": "Release Management Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 609,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-611-7cd9bb84",
+      "type": "header",
+      "level": 1,
+      "content": "24_meta_orchestration/releases/release_management.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 611,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-654-c7fa9c64",
+      "type": "header",
+      "level": 3,
+      "content": "Deprecation Management",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 654,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-656-bf860136",
+      "type": "header",
+      "level": 1,
+      "content": "24_meta_orchestration/version_management/deprecation_strategy.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 656,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-689-07169de5",
+      "type": "header",
+      "level": 2,
+      "content": "Global Market & Jurisdictional Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 689,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-691-9e9a6c05",
+      "type": "header",
+      "level": 3,
+      "content": "Jurisdictional Coverage Matrix",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 691,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-693-aa500c16",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/jurisdictions/coverage_matrix.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 693,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-820-3c5ea48a",
+      "type": "header",
+      "level": 3,
+      "content": "Market Entry Strategy",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 820,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-822-94f4a160",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/market_entry/expansion_strategy.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 822,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-896-e9145d7f",
+      "type": "header",
+      "level": 3,
+      "content": "Regulatory Monitoring & Intelligence",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 896,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-898-7743e44a",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/regulatory_intelligence/monitoring_framework.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 898,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-976-c5fdd7bf",
+      "type": "header",
+      "level": 2,
+      "content": "Innovation & Future-Proofing Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 976,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-978-f4fd360f",
+      "type": "header",
+      "level": 3,
+      "content": "AI/ML-Ready Compliance Architecture",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 978,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-980-228270ca",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/ai_ml_ready/compliance_ai_config.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 980,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1044-a1139c62",
+      "type": "header",
+      "level": 3,
+      "content": "API & Data Portability Framework",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1044,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1046-4e137d61",
+      "type": "header",
+      "level": 1,
+      "content": "10_interoperability/api_portability/export_import_config.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1046,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1111-5e5f45cd",
+      "type": "header",
+      "level": 3,
+      "content": "Next-Generation Audit Chain",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1111,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1113-1445cda1",
+      "type": "header",
+      "level": 1,
+      "content": "02_audit_logging/next_gen_audit/audit_chain_config.yaml",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1113,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1181-7461c3a2",
+      "type": "header",
+      "level": 3,
+      "content": "Common MUST (Alle 24 Module)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1181,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1189-c4fbd5ba",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – Source of Truth (A–C) & Language Policy Override",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1189,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1194-22866363",
+      "type": "header",
+      "level": 3,
+      "content": "Language Policy Override (verbindlich)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1194,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1204-a3fa4d34",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – CORRECTION: LOGS vs LOCKS & Intake Relocation",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1204,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1207-74b2c1b5",
+      "type": "header",
+      "level": 3,
+      "content": "Korrekturgrundsatz (SAFE-FIX, keine Löschung – nur Ergänzung)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1207,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1210-0847eb97",
+      "type": "header",
+      "level": 3,
+      "content": "Kanonische Registry-Struktur (final, verbindlich)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1210,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1237-25c857f0",
+      "type": "header",
+      "level": 3,
+      "content": "Verlagerungen (DELTA, canonical MOVE-Regeln)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1237,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1242-443f1790",
+      "type": "header",
+      "level": 3,
+      "content": "Dateityp-Policies (erzwingend)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1242,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1248-a7cc75a6",
+      "type": "header",
+      "level": 3,
+      "content": "CI-Gate-Anpassungen (erzwingen Semantik)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1248,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1256-6c16460c",
+      "type": "header",
+      "level": 3,
+      "content": "SHARD-16 Mapping (keine Änderung, nur Klarstellung für Intake)",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1256,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "LIST-424-74171d0b",
+      "type": "policy_list_item",
+      "content": "Local regulatory validation required",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 424,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "LIST-425-03358924",
+      "type": "policy_list_item",
+      "content": "Professional compliance consultation recommended",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 425,
+      "priority": "SHOULD"
+    },
+    {
+      "rule_id": "LIST-1196-15b82b49",
+      "type": "policy_list_item",
+      "content": "**ENFORCED LANGUAGES:** `en-US` (Primär), `de-DE` (Sekundär, Docs/UI), `es-ES`, `fr-FR` (optional, business-context).",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1196,
+      "priority": "MAY"
+    },
+    {
+      "rule_id": "LIST-1197-ce6efe31",
+      "type": "policy_list_item",
+      "content": "**Konsequenz:** In allen Baumdarstellungen bleibt `zh/…` als historischer Hinweis **dokumentiert**, ist aber **DISABLED** und darf **nicht** erstellt werden.",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1197,
+      "priority": "MAY"
+    },
+    {
+      "rule_id": "LIST-1251-4fbaf28b",
+      "type": "policy_list_item",
+      "content": "`registry/locks/` fehlt oder unsignierte Änderungen erkannt werden",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1251,
+      "priority": "MAY"
+    },
+    {
+      "rule_id": "TABLE-4-9affe7b4",
+      "type": "table_row",
+      "content": "**Datum:** 2025-09-15 | **Status:** ROOT-24-LOCK | **Ziel:** Alle grünen Haken ✅ + Anti-Gaming Ready + Enterprise Excellence + Innovation Framework + AI/ML-Ready + Legal Excellence + Token Framework + Global Market Ready",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 4,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-8-3469cea9",
+      "type": "table_row",
+      "content": "**24 Root-Ordner (FIX)** | **Common MUST** | **Zentral** | **Create-on-Use** | **100-Score-Ready** | **Gaming-Resistant** | **Version-Linked** | **Community-Integrated** | **AI/ML-Ready** | **Innovation-Focused** | **Legal-Bulletproof** | **Token-Ready** | **Global-Market-Enabled**",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 8,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "CODE-MARKDOWN-36c51238",
+      "type": "code_block_markdown",
+      "content": "# 05_documentation/internationalization/jurisdiction_specific/\n\n## Documentation Structure by Language/Market",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 312,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-MARKDOWN-f4e6e064",
+      "type": "code_block_markdown",
+      "content": "# 23_compliance/enterprise_adoption/adoption_disclaimer.md\n\n## Enterprise Adoption Framework\n\n**Classification:** PUBLIC - Adoption Guidelines\n**Target Audience:** Fortune 500, Government, NGO, Academ",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 388,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-TEXT-eddfd899",
+      "type": "code_block_text",
+      "content": "24_meta_orchestration/\n  registry/\n    logs/                       # NUR *.log oder *.log.jsonl (append-only)\n      registry_events.log       # Ereignis-Log (WORM)\n      access.log                # Zu",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 1211,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "BOLD-8-91e4a81f",
+      "type": "bold_policy",
+      "content": "Common MUST",
+      "source_file": "SSID_structure_level3_part1_MAX.md",
+      "line_number": 8,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-f635db47",
+      "type": "yaml_block",
+      "content": "# 23_compliance/exceptions/root_level_exceptions.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"PUBLIC - CI Guard Enforcement\"\n\nroot_level_exceptions:\n  description: \"EINMAL",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 27,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-b09b0048",
+      "type": "yaml_block",
+      "content": "# 23_compliance/governance/maintainers_enterprise.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Internal Use Only\"\n\nmaintainer_structure:\n  primary_maintaine",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 249,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-ba12e9d8",
+      "type": "yaml_block",
+      "content": "# 23_compliance/social_ecosystem/diversity_inclusion_config.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Enterprise Social Responsibility\"\n\ninternational_st",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 339,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-ae6979cf",
+      "type": "yaml_block",
+      "content": "# 23_compliance/social_ecosystem/esg_sustainability_config.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Enterprise ESG Strategy\"\n\nenvironmental_standards:\n ",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 444,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-16c9e190",
+      "type": "yaml_block",
+      "content": "# 23_compliance/social_ecosystem/sector_compatibility.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Enterprise Market Analysis\"\n\nsector_support:\n  financial_",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 511,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-7d58e358",
+      "type": "yaml_block",
+      "content": "# 23_compliance/metrics/threshold_rationale_internal.yaml\nversion: \"1.1\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Internal Standards\"\nlast_review: \"2025-09-15\"\nnext_review:",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 806,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-e70d6df9",
+      "type": "yaml_block",
+      "content": "# 23_compliance/anti_gaming/badge_integrity_enterprise.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Enterprise Controls\"\n\ncontrols:\n  circular_dependency_ch",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 864,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-ad89e1d6",
+      "type": "yaml_block",
+      "content": "# .github/workflows/review_validation_enterprise.yml\nname: Enterprise Review Status Validation\non: [pull_request, schedule]\n\njobs:\n  check_review_status:\n    runs-on: ubuntu-latest\n    steps:\n      - ",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1019,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-45f6a696",
+      "type": "yaml_block",
+      "content": "# 23_compliance/mappings/eu_regulatorik_v2.1.yaml\nversion: \"2.1\"\ndate: \"2025-09-15\"\ndeprecated: false\nregulatory_basis: \"EU-Gesamtpaket 2024/2025 + Brexit-Updates\"\nclassification: \"CONFIDENTIAL - Inte",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1047,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-79ec876b",
+      "type": "yaml_block",
+      "content": "root_depth_matrix:\n  \"01_ai_layer\":\n    max_depth: 3\n    level_3: [\"agents/\", \"prompts/\", \"evaluation/\", \"safety/\", \"runtimes/\"]\n  \"02_audit_logging\":\n    max_depth: 5\n    level_3: [\"ingest/\", \"proces",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1194,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-f4ee9045",
+      "type": "yaml_block",
+      "content": "shard_profile_default:\n  S01_policies: \"Policies/Konfigurationen\"\n  S02_evidence: \"Evidenzen/Nachweise\"\n  S03_configs: \"Technische Configs (YAML/JSON)\"\n  S04_registry: \"Registries/Indizes (nur zentral",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1288,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "HEADER-9-352f7a43",
+      "type": "header",
+      "level": 2,
+      "content": "Zentralisierung (Anti-Duplikat)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 9,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-24-4bb217ae",
+      "type": "header",
+      "level": 2,
+      "content": "Root-Level Exceptions Framework (Kanonisch)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 24,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-26-08bcf394",
+      "type": "header",
+      "level": 3,
+      "content": "Canonical Root-Level Exceptions Definition",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 26,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-28-b3505f8e",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/exceptions/root_level_exceptions.yaml",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 28,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-128-5f4e34d6",
+      "type": "header",
+      "level": 3,
+      "content": "Root-Level Guard Implementation",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 128,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-130-1152659f",
+      "type": "header",
+      "level": 1,
+      "content": "12_tooling/scripts/structure_guard.sh - Root Exceptions Validation",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 130,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-187-9de5d3fc",
+      "type": "header",
+      "level": 2,
+      "content": "Kritische Dateien (CI-Ready) - PFAD-NACHWEIS ERFORDERLICH",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 187,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-190-916f7816",
+      "type": "header",
+      "level": 1,
+      "content": "Struktur-Guard (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 190,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-193-5e6b5ebd",
+      "type": "header",
+      "level": 1,
+      "content": "Pre-Commit Hook (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 193,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-196-11809ce2",
+      "type": "header",
+      "level": 1,
+      "content": "Policies & Tests (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 196,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-202-2b6bb389",
+      "type": "header",
+      "level": 1,
+      "content": "CI-Gates (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 202,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-205-85bac21a",
+      "type": "header",
+      "level": 1,
+      "content": "Hinweis: Level-4-Kontrollen (Anti-Gaming/Reviews/Business) werden nicht durch `structure_lock_l3.py`,",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 205,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-206-a9dac5a6",
+      "type": "header",
+      "level": 1,
+      "content": "sondern durch folgende Gates/Scanner erzwungen:",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 206,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-207-fd186297",
+      "type": "header",
+      "level": 1,
+      "content": "- 23_compliance/anti_gaming/* (Zirkularität, Badge-Integrität, Overfitting, Dependency-Graph)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 207,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-208-8cfbaae5",
+      "type": "header",
+      "level": 1,
+      "content": "- 23_compliance/reviews/* (Review-Status, Business-Compliance)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 208,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-210-a4e10a54",
+      "type": "header",
+      "level": 1,
+      "content": "WORM Storage (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 210,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-213-113436e6",
+      "type": "header",
+      "level": 1,
+      "content": "Quarantine Framework (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 213,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-219-5e4a67d9",
+      "type": "header",
+      "level": 1,
+      "content": "Anti-Gaming Controls (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 219,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-225-153dfaed",
+      "type": "header",
+      "level": 1,
+      "content": "Governance & Maintenance (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 225,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-230-163d5ed1",
+      "type": "header",
+      "level": 1,
+      "content": "Token Framework (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 230,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-235-3c5dfd42",
+      "type": "header",
+      "level": 1,
+      "content": "Internationalization (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 235,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-239-8dcc1620",
+      "type": "header",
+      "level": 1,
+      "content": "Enterprise Adoption (MUSS EXISTIEREN)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 239,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-246-e0a4fab7",
+      "type": "header",
+      "level": 2,
+      "content": "Governance & Maintainer Framework (Enterprise)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 246,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-248-bec094e8",
+      "type": "header",
+      "level": 3,
+      "content": "Maintainer Definition & Backup Structure",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 248,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-250-6b358dd9",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/governance/maintainers_enterprise.yaml",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 250,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-301-677c8d60",
+      "type": "header",
+      "level": 3,
+      "content": "Source of Truth Documentation (Enterprise)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 301,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-303-01ce4165",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/governance/source_of_truth_enterprise.md",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 303,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-305-bac70313",
+      "type": "header",
+      "level": 2,
+      "content": "Badge & Metrics Source References (Internal)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 305,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-307-b21d5126",
+      "type": "header",
+      "level": 3,
+      "content": "Structure Compliance Badge",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 307,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-314-f70523ff",
+      "type": "header",
+      "level": 3,
+      "content": "Test Coverage Badge (Tiered)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 314,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-322-c9568373",
+      "type": "header",
+      "level": 3,
+      "content": "Compliance Coverage Badge (Internal)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 322,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-329-94db360a",
+      "type": "header",
+      "level": 3,
+      "content": "Anti-Gaming Controls (Enterprise)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 329,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-336-a3fcfd56",
+      "type": "header",
+      "level": 2,
+      "content": "Social & Ecosystem Compatibility Framework",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 336,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-338-1ba4dbc7",
+      "type": "header",
+      "level": 3,
+      "content": "Diversity & Inclusion Standards",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 338,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-340-67a419f2",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/social_ecosystem/diversity_inclusion_config.yaml",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 340,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-443-c1a82a04",
+      "type": "header",
+      "level": 3,
+      "content": "ESG & Sustainability Integration",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 443,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-445-a3d8a448",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/social_ecosystem/esg_sustainability_config.yaml",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 445,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-510-75ea2f99",
+      "type": "header",
+      "level": 3,
+      "content": "Multi-Sector Compatibility Matrix",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 510,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-512-c42cad2c",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/social_ecosystem/sector_compatibility.yaml",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 512,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-576-c54921ad",
+      "type": "header",
+      "level": 2,
+      "content": "Module-Strukturen (MUST/OPTIONAL)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 576,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-578-3a5219a2",
+      "type": "header",
+      "level": 3,
+      "content": "Kern-Module",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 578,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-585-fdc1e883",
+      "type": "header",
+      "level": 3,
+      "content": "Compliance/Audit (Enhanced)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 585,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-590-fc0c7c2b",
+      "type": "header",
+      "level": 3,
+      "content": "Tech-Module",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 590,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-596-3c530aa1",
+      "type": "header",
+      "level": 3,
+      "content": "Data & Standards",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 596,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-602-0949cc6c",
+      "type": "header",
+      "level": 3,
+      "content": "Support-Module",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 602,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-612-4244432a",
+      "type": "header",
+      "level": 3,
+      "content": "Detaillierte Modul-Strukturerklärungen",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 612,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-614-15b49ae3",
+      "type": "header",
+      "level": 4,
+      "content": "1. Kern-Module",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 614,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-645-5cb87d48",
+      "type": "header",
+      "level": 4,
+      "content": "2. Compliance/Audit (Enhanced)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 645,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-668-a4cd679c",
+      "type": "header",
+      "level": 4,
+      "content": "3. Tech-Module",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 668,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-693-7a8fc1d3",
+      "type": "header",
+      "level": 4,
+      "content": "4. Data & Standards",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 693,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-719-b5929d42",
+      "type": "header",
+      "level": 4,
+      "content": "5. Support-Module",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 719,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-767-f024602c",
+      "type": "header",
+      "level": 3,
+      "content": "Modul-Zweck Übersicht",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 767,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-796-d8d0822a",
+      "type": "header",
+      "level": 2,
+      "content": "100-Punkte-Scoring (Automatisch + Anti-Gaming Enhanced)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 796,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-805-4d0c99a2",
+      "type": "header",
+      "level": 3,
+      "content": "Badge Threshold Justification (Enhanced)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 805,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-807-9bfd55d4",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/metrics/threshold_rationale_internal.yaml",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 807,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-861-914dd3dd",
+      "type": "header",
+      "level": 2,
+      "content": "Anti-Gaming & Integrity Controls (Enhanced Enterprise)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 861,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-863-09b30599",
+      "type": "header",
+      "level": 3,
+      "content": "Badge Integrity Framework (Enterprise)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 863,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-865-ef89ec92",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/anti_gaming/badge_integrity_enterprise.yaml",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 865,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-939-69826c93",
+      "type": "header",
+      "level": 3,
+      "content": "Gaming Prevention Measures (Enterprise)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 939,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-947-45769b0e",
+      "type": "header",
+      "level": 2,
+      "content": "Machine-Readable Review System (Enterprise)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 947,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-949-449d5429",
+      "type": "header",
+      "level": 3,
+      "content": "Review Log (JSON/YAML Integration)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 949,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1018-148acd39",
+      "type": "header",
+      "level": 3,
+      "content": "Review CI/CD Integration (Enterprise)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1018,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1020-0390af88",
+      "type": "header",
+      "level": 1,
+      "content": ".github/workflows/review_validation_enterprise.yml",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1020,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1044-3573d1c3",
+      "type": "header",
+      "level": 2,
+      "content": "EU-Regulatorik-Mapping (Vollständig + Versioniert)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1044,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1046-fd890edf",
+      "type": "header",
+      "level": 3,
+      "content": "Versioned Regulatory Mappings",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1046,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1048-199b1a6e",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/mappings/eu_regulatorik_v2.1.yaml",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1048,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1143-48cf501e",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – Registry Pflichtstruktur (logs + locks) – Canonical",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1143,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1175-d7c1661d",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – Common MUST je Modul (Ebene 2)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1175,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1191-2a4d3456",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – Root-Depth-Matrix (Ebene 3–6, verbindlich)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1191,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1285-67895237",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – SHARD-16 – Globale Pflicht-Belegung (für alle Roots)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1285,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1313-a3fa4d34",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – CORRECTION: LOGS vs LOCKS & Intake Relocation",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1313,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1316-74b2c1b5",
+      "type": "header",
+      "level": 3,
+      "content": "Korrekturgrundsatz (SAFE-FIX, keine Löschung – nur Ergänzung)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1316,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1319-0847eb97",
+      "type": "header",
+      "level": 3,
+      "content": "Kanonische Registry-Struktur (final, verbindlich)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1319,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1346-25c857f0",
+      "type": "header",
+      "level": 3,
+      "content": "Verlagerungen (DELTA, canonical MOVE-Regeln)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1346,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1351-443f1790",
+      "type": "header",
+      "level": 3,
+      "content": "Dateityp-Policies (erzwingend)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1351,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1357-a7cc75a6",
+      "type": "header",
+      "level": 3,
+      "content": "CI-Gate-Anpassungen (erzwingen Semantik)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1357,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1365-6c16460c",
+      "type": "header",
+      "level": 3,
+      "content": "SHARD-16 Mapping (keine Änderung, nur Klarstellung für Intake)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1365,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "LIST-324-717d1164",
+      "type": "policy_list_item",
+      "content": "**Formula:** (Implemented Controls / Total Required Controls) * 100",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 324,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "LIST-491-0ecf7529",
+      "type": "policy_list_item",
+      "content": "\"Financial transparency (where legally required)\"",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 491,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "LIST-1360-4fbaf28b",
+      "type": "policy_list_item",
+      "content": "`registry/locks/` fehlt oder unsignierte Änderungen erkannt werden",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1360,
+      "priority": "MAY"
+    },
+    {
+      "rule_id": "TABLE-11-7075fc20",
+      "type": "table_row",
+      "content": "Funktion | Zentraler Pfad | Zweck",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 11,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-13-4194a1af",
+      "type": "table_row",
+      "content": "**Registry** | `24_meta_orchestration/registry/` | Kanonische Modulverwaltung",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 13,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-14-ce720a5d",
+      "type": "table_row",
+      "content": "**Policies** | `23_compliance/policies/` | Struktur-Policies zentral",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 14,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-15-e53a06e0",
+      "type": "table_row",
+      "content": "**Evidence** | `23_compliance/evidence/` | Audit-Evidence gesammelt",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 15,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-16-3da39523",
+      "type": "table_row",
+      "content": "**Exceptions** | `23_compliance/exceptions/` | Struktur-Ausnahmen zentral",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 16,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-17-1f1f9bba",
+      "type": "table_row",
+      "content": "**Risk** | `07_governance_legal/risk/` | Risk Register zentral",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 17,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-18-9d89d683",
+      "type": "table_row",
+      "content": "**CI/CD** | `.github/workflows/` + `24_meta_orchestration/triggers/ci/` | Pipeline-Logik",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 18,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-135-21615ff0",
+      "type": "table_row",
+      "content": "local REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null | pwd)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 135,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-140-001ed31f",
+      "type": "table_row",
+      "content": "local ALLOWED_DIRS=$(yq -r '.root_level_exceptions.allowed_directories.*[]' \"$EXCEPTIONS_FILE\" 2>/dev/null | echo \"\")",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 140,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-141-f3663bf1",
+      "type": "table_row",
+      "content": "local ALLOWED_FILES=$(yq -r '.root_level_exceptions.allowed_files.*[]' \"$EXCEPTIONS_FILE\" 2>/dev/null | echo \"\")",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 141,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-145-9ff3dca7",
+      "type": "table_row",
+      "content": "local MODULE_COUNT=$(ls -d [0-9][0-9]_* 2>/dev/null | wc -l | tr -d ' ')",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 145,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-769-4cfa26e2",
+      "type": "table_row",
+      "content": "Modul | Zweck / Aufgabe",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 769,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-771-2a5af884",
+      "type": "table_row",
+      "content": "**01_ai_layer** | KI/Agenten, Prompt- und Workflow-Logik, KI-Sicherheit",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 771,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-772-ae3a236d",
+      "type": "table_row",
+      "content": "**02_audit_logging** | Audit-Logs, Retention, Onchain-Evidence",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 772,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-773-eaea4222",
+      "type": "table_row",
+      "content": "**03_core** | Hauptlogik, Domain-Services, APIs, Tokenomics",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 773,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-774-2281b40d",
+      "type": "table_row",
+      "content": "**04_deployment** | CI/CD, Deployments, Containerization",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 774,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-775-73a84846",
+      "type": "table_row",
+      "content": "**05_documentation** | Doku, Architektur, ADRs, Runbooks",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 775,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-776-c7d4be5c",
+      "type": "table_row",
+      "content": "**06_data_pipeline** | Data Engineering, ML-Pipelines, Trainingsdaten",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 776,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-777-737e9eef",
+      "type": "table_row",
+      "content": "**07_governance_legal** | Legal, Compliance-Verknüpfung, Approvals",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 777,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-778-2e794a0a",
+      "type": "table_row",
+      "content": "**08_identity_score** | Reputations-, Score- und Trustlogik",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 778,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-779-d098a0ad",
+      "type": "table_row",
+      "content": "**09_meta_identity** | Identitäts-Mapping, DID/Resolver, Attributprofile",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 779,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-780-119fc81d",
+      "type": "table_row",
+      "content": "**10_interoperability** | Standards, externe Integrationen, Connectoren",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 780,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-781-2513e28f",
+      "type": "table_row",
+      "content": "**11_test_simulation** | Alle Testarten (Unit, Integration, e2e, Fixtures)",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 781,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-782-c467beb1",
+      "type": "table_row",
+      "content": "**12_tooling** | Tools, Scripts, Linter, Generatoren, Hooks",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 782,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-783-e7d88e77",
+      "type": "table_row",
+      "content": "**13_ui_layer** | UI-Schichten: Admin, Partner, Public, Designsystem",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 783,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-784-bedd1641",
+      "type": "table_row",
+      "content": "**14_zero_time_auth** | Authentifizierung, Wallet, SSO, lokale Auth-Policies",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 784,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-785-57795971",
+      "type": "table_row",
+      "content": "**15_infra** | Infrastruktur: K8s, Terraform, Netz, Secrets",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 785,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-786-8f17fb56",
+      "type": "table_row",
+      "content": "**16_codex** | Playbooks, Guides, Patterns",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 786,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-787-6a01d5ed",
+      "type": "table_row",
+      "content": "**17_observability** | Monitoring, Dashboards, Alerts, OTEL, Score",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 787,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-788-5f028868",
+      "type": "table_row",
+      "content": "**18_data_layer** | DB-Schemas, Migrations, Repositories, Adapter",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 788,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-789-9621a155",
+      "type": "table_row",
+      "content": "**19_adapters** | Adapters für Web3, Payment, Messaging, Identity",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 789,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-790-984cd512",
+      "type": "table_row",
+      "content": "**20_foundation** | Utilities, Security, Serialization, Config, Tokenomics",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 790,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-791-6071524c",
+      "type": "table_row",
+      "content": "**21_post_quantum_crypto** | Post-Quantum-Krypto, Algorithmen, Keystores, Adapter, Benchmarks",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 791,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-792-d30482a7",
+      "type": "table_row",
+      "content": "**22_datasets** | Roh-, Zwischen-, Referenz- und Externe Datensätze",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 792,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-793-6c229840",
+      "type": "table_row",
+      "content": "**23_compliance** | Policies, Evidence, Mapping, Tests, Governance, Anti-Gaming, Reviews, Exceptions",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 793,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-794-2712100f",
+      "type": "table_row",
+      "content": "**24_meta_orchestration** | Orchestrator, Pipelines, Registry, CI-Trigger",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 794,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-798-a3c9e29c",
+      "type": "table_row",
+      "content": "Kategorie | Gewichtung | Penalty-Beispiele | Ziel",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 798,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-800-a2f944a5",
+      "type": "table_row",
+      "content": "**Root-Konformität** | 40% | Extra Root: -3, Fehlend: -5 | Exakt 24 Root-Ordner",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 800,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-801-19164eca",
+      "type": "table_row",
+      "content": "**MUST-Ordner** | 30% | Fehlende MUST: -2 | Alle Module-MUST vorhanden",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 801,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-802-e2f8ea3d",
+      "type": "table_row",
+      "content": "**Naming** | 20% | Convention-Violations: -1 | snake_case, keine Umlaute",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 802,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "TABLE-803-d480a42a",
+      "type": "table_row",
+      "content": "**Anti-Duplikat** | 10% | Verbotene Items: -10 | Keine modulnahen Policies",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 803,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "CODE-BASH-be90af40",
+      "type": "code_block_bash",
+      "content": "# 12_tooling/scripts/structure_guard.sh - Root Exceptions Validation\nvalidate_root_exceptions() {\n    local EXCEPTIONS_FILE=\"23_compliance/exceptions/root_level_exceptions.yaml\"\n    \n    # Get reposit",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 129,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-BASH-ef2db1ea",
+      "type": "code_block_bash",
+      "content": "# Struktur-Guard (MUSS EXISTIEREN)\n12_tooling/scripts/structure_guard.sh\n\n# Pre-Commit Hook (MUSS EXISTIEREN)\n12_tooling/hooks/pre_commit/structure_validation.sh\n\n# Policies & Tests (MUSS EXISTIEREN)\n",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 189,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-MARKDOWN-f83c5f24",
+      "type": "code_block_markdown",
+      "content": "# 23_compliance/governance/source_of_truth_enterprise.md\n\n## Badge & Metrics Source References (Internal)\n\n### Structure Compliance Badge\n- **Source:** `12_tooling/scripts/structure_guard.sh:line_127`",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 302,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-JSON-3d921c18",
+      "type": "code_block_json",
+      "content": "// 23_compliance/reviews/review_log_enterprise.json\n{\n  \"review_system_version\": \"1.0\",\n  \"classification\": \"CONFIDENTIAL\",\n  \"last_updated\": \"2025-09-15T10:30:00Z\",\n  \"review_history\": [\n    {\n      ",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 950,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-TEXT-72bcdf97",
+      "type": "code_block_text",
+      "content": "module.yaml\nREADME.md\ndocs/\nsrc/\ntests/",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1179,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-TEXT-eddfd899",
+      "type": "code_block_text",
+      "content": "24_meta_orchestration/\n  registry/\n    logs/                       # NUR *.log oder *.log.jsonl (append-only)\n      registry_events.log       # Ereignis-Log (WORM)\n      access.log                # Zu",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 1320,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "BOLD-801-453b661d",
+      "type": "bold_policy",
+      "content": "MUST-Ordner",
+      "source_file": "SSID_structure_level3_part2_MAX.md",
+      "line_number": 801,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-de145297",
+      "type": "yaml_block",
+      "content": "# 23_compliance/global/global_foundations_v2.0.yaml\nversion: \"2.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nregulatory_basis: \"FATF 2025, OECD CARF 2025-07, ISO Updates 2025\"\nclassification: \"CONFIDENTIAL",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 26,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-3321ca6c",
+      "type": "yaml_block",
+      "content": "# 23_compliance/jurisdictions/eu_eea_uk_ch_li_v1.5.yaml\nversion: \"1.5\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL\"\n\nuk_crypto_regime/\n  fca_ps23_6_promotions/:\n    name: \"Werbe",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 91,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-f915fc7f",
+      "type": "yaml_block",
+      "content": "# 23_compliance/jurisdictions/mena_africa_v1.2.yaml\nversion: \"1.2\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL\"\n\nae_bh_za_mu/\n  bh_cbb_cryptoasset_module_2024/:\n    name: \"Ruleb",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 127,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-97764d49",
+      "type": "yaml_block",
+      "content": "# 23_compliance/jurisdictions/apac_v1.8.yaml\nversion: \"1.8\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL\"\n\nsg_hk_jp_au/\n  sg_psn02_2024/:\n    name: \"Notice + Guidelines, EDD-Trig",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 149,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-adaea9c6",
+      "type": "yaml_block",
+      "content": "# 23_compliance/jurisdictions/americas_v1.3.yaml\nversion: \"1.3\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL\"\n\nus_ca_br_mx/\n  us_irs_1099_da_final/:\n    name: \"Broker-Reporting a",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 189,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-4e54f27f",
+      "type": "yaml_block",
+      "content": "# 23_compliance/privacy/global_privacy_v2.2.yaml\nversion: \"2.2\"\ndate: \"2025-09-15\"\ndeprecated: false\nregulatory_basis: \"Global Privacy Landscape 2025 + Emerging Markets\"\nclassification: \"CONFIDENTIAL\"",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 225,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-891c4587",
+      "type": "yaml_block",
+      "content": "# 23_compliance/security/financial_security_v1.1.yaml\nversion: \"1.1\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL\"\n\nnist_csf_20/:\n  name: \"NIST CSF 2.0 (Govern/Identify/Protect/D",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 291,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-32f86bca",
+      "type": "yaml_block",
+      "content": "# .github/ISSUE_TEMPLATE/regulatory_update_internal.yml\nname: Regulatory Update Request (Internal)\ndescription: Internal regulatory change tracking\ntitle: \"[INTERNAL-REGULATORY] \"\nlabels: [\"compliance",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 330,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-98dcd0af",
+      "type": "yaml_block",
+      "content": "# 02_audit_logging/storage/evidence_config_enterprise.yaml\nversion: \"1.0\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Enterprise Evidence Management\"\n\nstorage_tiers:\n  immutable_store:\n    path:",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 425,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-3a87e5b3",
+      "type": "yaml_block",
+      "content": "# 02_audit_logging/quarantine/quarantine_config_enterprise.yaml\nversion: \"1.0\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Enterprise Quarantine Management\"\n\nquarantine_single",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 473,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-0dfd4605",
+      "type": "yaml_block",
+      "content": "# 23_compliance/standards/implementation_enterprise_v1.5.yaml\nversion: \"1.5\"\ndate: \"2025-09-15\"\ndeprecated: false\nclassification: \"CONFIDENTIAL\"\n\nactive_standards:\n  W3C_VC_20:\n    name: \"W3C Verifiab",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 681,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-5c80313f",
+      "type": "yaml_block",
+      "content": "# 23_compliance/reviews/internal_review_schedule.yaml\nversion: \"1.0\"\ndeprecated: false\nclassification: \"CONFIDENTIAL\"\n\ninternal_reviews:\n  monthly:\n    scope: \"Badge metrics validation, compliance upd",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 731,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "YAML-6ca0bc1c",
+      "type": "yaml_block",
+      "content": "# 02_audit_logging/quarantine/quarantine_policy.yaml\nversion: \"1.0\"\ndate: \"2025-09-21\"\ndeprecated: false\nclassification: \"CONFIDENTIAL - Security Operations\"\n\nquarantine_structure:\n  canonical_path: \"",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 908,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "HEADER-23-4a44ca95",
+      "type": "header",
+      "level": 2,
+      "content": "Globale Compliance-Checkliste (Enhanced + Versioniert)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 23,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-25-fd9564d9",
+      "type": "header",
+      "level": 3,
+      "content": "1. Globale Grundsteine (immer erforderlich) - v2.0",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 25,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-27-ea91fe45",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/global/global_foundations_v2.0.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 27,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-90-4aa81633",
+      "type": "header",
+      "level": 3,
+      "content": "2. EU/EEA & UK/CH/LI - v1.5",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 90,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-92-6ce5fc56",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/jurisdictions/eu_eea_uk_ch_li_v1.5.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 92,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-126-65fd2551",
+      "type": "header",
+      "level": 3,
+      "content": "3. Nahost & Afrika (MENA/Africa Bündel) - v1.2",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 126,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-128-7180c797",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/jurisdictions/mena_africa_v1.2.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 128,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-148-9088bf16",
+      "type": "header",
+      "level": 3,
+      "content": "4. Asien-Pazifik (APAC Bündel) - v1.8",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 148,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-150-81143f03",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/jurisdictions/apac_v1.8.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 150,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-188-c3173164",
+      "type": "header",
+      "level": 3,
+      "content": "5. Nord-/Lateinamerika (Amerika) - v1.3",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 188,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-190-72e3b9b0",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/jurisdictions/americas_v1.3.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 190,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-224-d7a9439c",
+      "type": "header",
+      "level": 3,
+      "content": "6. Datenschutz (globale Abdeckung) - v2.2",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 224,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-226-a772300a",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/privacy/global_privacy_v2.2.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 226,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-290-4f47002d",
+      "type": "header",
+      "level": 3,
+      "content": "7. Finanzmarkt-Sicherheit & Resilienz - v1.1",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 290,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-292-7446a256",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/security/financial_security_v1.1.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 292,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-317-e19e19bc",
+      "type": "header",
+      "level": 3,
+      "content": "Finaler Delta-Patch - Ergebnisbewertung (100% Check + Enhanced)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 317,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-327-7ceecc0f",
+      "type": "header",
+      "level": 2,
+      "content": "Community Integration & Issue Templates (Enterprise Adapted)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 327,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-329-6c571a67",
+      "type": "header",
+      "level": 3,
+      "content": "Internal Issue Templates",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 329,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-331-5dc981dd",
+      "type": "header",
+      "level": 1,
+      "content": ".github/ISSUE_TEMPLATE/regulatory_update_internal.yml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 331,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-389-c5da7663",
+      "type": "header",
+      "level": 3,
+      "content": "Community Contribution Guidelines (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 389,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-391-094652df",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/governance/community_guidelines_enterprise.md",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 391,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-393-d00aa92f",
+      "type": "header",
+      "level": 2,
+      "content": "Enterprise Community Contribution Guidelines",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 393,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-397-48323ee3",
+      "type": "header",
+      "level": 3,
+      "content": "Internal Regulatory Updates",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 397,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-403-da553134",
+      "type": "header",
+      "level": 3,
+      "content": "External Community Contributions",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 403,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-409-94e53c0e",
+      "type": "header",
+      "level": 3,
+      "content": "Review Process (Internal)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 409,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-415-1becbd7a",
+      "type": "header",
+      "level": 3,
+      "content": "Business Confidentiality",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 415,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-422-3638bfde",
+      "type": "header",
+      "level": 2,
+      "content": "Audit-Trail (WORM-Properties + Enhanced)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 422,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-424-8a68e7f4",
+      "type": "header",
+      "level": 3,
+      "content": "Enhanced Evidence Management (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 424,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-426-f55125a6",
+      "type": "header",
+      "level": 1,
+      "content": "02_audit_logging/storage/evidence_config_enterprise.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 426,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-472-569900ac",
+      "type": "header",
+      "level": 3,
+      "content": "Quarantine Singleton Framework (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 472,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-474-66fdb35b",
+      "type": "header",
+      "level": 1,
+      "content": "02_audit_logging/quarantine/quarantine_config_enterprise.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 474,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-595-41b947f5",
+      "type": "header",
+      "level": 3,
+      "content": "Quarantine Hash-Ledger Implementation",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 595,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-646-0131930d",
+      "type": "header",
+      "level": 2,
+      "content": "CI/CD-Automatisierung (Enhanced)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 646,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-649-a530a729",
+      "type": "header",
+      "level": 1,
+      "content": "Pre-Commit (Enhanced)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 649,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-654-588d828f",
+      "type": "header",
+      "level": 1,
+      "content": "CI-Gates (Enhanced - Exit Code 24 bei Violation)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 654,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-659-e3362a35",
+      "type": "header",
+      "level": 1,
+      "content": "Evidence Collection",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 659,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-664-26295b10",
+      "type": "header",
+      "level": 1,
+      "content": "Structure Guard (Enhanced)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 664,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-667-73ffc7c4",
+      "type": "header",
+      "level": 1,
+      "content": "Anti-Gaming Controls (Enhanced)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 667,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-673-9a7e3cd1",
+      "type": "header",
+      "level": 1,
+      "content": "Review System Integration",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 673,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-679-14b5fa55",
+      "type": "header",
+      "level": 2,
+      "content": "Standards-Implementierung (Enhanced + Versioniert)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 679,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-682-dd8e582e",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/standards/implementation_enterprise_v1.5.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 682,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-728-eabbc941",
+      "type": "header",
+      "level": 2,
+      "content": "Enhanced Review & Maintenance Framework",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 728,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-730-1897693a",
+      "type": "header",
+      "level": 3,
+      "content": "Internal Review Requirements (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 730,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-732-b00205f2",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/reviews/internal_review_schedule.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 732,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-769-78fdb97f",
+      "type": "header",
+      "level": 3,
+      "content": "Review Documentation Templates (Enhanced)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 769,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-771-3b356224",
+      "type": "header",
+      "level": 1,
+      "content": "23_compliance/reviews/templates/internal_quarterly_review_template_enterprise.md",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 771,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-773-5128dfbf",
+      "type": "header",
+      "level": 2,
+      "content": "Internal Quarterly Compliance Review (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 773,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-781-02670d86",
+      "type": "header",
+      "level": 3,
+      "content": "Executive Summary",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 781,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-789-594a64f6",
+      "type": "header",
+      "level": 3,
+      "content": "Compliance Matrix Review (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 789,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-800-921755bd",
+      "type": "header",
+      "level": 3,
+      "content": "Business Impact Assessment (Detailed)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 800,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-815-44c213b8",
+      "type": "header",
+      "level": 3,
+      "content": "Anti-Gaming Control Assessment (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 815,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-823-912b5602",
+      "type": "header",
+      "level": 3,
+      "content": "Competitive Intelligence",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 823,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-830-cc92f367",
+      "type": "header",
+      "level": 3,
+      "content": "Regulatory Horizon Scanning (Business Focus)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 830,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-837-ccaabb72",
+      "type": "header",
+      "level": 3,
+      "content": "Internal Actions Required (Business-Prioritized)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 837,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-841-e8a4e719",
+      "type": "header",
+      "level": 3,
+      "content": "Board Reporting Summary",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 841,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-847-13b2574e",
+      "type": "header",
+      "level": 3,
+      "content": "Next Review",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 847,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-860-0252a620",
+      "type": "header",
+      "level": 2,
+      "content": "Validierung (Enhanced 4-Level)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 860,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-867-5f12edfc",
+      "type": "header",
+      "level": 3,
+      "content": "CI-Gate Implementation (Clarification)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 867,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-877-2e52089c",
+      "type": "header",
+      "level": 1,
+      "content": "Level 4 Gates (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 877,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-886-d55dfdb8",
+      "type": "header",
+      "level": 2,
+      "content": "Legal Disclaimers (Enterprise Enhanced)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 886,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-888-92bf9b2d",
+      "type": "header",
+      "level": 3,
+      "content": "Compliance Claims Disclaimer (Internal)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 888,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-899-799c42e3",
+      "type": "header",
+      "level": 3,
+      "content": "Version-Specific Validity (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 899,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-902-993238b0",
+      "type": "header",
+      "level": 3,
+      "content": "Repository Scope Disclaimer (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 902,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-905-87720b26",
+      "type": "header",
+      "level": 2,
+      "content": "Enhanced File Structure Summary (Enterprise)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 905,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-907-abb84911",
+      "type": "header",
+      "level": 3,
+      "content": "Quarantine Framework (Canonical)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 907,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-909-81fe7350",
+      "type": "header",
+      "level": 1,
+      "content": "02_audit_logging/quarantine/quarantine_policy.yaml",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 909,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-974-1b4d5699",
+      "type": "header",
+      "level": 2,
+      "content": "OpenCore Integration Summary - Fully Integrated Features",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 974,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1077-f0607931",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – Chat-Intake (6 Dateien) → SHARD-Zuordnung & Logs",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1077,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1096-7f9fba84",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – Frontend/Backend/Admin/Partner/Public – Platzierung (SOLL)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1096,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1144-6aa8bbb5",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – CI-Gates & Tests (erzwingen Ebenen 1–6)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1144,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1157-a3fa4d34",
+      "type": "header",
+      "level": 2,
+      "content": "MAXIMALSTAND ADDENDUM – CORRECTION: LOGS vs LOCKS & Intake Relocation",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1157,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1160-74b2c1b5",
+      "type": "header",
+      "level": 3,
+      "content": "Korrekturgrundsatz (SAFE-FIX, keine Löschung – nur Ergänzung)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1160,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1163-0847eb97",
+      "type": "header",
+      "level": 3,
+      "content": "Kanonische Registry-Struktur (final, verbindlich)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1163,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1190-25c857f0",
+      "type": "header",
+      "level": 3,
+      "content": "Verlagerungen (DELTA, canonical MOVE-Regeln)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1190,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1195-443f1790",
+      "type": "header",
+      "level": 3,
+      "content": "Dateityp-Policies (erzwingend)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1195,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1201-a7cc75a6",
+      "type": "header",
+      "level": 3,
+      "content": "CI-Gate-Anpassungen (erzwingen Semantik)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1201,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "HEADER-1209-6c16460c",
+      "type": "header",
+      "level": 3,
+      "content": "SHARD-16 Mapping (keine Änderung, nur Klarstellung für Intake)",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1209,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "LIST-835-86a6faa5",
+      "type": "policy_list_item",
+      "content": "Required Actions: [List with timelines and business priority]",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 835,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "LIST-843-ec3a7289",
+      "type": "policy_list_item",
+      "content": "Investment Decisions Required: [List with amounts]",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 843,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "LIST-850-550864ec",
+      "type": "policy_list_item",
+      "content": "External Review Required: [Yes/No]",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 850,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "LIST-871-9fd71e1c",
+      "type": "policy_list_item",
+      "content": "MUST/OPTIONAL Compliance (Level 2) ",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 871,
+      "priority": "MUST"
+    },
+    {
+      "rule_id": "LIST-1204-4fbaf28b",
+      "type": "policy_list_item",
+      "content": "`registry/locks/` fehlt oder unsignierte Änderungen erkannt werden",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1204,
+      "priority": "MAY"
+    },
+    {
+      "rule_id": "NUM-398-35b6deaa",
+      "type": "numbered_list",
+      "number": "1",
+      "content": "Use the Internal Regulatory Update Request template",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 398,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-399-e94d0267",
+      "type": "numbered_list",
+      "number": "2",
+      "content": "Include business priority assessment",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 399,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-400-9c9ef086",
+      "type": "numbered_list",
+      "number": "3",
+      "content": "Provide competitive impact analysis",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 400,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-401-4fcfb55f",
+      "type": "numbered_list",
+      "number": "4",
+      "content": "Reference internal legal counsel review",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 401,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-404-b4010e59",
+      "type": "numbered_list",
+      "number": "1",
+      "content": "All external contributions require internal review",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 404,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-405-aa9fad88",
+      "type": "numbered_list",
+      "number": "2",
+      "content": "No confidential compliance mappings in public contributions",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 405,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-406-b64de0f6",
+      "type": "numbered_list",
+      "number": "3",
+      "content": "Generic regulatory updates acceptable for public version",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 406,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-407-50d4bccd",
+      "type": "numbered_list",
+      "number": "4",
+      "content": "Maintain separation between public and private repositories",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 407,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-838-f8f6f788",
+      "type": "numbered_list",
+      "number": "1",
+      "content": "[Action] - Owner: [Person] - Deadline: [Date] - Business Impact: [Revenue/Risk]",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 838,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "NUM-839-fb1bb950",
+      "type": "numbered_list",
+      "number": "2",
+      "content": "[Action] - Owner: [Person] - Deadline: [Date] - Business Impact: [Revenue/Risk]",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 839,
+      "priority": "STRUCTURAL"
+    },
+    {
+      "rule_id": "CODE-MARKDOWN-54c61dc9",
+      "type": "code_block_markdown",
+      "content": "# 23_compliance/governance/community_guidelines_enterprise.md\n\n## Enterprise Community Contribution Guidelines\n\n**Classification:** CONFIDENTIAL - Internal Use Only\n\n### Internal Regulatory Updates\n1.",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 390,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-JSON-820cbb52",
+      "type": "code_block_json",
+      "content": "// 02_audit_logging/quarantine/hash_ledger/quarantine_chain.json\n{\n  \"quarantine_chain_version\": \"1.0\",\n  \"classification\": \"CONFIDENTIAL\",\n  \"last_updated\": \"2025-09-15T10:30:00Z\",\n  \"chain_integrity",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 596,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-BASH-533a20a6",
+      "type": "code_block_bash",
+      "content": "# Pre-Commit (Enhanced)\n12_tooling/hooks/pre_commit/structure_validation.sh\n12_tooling/hooks/pre_commit/deprecation_check.sh\n12_tooling/hooks/pre_commit/confidentiality_check.sh\n\n# CI-Gates (Enhanced ",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 648,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-MARKDOWN-ce714ec4",
+      "type": "code_block_markdown",
+      "content": "# 23_compliance/reviews/templates/internal_quarterly_review_template_enterprise.md\n\n## Internal Quarterly Compliance Review (Enterprise)\n\n**Review Quarter:** YYYY-QX  \n**Review Team:** [Compliance Lea",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 770,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-BASH-e539c888",
+      "type": "code_block_bash",
+      "content": "# Level 4 Gates (Enterprise)\n24_meta_orchestration/triggers/ci/gates/review_status_gate.py         # Review Compliance\n24_meta_orchestration/triggers/ci/gates/business_compliance_gate.py   # Business ",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 876,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-TEXT-6bdfa065",
+      "type": "code_block_text",
+      "content": "13_ui_layer/\n  admin_frontend/             # Admin-UI\n    app/\n    docs/\n    tests/\n  partner_dashboard/          # Partner-UI\n    app/\n    docs/\n    tests/\n  public_frontend/            # Public-UI\n ",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1099,
+      "priority": "IMPLEMENTATION"
+    },
+    {
+      "rule_id": "CODE-TEXT-eddfd899",
+      "type": "code_block_text",
+      "content": "24_meta_orchestration/\n  registry/\n    logs/                       # NUR *.log oder *.log.jsonl (append-only)\n      registry_events.log       # Ereignis-Log (WORM)\n      access.log                # Zu",
+      "source_file": "SSID_structure_level3_part3_MAX.md",
+      "line_number": 1164,
+      "priority": "IMPLEMENTATION"
+    }
+  ],
+  "breakdown": {
+    "by_type": {
+      "yaml_block": 47,
+      "header": 341,
+      "policy_list_item": 17,
+      "table_row": 56,
+      "numbered_list": 32,
+      "checkbox": 26,
+      "code_block_markdown": 5,
+      "code_block_text": 5,
+      "bold_policy": 2,
+      "code_block_bash": 4,
+      "code_block_json": 2
+    },
+    "by_priority": {
+      "MUST": 78,
+      "STRUCTURAL": 429,
+      "SHOULD": 3,
+      "COMPLETED": 6,
+      "MAY": 5,
+      "IMPLEMENTATION": 16
+    },
+    "by_file": {
+      "ssid_master_definition_corrected_v1.1.1.md": 197,
+      "SSID_structure_level3_part1_MAX.md": 89,
+      "SSID_structure_level3_part2_MAX.md": 139,
+      "SSID_structure_level3_part3_MAX.md": 112
+    }
+  }
+}

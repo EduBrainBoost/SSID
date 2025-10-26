@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2025-10-23T20:41:46.417237",
+  "enforcement_rules": {
+    "root_24_lock": {
+      "type": "deny",
+      "count": 80
+    },
+    "safe_fix": {
+      "type": "deny",
+      "count": 3
+    },
+    "gdpr_compliance": {
+      "type": "warn",
+      "count": 0
+    },
+    "non_custodial": {
+      "type": "deny",
+      "count": 0
+    },
+    "hash_only": {
+      "type": "deny",
+      "count": 0
+    }
+  },
+  "static_analysis": {
+    "pre_commit_hooks": true,
+    "ci_gates": true,
+    "path": "12_tooling/hooks/pre_commit/"
+  },
+  "runtime_enforcement": {
+    "opa_enabled": true,
+    "gatekeeper_enabled": true,
+    "policy_file": "23_compliance/policies/sot/sot_policy.rego"
+  },
+  "ci_integration": {
+    "workflow": ".github/workflows/ci_policy_check.yaml",
+    "exit_code_on_fail": 24
+  }
+}

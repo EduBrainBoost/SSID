@@ -101,7 +101,7 @@ class PythonValidatorExtractor:
         tree = ast.parse(content)
 
         for node in ast.walk(tree):
-            if isinstance(node, ast.ClassDef) and node.name == "SoTValidator":
+            if isinstance(node, ast.ClassDef) and node.name == "RuleValidationEngine":
                 for item in node.body:
                     if isinstance(item, ast.FunctionDef) and item.name.startswith("validate_"):
                         rule_id = self._extract_rule_id(item.name)

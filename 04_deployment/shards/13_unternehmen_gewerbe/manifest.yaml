@@ -1,0 +1,24 @@
+apiVersion: deployment.ssid.project/v1
+kind: ShardManifest
+metadata:
+  name: 04_deployment_13_unternehmen_gewerbe
+  labels:
+    root: 04_deployment
+    shard: 13_unternehmen_gewerbe
+    domain: business_government
+spec:
+  replicas: 1
+  deployment:
+    strategy: RollingUpdate
+    maxSurge: 1
+    maxUnavailable: 0
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi

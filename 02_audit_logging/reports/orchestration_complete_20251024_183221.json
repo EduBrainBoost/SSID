@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-10-24T16:32:21.994210+00:00",
+  "overall_status": "SUCCESS",
+  "overall_score": 84.0,
+  "total_duration_seconds": 20.04404926300049,
+  "phases": [
+    {
+      "phase": "Phase 1: 6-Layer Security Check",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 19.608099460601807,
+      "details": {
+        "status": "SUCCESS",
+        "score": 100.0,
+        "errors": []
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:32:21.559258+00:00"
+    },
+    {
+      "phase": "Phase 3: Change Detection & Quarantine",
+      "status": "PARTIAL",
+      "score": 50.0,
+      "duration_seconds": 0.4329655170440674,
+      "details": {
+        "status": "PARTIAL",
+        "score": 50.0,
+        "errors": [
+          "INFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:QUARANTINE ENGINE - SCAN AND ISOLATE\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:CHANGE DETECTION SCAN\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:\n[CHECK] SoT Artefacts...\nINFO:QUARANTINE_ENGINE:\n[CHECK] Shards...\nINFO:QUARANTINE_ENGINE:\n[CHECK] Unregistered Files...\nINFO:QUARANTINE_ENGINE:\nDetected 30 violations\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\046a30716c3bbbdc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\232d9daaf534ed85.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\2f13eea2b26d8443.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\366a0aea9e719542.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\480b6e3f5ad4b5e1.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\5033e7f46058df82.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\5449c23b87bacdbc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\64a5f62d01c5854d.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\66c41a1d913e9cde.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\80e1c5e8b87a7ce0.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\965d3675bd824e06.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\bb4192a699e4d6d8.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\c90d8862860378fc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\ca27d1d9756859ec.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\daf414a0fb132848.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\e3ac3a1be44df32c.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\ed9c3f8f5f150ba1.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\f335bbd9a31030db.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\fab5dec56e354c52.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\fe26307e5bde9e49.json: Expecting value: line 5 column 15 (char 68)\nINFO:QUARANTINE_ENGINE:\\U0001f4c4 Report saved: quarantine_report_20251024_183221.json\n"
+        ]
+      },
+      "errors": [
+        "INFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:QUARANTINE ENGINE - SCAN AND ISOLATE\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:CHANGE DETECTION SCAN\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:\n[CHECK] SoT Artefacts...\nINFO:QUARANTINE_ENGINE:\n[CHECK] Shards...\nINFO:QUARANTINE_ENGINE:\n[CHECK] Unregistered Files...\nINFO:QUARANTINE_ENGINE:\nDetected 30 violations\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\046a30716c3bbbdc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\232d9daaf534ed85.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\2f13eea2b26d8443.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\366a0aea9e719542.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\480b6e3f5ad4b5e1.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\5033e7f46058df82.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\5449c23b87bacdbc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\64a5f62d01c5854d.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\66c41a1d913e9cde.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\80e1c5e8b87a7ce0.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\965d3675bd824e06.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\bb4192a699e4d6d8.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\c90d8862860378fc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\ca27d1d9756859ec.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\daf414a0fb132848.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\e3ac3a1be44df32c.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\ed9c3f8f5f150ba1.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\f335bbd9a31030db.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\fab5dec56e354c52.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\fe26307e5bde9e49.json: Expecting value: line 5 column 15 (char 68)\nINFO:QUARANTINE_ENGINE:\\U0001f4c4 Report saved: quarantine_report_20251024_183221.json\n"
+      ],
+      "timestamp": "2025-10-24T16:32:21.992224+00:00"
+    },
+    {
+      "phase": "Phase 5: Validation & Verification",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 0.0019867420196533203,
+      "details": {
+        "registry_exists": true,
+        "artefacts_exist": true,
+        "worm_intact": true,
+        "shards_valid": true
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:32:21.994210+00:00"
+    },
+    {
+      "phase": "Phase 6: Self-Healing & Recovery",
+      "status": "SUCCESS",
+      "score": 70.0,
+      "duration_seconds": 0.0,
+      "details": {
+        "actions": [
+          "Healing attempted for Phase 3: Change Detection & Quarantine"
+        ]
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:32:21.994210+00:00"
+    },
+    {
+      "phase": "Phase 8: Reporting & Audit",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 0.0,
+      "details": {
+        "report_generated": true
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:32:21.994210+00:00"
+    }
+  ],
+  "summary": {
+    "total_phases": 5,
+    "successful_phases": 4,
+    "partial_phases": 1,
+    "failed_phases": 0,
+    "average_score": 84.0,
+    "total_errors": 1
+  },
+  "next_run": "2025-10-24T16:37:21.994210+00:00"
+}

@@ -16,7 +16,7 @@ from pathlib import Path
 # Add validators to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / '03_core' / 'validators' / 'sot'))
 
-from sot_validator_core_v2 import validate_all_sot_rules, ValidationResult
+from sot_validator_engine import RuleValidationEngine, ValidationResult
 
 class TestSoTValidatorMoSCoW:
     """Test all 4773 SoT rules"""

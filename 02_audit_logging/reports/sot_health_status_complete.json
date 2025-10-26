@@ -1,0 +1,108 @@
+{
+  "timestamp": "2025-10-24T16:03:01.771618",
+  "version": "3.2.0",
+  "checks": {
+    "file_exists_registry": {
+      "check": "file_exists_registry",
+      "status": "PASS",
+      "file": "C:\\Users\\bibel\\Documents\\Github\\SSID\\16_codex\\structure\\auto_generated\\sot_rules_full.json",
+      "exists": true,
+      "size": 28018971,
+      "hash": "1c46c723049fe81af6de1e9fa35b725e4520e1c989e2dab755a2588dc9ef0bd8"
+    },
+    "file_exists_contract": {
+      "check": "file_exists_contract",
+      "status": "PASS",
+      "file": "C:\\Users\\bibel\\Documents\\Github\\SSID\\16_codex\\contracts\\sot\\sot_contract_complete.yaml",
+      "exists": true,
+      "size": 11608953,
+      "hash": "c6dd3292733e633c473ee0605565c6800ef84104a8255b97d7f8fe5f62484d8c"
+    },
+    "file_exists_policy": {
+      "check": "file_exists_policy",
+      "status": "PASS",
+      "file": "C:\\Users\\bibel\\Documents\\Github\\SSID\\23_compliance\\policies\\sot\\sot_policy_complete.rego",
+      "exists": true,
+      "size": 72038,
+      "hash": "dc38e1a7852bbcb490ae3bda93f4a8f3be3c3686c544bf100b407832d5b6bcf9"
+    },
+    "file_exists_validator": {
+      "check": "file_exists_validator",
+      "status": "PASS",
+      "file": "C:\\Users\\bibel\\Documents\\Github\\SSID\\03_core\\validators\\sot\\sot_validator_complete.py",
+      "exists": true,
+      "size": 26790,
+      "hash": "25ce38501f2bc9b9a9e3f7d58a42113ac331c5246a72d543608ca17ff3a97e5d"
+    },
+    "file_exists_tests": {
+      "check": "file_exists_tests",
+      "status": "PASS",
+      "file": "C:\\Users\\bibel\\Documents\\Github\\SSID\\11_test_simulation\\tests_compliance\\test_sot_complete.py",
+      "exists": true,
+      "size": 11006,
+      "hash": "3584d5f356aae2e2500734f7c07b8530250740db9df2b0c9d46de35f604c9430"
+    },
+    "file_exists_merkle": {
+      "check": "file_exists_merkle",
+      "status": "PASS",
+      "file": "C:\\Users\\bibel\\Documents\\Github\\SSID\\24_meta_orchestration\\registry\\sot_merkle_tree.json",
+      "exists": true,
+      "size": 188,
+      "hash": "32e937fe4a0c4fc33b40275a2c89b4ce4a0b05862424310f7fbef9843ee0c9e6"
+    },
+    "file_exists_audit": {
+      "check": "file_exists_audit",
+      "status": "PASS",
+      "file": "C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\reports\\sot_extractor_audit.json",
+      "exists": true,
+      "size": 3649,
+      "hash": "61a3b3270af113b03cbc2e9f0967dc609f661fa68c14822221c060f55ae8fe3c"
+    },
+    "registry_integrity": {
+      "check": "registry_integrity",
+      "status": "PASS",
+      "total_rules": 31742,
+      "version": "3.2.0",
+      "extraction_mode": "comprehensive"
+    },
+    "merkle_tree": {
+      "check": "merkle_tree",
+      "status": "PASS",
+      "merkle_root": "5c6f233e62f2bfee56bbf76851123838b05d8bede8b0d3b0e6e764341ca5ea5d",
+      "total_leaves": 31742,
+      "algorithm": "SHA-256"
+    },
+    "artifact_sync": {
+      "check": "artifact_sync",
+      "status": "WARN",
+      "registry_rules": 31742,
+      "contract_rules": 31709,
+      "validator_functions": 82,
+      "test_functions": 51,
+      "issues": [],
+      "warnings": [
+        "Rule count mismatch: registry=31742, contract=31709"
+      ]
+    },
+    "completeness": {
+      "check": "completeness",
+      "status": "FAIL",
+      "total_rules": 31742,
+      "average_score": 20.0,
+      "breakdown": {
+        "perfect_100": 0,
+        "high_80_99": 0,
+        "medium_60_79": 0,
+        "low_0_59": 31742
+      }
+    }
+  },
+  "overall_status": "FAIL",
+  "score": 0.0,
+  "issues": [
+    "Completeness check failed"
+  ],
+  "warnings": [
+    "Rule count mismatch: registry=31742, contract=31709"
+  ]
+}

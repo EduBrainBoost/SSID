@@ -70,15 +70,15 @@ def repo_root():
 
 @pytest.fixture
 def validator(repo_root):
-    """Create SoTValidator instance."""
-    return sot_core.SoTValidator(repo_root)
+    """Create RuleValidationEngine instance."""
+    return sot_core.RuleValidationEngine(repo_root)
 
 
 @pytest.fixture
 def validator_invalid_repo(tmp_path):
-    """Create SoTValidator for invalid repository (for negative tests)."""
+    """Create RuleValidationEngine for invalid repository (for negative tests)."""
     # Create minimal invalid structure for testing
-    return sot_core.SoTValidator(tmp_path)
+    return sot_core.RuleValidationEngine(tmp_path)
 
 
 @pytest.fixture

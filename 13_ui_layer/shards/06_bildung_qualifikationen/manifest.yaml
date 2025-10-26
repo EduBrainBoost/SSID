@@ -1,0 +1,24 @@
+apiVersion: deployment.ssid.project/v1
+kind: ShardManifest
+metadata:
+  name: 13_ui_layer_06_bildung_qualifikationen
+  labels:
+    root: 13_ui_layer
+    shard: 06_bildung_qualifikationen
+    domain: life_domains
+spec:
+  replicas: 1
+  deployment:
+    strategy: RollingUpdate
+    maxSurge: 1
+    maxUnavailable: 0
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi

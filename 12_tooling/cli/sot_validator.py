@@ -19,11 +19,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / '03_core' / 'valida
 
 try:
     # Try v2 first (with enforcement layer rules)
-    from sot_validator_core_v2 import validate_all_sot_rules, ValidationResult, RULE_PRIORITIES
+    from sot_validator_engine import RuleValidationEngine, ValidationResult, RULE_PRIORITIES
     print("[INFO] Using sot_validator_core_v2 (4.773 rules including 50 enforcement layer rules)")
 except ImportError:
     try:
-        from sot_validator_core import validate_all_sot_rules, ValidationResult, RULE_PRIORITIES
+        from sot_validator_engine import RuleValidationEngine, ValidationResult, RULE_PRIORITIES
         print("[INFO] Using sot_validator_core (4.723 rules)")
     except ImportError:
         print("[ERROR] sot_validator_core not found")

@@ -1,0 +1,150 @@
+================================================================================
+SoT Validator Performance Profile - Top 50 Functions by Cumulative Time
+================================================================================
+
+         1139208729 function calls (1136136457 primitive calls) in 4621.848 seconds
+
+   Ordered by: cumulative time
+   List reduced from 413 to 50 due to restriction <50>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.049    0.049 4621.848 4621.848 sot_validator_core.py:212(validate_all)
+   707915    0.412    0.000 4569.788    0.006 pathlib.py:1097(rglob)
+1896137/707919   52.730    0.000 4562.482    0.006 pathlib.py:234(_select_from)
+   603481    1.158    0.000 3395.438    0.006 pathlib.py:248(_select_from)
+      185    0.344    0.002 3293.559   17.803 sot_validator_core.py:4379(validate_sot_v2)
+      185    0.600    0.003 3293.215   17.801 sot_validator_core.py:4276(_validate_field)
+ 20757736   48.546    0.000 2476.015    0.000 pathlib.py:228(_iterate_directories)
+ 40347660   22.067    0.000 2260.177    0.000 pathlib.py:1059(_scandir)
+ 40347660 2200.895    0.000 2238.111    0.000 {built-in method nt.scandir}
+ 20757203  841.629    0.000 2193.899    0.000 pathlib.py:1112(walk)
+21488794/20034986  807.262    0.000 2117.476    0.000 pathlib.py:200(_select_from)
+ 40475690  131.821    0.000  433.065    0.000 pathlib.py:1065(_make_child_relpath)
+ 40518198   66.764    0.000  273.514    0.000 pathlib.py:380(with_segments)
+ 40518199   56.423    0.000  166.557    0.000 pathlib.py:1157(__init__)
+ 40518199   65.216    0.000  110.134    0.000 pathlib.py:358(__init__)
+        7    0.024    0.003   95.728   13.675 sot_validator_core.py:1378(_check_jurisdiction_blocking)
+       10    0.000    0.000   87.784    8.778 sot_validator_core.py:4207(validate_pii_cat)
+        7    0.000    0.000   68.788    9.827 sot_validator_core.py:4119(validate_prop_type)
+        7    0.000    0.000   63.938    9.134 sot_validator_core.py:4143(validate_tier1_mkt)
+        6    0.000    0.000   54.539    9.090 sot_validator_core.py:4191(validate_auth_method)
+        6    0.000    0.000   51.834    8.639 sot_validator_core.py:4175(validate_network)
+        5    0.000    0.000   47.119    9.424 sot_validator_core.py:4159(validate_reward_pool)
+        5    0.000    0.000   44.187    8.837 sot_validator_core.py:4240(validate_retention)
+ 40518199   22.142    0.000   40.193    0.000 pathlib.py:1164(__new__)
+     1185    0.005    0.000   38.005    0.032 __init__.py:117(safe_load)
+     1185    0.097    0.000   38.000    0.032 __init__.py:74(load)
+     1185    0.005    0.000   37.808    0.032 constructor.py:47(get_single_data)
+ 40418627   29.413    0.000   37.285    0.000 pathlib.py:447(__fspath__)
+     1185    0.006    0.000   35.844    0.030 composer.py:29(get_single_node)
+     1185    0.004    0.000   35.483    0.030 composer.py:50(compose_document)
+293332/1185    1.009    0.000   35.469    0.030 composer.py:63(compose_node)
+43297/1185    0.480    0.000   35.409    0.030 composer.py:117(compose_mapping_node)
+        4    0.007    0.002   34.084    8.521 sot_validator_core.py:4224(validate_hash_alg)
+109545567   34.056    0.000   34.056    0.000 {method 'is_dir' of 'nt.DirEntry' objects}
+        4    0.000    0.000   33.367    8.342 sot_validator_core.py:4256(validate_did_method)
+   923487    0.830    0.000   32.318    0.000 parser.py:94(check_event)
+105526927   31.878    0.000   31.878    0.000 {method 'append' of 'list' objects}
+ 32041235   30.113    0.000   30.113    0.000 {method 'match' of 're.Pattern' objects}
+106196601   29.893    0.000   29.992    0.000 {built-in method builtins.isinstance}
+        1    0.000    0.000   29.263   29.263 sot_validator_core.py:2743(validate_mr002)
+        1    0.000    0.000   28.390   28.390 sot_validator_core.py:2510(validate_ce007)
+  2342857    2.602    0.000   25.047    0.000 scanner.py:113(check_token)
+        1    0.000    0.000   25.017   25.017 sot_validator_core.py:2342(validate_kp007)
+        1    0.009    0.009   23.849   23.849 sot_validator_core.py:2258(validate_kp001)
+        1    0.000    0.000   23.353   23.353 sot_validator_core.py:2314(validate_kp005)
+ 40346599   20.403    0.000   20.403    0.000 {method '__exit__' of 'nt.ScandirIterator' objects}
+        1    0.000    0.000   19.947   19.947 sot_validator_core.py:2666(validate_dc002)
+ 40518199   18.051    0.000   18.051    0.000 {built-in method __new__ of type object at 0x00007FFF1F4498F0}
+        1    0.236    0.236   17.419   17.419 sot_validator_core.py:934(validate_cp001)
+        1    0.004    0.004   17.282   17.282 sot_validator_core.py:2272(validate_kp002)
+
+
+
+
+================================================================================
+Top 30 Functions by Total Time
+================================================================================
+
+         1139208729 function calls (1136136457 primitive calls) in 4621.848 seconds
+
+   Ordered by: internal time
+   List reduced from 413 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+ 40347660 2200.895    0.000 2238.111    0.000 {built-in method nt.scandir}
+ 20757203  841.629    0.000 2193.899    0.000 pathlib.py:1112(walk)
+21488794/20034986  807.262    0.000 2117.476    0.000 pathlib.py:200(_select_from)
+ 40475690  131.821    0.000  433.065    0.000 pathlib.py:1065(_make_child_relpath)
+ 40518198   66.764    0.000  273.514    0.000 pathlib.py:380(with_segments)
+ 40518199   65.216    0.000  110.134    0.000 pathlib.py:358(__init__)
+ 40518199   56.423    0.000  166.557    0.000 pathlib.py:1157(__init__)
+1896137/707919   52.730    0.000 4562.482    0.006 pathlib.py:234(_select_from)
+ 20757736   48.546    0.000 2476.015    0.000 pathlib.py:228(_iterate_directories)
+109545567   34.056    0.000   34.056    0.000 {method 'is_dir' of 'nt.DirEntry' objects}
+105526927   31.878    0.000   31.878    0.000 {method 'append' of 'list' objects}
+ 32041235   30.113    0.000   30.113    0.000 {method 'match' of 're.Pattern' objects}
+106196601   29.893    0.000   29.992    0.000 {built-in method builtins.isinstance}
+ 40418627   29.413    0.000   37.285    0.000 pathlib.py:447(__fspath__)
+ 40518199   22.142    0.000   40.193    0.000 pathlib.py:1164(__new__)
+ 40347660   22.067    0.000 2260.177    0.000 pathlib.py:1059(_scandir)
+ 40346599   20.403    0.000   20.403    0.000 {method '__exit__' of 'nt.ScandirIterator' objects}
+ 40518199   18.051    0.000   18.051    0.000 {built-in method __new__ of type object at 0x00007FFF1F4498F0}
+ 81524946   15.340    0.000   15.466    0.000 pathlib.py:437(__str__)
+ 40560225   10.129    0.000   10.129    0.000 {built-in method nt.fspath}
+ 21228675    9.220    0.000    9.220    0.000 {method 'pop' of 'list' objects}
+ 40491717    7.127    0.000    7.275    0.000 pathlib.py:551(drive)
+ 41087372    6.866    0.000    6.866    0.000 pathlib.py:569(_tail)
+ 40491717    6.785    0.000    6.785    0.000 pathlib.py:560(root)
+  3764400    3.297    0.000    6.361    0.000 scanner.py:145(need_more_tokens)
+    32297    2.829    0.000    2.929    0.000 {built-in method _io.open}
+  2342857    2.602    0.000   25.047    0.000 scanner.py:113(check_token)
+    38440    2.513    0.000    2.549    0.000 {built-in method nt.stat}
+  1797210    2.459    0.000    2.807    0.000 reader.py:99(forward)
+  3894579    2.402    0.000    2.402    0.000 scanner.py:279(stale_possible_simple_keys)
+
+
+
+
+================================================================================
+Functions called most frequently
+================================================================================
+
+         1139208729 function calls (1136136457 primitive calls) in 4621.848 seconds
+
+   Ordered by: call count
+   List reduced from 413 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+109545567   34.056    0.000   34.056    0.000 {method 'is_dir' of 'nt.DirEntry' objects}
+106196601   29.893    0.000   29.992    0.000 {built-in method builtins.isinstance}
+105526927   31.878    0.000   31.878    0.000 {method 'append' of 'list' objects}
+ 81524946   15.340    0.000   15.466    0.000 pathlib.py:437(__str__)
+ 41087372    6.866    0.000    6.866    0.000 pathlib.py:569(_tail)
+ 40560225   10.129    0.000   10.129    0.000 {built-in method nt.fspath}
+ 40518199   65.216    0.000  110.134    0.000 pathlib.py:358(__init__)
+ 40518199   56.423    0.000  166.557    0.000 pathlib.py:1157(__init__)
+ 40518199   22.142    0.000   40.193    0.000 pathlib.py:1164(__new__)
+ 40518199   18.051    0.000   18.051    0.000 {built-in method __new__ of type object at 0x00007FFF1F4498F0}
+ 40518198   66.764    0.000  273.514    0.000 pathlib.py:380(with_segments)
+ 40491717    7.127    0.000    7.275    0.000 pathlib.py:551(drive)
+ 40491717    6.785    0.000    6.785    0.000 pathlib.py:560(root)
+ 40475690  131.821    0.000  433.065    0.000 pathlib.py:1065(_make_child_relpath)
+ 40418627   29.413    0.000   37.285    0.000 pathlib.py:447(__fspath__)
+ 40347660   22.067    0.000 2260.177    0.000 pathlib.py:1059(_scandir)
+ 40347660 2200.895    0.000 2238.111    0.000 {built-in method nt.scandir}
+ 40346599   20.403    0.000   20.403    0.000 {method '__exit__' of 'nt.ScandirIterator' objects}
+ 32041235   30.113    0.000   30.113    0.000 {method 'match' of 're.Pattern' objects}
+21488794/20034986  807.262    0.000 2117.476    0.000 pathlib.py:200(_select_from)
+ 21228675    9.220    0.000    9.220    0.000 {method 'pop' of 'list' objects}
+ 20757736   48.546    0.000 2476.015    0.000 pathlib.py:228(_iterate_directories)
+ 20757203  841.629    0.000 2193.899    0.000 pathlib.py:1112(walk)
+  7437829    1.676    0.000    1.676    0.000 reader.py:87(peek)
+  3894579    2.402    0.000    2.402    0.000 scanner.py:279(stale_possible_simple_keys)
+  3764400    3.297    0.000    6.361    0.000 scanner.py:145(need_more_tokens)
+  3479537    0.956    0.000    0.956    0.000 scanner.py:264(next_possible_simple_key)
+2952390/2893298    0.601    0.000    0.618    0.000 {built-in method builtins.len}
+  2342857    2.602    0.000   25.047    0.000 scanner.py:113(check_token)
+1896137/707919   52.730    0.000 4562.482    0.006 pathlib.py:234(_select_from)
+
+

@@ -1,0 +1,39 @@
+
+version: "1.0.0"
+name: "ssid_security_autonomy_blueprint_v1"
+description: "Automatisierte Sicherheits-Autonomie für SSID (Selbstprüfung, -schutz, -heilung)"
+layers:
+  - id: meta_automation
+    purpose: "Orchestrierung von Boot, Validation, Compliance, Testing, Registry, Audit"
+    contracts:
+      - "16_codex/contracts/meta/meta_pipeline.yaml"
+    outputs:
+      - "24_meta_orchestration/meta_state_matrix.json"
+      - "24_meta_orchestration/meta_global_scorecard.md"
+  - id: security_mesh
+    purpose: "Malware, Trojaner, Quarantäne, Auto-Rollback, IDS/IPS"
+    policies:
+      - "23_compliance/policies/security/quarantine.rego"
+      - "23_compliance/policies/security/autorollback.rego"
+    components:
+      - "17_observability/threat_detection_engine.py"
+      - "03_core/monitors/integrity_monitor.py"
+  - id: backup_recovery
+    purpose: "Automatische Snapshots, Merkle-Index, Restore, Geo-Redundanz"
+    components:
+      - "15_infra/backup/backup_snapshot.py"
+      - "15_infra/backup/backup_daemon.py"
+    plans:
+      - "15_infra/backup/backup_plan.yaml"
+  - id: observability
+    purpose: "Metriken, Alerts, Anomalie-Erkennung, Forensik"
+    components:
+      - "17_observability/metrics.py"
+    alerts:
+      - "17_observability/alerts/security_alert_rules.yaml"
+  - id: governance_legal
+    purpose: "Policy-Enforcement, Audit-Beweise, Lizenzen, DSGVO/eIDAS/MiCA"
+    outputs:
+      - "02_audit_logging/reports/AUDIT_PLAN_SECURITY_AUTONOMY.md"
+ci_workflows:
+  - ".github/workflows/security_autonomy_ci.yml"

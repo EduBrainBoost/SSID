@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-10-24T16:31:18.733438+00:00",
+  "overall_status": "SUCCESS",
+  "overall_score": 84.0,
+  "total_duration_seconds": 19.184657335281372,
+  "phases": [
+    {
+      "phase": "Phase 1: 6-Layer Security Check",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 18.594826221466064,
+      "details": {
+        "status": "SUCCESS",
+        "score": 100.0,
+        "errors": []
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:31:18.143607+00:00"
+    },
+    {
+      "phase": "Phase 3: Change Detection & Quarantine",
+      "status": "PARTIAL",
+      "score": 50.0,
+      "duration_seconds": 0.5868527889251709,
+      "details": {
+        "status": "PARTIAL",
+        "score": 50.0,
+        "errors": [
+          "INFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:QUARANTINE ENGINE - SCAN AND ISOLATE\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:CHANGE DETECTION SCAN\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:\n[CHECK] SoT Artefacts...\nINFO:QUARANTINE_ENGINE:\n[CHECK] Shards...\nINFO:QUARANTINE_ENGINE:\n[CHECK] Unregistered Files...\nINFO:QUARANTINE_ENGINE:\nDetected 36 violations\nINFO:QUARANTINE_ENGINE:\n\\U0001f512 QUARANTINING 5 VIOLATIONS\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\046a30716c3bbbdc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\2f13eea2b26d8443.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\366a0aea9e719542.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\480b6e3f5ad4b5e1.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\965d3675bd824e06.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\c90d8862860378fc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\ca27d1d9756859ec.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\e3ac3a1be44df32c.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\ed9c3f8f5f150ba1.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\f335bbd9a31030db.json: Expecting value: line 5 column 15 (char 68)\nINFO:QUARANTINE_ENGINE:\\U0001f4c4 Report saved: quarantine_report_20251024_183118.json\n"
+        ]
+      },
+      "errors": [
+        "INFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:QUARANTINE ENGINE - SCAN AND ISOLATE\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:CHANGE DETECTION SCAN\nINFO:QUARANTINE_ENGINE:================================================================================\nINFO:QUARANTINE_ENGINE:\n[CHECK] SoT Artefacts...\nINFO:QUARANTINE_ENGINE:\n[CHECK] Shards...\nINFO:QUARANTINE_ENGINE:\n[CHECK] Unregistered Files...\nINFO:QUARANTINE_ENGINE:\nDetected 36 violations\nINFO:QUARANTINE_ENGINE:\n\\U0001f512 QUARANTINING 5 VIOLATIONS\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to save quarantine entry: Object of type ViolationType is not JSON serializable\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\046a30716c3bbbdc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\2f13eea2b26d8443.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\366a0aea9e719542.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\480b6e3f5ad4b5e1.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\965d3675bd824e06.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\c90d8862860378fc.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\ca27d1d9756859ec.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\e3ac3a1be44df32c.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\ed9c3f8f5f150ba1.json: Expecting value: line 5 column 15 (char 68)\nERROR:QUARANTINE_ENGINE:Failed to load quarantine entry C:\\Users\\bibel\\Documents\\Github\\SSID\\02_audit_logging\\quarantine\\items\\f335bbd9a31030db.json: Expecting value: line 5 column 15 (char 68)\nINFO:QUARANTINE_ENGINE:\\U0001f4c4 Report saved: quarantine_report_20251024_183118.json\n"
+      ],
+      "timestamp": "2025-10-24T16:31:18.730460+00:00"
+    },
+    {
+      "phase": "Phase 5: Validation & Verification",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 0.0019843578338623047,
+      "details": {
+        "registry_exists": true,
+        "artefacts_exist": true,
+        "worm_intact": true,
+        "shards_valid": true
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:31:18.732444+00:00"
+    },
+    {
+      "phase": "Phase 6: Self-Healing & Recovery",
+      "status": "SUCCESS",
+      "score": 70.0,
+      "duration_seconds": 0.0,
+      "details": {
+        "actions": [
+          "Healing attempted for Phase 3: Change Detection & Quarantine"
+        ]
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:31:18.732444+00:00"
+    },
+    {
+      "phase": "Phase 8: Reporting & Audit",
+      "status": "SUCCESS",
+      "score": 100.0,
+      "duration_seconds": 0.0,
+      "details": {
+        "report_generated": true
+      },
+      "errors": [],
+      "timestamp": "2025-10-24T16:31:18.733438+00:00"
+    }
+  ],
+  "summary": {
+    "total_phases": 5,
+    "successful_phases": 4,
+    "partial_phases": 1,
+    "failed_phases": 0,
+    "average_score": 84.0,
+    "total_errors": 1
+  },
+  "next_run": "2025-10-24T16:36:18.733438+00:00"
+}

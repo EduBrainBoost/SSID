@@ -1,0 +1,53 @@
+# Auto-generated from validator expectations
+# Source: unified_content_validators.py
+# Fields: 49
+
+version: '1.0'
+date: '2025-09-15'
+deprecated: false
+classification: CONFIDENTIAL - Enterprise Controls
+controls:
+  circular_dependency_check:
+    description: Enterprise-Grade Validation gegen zirkuläre Referenzen
+    script: 23_compliance/anti_gaming/circular_dependency_validator.py
+    script_deprecated: false
+    frequency: Every commit + Daily full scan
+    threshold: Zero circular dependencies allowed
+    escalation: Block deployment on violation
+    dependency_map_export: 23_compliance/anti_gaming/dependency_maps/
+  business_logic_overfitting:
+    description: Validierung gegen Business-Gaming und Metric-Optimierung
+    method: Random sampling + Quarterly manual review
+    script: 23_compliance/anti_gaming/overfitting_detector.py
+    script_deprecated: false
+    frequency: Weekly automated + Monthly manual
+    sample_size: 20%
+    reviewer_required: true
+    internal_audit: Quarterly by compliance team
+  enterprise_badge_validation:
+    description: Enterprise Badge-Berechnungen gegen dokumentierte Formeln
+    script: 23_compliance/anti_gaming/badge_integrity_checker.sh
+    script_deprecated: false
+    frequency: Every PR + Pre-release
+    documentation_required: true
+    business_review: Quarterly threshold review
+    source_validation: true
+    formula_verification: true
+dependency_graph_generation:
+  enabled: true
+  script: 23_compliance/anti_gaming/dependency_graph_generator.py
+  output_directory: 23_compliance/anti_gaming/dependency_maps/
+  formats:
+    dot: true
+    json: true
+    svg: true
+    enterprise_dashboard: true
+    confidential_mapping: true
+  update_frequency: Daily
+  ci_integration: true
+  classification: CONFIDENTIAL
+external_review_cycle:
+  frequency: Every 6 months
+  last_review: '2025-09-15'
+  next_review: '2026-03-15'
+  internal_review: Every 3 months (zusätzlich)

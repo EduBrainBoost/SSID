@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2025-10-23T20:41:46.421228",
+  "immutable_registry": {
+    "enabled": true,
+    "path": "24_meta_orchestration/registry/",
+    "worm_storage": true,
+    "blockchain_anchored": false
+  },
+  "dual_review_process": {
+    "enabled": true,
+    "architecture_review": {
+      "required": true,
+      "reviewer_role": "Technical Architect"
+    },
+    "compliance_review": {
+      "required": true,
+      "reviewer_role": "Compliance Officer"
+    },
+    "both_required_for_promotion": true
+  },
+  "legal_proof_anchoring": {
+    "enabled": true,
+    "path": "07_governance_legal/",
+    "eidas_compliant": true,
+    "gdpr_article_5": true,
+    "registry_signatures_legal": true
+  },
+  "semver_enforcement": {
+    "enabled": true,
+    "major_bump_requires": "RFC + Dual Review",
+    "minor_bump_requires": "Dual Review",
+    "patch_bump_requires": "Single Review"
+  }
+}

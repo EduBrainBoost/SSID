@@ -1,0 +1,58 @@
+
+name: security_autonomy_ci
+on:
+  push:
+    paths:
+      - "24_meta_orchestration/blueprints/**"
+      - "17_observability/**"
+      - "03_core/monitors/**"
+      - "15_infra/backup/**"
+      - "23_compliance/policies/security/**"
+      - "12_tooling/cli/security_cli.py"
+      - "11_test_simulation/tests_security/**"
+      - ".github/workflows/security_autonomy_ci.yml"
+  workflow_dispatch: {}
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Threat & Integrity
+        run: |
+          export SSID_REPO_ROOT=$GITHUB_WORKSPACE
+          python 12_tooling/cli/security_cli.py --threat-scan
+          python 12_tooling/cli/security_cli.py --integrity
+      - name: Tests
+        run: |
+          pip install pytest
+          export SSID_REPO_ROOT=$GITHUB_WORKSPACE
+          pytest -q 11_test_simulation/tests_security
+      - name: Backup snapshot (one-shot)
+        run: |
+          export SSID_REPO_ROOT=$GITHUB_WORKSPACE
+          python 12_tooling/cli/security_cli.py --backup
+      - name: Prepare OPA Input (quarantine & rollback)
+        run: |
+          jq -n --argfile t 02_audit_logging/reports/THREAT_DETECTION_REPORT.json                 --argfile i 02_audit_logging/reports/INTEGRITY_MONITOR_REPORT.json                 '{positives: ($t.positives // 0), drift: ($i.drift // 0), score: 100}' > input_security.json
+          cat input_security.json
+      - name: Download OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
+          chmod +x opa
+      - name: OPA Evaluate
+        run: |
+          ./opa eval -f pretty -i input_security.json -d 23_compliance/policies/security/quarantine.rego "data.ssid.security.quarantine.deny" > sec_deny.txt
+          ./opa eval -f pretty -i input_security.json -d 23_compliance/policies/security/quarantine.rego "data.ssid.security.quarantine.quarantine" > sec_quarantine.txt
+          ./opa eval -f pretty -i input_security.json -d 23_compliance/policies/security/autorollback.rego "data.ssid.security.autorollback.rollback" > sec_rollback.txt
+      - name: Upload Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-autonomy-artifacts
+          path: |
+            02_audit_logging/reports/**
+            sec_deny.txt
+            sec_quarantine.txt
+            sec_rollback.txt

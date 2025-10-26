@@ -1,0 +1,45 @@
+# Auto-generated from validator expectations
+# Source: unified_content_validators.py
+# Fields: 41
+
+version: '1.1'
+date: '2025-09-15'
+deprecated: false
+classification: CONFIDENTIAL - Internal Standards
+last_review: '2025-09-15'
+next_review: '2026-03-15'
+thresholds:
+  structure_compliance:
+    threshold: '>= 95%'
+    rationale: Enterprise-Grade mit 5% Toleranz für Edge Cases und Transitionen
+    business_impact: Kritisch für interne Audits und externe Compliance
+    internal_note: Höhere Standards als Public-Version für interne Qualität
+    deprecated: false
+    benchmark_source: Internal enterprise compliance framework
+  test_coverage:
+    threshold: '>= 90%'
+    rationale: Production-Standard mit 10% Toleranz für Legacy und Integration
+    business_impact: Essential für Reliability und Enterprise-Einsatz
+    deprecated: false
+    tiered_requirements:
+      business_critical: '>= 95%'
+      security_modules: '>= 98%'
+      compliance_modules: '>= 99%'
+    internal_exception: 'Business-kritische Module: >= 95%'
+  compliance_coverage:
+    threshold: '>= 98%'
+    rationale: Höchste Standards für regulatorische Vollabdeckung
+    business_impact: Kritisch für Marktzulassungen und Audits
+    deprecated: false
+    jurisdictional_requirements:
+      eu_markets: '>= 99%'
+      apac_markets: '>= 97%'
+      americas_markets: '>= 96%'
+      emerging_markets: '>= 95%'
+    jurisdictions: Alle definierten Märkte müssen >= 95% erreichen
+  review_cycle:
+    requirement: Internal 3 months + External 6 months
+    rationale: Höhere Review-Frequenz für Enterprise-Risiko-Management
+    cost_benefit: Höherer Aufwand aber maximaler Compliance-Schutz
+    deprecated: false
+    escalation_trigger: Review overdue by 15 days (stricter than public)

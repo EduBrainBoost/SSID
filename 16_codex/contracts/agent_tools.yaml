@@ -1,0 +1,41 @@
+version: "1.0.0"
+component: SSID_LOCAL_AGENT_TOOLS
+root_24_lock: true
+safe_fix: true
+tools:
+  - name: fs_read
+    desc: "Liest Textdateien innerhalb des SSID-Root"
+    input: { path: "string" }
+    output: { text: "string", sha256: "string" }
+  - name: fs_write
+    desc: "Schreibt Textdateien innerhalb des SSID-Root (nur erlaubte Pfade)"
+    input: { path: "string", text: "string" }
+    output: { sha256: "string" }
+  - name: sh
+    desc: "Führt CLI-Kommandos aus (Whitelist, Timeout)"
+    input: { cmd: "string" }
+    output: { stdout: "string", stderr: "string", exit_code: "integer" }
+  - name: http_get
+    desc: "HTTP GET (Whitelist-Domains), nur Text"
+    input: { url: "string" }
+    output: { status: "integer", text: "string" }
+constraints:
+  fs:
+    root: "C:\\Users\\bibel\\Documents\\Github\\SSID"
+    deny_globs:
+      - "**/.git/**"
+      - "**/node_modules/**"
+  sh:
+    whitelist:
+      - "git status"
+      - "pytest -q"
+      - "python -V"
+  http:
+    whitelist_domains:
+      - "schemas.openapis.org"
+      - "raw.githubusercontent.com"
+      - "docs.python.org"
+ci_gate:
+  must:
+    - "Root-24-LOCK enforced"
+    - "SAFE-FIX enforced"

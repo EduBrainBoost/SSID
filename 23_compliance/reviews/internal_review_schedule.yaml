@@ -1,0 +1,34 @@
+# Auto-generated from validator expectations
+# Source: unified_content_validators.py
+# Fields: 30
+
+version: '1.0'
+deprecated: false
+classification: CONFIDENTIAL
+internal_reviews:
+  monthly:
+    scope: Badge metrics validation, compliance updates, business impact
+    owner: Compliance Team Lead
+    deliverable: internal_monthly_YYYY-MM.md
+    classification: CONFIDENTIAL
+    business_review: true
+  quarterly:
+    scope: Full compliance matrix review, threshold validation, competitive analysis
+    owner: Senior Compliance Officer + Legal
+    deliverable: internal_quarterly_YYYY-QX.md
+    classification: CONFIDENTIAL
+    external_validation: Optional external consultant
+    board_reporting: true
+  semi_annual:
+    scope: Strategic compliance roadmap, regulatory horizon scan, market expansion
+    owner: Executive Compliance Committee
+    deliverable: strategic_compliance_YYYY-H1H2.md
+    classification: CONFIDENTIAL
+    c_suite_presentation: true
+external_reviews:
+  frequency: Every 6 months
+  mandatory: true
+  scope: Badge logic, anti-gaming controls, regulatory accuracy
+  deliverable: external_review_YYYY-MM.md
+  confidentiality_agreement: required
+  clearance_verification: true

@@ -1,0 +1,20 @@
+component: SSID_LOCAL_AGENT_STACK
+version: "1.0.0"
+services:
+  - name: ollama
+    url: "http://localhost:11434"
+    model: "qwen2.5-coder:7b"
+  - name: litellm
+    url: "http://localhost:4000/v1"
+contracts:
+  - path: "16_codex/contracts/agent_tools.yaml"
+policies:
+  - path: "23_compliance/policies/agent_sandbox.rego"
+tooling:
+  - path: "12_tooling/agent/agent_cli.py"
+tests:
+  - path: "11_test_simulation/tests_agent/test_agent_tools.py"
+ci_gate:
+  must_pass: true
+root_24_lock: true
+safe_fix: true

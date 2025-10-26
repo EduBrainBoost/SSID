@@ -1,0 +1,108 @@
+name: SoT Auto Verify
+# Autonomous SoT verification triggered on any change to core artefacts
+
+on:
+  push:
+    paths:
+      - '03_core/validators/sot/**'
+      - '23_compliance/policies/sot/**'
+      - '16_codex/contracts/sot/**'
+      - '12_tooling/cli/sot_validator.py'
+      - '11_test_simulation/tests_compliance/**'
+  pull_request:
+    paths:
+      - '03_core/validators/sot/**'
+      - '23_compliance/policies/sot/**'
+      - '16_codex/contracts/sot/**'
+      - '12_tooling/cli/sot_validator.py'
+      - '11_test_simulation/tests_compliance/**'
+  workflow_dispatch: # Manual trigger
+  schedule:
+    - cron: '0 3 * * *' # Daily at 03:00 UTC (WORM-Mode)
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for hash chain
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pytest pytest-cov pyyaml
+          pip install openpolicyagent || echo "OPA install skipped - will try binary"
+
+      - name: Install OPA Binary
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
+          opa version
+
+      - name: Run SoT Watcher
+        id: watcher
+        run: |
+          python 12_tooling/ci/sot_auto_trigger.py
+        continue-on-error: true
+
+      - name: Generate Scorecard
+        if: always()
+        run: |
+          python 12_tooling/cli/sot_validator.py --scorecard || echo "Scorecard generation failed"
+        continue-on-error: true
+
+      - name: Collect Artifacts
+        if: always()
+        run: |
+          mkdir -p ci_artifacts
+          cp 24_meta_orchestration/registry/sot_registry.json ci_artifacts/ || true
+          cp 24_meta_orchestration/registry/sot_hash_chain.json ci_artifacts/ || true
+          cp 02_audit_logging/reports/SOT_MOSCOW_ENFORCEMENT_V3.2.0.md ci_artifacts/ || true
+          cp scorecard.json ci_artifacts/ || true
+          cp scorecard.md ci_artifacts/ || true
+          ls -la ci_artifacts/
+
+      - name: Upload Audit Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: SOT_MOSCOW_ENFORCEMENT
+          path: ci_artifacts/
+          retention-days: 90
+
+      - name: Check Verification Status
+        if: steps.watcher.outcome == 'failure'
+        run: |
+          echo "::error::SoT Watcher verification failed - blocking CI"
+          exit 1
+
+      - name: Success Summary
+        if: success()
+        run: |
+          echo "✅ All SoT verifications passed"
+          echo "✅ Tests: PASS"
+          echo "✅ OPA: PASS"
+          echo "✅ Hash Chain: UPDATED"
+          echo "✅ Audit Log: GENERATED"
+
+      - name: Commit Registry Updates (WORM-Mode)
+        if: github.event_name == 'schedule' && success()
+        run: |
+          git config --global user.name "SoT Auto-Trigger Bot"
+          git config --global user.email "sot-bot@ssid.invalid"
+          git add 24_meta_orchestration/registry/*.json
+          git add 02_audit_logging/sot_watcher/*.json
+          git commit -m "chore(sot): Auto-update registry and hash chain [skip ci]" || echo "No changes to commit"
+          # Uncomment to enable auto-push:
+          # git push origin HEAD:audit-logs

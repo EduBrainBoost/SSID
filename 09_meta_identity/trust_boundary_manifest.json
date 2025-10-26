@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2025-10-23T20:41:46.418237",
+  "developer_registry": {
+    "enabled": true,
+    "did_required": true,
+    "path": "09_meta_identity/developer_registry.json"
+  },
+  "zero_time_auth": {
+    "enabled": true,
+    "path": "14_zero_time_auth/",
+    "no_sessions": true,
+    "no_tokens_stored": true,
+    "instant_verification": true
+  },
+  "non_custodial_proof": {
+    "enabled": true,
+    "peer_to_peer": true,
+    "no_central_authority": true
+  },
+  "commit_verification": {
+    "all_commits_signed": true,
+    "did_signature_required": true,
+    "unsigned_commits_blocked": true
+  }
+}

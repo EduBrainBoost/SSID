@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2025-10-23T20:53:28.683404",
+  "layer": 8,
+  "name": "Behavior & Anomaly Detection",
+  "components": {
+    "behavioral_fingerprinting": {
+      "enabled": true,
+      "profile_metrics": [
+        "cpu_cycles",
+        "test_duration_ms",
+        "log_volume_bytes",
+        "memory_usage_mb",
+        "file_access_count"
+      ],
+      "baseline_builds": 10,
+      "anomaly_threshold_stddev": 3.0,
+      "trigger_security_check_on_anomaly": true,
+      "protection_against": [
+        "supply_chain_manipulation",
+        "insider_code_injection",
+        "malicious_dependency_injection"
+      ]
+    },
+    "ml_drift_detector": {
+      "enabled": true,
+      "ai_layer_path": "01_ai_layer/ml_drift_detector.py",
+      "training_data_source": "02_audit_logging/reports/historical_scores.json",
+      "model_type": "gradient_boosting",
+      "features": [
+        "audit_score",
+        "policy_violations",
+        "test_pass_rate",
+        "build_duration"
+      ],
+      "prediction_window_days": 7,
+      "auto_reevaluation_on_erosion": true,
+      "alert_threshold": 0.15
+    },
+    "threat_pattern_registry": {
+      "enabled": true,
+      "registry_path": "23_compliance/threat_signatures.yaml",
+      "pattern_types": [
+        "exploit_hashes",
+        "policy_bypass_patterns",
+        "ci_manipulation_signatures",
+        "malicious_commit_patterns"
+      ],
+      "auto_load_on_ci_start": true,
+      "block_on_match": true,
+      "update_frequency_hours": 24
+    }
+  },
+  "detection_metrics": {
+    "baseline_cpu_cycles": 1500000,
+    "baseline_test_duration_ms": 45000,
+    "baseline_log_volume_bytes": 524288,
+    "anomalies_detected_last_30_days": 0,
+    "threat_patterns_in_registry": 127
+  }
+}

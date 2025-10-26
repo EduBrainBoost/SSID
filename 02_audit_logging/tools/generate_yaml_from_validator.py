@@ -66,9 +66,9 @@ class ValidatorParser:
         """Extrahiert alle Regel-Definitionen aus dem Validator."""
         rules = []
 
-        # Find SoTValidator class
+        # Find RuleValidationEngine class
         for node in ast.walk(self.tree):
-            if isinstance(node, ast.ClassDef) and node.name == "SoTValidator":
+            if isinstance(node, ast.ClassDef) and node.name == "RuleValidationEngine":
                 # Extract all validate_* methods
                 for item in node.body:
                     if isinstance(item, ast.FunctionDef) and item.name.startswith("validate_"):

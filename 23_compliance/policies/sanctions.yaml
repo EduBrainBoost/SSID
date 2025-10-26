@@ -1,0 +1,65 @@
+# Sanctions Compliance Policy
+# Implements JURIS_BL_001-007 (Lifted Rules)
+# Compliance: OFAC, EU Sanctions, UN Security Council
+
+version: "1.0.0"
+last_updated: "2025-10-21"
+owner: "Compliance Team"
+scope: "Global Sanctions Enforcement"
+
+# Jurisdiction Blacklist - OFAC/EU Comprehensive Sanctions
+blacklist_jurisdictions:
+  - IR  # Iran - OFAC Comprehensive Sanctions (JURIS_BL_001)
+  - KP  # North Korea - OFAC Comprehensive Sanctions (JURIS_BL_002)
+  - SY  # Syria - OFAC Comprehensive Sanctions (JURIS_BL_003)
+  - CU  # Cuba - OFAC Sanctions Limited (JURIS_BL_004)
+  - SD  # Sudan - OFAC Regional Sanctions (JURIS_BL_005)
+  - BY  # Belarus - EU Sanctions (JURIS_BL_006)
+  - VE  # Venezuela - OFAC Sectoral Sanctions (JURIS_BL_007)
+
+# Sanctioned Entities - OFAC SDN List Integration
+sanctioned_entities_sources:
+  - name: "OFAC SDN List"
+    url: "https://www.treasury.gov/ofac/downloads/sdn.xml"
+    update_frequency: "daily"
+    last_update: "2025-10-21"
+
+  - name: "EU Sanctions List"
+    url: "https://webgate.ec.europa.eu/europeaid/fsd/fsf"
+    update_frequency: "daily"
+    last_update: "2025-10-21"
+
+  - name: "UN Security Council Sanctions"
+    url: "https://www.un.org/securitycouncil/sanctions/information"
+    update_frequency: "weekly"
+    last_update: "2025-10-21"
+
+# Enforcement Rules
+enforcement:
+  transaction_blocking:
+    enabled: true
+    log_all_blocks: true
+    alert_compliance_team: true
+
+  screening:
+    pre_transaction: true
+    real_time: true
+    batch_daily: true
+
+  exceptions:
+    humanitarian_exemptions: false
+    government_authorized_only: true
+
+# Audit Trail
+audit_requirements:
+  log_all_screenings: true
+  blockchain_anchor: true
+  retention_years: 10
+  format: "WORM_compliant"
+
+# Regulatory References
+references:
+  - "OFAC 31 CFR Part 500"
+  - "EU Council Regulation (EC) No 765/2006"
+  - "UN Security Council Resolutions"
+  - "MiCA Article 68 (AML/CTF)"

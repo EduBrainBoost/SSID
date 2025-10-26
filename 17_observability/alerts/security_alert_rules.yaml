@@ -1,0 +1,10 @@
+
+rules:
+  - id: SEC-001
+    match: "maos.warn.count"
+    threshold: 10
+    action: "raise-issue"
+  - id: SEC-002
+    match: "maos.drift.count"
+    threshold: 1
+    action: "fail-ci"

@@ -1,0 +1,73 @@
+{
+  "version": "3.2.1",
+  "timestamp": "2025-10-24T16:44:32.286794",
+  "summary": {
+    "timestamp": "2025-10-24T16:44:32.286794",
+    "total_steps": 6,
+    "passed_steps": 4,
+    "failed_steps": 2,
+    "skipped_steps": 0,
+    "success_rate": 66.66666666666666,
+    "overall_status": "PARTIAL",
+    "steps": {
+      "extraction": {
+        "status": "pass",
+        "output": "\n================================================================================\nSSID SoT Universal Rule Extractor v3.2.0\nMode: COMPREHENSIVE\n================================================================================\n\nScanning 20 files in sot...\nScanning 19 files in sot...\nScanning 52 files in sot...\nScanning 20 files in tests_compliance...\nScanning 18 files in structure...\n\nBuilding cross-references...\nCalculating completeness scores...\n\nBuilding Merkle tree...\n\nSaving registry to: C:\\Us",
+        "errors": null
+      },
+      "validation": {
+        "status": "pass",
+        "output": "SoT Validator Core - 13,942 rules loaded\nRun validator.validate_all({}) to validate all rules\n",
+        "errors": null
+      },
+      "tests": {
+        "status": "timeout"
+      },
+      "completeness": {
+        "status": "pass",
+        "output": "Loading ID mappings from: rule_id_mapping.json\n  Loaded 31198 variations\n============================================================\nCOMPLETENESS ANALYSIS (Integrated with Normalization)\n============================================================\n\n[1/5] Scanning Registry...\n  Found 16048 canonical rules\n[2/5] Scanning Contract...\n  Found 26633 rules\n[3/5] Scanning Policy...\n  Found 16044 rules\n[4/5] Scanning Validator...\n  Data-driven engine: 16048 rules\n[5/5] Scanning Tests...\n  Parametrized ",
+        "errors": null
+      },
+      "signing": {
+        "status": "pass",
+        "output": "============================================================\nPQC SIGNATURE APPLICATION - SoT Artifacts\n============================================================\nRepository: SSID\nAlgorithm: Dilithium3 (FIPS 204)\nArtifacts: 5\n============================================================\n\n[1/5] SoT Registry\nSigning SoT Registry...\n  [OK] Signed: registry_signature.json\n  Hash: 0ce8d7542fb5bd4072d71cab13f2dd20...\n\n[2/5] SoT Contract\nSigning SoT Contract...\n  [OK] Signed: contract_signature.json\n  ",
+        "errors": null
+      },
+      "health": {
+        "status": "fail",
+        "output": "================================================================================\nSoT System Health Monitor\n================================================================================\nTimestamp: 2025-10-24T14:43:56.174136+00:00\nRepository: C:\\Users\\bibel\\Documents\\Github\\SSID\n================================================================================\n\n[1/9] Checking file existence...\n  [OK] contract: sot_contract.yaml\n  [OK] policy: sot_policy.rego\n  [OK] validator: sot_validator_core.p",
+        "errors": "<unknown>:58202: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:58538: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:67337: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:193634: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:197114: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:197162: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:197882: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:200690: SyntaxWarning: invalid escape sequence '\\.'\n<unknow"
+      }
+    }
+  },
+  "details": {
+    "extraction": {
+      "status": "pass",
+      "output": "\n================================================================================\nSSID SoT Universal Rule Extractor v3.2.0\nMode: COMPREHENSIVE\n================================================================================\n\nScanning 20 files in sot...\nScanning 19 files in sot...\nScanning 52 files in sot...\nScanning 20 files in tests_compliance...\nScanning 18 files in structure...\n\nBuilding cross-references...\nCalculating completeness scores...\n\nBuilding Merkle tree...\n\nSaving registry to: C:\\Us",
+      "errors": null
+    },
+    "validation": {
+      "status": "pass",
+      "output": "SoT Validator Core - 13,942 rules loaded\nRun validator.validate_all({}) to validate all rules\n",
+      "errors": null
+    },
+    "tests": {
+      "status": "timeout"
+    },
+    "completeness": {
+      "status": "pass",
+      "output": "Loading ID mappings from: rule_id_mapping.json\n  Loaded 31198 variations\n============================================================\nCOMPLETENESS ANALYSIS (Integrated with Normalization)\n============================================================\n\n[1/5] Scanning Registry...\n  Found 16048 canonical rules\n[2/5] Scanning Contract...\n  Found 26633 rules\n[3/5] Scanning Policy...\n  Found 16044 rules\n[4/5] Scanning Validator...\n  Data-driven engine: 16048 rules\n[5/5] Scanning Tests...\n  Parametrized ",
+      "errors": null
+    },
+    "signing": {
+      "status": "pass",
+      "output": "============================================================\nPQC SIGNATURE APPLICATION - SoT Artifacts\n============================================================\nRepository: SSID\nAlgorithm: Dilithium3 (FIPS 204)\nArtifacts: 5\n============================================================\n\n[1/5] SoT Registry\nSigning SoT Registry...\n  [OK] Signed: registry_signature.json\n  Hash: 0ce8d7542fb5bd4072d71cab13f2dd20...\n\n[2/5] SoT Contract\nSigning SoT Contract...\n  [OK] Signed: contract_signature.json\n  ",
+      "errors": null
+    },
+    "health": {
+      "status": "fail",
+      "output": "================================================================================\nSoT System Health Monitor\n================================================================================\nTimestamp: 2025-10-24T14:43:56.174136+00:00\nRepository: C:\\Users\\bibel\\Documents\\Github\\SSID\n================================================================================\n\n[1/9] Checking file existence...\n  [OK] contract: sot_contract.yaml\n  [OK] policy: sot_policy.rego\n  [OK] validator: sot_validator_core.p",
+      "errors": "<unknown>:58202: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:58538: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:67337: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:193634: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:197114: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:197162: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:197882: SyntaxWarning: invalid escape sequence '\\.'\n<unknown>:200690: SyntaxWarning: invalid escape sequence '\\.'\n<unknow"
+    }
+  }
+}

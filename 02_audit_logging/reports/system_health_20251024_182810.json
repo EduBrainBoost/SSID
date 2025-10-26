@@ -1,0 +1,66 @@
+{
+  "timestamp": "2025-10-24T16:27:52.457887+00:00",
+  "overall_status": "failure",
+  "security_score": 93.33333333333333,
+  "checks": [
+    {
+      "layer": "Layer 1: Cryptographic Security",
+      "name": "Cryptographic Security Check",
+      "status": false,
+      "score": 70.0,
+      "details": "Hash mismatch at index 0; Hash mismatch at index 1; Hash mismatch at index 2; Hash mismatch at index 3; Hash mismatch at index 4; Hash mismatch at index 5",
+      "timestamp": "2025-10-24T16:27:52.459480+00:00",
+      "remediation": "Run hash reconciliation and verify signatures"
+    },
+    {
+      "layer": "Layer 2: Policy Enforcement",
+      "name": "Policy Enforcement Check",
+      "status": true,
+      "score": 100.0,
+      "details": "All policy enforcement checks passed",
+      "timestamp": "2025-10-24T16:27:52.459480+00:00",
+      "remediation": null
+    },
+    {
+      "layer": "Layer 3: Trust Boundary",
+      "name": "Trust Boundary Check",
+      "status": true,
+      "score": 90.0,
+      "details": "Trust boundary checks passed (external authentication assumed)",
+      "timestamp": "2025-10-24T16:27:52.459480+00:00",
+      "remediation": null
+    },
+    {
+      "layer": "Layer 4: Observability",
+      "name": "Observability Check",
+      "status": true,
+      "score": 100.0,
+      "details": "All observability checks passed",
+      "timestamp": "2025-10-24T16:27:52.465491+00:00",
+      "remediation": null
+    },
+    {
+      "layer": "Layer 5: Governance & Legal",
+      "name": "Governance & Legal Check",
+      "status": true,
+      "score": 100.0,
+      "details": "All governance checks passed",
+      "timestamp": "2025-10-24T16:27:52.465491+00:00",
+      "remediation": null
+    },
+    {
+      "layer": "Layer 6: Autonomous Enforcement",
+      "name": "Autonomous Enforcement Check",
+      "status": true,
+      "score": 100.0,
+      "details": "All autonomous enforcement checks passed",
+      "timestamp": "2025-10-24T16:27:52.465491+00:00",
+      "remediation": null
+    }
+  ],
+  "issues": [
+    "Layer 1: Cryptographic Security: Hash mismatch at index 0; Hash mismatch at index 1; Hash mismatch at index 2; Hash mismatch at index 3; Hash mismatch at index 4; Hash mismatch at index 5"
+  ],
+  "actions_taken": [],
+  "next_check": "2025-10-24T16:33:10.212096+00:00"
+}

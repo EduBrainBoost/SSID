@@ -25,14 +25,14 @@ import sys
 # Add validator to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "03_core" / "validators" / "sot"))
 
-from sot_validator_core import SoTValidator, Severity
+from sot_validator_engine import RuleValidationEngine, Severity
 
 
 @pytest.fixture
 def validator():
     """Create validator instance for repo root"""
     repo_root = Path(__file__).parent.parent.parent
-    return SoTValidator(repo_root)
+    return RuleValidationEngine(repo_root)
 
 
 # ============================================================================

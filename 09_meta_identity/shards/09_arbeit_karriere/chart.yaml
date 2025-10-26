@@ -1,0 +1,64 @@
+apiVersion: ssid.project/v1
+kind: ShardChart
+metadata:
+  name: 09_meta_identity_09_arbeit_karriere
+  shard_id: 09_arbeit_karriere
+  shard_number: 9
+  shard_name: Work & Career
+  root_id: 09_meta_identity
+  root_name: Meta-Identity Layer
+  created: '2025-10-24T15:58:10.873840+00:00'
+  version: 1.0.0
+  hash: e01917f6304cc65694cae68840de4ea4f9099b7cfe509345cb4b62c1bcdc0655
+spec:
+  description: Employment, CV, Job History
+  domain: work_finance
+  compliance:
+    gdpr: true
+    eidas: true
+    mica: false
+  storage:
+    ipfs: true
+    hash_ledger: true
+    worm: true
+  identity:
+    did_required: true
+    vc_support: true
+    kyc_level: basic
+data:
+  schema_version: '1.0'
+  fields: []
+rules:
+  validation:
+  - id: RULE_TENSORFLOW_PYTORCH_SCIKITLEARN_e43d976c
+    category: RULE
+    description: TensorFlow, PyTorch, Scikit-Learn
+    source: ssid_master_definition_corrected_v1.1.1.md
+    hash: e43d976c58b73a1c91bf7d7786afeeb6f56523e5d2aec31df93e3202b6524805
+    registered_at: '2025-10-24T15:59:31.538863+00:00'
+  - id: RULE_GRPC_REST_GRAPHQL_2d3b68c9
+    category: RULE
+    description: gRPC, REST, GraphQL
+    source: ssid_master_definition_corrected_v1.1.1.md
+    hash: 2d3b68c979c8ea620dfbb2b893a6a2fe004f92fd06299e3593fd285e5e79e003
+    registered_at: '2025-10-24T15:59:31.538863+00:00'
+  - id: RULE_23COMPLIANCEEXCEPTIONSSTRUCTUREEXCEPTIONSYAM_264576e3
+    category: RULE
+    description: '`23_compliance/exceptions/structure_exceptions.yaml` ist die einzige
+      gültige Struktur-Exception. Keine Kopie im Root oder modulnah.'
+    source: SSID_structure_level3_part1_MAX.md
+    hash: 264576e3573fbeecfdd611f6d0262d03c09c86facd4fee8beab21674ea8cab78
+    registered_at: '2025-10-24T15:59:31.538863+00:00'
+  policies: []
+sot_master_index:
+  synchronized: true
+  version: 1.0.0
+  timestamp: '2025-10-24T19:28:21.560309'
+  source_artifacts:
+  - sot_contract_expanded_TRUE
+  - sot_contract_COMPLETE
+  - sot_contract
+  - sot_contract_part2
+  - sot_contract_part3
+  total_rules: 51059
+  index_location: 24_meta_orchestration/registry/sot_master_index.json

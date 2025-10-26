@@ -1,0 +1,29 @@
+
+version: "1.0"
+schedule:
+  cron: "0 2 * * *"  # daily 02:00
+scope:
+  include:
+    - "01_ai_layer/"
+    - "02_audit_logging/"
+    - "03_core/"
+    - "11_test_simulation/"
+    - "12_tooling/"
+    - "16_codex/"
+    - "17_observability/"
+    - "23_compliance/"
+    - "24_meta_orchestration/"
+  exclude:
+    - "**/__pycache__/"
+    - "**/.pytest_cache/"
+    - "**/.git/"
+retention:
+  daily: 14
+  weekly: 8
+  monthly: 12
+encryption:
+  mode: "aes256"
+  key_ref: "ENV:SSID_BACKUP_KEY"
+destination:
+  type: "local"
+  path: "02_audit_logging/archives/backups"

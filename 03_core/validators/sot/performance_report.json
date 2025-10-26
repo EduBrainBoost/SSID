@@ -1,0 +1,361 @@
+{
+  "timestamp": "2025-10-21T20:20:58.280591",
+  "repo_root": "C:\\Users\\bibel\\Documents\\Github\\SSID",
+  "total_execution_time": 4621.849609375,
+  "validation_stats": {
+    "total_rules": 327,
+    "passed": 222,
+    "failed": 105
+  },
+  "performance_breakdown": {
+    "filesystem_operations": {
+      "total_calls": 110331071,
+      "total_time": 34.6930745,
+      "percentage": 0.7506318342688665,
+      "top_operations": [
+        {
+          "function": "<method 'is_dir' of 'nt.DirEntry' objects>",
+          "file": "~",
+          "ncalls": 109545567,
+          "tottime": 109545567,
+          "cumtime": 34.056388500000004,
+          "percall_tot": 1.0,
+          "percall_cum": 3.1088787463211545e-07
+        },
+        {
+          "function": "rglob",
+          "file": "pathlib.py",
+          "ncalls": 707915,
+          "tottime": 707915,
+          "cumtime": 0.4124783,
+          "percall_tot": 1.0,
+          "percall_cum": 5.826664218161785e-07
+        },
+        {
+          "function": "read_text",
+          "file": "pathlib.py",
+          "ncalls": 32112,
+          "tottime": 32112,
+          "cumtime": 0.1381076,
+          "percall_tot": 1.0,
+          "percall_cum": 4.30080966616841e-06
+        },
+        {
+          "function": "is_file",
+          "file": "pathlib.py",
+          "ncalls": 31045,
+          "tottime": 31045,
+          "cumtime": 0.0680401,
+          "percall_tot": 1.0,
+          "percall_cum": 2.1916604928329844e-06
+        },
+        {
+          "function": "is_dir",
+          "file": "pathlib.py",
+          "ncalls": 7337,
+          "tottime": 7337,
+          "cumtime": 0.012050400000000001,
+          "percall_tot": 1.0,
+          "percall_cum": 1.6424151560583346e-06
+        },
+        {
+          "function": "iterdir",
+          "file": "pathlib.py",
+          "ncalls": 7038,
+          "tottime": 7038,
+          "cumtime": 0.005941,
+          "percall_tot": 1.0,
+          "percall_cum": 8.44131855640807e-07
+        },
+        {
+          "function": "exists",
+          "file": "pathlib.py",
+          "ncalls": 57,
+          "tottime": 57,
+          "cumtime": 6.86e-05,
+          "percall_tot": 1.0,
+          "percall_cum": 1.2035087719298246e-06
+        }
+      ]
+    },
+    "regex_operations": {
+      "total_calls": 32254797,
+      "total_time": 31.520303200000004,
+      "percentage": 0.6819846136071573,
+      "top_operations": [
+        {
+          "function": "<method 'match' of 're.Pattern' objects>",
+          "file": "~",
+          "ncalls": 32041235,
+          "tottime": 32041235,
+          "cumtime": 30.113275400000003,
+          "percall_tot": 1.0,
+          "percall_cum": 9.398287987338816e-07
+        },
+        {
+          "function": "<method 'search' of 're.Pattern' objects>",
+          "file": "~",
+          "ncalls": 71646,
+          "tottime": 71646,
+          "cumtime": 1.2004346000000001,
+          "percall_tot": 1.0,
+          "percall_cum": 1.6755081930603247e-05
+        },
+        {
+          "function": "_compile",
+          "file": "__init__.py",
+          "ncalls": 70382,
+          "tottime": 70382,
+          "cumtime": 0.1309998,
+          "percall_tot": 1.0,
+          "percall_cum": 1.861268506152141e-06
+        },
+        {
+          "function": "search",
+          "file": "__init__.py",
+          "ncalls": 70276,
+          "tottime": 70276,
+          "cumtime": 0.069624,
+          "percall_tot": 1.0,
+          "percall_cum": 9.907222949513348e-07
+        },
+        {
+          "function": "_compile",
+          "file": "_compiler.py",
+          "ncalls": 89,
+          "tottime": 355,
+          "cumtime": 0.0038419,
+          "percall_tot": 3.9887640449438204,
+          "percall_cum": 4.316741573033708e-05
+        },
+        {
+          "function": "compile",
+          "file": "_compiler.py",
+          "ncalls": 89,
+          "tottime": 89,
+          "cumtime": 0.000595,
+          "percall_tot": 1.0,
+          "percall_cum": 6.685393258426967e-06
+        },
+        {
+          "function": "_compile_info",
+          "file": "_compiler.py",
+          "ncalls": 89,
+          "tottime": 89,
+          "cumtime": 0.0005845000000000001,
+          "percall_tot": 1.0,
+          "percall_cum": 6.567415730337079e-06
+        },
+        {
+          "function": "_compile_pattern",
+          "file": "pathlib.py",
+          "ncalls": 83,
+          "tottime": 83,
+          "cumtime": 0.000366,
+          "percall_tot": 1.0,
+          "percall_cum": 4.4096385542168675e-06
+        },
+        {
+          "function": "match",
+          "file": "_parser.py",
+          "ncalls": 706,
+          "tottime": 706,
+          "cumtime": 0.00028930000000000004,
+          "percall_tot": 1.0,
+          "percall_cum": 4.0977337110481593e-07
+        },
+        {
+          "function": "<built-in method _sre.compile>",
+          "file": "~",
+          "ncalls": 89,
+          "tottime": 89,
+          "cumtime": 0.00016460000000000002,
+          "percall_tot": 1.0,
+          "percall_cum": 1.8494382022471912e-06
+        }
+      ]
+    }
+  },
+  "top_bottlenecks": [
+    {
+      "function": "<built-in method nt.scandir>",
+      "file": "~",
+      "ncalls": 40347660,
+      "tottime": 40347660,
+      "cumtime": 2200.8951411000003,
+      "percall_tot": 1.0,
+      "percall_cum": 5.454827221950419e-05
+    },
+    {
+      "function": "walk",
+      "file": "pathlib.py",
+      "ncalls": 20757203,
+      "tottime": 20757203,
+      "cumtime": 841.6290945000001,
+      "percall_tot": 1.0,
+      "percall_cum": 4.054636332746758e-05
+    },
+    {
+      "function": "_select_from",
+      "file": "pathlib.py",
+      "ncalls": 20034986,
+      "tottime": 21488794,
+      "cumtime": 807.2616733000001,
+      "percall_tot": 1.0725634647311457,
+      "percall_cum": 4.029259982013464e-05
+    },
+    {
+      "function": "_make_child_relpath",
+      "file": "pathlib.py",
+      "ncalls": 40475690,
+      "tottime": 40475690,
+      "cumtime": 131.8209591,
+      "percall_tot": 1.0,
+      "percall_cum": 3.2567933764686904e-06
+    },
+    {
+      "function": "with_segments",
+      "file": "pathlib.py",
+      "ncalls": 40518198,
+      "tottime": 40518198,
+      "cumtime": 66.764334,
+      "percall_tot": 1.0,
+      "percall_cum": 1.647761679825939e-06
+    },
+    {
+      "function": "__init__",
+      "file": "pathlib.py",
+      "ncalls": 40518199,
+      "tottime": 40518199,
+      "cumtime": 65.2161509,
+      "percall_tot": 1.0,
+      "percall_cum": 1.6095520657273045e-06
+    },
+    {
+      "function": "__init__",
+      "file": "pathlib.py",
+      "ncalls": 40518199,
+      "tottime": 40518199,
+      "cumtime": 56.4228876,
+      "percall_tot": 1.0,
+      "percall_cum": 1.392531973101766e-06
+    },
+    {
+      "function": "_select_from",
+      "file": "pathlib.py",
+      "ncalls": 707919,
+      "tottime": 1896137,
+      "cumtime": 52.7303434,
+      "percall_tot": 2.6784660391937494,
+      "percall_cum": 7.448640790824939e-05
+    },
+    {
+      "function": "_iterate_directories",
+      "file": "pathlib.py",
+      "ncalls": 20757736,
+      "tottime": 20757736,
+      "cumtime": 48.546293600000006,
+      "percall_tot": 1.0,
+      "percall_cum": 2.3387084988459245e-06
+    },
+    {
+      "function": "<method 'is_dir' of 'nt.DirEntry' objects>",
+      "file": "~",
+      "ncalls": 109545567,
+      "tottime": 109545567,
+      "cumtime": 34.056388500000004,
+      "percall_tot": 1.0,
+      "percall_cum": 3.1088787463211545e-07
+    },
+    {
+      "function": "<method 'append' of 'list' objects>",
+      "file": "~",
+      "ncalls": 105526927,
+      "tottime": 105526927,
+      "cumtime": 31.877953400000003,
+      "percall_tot": 1.0,
+      "percall_cum": 3.020835942659451e-07
+    },
+    {
+      "function": "<method 'match' of 're.Pattern' objects>",
+      "file": "~",
+      "ncalls": 32041235,
+      "tottime": 32041235,
+      "cumtime": 30.113275400000003,
+      "percall_tot": 1.0,
+      "percall_cum": 9.398287987338816e-07
+    },
+    {
+      "function": "<built-in method builtins.isinstance>",
+      "file": "~",
+      "ncalls": 106196601,
+      "tottime": 106196601,
+      "cumtime": 29.892734200000003,
+      "percall_tot": 1.0,
+      "percall_cum": 2.814848490301493e-07
+    },
+    {
+      "function": "__fspath__",
+      "file": "pathlib.py",
+      "ncalls": 40418627,
+      "tottime": 40418627,
+      "cumtime": 29.413032100000002,
+      "percall_tot": 1.0,
+      "percall_cum": 7.277098279464071e-07
+    },
+    {
+      "function": "__new__",
+      "file": "pathlib.py",
+      "ncalls": 40518199,
+      "tottime": 40518199,
+      "cumtime": 22.142158000000002,
+      "percall_tot": 1.0,
+      "percall_cum": 5.464743879657633e-07
+    },
+    {
+      "function": "_scandir",
+      "file": "pathlib.py",
+      "ncalls": 40347660,
+      "tottime": 40347660,
+      "cumtime": 22.066892300000003,
+      "percall_tot": 1.0,
+      "percall_cum": 5.469187630707704e-07
+    },
+    {
+      "function": "<method '__exit__' of 'nt.ScandirIterator' objects>",
+      "file": "~",
+      "ncalls": 40346599,
+      "tottime": 40346599,
+      "cumtime": 20.4026411,
+      "percall_tot": 1.0,
+      "percall_cum": 5.056842858056016e-07
+    },
+    {
+      "function": "<built-in method __new__ of type object at 0x00007FFF1F4498F0>",
+      "file": "~",
+      "ncalls": 40518199,
+      "tottime": 40518199,
+      "cumtime": 18.051110400000002,
+      "percall_tot": 1.0,
+      "percall_cum": 4.4550623782661223e-07
+    },
+    {
+      "function": "__str__",
+      "file": "pathlib.py",
+      "ncalls": 81524946,
+      "tottime": 81524946,
+      "cumtime": 15.339700800000001,
+      "percall_tot": 1.0,
+      "percall_cum": 1.8815959473312623e-07
+    },
+    {
+      "function": "<built-in method nt.fspath>",
+      "file": "~",
+      "ncalls": 40560225,
+      "tottime": 40560225,
+      "cumtime": 10.1286603,
+      "percall_tot": 1.0,
+      "percall_cum": 2.497190363219139e-07
+    }
+  ]
+}

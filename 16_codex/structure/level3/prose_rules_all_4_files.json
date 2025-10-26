@@ -1,0 +1,118 @@
+{
+  "total_rules": 10,
+  "extraction_date": "2025-10-22T15:10:30.914000",
+  "source_files": [
+    "16_codex/structure/SSID_structure_level3_part1_MAX.md",
+    "16_codex/structure/SSID_structure_level3_part2_MAX.md",
+    "16_codex/structure/SSID_structure_level3_part3_MAX.md",
+    "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md"
+  ],
+  "file_breakdown": {
+    "SSID_structure_level3_part1_MAX.md": 2,
+    "SSID_structure_level3_part2_MAX.md": 4,
+    "SSID_structure_level3_part3_MAX.md": 1,
+    "ssid_master_definition_corrected_v1.1.1.md": 3
+  },
+  "rules": [
+    {
+      "rule_type": "MUST",
+      "severity": "CRITICAL",
+      "requirement": "assess own risk tolerance\"",
+      "source_file": "16_codex/structure/SSID_structure_level3_part1_MAX.md",
+      "line_number": 500,
+      "context": "risk_assessment: \"Users must assess own risk tolerance\"",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_STRUCTURE_LEVEL3_PART1_MAX-0001"
+    },
+    {
+      "rule_type": "MAY",
+      "severity": "LOW",
+      "requirement": "**nicht** erstellt werden",
+      "source_file": "16_codex/structure/SSID_structure_level3_part1_MAX.md",
+      "line_number": 1197,
+      "context": "- **Konsequenz:** In allen Baumdarstellungen bleibt `zh/…` als historischer Hinweis **dokumentiert**, ist aber **DISABLED** und darf **nicht** erstellt werden.",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_STRUCTURE_LEVEL3_PART1_MAX-0002"
+    },
+    {
+      "rule_type": "MUST",
+      "severity": "CRITICAL",
+      "requirement": "be explicitly listed\"",
+      "source_file": "16_codex/structure/SSID_structure_level3_part2_MAX.md",
+      "line_number": 110,
+      "context": "explicit_enumeration: \"Every allowed item must be explicitly listed\"",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_STRUCTURE_LEVEL3_PART2_MAX-0001"
+    },
+    {
+      "rule_type": "MUST",
+      "severity": "CRITICAL",
+      "requirement": "existieren",
+      "source_file": "16_codex/structure/SSID_structure_level3_part2_MAX.md",
+      "line_number": 1149,
+      "context": "logs/                                 # MUSS existieren",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_STRUCTURE_LEVEL3_PART2_MAX-0002"
+    },
+    {
+      "rule_type": "MUST",
+      "severity": "CRITICAL",
+      "requirement": "existieren",
+      "source_file": "16_codex/structure/SSID_structure_level3_part2_MAX.md",
+      "line_number": 1160,
+      "context": "locks/                                # MUSS existieren",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_STRUCTURE_LEVEL3_PART2_MAX-0003"
+    },
+    {
+      "rule_type": "MUST",
+      "severity": "CRITICAL",
+      "requirement": "existieren",
+      "source_file": "16_codex/structure/SSID_structure_level3_part2_MAX.md",
+      "line_number": 1164,
+      "context": "manifests/                            # MUSS existieren",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_STRUCTURE_LEVEL3_PART2_MAX-0004"
+    },
+    {
+      "rule_type": "MAY",
+      "severity": "LOW",
+      "requirement": "result in significant business harm and legal consequences",
+      "source_file": "16_codex/structure/SSID_structure_level3_part3_MAX.md",
+      "line_number": 853,
+      "context": "**Confidentiality Notice:** This document contains proprietary business information, competitive intelligence, and regulatory assessments. Distribution restricted to authorized personnel with CONFIDENTIAL clearance only. Unauthorized disclosure may result in significant business harm and legal consequences.",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_STRUCTURE_LEVEL3_PART3_MAX-0001"
+    },
+    {
+      "rule_type": "SHOULD",
+      "severity": "HIGH",
+      "requirement": "getan werden",
+      "source_file": "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 804,
+      "context": "- WAS soll getan werden",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_MASTER_DEFINITION_CORRECTED_V1.1.1-0001"
+    },
+    {
+      "rule_type": "MUST",
+      "severity": "CRITICAL",
+      "requirement": "skalieren können",
+      "source_file": "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 869,
+      "context": "**Regel:** Jeder Shard muss skalieren können.",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_MASTER_DEFINITION_CORRECTED_V1.1.1-0002"
+    },
+    {
+      "rule_type": "MUST",
+      "severity": "CRITICAL",
+      "requirement": "`docs/incident_response_plan",
+      "source_file": "16_codex/structure/ssid_master_definition_corrected_v1.1.1.md",
+      "line_number": 1049,
+      "context": "- Pro Root muss `docs/incident_response_plan.md` existieren. Vorlage:",
+      "category": "PROSE_REQUIREMENT",
+      "rule_id": "PROSE-SSID_MASTER_DEFINITION_CORRECTED_V1.1.1-0003"
+    }
+  ]
+}

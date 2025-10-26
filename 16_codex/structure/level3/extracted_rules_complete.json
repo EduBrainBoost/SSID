@@ -1,0 +1,332 @@
+[
+  {
+    "rule_id": "AR001",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Das System MUSS aus exakt 24 Root-Ordnern bestehen",
+    "source_section": "Die 24 Root-Ordner",
+    "sot_mapping": {
+      "contract": "schema: roots_registry.schema.json with enum[24]",
+      "core": "registry_validator.py: assert len(roots) == 24",
+      "policy": "opa/structure.rego: root_count == 24",
+      "cli": "cli validate --roots: exit 1 if != 24",
+      "test": "test_registry.py::test_exact_24_roots()"
+    }
+  },
+  {
+    "rule_id": "AR002",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Jeder Root-Ordner MUSS exakt 16 Shards enthalten",
+    "source_section": "Die 16 Shards (Oberkategorien)",
+    "sot_mapping": {
+      "contract": "schema: shard_structure.schema.json with minItems: 16, maxItems: 16",
+      "core": "shard_validator.py: assert len(shards) == 16 per root",
+      "policy": "opa/structure.rego: shard_count_per_root == 16",
+      "cli": "cli validate --shards: per-root check",
+      "test": "test_shards.py::test_16_shards_per_root()"
+    }
+  },
+  {
+    "rule_id": "AR003",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Es MÜSSEN exakt 384 Chart-Dateien existieren (24×16)",
+    "source_section": "Matrix-Architektur (24×16)",
+    "sot_mapping": {
+      "contract": "schema: matrix_registry.schema.json with total_charts: 384",
+      "core": "chart_validator.py: assert count_charts() == 384",
+      "policy": "opa/matrix.rego: count(charts) == 384",
+      "cli": "cli validate --matrix: total chart count",
+      "test": "test_matrix.py::test_exact_384_charts()"
+    }
+  },
+  {
+    "rule_id": "AR004",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Root-Ordner MÜSSEN Format '{NR}_{NAME}' haben (z.B. 01_ai_layer)",
+    "source_section": "Naming Conventions",
+    "sot_mapping": {
+      "contract": "schema: root_naming.schema.json with pattern: ^\\d{2}_[a-z_]+$",
+      "core": "naming_validator.py: regex_check(root_name, ROOT_PATTERN)",
+      "policy": "opa/naming.rego: re_match(^\\d{2}_[a-z_]+$, root)",
+      "cli": "cli validate --naming: root pattern check",
+      "test": "test_naming.py::test_root_naming_convention()"
+    }
+  },
+  {
+    "rule_id": "AR005",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Shards MÜSSEN Format 'Shard_{NR}_{NAME}' haben",
+    "source_section": "Naming Conventions",
+    "sot_mapping": {
+      "contract": "schema: shard_naming.schema.json with pattern: ^Shard_\\d{2}_[A-Za-z_]+$",
+      "core": "naming_validator.py: regex_check(shard_name, SHARD_PATTERN)",
+      "policy": "opa/naming.rego: re_match(^Shard_\\d{2}_[A-Za-z_]+$, shard)",
+      "cli": "cli validate --naming: shard pattern check",
+      "test": "test_naming.py::test_shard_naming_convention()"
+    }
+  },
+  {
+    "rule_id": "AR006",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Jeder Shard MUSS eine chart.yaml (SoT) enthalten",
+    "source_section": "Hybrid-Struktur: SoT + Implementierung",
+    "sot_mapping": {
+      "contract": "schema: shard_structure.schema.json requires chart.yaml",
+      "core": "shard_validator.py: assert exists(chart_path)",
+      "policy": "opa/structure.rego: chart_yaml_exists",
+      "cli": "cli validate --structure: chart.yaml presence",
+      "test": "test_structure.py::test_chart_yaml_exists()"
+    }
+  },
+  {
+    "rule_id": "AR007",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Jede Implementierung MUSS eine manifest.yaml enthalten",
+    "source_section": "Hybrid-Struktur: SoT + Implementierung",
+    "sot_mapping": {
+      "contract": "schema: implementation.schema.json requires manifest.yaml",
+      "core": "impl_validator.py: assert exists(manifest_path)",
+      "policy": "opa/structure.rego: manifest_yaml_exists",
+      "cli": "cli validate --implementations",
+      "test": "test_impl.py::test_manifest_yaml_exists()"
+    }
+  },
+  {
+    "rule_id": "AR008",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Pfadstruktur MUSS sein: {ROOT}/shards/{SHARD}/chart.yaml",
+    "source_section": "Naming Conventions - Pfade",
+    "sot_mapping": {
+      "contract": "schema: path_structure.schema.json",
+      "core": "path_validator.py: validate_path_pattern()",
+      "policy": "opa/paths.rego: valid_chart_path",
+      "cli": "cli validate --paths",
+      "test": "test_paths.py::test_chart_yaml_path()"
+    }
+  },
+  {
+    "rule_id": "AR009",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Implementierungen MÜSSEN unter implementations/{IMPL_ID}/ liegen",
+    "source_section": "Ordnerstruktur Beispiele",
+    "sot_mapping": {
+      "contract": "schema: implementation_paths.schema.json",
+      "core": "impl_validator.py: validate_impl_paths()",
+      "policy": "opa/impl.rego: valid_impl_path",
+      "cli": "cli validate --impl-paths",
+      "test": "test_impl_paths.py::test_impl_directory_structure()"
+    }
+  },
+  {
+    "rule_id": "AR010",
+    "category": "architecture_rules",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Contracts MÜSSEN in contracts/-Ordner mit OpenAPI/JSON-Schema liegen",
+    "source_section": "Ordnerstruktur Beispiele",
+    "sot_mapping": {
+      "contract": "schema: contract_structure.schema.json",
+      "core": "contract_validator.py: validate_contracts()",
+      "policy": "opa/contracts.rego: contracts_present",
+      "cli": "cli validate --contracts",
+      "test": "test_contracts.py::test_contract_files_exist()"
+    }
+  },
+  {
+    "rule_id": "CP001",
+    "category": "critical_policies",
+    "type": "NIEMALS",
+    "severity": "CRITICAL",
+    "rule": "NIEMALS Rohdaten von PII oder biometrischen Daten speichern",
+    "source_section": "Kritische Policies - Non-Custodial",
+    "sot_mapping": {
+      "contract": "schema: pii_constraints.schema.json forbids pii_storage",
+      "core": "pii_detector.py: runtime_check(), raise on violation",
+      "policy": "opa/pii.rego: deny[msg] { pii_storage }",
+      "cli": "cli lint --pii: pre-commit hook",
+      "test": "test_pii.py::test_no_pii_storage()"
+    }
+  },
+  {
+    "rule_id": "CP002",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Alle Daten MÜSSEN als SHA3-256 Hashes gespeichert werden",
+    "source_section": "Kritische Policies - Hash-Only Data Policy",
+    "sot_mapping": {
+      "contract": "schema: data_policy.schema.json: storage_type=hash_only",
+      "core": "hasher.py: sha3_256_hash(data, tenant_pepper)",
+      "policy": "opa/hash_policy.rego: data_policy == hash_only",
+      "cli": "cli validate --data-policy",
+      "test": "test_hash_policy.py::test_hash_only_storage()"
+    }
+  },
+  {
+    "rule_id": "CP003",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Tenant-spezifische Peppers MÜSSEN verwendet werden",
+    "source_section": "Kritische Policies - Hash-Only Data Policy",
+    "sot_mapping": {
+      "contract": "schema: pepper_strategy.schema.json: per_tenant",
+      "core": "pepper_manager.py: get_tenant_pepper(tenant_id)",
+      "policy": "opa/pepper.rego: pepper_strategy == per_tenant",
+      "cli": "cli validate --pepper-strategy",
+      "test": "test_pepper.py::test_per_tenant_pepper()"
+    }
+  },
+  {
+    "rule_id": "CP004",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Raw Data Retention MUSS '0 seconds' sein (Immediate Discard)",
+    "source_section": "Kritische Policies - Non-Custodial",
+    "sot_mapping": {
+      "contract": "schema: retention_policy.schema.json: raw_data=0s",
+      "core": "data_processor.py: immediate_discard_after_hash()",
+      "policy": "opa/retention.rego: raw_data_retention == 0",
+      "cli": "cli validate --retention",
+      "test": "test_retention.py::test_immediate_discard()"
+    }
+  },
+  {
+    "rule_id": "CP005",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Right to Erasure MUSS via Hash-Rotation implementiert sein",
+    "source_section": "Kritische Policies - GDPR Compliance",
+    "sot_mapping": {
+      "contract": "api: POST /gdpr/erasure with pepper_rotation",
+      "core": "gdpr_handler.py: rotate_pepper(user_id)",
+      "policy": "opa/gdpr.rego: erasure_mechanism_present",
+      "cli": "cli gdpr-erasure --user-id",
+      "test": "test_gdpr.py::test_right_to_erasure()"
+    }
+  },
+  {
+    "rule_id": "CP006",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Data Portability MUSS JSON-Export aller Hashes + Metadaten bieten",
+    "source_section": "Kritische Policies - GDPR Compliance",
+    "sot_mapping": {
+      "contract": "api: GET /gdpr/export returns JSON",
+      "core": "gdpr_handler.py: export_user_data(user_id)",
+      "policy": "opa/gdpr.rego: portability_endpoint_present",
+      "cli": "cli gdpr-export --user-id --output export.json",
+      "test": "test_gdpr.py::test_data_portability()"
+    }
+  },
+  {
+    "rule_id": "CP007",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "PII Redaction MUSS automatisch in Logs & Traces erfolgen",
+    "source_section": "Kritische Policies - GDPR Compliance",
+    "sot_mapping": {
+      "contract": "schema: logging_config.schema.json: pii_redaction=true",
+      "core": "log_redactor.py: redact_pii_patterns(log_entry)",
+      "policy": "opa/logging.rego: pii_redaction_enabled",
+      "cli": "cli validate --logging-config",
+      "test": "test_logging.py::test_pii_redaction()"
+    }
+  },
+  {
+    "rule_id": "CP008",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Alle AI/ML-Modelle MÜSSEN auf Bias getestet werden",
+    "source_section": "Kritische Policies - Bias & Fairness",
+    "sot_mapping": {
+      "contract": "schema: model_card.schema.json includes fairness_metrics",
+      "core": "bias_tester.py: test_demographic_parity(), test_equal_opportunity()",
+      "policy": "opa/ai_governance.rego: bias_tests_required",
+      "cli": "cli test-bias --model-path",
+      "test": "test_bias.py::test_model_fairness_metrics()"
+    }
+  },
+  {
+    "rule_id": "CP009",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "Hash-Ledger mit Blockchain-Anchoring MUSS verwendet werden",
+    "source_section": "Kritische Policies - Evidence & Audit",
+    "sot_mapping": {
+      "contract": "schema: evidence_strategy.schema.json: blockchain_anchoring",
+      "core": "blockchain_anchor.py: anchor_to_ethereum(), anchor_to_polygon()",
+      "policy": "opa/evidence.rego: anchoring_enabled",
+      "cli": "cli anchor --chain ethereum|polygon",
+      "test": "test_anchoring.py::test_blockchain_anchor()"
+    }
+  },
+  {
+    "rule_id": "CP010",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "CRITICAL",
+    "rule": "WORM-Storage mit 10 Jahren Retention MUSS verwendet werden",
+    "source_section": "Kritische Policies - Evidence & Audit",
+    "sot_mapping": {
+      "contract": "schema: worm_config.schema.json: retention=10y",
+      "core": "worm_storage.py: write_once_read_many(record)",
+      "policy": "opa/worm.rego: retention_policy == 10_years",
+      "cli": "cli validate --worm-config",
+      "test": "test_worm.py::test_immutable_storage()"
+    }
+  },
+  {
+    "rule_id": "CP011",
+    "category": "critical_policies",
+    "type": "NIEMALS",
+    "severity": "CRITICAL",
+    "rule": "NIEMALS Secrets in Git committen",
+    "source_section": "Kritische Policies - Secrets Management",
+    "sot_mapping": {
+      "contract": "schema: forbidden_patterns.schema.json",
+      "core": "secret_scanner.py: detect_secrets_in_diff()",
+      "policy": "opa/secrets.rego: deny[msg] { secret_in_repo }",
+      "cli": "pre-commit hook: cli scan-secrets",
+      "test": "test_secrets.py::test_no_secrets_in_repo()"
+    }
+  },
+  {
+    "rule_id": "CP012",
+    "category": "critical_policies",
+    "type": "MUST",
+    "severity": "HIGH",
+    "rule": "Secrets MÜSSEN alle 90 Tage rotiert werden",
+    "source_section": "Kritische Policies - Secrets Management",
+    "sot_mapping": {
+      "contract": "schema: rotation_policy.schema.json: frequency=90d",
+      "core": "vault_rotation.py: auto_rotate_secrets()",
+      "policy": "opa/rotation.rego: rotation_frequency <= 90",
+      "cli": "cli rotate-secrets --force",
+      "test": "test_rotation.py::test_90_day_rotation()"
+    }
+  }
+]

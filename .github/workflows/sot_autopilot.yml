@@ -1,0 +1,66 @@
+# ============================================================================
+# GENERATED FILE - DO NOT EDIT MANUALLY
+# ============================================================================
+# Generator: SotAutopilotYmlGenerator
+# Timestamp: 2025-10-24T14:55:32.504508
+# Source: SoT Rule Parser V4.0 ULTIMATE
+# ============================================================================
+
+name: SoT Autopilot - Daily Validation
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    - cron: '0 3 * * *'  # Daily at 3 AM UTC
+
+jobs:
+  sot-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml networkx pytest
+
+      - name: Run SoT Parser
+        run: |
+          python 03_core/validators/sot/sot_rule_parser_v3.py
+
+      - name: Run SoT Validator
+        run: |
+          python 12_tooling/cli/sot_validator.py --verify-all --scorecard --strict
+
+      - name: Run Tests
+        run: |
+          pytest 11_test_simulation/tests_compliance/test_sot_validator.py -v
+
+      - name: Upload Scorecard
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sot-scorecard
+          path: |
+            scorecard.json
+            scorecard.md
+
+      - name: Upload Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sot-reports
+          path: 02_audit_logging/reports/
+
+      - name: Fail on Policy Violations
+        if: failure()
+        run: exit 1

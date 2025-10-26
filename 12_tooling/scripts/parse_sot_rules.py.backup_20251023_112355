@@ -1,0 +1,254 @@
+#!/usr/bin/env python3
+"""
+SoT Rule Parser - Extract ALL Rules from sot_validator_core.py
+================================================================
+This script parses sot_validator_core.py to extract and count ALL validation rules.
+
+Purpose:
+- Verify actual rule count (not 91, not 1,367, but the REAL number)
+- Extract all rule IDs from all levels
+- Generate accurate statistics for Autopilot V4.0
+
+Output: JSON file with complete rule registry
+"""
+
+import re
+import json
+from pathlib import Path
+from typing import Dict, List, Set, Tuple
+from collections import defaultdict
+
+class SoTRuleParser:
+    """Parse all rules from sot_validator_core.py"""
+
+    def __init__(self, core_file: Path):
+        self.core_file = core_file
+        self.rules: Dict[str, Dict] = {}
+        self.stats = defaultdict(int)
+
+    def parse(self) -> Dict:
+        """Parse all rules from sot_validator_core.py"""
+        print(f"[*] Reading {self.core_file}...")
+        content = self.core_file.read_text(encoding='utf-8')
+
+        # Extract rule counts from documentation header
+        self._parse_header_stats(content)
+
+        # Extract EBENE 2 rules (Policy-Level)
+        self._parse_ebene2_rules(content)
+
+        # Extract EBENE 3 rules (Line-Level and Content-Level)
+        self._parse_ebene3_rules(content)
+
+        # Generate final report
+        return self._generate_report()
+
+    def _parse_header_stats(self, content: str):
+        """Extract statistics from file header"""
+        print("\n[*] Parsing header statistics...")
+
+        # Look for "Total Rules: X validators"
+        total_match = re.search(r'Total Rules:\s*([0-9,]+)\s+validators', content)
+        if total_match:
+            total_str = total_match.group(1).replace(',', '')
+            self.stats['header_total'] = int(total_str)
+            print(f"  Header claims: {total_str} total validators")
+
+        # Look for EBENE 2 count
+        ebene2_match = re.search(r'EBENE 2.*?\((\d+)\s+validators\)', content)
+        if ebene2_match:
+            self.stats['header_ebene2'] = int(ebene2_match.group(1))
+            print(f"  Header claims: {ebene2_match.group(1)} EBENE 2 validators")
+
+        # Look for EBENE 3 LINE LEVEL count
+        line_match = re.search(r'EBENE 3 - LINE LEVEL.*?\(([0-9,]+)\s+validators\)', content)
+        if line_match:
+            line_str = line_match.group(1).replace(',', '')
+            self.stats['header_line_level'] = int(line_str)
+            print(f"  Header claims: {line_str} LINE LEVEL validators")
+
+        # Look for EBENE 3 CONTENT LEVEL count
+        content_match = re.search(r'EBENE 3 - CONTENT LEVEL.*?\((\d+)\s+validators\)', content)
+        if content_match:
+            self.stats['header_content_level'] = int(content_match.group(1))
+            print(f"  Header claims: {content_match.group(1)} CONTENT LEVEL validators")
+
+    def _parse_ebene2_rules(self, content: str):
+        """Parse EBENE 2 (Policy-Level) rules"""
+        print("\n[*] Parsing EBENE 2 rules...")
+
+        # Find all rule_id assignments in validation functions
+        rule_pattern = r'rule_id\s*=\s*["\']([A-Z0-9_-]+)["\']'
+
+        for match in re.finditer(rule_pattern, content):
+            rule_id = match.group(1)
+
+            # Skip line-level and content-level rules
+            if rule_id.startswith('SOT-LINE-') or rule_id.startswith('YAML-ALL-'):
+                continue
+
+            # Find the function this rule belongs to
+            func_start = content.rfind('def ', 0, match.start())
+            if func_start != -1:
+                func_line = content[func_start:match.start()]
+                func_match = re.search(r'def\s+(\w+)', func_line)
+                if func_match:
+                    func_name = func_match.group(1)
+
+                    self.rules[rule_id] = {
+                        'rule_id': rule_id,
+                        'level': 'EBENE_2',
+                        'function': func_name,
+                        'category': self._categorize_rule(rule_id)
+                    }
+                    self.stats['ebene2_count'] += 1
+
+        print(f"  [+] Found {self.stats['ebene2_count']} EBENE 2 rules")
+
+    def _parse_ebene3_rules(self, content: str):
+        """Parse EBENE 3 (Line-Level and Content-Level) rules"""
+        print("\n[*] Parsing EBENE 3 rules...")
+
+        # Line-Level rules: SOT-LINE-0001 through SOT-LINE-XXXX
+        line_pattern = r'SOT-LINE-(\d+)'
+        line_matches = set(re.findall(line_pattern, content))
+
+        if line_matches:
+            max_line = max(int(m) for m in line_matches)
+            # Assume continuous range from 0001 to max
+            for i in range(1, max_line + 1):
+                rule_id = f"SOT-LINE-{i:04d}"
+                self.rules[rule_id] = {
+                    'rule_id': rule_id,
+                    'level': 'EBENE_3_LINE',
+                    'type': 'hash_validation'
+                }
+                self.stats['ebene3_line_count'] += 1
+
+            print(f"  [+] Found {self.stats['ebene3_line_count']} LINE LEVEL rules (SOT-LINE-0001 to SOT-LINE-{max_line:04d})")
+
+        # Content-Level rules: YAML-ALL-0001 through YAML-ALL-XXXX
+        content_pattern = r'YAML-ALL-(\d+)'
+        content_matches = set(re.findall(content_pattern, content))
+
+        if content_matches:
+            max_content = max(int(m) for m in content_matches)
+            # Assume continuous range from 0001 to max
+            for i in range(1, max_content + 1):
+                rule_id = f"YAML-ALL-{i:04d}"
+                self.rules[rule_id] = {
+                    'rule_id': rule_id,
+                    'level': 'EBENE_3_CONTENT',
+                    'type': 'yaml_content_validation'
+                }
+                self.stats['ebene3_content_count'] += 1
+
+            print(f"  [+] Found {self.stats['ebene3_content_count']} CONTENT LEVEL rules (YAML-ALL-0001 to YAML-ALL-{max_content:04d})")
+
+    def _categorize_rule(self, rule_id: str) -> str:
+        """Categorize EBENE 2 rules by prefix"""
+        prefixes = {
+            'AR': 'Artefact Rules',
+            'CP': 'Claim Process',
+            'VG': 'Value Governance',
+            'JURIS': 'Jurisdiction',
+            'SOT-V2': 'SoT Contract V2',
+            'CS': 'Chart Structure',
+            'MS': 'Manifest Structure',
+            'KP': 'Core Principles',
+            'CE': 'Consolidated Extensions',
+            'TS': 'Technology Standards',
+            'DC': 'Deployment & CI/CD',
+            'MR': 'Matrix & Registry',
+            'MD': 'Master Definition'
+        }
+
+        for prefix, category in prefixes.items():
+            if rule_id.startswith(prefix):
+                return category
+
+        return 'Other'
+
+    def _generate_report(self) -> Dict:
+        """Generate final report with all statistics"""
+        total_parsed = len(self.rules)
+
+        report = {
+            'metadata': {
+                'source_file': str(self.core_file),
+                'parsed_date': '2025-10-23',
+                'parser_version': '1.0.0'
+            },
+            'summary': {
+                'total_rules_parsed': total_parsed,
+                'header_claimed_total': self.stats.get('header_total', 0),
+                'ebene2_count': self.stats['ebene2_count'],
+                'ebene3_line_count': self.stats['ebene3_line_count'],
+                'ebene3_content_count': self.stats['ebene3_content_count'],
+                'discrepancy': total_parsed - self.stats.get('header_total', 0)
+            },
+            'breakdown': {
+                'EBENE_2_POLICY_LEVEL': {
+                    'count': self.stats['ebene2_count'],
+                    'categories': self._count_by_category()
+                },
+                'EBENE_3_LINE_LEVEL': {
+                    'count': self.stats['ebene3_line_count'],
+                    'type': 'hash_based_drift_detection'
+                },
+                'EBENE_3_CONTENT_LEVEL': {
+                    'count': self.stats['ebene3_content_count'],
+                    'type': 'yaml_content_validation'
+                }
+            },
+            'rules': self.rules
+        }
+
+        return report
+
+    def _count_by_category(self) -> Dict[str, int]:
+        """Count EBENE 2 rules by category"""
+        categories = defaultdict(int)
+        for rule in self.rules.values():
+            if rule['level'] == 'EBENE_2':
+                categories[rule['category']] += 1
+        return dict(categories)
+
+
+def main():
+    """Main entry point"""
+    print("=" * 70)
+    print("SoT Rule Parser - Extract ALL Rules from sot_validator_core.py")
+    print("=" * 70)
+
+    # Locate sot_validator_core.py
+    core_file = Path(__file__).parent.parent.parent / '03_core' / 'validators' / 'sot' / 'sot_validator_core.py'
+
+    if not core_file.exists():
+        print(f"[!] ERROR: {core_file} not found!")
+        return
+
+    # Parse rules
+    parser = SoTRuleParser(core_file)
+    report = parser.parse()
+
+    # Save report
+    output_file = Path(__file__).parent / 'sot_rules_parsed.json'
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(report, f, indent=2, ensure_ascii=False)
+
+    print("\n" + "=" * 70)
+    print("FINAL STATISTICS")
+    print("=" * 70)
+    print(f"Total Rules Parsed: {report['summary']['total_rules_parsed']}")
+    print(f"  - EBENE 2 (Policy Level): {report['summary']['ebene2_count']}")
+    print(f"  - EBENE 3 (Line Level): {report['summary']['ebene3_line_count']}")
+    print(f"  - EBENE 3 (Content Level): {report['summary']['ebene3_content_count']}")
+    print(f"\nHeader claimed: {report['summary']['header_claimed_total']}")
+    print(f"Discrepancy: {report['summary']['discrepancy']}")
+    print(f"\n[+] Report saved to: {output_file}")
+    print("=" * 70)
+
+
+if __name__ == '__main__':
+    main()
