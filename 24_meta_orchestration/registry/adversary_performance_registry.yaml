@@ -110,5 +110,49 @@ runs:
     POLICY_BYPASS:
       detected: true
       severity: HIGH
-last_updated: '2025-10-14T17:22:55.441095+00:00'
-total_runs: 5
+- timestamp: '2025-11-01T04:15:08.651588+00:00'
+  detection_rate: 1.0
+  attacks_detected: 5
+  attacks_total: 5
+  attacks_missed: 0
+  status: PERFECT
+  attack_breakdown:
+    HASH_CHAIN_MANIPULATION:
+      detected: true
+      severity: CRITICAL
+    FAKE_SCORE_INJECTION:
+      detected: true
+      severity: CRITICAL
+    WORM_DELETION:
+      detected: true
+      severity: CRITICAL
+    TIMESTAMP_MANIPULATION:
+      detected: true
+      severity: HIGH
+    POLICY_BYPASS:
+      detected: true
+      severity: HIGH
+- timestamp: '2025-11-01T04:15:08.771616+00:00'
+  detection_rate: 1.0
+  attacks_detected: 5
+  attacks_total: 5
+  attacks_missed: 0
+  status: PERFECT
+  attack_breakdown:
+    HASH_CHAIN_MANIPULATION:
+      detected: true
+      severity: CRITICAL
+    FAKE_SCORE_INJECTION:
+      detected: true
+      severity: CRITICAL
+    WORM_DELETION:
+      detected: true
+      severity: CRITICAL
+    TIMESTAMP_MANIPULATION:
+      detected: true
+      severity: HIGH
+    POLICY_BYPASS:
+      detected: true
+      severity: HIGH
+last_updated: '2025-11-01T04:15:08.771629+00:00'
+total_runs: 7
