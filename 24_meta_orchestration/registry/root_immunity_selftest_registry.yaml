@@ -112,5 +112,33 @@ selftests:
       success_rate: 1.0
       techniques_passed: 4
       techniques_total: 4
-last_updated: '2025-10-14T16:56:37.949808+00:00'
-total_selftests: 4
+- timestamp: '2025-11-01T03:46:41.187209+00:00'
+  immunity_scale: 26.67
+  attacks_launched: 5
+  attacks_blocked: 2
+  attacks_failed: 3
+  status: COMPROMISED
+  opa_evaluated: false
+  attack_summary:
+    INVALID_PATHS:
+      success_rate: 0.0
+      techniques_passed: 0
+      techniques_total: 3
+    WHITELIST_MANIPULATION:
+      success_rate: 1.0
+      techniques_passed: 2
+      techniques_total: 2
+    CLAUDE_UNAUTHORIZED:
+      success_rate: 0.0
+      techniques_passed: 0
+      techniques_total: 4
+    MANIFEST_TAMPERING:
+      success_rate: 1.0
+      techniques_passed: 2
+      techniques_total: 2
+    HIDDEN_PATH_INJECTION:
+      success_rate: 0.0
+      techniques_passed: 0
+      techniques_total: 4
+last_updated: '2025-11-01T03:46:41.187226+00:00'
+total_selftests: 5
